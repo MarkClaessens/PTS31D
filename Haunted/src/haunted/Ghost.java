@@ -1,5 +1,9 @@
 package haunted;
 
+/**
+ *
+ * @author Mal
+ */
 public class Ghost extends Character {
 
     private boolean vulnerable;

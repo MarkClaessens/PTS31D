@@ -2,6 +2,10 @@ package haunted;
 
 import java.awt.geom.Point2D;
 
+/**
+ *
+ * @author Mal
+ */
 public abstract class Character {
 
     private Point2D position;

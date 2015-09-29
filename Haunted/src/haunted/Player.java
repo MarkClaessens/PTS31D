@@ -1,10 +1,23 @@
 package haunted;
 
+/**
+ *
+ * @author Mal
+ */
 public class Player {
 
     Game game;
     private String name;
     private Boolean ready;
+
+    /**
+     * this creates the Player object.
+     * @param name
+     */
+    public Player(String name) {
+        this.name = name;
+        this.ready = false;
+    }
 
     /**
      *

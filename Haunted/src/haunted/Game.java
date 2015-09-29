@@ -3,6 +3,10 @@ package haunted;
 import java.util.List;
 import java.util.Timer;
 
+/**
+ *
+ * @author Mal
+ */
 public class Game {
 
     private int floorAmount;
@@ -21,6 +25,7 @@ public class Game {
 
     /**
      * sets amount of floors the game will contain
+     * @param floorAmount
      */
     public void setFloorAmount(int floorAmount) {
         this.floorAmount = floorAmount;

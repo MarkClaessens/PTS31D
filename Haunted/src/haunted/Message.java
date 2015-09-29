@@ -2,6 +2,10 @@ package haunted;
 
 import java.sql.Time;
 
+/**
+ *
+ * @author Mal
+ */
 public class Message {
 
     private Time timeStamp;

@@ -2,6 +2,10 @@ package haunted;
 
 import java.awt.geom.Point2D;
 
+/**
+ *
+ * @author Mal
+ */
 public class Level {
 
     private int floorNr;

@@ -1,5 +1,9 @@
 package haunted;
 
+/**
+ *
+ * @author Mal
+ */
 public class GameLobby {
 
     private Player Host;
@@ -19,7 +23,7 @@ public class GameLobby {
 
     /**
      * sets host of the game
-     *
+     * host cannot be null;
      * @param Host
      */
     public void setHost(Player Host) {
@@ -37,7 +41,7 @@ public class GameLobby {
 
     /**
      * sets name of the gamelobby
-     *
+     * name cannot be null or consist only of spaces.
      * @param name
      */
     public void setName(String name) {
@@ -54,8 +58,8 @@ public class GameLobby {
     }
 
     /**
-     * sets password of the gamelobby
-     *
+     * sets password of the GameLobby
+     * password can be null
      * @param password
      */
     public void setPassword(String password) {
@@ -63,8 +67,8 @@ public class GameLobby {
     }
 
     /**
-     * gives maximal number of players for the gamelobby
-     *
+     * gives maximal number of players for the GameLobby
+     * 
      * @return
      */
     public int getMaxPlayers() {
@@ -73,7 +77,7 @@ public class GameLobby {
 
     /**
      * sets maximal number of players for the gamelobby
-     *
+     * maxPlayers can not be null, lower than 3 or lower than the number current players in the lobby.
      * @param maxPlayers
      */
     public void setMaxPlayers(int maxPlayers) {
@@ -99,8 +103,11 @@ public class GameLobby {
     }
 
     /**
-     * create a gamelobby
-     *
+     * create a GameLobby
+     * name cannot be null or consist only of spaces.
+     * name has to be unique.
+     * password can be null
+     * host cannot be null
      * @param name
      * @param password
      * @param host
@@ -136,7 +143,7 @@ public class GameLobby {
 
     /**
      * send a message to the other players
-     *
+     * message cannot be null
      * @param message
      */
     public void sendMessage(String message) {
@@ -145,8 +152,8 @@ public class GameLobby {
     }
 
     /**
-     * add a player to the gamelobby
-     *
+     * add a player to the GameLobby
+     * player cannot be null or already added to the GameLobby
      * @param player
      */
     public void addPlayer(Player player) {
@@ -156,7 +163,7 @@ public class GameLobby {
 
     /**
      * checks if all players are ready
-     *
+     * 
      * @return
      */
     public boolean readyCheck() {
