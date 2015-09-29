@@ -38,17 +38,22 @@ public class GhostTest {
     }
 
     /**
+     * Test of Ghost constructor, of class Ghost.
+     */
+    @Test
+    public void testMakeGhost(){
+        Character ghost1 = new Ghost();
+    }
+    
+    /**
      * Test of isVulnerable method, of class Ghost.
      */
     @Test
     public void testIsVulnerable() {
         System.out.println("isVulnerable");
-        Ghost instance = new Ghost();
-        boolean expResult = false;
-        boolean result = instance.isVulnerable();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        Ghost ghost = new Ghost();
+        assertTrue("Ghost is not vulnerable", ghost.isVulnerable());
     }
 
     /**
@@ -57,11 +62,9 @@ public class GhostTest {
     @Test
     public void testSetVulnerable() {
         System.out.println("setVulnerable");
-        boolean vulnerable = false;
-        Ghost instance = new Ghost();
-        instance.setVulnerable(vulnerable);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Ghost ghost = new Ghost();
+        ghost.setVulnerable(false);
+        assertFalse("Ghost is vulnerable", ghost.isVulnerable());
     }
 
     /**
@@ -70,10 +73,10 @@ public class GhostTest {
     @Test
     public void testPossess() {
         System.out.println("possess");
-        Ghost instance = new Ghost();
-        instance.possess();
+        Ghost ghost = new Ghost();
+        ghost.possess();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        fail("the ghost has not been possessed to human");
     }
 
     /**
@@ -82,8 +85,9 @@ public class GhostTest {
     @Test
     public void testChangeAppearance() {
         System.out.println("changeAppearance");
-        Ghost instance = new Ghost();
-        instance.changeAppearance();
+        Ghost ghost = new Ghost();
+        ghost.changeAppearance();
+        assertTrue("ghost is still vulnerable", ghost.isVulnerable());
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -94,8 +98,9 @@ public class GhostTest {
     @Test
     public void testVanish() {
         System.out.println("vanish");
-        Ghost instance = new Ghost();
-        instance.vanish();
+        Ghost ghost = new Ghost();
+        ghost.vanish();
+        assertTrue("ghost is still vulnerable", ghost.isVulnerable());
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
