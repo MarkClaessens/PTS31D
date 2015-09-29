@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Mal
+ * @author Kevin Stoelers, Joris van de Wijgert, Cyril Brugman, Mark Claesens, Mike Evers
  */
 public class Haunted extends Application {
     

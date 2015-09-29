@@ -14,7 +14,8 @@ import javafx.scene.control.Label;
 
 /**
  *
- * @author Mal
+ * @author Kevin Stoelers, Joris van de Wijgert, Cyril Brugman, Mark Claesens, Mike Evers
+
  */
 public class FXMLHauntedController implements Initializable {
     
