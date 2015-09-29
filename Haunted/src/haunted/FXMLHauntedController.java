@@ -14,23 +14,24 @@ import javafx.scene.control.Label;
 
 /**
  *
- * @author Kevin Stoelers, Joris van de Wijgert, Cyril Brugman, Mark Claesens, Mike Evers
-
+ * @author Kevin Stoelers, Joris van de Wijgert, Cyril Brugman, Mark Claesens,
+ * Mike Evers
+ *
  */
 public class FXMLHauntedController implements Initializable {
-    
+
     @FXML
     private Label label;
-    
+
     @FXML
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
         label.setText("Hello World!");
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }

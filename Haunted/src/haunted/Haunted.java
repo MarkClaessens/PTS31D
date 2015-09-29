@@ -13,16 +13,17 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Kevin Stoelers, Joris van de Wijgert, Cyril Brugman, Mark Claesens, Mike Evers
+ * @author Kevin Stoelers, Joris van de Wijgert, Cyril Brugman, Mark Claesens,
+ * Mike Evers
  */
 public class Haunted extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLHaunted.fxml"));
-        
+
         Scene scene = new Scene(root);
-        
+
         stage.setScene(scene);
         stage.show();
     }
@@ -33,5 +34,5 @@ public class Haunted extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
