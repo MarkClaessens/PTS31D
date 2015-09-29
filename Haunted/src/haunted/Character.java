@@ -10,8 +10,8 @@ public abstract class Character {
 	private Double movementSpeed;
 
         /**
-         * Character position on the map
-         * @return position
+         * 
+         * @return character position on the map
          */
 	public Point2D getPosition() {
 		return this.position;
@@ -26,8 +26,8 @@ public abstract class Character {
 	}
 
         /**
-         * Returns the color of the character (Ghosts are completely colored, humans only wear a colored hat).
-         * @return color
+         * 
+         * @return the color of the character (Ghosts are completely colored, humans only wear a colored hat).
          */
 	public String getColor() {
 		return this.color;
@@ -42,8 +42,8 @@ public abstract class Character {
 	}
 
         /**
-         * Returns the character's sprite (human/ghost/wall)
-         * @return sprite
+         * 
+         * @return the character's sprite (human/ghost/wall)
          */
 	public String getSprite() {
 		return this.sprite;
@@ -58,8 +58,8 @@ public abstract class Character {
 	}
 
         /**
-         * Returns the character's movement speed
-         * @return 
+         * 
+         * @return the character's movement speed
          */
 	public Double getMovementSpeed() {
 		return this.movementSpeed;

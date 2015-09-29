@@ -24,7 +24,7 @@ public class Message {
 	}
 
         /**
-         * Return the text contained in the message
+         * Returns the text contained in the message
          * @return 
          */
 	public String getText() {
