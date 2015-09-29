@@ -25,6 +25,7 @@ public class Game {
 
     /**
      * sets amount of floors the game will contain
+     *
      * @param floorAmount
      */
     public void setFloorAmount(int floorAmount) {

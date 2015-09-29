@@ -18,22 +18,22 @@ import static org.junit.Assert.*;
  * @author Mal
  */
 public class CharacterTest {
-    
+
     public CharacterTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -161,5 +161,5 @@ public class CharacterTest {
 
     public class CharacterImpl extends Character {
     }
-    
+
 }

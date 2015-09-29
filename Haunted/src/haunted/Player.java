@@ -12,6 +12,7 @@ public class Player {
 
     /**
      * this creates the Player object.
+     *
      * @param name
      */
     public Player(String name) {

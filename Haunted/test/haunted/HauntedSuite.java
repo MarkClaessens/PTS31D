@@ -35,5 +35,5 @@ public class HauntedSuite {
     @After
     public void tearDown() throws Exception {
     }
-    
+
 }
