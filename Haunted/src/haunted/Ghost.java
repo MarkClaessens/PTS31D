@@ -2,70 +2,34 @@ package haunted;
 
 public class Ghost extends Character {
 
-    private boolean vulnerable;
-    private boolean isGhost;
+	private boolean vulnerable;
 
-    /**
-     * gives the state of vulnerability
-     *
-     * @return vulnerability
-     */
-    public boolean isVulnerable() {
-        return this.vulnerable;
-    }
+	public boolean isVulnerable() {
+		return this.vulnerable;
+	}
 
-    /**
-     * this sets the vulnerability of the ghost object
-     *
-     * @param vulnerable
-     */
-    public void setVulnerable(boolean vulnerable) {
-        this.vulnerable = vulnerable;
-    }
+	public void setVulnerable(boolean vulnerable) {
+		this.vulnerable = vulnerable;
+	}
 
-    /**
-     * This possesses a human, this ghost becomes the human, the previous human
-     * becomes a ghost.
-     */
-    public void possess() {
-        // TODO - implement Ghost.possess
-        // TODO - posses the human, works with Game.
-        throw new UnsupportedOperationException();
-    }
+	public void possess() {
+		// TODO - implement Ghost.possess
+		throw new UnsupportedOperationException();
+	}
 
-    /**
-     * Changes the appearance of the ghost, it becomes a wall or a ghost.
-     */
-    public void changeAppearance() {
-        // TODO - implement Ghost.changeApperance
-        if (this.isGhost) {
-            this.vulnerable = false;
-            this.setSprite("Wall");
-            this.isGhost = false;
-        } else {
-            this.vulnerable = true;
-            this.setSprite("Ghost");
-            this.isGhost = true;
-        }
+	public void becomeAWall() {
+		// TODO - implement Ghost.becomeAWall
+		throw new UnsupportedOperationException();
+	}
 
-        throw new UnsupportedOperationException();
+	public void vanish() {
+		// TODO - implement Ghost.vanish
+		throw new UnsupportedOperationException();
+	}
 
-    }
-
-    /**
-     * Removes the ghost when hit by the flashlight
-     */
-    public void vanish() {
-        // TODO - implement Ghost.vanish
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * Constructor for ghost
-     */
-    public Ghost() {
-        // TODO - implement Ghost.Ghost
-        throw new UnsupportedOperationException();
-    }
+	public Ghost() {
+		// TODO - implement Ghost.Ghost
+		throw new UnsupportedOperationException();
+	}
 
 }
