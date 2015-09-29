@@ -14,8 +14,8 @@ public class Level {
 	private String theme;
 
         /**
-         * Returns the floor number
-         * @return floorNr
+         * 
+         * @return the floor number
          */
 	public int getFloorNr() {
 		return this.floorNr;
@@ -23,6 +23,7 @@ public class Level {
 
         /**
          * Sets the floor number
+         * Floor number is not null, 0 or a negative number.
          * @param floorNr 
          */
 	public void setFloorNr(int floorNr) {
@@ -30,8 +31,8 @@ public class Level {
 	}
 
         /**
-         * Returns the number of ghost lives
-         * @return ghostLifePool
+         * 
+         * @return the number of ghost lives
          */
 	public int getGhostLifePool() {
 		return this.ghostLifePool;
@@ -39,6 +40,7 @@ public class Level {
 
         /**
          * Sets the number of ghost lives
+         * Ghost live is not null or a negative number. 
          * @param ghostLifePool 
          */
 	public void setGhostLifePool(int ghostLifePool) {
@@ -46,8 +48,8 @@ public class Level {
 	}
 
         /**
-         * Returns the shape of the level in a string
-         * @return shape
+         * 
+         * @return the shape of the level in a string
          */
 	public String getShape() {
 		return this.shape;
@@ -62,8 +64,8 @@ public class Level {
 	}
 
         /**
-         * Returns the level's width (x-axis)
-         * @return width
+         * 
+         * @return the level's width (x-axis)
          */
 	public int getWidth() {
 		return this.width;
@@ -78,8 +80,8 @@ public class Level {
 	}
 
         /**
-         * Returns the level's height (y-axis)
-         * @return height
+         * 
+         * @return the level's height (y-axis)
          */
 	public int getHeight() {
 		return this.height;
@@ -94,8 +96,8 @@ public class Level {
 	}
 
         /**
-         * Returns the key's location on the map
-         * @return keylocation
+         * 
+         * @return the key's location on the map
          */
 	public Point2D getKeyLocation() {
 		return this.keyLocation;
@@ -110,8 +112,8 @@ public class Level {
 	}
 
         /**
-         * Returns the door's location on the map
-         * @return doorLocation
+         * 
+         * @return the door's location on the map
          */
 	public Point2D getDoorLocation() {
 		return this.doorLocation;
@@ -126,8 +128,8 @@ public class Level {
 	}
 
         /**
-         * Returns the level's current theme
-         * @return theme
+         * 
+         * @return the level's current theme
          */
 	public String getTheme() {
 		return this.theme;
