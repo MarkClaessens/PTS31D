@@ -6,27 +6,51 @@ public class Player {
 	private String name;
 	private Boolean ready;
 
+        /**
+         * 
+         * @return The name of the player.
+         */
 	public String getName() {
 		return this.name;
 	}
-
+        
+        /**
+         * Sets the name of the player.
+         * Where the name String is not empty and contains at least one character.
+         * @param name 
+         */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+        /**
+         * 
+         * @return returns if the player is ready to play.
+         */
 	public Boolean getReady() {
 		return this.ready;
 	}
 
+        /**
+         * Sets if the player is ready to play.
+         * @param ready 
+         */
 	public void setReady(Boolean ready) {
 		this.ready = ready;
 	}
-
+        
+        /**
+         * Changes the player settings in the lobby or in-game.
+         * Player can change his soundvolume and resolution.
+         */
 	public void changeSettings() {
 		// TODO - implement Player.changeSettings
 		throw new UnsupportedOperationException();
 	}
 
+        /***
+         * Loads the player settings from a file.
+         */
 	public void loadSettings() {
 		// TODO - implement Player.loadSettings
 		throw new UnsupportedOperationException();
