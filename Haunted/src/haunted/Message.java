@@ -1,5 +1,7 @@
 package haunted;
 
+import java.sql.Time;
+
 public class Message {
 
 	private Time timeStamp;
