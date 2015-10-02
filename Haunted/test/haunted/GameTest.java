@@ -5,23 +5,29 @@
  */
 package haunted;
 
-import java.util.Timer;
+import java.util.ArrayList;
+import java.util.List;
+import junit.framework.Assert;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
- * @author Mal
+ * @author Mike Evers
  */
 public class GameTest {
 
     public GameTest() {
     }
-
+    List<Player> players;
+    Player player1;
+    Player player2;
+    Game game;
+    int floors;
+    
     @BeforeClass
     public static void setUpClass() {
     }
@@ -32,191 +38,109 @@ public class GameTest {
 
     @Before
     public void setUp() {
+        player1 = new Player("John Doe");
+        player2 = new Player("Lucky Luck");
+        players = new ArrayList<>();
+        players.add(player1);
+        players.add(player2);
+        floors = 5;
+        
+        game = new Game(players, floors);
     }
-
+        
     @After
     public void tearDown() {
     }
 
-    /**
-     * Test of getFloorAmount method, of class Game.
-     */
     @Test
-    public void testGetFloorAmount() {
-        System.out.println("getFloorAmount");
-        Game instance = null;
-        int expResult = 0;
-        int result = instance.getFloorAmount();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testGameConstructor(){
+    /**
+     * creates the game
+     */
+        Assert.assertEquals("Expected another list of players, check the constructor.", players, game.getPlayers());
+        Assert.assertEquals("Expected another amount of floors, check the constructor,", floors, game.getFloorAmount());
     }
-
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void testGameConstructorPlayers(){
     /**
-     * Test of setFloorAmount method, of class Game.
+     * @param players List can not be empty.
      */
-    @Test
-    public void testSetFloorAmount() {
-        System.out.println("setFloorAmount");
-        int floorAmount = 0;
-        Game instance = null;
-        instance.setFloorAmount(floorAmount);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        players = new ArrayList<>();
+        game = new Game(players, floors);
+        Assert.fail("Constructor doesn't throw exception when you create a game without players.");
     }
-
+    
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void testGameConstructorFloors(){
     /**
-     * Test of getCurrentRound method, of class Game.
+     * @param floors Cannot be 0.
      */
-    @Test
-    public void testGetCurrentRound() {
-        System.out.println("getCurrentRound");
-        Game instance = null;
-        int expResult = 0;
-        int result = instance.getCurrentRound();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        floors = 0;
+        game = new Game(players, floors);
+        Assert.fail("Constructor doesn't throw excetion when you create a game with floorAmount set to 0");
     }
-
-    /**
-     * Test of setCurrentRound method, of class Game.
-     */
+    
     @Test
-    public void testSetCurrentRound() {
-        System.out.println("setCurrentRound");
-        int currentRound = 0;
-        Game instance = null;
-        instance.setCurrentRound(currentRound);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testNextLevel(){
+    /**
+     * sets the game to the next level
+     */
+        
+        // First we create a level that is used bij floor 1.
+        Level floor1 = new Level(1);
+        
+        // Could not finish this method cause specification is bad!
     }
-
+    
+    @Test 
+    public void testNextLevelFloor(){
     /**
-     * Test of getCurrentFloor method, of class Game.
+     * @param floor 
      */
-    @Test
-    public void testGetCurrentFloor() {
-        System.out.println("getCurrentFloor");
-        Game instance = null;
-        int expResult = 0;
-        int result = instance.getCurrentFloor();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        // Could not finish this method cause specification is bad!
     }
-
-    /**
-     * Test of setCurrentFloor method, of class Game.
-     */
+    
     @Test
-    public void testSetCurrentFloor() {
-        System.out.println("setCurrentFloor");
-        int currentFloor = 0;
-        Game instance = null;
-        instance.setCurrentFloor(currentFloor);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testStartRound(){
+        // I think we need a state attribute for the game.. whether the game is in a round or not.
     }
-
-    /**
-     * Test of getTickTimer method, of class Game.
-     */
+    
     @Test
-    public void testGetTickTimer() {
-        System.out.println("getTickTimer");
-        Game instance = null;
-        Timer expResult = null;
-        Timer result = instance.getTickTimer();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testEndRound(){
+        // I think we need a state attribute for the game.. whether the game is in a round or not.
     }
-
-    /**
-     * Test of setTickTimer method, of class Game.
-     */
+    
     @Test
-    public void testSetTickTimer() {
-        System.out.println("setTickTimer");
-        Timer tickTimer = null;
-        Game instance = null;
-        instance.setTickTimer(tickTimer);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testEndGame(){
+        // Ending a game is deleting the Game object (and so the Level object) and the GameLobby object.
+        // We can use a destructor for deleting objects??
     }
-
-    /**
-     * Test of nextLevel method, of class Game.
-     */
+    
     @Test
-    public void testNextLevel() {
-        System.out.println("nextLevel");
-        int floor = 0;
-        Game instance = null;
-        instance.nextLevel(floor);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testLeaveGame(){
+    /**
+     * player leaves the game
+     * @param player the player who wants to leave the game.
+     */
+        
+        // !! I added the param player in leaveGame method !! 
+        
+        players.remove(player1);
+        game.leaveGame(player1);
+        Assert.assertEquals("Expected another list of players, leaveGame() fails", players, game.getPlayers());
     }
-
-    /**
-     * Test of startRound method, of class Game.
-     */
+    
     @Test
-    public void testStartRound() {
-        System.out.println("startRound");
-        Game instance = null;
-        instance.startRound();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
+    public void testTick(){
     /**
-     * Test of endRound method, of class Game.
+     * everything that needs to be checked every tick from the timer
      */
-    @Test
-    public void testEndRound() {
-        System.out.println("endRound");
-        Game instance = null;
-        instance.endRound();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of endGame method, of class Game.
-     */
-    @Test
-    public void testEndGame() {
-        System.out.println("endGame");
-        Game instance = null;
-        instance.endGame();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of leaveGame method, of class Game.
-     */
-    @Test
-    public void testLeaveGame() {
-        System.out.println("leaveGame");
-        Game instance = null;
-        instance.leaveGame();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of tick method, of class Game.
-     */
-    @Test
-    public void testTick() {
-        System.out.println("tick");
-        Game instance = null;
-        instance.tick();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        // Could not finish this method cause specification is bad!
+        // Damn how to test this?
     }
 
 }

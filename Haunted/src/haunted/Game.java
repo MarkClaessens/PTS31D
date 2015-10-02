@@ -8,12 +8,19 @@ import java.util.Timer;
  * @author Mal
  */
 public class Game {
-
+    
+    private List<Player> players;
     private int floorAmount;
     private int currentRound;
     private int currentFloor;
     private Timer tickTimer;
 
+    /**
+     * @return the list of Players that are playing the game.
+     */
+    public List<Player> getPlayers(){
+        return this.players;
+    }
     /**
      * gives amount of floors the game contains
      *
@@ -89,8 +96,8 @@ public class Game {
     /**
      * creates the game
      *
-     * @param players
-     * @param floors
+     * @param players List can not be empty.
+     * @param floors Cannot be 0.
      */
     public Game(List<Player> players, int floors) {
         // TODO - implement Game.Game
@@ -100,7 +107,7 @@ public class Game {
     /**
      * sets the game to the next level
      *
-     * @param floor
+     * @param floor Mike: why do we use a parameters???
      */
     public void nextLevel(int floor) {
         // TODO - implement Game.nextLevel
@@ -133,8 +140,9 @@ public class Game {
 
     /**
      * player leaves the game
+     * @param player the player who wants to leave the game.
      */
-    public void leaveGame() {
+    public void leaveGame(Player player) {
         // TODO - implement Game.leaveGame
         throw new UnsupportedOperationException();
     }
