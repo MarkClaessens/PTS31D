@@ -37,6 +37,14 @@ public class HumanTest {
     @After
     public void tearDown() {
     }
+    
+    /**
+     * Test of making human in the constructor
+     */
+    @Test
+    public void testMakeHuman(){
+        Character human = new Human();
+    }
 
     /**
      * Test of getFlashlightRange method, of class Human.
@@ -44,12 +52,10 @@ public class HumanTest {
     @Test
     public void testGetFlashlightRange() {
         System.out.println("getFlashlightRange");
-        Human instance = new Human();
-        int expResult = 0;
-        int result = instance.getFlashlightRange();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Human human = new Human();
+        int expResult = 12;
+        int result = human.getFlashlightRange();
+        assertEquals("the result is not equal to 12", expResult, result);
     }
 
     /**
@@ -58,11 +64,10 @@ public class HumanTest {
     @Test
     public void testSetFlashlightRange() {
         System.out.println("setFlashlightRange");
-        int flashlightRange = 0;
-        Human instance = new Human();
-        instance.setFlashlightRange(flashlightRange);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int flashlightRange = 10;
+        Human human = new Human();
+        human.setFlashlightRange(flashlightRange);
+        assertEquals("the flashlight range is not changed", 10, human.getFlashlightRange());
     }
 
     /**
@@ -71,12 +76,10 @@ public class HumanTest {
     @Test
     public void testGetFlashlightAngle() {
         System.out.println("getFlashlightAngle");
-        Human instance = new Human();
-        int expResult = 0;
-        int result = instance.getFlashlightAngle();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Human human = new Human();
+        int expResult = 45;
+        int result = human.getFlashlightAngle();
+        assertEquals("the result is not equal to 45", expResult, result);
     }
 
     /**
@@ -85,11 +88,10 @@ public class HumanTest {
     @Test
     public void testSetFlashlightAngle() {
         System.out.println("setFlashlightAngle");
-        int flashlightAngle = 0;
-        Human instance = new Human();
-        instance.setFlashlightAngle(flashlightAngle);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int flashlightAngle = 30;
+        Human human = new Human();
+        human.setFlashlightAngle(flashlightAngle);
+        assertEquals("the flashlight angle isn't changed", 30, human.getFlashlightAngle());
     }
 
     /**
@@ -98,12 +100,8 @@ public class HumanTest {
     @Test
     public void testIsHasKey() {
         System.out.println("isHasKey");
-        Human instance = new Human();
-        boolean expResult = false;
-        boolean result = instance.isHasKey();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Human human = new Human();
+        assertFalse("human has key", human.isHasKey());
     }
 
     /**
@@ -112,11 +110,10 @@ public class HumanTest {
     @Test
     public void testSetHasKey() {
         System.out.println("setHasKey");
-        boolean hasKey = false;
-        Human instance = new Human();
-        instance.setHasKey(hasKey);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        boolean hasKey = true;
+        Human human = new Human();
+        human.setHasKey(hasKey);
+        assertTrue("human has key isn't changed", human.isHasKey());
     }
 
     /**
@@ -125,12 +122,10 @@ public class HumanTest {
     @Test
     public void testGetRotationSpeed() {
         System.out.println("getRotationSpeed");
-        Human instance = new Human();
-        Double expResult = null;
-        Double result = instance.getRotationSpeed();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Human human = new Human();
+        Double expResult = 23.4;
+        Double result = human.getRotationSpeed();
+        assertEquals("the result is not equal to 23.4", expResult, result);
     }
 
     /**
@@ -139,11 +134,10 @@ public class HumanTest {
     @Test
     public void testSetRotationSpeed() {
         System.out.println("setRotationSpeed");
-        Double rotationSpeed = null;
-        Human instance = new Human();
-        instance.setRotationSpeed(rotationSpeed);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Double rotationSpeed = 28.1;
+        Human human = new Human();
+        human.setRotationSpeed(rotationSpeed);
+        assertEquals("rotation speed isn't changed", String.valueOf(28.1), String.valueOf(human.getRotationSpeed()));
     }
 
     /**
@@ -153,10 +147,10 @@ public class HumanTest {
     public void testRotateFlashlight() {
         System.out.println("rotateFlashlight");
         Point2D mousePosition = null;
-        Human instance = new Human();
-        instance.rotateFlashlight(mousePosition);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        mousePosition.setLocation(12.0, 24.0);
+        Human human = new Human();
+        human.rotateFlashlight(mousePosition);
+        //POSITIE WORDT NIET OPGESLAGEN !?
     }
 
     /**
@@ -177,10 +171,9 @@ public class HumanTest {
     @Test
     public void testPickUpKey() {
         System.out.println("pickUpKey");
-        Human instance = new Human();
-        instance.pickUpKey();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Human human = new Human();
+        human.pickUpKey();
+        assertTrue("human has not the key", human.isHasKey());
     }
 
     /**
@@ -189,10 +182,9 @@ public class HumanTest {
     @Test
     public void testEnterDoor() {
         System.out.println("enterDoor");
-        Human instance = new Human();
-        instance.enterDoor();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Human human = new Human();
+        human.pickUpKey();
+        human.enterDoor();
     }
 
 }
