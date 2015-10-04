@@ -5,9 +5,11 @@
  */
 package haunted;
 
+import java.awt.Point;
 import java.awt.geom.Point2D;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -43,13 +45,9 @@ public class LevelTest {
      */
     @Test
     public void testGetFloorNr() {
-        System.out.println("getFloorNr");
-        Level instance = null;
-        int expResult = 0;
-        int result = instance.getFloorNr();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Level current = new Level(5);
+        
+        assertEquals(5, current.getFloorNr());
     }
 
     /**
@@ -57,12 +55,12 @@ public class LevelTest {
      */
     @Test
     public void testSetFloorNr() {
-        System.out.println("setFloorNr");
-        int floorNr = 0;
-        Level instance = null;
-        instance.setFloorNr(floorNr);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Level current = new Level(1);
+
+        current.setFloorNr(-10);
+        current.setFloorNr(2);              
+        
+        assertEquals(2, current.getFloorNr());
     }
 
     /**
@@ -70,13 +68,9 @@ public class LevelTest {
      */
     @Test
     public void testGetGhostLifePool() {
-        System.out.println("getGhostLifePool");
-        Level instance = null;
-        int expResult = 0;
-        int result = instance.getGhostLifePool();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Level current = new Level(1);
+        
+        assertEquals(3, current.getGhostLifePool());
     }
 
     /**
@@ -84,12 +78,12 @@ public class LevelTest {
      */
     @Test
     public void testSetGhostLifePool() {
-        System.out.println("setGhostLifePool");
-        int ghostLifePool = 0;
-        Level instance = null;
-        instance.setGhostLifePool(ghostLifePool);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Level current = new Level(1);
+
+        current.setGhostLifePool(-1);
+        current.setGhostLifePool(4);
+        
+        assertEquals(4, current.getGhostLifePool());
     }
 
     /**
@@ -97,13 +91,10 @@ public class LevelTest {
      */
     @Test
     public void testGetShape() {
-        System.out.println("getShape");
-        Level instance = null;
-        String expResult = "";
-        String result = instance.getShape();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Level current = new Level(1);
+        current.setShape("Test");
+        
+        assertEquals("Test", current.getShape());
     }
 
     /**
@@ -111,12 +102,10 @@ public class LevelTest {
      */
     @Test
     public void testSetShape() {
-        System.out.println("setShape");
-        String shape = "";
-        Level instance = null;
-        instance.setShape(shape);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Level current = new Level(1);
+        current.setShape("Test");
+        
+        assertEquals("Test", current.getShape());
     }
 
     /**
@@ -124,13 +113,10 @@ public class LevelTest {
      */
     @Test
     public void testGetWidth() {
-        System.out.println("getWidth");
-        Level instance = null;
-        int expResult = 0;
-        int result = instance.getWidth();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Level current = new Level(1);
+        current.setWidth(50);
+        
+        assertEquals(50, current.getWidth());
     }
 
     /**
@@ -138,12 +124,12 @@ public class LevelTest {
      */
     @Test
     public void testSetWidth() {
-        System.out.println("setWidth");
-        int width = 0;
-        Level instance = null;
-        instance.setWidth(width);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Level current = new Level(1);
+
+        current.setWidth(-100);
+        current.setWidth(100);
+        
+        assertEquals(100, current.getWidth());
     }
 
     /**
@@ -151,13 +137,10 @@ public class LevelTest {
      */
     @Test
     public void testGetHeight() {
-        System.out.println("getHeight");
-        Level instance = null;
-        int expResult = 0;
-        int result = instance.getHeight();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Level current = new Level(1);
+        current.setHeight(65);
+        
+        assertEquals(65, current.getHeight());
     }
 
     /**
@@ -165,12 +148,12 @@ public class LevelTest {
      */
     @Test
     public void testSetHeight() {
-        System.out.println("setHeight");
-        int height = 0;
-        Level instance = null;
-        instance.setHeight(height);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Level current = new Level(1);
+
+        current.setHeight(-100);
+        current.setHeight(120); 
+        
+        assertEquals(120, current.getHeight());
     }
 
     /**
@@ -178,13 +161,11 @@ public class LevelTest {
      */
     @Test
     public void testGetKeyLocation() {
-        System.out.println("getKeyLocation");
-        Level instance = null;
-        Point2D expResult = null;
-        Point2D result = instance.getKeyLocation();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Level current = new Level(1);
+        current.setKeyLocation(new Point(50,50));
+        Point2D key = new Point(50,50);
+        
+        assertEquals(key, current.getKeyLocation());
     }
 
     /**
@@ -192,12 +173,13 @@ public class LevelTest {
      */
     @Test
     public void testSetKeyLocation() {
-        System.out.println("setKeyLocation");
-        Point2D keyLocation = null;
-        Level instance = null;
-        instance.setKeyLocation(keyLocation);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Level current = new Level(1);
+        
+        current.setKeyLocation(new Point(-5, 50));
+        current.setKeyLocation(new Point(-10,60));
+        current.setKeyLocation(new Point(50,50));
+        
+        assertEquals(new Point(50,50), current.getKeyLocation());
     }
 
     /**
@@ -205,13 +187,10 @@ public class LevelTest {
      */
     @Test
     public void testGetDoorLocation() {
-        System.out.println("getDoorLocation");
-        Level instance = null;
-        Point2D expResult = null;
-        Point2D result = instance.getDoorLocation();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Level current = new Level(1);
+        current.setDoorLocation(new Point(100,100));
+        
+        assertEquals(new Point(100,100), current.getDoorLocation());
     }
 
     /**
@@ -219,12 +198,14 @@ public class LevelTest {
      */
     @Test
     public void testSetDoorLocation() {
-        System.out.println("setDoorLocation");
-        Point2D doorLocation = null;
-        Level instance = null;
-        instance.setDoorLocation(doorLocation);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Level current = new Level(1);
+        
+        current.setDoorLocation(new Point(-50,50));
+        current.setDoorLocation(new Point(50, -50));
+        current.setDoorLocation(new Point(50,50));
+        
+        assertEquals(new Point(50,50), current.getDoorLocation());
+         
     }
 
     /**
@@ -232,13 +213,10 @@ public class LevelTest {
      */
     @Test
     public void testGetTheme() {
-        System.out.println("getTheme");
-        Level instance = null;
-        String expResult = "";
-        String result = instance.getTheme();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Level current = new Level(1);
+        current.setTheme("Test");
+        
+        assertEquals("Test", current.getTheme());
     }
 
     /**
@@ -246,12 +224,10 @@ public class LevelTest {
      */
     @Test
     public void testSetTheme() {
-        System.out.println("setTheme");
-        String theme = "";
-        Level instance = null;
-        instance.setTheme(theme);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Level current = new Level(1);
+        current.setTheme("Test");
+        
+        assertEquals("Test", current.getTheme());
     }
 
     /**
@@ -259,11 +235,10 @@ public class LevelTest {
      */
     @Test
     public void testGenerateKeyLocation() {
-        System.out.println("generateKeyLocation");
-        Level instance = null;
-        instance.generateKeyLocation();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Level current = new Level(1);
+        current.generateKeyLocation();
+        
+        assertEquals(Point2D.class, current.getKeyLocation());
     }
 
     /**
@@ -271,11 +246,10 @@ public class LevelTest {
      */
     @Test
     public void testGenerateDoorLocation() {
-        System.out.println("generateDoorLocation");
-        Level instance = null;
-        instance.generateDoorLocation();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Level current = new Level(1);
+        current.generateDoorLocation();
+        
+        assertEquals(Point2D.class, current.getDoorLocation());
     }
 
     /**
@@ -283,11 +257,11 @@ public class LevelTest {
      */
     @Test
     public void testGenerateLayout() {
-        System.out.println("generateLayout");
-        Level instance = null;
-        instance.generateLayout();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Level current = new Level(1);
+        current.generateLayout();
+        
+        assertEquals(Point2D.class, current.getKeyLocation());
+        assertEquals(Point2D.class, current.getDoorLocation());
     }
 
     /**
@@ -295,11 +269,7 @@ public class LevelTest {
      */
     @Test
     public void testPlaceObstacles() {
-        System.out.println("placeObstacles");
-        Level instance = null;
-        instance.placeObstacles();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //Hoe kan je dit unit testen?
     }
 
 }

@@ -17,6 +17,10 @@ public class Level {
     private Point2D doorLocation;
     private String theme;
 
+    Level() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     /**
      *
      * @return the floor number
