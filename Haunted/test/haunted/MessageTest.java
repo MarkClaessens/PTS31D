@@ -19,11 +19,15 @@ import static org.junit.Assert.*;
  */
 public class MessageTest {
 
+        Time timeStamp;
+        Player player;
+        Message bericht;
     public MessageTest() {
     }
 
     @BeforeClass
     public static void setUpClass() {
+         
     }
 
     @AfterClass
@@ -32,6 +36,9 @@ public class MessageTest {
 
     @Before
     public void setUp() {
+         timeStamp = new Time(12,12,12);
+         player = new Player("Tom");
+         bericht = new Message("hallo",player);
     }
 
     @After
@@ -44,12 +51,10 @@ public class MessageTest {
     @Test
     public void testGetTimeStamp() {
         System.out.println("getTimeStamp");
-        Message instance = null;
-        Time expResult = null;
-        Time result = instance.getTimeStamp();
-        assertEquals(expResult, result);
+        bericht.setTimeStamp(timeStamp);
+        assertEquals(new Time(12,12,12),bericht.getTimeStamp());
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -57,12 +62,9 @@ public class MessageTest {
      */
     @Test
     public void testSetTimeStamp() {
-        System.out.println("setTimeStamp");
-        Time timeStamp = null;
-        Message instance = null;
-        instance.setTimeStamp(timeStamp);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("setTimeStamp");        
+        bericht.setTimeStamp(timeStamp);
+        
     }
 
     /**
@@ -71,12 +73,7 @@ public class MessageTest {
     @Test
     public void testGetText() {
         System.out.println("getText");
-        Message instance = null;
-        String expResult = "";
-        String result = instance.getText();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals("hallo",bericht.getText());
     }
 
     /**
@@ -84,12 +81,10 @@ public class MessageTest {
      */
     @Test
     public void testSetText() {
-        System.out.println("setText");
-        String text = "";
-        Message instance = null;
-        instance.setText(text);
+        System.out.println("setText");        
+        bericht.setText("hi");
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
 }
