@@ -41,31 +41,6 @@ public class LobbyTest {
     @After
     public void tearDown() {
     }
-
-    /**
-     * Test of joinGameLobby method, of class Lobby.
-     */
-    @Test
-    public void testJoinGameLobby() {
-        System.out.println("joinGameLobby");        
-        GameLobby gamelobby = new GameLobby("boe",null, player);        
-        lobby.joinGameLobby(gamelobby);
-        //optioneel om toch nog true of false terug te geven als room vol is en je niet meer kunt joinen.
-        // TODO revie test case is a prototype.");w the generated test code and remove the default call to fail.
-        
-    }
-
-    /**
-     * Test of refresh method, of class Lobby.
-     */
-    @Test
-    public void testRefresh() {
-        System.out.println("refresh");        
-        lobby.refresh();
-        // TODO review the generated test code and remove the default call to fail.
-        
-    }
-
     /**
      * Test of changePlayerName method, of class Lobby.
      */

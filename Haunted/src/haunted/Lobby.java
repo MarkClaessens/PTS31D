@@ -5,27 +5,8 @@ package haunted;
  * @author Mal
  */
 public class Lobby {
-
     /**
-     * This makes the player join the selected GameLobby lobby can not be null
-     *
-     * @param lobby
-     */
-    public void joinGameLobby(GameLobby lobby) {
-        // TODO - implement Lobby.joinGameLobby
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * this refreshes the view that shows GameLobbys
-     */
-    public void refresh() {
-        // TODO - implement Lobby.refresh
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     *
+     * change the name of the current player
      * @param name
      */
     public void changePlayerName(String name) {
