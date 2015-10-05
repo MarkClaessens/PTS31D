@@ -85,6 +85,7 @@ public abstract class Character {
 
     /**
      * Makes the character move in the pointed direction
+     * Be aware of collision!
      *
      * @param direction
      */
@@ -92,5 +93,9 @@ public abstract class Character {
         // TODO - implement Character.move
         throw new UnsupportedOperationException();
     }
-
+    
+    public Character(String color){
+        //TODO - implement Character.Character
+        throw new UnsupportedOperationException();
+    }
 }
