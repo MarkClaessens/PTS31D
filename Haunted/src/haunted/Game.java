@@ -11,7 +11,7 @@ public class Game {
     
     private List<Player> players;
     private int floorAmount;
-    private int currentRound;
+    private int currentRound; // start with 0
     private Timer tickTimer;
 
     /**
