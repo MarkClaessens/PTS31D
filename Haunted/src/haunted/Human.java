@@ -14,9 +14,8 @@ public class Human extends Character {
     private Double rotationSpeed;
 
     /**
-     * Returns the flashlight range
      *
-     * @return flashlightRange
+     * @return the flashlight range
      */
     public int getFlashlightRange() {
         return this.flashlightRange;
@@ -32,9 +31,8 @@ public class Human extends Character {
     }
 
     /**
-     * Returns the flashlight angle
      *
-     * @return flashlightAngle
+     * @return the flashlight angle
      */
     public int getFlashlightAngle() {
         return this.flashlightAngle;
@@ -50,9 +48,8 @@ public class Human extends Character {
     }
 
     /**
-     * Returns true if the human has the key
      *
-     * @return hasKey
+     * @return true if the human has the key
      */
     public boolean isHasKey() {
         return this.hasKey;
@@ -68,9 +65,8 @@ public class Human extends Character {
     }
 
     /**
-     * Returns the rotation speed of the flashlight
      *
-     * @return rotationSpeed
+     * @return the rotation speed of the flashlight
      */
     public Double getRotationSpeed() {
         return this.rotationSpeed;
@@ -87,6 +83,8 @@ public class Human extends Character {
 
     /**
      * Rotates the flashlight depending on the mouse position
+     * When flashing on a wall, light is not behind the wall
+     * Also check on collision with ghost
      *
      * @param mousePosition
      */
@@ -122,8 +120,13 @@ public class Human extends Character {
 
     /**
      * Constructor of Human
+     * Set haskey to false
+     * Set rotation speed and flashlight properties
+     * Set properties in super class
+     * @param color, color of the hat
      */
-    public Human() {
+    public Human(String color) {
+        super(color);
         // TODO - implement Human.Human
         throw new UnsupportedOperationException();
     }

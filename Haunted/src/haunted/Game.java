@@ -11,8 +11,7 @@ public class Game {
     
     private List<Player> players;
     private int floorAmount;
-    private int currentRound;
-    private int currentFloor;
+    private int currentRound; // start with 0
     private Timer tickTimer;
 
     /**
@@ -22,9 +21,7 @@ public class Game {
         return this.players;
     }
     /**
-     * gives amount of floors the game contains
-     *
-     * @return
+     * @return amount of floors that the game contains.
      */
     public int getFloorAmount() {
         return this.floorAmount;
@@ -40,45 +37,15 @@ public class Game {
     }
 
     /**
-     * gives current round number
-     *
-     * @return
+     * @return current round number
      */
     public int getCurrentRound() {
         return this.currentRound;
     }
 
-    /**
-     * sets current round number
-     *
-     * @param currentRound
-     */
-    public void setCurrentRound(int currentRound) {
-        this.currentRound = currentRound;
-    }
 
     /**
-     * gives current floor number of the game
-     *
-     * @return
-     */
-    public int getCurrentFloor() {
-        return this.currentFloor;
-    }
-
-    /**
-     * sets current floor number of the game
-     *
-     * @param currentFloor
-     */
-    public void setCurrentFloor(int currentFloor) {
-        this.currentFloor = currentFloor;
-    }
-
-    /**
-     * gives the tick timer
-     *
-     * @return
+     * @return the tick timer
      */
     public Timer getTickTimer() {
         return this.tickTimer;
@@ -106,16 +73,15 @@ public class Game {
 
     /**
      * sets the game to the next level
-     *
-     * @param floor Mike: why do we use a parameters???
+     * Increases the currentRound with 1, generates a new level object and calls the startRound method.
      */
-    public void nextLevel(int floor) {
+    public void nextLevel() {
         // TODO - implement Game.nextLevel
         throw new UnsupportedOperationException();
     }
 
     /**
-     * starts the next round
+     * starts the next round at the current floor.
      */
     public void startRound() {
         // TODO - implement Game.startRound
@@ -123,7 +89,8 @@ public class Game {
     }
 
     /**
-     * ends the current round
+     * ends the current round, after this the next level will be generated 
+     * and the current round will increase with one.
      */
     public void endRound() {
         // TODO - implement Game.endRound
@@ -131,7 +98,7 @@ public class Game {
     }
 
     /**
-     * ends the game
+     * Will be called when the game is done. There might be a victory screen.
      */
     public void endGame() {
         // TODO - implement Game.endGame
@@ -140,15 +107,16 @@ public class Game {
 
     /**
      * player leaves the game
-     * @param player the player who wants to leave the game.
+     * First iteration doesn't need a parameter because we only have two player.
      */
-    public void leaveGame(Player player) {
+    public void leaveGame() {
         // TODO - implement Game.leaveGame
         throw new UnsupportedOperationException();
     }
 
     /**
-     * everything that needs to be checked every tick from the timer
+     * Engine of the game. 
+     * Makes al calculations for the game and checks if there are any changes to the game state.
      */
     public void tick() {
         // TODO - implement Game.tick

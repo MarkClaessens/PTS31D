@@ -17,16 +17,20 @@ public class Level {
     private Point2D doorLocation;
     private String theme;
 
+    Level() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     /**
-     *
-     * @return the floor number
+     * Returns the current floor number
+     * @return current floor number
      */
     public int getFloorNr() {
         return this.floorNr;
     }
 
     /**
-     * Sets the floor number Floor number is not null, 0 or a negative number.
+     * Sets the floor number Floor number is not null or a negative number.
      *
      * @param floorNr
      */
@@ -35,15 +39,15 @@ public class Level {
     }
 
     /**
-     *
-     * @return the number of ghost lives
+     * Returns the current number of ghost lives for the game
+     * @return ghost life pool
      */
     public int getGhostLifePool() {
         return this.ghostLifePool;
     }
 
     /**
-     * Sets the number of ghost lives Ghost live is not null or a negative
+     * Sets the number of ghost lives. Ghost lives can not be null or a negative
      * number.
      *
      * @param ghostLifePool
@@ -53,15 +57,15 @@ public class Level {
     }
 
     /**
-     *
-     * @return the shape of the level in a string
+     * Returns the shape of the current level in a string
+     * @return shape of the level
      */
     public String getShape() {
         return this.shape;
     }
 
     /**
-     * Sets the shape of the level
+     * Sets the shape of the level, this can be set by use of a String
      *
      * @param shape
      */
@@ -70,15 +74,15 @@ public class Level {
     }
 
     /**
-     *
-     * @return the level's width (x-axis)
+     * Returns the current level's width (x-axis)
+     * @return level's width
      */
     public int getWidth() {
         return this.width;
     }
 
     /**
-     * Sets the level's width (x-axis)
+     * Sets the current level's width (x-axis)
      *
      * @param width
      */
@@ -87,8 +91,8 @@ public class Level {
     }
 
     /**
-     *
-     * @return the level's height (y-axis)
+     * Return the current level's height (y-axis)
+     * @return level's height
      */
     public int getHeight() {
         return this.height;
@@ -104,15 +108,15 @@ public class Level {
     }
 
     /**
-     *
-     * @return the key's location on the map
+     * Returns the key's location on the current level
+     * @return key location
      */
     public Point2D getKeyLocation() {
         return this.keyLocation;
     }
 
     /**
-     * Sets the key's location on the map, this location is generated randomly
+     * Sets the key's location on the current level, this location is generated randomly
      *
      * @param keyLocation
      */
@@ -121,15 +125,15 @@ public class Level {
     }
 
     /**
-     *
-     * @return the door's location on the map
+     * Returns the door's location on the current level
+     * @return door location
      */
     public Point2D getDoorLocation() {
         return this.doorLocation;
     }
 
     /**
-     * Sets the door's location on the map, this location is generated randomly
+     * Sets the door's location on the current level, this location is generated randomly
      * on one of the sides
      *
      * @param doorLocation
@@ -139,8 +143,8 @@ public class Level {
     }
 
     /**
-     *
-     * @return the level's current theme
+     * Returns the theme of the current level in a String
+     * @return level's theme
      */
     public String getTheme() {
         return this.theme;
@@ -148,7 +152,7 @@ public class Level {
 
     /**
      * Sets the level's current theme, this determines which character sprites
-     * are used
+     * are being used
      *
      * @param theme
      */
@@ -157,7 +161,7 @@ public class Level {
     }
 
     /**
-     * Generates the location of the key on the map, this location is random.
+     * Generates the location of the key on the current level, this location is random.
      * This is done after the door location is generated.
      */
     public void generateKeyLocation() {
@@ -166,7 +170,7 @@ public class Level {
     }
 
     /**
-     * Generates the location of the door on the map, this location is random.
+     * Generates the location of the door on the current level, this location is random.
      */
     public void generateDoorLocation() {
         // TODO - implement Level.generateDoorLocation

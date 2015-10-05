@@ -10,9 +10,9 @@ public class Ghost extends Character {
     private boolean isGhost;
 
     /**
-     * gives the state of vulnerability
+     * 
      *
-     * @return vulnerability
+     * @return the state of vulnerability
      */
     public boolean isVulnerable() {
         return this.vulnerable;
@@ -63,8 +63,12 @@ public class Ghost extends Character {
 
     /**
      * Constructor for ghost
+     * sets vulnerable and isGhost to true
+     * sets the super variables in characters
+     * @param color, color of the ghost
      */
-    public Ghost() {
+    public Ghost(String color) {
+        super(color);
         // TODO - implement Ghost.Ghost
         throw new UnsupportedOperationException();
     }
