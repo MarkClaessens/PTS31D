@@ -86,12 +86,13 @@ public class GameTest {
     public void testNextLevel(){
     /**
      * sets the game to the next level
+     * Increases the currentRound with 1, generates a new level object and calls the startRound method.
      */
         
         // First we create a level that is used bij floor 1.
         Level floor1 = new Level(1);
         
-        // Could not finish this method cause specification is bad!
+        
     }
        
     @Test
