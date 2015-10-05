@@ -93,54 +93,43 @@ public class GameTest {
         
         // Could not finish this method cause specification is bad!
     }
-    
-    @Test 
-    public void testNextLevelFloor(){
-    /**
-     * @param floor 
-     */
-        
-        // Could not finish this method cause specification is bad!
-    }
-    
+       
     @Test
     public void testStartRound(){
-        // I think we need a state attribute for the game.. whether the game is in a round or not.
+    /**
+     * starts the next round at the current floor.
+     */
     }
     
     @Test
     public void testEndRound(){
-        // I think we need a state attribute for the game.. whether the game is in a round or not.
+    /**
+     * ends the current round, after this the next level will be generated 
+     * and the current round will increase with one.
+     */
     }
     
     @Test
     public void testEndGame(){
-        // Ending a game is deleting the Game object (and so the Level object) and the GameLobby object.
-        // We can use a destructor for deleting objects??
+    /**
+     * Will be called when the game is done. There might be a victory screen.
+     */
     }
     
     @Test
     public void testLeaveGame(){
     /**
      * player leaves the game
-     * @param player the player who wants to leave the game.
+     * First iteration doesn't need a parameter because we only have two player.
      */
-        
-        // !! I added the param player in leaveGame method !! 
-        
-        players.remove(player1);
-        game.leaveGame(player1);
-        Assert.assertEquals("Expected another list of players, leaveGame() fails", players, game.getPlayers());
     }
     
     @Test
     public void testTick(){
     /**
-     * everything that needs to be checked every tick from the timer
+     * Engine of the game. 
+     * Makes al calculations for the game and checks if there are any changes to the game state.
      */
-        
-        // Could not finish this method cause specification is bad!
-        // Damn how to test this?
     }
 
 }
