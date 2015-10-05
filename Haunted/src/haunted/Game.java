@@ -12,7 +12,6 @@ public class Game {
     private List<Player> players;
     private int floorAmount;
     private int currentRound;
-    private int currentFloor;
     private Timer tickTimer;
 
     /**
@@ -44,14 +43,6 @@ public class Game {
         return this.currentRound;
     }
 
-    /**
-     * sets current round number
-     *
-     * @param currentRound
-     */
-    public void setCurrentRound(int currentRound) {
-        this.currentRound = currentRound;
-    }
 
     /**
      * @return the tick timer
@@ -82,6 +73,7 @@ public class Game {
 
     /**
      * sets the game to the next level
+     * Increases the currentRound with 1, generates a new level object and calls the startRound method.
      */
     public void nextLevel() {
         // TODO - implement Game.nextLevel

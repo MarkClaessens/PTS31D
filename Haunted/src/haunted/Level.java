@@ -26,7 +26,7 @@ public class Level {
     }
 
     /**
-     * Sets the floor number Floor number is not null, 0 or a negative number.
+     * Sets the floor number Floor number is not null or a negative number.
      *
      * @param floorNr
      */
