@@ -17,10 +17,10 @@ import static org.junit.Assert.*;
  * @author Mal
  */
 public class LobbyTest {
-    
+
     Player player;
     Lobby lobby;
-    
+
     public LobbyTest() {
     }
 
@@ -47,12 +47,12 @@ public class LobbyTest {
      */
     @Test
     public void testJoinGameLobby() {
-        System.out.println("joinGameLobby");        
-        GameLobby gamelobby = new GameLobby("boe",null, player);        
+        System.out.println("joinGameLobby");
+        GameLobby gamelobby = new GameLobby("boe", null, player);
         lobby.joinGameLobby(gamelobby);
         //optioneel om toch nog true of false terug te geven als room vol is en je niet meer kunt joinen.
         // TODO revie test case is a prototype.");w the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -60,10 +60,10 @@ public class LobbyTest {
      */
     @Test
     public void testRefresh() {
-        System.out.println("refresh");        
+        System.out.println("refresh");
         lobby.refresh();
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -71,9 +71,9 @@ public class LobbyTest {
      */
     @Test
     public void testChangePlayerName() {
-        System.out.println("changePlayerName");        
+        System.out.println("changePlayerName");
         lobby.changePlayerName("Henkie");
-        assertEquals("Henkie",player.getName());
+        assertEquals("Henkie", player.getName());
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -83,8 +83,8 @@ public class LobbyTest {
      */
     @Test
     public void testExit() {
-        System.out.println("exit");        
-        lobby.exit();        
+        System.out.println("exit");
+        lobby.exit();
     }
 
     /**
@@ -94,7 +94,7 @@ public class LobbyTest {
     public void testCreateGameLobby() {
         System.out.println("createGameLobby");
         String name = "powerhole";
-        String password = "kaassoufle";        
+        String password = "kaassoufle";
         lobby.createGameLobby(name, password);
     }
 
