@@ -1,5 +1,9 @@
 package haunted;
 
+import java.sql.Time;
+import java.util.List;
+import java.util.Timer;
+
 /**
  *
  * @author Mal
@@ -11,6 +15,23 @@ public class GameLobby {
     private String password;
     private int maxPlayers;
     private int floorAmount;
+    private Timer tickTimer;
+    private List<Player> players;
+
+    /**
+     * create a GameLobby name cannot be null or consist only of spaces. name
+     * has to be unique. password can be null host cannot be null default
+     * maxPlayers 4 default floorAmount 4S
+     *
+     * @param name
+     * @param password
+     * @param host
+     */
+    public GameLobby(String name, String password, Player host) {
+
+        // TODO - implement GameLobby.GameLobby
+        throw new UnsupportedOperationException();
+    }
 
     /**
      * gives the host of the game
@@ -104,20 +125,7 @@ public class GameLobby {
     }
 
     /**
-     * create a GameLobby name cannot be null or consist only of spaces. name
-     * has to be unique. password can be null host cannot be null
-     *
-     * @param name
-     * @param password
-     * @param host
-     */
-    public GameLobby(String name, String password, Player host) {
-        // TODO - implement GameLobby.GameLobby
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * you can start the game when everyone is ready.
+     * you can start the game when everyone is ready. this starts a timer
      */
     public void startGame() {
         // TODO - implement GameLobby.startGame
@@ -133,9 +141,19 @@ public class GameLobby {
     }
 
     /**
-     * kick player from gamelobby
+     * gets list of players in the GameLobby
+     * @return list<Player>
      */
-    public void removePlayer() {
+    public List<Player> getPlayers(){
+        // TODO - implement GameLobby.getPlayers
+        throw new UnsupportedOperationException();
+    }
+    
+    /**
+     * kick player from GameLobby
+     * @param player
+     */
+    public void removePlayer(Player player) {
         // TODO - implement GameLobby.removePlayer
         throw new UnsupportedOperationException();
     }
@@ -168,6 +186,15 @@ public class GameLobby {
      */
     public boolean readyCheck() {
         // TODO - implement GameLobby.readyCheck
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * this returns true if the ticktimer is on
+     * @return TickTimerState
+     */
+    public boolean getTickTimerState() {
+        // TODO - implement GameLobby.getTickTimerState
         throw new UnsupportedOperationException();
     }
 
