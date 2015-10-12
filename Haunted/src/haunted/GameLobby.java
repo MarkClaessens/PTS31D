@@ -142,22 +142,31 @@ public class GameLobby {
 
     /**
      * gets list of players in the GameLobby
+     *
      * @return list<Player>
      */
-    public List<Player> getPlayers(){
+    public List<Player> getPlayers() {
         // TODO - implement GameLobby.getPlayers
         throw new UnsupportedOperationException();
     }
-    
+
     /**
      * kick player from GameLobby
+     *
      * @param player
      */
     public void removePlayer(Player player) {
         // TODO - implement GameLobby.removePlayer
         throw new UnsupportedOperationException();
     }
-
+    
+    /**
+     * this returns the list of messages from chat.
+     * @return list of messages
+     */
+    public List<Message> getMessages(){
+        throw new UnsupportedOperationException();
+    }
     /**
      * send a message to the other players message cannot be null
      *
@@ -191,6 +200,7 @@ public class GameLobby {
 
     /**
      * this returns true if the ticktimer is on
+     *
      * @return TickTimerState
      */
     public boolean getTickTimerState() {
