@@ -7,8 +7,8 @@
     <offline-allowed/>
   </information>
   <resources>
-    <j2se version="1.6+" java-vm-args="-javaagent:"C:\Users\jvdwi\AppData\Roaming\NetBeans\8.0.2\modules\ext\jacocoagent.jar"=includes=haunted.*,destfile="C:\Users\jvdwi\Documents\[School]\FONTYS\Jaar 2\Semester 3\PTS3\Software\PTS31D\Haunted\jacoco.exec-239102791471511" "  href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Haunted.jar" size="10066" download="eager" />
+    <j2se version="1.6+" java-vm-args="-javaagent:"C:\Users\jvdwi\AppData\Roaming\NetBeans\8.0.2\modules\ext\jacocoagent.jar"=includes=haunted.*,destfile="C:\Users\jvdwi\Documents\[School]\FONTYS\Jaar 2\Semester 3\PTS3\Software\PTS31D\Haunted\jacoco.exec-241671191698862" "  href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="Haunted.jar" size="10045" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Haunted" >
     <param name="requiredFXVersion" value="8.0+"/>
