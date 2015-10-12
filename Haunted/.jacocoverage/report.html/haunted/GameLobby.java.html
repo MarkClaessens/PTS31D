@@ -1,4 +1,4 @@
-package haunted;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="nl"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>GameLobby.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Haunted&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">haunted</a> &gt; <span class="el_source">GameLobby.java</span></div><h1>GameLobby.java</h1><pre class="source lang-java linenums">package haunted;
 
 import java.sql.Time;
 import java.util.List;
@@ -16,7 +16,7 @@ public class GameLobby {
     private int maxPlayers;
     private int floorAmount;
     private Timer tickTimer;
-    private List<Player> players;
+    private List&lt;Player&gt; players;
 
     /**
      * create a GameLobby name cannot be null or consist only of spaces. name
@@ -27,10 +27,10 @@ public class GameLobby {
      * @param password
      * @param host
      */
-    public GameLobby(String name, String password, Player host) {
+<span class="nc" id="L30">    public GameLobby(String name, String password, Player host) {</span>
 
         // TODO - implement GameLobby.GameLobby
-        throw new UnsupportedOperationException();
+<span class="nc" id="L33">        throw new UnsupportedOperationException();</span>
     }
 
     /**
@@ -39,7 +39,7 @@ public class GameLobby {
      * @return
      */
     public Player getHost() {
-        return this.Host;
+<span class="nc" id="L42">        return this.Host;</span>
     }
 
     /**
@@ -48,8 +48,8 @@ public class GameLobby {
      * @param Host
      */
     public void setHost(Player Host) {
-        this.Host = Host;
-    }
+<span class="nc" id="L51">        this.Host = Host;</span>
+<span class="nc" id="L52">    }</span>
 
     /**
      * gives name of the gamelobby
@@ -57,7 +57,7 @@ public class GameLobby {
      * @return
      */
     public String getName() {
-        return this.name;
+<span class="nc" id="L60">        return this.name;</span>
     }
 
     /**
@@ -66,8 +66,8 @@ public class GameLobby {
      * @param name
      */
     public void setName(String name) {
-        this.name = name;
-    }
+<span class="nc" id="L69">        this.name = name;</span>
+<span class="nc" id="L70">    }</span>
 
     /**
      * gives password of the gamelobby
@@ -75,7 +75,7 @@ public class GameLobby {
      * @return
      */
     public String getPassword() {
-        return this.password;
+<span class="nc" id="L78">        return this.password;</span>
     }
 
     /**
@@ -84,8 +84,8 @@ public class GameLobby {
      * @param password
      */
     public void setPassword(String password) {
-        this.password = password;
-    }
+<span class="nc" id="L87">        this.password = password;</span>
+<span class="nc" id="L88">    }</span>
 
     /**
      * gives maximal number of players for the GameLobby
@@ -93,7 +93,7 @@ public class GameLobby {
      * @return
      */
     public int getMaxPlayers() {
-        return this.maxPlayers;
+<span class="nc" id="L96">        return this.maxPlayers;</span>
     }
 
     /**
@@ -103,8 +103,8 @@ public class GameLobby {
      * @param maxPlayers
      */
     public void setMaxPlayers(int maxPlayers) {
-        this.maxPlayers = maxPlayers;
-    }
+<span class="nc" id="L106">        this.maxPlayers = maxPlayers;</span>
+<span class="nc" id="L107">    }</span>
 
     /**
      * gives amount of floors for the game
@@ -112,7 +112,7 @@ public class GameLobby {
      * @return
      */
     public int getFloorAmount() {
-        return this.floorAmount;
+<span class="nc" id="L115">        return this.floorAmount;</span>
     }
 
     /**
@@ -121,15 +121,15 @@ public class GameLobby {
      * @param floorAmount
      */
     public void setFloorAmount(int floorAmount) {
-        this.floorAmount = floorAmount;
-    }
+<span class="nc" id="L124">        this.floorAmount = floorAmount;</span>
+<span class="nc" id="L125">    }</span>
 
     /**
      * you can start the game when everyone is ready. this starts a timer
      */
     public void startGame() {
         // TODO - implement GameLobby.startGame
-        throw new UnsupportedOperationException();
+<span class="nc" id="L132">        throw new UnsupportedOperationException();</span>
     }
 
     /**
@@ -137,16 +137,16 @@ public class GameLobby {
      */
     public void changeReadyStatus() {
         // TODO - implement GameLobby.changeReadyStatus
-        throw new UnsupportedOperationException();
+<span class="nc" id="L140">        throw new UnsupportedOperationException();</span>
     }
 
     /**
      * gets list of players in the GameLobby
-     * @return list<Player>
+     * @return list&lt;Player&gt;
      */
-    public List<Player> getPlayers(){
+    public List&lt;Player&gt; getPlayers(){
         // TODO - implement GameLobby.getPlayers
-        throw new UnsupportedOperationException();
+<span class="nc" id="L149">        throw new UnsupportedOperationException();</span>
     }
     
     /**
@@ -155,7 +155,7 @@ public class GameLobby {
      */
     public void removePlayer(Player player) {
         // TODO - implement GameLobby.removePlayer
-        throw new UnsupportedOperationException();
+<span class="nc" id="L158">        throw new UnsupportedOperationException();</span>
     }
 
     /**
@@ -165,7 +165,7 @@ public class GameLobby {
      */
     public void sendMessage(String message) {
         // TODO - implement GameLobby.sendMessage
-        throw new UnsupportedOperationException();
+<span class="nc" id="L168">        throw new UnsupportedOperationException();</span>
     }
 
     /**
@@ -176,7 +176,7 @@ public class GameLobby {
      */
     public void addPlayer(Player player) {
         // TODO - implement GameLobby.addPlayer
-        throw new UnsupportedOperationException();
+<span class="nc" id="L179">        throw new UnsupportedOperationException();</span>
     }
 
     /**
@@ -186,7 +186,7 @@ public class GameLobby {
      */
     public boolean readyCheck() {
         // TODO - implement GameLobby.readyCheck
-        throw new UnsupportedOperationException();
+<span class="nc" id="L189">        throw new UnsupportedOperationException();</span>
     }
 
     /**
@@ -195,7 +195,8 @@ public class GameLobby {
      */
     public boolean getTickTimerState() {
         // TODO - implement GameLobby.getTickTimerState
-        throw new UnsupportedOperationException();
+<span class="nc" id="L198">        throw new UnsupportedOperationException();</span>
     }
 
 }
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

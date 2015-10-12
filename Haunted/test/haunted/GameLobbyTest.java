@@ -18,6 +18,9 @@ import static org.junit.Assert.*;
  */
 public class GameLobbyTest {
 
+    private GameLobby globby;
+    private Player host;
+
     public GameLobbyTest() {
     }
 
@@ -31,6 +34,8 @@ public class GameLobbyTest {
 
     @Before
     public void setUp() {
+        host = new Player("host");
+        globby = new GameLobby("lobby1", "pass1", host);
     }
 
     @After
@@ -43,12 +48,10 @@ public class GameLobbyTest {
     @Test
     public void testGetHost() {
         System.out.println("getHost");
-        GameLobby instance = null;
-        Player expResult = null;
+        GameLobby instance = globby;
+        Player expResult = host;
         Player result = instance.getHost();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -57,11 +60,12 @@ public class GameLobbyTest {
     @Test
     public void testSetHost() {
         System.out.println("setHost");
-        Player Host = null;
-        GameLobby instance = null;
+        Player Host = new Player("host2");
+        GameLobby instance = globby;
         instance.setHost(Host);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Player expResult = Host;
+        Player result = instance.getHost();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -70,12 +74,10 @@ public class GameLobbyTest {
     @Test
     public void testGetName() {
         System.out.println("getName");
-        GameLobby instance = null;
-        String expResult = "";
+        GameLobby instance = globby;
+        String expResult = "lobby1";
         String result = instance.getName();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -84,11 +86,12 @@ public class GameLobbyTest {
     @Test
     public void testSetName() {
         System.out.println("setName");
-        String name = "";
-        GameLobby instance = null;
+        String name = "lobby2";
+        GameLobby instance = globby;
         instance.setName(name);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String expResult = "lobby2";
+        String result = instance.getName();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -97,12 +100,10 @@ public class GameLobbyTest {
     @Test
     public void testGetPassword() {
         System.out.println("getPassword");
-        GameLobby instance = null;
-        String expResult = "";
+        GameLobby instance = globby;
+        String expResult = "pass1";
         String result = instance.getPassword();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -111,11 +112,12 @@ public class GameLobbyTest {
     @Test
     public void testSetPassword() {
         System.out.println("setPassword");
-        String password = "";
-        GameLobby instance = null;
+        String password = "pass2";
+        GameLobby instance = globby;
         instance.setPassword(password);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String expResult = "pass2";
+        String result = instance.getPassword();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -124,12 +126,10 @@ public class GameLobbyTest {
     @Test
     public void testGetMaxPlayers() {
         System.out.println("getMaxPlayers");
-        GameLobby instance = null;
-        int expResult = 0;
+        GameLobby instance = globby;
+        int expResult = 4;
         int result = instance.getMaxPlayers();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -138,11 +138,12 @@ public class GameLobbyTest {
     @Test
     public void testSetMaxPlayers() {
         System.out.println("setMaxPlayers");
-        int maxPlayers = 0;
-        GameLobby instance = null;
+        int maxPlayers = 2;
+        GameLobby instance = globby;
         instance.setMaxPlayers(maxPlayers);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int expResult = 2;
+        int result = instance.getMaxPlayers();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -151,12 +152,10 @@ public class GameLobbyTest {
     @Test
     public void testGetFloorAmount() {
         System.out.println("getFloorAmount");
-        GameLobby instance = null;
-        int expResult = 0;
+        GameLobby instance = globby;
+        int expResult = 4;
         int result = instance.getFloorAmount();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -165,11 +164,12 @@ public class GameLobbyTest {
     @Test
     public void testSetFloorAmount() {
         System.out.println("setFloorAmount");
-        int floorAmount = 0;
-        GameLobby instance = null;
+        int floorAmount = 2;
+        GameLobby instance = globby;
         instance.setFloorAmount(floorAmount);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int expResult = 2;
+        int result = instance.getFloorAmount();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -178,10 +178,11 @@ public class GameLobbyTest {
     @Test
     public void testStartGame() {
         System.out.println("startGame");
-        GameLobby instance = null;
+        GameLobby instance = globby;
         instance.startGame();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        boolean expResult = true;
+        boolean result = instance.getTickTimerState();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -190,10 +191,11 @@ public class GameLobbyTest {
     @Test
     public void testChangeReadyStatus() {
         System.out.println("changeReadyStatus");
-        GameLobby instance = null;
+        GameLobby instance = globby;
+        boolean expResult = !instance.getHost().getReady();
         instance.changeReadyStatus();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        boolean result = instance.getHost().getReady();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -202,10 +204,19 @@ public class GameLobbyTest {
     @Test
     public void testRemovePlayer() {
         System.out.println("removePlayer");
-        GameLobby instance = null;
-        instance.removePlayer();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        GameLobby instance = globby;
+        Player p1 = new Player("player1");
+        globby.addPlayer(p1);
+        instance.removePlayer(p1);
+        boolean expResult = true;
+        boolean result = true;
+        for (Player P : instance.getPlayers()) {
+            if (P.getName().equals(p1.getName())) {
+                result = false;
+            }
+        }
+        assertEquals(expResult, result);
+
     }
 
     /**
@@ -214,11 +225,17 @@ public class GameLobbyTest {
     @Test
     public void testSendMessage() {
         System.out.println("sendMessage");
-        String message = "";
-        GameLobby instance = null;
+        String message = "message1";
+        GameLobby instance = globby;
         instance.sendMessage(message);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        boolean expResult = true;
+        boolean result = false;
+        for (Message M : instance.getMessages()) {
+            if (M.getText().equals(message)) {
+                result = true;
+            }
+        }
+        assertEquals(expResult, result);
     }
 
     /**
@@ -227,25 +244,86 @@ public class GameLobbyTest {
     @Test
     public void testAddPlayer() {
         System.out.println("addPlayer");
-        Player player = null;
-        GameLobby instance = null;
+        Player player = new Player("player2");
+        GameLobby instance = globby;
         instance.addPlayer(player);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        boolean expResult = true;
+        boolean result = false;
+        for (Player P : instance.getPlayers()) {
+            if (P.equals(player)) {
+                result = true;
+            }
+        }
+        assertEquals(expResult, result);
     }
 
     /**
      * Test of readyCheck method, of class GameLobby.
+     * result should be false
      */
     @Test
-    public void testReadyCheck() {
-        System.out.println("readyCheck");
-        GameLobby instance = null;
+    public void testReadyCheckFalse() {
+        System.out.println("readyCheckFalse");
+        GameLobby instance = globby;
+        Player p1 = new Player("p1");
+        Player p2 = new Player("p2");
+        instance.addPlayer(p1);
+        instance.addPlayer(p2);
+        instance.changeReadyStatus();
         boolean expResult = false;
         boolean result = instance.readyCheck();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    }
+    
+     /**
+     * Test of readyCheck method, of class GameLobby.
+     */
+    @Test
+    public void testReadyCheckTrue() {
+        System.out.println("readyCheckFalse");
+        GameLobby instance = globby;
+        Player p1 = new Player("p1");
+        Player p2 = new Player("p2");
+        p1.setReady(true);
+        p2.setReady(true);
+        if (instance.getHost().getReady() == !true){
+            instance.changeReadyStatus();
+        }
+        instance.addPlayer(p1);
+        instance.addPlayer(p2);
+        boolean expResult = true;
+        boolean result = instance.readyCheck();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getTickTimerState method, of class GameLobby.
+     * should be false
+     */
+    @Test
+    public void testGetTickTimerStateFalse() {
+        System.out.println("GetTickTimerState");
+        GameLobby instance = globby;
+        boolean expResult = false;
+        boolean result = instance.getTickTimerState();
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Test of getTickTimerState method, of class GameLobby.
+     * should be true
+     */
+    @Test
+    public void testGetTickTimerStateTrue() {
+        System.out.println("GetTickTimerState");
+        GameLobby instance = globby;
+        if (instance.getHost().getReady() == !true){
+            instance.changeReadyStatus();
+        }
+        instance.startGame();
+        boolean expResult = true;
+        boolean result = instance.getTickTimerState();
+        assertEquals(expResult, result);
     }
 
 }

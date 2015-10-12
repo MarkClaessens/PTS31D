@@ -11,9 +11,26 @@ public class Game {
     
     private List<Player> players;
     private int floorAmount;
-    private int currentRound; // start with 0
+    private int currentRound = -1; //value is -1 because the first round (=floor) is equal to 0. 
     private Timer tickTimer;
-
+    private Level currentLevel;
+    private boolean isRunning = false;
+    
+    
+    /**
+     * @return if the game isRunning (boolean)
+     */
+    public boolean getIsRunning(){
+        return this.isRunning;
+    }
+    
+    /**
+     * @return the current level of the game
+     */
+    public Level getCurrentLevel(){
+        return this.currentLevel;
+    }
+    
     /**
      * @return the list of Players that are playing the game.
      */
@@ -98,7 +115,9 @@ public class Game {
     }
 
     /**
-     * Will be called when the game is done. There might be a victory screen.
+     * Will be called when the game is done.
+     * isRunning has to be false.
+     * There might be a victory screen.
      */
     public void endGame() {
         // TODO - implement Game.endGame

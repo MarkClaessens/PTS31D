@@ -19,15 +19,16 @@ import static org.junit.Assert.*;
  */
 public class MessageTest {
 
-        Time timeStamp;
-        Player player;
-        Message bericht;
+    Time timeStamp;
+    Player player;
+    Message bericht;
+
     public MessageTest() {
     }
 
     @BeforeClass
     public static void setUpClass() {
-         
+
     }
 
     @AfterClass
@@ -36,9 +37,9 @@ public class MessageTest {
 
     @Before
     public void setUp() {
-         timeStamp = new Time(12,12,12);
-         player = new Player("Tom");
-         bericht = new Message("hallo",player);
+        timeStamp = new Time(12, 12, 12);
+        player = new Player("Tom");
+        bericht = new Message("hallo", player);
     }
 
     @After
@@ -52,9 +53,9 @@ public class MessageTest {
     public void testGetTimeStamp() {
         System.out.println("getTimeStamp");
         bericht.setTimeStamp(timeStamp);
-        assertEquals(new Time(12,12,12),bericht.getTimeStamp());
+        assertEquals(new Time(12, 12, 12), bericht.getTimeStamp());
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -62,9 +63,9 @@ public class MessageTest {
      */
     @Test
     public void testSetTimeStamp() {
-        System.out.println("setTimeStamp");        
+        System.out.println("setTimeStamp");
         bericht.setTimeStamp(timeStamp);
-        
+
     }
 
     /**
@@ -73,7 +74,7 @@ public class MessageTest {
     @Test
     public void testGetText() {
         System.out.println("getText");
-        assertEquals("hallo",bericht.getText());
+        assertEquals("hallo", bericht.getText());
     }
 
     /**
@@ -81,10 +82,10 @@ public class MessageTest {
      */
     @Test
     public void testSetText() {
-        System.out.println("setText");        
+        System.out.println("setText");
         bericht.setText("hi");
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
 }
