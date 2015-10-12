@@ -7,19 +7,15 @@ import java.awt.geom.Point2D;
  * @author Mal
  */
 public class Level {
-
+    
     private int floorNr;
-    private int ghostLifePool;
-    private String shape;
+    private int ghostLifePool; // standard is 3
     private int width;
     private int height;
     private Point2D keyLocation;
     private Point2D doorLocation;
     private String theme;
 
-    Level() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     /**
      * Returns the current floor number
@@ -30,7 +26,7 @@ public class Level {
     }
 
     /**
-     * Sets the floor number Floor number is not null or a negative number.
+     * Sets the floor number Floor, number is not a negative number.
      *
      * @param floorNr
      */
@@ -56,22 +52,6 @@ public class Level {
         this.ghostLifePool = ghostLifePool;
     }
 
-    /**
-     * Returns the shape of the current level in a string
-     * @return shape of the level
-     */
-    public String getShape() {
-        return this.shape;
-    }
-
-    /**
-     * Sets the shape of the level, this can be set by use of a String
-     *
-     * @param shape
-     */
-    public void setShape(String shape) {
-        this.shape = shape;
-    }
 
     /**
      * Returns the current level's width (x-axis)

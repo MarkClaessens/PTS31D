@@ -7,6 +7,7 @@ package haunted;
 
 import java.awt.Point;
 import java.awt.geom.Point2D;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -17,10 +18,11 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Mal
+ * @author Kevin
  */
 public class LevelTest {
-
+    Level current;
+    
     public LevelTest() {
     }
 
@@ -34,6 +36,7 @@ public class LevelTest {
 
     @Before
     public void setUp() {
+        current = new Level(1);
     }
 
     @After
@@ -47,7 +50,7 @@ public class LevelTest {
     public void testGetFloorNr() {
         Level current = new Level(5);
         
-        assertEquals(5, current.getFloorNr());
+        assertEquals("getFloorNr incorrect, expected another floorNr", 5, current.getFloorNr());
     }
 
     /**
@@ -55,20 +58,22 @@ public class LevelTest {
      */
     @Test
     public void testSetFloorNr() {
-        Level current = new Level(1);
-
-        current.setFloorNr(-10);
-        current.setFloorNr(2);              
-        
+        current.setFloorNr(2);                
         assertEquals(2, current.getFloorNr());
     }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetFloorNrNegative(){
+        current.setFloorNr(-10);
+        Assert.fail("setFloorNr allows a negative number.");
+    }
+    
 
     /**
      * Test of getGhostLifePool method, of class Level.
      */
     @Test
     public void testGetGhostLifePool() {
-        Level current = new Level(1);
         
         assertEquals(3, current.getGhostLifePool());
     }
@@ -78,42 +83,21 @@ public class LevelTest {
      */
     @Test
     public void testSetGhostLifePool() {
-        Level current = new Level(1);
-
-        current.setGhostLifePool(-1);
         current.setGhostLifePool(4);
-        
         assertEquals(4, current.getGhostLifePool());
     }
 
-    /**
-     * Test of getShape method, of class Level.
-     */
-    @Test
-    public void testGetShape() {
-        Level current = new Level(1);
-        current.setShape("Test");
-        
-        assertEquals("Test", current.getShape());
+    @Test (expected = IllegalArgumentException.class)
+    public void testSetGhostLifePoolNegative(){
+        current.setGhostLifePool(-1);
+        Assert.fail("setGhostLifePool allows a negative number");
     }
-
-    /**
-     * Test of setShape method, of class Level.
-     */
-    @Test
-    public void testSetShape() {
-        Level current = new Level(1);
-        current.setShape("Test");
-        
-        assertEquals("Test", current.getShape());
-    }
-
+    
     /**
      * Test of getWidth method, of class Level.
      */
     @Test
     public void testGetWidth() {
-        Level current = new Level(1);
         current.setWidth(50);
         
         assertEquals(50, current.getWidth());
@@ -124,12 +108,14 @@ public class LevelTest {
      */
     @Test
     public void testSetWidth() {
-        Level current = new Level(1);
-
-        current.setWidth(-100);
-        current.setWidth(100);
-        
+        current.setWidth(100);      
         assertEquals(100, current.getWidth());
+    }
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void testSetWidthNegative(){
+        current.setWidth(-100);
+        Assert.fail("setWidth allows a negative number");
     }
 
     /**
@@ -137,9 +123,7 @@ public class LevelTest {
      */
     @Test
     public void testGetHeight() {
-        Level current = new Level(1);
         current.setHeight(65);
-        
         assertEquals(65, current.getHeight());
     }
 
@@ -148,12 +132,14 @@ public class LevelTest {
      */
     @Test
     public void testSetHeight() {
-        Level current = new Level(1);
-
-        current.setHeight(-100);
-        current.setHeight(120); 
-        
+        current.setHeight(120);  
         assertEquals(120, current.getHeight());
+    }
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void testSetHeightNegative(){
+        current.setHeight(-100);
+        Assert.fail("setHeight allows a negative number");
     }
 
     /**
@@ -161,7 +147,6 @@ public class LevelTest {
      */
     @Test
     public void testGetKeyLocation() {
-        Level current = new Level(1);
         current.setKeyLocation(new Point(50,50));
         Point2D key = new Point(50,50);
         
@@ -173,13 +158,21 @@ public class LevelTest {
      */
     @Test
     public void testSetKeyLocation() {
-        Level current = new Level(1);
-        
-        current.setKeyLocation(new Point(-5, 50));
-        current.setKeyLocation(new Point(-10,60));
         current.setKeyLocation(new Point(50,50));
         
         assertEquals(new Point(50,50), current.getKeyLocation());
+    }
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void testSetKeyLocationX(){
+        current.setKeyLocation(new Point(-5, 50));
+        Assert.fail("setKeyLocation allows a negative x position");
+    }
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void testSetKeyLocationY(){
+        current.setKeyLocation(new Point(10,-60));
+        Assert.fail("setKeyLocation allows a negative y position");
     }
 
     /**
@@ -187,7 +180,6 @@ public class LevelTest {
      */
     @Test
     public void testGetDoorLocation() {
-        Level current = new Level(1);
         current.setDoorLocation(new Point(100,100));
         
         assertEquals(new Point(100,100), current.getDoorLocation());
@@ -198,14 +190,20 @@ public class LevelTest {
      */
     @Test
     public void testSetDoorLocation() {
-        Level current = new Level(1);
-        
-        current.setDoorLocation(new Point(-50,50));
-        current.setDoorLocation(new Point(50, -50));
         current.setDoorLocation(new Point(50,50));
-        
-        assertEquals(new Point(50,50), current.getDoorLocation());
-         
+        assertEquals(new Point(50,50), current.getDoorLocation());  
+    }
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void testSetDoorLocationX(){
+        current.setDoorLocation(new Point(-50,50));
+        Assert.fail("setDoorLocation allows negative number x position");
+    }
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void testSetDoorLocationY(){
+        current.setDoorLocation(new Point(50, -50));
+        Assert.fail("setDoorLocation allows negative number y position");
     }
 
     /**
@@ -213,9 +211,7 @@ public class LevelTest {
      */
     @Test
     public void testGetTheme() {
-        Level current = new Level(1);
-        current.setTheme("Test");
-        
+        current.setTheme("Test");       
         assertEquals("Test", current.getTheme());
     }
 
@@ -224,7 +220,6 @@ public class LevelTest {
      */
     @Test
     public void testSetTheme() {
-        Level current = new Level(1);
         current.setTheme("Test");
         
         assertEquals("Test", current.getTheme());
@@ -235,10 +230,9 @@ public class LevelTest {
      */
     @Test
     public void testGenerateKeyLocation() {
-        Level current = new Level(1);
         current.generateKeyLocation();
-        
-        assertEquals(Point2D.class, current.getKeyLocation());
+        Assert.assertThat("generateKeyLocation doesn't create a Point2D object", 
+                          current.getKeyLocation(), instanceOf(Point2D.class));
     }
 
     /**
@@ -246,10 +240,9 @@ public class LevelTest {
      */
     @Test
     public void testGenerateDoorLocation() {
-        Level current = new Level(1);
         current.generateDoorLocation();
-        
-        assertEquals(Point2D.class, current.getDoorLocation());
+        Assert.assertThat("generateDoorLocation doesn't create a Point2D object",
+                          current.getDoorLocation(), instanceOf(Point2D.class));
     }
 
     /**
@@ -257,9 +250,10 @@ public class LevelTest {
      */
     @Test
     public void testGenerateLayout() {
-        Level current = new Level(1);
-        current.generateLayout();
         
+        // TODO for kevin
+        current.generateLayout();
+        Assert.assertThat("generteLayout doesn't create a ", this, null);
         assertEquals(Point2D.class, current.getKeyLocation());
         assertEquals(Point2D.class, current.getDoorLocation());
     }
@@ -269,7 +263,7 @@ public class LevelTest {
      */
     @Test
     public void testPlaceObstacles() {
-        //Hoe kan je dit unit testen?
+        // TODO for kevin, how to test this?
     }
 
 }
