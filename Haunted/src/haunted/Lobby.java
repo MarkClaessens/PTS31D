@@ -9,7 +9,7 @@ import static com.sun.deploy.cache.MemoryCache.shutdown;
  * @author Mal
  */
 public class Lobby {
-<<<<<<< HEAD
+
     
     private Player speler1;
     private Player speler2;
@@ -18,9 +18,9 @@ public class Lobby {
       speler1 = new Player("speler1");
       speler2 = new Player("speler2");
     }
-=======
 
->>>>>>> origin/master
+
+
     /**
      * change the name of the current player
      *

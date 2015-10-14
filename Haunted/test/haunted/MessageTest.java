@@ -6,6 +6,7 @@
 package haunted;
 
 import java.sql.Time;
+import java.time.LocalTime;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -51,22 +52,12 @@ public class MessageTest {
      */
     @Test
     public void testGetTimeStamp() {
-        System.out.println("getTimeStamp");
-        bericht.setTimeStamp(timeStamp);
-        assertEquals(new Time(12, 12, 12), bericht.getTimeStamp());
+        System.out.println("getTimeStamp");        
+        assertEquals(Time.valueOf(LocalTime.MIN), bericht.getTimeStamp());
         // TODO review the generated test code and remove the default call to fail.
 
-    }
-
-    /**
-     * Test of setTimeStamp method, of class Message.
-     */
-    @Test
-    public void testSetTimeStamp() {
-        System.out.println("setTimeStamp");
-        bericht.setTimeStamp(timeStamp);
-
-    }
+    }   
+    
 
     /**
      * Test of getText method, of class Message.
@@ -77,15 +68,7 @@ public class MessageTest {
         assertEquals("hallo", bericht.getText());
     }
 
-    /**
-     * Test of setText method, of class Message.
-     */
-    @Test
-    public void testSetText() {
-        System.out.println("setText");
-        bericht.setText("hi");
-        // TODO review the generated test code and remove the default call to fail.
-
-    }
+    
+    
 
 }
