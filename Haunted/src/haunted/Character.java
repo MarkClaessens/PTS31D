@@ -9,7 +9,8 @@ import java.awt.geom.Point2D;
  */
 
 public abstract class Character {
-
+    
+    private Game game; 
     private Point2D position;
     private Color color;
     private String sprite;
@@ -102,11 +103,12 @@ public abstract class Character {
         this.direction = direction;
     }
     
-    public Character(Point2D position, Color color, String sprite){
+    public Character(Point2D position, Color color, String sprite, Game game){
         this.position = position;
         this.color = color;
         this.sprite = sprite;
         this.direction = DirectionType.DOWN; // Set a default direction
+        this.game = game;
     }
     
     /**

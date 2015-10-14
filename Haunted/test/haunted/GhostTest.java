@@ -7,6 +7,8 @@ package haunted;
 
 import java.awt.Color;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -20,6 +22,7 @@ import static org.junit.Assert.*;
  */
 public class GhostTest {
 
+    Game game;
     public GhostTest() {
     }
 
@@ -33,6 +36,11 @@ public class GhostTest {
 
     @Before
     public void setUp() {
+        List<Player> players = new ArrayList<>();
+        players.add(new Player("testPlayer1"));
+        players.add(new Player("testPlayer2"));
+        
+        game = new Game(players, 3);
     }
 
     @After
@@ -43,10 +51,9 @@ public class GhostTest {
      * Test of Ghost constructor, of class Ghost.
      */
     @Test
-    public void testMakeGhost() {
-        Point2D spawnPosition = null;
-        spawnPosition.setLocation(300, 500);
-        Ghost ghost1 = new Ghost(spawnPosition, Color.RED, "redGhost");
+    public void testMakeGhost() {                
+        Point2D spawnPosition = new Point2D.Double(300, 500);
+        Ghost ghost1 = new Ghost(spawnPosition, Color.RED, "redGhost", game);
     }
 
     /**
@@ -56,9 +63,8 @@ public class GhostTest {
     public void testIsVulnerable() {
         System.out.println("isVulnerable");
 
-        Point2D spawnPosition = null;
-        spawnPosition.setLocation(300, 500);
-        Ghost ghost = new Ghost(spawnPosition, Color.RED, "redGhost");
+        Point2D spawnPosition = new Point2D.Double(300, 500);
+        Ghost ghost = new Ghost(spawnPosition, Color.RED, "redGhost", game);
         assertTrue("Ghost is not vulnerable at initiliazing", ghost.isVulnerable());
     }
 
@@ -69,9 +75,8 @@ public class GhostTest {
     public void testSetVulnerable() {
         System.out.println("setVulnerable");
         
-        Point2D spawnPosition = null;
-        spawnPosition.setLocation(300, 500);
-        Ghost ghost = new Ghost(spawnPosition, Color.RED, "redGhost");
+        Point2D spawnPosition = new Point2D.Double(300, 500);
+        Ghost ghost = new Ghost(spawnPosition, Color.RED, "redGhost", game);
         ghost.setVulnerable(false);
         assertFalse("Ghost vulnerable was not correctly set to false", ghost.isVulnerable());
     }
@@ -82,9 +87,8 @@ public class GhostTest {
     @Test
     public void testPossess() {
         System.out.println("possess");
-        Point2D spawnPosition = null;
-        spawnPosition.setLocation(300, 500);
-        Ghost ghost = new Ghost(spawnPosition, Color.RED, "redGhost");
+        Point2D spawnPosition = new Point2D.Double(300, 500);
+        Ghost ghost = new Ghost(spawnPosition, Color.RED, "redGhost", game);
         ghost.possess();
         // TODO review the generated test code and remove the default call to fail.
         fail("the ghost has not been possessed to human");
@@ -96,9 +100,8 @@ public class GhostTest {
     @Test
     public void testChangeAppearance() {
         System.out.println("changeAppearance");
-        Point2D spawnPosition = null;
-        spawnPosition.setLocation(300, 500);
-        Ghost ghost = new Ghost(spawnPosition, Color.RED, "redGhost");
+        Point2D spawnPosition = new Point2D.Double(300, 500);
+        Ghost ghost = new Ghost(spawnPosition, Color.RED, "redGhost", game);
         ghost.changeAppearance();
         assertTrue("ghost is still vulnerable", ghost.isVulnerable());
         // TODO review the generated test code and remove the default call to fail.
@@ -111,9 +114,8 @@ public class GhostTest {
     @Test
     public void testVanish() {
         System.out.println("vanish");
-        Point2D spawnPosition = null;
-        spawnPosition.setLocation(300, 500);
-        Ghost ghost = new Ghost(spawnPosition, Color.RED, "redGhost");
+        Point2D spawnPosition = new Point2D.Double(300, 500);
+        Ghost ghost = new Ghost(spawnPosition, Color.RED, "redGhost", game);
         ghost.vanish();
         assertTrue("ghost is still vulnerable", ghost.isVulnerable());
         // TODO review the generated test code and remove the default call to fail.

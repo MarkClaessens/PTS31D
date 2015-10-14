@@ -55,9 +55,10 @@ public class Ghost extends Character {
      * @param position, the Point2D position of the Ghost on the map
      * @param color, color of the Ghost
      * @param sprite, sprite of the Ghost
+     * @param game, the game in which the Ghost is active
      */
-    public Ghost(Point2D position, Color color, String sprite) {
-        super(position, color, sprite);
+    public Ghost(Point2D position, Color color, String sprite, Game game) {
+        super(position, color, sprite, game);
         this.isGhost = true;
         this.vulnerable = true;
     }
