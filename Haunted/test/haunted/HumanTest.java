@@ -101,11 +101,11 @@ public class HumanTest {
      * Test of isHasKey method, of class Human.
      */
     @Test
-    public void testIsHasKey() {
+    public void testGetHasKey() {
         System.out.println("isHasKey");
         Human human = new Human("blue");
 
-        assertFalse("human has key", human.isHasKey());
+        assertFalse("human has key", human.getHasKey());
     }
 
     /**
@@ -118,47 +118,7 @@ public class HumanTest {
         Human human = new Human("blue");
 
         human.setHasKey(hasKey);
-        assertTrue("human has key isn't changed", human.isHasKey());
-    }
-
-    /**
-     * Test of getRotationSpeed method, of class Human.
-     */
-    @Test
-    public void testGetRotationSpeed() {
-        System.out.println("getRotationSpeed");
-        Human human = new Human("blue");
-
-        Double expResult = 23.4;
-        Double result = human.getRotationSpeed();
-        assertEquals("the result is not equal to 23.4", expResult, result);
-    }
-
-    /**
-     * Test of setRotationSpeed method, of class Human.
-     */
-    @Test
-    public void testSetRotationSpeed() {
-        System.out.println("setRotationSpeed");
-        Double rotationSpeed = 28.1;
-        Human human = new Human("blue");
-
-        human.setRotationSpeed(rotationSpeed);
-        assertEquals("rotation speed isn't changed", String.valueOf(28.1), String.valueOf(human.getRotationSpeed()));
-    }
-
-    /**
-     * Test of rotateFlashlight method, of class Human.
-     */
-    @Test
-    public void testRotateFlashlight() {
-        System.out.println("rotateFlashlight");
-        Point2D mousePosition = null;
-        mousePosition.setLocation(12.0, 24.0);
-        Human human = new Human("blue");
-
-        human.rotateFlashlight(mousePosition);
-        //POSITIE WORDT NIET OPGESLAGEN !?
+        assertTrue("human has key isn't changed", human.getHasKey());
     }
 
     /**
@@ -184,7 +144,7 @@ public class HumanTest {
         Human human = new Human("blue");
 
         human.pickUpKey();
-        assertTrue("human has not the key", human.isHasKey());
+        assertTrue("human has not the key", human.getHasKey());
     }
 
     /**

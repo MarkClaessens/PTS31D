@@ -51,7 +51,7 @@ public class Human extends Character {
      *
      * @return true if the human has the key
      */
-    public boolean isHasKey() {
+    public boolean getHasKey() {
         return this.hasKey;
     }
 
@@ -64,33 +64,6 @@ public class Human extends Character {
         this.hasKey = hasKey;
     }
 
-    /**
-     *
-     * @return the rotation speed of the flashlight
-     */
-    public Double getRotationSpeed() {
-        return this.rotationSpeed;
-    }
-
-    /**
-     * Sets the rotation speed of the flashlight
-     *
-     * @param rotationSpeed
-     */
-    public void setRotationSpeed(Double rotationSpeed) {
-        this.rotationSpeed = rotationSpeed;
-    }
-
-    /**
-     * Rotates the flashlight depending on the mouse position When flashing on a
-     * wall, light is not behind the wall Also check on collision with ghost
-     *
-     * @param mousePosition
-     */
-    public void rotateFlashlight(Point2D mousePosition) {
-        // TODO - implement Human.rotateFlashlight
-        throw new UnsupportedOperationException();
-    }
 
     /**
      * The controls of the current ghost as human goes to the new ghost as human
