@@ -8,35 +8,35 @@ import java.util.Timer;
  * @author Mal
  */
 public class Game {
-    
+
     private List<Player> players;
     private int floorAmount;
     private int currentRound = -1; //value is -1 because the first round (=floor) is equal to 0. 
     private Timer tickTimer;
     private Level currentLevel;
     private boolean isRunning = false;
-    
-    
+
     /**
      * @return if the game isRunning (boolean)
      */
-    public boolean getIsRunning(){
+    public boolean getIsRunning() {
         return this.isRunning;
     }
-    
+
     /**
      * @return the current level of the game
      */
-    public Level getCurrentLevel(){
+    public Level getCurrentLevel() {
         return this.currentLevel;
     }
-    
+
     /**
      * @return the list of Players that are playing the game.
      */
-    public List<Player> getPlayers(){
+    public List<Player> getPlayers() {
         return this.players;
     }
+
     /**
      * @return amount of floors that the game contains.
      */
@@ -59,7 +59,6 @@ public class Game {
     public int getCurrentRound() {
         return this.currentRound;
     }
-
 
     /**
      * @return the tick timer
@@ -89,8 +88,8 @@ public class Game {
     }
 
     /**
-     * sets the game to the next level
-     * Increases the currentRound with 1, generates a new level object and calls the startRound method.
+     * sets the game to the next level Increases the currentRound with 1,
+     * generates a new level object and calls the startRound method.
      */
     public void nextLevel() {
         // TODO - implement Game.nextLevel
@@ -106,8 +105,8 @@ public class Game {
     }
 
     /**
-     * ends the current round, after this the next level will be generated 
-     * and the current round will increase with one.
+     * ends the current round, after this the next level will be generated and
+     * the current round will increase with one.
      */
     public void endRound() {
         // TODO - implement Game.endRound
@@ -115,9 +114,8 @@ public class Game {
     }
 
     /**
-     * Will be called when the game is done.
-     * isRunning has to be false.
-     * There might be a victory screen.
+     * Will be called when the game is done. isRunning has to be false. There
+     * might be a victory screen.
      */
     public void endGame() {
         // TODO - implement Game.endGame
@@ -125,8 +123,8 @@ public class Game {
     }
 
     /**
-     * player leaves the game
-     * First iteration doesn't need a parameter because we only have two player.
+     * player leaves the game First iteration doesn't need a parameter because
+     * we only have two player.
      */
     public void leaveGame() {
         // TODO - implement Game.leaveGame
@@ -134,8 +132,8 @@ public class Game {
     }
 
     /**
-     * Engine of the game. 
-     * Makes al calculations for the game and checks if there are any changes to the game state.
+     * Engine of the game. Makes al calculations for the game and checks if
+     * there are any changes to the game state.
      */
     public void tick() {
         // TODO - implement Game.tick

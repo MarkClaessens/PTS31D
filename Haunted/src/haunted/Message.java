@@ -1,6 +1,7 @@
 package haunted;
 
 import java.sql.Time;
+import java.time.LocalTime;
 
 /**
  *
@@ -10,6 +11,7 @@ public class Message {
 
     private Time timeStamp;
     private String text;
+    private Player player;
 
     /**
      * Returns the timestamp when the message was created
@@ -21,15 +23,6 @@ public class Message {
     }
 
     /**
-     * Sets the timestamp when the message was created
-     *
-     * @param timeStamp
-     */
-    public void setTimeStamp(Time timeStamp) {
-        this.timeStamp = timeStamp;
-    }
-
-    /**
      * Returns the text contained in the message
      *
      * @return
@@ -38,13 +31,8 @@ public class Message {
         return this.text;
     }
 
-    /**
-     * Sets the text contained in the message
-     *
-     * @param text
-     */
-    public void setText(String text) {
-        this.text = text;
+    public Player getPlayer() {
+        return this.player;
     }
 
     /**
@@ -53,8 +41,21 @@ public class Message {
      * @param player
      */
     public Message(String text, Player player) {
-        // TODO - implement Message.Message
-        throw new UnsupportedOperationException();
+        if (!text.isEmpty()) {
+            this.timeStamp = Time.valueOf(LocalTime.MIN);
+            this.text = text;
+            this.player = player;
+        }
+    }
+
+    /**
+     * returns this message in a string string will be in this way: "[timestamp]
+     * player: text"
+     *
+     * @return string
+     */
+    public String toString() {
+        return "[" + this.timeStamp.toString() + "]" + " " + this.player.getName() + ": " + this.getText();
     }
 
 }

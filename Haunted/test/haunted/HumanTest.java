@@ -66,7 +66,7 @@ public class HumanTest {
         System.out.println("setFlashlightRange");
         int flashlightRange = 10;
         Human human = new Human("blue");
-        
+
         human.setFlashlightRange(flashlightRange);
         assertEquals("the flashlight range is not changed", 10, human.getFlashlightRange());
     }
@@ -78,7 +78,7 @@ public class HumanTest {
     public void testGetFlashlightAngle() {
         System.out.println("getFlashlightAngle");
         Human human = new Human("blue");
-        
+
         int expResult = 45;
         int result = human.getFlashlightAngle();
         assertEquals("the result is not equal to 45", expResult, result);
@@ -92,7 +92,7 @@ public class HumanTest {
         System.out.println("setFlashlightAngle");
         int flashlightAngle = 30;
         Human human = new Human("blue");
-        
+
         human.setFlashlightAngle(flashlightAngle);
         assertEquals("the flashlight angle isn't changed", 30, human.getFlashlightAngle());
     }
@@ -104,7 +104,7 @@ public class HumanTest {
     public void testIsHasKey() {
         System.out.println("isHasKey");
         Human human = new Human("blue");
-        
+
         assertFalse("human has key", human.isHasKey());
     }
 
@@ -116,7 +116,7 @@ public class HumanTest {
         System.out.println("setHasKey");
         boolean hasKey = true;
         Human human = new Human("blue");
-        
+
         human.setHasKey(hasKey);
         assertTrue("human has key isn't changed", human.isHasKey());
     }
@@ -128,7 +128,7 @@ public class HumanTest {
     public void testGetRotationSpeed() {
         System.out.println("getRotationSpeed");
         Human human = new Human("blue");
-        
+
         Double expResult = 23.4;
         Double result = human.getRotationSpeed();
         assertEquals("the result is not equal to 23.4", expResult, result);
@@ -142,7 +142,7 @@ public class HumanTest {
         System.out.println("setRotationSpeed");
         Double rotationSpeed = 28.1;
         Human human = new Human("blue");
-        
+
         human.setRotationSpeed(rotationSpeed);
         assertEquals("rotation speed isn't changed", String.valueOf(28.1), String.valueOf(human.getRotationSpeed()));
     }
@@ -156,7 +156,7 @@ public class HumanTest {
         Point2D mousePosition = null;
         mousePosition.setLocation(12.0, 24.0);
         Human human = new Human("blue");
-        
+
         human.rotateFlashlight(mousePosition);
         //POSITIE WORDT NIET OPGESLAGEN !?
     }
@@ -168,9 +168,9 @@ public class HumanTest {
     public void testTransferHuman() {
         System.out.println("transferHuman");
         Human human = new Human("blue");
-        
+
         human.transferHuman();
-        
+
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -182,7 +182,7 @@ public class HumanTest {
     public void testPickUpKey() {
         System.out.println("pickUpKey");
         Human human = new Human("blue");
-        
+
         human.pickUpKey();
         assertTrue("human has not the key", human.isHasKey());
     }
@@ -194,7 +194,7 @@ public class HumanTest {
     public void testEnterDoor() {
         System.out.println("enterDoor");
         Human human = new Human("blue");
-        
+
         human.pickUpKey();
         human.enterDoor();
     }

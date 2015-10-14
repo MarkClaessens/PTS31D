@@ -7,7 +7,7 @@ import java.awt.geom.Point2D;
  * @author Mal
  */
 public class Level {
-    
+
     private int floorNr;
     private int ghostLifePool; // standard is 3
     private int width;
@@ -16,9 +16,9 @@ public class Level {
     private Point2D doorLocation;
     private String theme;
 
-
     /**
      * Returns the current floor number
+     *
      * @return current floor number
      */
     public int getFloorNr() {
@@ -36,6 +36,7 @@ public class Level {
 
     /**
      * Returns the current number of ghost lives for the game
+     *
      * @return ghost life pool
      */
     public int getGhostLifePool() {
@@ -52,9 +53,9 @@ public class Level {
         this.ghostLifePool = ghostLifePool;
     }
 
-
     /**
      * Returns the current level's width (x-axis)
+     *
      * @return level's width
      */
     public int getWidth() {
@@ -72,6 +73,7 @@ public class Level {
 
     /**
      * Return the current level's height (y-axis)
+     *
      * @return level's height
      */
     public int getHeight() {
@@ -89,6 +91,7 @@ public class Level {
 
     /**
      * Returns the key's location on the current level
+     *
      * @return key location
      */
     public Point2D getKeyLocation() {
@@ -96,7 +99,8 @@ public class Level {
     }
 
     /**
-     * Sets the key's location on the current level, this location is generated randomly
+     * Sets the key's location on the current level, this location is generated
+     * randomly
      *
      * @param keyLocation
      */
@@ -106,6 +110,7 @@ public class Level {
 
     /**
      * Returns the door's location on the current level
+     *
      * @return door location
      */
     public Point2D getDoorLocation() {
@@ -113,8 +118,8 @@ public class Level {
     }
 
     /**
-     * Sets the door's location on the current level, this location is generated randomly
-     * on one of the sides
+     * Sets the door's location on the current level, this location is generated
+     * randomly on one of the sides
      *
      * @param doorLocation
      */
@@ -124,6 +129,7 @@ public class Level {
 
     /**
      * Returns the theme of the current level in a String
+     *
      * @return level's theme
      */
     public String getTheme() {
@@ -141,8 +147,8 @@ public class Level {
     }
 
     /**
-     * Generates the location of the key on the current level, this location is random.
-     * This is done after the door location is generated.
+     * Generates the location of the key on the current level, this location is
+     * random. This is done after the door location is generated.
      */
     public void generateKeyLocation() {
         // TODO - implement Level.generateKeyLocation
@@ -150,7 +156,8 @@ public class Level {
     }
 
     /**
-     * Generates the location of the door on the current level, this location is random.
+     * Generates the location of the door on the current level, this location is
+     * random.
      */
     public void generateDoorLocation() {
         // TODO - implement Level.generateDoorLocation

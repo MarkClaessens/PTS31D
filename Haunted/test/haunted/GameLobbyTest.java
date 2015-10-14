@@ -258,8 +258,7 @@ public class GameLobbyTest {
     }
 
     /**
-     * Test of readyCheck method, of class GameLobby.
-     * result should be false
+     * Test of readyCheck method, of class GameLobby. result should be false
      */
     @Test
     public void testReadyCheckFalse() {
@@ -274,8 +273,8 @@ public class GameLobbyTest {
         boolean result = instance.readyCheck();
         assertEquals(expResult, result);
     }
-    
-     /**
+
+    /**
      * Test of readyCheck method, of class GameLobby.
      */
     @Test
@@ -286,7 +285,7 @@ public class GameLobbyTest {
         Player p2 = new Player("p2");
         p1.setReady(true);
         p2.setReady(true);
-        if (instance.getHost().getReady() == !true){
+        if (instance.getHost().getReady() == !true) {
             instance.changeReadyStatus();
         }
         instance.addPlayer(p1);
@@ -297,8 +296,7 @@ public class GameLobbyTest {
     }
 
     /**
-     * Test of getTickTimerState method, of class GameLobby.
-     * should be false
+     * Test of getTickTimerState method, of class GameLobby. should be false
      */
     @Test
     public void testGetTickTimerStateFalse() {
@@ -308,16 +306,15 @@ public class GameLobbyTest {
         boolean result = instance.getTickTimerState();
         assertEquals(expResult, result);
     }
-    
+
     /**
-     * Test of getTickTimerState method, of class GameLobby.
-     * should be true
+     * Test of getTickTimerState method, of class GameLobby. should be true
      */
     @Test
     public void testGetTickTimerStateTrue() {
         System.out.println("GetTickTimerState");
         GameLobby instance = globby;
-        if (instance.getHost().getReady() == !true){
+        if (instance.getHost().getReady() == !true) {
             instance.changeReadyStatus();
         }
         instance.startGame();

@@ -1,8 +1,8 @@
 package haunted;
 
-import java.sql.Time;
 import java.util.List;
 import java.util.Timer;
+import java.util.ArrayList;
 
 /**
  *
@@ -10,13 +10,14 @@ import java.util.Timer;
  */
 public class GameLobby {
 
-    private Player Host;
+    private Player host;
     private String name;
     private String password;
     private int maxPlayers;
     private int floorAmount;
-    private Timer tickTimer;
     private List<Player> players;
+    private List<Message> messages;
+    private Game game;
 
     /**
      * create a GameLobby name cannot be null or consist only of spaces. name
@@ -27,10 +28,18 @@ public class GameLobby {
      * @param password
      * @param host
      */
-    public GameLobby(String name, String password, Player host) {
+    public GameLobby(String Name, String Password, Player Host) {
+        this.name = Name;
+        if (Password != null) {
+            this.password = Password;
+        } else {
+            this.password = null;
+        }
+        this.host = Host;
+        this.addPlayer(Host);
+        this.players = new ArrayList();
+        this.messages = new ArrayList();
 
-        // TODO - implement GameLobby.GameLobby
-        throw new UnsupportedOperationException();
     }
 
     /**
@@ -39,7 +48,7 @@ public class GameLobby {
      * @return
      */
     public Player getHost() {
-        return this.Host;
+        return this.host;
     }
 
     /**
@@ -48,7 +57,7 @@ public class GameLobby {
      * @param Host
      */
     public void setHost(Player Host) {
-        this.Host = Host;
+        this.host = Host;
     }
 
     /**
@@ -61,16 +70,16 @@ public class GameLobby {
     }
 
     /**
-     * sets name of the gamelobby name cannot be null or consist only of spaces.
+     * sets name of the Gamelobby name cannot be null or consist only of spaces.
      *
      * @param name
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String Name) {
+        this.name = Name;
     }
 
     /**
-     * gives password of the gamelobby
+     * gives password of the Gamelobby
      *
      * @return
      */
@@ -83,8 +92,8 @@ public class GameLobby {
      *
      * @param password
      */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String Password) {
+        this.password = Password;
     }
 
     /**
@@ -102,8 +111,10 @@ public class GameLobby {
      *
      * @param maxPlayers
      */
-    public void setMaxPlayers(int maxPlayers) {
-        this.maxPlayers = maxPlayers;
+    public void setMaxPlayers(int MaxPlayers) {
+        if (MaxPlayers > 0 && MaxPlayers >= this.players.size()) {
+            this.maxPlayers = MaxPlayers;
+        }
     }
 
     /**
@@ -120,24 +131,26 @@ public class GameLobby {
      *
      * @param floorAmount
      */
-    public void setFloorAmount(int floorAmount) {
-        this.floorAmount = floorAmount;
+    public void setFloorAmount(int FloorAmount) {
+        if (FloorAmount >= 1) {
+            this.floorAmount = FloorAmount;
+        }
     }
 
     /**
      * you can start the game when everyone is ready. this starts a timer
      */
     public void startGame() {
-        // TODO - implement GameLobby.startGame
-        throw new UnsupportedOperationException();
+        if (this.readyCheck()) {
+            this.game = new Game(this.players, this.floorAmount);
+        }
     }
 
     /**
      * set status to ready/not ready, depends on current status.
      */
     public void changeReadyStatus() {
-        // TODO - implement GameLobby.changeReadyStatus
-        throw new UnsupportedOperationException();
+        this.host.setReady(this.host.getReady());
     }
 
     /**
@@ -146,8 +159,7 @@ public class GameLobby {
      * @return list<Player>
      */
     public List<Player> getPlayers() {
-        // TODO - implement GameLobby.getPlayers
-        throw new UnsupportedOperationException();
+        return this.players;
     }
 
     /**
@@ -156,25 +168,32 @@ public class GameLobby {
      * @param player
      */
     public void removePlayer(Player player) {
-        // TODO - implement GameLobby.removePlayer
-        throw new UnsupportedOperationException();
+        for (Player P : this.players) {
+            if (P.getName() == player.getName()) {
+                this.players.remove(P);
+                break;
+            }
+        }
     }
-    
+
     /**
      * this returns the list of messages from chat.
+     *
      * @return list of messages
      */
-    public List<Message> getMessages(){
-        throw new UnsupportedOperationException();
+    public List<Message> getMessages() {
+        return this.messages;
     }
+
     /**
      * send a message to the other players message cannot be null
      *
      * @param message
      */
     public void sendMessage(String message) {
-        // TODO - implement GameLobby.sendMessage
-        throw new UnsupportedOperationException();
+        if (message != null && !message.equalsIgnoreCase("")) {
+            this.messages.add(new Message(message, this.host));
+        }
     }
 
     /**
@@ -184,8 +203,11 @@ public class GameLobby {
      * @param player
      */
     public void addPlayer(Player player) {
-        // TODO - implement GameLobby.addPlayer
-        throw new UnsupportedOperationException();
+        if (player != null) {
+            if (!this.players.contains(player)) {
+                this.players.add(player);
+            }
+        }
     }
 
     /**
@@ -194,18 +216,6 @@ public class GameLobby {
      * @return
      */
     public boolean readyCheck() {
-        // TODO - implement GameLobby.readyCheck
-        throw new UnsupportedOperationException();
+        return players.stream().noneMatch((P) -> (!P.getReady()));
     }
-
-    /**
-     * this returns true if the ticktimer is on
-     *
-     * @return TickTimerState
-     */
-    public boolean getTickTimerState() {
-        // TODO - implement GameLobby.getTickTimerState
-        throw new UnsupportedOperationException();
-    }
-
 }

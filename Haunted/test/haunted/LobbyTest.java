@@ -66,7 +66,6 @@ public class LobbyTest {
 //        // TODO review the generated test code and remove the default call to fail.
 //
 //    }
-    
     /**
      * Test of changePlayerName method, of class Lobby.
      */

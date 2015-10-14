@@ -5,8 +5,10 @@ package haunted;
  * @author Mal
  */
 public class Lobby {
+
     /**
      * change the name of the current player
+     *
      * @param name
      */
     public void changePlayerName(String name) {
