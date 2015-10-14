@@ -7,43 +7,39 @@ import java.awt.geom.Point2D;
  * @author Mal
  */
 public class Level {
-
+    
     private int floorNr;
-    private int ghostLifePool;
-    private String shape;
+    private int ghostLifePool; // standard is 3
     private int width;
     private int height;
     private Point2D keyLocation;
     private Point2D doorLocation;
     private String theme;
 
-<span class="nc" id="L20">    Level() {</span>
-<span class="nc" id="L21">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
-    }
 
     /**
      * Returns the current floor number
      * @return current floor number
      */
     public int getFloorNr() {
-<span class="nc" id="L29">        return this.floorNr;</span>
+<span class="nc" id="L25">        return this.floorNr;</span>
     }
 
     /**
-     * Sets the floor number Floor number is not null or a negative number.
+     * Sets the floor number Floor, number is not a negative number.
      *
      * @param floorNr
      */
     public void setFloorNr(int floorNr) {
-<span class="nc" id="L38">        this.floorNr = floorNr;</span>
-<span class="nc" id="L39">    }</span>
+<span class="nc" id="L34">        this.floorNr = floorNr;</span>
+<span class="nc" id="L35">    }</span>
 
     /**
      * Returns the current number of ghost lives for the game
      * @return ghost life pool
      */
     public int getGhostLifePool() {
-<span class="nc" id="L46">        return this.ghostLifePool;</span>
+<span class="nc" id="L42">        return this.ghostLifePool;</span>
     }
 
     /**
@@ -53,32 +49,16 @@ public class Level {
      * @param ghostLifePool
      */
     public void setGhostLifePool(int ghostLifePool) {
-<span class="nc" id="L56">        this.ghostLifePool = ghostLifePool;</span>
-<span class="nc" id="L57">    }</span>
+<span class="nc" id="L52">        this.ghostLifePool = ghostLifePool;</span>
+<span class="nc" id="L53">    }</span>
 
-    /**
-     * Returns the shape of the current level in a string
-     * @return shape of the level
-     */
-    public String getShape() {
-<span class="nc" id="L64">        return this.shape;</span>
-    }
-
-    /**
-     * Sets the shape of the level, this can be set by use of a String
-     *
-     * @param shape
-     */
-    public void setShape(String shape) {
-<span class="nc" id="L73">        this.shape = shape;</span>
-<span class="nc" id="L74">    }</span>
 
     /**
      * Returns the current level's width (x-axis)
      * @return level's width
      */
     public int getWidth() {
-<span class="nc" id="L81">        return this.width;</span>
+<span class="nc" id="L61">        return this.width;</span>
     }
 
     /**
@@ -87,15 +67,15 @@ public class Level {
      * @param width
      */
     public void setWidth(int width) {
-<span class="nc" id="L90">        this.width = width;</span>
-<span class="nc" id="L91">    }</span>
+<span class="nc" id="L70">        this.width = width;</span>
+<span class="nc" id="L71">    }</span>
 
     /**
      * Return the current level's height (y-axis)
      * @return level's height
      */
     public int getHeight() {
-<span class="nc" id="L98">        return this.height;</span>
+<span class="nc" id="L78">        return this.height;</span>
     }
 
     /**
@@ -104,15 +84,15 @@ public class Level {
      * @param height
      */
     public void setHeight(int height) {
-<span class="nc" id="L107">        this.height = height;</span>
-<span class="nc" id="L108">    }</span>
+<span class="nc" id="L87">        this.height = height;</span>
+<span class="nc" id="L88">    }</span>
 
     /**
      * Returns the key's location on the current level
      * @return key location
      */
     public Point2D getKeyLocation() {
-<span class="nc" id="L115">        return this.keyLocation;</span>
+<span class="nc" id="L95">        return this.keyLocation;</span>
     }
 
     /**
@@ -121,15 +101,15 @@ public class Level {
      * @param keyLocation
      */
     public void setKeyLocation(Point2D keyLocation) {
-<span class="nc" id="L124">        this.keyLocation = keyLocation;</span>
-<span class="nc" id="L125">    }</span>
+<span class="nc" id="L104">        this.keyLocation = keyLocation;</span>
+<span class="nc" id="L105">    }</span>
 
     /**
      * Returns the door's location on the current level
      * @return door location
      */
     public Point2D getDoorLocation() {
-<span class="nc" id="L132">        return this.doorLocation;</span>
+<span class="nc" id="L112">        return this.doorLocation;</span>
     }
 
     /**
@@ -139,15 +119,15 @@ public class Level {
      * @param doorLocation
      */
     public void setDoorLocation(Point2D doorLocation) {
-<span class="nc" id="L142">        this.doorLocation = doorLocation;</span>
-<span class="nc" id="L143">    }</span>
+<span class="nc" id="L122">        this.doorLocation = doorLocation;</span>
+<span class="nc" id="L123">    }</span>
 
     /**
      * Returns the theme of the current level in a String
      * @return level's theme
      */
     public String getTheme() {
-<span class="nc" id="L150">        return this.theme;</span>
+<span class="nc" id="L130">        return this.theme;</span>
     }
 
     /**
@@ -157,8 +137,8 @@ public class Level {
      * @param theme
      */
     public void setTheme(String theme) {
-<span class="nc" id="L160">        this.theme = theme;</span>
-<span class="nc" id="L161">    }</span>
+<span class="nc" id="L140">        this.theme = theme;</span>
+<span class="nc" id="L141">    }</span>
 
     /**
      * Generates the location of the key on the current level, this location is random.
@@ -166,7 +146,7 @@ public class Level {
      */
     public void generateKeyLocation() {
         // TODO - implement Level.generateKeyLocation
-<span class="nc" id="L169">        throw new UnsupportedOperationException();</span>
+<span class="nc" id="L149">        throw new UnsupportedOperationException();</span>
     }
 
     /**
@@ -174,7 +154,7 @@ public class Level {
      */
     public void generateDoorLocation() {
         // TODO - implement Level.generateDoorLocation
-<span class="nc" id="L177">        throw new UnsupportedOperationException();</span>
+<span class="nc" id="L157">        throw new UnsupportedOperationException();</span>
     }
 
     /**
@@ -183,7 +163,7 @@ public class Level {
      */
     public void generateLayout() {
         // TODO - implement Level.generateLayout
-<span class="nc" id="L186">        throw new UnsupportedOperationException();</span>
+<span class="nc" id="L166">        throw new UnsupportedOperationException();</span>
     }
 
     /**
@@ -192,16 +172,16 @@ public class Level {
      */
     public void placeObstacles() {
         // TODO - implement Level.placeObstacles
-<span class="nc" id="L195">        throw new UnsupportedOperationException();</span>
+<span class="nc" id="L175">        throw new UnsupportedOperationException();</span>
     }
 
     /**
      *
      * @param floorNr
      */
-<span class="nc" id="L202">    public Level(int floorNr) {</span>
+<span class="fc" id="L182">    public Level(int floorNr) {</span>
         // TODO - implement Level.Level
-<span class="nc" id="L204">        throw new UnsupportedOperationException();</span>
+<span class="fc" id="L184">        throw new UnsupportedOperationException();</span>
     }
 
 }

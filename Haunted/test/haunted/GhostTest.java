@@ -41,17 +41,17 @@ public class GhostTest {
      * Test of Ghost constructor, of class Ghost.
      */
     @Test
-    public void testMakeGhost(){
+    public void testMakeGhost() {
         Character ghost1 = new Ghost("blue");
     }
-    
+
     /**
      * Test of isVulnerable method, of class Ghost.
      */
     @Test
     public void testIsVulnerable() {
         System.out.println("isVulnerable");
-        
+
         Ghost ghost = new Ghost("blue");
         assertTrue("Ghost is not vulnerable", ghost.isVulnerable());
     }

@@ -27,10 +27,10 @@ public class GameLobby {
      * @param password
      * @param host
      */
-<span class="nc" id="L30">    public GameLobby(String name, String password, Player host) {</span>
+<span class="fc" id="L30">    public GameLobby(String name, String password, Player host) {</span>
 
         // TODO - implement GameLobby.GameLobby
-<span class="nc" id="L33">        throw new UnsupportedOperationException();</span>
+<span class="fc" id="L33">        throw new UnsupportedOperationException();</span>
     }
 
     /**
@@ -142,22 +142,31 @@ public class GameLobby {
 
     /**
      * gets list of players in the GameLobby
+     *
      * @return list&lt;Player&gt;
      */
-    public List&lt;Player&gt; getPlayers(){
+    public List&lt;Player&gt; getPlayers() {
         // TODO - implement GameLobby.getPlayers
-<span class="nc" id="L149">        throw new UnsupportedOperationException();</span>
+<span class="nc" id="L150">        throw new UnsupportedOperationException();</span>
     }
-    
+
     /**
      * kick player from GameLobby
+     *
      * @param player
      */
     public void removePlayer(Player player) {
         // TODO - implement GameLobby.removePlayer
-<span class="nc" id="L158">        throw new UnsupportedOperationException();</span>
+<span class="nc" id="L160">        throw new UnsupportedOperationException();</span>
     }
-
+    
+    /**
+     * this returns the list of messages from chat.
+     * @return list of messages
+     */
+    public List&lt;Message&gt; getMessages(){
+<span class="nc" id="L168">        throw new UnsupportedOperationException();</span>
+    }
     /**
      * send a message to the other players message cannot be null
      *
@@ -165,7 +174,7 @@ public class GameLobby {
      */
     public void sendMessage(String message) {
         // TODO - implement GameLobby.sendMessage
-<span class="nc" id="L168">        throw new UnsupportedOperationException();</span>
+<span class="nc" id="L177">        throw new UnsupportedOperationException();</span>
     }
 
     /**
@@ -176,7 +185,7 @@ public class GameLobby {
      */
     public void addPlayer(Player player) {
         // TODO - implement GameLobby.addPlayer
-<span class="nc" id="L179">        throw new UnsupportedOperationException();</span>
+<span class="nc" id="L188">        throw new UnsupportedOperationException();</span>
     }
 
     /**
@@ -186,16 +195,17 @@ public class GameLobby {
      */
     public boolean readyCheck() {
         // TODO - implement GameLobby.readyCheck
-<span class="nc" id="L189">        throw new UnsupportedOperationException();</span>
+<span class="nc" id="L198">        throw new UnsupportedOperationException();</span>
     }
 
     /**
      * this returns true if the ticktimer is on
+     *
      * @return TickTimerState
      */
     public boolean getTickTimerState() {
         // TODO - implement GameLobby.getTickTimerState
-<span class="nc" id="L198">        throw new UnsupportedOperationException();</span>
+<span class="nc" id="L208">        throw new UnsupportedOperationException();</span>
     }
 
 }

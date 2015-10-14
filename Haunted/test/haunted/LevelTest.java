@@ -21,8 +21,9 @@ import static org.junit.Assert.*;
  * @author Kevin
  */
 public class LevelTest {
+
     Level current;
-    
+
     public LevelTest() {
     }
 
@@ -49,7 +50,7 @@ public class LevelTest {
     @Test
     public void testGetFloorNr() {
         Level current = new Level(5);
-        
+
         assertEquals("getFloorNr incorrect, expected another floorNr", 5, current.getFloorNr());
     }
 
@@ -58,23 +59,22 @@ public class LevelTest {
      */
     @Test
     public void testSetFloorNr() {
-        current.setFloorNr(2);                
+        current.setFloorNr(2);
         assertEquals(2, current.getFloorNr());
     }
-    
+
     @Test(expected = IllegalArgumentException.class)
-    public void testSetFloorNrNegative(){
+    public void testSetFloorNrNegative() {
         current.setFloorNr(-10);
         Assert.fail("setFloorNr allows a negative number.");
     }
-    
 
     /**
      * Test of getGhostLifePool method, of class Level.
      */
     @Test
     public void testGetGhostLifePool() {
-        
+
         assertEquals(3, current.getGhostLifePool());
     }
 
@@ -87,19 +87,19 @@ public class LevelTest {
         assertEquals(4, current.getGhostLifePool());
     }
 
-    @Test (expected = IllegalArgumentException.class)
-    public void testSetGhostLifePoolNegative(){
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetGhostLifePoolNegative() {
         current.setGhostLifePool(-1);
         Assert.fail("setGhostLifePool allows a negative number");
     }
-    
+
     /**
      * Test of getWidth method, of class Level.
      */
     @Test
     public void testGetWidth() {
         current.setWidth(50);
-        
+
         assertEquals(50, current.getWidth());
     }
 
@@ -108,12 +108,12 @@ public class LevelTest {
      */
     @Test
     public void testSetWidth() {
-        current.setWidth(100);      
+        current.setWidth(100);
         assertEquals(100, current.getWidth());
     }
-    
-    @Test (expected = IllegalArgumentException.class)
-    public void testSetWidthNegative(){
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetWidthNegative() {
         current.setWidth(-100);
         Assert.fail("setWidth allows a negative number");
     }
@@ -132,12 +132,12 @@ public class LevelTest {
      */
     @Test
     public void testSetHeight() {
-        current.setHeight(120);  
+        current.setHeight(120);
         assertEquals(120, current.getHeight());
     }
-    
-    @Test (expected = IllegalArgumentException.class)
-    public void testSetHeightNegative(){
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetHeightNegative() {
         current.setHeight(-100);
         Assert.fail("setHeight allows a negative number");
     }
@@ -147,9 +147,9 @@ public class LevelTest {
      */
     @Test
     public void testGetKeyLocation() {
-        current.setKeyLocation(new Point(50,50));
-        Point2D key = new Point(50,50);
-        
+        current.setKeyLocation(new Point(50, 50));
+        Point2D key = new Point(50, 50);
+
         assertEquals(key, current.getKeyLocation());
     }
 
@@ -158,20 +158,20 @@ public class LevelTest {
      */
     @Test
     public void testSetKeyLocation() {
-        current.setKeyLocation(new Point(50,50));
-        
-        assertEquals(new Point(50,50), current.getKeyLocation());
+        current.setKeyLocation(new Point(50, 50));
+
+        assertEquals(new Point(50, 50), current.getKeyLocation());
     }
-    
-    @Test (expected = IllegalArgumentException.class)
-    public void testSetKeyLocationX(){
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetKeyLocationX() {
         current.setKeyLocation(new Point(-5, 50));
         Assert.fail("setKeyLocation allows a negative x position");
     }
-    
-    @Test (expected = IllegalArgumentException.class)
-    public void testSetKeyLocationY(){
-        current.setKeyLocation(new Point(10,-60));
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetKeyLocationY() {
+        current.setKeyLocation(new Point(10, -60));
         Assert.fail("setKeyLocation allows a negative y position");
     }
 
@@ -180,9 +180,9 @@ public class LevelTest {
      */
     @Test
     public void testGetDoorLocation() {
-        current.setDoorLocation(new Point(100,100));
-        
-        assertEquals(new Point(100,100), current.getDoorLocation());
+        current.setDoorLocation(new Point(100, 100));
+
+        assertEquals(new Point(100, 100), current.getDoorLocation());
     }
 
     /**
@@ -190,18 +190,18 @@ public class LevelTest {
      */
     @Test
     public void testSetDoorLocation() {
-        current.setDoorLocation(new Point(50,50));
-        assertEquals(new Point(50,50), current.getDoorLocation());  
+        current.setDoorLocation(new Point(50, 50));
+        assertEquals(new Point(50, 50), current.getDoorLocation());
     }
-    
-    @Test (expected = IllegalArgumentException.class)
-    public void testSetDoorLocationX(){
-        current.setDoorLocation(new Point(-50,50));
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetDoorLocationX() {
+        current.setDoorLocation(new Point(-50, 50));
         Assert.fail("setDoorLocation allows negative number x position");
     }
-    
-    @Test (expected = IllegalArgumentException.class)
-    public void testSetDoorLocationY(){
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetDoorLocationY() {
         current.setDoorLocation(new Point(50, -50));
         Assert.fail("setDoorLocation allows negative number y position");
     }
@@ -211,7 +211,7 @@ public class LevelTest {
      */
     @Test
     public void testGetTheme() {
-        current.setTheme("Test");       
+        current.setTheme("Test");
         assertEquals("Test", current.getTheme());
     }
 
@@ -221,7 +221,7 @@ public class LevelTest {
     @Test
     public void testSetTheme() {
         current.setTheme("Test");
-        
+
         assertEquals("Test", current.getTheme());
     }
 
@@ -231,8 +231,8 @@ public class LevelTest {
     @Test
     public void testGenerateKeyLocation() {
         current.generateKeyLocation();
-        Assert.assertThat("generateKeyLocation doesn't create a Point2D object", 
-                          current.getKeyLocation(), instanceOf(Point2D.class));
+        Assert.assertThat("generateKeyLocation doesn't create a Point2D object",
+                current.getKeyLocation(), instanceOf(Point2D.class));
     }
 
     /**
@@ -242,7 +242,7 @@ public class LevelTest {
     public void testGenerateDoorLocation() {
         current.generateDoorLocation();
         Assert.assertThat("generateDoorLocation doesn't create a Point2D object",
-                          current.getDoorLocation(), instanceOf(Point2D.class));
+                current.getDoorLocation(), instanceOf(Point2D.class));
     }
 
     /**
@@ -250,7 +250,7 @@ public class LevelTest {
      */
     @Test
     public void testGenerateLayout() {
-        
+
         // TODO for kevin
         current.generateLayout();
         Assert.assertThat("generteLayout doesn't create a ", this, null);

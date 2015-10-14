@@ -82,9 +82,8 @@ public class Human extends Character {
     }
 
     /**
-     * Rotates the flashlight depending on the mouse position
-     * When flashing on a wall, light is not behind the wall
-     * Also check on collision with ghost
+     * Rotates the flashlight depending on the mouse position When flashing on a
+     * wall, light is not behind the wall Also check on collision with ghost
      *
      * @param mousePosition
      */
@@ -119,10 +118,9 @@ public class Human extends Character {
     }
 
     /**
-     * Constructor of Human
-     * Set haskey to false
-     * Set rotation speed and flashlight properties
-     * Set properties in super class
+     * Constructor of Human Set haskey to false Set rotation speed and
+     * flashlight properties Set properties in super class
+     *
      * @param color, color of the hat
      */
     public Human(String color) {

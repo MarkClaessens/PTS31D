@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="Haunted.jnlp">
-  <information>
-    <title>Haunted</title>
-    <vendor>PTS31D</vendor>
-    <description>null</description>
-    <offline-allowed/>
-  </information>
-  <resources>
-    <j2se version="1.6+" java-vm-args="-javaagent:"C:\Users\jvdwi\AppData\Roaming\NetBeans\8.0.2\modules\ext\jacocoagent.jar"=includes=haunted.*,destfile="C:\Users\jvdwi\Documents\[School]\FONTYS\Jaar 2\Semester 3\PTS3\Software\PTS31D\Haunted\jacoco.exec-239102791471511" "  href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Haunted.jar" size="10066" download="eager" />
-  </resources>
-  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Haunted" >
-    <param name="requiredFXVersion" value="8.0+"/>
-  </applet-desc>
-  <jfx:javafx-desc  width="800" height="600" main-class="haunted.Haunted"  name="Haunted" />
-  <update check="always"/>
+    <information>
+        <title>Haunted</title>
+        <vendor>PTS31D</vendor>
+        <description>null</description>
+        <offline-allowed/>
+    </information>
+    <resources>
+        <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+        <jar href="Haunted.jar" size="11207" download="eager" />
+    </resources>
+    <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Haunted" >
+        <param name="requiredFXVersion" value="8.0+"/>
+    </applet-desc>
+    <jfx:javafx-desc  width="800" height="600" main-class="haunted.Haunted"  name="Haunted" />
+    <update check="always"/>
 </jnlp>
