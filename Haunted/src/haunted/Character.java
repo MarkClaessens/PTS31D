@@ -10,7 +10,7 @@ import java.awt.geom.Point2D;
 
 public abstract class Character {
     
-    private Game game; 
+    protected Game game; 
     private Point2D position;
     private Color color;
     private String sprite;

@@ -1,6 +1,8 @@
 package haunted;
 
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -12,10 +14,25 @@ public class Level {
     private int ghostLifePool; // standard is 3
     private int width;
     private int height;
-    private Point2D keyLocation;
-    private Point2D doorLocation;
     private String theme;
+    private List<Obstacle> obstacles = new ArrayList<>();
 
+    /**
+     * 
+     * @return the list with obstacles
+     */
+    public List<Obstacle> getObstacles(){
+        return obstacles;
+    }
+    
+    /**
+     * Sets the list of obstacles
+     * @param obstacles 
+     */
+    public void setObstacles(List<Obstacle> obstacles){
+        this.obstacles = obstacles;
+    }
+    
     /**
      * Returns the current floor number
      *
@@ -87,44 +104,6 @@ public class Level {
      */
     public void setHeight(int height) {
         this.height = height;
-    }
-
-    /**
-     * Returns the key's location on the current level
-     *
-     * @return key location
-     */
-    public Point2D getKeyLocation() {
-        return this.keyLocation;
-    }
-
-    /**
-     * Sets the key's location on the current level, this location is generated
-     * randomly
-     *
-     * @param keyLocation
-     */
-    public void setKeyLocation(Point2D keyLocation) {
-        this.keyLocation = keyLocation;
-    }
-
-    /**
-     * Returns the door's location on the current level
-     *
-     * @return door location
-     */
-    public Point2D getDoorLocation() {
-        return this.doorLocation;
-    }
-
-    /**
-     * Sets the door's location on the current level, this location is generated
-     * randomly on one of the sides
-     *
-     * @param doorLocation
-     */
-    public void setDoorLocation(Point2D doorLocation) {
-        this.doorLocation = doorLocation;
     }
 
     /**

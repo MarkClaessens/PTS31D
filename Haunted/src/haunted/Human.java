@@ -72,9 +72,10 @@ public class Human extends Character {
      * @param position, the Point2D position of the Ghost on the map
      * @param color, color of the Ghost
      * @param sprite, sprite of the Ghost
+     * @param game, the game in which the Ghost is active
      */
-    public Human(Point2D position, Color color, String sprite) {
-        super(position, color, sprite);
+    public Human(Point2D position, Color color, String sprite, Game game) {
+        super(position, color, sprite, game);
         this.hasKey = false;
     }
 
@@ -87,11 +88,11 @@ public class Human extends Character {
     }
 
     /**
-     * Let the human pick up a key, only if the human touches the key
+     * Let the human pick up a key, called when the human touches the key
      */
     public void pickUpKey() {
-        // TODO - implement Human.pickUpKey
-        throw new UnsupportedOperationException();
+        // Mike: this methods is useless since a player picks up the key by just 
+        // moving over it. (So we can use the setter: setHaskey)
     }
 
     /**
