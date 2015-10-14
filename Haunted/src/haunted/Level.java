@@ -166,8 +166,11 @@ public class Level {
      * @param floorNr
      */
     public Level(int floorNr) {
-        // TODO - implement Level.Level
-        throw new UnsupportedOperationException();
+        this.floorNr = floorNr;
+        this.height = 25000;
+        this.width = 25000;
+        this.ghostLifePool = 3;
+        this.theme = "";
     }
 
 }

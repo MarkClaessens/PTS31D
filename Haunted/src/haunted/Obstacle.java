@@ -10,7 +10,14 @@ public class Obstacle {
 
     private Point2D position;
     private String sprite;
+    private ObstacleType obstacleType;
 
+    public Obstacle(ObstacleType obstacleType, String sprite, Point2D position) {
+        this.obstacleType = obstacleType;
+        this.sprite = sprite;
+        this.position = position;
+    }
+    
     /**
      *
      * @return the obstacle's position on the map.
@@ -45,5 +52,38 @@ public class Obstacle {
     public void setSprite(String sprite) {
         this.sprite = sprite;
     }
+    
+    /**
+     * 
+     * @return the behaviour of the obstacle 
+     */
+    public ObstacleType getObstacleType() {
+        return this.obstacleType;
+    }
+    
+    /**
+     * Sets the behaviour of the obstacle, must be an ObstacleType (door,key,wall)
+     * @param obstacleType 
+     */
+    public void setObstacleType(ObstacleType obstacleType) {
+        this.obstacleType = obstacleType;
+    }
 
+    /**
+     * Is called when a character collides with an obstacle. Further actions are determined by obstacleType.
+     * For example: if obstacleType = wall > character can not move any further.
+     */
+    public void interact() {
+        if(obstacleType == ObstacleType.key) {
+            //Implementation needed
+        }
+        
+        if(obstacleType == ObstacleType.door) {
+            //Implementation needed
+        }
+        
+        if(obstacleType == ObstacleType.wall) {
+            //Implementation needed
+        }
+    }
 }
