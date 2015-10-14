@@ -5,6 +5,8 @@
  */
 package haunted;
 
+import java.awt.Color;
+import java.awt.geom.Point2D;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -42,7 +44,9 @@ public class GhostTest {
      */
     @Test
     public void testMakeGhost() {
-        Character ghost1 = new Ghost("blue");
+        Point2D spawnPosition = null;
+        spawnPosition.setLocation(300, 500);
+        Ghost ghost1 = new Ghost(spawnPosition, Color.RED, "redGhost");
     }
 
     /**
@@ -52,8 +56,10 @@ public class GhostTest {
     public void testIsVulnerable() {
         System.out.println("isVulnerable");
 
-        Ghost ghost = new Ghost("blue");
-        assertTrue("Ghost is not vulnerable", ghost.isVulnerable());
+        Point2D spawnPosition = null;
+        spawnPosition.setLocation(300, 500);
+        Ghost ghost = new Ghost(spawnPosition, Color.RED, "redGhost");
+        assertTrue("Ghost is not vulnerable at initiliazing", ghost.isVulnerable());
     }
 
     /**
@@ -62,9 +68,12 @@ public class GhostTest {
     @Test
     public void testSetVulnerable() {
         System.out.println("setVulnerable");
-        Ghost ghost = new Ghost("blue");
+        
+        Point2D spawnPosition = null;
+        spawnPosition.setLocation(300, 500);
+        Ghost ghost = new Ghost(spawnPosition, Color.RED, "redGhost");
         ghost.setVulnerable(false);
-        assertFalse("Ghost is vulnerable", ghost.isVulnerable());
+        assertFalse("Ghost vulnerable was not correctly set to false", ghost.isVulnerable());
     }
 
     /**
@@ -73,7 +82,9 @@ public class GhostTest {
     @Test
     public void testPossess() {
         System.out.println("possess");
-        Ghost ghost = new Ghost("blue");
+        Point2D spawnPosition = null;
+        spawnPosition.setLocation(300, 500);
+        Ghost ghost = new Ghost(spawnPosition, Color.RED, "redGhost");
         ghost.possess();
         // TODO review the generated test code and remove the default call to fail.
         fail("the ghost has not been possessed to human");
@@ -85,7 +96,9 @@ public class GhostTest {
     @Test
     public void testChangeAppearance() {
         System.out.println("changeAppearance");
-        Ghost ghost = new Ghost("blue");
+        Point2D spawnPosition = null;
+        spawnPosition.setLocation(300, 500);
+        Ghost ghost = new Ghost(spawnPosition, Color.RED, "redGhost");
         ghost.changeAppearance();
         assertTrue("ghost is still vulnerable", ghost.isVulnerable());
         // TODO review the generated test code and remove the default call to fail.
@@ -98,7 +111,9 @@ public class GhostTest {
     @Test
     public void testVanish() {
         System.out.println("vanish");
-        Ghost ghost = new Ghost("blue");
+        Point2D spawnPosition = null;
+        spawnPosition.setLocation(300, 500);
+        Ghost ghost = new Ghost(spawnPosition, Color.RED, "redGhost");
         ghost.vanish();
         assertTrue("ghost is still vulnerable", ghost.isVulnerable());
         // TODO review the generated test code and remove the default call to fail.

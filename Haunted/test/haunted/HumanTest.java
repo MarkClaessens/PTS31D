@@ -5,6 +5,7 @@
  */
 package haunted;
 
+import java.awt.Color;
 import java.awt.geom.Point2D;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -43,7 +44,8 @@ public class HumanTest {
      */
     @Test
     public void testMakeHuman() {
-        Character human = new Human("blue");
+        Point2D spawnPosition = new Point2D.Double(300, 500);
+        Human human = new Human(spawnPosition, Color.BLUE, "humanSprite");
     }
 
     /**
@@ -52,7 +54,8 @@ public class HumanTest {
     @Test
     public void testGetFlashlightRange() {
         System.out.println("getFlashlightRange");
-        Human human = new Human("blue");
+        Point2D spawnPosition = new Point2D.Double(300, 500);
+        Human human = new Human(spawnPosition, Color.BLUE, "humanSprite");
         int expResult = 12;
         int result = human.getFlashlightRange();
         assertEquals("the result is not equal to 12", expResult, result);
@@ -65,7 +68,8 @@ public class HumanTest {
     public void testSetFlashlightRange() {
         System.out.println("setFlashlightRange");
         int flashlightRange = 10;
-        Human human = new Human("blue");
+        Point2D spawnPosition = new Point2D.Double(300, 500);
+        Human human = new Human(spawnPosition, Color.BLUE, "humanSprite");
 
         human.setFlashlightRange(flashlightRange);
         assertEquals("the flashlight range is not changed", 10, human.getFlashlightRange());
@@ -77,7 +81,8 @@ public class HumanTest {
     @Test
     public void testGetFlashlightAngle() {
         System.out.println("getFlashlightAngle");
-        Human human = new Human("blue");
+        Point2D spawnPosition = new Point2D.Double(300, 500);
+        Human human = new Human(spawnPosition, Color.BLUE, "humanSprite");
 
         int expResult = 45;
         int result = human.getFlashlightAngle();
@@ -91,7 +96,8 @@ public class HumanTest {
     public void testSetFlashlightAngle() {
         System.out.println("setFlashlightAngle");
         int flashlightAngle = 30;
-        Human human = new Human("blue");
+        Point2D spawnPosition = new Point2D.Double(300, 500);
+        Human human = new Human(spawnPosition, Color.BLUE, "humanSprite");
 
         human.setFlashlightAngle(flashlightAngle);
         assertEquals("the flashlight angle isn't changed", 30, human.getFlashlightAngle());
@@ -103,7 +109,8 @@ public class HumanTest {
     @Test
     public void testGetHasKey() {
         System.out.println("isHasKey");
-        Human human = new Human("blue");
+        Point2D spawnPosition = new Point2D.Double(300, 500);
+        Human human = new Human(spawnPosition, Color.BLUE, "humanSprite");
 
         assertFalse("human has key", human.getHasKey());
     }
@@ -115,7 +122,8 @@ public class HumanTest {
     public void testSetHasKey() {
         System.out.println("setHasKey");
         boolean hasKey = true;
-        Human human = new Human("blue");
+        Point2D spawnPosition = new Point2D.Double(300, 500);
+        Human human = new Human(spawnPosition, Color.BLUE, "humanSprite");
 
         human.setHasKey(hasKey);
         assertTrue("human has key isn't changed", human.getHasKey());
@@ -127,7 +135,8 @@ public class HumanTest {
     @Test
     public void testTransferHuman() {
         System.out.println("transferHuman");
-        Human human = new Human("blue");
+        Point2D spawnPosition = new Point2D.Double(300, 500);
+        Human human = new Human(spawnPosition, Color.BLUE, "humanSprite");
 
         human.transferHuman();
 
@@ -141,7 +150,8 @@ public class HumanTest {
     @Test
     public void testPickUpKey() {
         System.out.println("pickUpKey");
-        Human human = new Human("blue");
+        Point2D spawnPosition = new Point2D.Double(300, 500);
+        Human human = new Human(spawnPosition, Color.BLUE, "humanSprite");
 
         human.pickUpKey();
         assertTrue("human has not the key", human.getHasKey());
@@ -153,7 +163,8 @@ public class HumanTest {
     @Test
     public void testEnterDoor() {
         System.out.println("enterDoor");
-        Human human = new Human("blue");
+        Point2D spawnPosition = new Point2D.Double(300, 500);
+        Human human = new Human(spawnPosition, Color.BLUE, "humanSprite");
 
         human.pickUpKey();
         human.enterDoor();
