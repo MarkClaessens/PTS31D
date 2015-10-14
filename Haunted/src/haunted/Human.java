@@ -91,8 +91,7 @@ public class Human extends Character {
      * Let the human pick up a key, called when the human touches the key
      */
     public void pickUpKey() {
-        // Mike: this methods is useless since a player picks up the key by just 
-        // moving over it. (So we can use the setter: setHaskey)
+        
     }
 
     /**
@@ -100,7 +99,6 @@ public class Human extends Character {
      * touches the door.
      */
     public void enterDoor() {
-        // TODO - implement Human.enterDoor
-        throw new UnsupportedOperationException();
+        
     }
 }
