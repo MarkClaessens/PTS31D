@@ -121,14 +121,15 @@ public class Game {
         
         // Choose random who becomes the human
         Random randomizer = new Random();
-        int index = randomizer.nextInt(players.size() - 1);
+        int index = randomizer.nextInt(players.size());
         players.get(index).setCharacter(human);
         if(index == 0){
             players.get(1).setCharacter(ghost);
         }
         else{
-            players.get(0).setCharacter(human);
+            players.get(0).setCharacter(ghost);
         }
+
         
         return players;
      }
@@ -236,10 +237,17 @@ public class Game {
      * 
      * @return a random generated Ghost Point2D location that is inside the game map 
      */
-    public Point2D generateRandomGhostPoint2DLocation(){
+    public Point2D generateRandomGhostPoint2DLocation(){                
         Random randomizer = new Random();
-        double randomX = ceil(100 + ((700 - 100) * randomizer.nextDouble()));
-        double randomY = ceil(100 + ((500 - 100) * randomizer.nextDouble()));
+        int min = 1;
+        int max = 7;
+        int random = randomizer.nextInt(max - min + 1) + min;
+        int randomX = random * 100;
+
+        int min2 = 1;
+        int max2 = 5;
+        int random2 = randomizer.nextInt(max2 - min2 + 1) + min2;
+        int randomY = random2 * 100;
         
         Point2D randomPoint2D = new Point2D.Double(randomX, randomY);
         
@@ -252,8 +260,15 @@ public class Game {
      */
     public Point2D generateRandomHumanPoint2DLocation(){
         Random randomizer = new Random();
-        double randomX = ceil(800 + ((1400 - 800) * randomizer.nextDouble()));
-        double randomY = ceil(600 + ((1000 - 700) * randomizer.nextDouble()));
+        int min = 8;
+        int max = 14;
+        int random = randomizer.nextInt(max - min + 1) + min;
+        int randomX = random * 100;
+
+        int min2 = 7;
+        int max2 = 9;
+        int random2 = randomizer.nextInt(max2 - min2 + 1) + min2;
+        int randomY = random2 * 100;
         
         Point2D randomPoint2D = new Point2D.Double(randomX, randomY);
         
@@ -263,3 +278,6 @@ public class Game {
     
 
 }
+
+
+        
