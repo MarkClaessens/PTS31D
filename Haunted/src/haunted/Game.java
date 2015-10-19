@@ -1,6 +1,10 @@
 package haunted;
 
+import java.awt.geom.Point2D;
+import static java.lang.Math.ceil;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 
 /**
@@ -82,9 +86,15 @@ public class Game {
      * @param players List can not be empty.
      * @param floors Cannot be 0.
      */
-    public Game(List<Player> players, int floors) {
-        // TODO - implement Game.Game
-        throw new UnsupportedOperationException();
+    public Game(List<Player> players, int floors) {       
+        // Generate random spawn positions for the characters
+        Point2D ghostSpawnPosition = generateRandomPoint2DLocation();
+        Point2D humanSpawnPosition = generateRandomPoint2DLocation();
+        
+        // See javadoc for more information
+        checkSpawnForCollision(ghostSpawnPosition, humanSpawnPosition);
+        
+        
     }
 
     /**
@@ -138,6 +148,66 @@ public class Game {
     public void tick() {
         // TODO - implement Game.tick
         throw new UnsupportedOperationException();
+    }
+    
+    /**
+     * Check if the random spawn positions collide with a obstacle.
+     *  If so, create a new random spawn position and check for colliding again (recursive). 
+     *  After that the method will return the spawnpositions.
+     * 
+     * @param ghostSpawnPoint
+     * @param humanSpawnPoint
+     * @return 
+     */
+    public List<Point2D> checkSpawnForCollision(Point2D ghostSpawnPointParameter, Point2D humanSpawnPointParameter){
+        List<Obstacle> obstacles = new ArrayList<>();
+        obstacles.addAll(currentLevel.getObstacles());
+        
+        Point2D ghostSpawnPoint = ghostSpawnPointParameter;
+        Point2D humanSpawnPoint = humanSpawnPointParameter;
+        boolean hasCollision = false;
+
+        for(Obstacle o : obstacles){
+            if (o.getPosition() == ghostSpawnPoint){
+                hasCollision = true;
+                Point2D newRandomPosition = generateRandomPoint2DLocation();
+                ghostSpawnPoint.setLocation(newRandomPosition);
+            }
+            else if ( o.getPosition() == humanSpawnPoint){
+                hasCollision = true;
+                Point2D newRandomPosition = generateRandomPoint2DLocation();
+                ghostSpawnPoint.setLocation(newRandomPosition);
+            }
+            else {
+                hasCollision = false;
+            }
+        }
+        
+        List<Point2D> spawnPoints = new ArrayList<>();
+        
+        if(hasCollision){
+            spawnPoints = checkSpawnForCollision(ghostSpawnPoint, humanSpawnPoint);
+        }
+        else{
+            spawnPoints.add(humanSpawnPoint);
+            spawnPoints.add(ghostSpawnPoint);
+        }
+             
+        return spawnPoints;
+    }
+    
+    /**
+     * 
+     * @return a random generated Point2D location that is inside the game map (height 1000 - width 1500)
+     */
+    public Point2D generateRandomPoint2DLocation(){
+        Random randomizer = new Random();
+        double randomX = ceil(100 + ((1400 - 100) * randomizer.nextDouble()));
+        double randomY = ceil(100 + ((1000 - 100) * randomizer.nextDouble()));
+        
+        Point2D randomPoint2D = new Point2D.Double(randomX, randomY);
+        
+        return randomPoint2D;
     }
 
 }

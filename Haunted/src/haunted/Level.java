@@ -167,8 +167,8 @@ public class Level {
      */
     public Level(int floorNr) {
         this.floorNr = floorNr;
-        this.height = 25000;
-        this.width = 25000;
+        this.height = 1000;
+        this.width = 1500;
         this.ghostLifePool = 3;
         this.theme = "";
     }
