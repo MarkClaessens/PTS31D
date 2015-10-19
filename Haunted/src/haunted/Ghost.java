@@ -3,6 +3,7 @@ package haunted;
 import java.awt.Color;
 import java.awt.geom.Point2D;
 import java.sql.Time;
+import java.util.List;
 
 /**
  *
@@ -65,12 +66,20 @@ public class Ghost extends Character {
     
     /**
      * This possesses a human, this ghost becomes the human, the previous human
-     * becomes a ghost.
+     * becomes the ghost. Iteration 1: The players switch their characters.
      */
     public void possess() {
-        // TODO - implement Ghost.possess
-        // TODO - posses the human, works with Game.
-        throw new UnsupportedOperationException();
+        List<Player> players = game.getPlayers();
+        if(players.get(0).getCharacter() instanceof Human){
+            Character human = players.get(0).getCharacter();
+            players.get(0).setCharacter(players.get(1).getCharacter());
+            players.get(1).setCharacter(human);
+        }
+        else{
+            Character human = players.get(1).getCharacter();
+            players.get(0).setCharacter(human);
+            players.get(1).setCharacter(players.get(0).getCharacter());
+        }
     }
 
     /**

@@ -80,12 +80,12 @@ public class Human extends Character {
         this.hasKey = false;
     }
 
-    /**
-     * The player who was the human becomes the ghost, and the player who was the ghost becomes the human.
-     */
+       // Mike: i commented this out because I programed the transformation in the Ghost class.
+//    /**
+//     * The controls of the current ghost as human goes to the new ghost as human.
+//     */
 //    public void transferHuman() {
-//        for(Player player : game.getPlayers()){
-//            if(player.get)
+//        
 //        }
 //    }
 
