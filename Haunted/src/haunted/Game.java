@@ -88,12 +88,16 @@ public class Game {
      */
     public Game(List<Player> players, int floors) {       
         // Generate random spawn positions for the characters
-        Point2D ghostSpawnPosition = generateRandomPoint2DLocation();
-        Point2D humanSpawnPosition = generateRandomPoint2DLocation();
+        Point2D ghostSpawnPosition = generateRandomGhostPoint2DLocation();
+        Point2D humanSpawnPosition = generateRandomHumanPoint2DLocation();
         
-        // See javadoc for more information
-        checkSpawnForCollision(ghostSpawnPosition, humanSpawnPosition);
+        // See javadoc for more information about checkSpawnForCollisio method
+        // spawnPoints.get(0) is the ghost spawnPoint and spawnPoints.get(1) is the human spawnPoint
+        List<Point2D> spawnPoints = checkSpawnForCollision(ghostSpawnPosition, humanSpawnPosition);
+        ghostSpawnPosition = spawnPoints.get(0);
+        humanSpawnPosition = spawnPoints.get(1);
         
+        // Create the characters and bind them to the players
         
     }
 
@@ -189,8 +193,8 @@ public class Game {
             spawnPoints = checkSpawnForCollision(ghostSpawnPoint, humanSpawnPoint);
         }
         else{
-            spawnPoints.add(humanSpawnPoint);
             spawnPoints.add(ghostSpawnPoint);
+            spawnPoints.add(humanSpawnPoint);
         }
              
         return spawnPoints;
