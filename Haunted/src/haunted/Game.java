@@ -237,15 +237,19 @@ public class Game {
      * 
      * @return a random generated Ghost Point2D location that is inside the game map 
      */
-    public Point2D generateRandomGhostPoint2DLocation(){
+    public Point2D generateRandomGhostPoint2DLocation(){                
         Random randomizer = new Random();
+        int min = 100;
+        int max = 700;
+        int random = randomizer.nextInt(max - min + 1) + min;
+        int randomX = random * 100;
+
+        int min2 = 100;
+        int max2 = 500;
+        int random2 = randomizer.nextInt(max2 - min2 + 1) + min2;
+        int randomY = random2 * 100;
         
-        double randomX = ceil(100 + ((700 - 100) * randomizer.nextDouble()));
-        double randomY = ceil(100 + ((500 - 100) * randomizer.nextDouble()));
-        
-        double roundedX = ((randomX + 99) / 100 ) * 100;
-        double roundedY = ((randomY + 99) / 100 ) * 100;
-        Point2D randomPoint2D = new Point2D.Double(roundedX, roundedY);
+        Point2D randomPoint2D = new Point2D.Double(randomX, randomY);
         
         return randomPoint2D;
     }
@@ -256,13 +260,17 @@ public class Game {
      */
     public Point2D generateRandomHumanPoint2DLocation(){
         Random randomizer = new Random();
-       
-        double randomX = ceil(800 + ((1400 - 800) * randomizer.nextDouble())); 
-        double randomY = ceil(600 + ((1000 - 700) * randomizer.nextDouble()));
+        int min = 800;
+        int max = 1400;
+        int random = randomizer.nextInt(max - min + 1) + min;
+        int randomX = random * 100;
+
+        int min2 = 700;
+        int max2 = 900;
+        int random2 = randomizer.nextInt(max2 - min2 + 1) + min2;
+        int randomY = random2 * 100;
         
-        double roundedX = ((randomX + 99) / 100 ) * 100;
-        double roundedY = ((randomY + 99) / 100 ) * 100;
-        Point2D randomPoint2D = new Point2D.Double(roundedX, roundedY);
+        Point2D randomPoint2D = new Point2D.Double(randomX, randomY);
         
         return randomPoint2D;
     }
@@ -270,3 +278,6 @@ public class Game {
     
 
 }
+
+
+        
