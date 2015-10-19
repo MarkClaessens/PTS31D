@@ -239,10 +239,13 @@ public class Game {
      */
     public Point2D generateRandomGhostPoint2DLocation(){
         Random randomizer = new Random();
+        
         double randomX = ceil(100 + ((700 - 100) * randomizer.nextDouble()));
         double randomY = ceil(100 + ((500 - 100) * randomizer.nextDouble()));
         
-        Point2D randomPoint2D = new Point2D.Double(randomX, randomY);
+        double roundedX = ((randomX + 99) / 100 ) * 100;
+        double roundedY = ((randomY + 99) / 100 ) * 100;
+        Point2D randomPoint2D = new Point2D.Double(roundedX, roundedY);
         
         return randomPoint2D;
     }
@@ -253,10 +256,13 @@ public class Game {
      */
     public Point2D generateRandomHumanPoint2DLocation(){
         Random randomizer = new Random();
-        double randomX = ceil(800 + ((1400 - 800) * randomizer.nextDouble()));
+       
+        double randomX = ceil(800 + ((1400 - 800) * randomizer.nextDouble())); 
         double randomY = ceil(600 + ((1000 - 700) * randomizer.nextDouble()));
         
-        Point2D randomPoint2D = new Point2D.Double(randomX, randomY);
+        double roundedX = ((randomX + 99) / 100 ) * 100;
+        double roundedY = ((randomY + 99) / 100 ) * 100;
+        Point2D randomPoint2D = new Point2D.Double(roundedX, roundedY);
         
         return randomPoint2D;
     }
