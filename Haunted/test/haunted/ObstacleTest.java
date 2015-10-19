@@ -43,13 +43,10 @@ public class ObstacleTest {
      */
     @Test
     public void testGetPosition() {
-        System.out.println("getPosition");
-        Obstacle instance = new Obstacle();
-        Point2D expResult = null;
+        Obstacle instance = new Obstacle(ObstacleType.WALL, "obstacleWall", new Point2D.Double(500, 500));
+        Point2D expResult = new Point2D.Double(500, 500);
         Point2D result = instance.getPosition();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals("Obstacle's getPosition returns something unexpected", expResult, result);
     }
 
     /**
@@ -57,39 +54,10 @@ public class ObstacleTest {
      */
     @Test
     public void testSetPosition() {
-        System.out.println("setPosition");
-        Point2D position = null;
-        Obstacle instance = new Obstacle();
+        Point2D position = new Point2D.Double(600, 600);
+        Obstacle instance = new Obstacle(ObstacleType.WALL, "obstacleWall", new Point2D.Double(500, 500));
         instance.setPosition(position);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        assertEquals("Obstacle setPosition isn't correct", position, instance.getPosition());
     }
-
-    /**
-     * Test of getSprite method, of class Obstacle.
-     */
-    @Test
-    public void testGetSprite() {
-        System.out.println("getSprite");
-        Obstacle instance = new Obstacle();
-        String expResult = "";
-        String result = instance.getSprite();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setSprite method, of class Obstacle.
-     */
-    @Test
-    public void testSetSprite() {
-        System.out.println("setSprite");
-        String sprite = "";
-        Obstacle instance = new Obstacle();
-        instance.setSprite(sprite);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
 }
