@@ -74,15 +74,15 @@ public class Obstacle {
      * For example: if obstacleType = wall > character can not move any further.
      */
     public void interact() {
-        if(obstacleType == ObstacleType.key) {
+        if(obstacleType == ObstacleType.KEY) {
             //Implementation needed
         }
         
-        if(obstacleType == ObstacleType.door) {
+        if(obstacleType == ObstacleType.DOOR) {
             //Implementation needed
         }
         
-        if(obstacleType == ObstacleType.wall) {
+        if(obstacleType == ObstacleType.WALL) {
             //Implementation needed
         }
     }
