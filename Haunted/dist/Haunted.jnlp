@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="Haunted.jnlp">
-<<<<<<< HEAD
   <information>
     <title>Haunted</title>
     <vendor>PTS31D</vendor>
@@ -9,28 +8,11 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Haunted.jar" size="12550" download="eager" />
+    <jar href="Haunted.jar" size="14588" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Haunted" >
     <param name="requiredFXVersion" value="8.0+"/>
   </applet-desc>
   <jfx:javafx-desc  width="800" height="600" main-class="haunted.Haunted"  name="Haunted" />
   <update check="always"/>
-=======
-    <information>
-        <title>Haunted</title>
-        <vendor>PTS31D</vendor>
-        <description>null</description>
-        <offline-allowed/>
-    </information>
-    <resources>
-        <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-        <jar href="Haunted.jar" size="11207" download="eager" />
-    </resources>
-    <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Haunted" >
-        <param name="requiredFXVersion" value="8.0+"/>
-    </applet-desc>
-    <jfx:javafx-desc  width="800" height="600" main-class="haunted.Haunted"  name="Haunted" />
-    <update check="always"/>
->>>>>>> origin/master
 </jnlp>

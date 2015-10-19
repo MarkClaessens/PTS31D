@@ -166,16 +166,16 @@ public class Game {
         Point2D ghostSpawnPoint = ghostSpawnPointParameter;
         Point2D humanSpawnPoint = humanSpawnPointParameter;
         boolean hasCollision = false;
-
+        
         for(Obstacle o : obstacles){
             if (o.getPosition() == ghostSpawnPoint){
                 hasCollision = true;
-                Point2D newRandomPosition = generateRandomPoint2DLocation();
+                Point2D newRandomPosition = generateRandomGhostPoint2DLocation();
                 ghostSpawnPoint.setLocation(newRandomPosition);
             }
-            else if ( o.getPosition() == humanSpawnPoint){
+            else if (o.getPosition() == humanSpawnPoint){
                 hasCollision = true;
-                Point2D newRandomPosition = generateRandomPoint2DLocation();
+                Point2D newRandomPosition = generateRandomHumanPoint2DLocation();
                 ghostSpawnPoint.setLocation(newRandomPosition);
             }
             else {
@@ -198,16 +198,32 @@ public class Game {
     
     /**
      * 
-     * @return a random generated Point2D location that is inside the game map (height 1000 - width 1500)
+     * @return a random generated Ghost Point2D location that is inside the game map 
      */
-    public Point2D generateRandomPoint2DLocation(){
+    public Point2D generateRandomGhostPoint2DLocation(){
         Random randomizer = new Random();
-        double randomX = ceil(100 + ((1400 - 100) * randomizer.nextDouble()));
-        double randomY = ceil(100 + ((1000 - 100) * randomizer.nextDouble()));
+        double randomX = ceil(100 + ((700 - 100) * randomizer.nextDouble()));
+        double randomY = ceil(100 + ((500 - 100) * randomizer.nextDouble()));
         
         Point2D randomPoint2D = new Point2D.Double(randomX, randomY);
         
         return randomPoint2D;
     }
+    
+    /**
+     * 
+     * @return a random generated Human Point2D location that is inside the game map (height 1000 - width 1500)
+     */
+    public Point2D generateRandomHumanPoint2DLocation(){
+        Random randomizer = new Random();
+        double randomX = ceil(800 + ((1400 - 800) * randomizer.nextDouble()));
+        double randomY = ceil(600 + ((1000 - 700) * randomizer.nextDouble()));
+        
+        Point2D randomPoint2D = new Point2D.Double(randomX, randomY);
+        
+        return randomPoint2D;
+    }
+    
+    
 
 }
