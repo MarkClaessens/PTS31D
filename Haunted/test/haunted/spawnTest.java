@@ -52,10 +52,10 @@ public class spawnTest {
         
         Level level = new Level(2);
         List<Obstacle> obstacles = new ArrayList<>();
-        Obstacle obstacle = new Obstacle(ObstacleType.WALL, "sprite", new Point2D.Double(200, 400));
-        Obstacle obstacle1 = new Obstacle(ObstacleType.WALL, "sprite", new Point2D.Double(600, 300));
-        Obstacle obstacle2 = new Obstacle(ObstacleType.WALL, "sprite", new Point2D.Double(900, 800)); 
-        Obstacle obstacle3 = new Obstacle(ObstacleType.WALL, "sprite", new Point2D.Double(1300, 900)); 
+        Obstacle obstacle = new Obstacle(ObstacleType.WALL, "sprite", new Point2D.Double(200, 400), level);
+        Obstacle obstacle1 = new Obstacle(ObstacleType.WALL, "sprite", new Point2D.Double(600, 300), level);
+        Obstacle obstacle2 = new Obstacle(ObstacleType.WALL, "sprite", new Point2D.Double(900, 800), level); 
+        Obstacle obstacle3 = new Obstacle(ObstacleType.WALL, "sprite", new Point2D.Double(1300, 900), level); 
         obstacles.add(obstacle);
         obstacles.add(obstacle1);
         obstacles.add(obstacle2);

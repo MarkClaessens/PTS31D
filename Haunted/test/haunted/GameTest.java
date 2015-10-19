@@ -134,7 +134,8 @@ public class GameTest {
         try {
             game.nextLevel(); // currentRound increases to 0. 
             game.endRound(); // isRunning state will be set to false
-            game.endGame(); // Illegal call because the method was called before the game reached the last floor.
+            // don't bother the paramter in endGame.
+            game.endGame(player1); // Illegal call because the method was called before the game reached the last floor.
         } catch (Exception e) {
             Assert.fail(e.getMessage());
         }
@@ -151,7 +152,8 @@ public class GameTest {
         game2.endRound(); // isRunning state will be set to false
         game2.nextLevel(); // currentRound increases to 1 (Legal for endGame() method)
         try {
-            game.endGame(); // called on isRunning = true - which will throw an exception
+            // don't bother the paramter in endGame.
+            game.endGame(player1); // called on isRunning = true - which will throw an exception
         } catch (Exception e) {
             Assert.fail(e.getMessage());
         }

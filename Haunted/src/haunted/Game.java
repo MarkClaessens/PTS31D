@@ -110,6 +110,7 @@ public class Game {
     
     /**
      * Bind the characters to the players and give them a spawnposition
+     * Call this method after the game generated his level and sets his obstacles [ ! ] 
      */
      public List<Player> bindCharactersToPlayers(){
          // Generate random spawn positions for the characters
@@ -205,23 +206,18 @@ public class Game {
      * @return 
      */
     public List<Point2D> checkSpawnForCollision(Point2D ghostSpawnPointParameter, Point2D humanSpawnPointParameter){
-        List<Obstacle> obstacles = new ArrayList<>();
-        obstacles.addAll(currentLevel.getObstacles());
-        
         Point2D ghostSpawnPoint = ghostSpawnPointParameter;
         Point2D humanSpawnPoint = humanSpawnPointParameter;
         boolean hasCollision = false;
         
-        for(Obstacle o : obstacles){
+        for(Obstacle o : currentLevel.getObstacles()){
             if (o.getPosition() == ghostSpawnPoint){
                 hasCollision = true;
-                Point2D newRandomPosition = generateRandomGhostPoint2DLocation();
-                ghostSpawnPoint.setLocation(newRandomPosition);
+                ghostSpawnPoint = generateRandomGhostPoint2DLocation();
             }
             else if (o.getPosition() == humanSpawnPoint){
                 hasCollision = true;
-                Point2D newRandomPosition = generateRandomHumanPoint2DLocation();
-                ghostSpawnPoint.setLocation(newRandomPosition);
+                ghostSpawnPoint = generateRandomHumanPoint2DLocation();
             }
             else {
                 hasCollision = false;

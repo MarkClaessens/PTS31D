@@ -11,11 +11,13 @@ public class Obstacle {
     private Point2D position;
     private String sprite;
     private ObstacleType behaviour;
+    private Level level;
 
-    public Obstacle(ObstacleType obstacleType, String sprite, Point2D position) {
+    public Obstacle(ObstacleType obstacleType, String sprite, Point2D position, Level level) {
         this.behaviour = obstacleType;
         this.sprite = sprite;
         this.position = position;
+        this.level = level;
     }
     
     /**
@@ -74,16 +76,13 @@ public class Obstacle {
      * For example: if obstacleType = wall > character can not move any further.
      */
     public void interact() {
-        if(this.behaviour == ObstacleType.KEY) {
-            //Implementation needed
-        }
-        
-        if(this.behaviour == ObstacleType.DOOR) {
-            //Implementation needed
-        }
-        
-        if(this.behaviour == ObstacleType.WALL) {
-            //Implementation needed
+        switch(this.behaviour){
+            case KEY: 
+                break;
+            case DOOR: 
+                break;
+            case WALL: 
+                break; 
         }
     }
 }

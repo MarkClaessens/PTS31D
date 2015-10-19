@@ -21,7 +21,7 @@ public class ObstacleTest {
 
     public ObstacleTest() {
     }
-
+    Level level;
     @BeforeClass
     public static void setUpClass() {
     }
@@ -32,6 +32,7 @@ public class ObstacleTest {
 
     @Before
     public void setUp() {
+        level = new Level(3);
     }
 
     @After
@@ -43,7 +44,7 @@ public class ObstacleTest {
      */
     @Test
     public void testGetPosition() {
-        Obstacle instance = new Obstacle(ObstacleType.WALL, "obstacleWall", new Point2D.Double(500, 500));
+        Obstacle instance = new Obstacle(ObstacleType.WALL, "obstacleWall", new Point2D.Double(500, 500), level);
         Point2D expResult = new Point2D.Double(500, 500);
         Point2D result = instance.getPosition();
         assertEquals("Obstacle's getPosition returns something unexpected", expResult, result);
@@ -55,7 +56,7 @@ public class ObstacleTest {
     @Test
     public void testSetPosition() {
         Point2D position = new Point2D.Double(600, 600);
-        Obstacle instance = new Obstacle(ObstacleType.WALL, "obstacleWall", new Point2D.Double(500, 500));
+        Obstacle instance = new Obstacle(ObstacleType.WALL, "obstacleWall", new Point2D.Double(500, 500), level);
         instance.setPosition(position);
         
         assertEquals("Obstacle setPosition isn't correct", position, instance.getPosition());
