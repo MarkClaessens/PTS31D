@@ -90,29 +90,4 @@ public class PlayerTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of changeSettings method, of class Player.
-     */
-    @Test
-    public void testChangeSettings() {
-        System.out.println("changeSettings");
-        Player instance = null;
-        instance.changeSettings();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of loadSettings method, of class Player.
-     */
-    @Test
-    public void testLoadSettings() {
-        System.out.println("loadSettings");
-        Player instance = null;
-        instance.loadSettings();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
 }

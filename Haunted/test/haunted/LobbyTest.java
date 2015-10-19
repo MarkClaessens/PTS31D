@@ -66,14 +66,13 @@ public class LobbyTest {
 //        // TODO review the generated test code and remove the default call to fail.
 //
 //    }
-    
     /**
      * Test of changePlayerName method, of class Lobby.
      */
     @Test
     public void testChangePlayerName() {
         System.out.println("changePlayerName");
-        lobby.changePlayerName("Henkie");
+        lobby.changePlayerName("Henkie","");
         assertEquals("Henkie", player.getName());
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

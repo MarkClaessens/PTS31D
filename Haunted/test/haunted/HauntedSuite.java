@@ -17,7 +17,7 @@ import org.junit.runners.Suite;
  * @author Mal
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({haunted.LobbyTest.class, haunted.LevelTest.class, haunted.MessageTest.class, haunted.ObstacleTest.class, haunted.FXMLHauntedControllerTest.class, haunted.GameTest.class, haunted.GhostTest.class, haunted.HauntedTest.class, haunted.HumanTest.class, haunted.PlayerTest.class, haunted.CharacterTest.class, haunted.GameLobbyTest.class})
+@Suite.SuiteClasses({haunted.LobbyTest.class, haunted.LevelTest.class, haunted.MessageTest.class, haunted.ObstacleTest.class, haunted.FXMLHauntedControllerTest.class, haunted.GameTest.class, haunted.GhostTest.class, haunted.HauntedTest.class, haunted.HumanTest.class, haunted.PlayerTest.class, haunted.GameLobbyTest.class})
 public class HauntedSuite {
 
     @BeforeClass

@@ -1,17 +1,19 @@
 package haunted;
 
+import java.awt.Color;
 import java.awt.geom.Point2D;
+
+
 
 /**
  *
- * @author Mal
+ * @author Mike Evers
  */
 public class Human extends Character {
 
-    private int flashlightRange;
-    private int flashlightAngle;
+    private int flashlightRange = 100; // Mike: setted default range to 100
+    private int flashlightAngle = 45; // Mike: setted default angle to 45
     private boolean hasKey;
-    private Double rotationSpeed;
 
     /**
      *
@@ -51,7 +53,7 @@ public class Human extends Character {
      *
      * @return true if the human has the key
      */
-    public boolean isHasKey() {
+    public boolean getHasKey() {
         return this.hasKey;
     }
 
@@ -63,34 +65,18 @@ public class Human extends Character {
     public void setHasKey(boolean hasKey) {
         this.hasKey = hasKey;
     }
-
+    
     /**
+     * Constructor of Human sets haskey to false and set the super variables in Character
      *
-     * @return the rotation speed of the flashlight
+     * @param position, the Point2D position of the Ghost on the map
+     * @param color, color of the Ghost
+     * @param sprite, sprite of the Ghost
+     * @param game, the game in which the Ghost is active
      */
-    public Double getRotationSpeed() {
-        return this.rotationSpeed;
-    }
-
-    /**
-     * Sets the rotation speed of the flashlight
-     *
-     * @param rotationSpeed
-     */
-    public void setRotationSpeed(Double rotationSpeed) {
-        this.rotationSpeed = rotationSpeed;
-    }
-
-    /**
-     * Rotates the flashlight depending on the mouse position
-     * When flashing on a wall, light is not behind the wall
-     * Also check on collision with ghost
-     *
-     * @param mousePosition
-     */
-    public void rotateFlashlight(Point2D mousePosition) {
-        // TODO - implement Human.rotateFlashlight
-        throw new UnsupportedOperationException();
+    public Human(Point2D position, Color color, String sprite, Game game) {
+        super(position, color, sprite, game);
+        this.hasKey = false;
     }
 
     /**
@@ -102,11 +88,10 @@ public class Human extends Character {
     }
 
     /**
-     * Let the human pick up a key, only if the human touches the key
+     * Let the human pick up a key, called when the human touches the key
      */
     public void pickUpKey() {
-        // TODO - implement Human.pickUpKey
-        throw new UnsupportedOperationException();
+        
     }
 
     /**
@@ -114,21 +99,6 @@ public class Human extends Character {
      * touches the door.
      */
     public void enterDoor() {
-        // TODO - implement Human.enterDoor
-        throw new UnsupportedOperationException();
+        
     }
-
-    /**
-     * Constructor of Human
-     * Set haskey to false
-     * Set rotation speed and flashlight properties
-     * Set properties in super class
-     * @param color, color of the hat
-     */
-    public Human(String color) {
-        super(color);
-        // TODO - implement Human.Human
-        throw new UnsupportedOperationException();
-    }
-
 }

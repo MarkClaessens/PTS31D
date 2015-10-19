@@ -55,22 +55,4 @@ public class Player {
         this.ready = ready;
     }
 
-    /**
-     * Changes the player settings in the lobby or in-game. Player can change
-     * his soundvolume and resolution.
-     */
-    public void changeSettings() {
-        // TODO - implement Player.changeSettings
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * *
-     * Loads the player settings from a file.
-     */
-    public void loadSettings() {
-        // TODO - implement Player.loadSettings
-        throw new UnsupportedOperationException();
-    }
-
 }

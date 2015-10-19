@@ -1,28 +1,32 @@
 package haunted;
 
+import java.awt.Color;
 import java.awt.geom.Point2D;
 
 /**
  *
- * @author Mal
+ * @author Mike Evers
  */
-public abstract class Character {
 
+public abstract class Character {
+    
+    protected Game game; 
     private Point2D position;
-    private String color;
+    private Color color;
     private String sprite;
-    private Double movementSpeed;
+    private Double movementSpeed = 0.0; //TODO the movementSpeed isn't set to the correct value yet
+    private DirectionType direction;
 
     /**
      *
-     * @return character position on the map
+     * @return character position on the map (Point2D object).
      */
     public Point2D getPosition() {
         return this.position;
     }
 
     /**
-     * Sets the character position on the map
+     * Sets the character position on the map (Point2D object).
      *
      * @param position
      */
@@ -35,7 +39,7 @@ public abstract class Character {
      * @return the color of the character (Ghosts are completely colored, humans
      * only wear a colored hat).
      */
-    public String getColor() {
+    public Color getColor() {
         return this.color;
     }
 
@@ -45,7 +49,7 @@ public abstract class Character {
      *
      * @param color
      */
-    public void setColor(String color) {
+    public void setColor(Color color) {
         this.color = color;
     }
 
@@ -82,10 +86,33 @@ public abstract class Character {
     public void setMovementSpeed(Double movementSpeed) {
         this.movementSpeed = movementSpeed;
     }
-
+    
+    /** 
+     * 
+     * @return the direction in which the Character looks or is moving
+     */
+    public DirectionType getDirection(){
+        return this.direction;
+    }
+    
+    /** 
+     * Set the direction in which the Character looks or is moving
+     * @param direction 
+     */
+    public void setDirection(DirectionType direction){
+        this.direction = direction;
+    }
+    
+    public Character(Point2D position, Color color, String sprite, Game game){
+        this.position = position;
+        this.color = color;
+        this.sprite = sprite;
+        this.direction = DirectionType.DOWN; // Set a default direction
+        this.game = game;
+    }
+    
     /**
-     * Makes the character move in the pointed direction
-     * Be aware of collision!
+     * Makes the character move in the pointed direction, be aware of collision!
      *
      * @param direction
      */
@@ -94,8 +121,12 @@ public abstract class Character {
         throw new UnsupportedOperationException();
     }
     
-    public Character(String color){
-        //TODO - implement Character.Character
+    /**
+     * Check if character collides with another object. 
+     * Be aware of the private modifier!
+     */
+    private void detectCollision(){
+        // TODO - implement Character.detectCollision
         throw new UnsupportedOperationException();
     }
 }

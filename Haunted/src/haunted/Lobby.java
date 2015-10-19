@@ -1,25 +1,41 @@
 package haunted;
 
+import static com.sun.deploy.cache.MemoryCache.shutdown;
+
+
+
 /**
  *
  * @author Mal
  */
 public class Lobby {
+
+    
+    private Player speler1;
+    private Player speler2;
+    public Lobby()
+    {
+      speler1 = new Player("speler1");
+      speler2 = new Player("speler2");
+    }
+
+
+
     /**
      * change the name of the current player
+     *
      * @param name
      */
-    public void changePlayerName(String name) {
-        // TODO - implement Lobby.changePlayerName
-        throw new UnsupportedOperationException();
+    public void changePlayerName(String speler1name, String speler2name) {        
+        speler1.setName(speler1name);
+        speler2.setName(speler2name);        
     }
 
     /**
      * this exits the lobby
      */
-    public void exit() {
-        // TODO - implement Lobby.exit
-        throw new UnsupportedOperationException();
+    public void exit() {        
+        shutdown();        
     }
 
     /**
@@ -29,9 +45,11 @@ public class Lobby {
      * @param name
      * @param password
      */
-    public void createGameLobby(String name, String password) {
-        // TODO - implement Lobby.createGameLobby
-        throw new UnsupportedOperationException();
+    public void createGameLobby(String name, String password) {               
+        GameLobby gamelobby = new GameLobby(name, password, speler1);
+        gamelobby.addPlayer(speler2);
     }
+    
+   
 
 }
