@@ -170,8 +170,9 @@ public class Game {
     /**
      * Will be called when the game is done. isRunning has to be false. There
      * might be a victory screen.
+     * @param The player who has won the game.
      */
-    public void endGame() {
+    public void endGame(Player winner) {
         // TODO - implement Game.endGame
         throw new UnsupportedOperationException();
     }
@@ -203,7 +204,7 @@ public class Game {
      * @param humanSpawnPoint
      * @return 
      */
-    private List<Point2D> checkSpawnForCollision(Point2D ghostSpawnPointParameter, Point2D humanSpawnPointParameter){
+    public List<Point2D> checkSpawnForCollision(Point2D ghostSpawnPointParameter, Point2D humanSpawnPointParameter){
         List<Obstacle> obstacles = new ArrayList<>();
         obstacles.addAll(currentLevel.getObstacles());
         
@@ -244,7 +245,7 @@ public class Game {
      * 
      * @return a random generated Ghost Point2D location that is inside the game map 
      */
-    private Point2D generateRandomGhostPoint2DLocation(){                
+    public Point2D generateRandomGhostPoint2DLocation(){                
         Random randomizer = new Random();
         int min = 1;
         int max = 7;
@@ -265,7 +266,7 @@ public class Game {
      * 
      * @return a random generated Human Point2D location that is inside the game map (height 1000 - width 1500)
      */
-    private Point2D generateRandomHumanPoint2DLocation(){
+    public Point2D generateRandomHumanPoint2DLocation(){
         Random randomizer = new Random();
         int min = 8;
         int max = 14;

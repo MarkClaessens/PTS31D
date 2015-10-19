@@ -104,8 +104,6 @@ public class GhostTest {
         Ghost ghost = new Ghost(spawnPosition, Color.RED, "redGhost", game);
         ghost.changeAppearance();
         assertTrue("ghost is still vulnerable", ghost.isVulnerable());
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**

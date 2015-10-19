@@ -112,7 +112,11 @@ public class Human extends Character {
         // First check if this entering was on the last floor (last level).
         if(game.getFloorAmount() - 1 == game.getCurrentRound()){
             game.setIsRunning(false);
-            game.endGame();
+            for(Player player : game.getPlayers()){
+                if (player.getCharacter() instanceof Human){
+                    game.endGame(player);
+                }
+            }
         }
         else{
             game.setIsRunning(false);

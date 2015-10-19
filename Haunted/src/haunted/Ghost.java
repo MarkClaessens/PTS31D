@@ -19,7 +19,7 @@ public class Ghost extends Character {
      * 
      * @return the time when the Ghost started standing still.
      */
-    public Time getStationaryTime(){
+    public Calendar getStationaryTime(){
         return this.stationaryTime;
     }
    
@@ -28,7 +28,7 @@ public class Ghost extends Character {
      * Started standing still = pressing no moving keys.
      * @param stationaryTime 
      */
-    public void setStationaryTime(Time stationaryTime){
+    public void setStationaryTime(Calendar stationaryTime){
         this.stationaryTime = stationaryTime;
     }
     
@@ -93,20 +93,35 @@ public class Ghost extends Character {
             this.vulnerable = false;
             this.setSprite("Wall");
             this.isGhost = false;
-        } else {
-            
+        } else if (this.isGhost == false) {
+            this.isGhost = true;
+            this.setSprite("Ghost");
+            this.vulnerable = true;
         }
-        //NOT DONE WITH THIS // LITTLE BREAK :)
-//        this.vulnerable = true;
-//        this.setSprite("Ghost");
-//        this.isGhost = true;
     }
 
     /**
-     * Removes the ghost when hit by the flashlight
+     * Respawns the ghost when hit by the flashlight
      */
     public void vanish() {
-        // TODO - implement Ghost.vanish
-        throw new UnsupportedOperationException();
+        // Get the remaining lifes that the ghost has.
+        int remainingGhostLifes = game.getCurrentLevel().getGhostLifePool();
+        
+        // If there are remaining lifes then respawn the ghost on the map.
+        if(remainingGhostLifes > 0){
+            // Respawn the ghost random on the map 
+            Point2D spawnPosition = game.generateRandomGhostPoint2DLocation();
+            // The second Point2D is null, but we don't need it here.
+            List<Point2D> spawnPoints = game.checkSpawnForCollision(spawnPosition, null);
+            super.setPosition(spawnPoints.get(0));
+        }
+        // If the ghost has no more lifes then end the game with the winning player as the parameter.
+        else{
+            for(Player player : game.getPlayers()){
+                if (player.getCharacter() instanceof Human){
+                    game.endGame(player);
+                }
+            }
+        }
     }
 }
