@@ -25,6 +25,10 @@ public class Player {
         this.character = character;
     }
     
+    public Character getCharacter(){
+        return this.character;
+    }
+    
     
     /**
      *
