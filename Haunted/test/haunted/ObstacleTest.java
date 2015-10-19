@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Mal
+ * @author Mike Evers
  */
 public class ObstacleTest {
 

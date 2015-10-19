@@ -2,7 +2,7 @@ package haunted;
 
 import java.awt.Color;
 import java.awt.geom.Point2D;
-import java.sql.Time;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -13,7 +13,7 @@ public class Ghost extends Character {
 
     private boolean vulnerable;
     private boolean isGhost;
-    private Time stationaryTime = null;
+    private Calendar stationaryTime = null;
 
     /**
      * 
@@ -25,6 +25,7 @@ public class Ghost extends Character {
    
     /**
      * Sets the time when the Ghost started standing still.
+     * Started standing still = pressing no moving keys.
      * @param stationaryTime 
      */
     public void setStationaryTime(Time stationaryTime){
@@ -84,18 +85,21 @@ public class Ghost extends Character {
 
     /**
      * Changes the appearance of the ghost, it becomes a wall or a ghost.
+     * If the isGhost true and it will become "a wall" then the stationaryTime has to be at least 1,5 (?) 
+     * seconds ago. So the ghost object can't become "a wall" immediately.
      */
     public void changeAppearance() {
-        // TODO - implement Ghost.changeApperance
-        if (this.isGhost) {
+        if (this.isGhost && System.currentTimeMillis() >= stationaryTime.getTimeInMillis() + 1500 ) {
             this.vulnerable = false;
             this.setSprite("Wall");
             this.isGhost = false;
         } else {
-            this.vulnerable = true;
-            this.setSprite("Ghost");
-            this.isGhost = true;
+            
         }
+        //NOT DONE WITH THIS // LITTLE BREAK :)
+//        this.vulnerable = true;
+//        this.setSprite("Ghost");
+//        this.isGhost = true;
     }
 
     /**

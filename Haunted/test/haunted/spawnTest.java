@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author User
+ * @author Mike Evers
  */
 public class spawnTest {
     

@@ -10,7 +10,7 @@ import java.util.Timer;
 
 /**
  *
- * @author Mal
+ * @author Mal && Mike 
  */
 public class Game {
 

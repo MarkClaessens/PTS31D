@@ -137,20 +137,20 @@ public class HumanTest {
         assertTrue("human has key isn't changed", human.getHasKey());
     }
 
-    /**
-     * Test of transferHuman method, of class Human.
-     */
-    @Test
-    public void testTransferHuman() {
-        System.out.println("transferHuman");
-        Point2D spawnPosition = new Point2D.Double(300, 500);
-        Human human = new Human(spawnPosition, Color.BLUE, "humanSprite", game);
-
-        human.transferHuman();
-
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+//    /**
+//     * Test of transferHuman method, of class Human.
+//     */
+//    @Test
+//    public void testTransferHuman() {
+//        System.out.println("transferHuman");
+//        Point2D spawnPosition = new Point2D.Double(300, 500);
+//        Human human = new Human(spawnPosition, Color.BLUE, "humanSprite", game);
+//
+//        human.transferHuman();
+//
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 
     /**
      * Test of pickUpKey method, of class Human.
