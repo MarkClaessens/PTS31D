@@ -94,7 +94,7 @@ public class Game {
      * creates the game
      *
      * @param players List can not be empty.
-     * @param floors Cannot be 0.
+     * @param floors Cannot be 0..
      */
     public Game(List<Player> players, int floors) {       
         this.players = players;
