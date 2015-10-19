@@ -23,6 +23,7 @@ import javafx.stage.Stage;
  * @author jvdwi
  */
 public class MainGameFX extends Application {
+
     Human human;
     Ghost ghost;
     List<Obstacle> obstacles;
@@ -38,34 +39,38 @@ public class MainGameFX extends Application {
         Canvas canvas = new Canvas(width, height);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         root.getChildren().add(canvas);
-        new AnimationTimer(){
-            public void handle(long currentNanoTime){
+        new AnimationTimer() {
+            public void handle(long currentNanoTime) {
                 drawElements(gc);
             }
         }.start();
         stage.show();
         stage.setFullScreen(true);
     }
-    
-    public void drawElements(GraphicsContext gc){
-        Image humanImg = new Image(human.getSprite());
-        gc.drawImage(humanImg, human.getPosition().getX(), human.getPosition().getY());
-        
-        Image ghostImg = new Image(ghost.getSprite());
-        gc.drawImage(ghostImg, ghost.getPosition().getX(), ghost.getPosition().getY());
-        
-        for(Obstacle o : obstacles){
+
+    //TODO: handling 3 versions when moving
+    public void drawElements(GraphicsContext gc) {
+        for (String img : human.getSprites()) {
+            Image humanImg = new Image(img);
+            gc.drawImage(humanImg, human.getPosition().getX(), human.getPosition().getY());
+        }
+
+        for (String img : ghost.getSprites()) {
+            Image ghostImg = new Image(img);
+            gc.drawImage(ghostImg, ghost.getPosition().getX(), ghost.getPosition().getY());
+        }
+
+        for (Obstacle o : obstacles) {
             Image obstImg = new Image(o.getSprite());
             gc.drawImage(obstImg, o.getPosition().getX(), o.getPosition().getY());
         }
     }
-    
-    public void setItems(Game game){
-        for(Player p : game.getPlayers()){
-            if(p.getCharacter().getClass().equals(human.getClass())){
+
+    public void setItems(Game game) {
+        for (Player p : game.getPlayers()) {
+            if (p.getCharacter().getClass().equals(human.getClass())) {
                 this.human = (Human) p.getCharacter();
-            }
-            else{
+            } else {
                 this.ghost = (Ghost) p.getCharacter();
             }
         }

@@ -59,8 +59,8 @@ public class Ghost extends Character {
      * @param sprite, sprite of the Ghost
      * @param game, the game in which the Ghost is active
      */
-    public Ghost(Point2D position, Color color, String sprite, Game game) {
-        super(position, color, sprite, game);
+    public Ghost(Point2D position, Color color, String[] sprites, Game game) {
+        super(position, color, sprites, game);
         this.isGhost = true;
         this.vulnerable = true;
     }
@@ -91,11 +91,11 @@ public class Ghost extends Character {
     public void changeAppearance() {
         if (this.isGhost && System.currentTimeMillis() >= stationaryTime.getTimeInMillis() + 1500 ) {
             this.vulnerable = false;
-            this.setSprite("Wall");
+            this.setSprites(new String[]{"ghostRedDown1.gif", "ghostRedDown2.gif", "ghostRedDown3.gif"});
             this.isGhost = false;
         } else if (this.isGhost == false) {
             this.isGhost = true;
-            this.setSprite("Ghost");
+            this.setSprites(new String[]{"Ghost"});
             this.vulnerable = true;
         }
     }

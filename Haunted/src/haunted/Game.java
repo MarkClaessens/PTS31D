@@ -123,8 +123,8 @@ public class Game {
         humanSpawnPosition = spawnPoints.get(1);
         
         // Create the characters and bind them to the players
-        Ghost ghost = new Ghost(ghostSpawnPosition, Color.RED, "ghostRedDown", this);
-        Human human = new Human(humanSpawnPosition, Color.BLUE, "humanBlueDown", this);
+        Ghost ghost = new Ghost(ghostSpawnPosition, Color.RED, new String[]{"ghostRedDown1.gif", "ghostRedDown2.gif", "ghostRedDown3.gif"}, this);
+        Human human = new Human(humanSpawnPosition, Color.BLUE, new String[]{"humanBlueDown1.gif", "humanBlueDown2.gif", "humanBlueDown3.gif"}, this);
         
         // Choose random who becomes the human
         Random randomizer = new Random();

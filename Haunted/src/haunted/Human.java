@@ -75,8 +75,8 @@ public class Human extends Character {
      * @param sprite, sprite of the Ghost
      * @param game, the game in which the Ghost is active
      */
-    public Human(Point2D position, Color color, String sprite, Game game) {
-        super(position, color, sprite, game);
+    public Human(Point2D position, Color color, String[] sprites, Game game) {
+        super(position, color, sprites, game);
         this.hasKey = false;
     }
 
