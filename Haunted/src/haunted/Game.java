@@ -127,8 +127,9 @@ public class Game {
             players.get(1).setCharacter(ghost);
         }
         else{
-            players.get(0).setCharacter(human);
+            players.get(0).setCharacter(ghost);
         }
+
         
         return players;
      }
