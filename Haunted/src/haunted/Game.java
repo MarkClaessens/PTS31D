@@ -121,7 +121,7 @@ public class Game {
         
         // Choose random who becomes the human
         Random randomizer = new Random();
-        int index = randomizer.nextInt(players.size() - 1);
+        int index = randomizer.nextInt(players.size());
         players.get(index).setCharacter(human);
         if(index == 0){
             players.get(1).setCharacter(ghost);
