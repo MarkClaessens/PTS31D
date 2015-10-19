@@ -101,7 +101,8 @@ public class Ghost extends Character {
     }
 
     /**
-     * Respawns the ghost when hit by the flashlight
+     * Respawns the ghost when hit by the flashlight.
+     * If the aren't remaining lifes for the ghost then endGame(player) will be called.
      */
     public void vanish() {
         // Get the remaining lifes that the ghost has.
