@@ -19,7 +19,7 @@ public class Game {
     private int currentRound = -1; //value is -1 because the first round (=floor) is equal to 0. 
     private Timer tickTimer;
     private Level currentLevel;
-    private boolean isRunning = false;
+    private boolean isRunning = false; // flaf that indicates if the game is active, like players are playing.
 
     /**
      * @return if the game isRunning (boolean)
@@ -27,7 +27,14 @@ public class Game {
     public boolean getIsRunning() {
         return this.isRunning;
     }
-
+    
+    /**
+     * Sets if the game is running or not. 
+     * @param isRunning 
+     */
+    public void setIsRunning(boolean isRunning){
+        this.isRunning = isRunning;
+    }
     /**
      * @return the current level of the game
      */
@@ -196,7 +203,7 @@ public class Game {
      * @param humanSpawnPoint
      * @return 
      */
-    public List<Point2D> checkSpawnForCollision(Point2D ghostSpawnPointParameter, Point2D humanSpawnPointParameter){
+    private List<Point2D> checkSpawnForCollision(Point2D ghostSpawnPointParameter, Point2D humanSpawnPointParameter){
         List<Obstacle> obstacles = new ArrayList<>();
         obstacles.addAll(currentLevel.getObstacles());
         
@@ -237,7 +244,7 @@ public class Game {
      * 
      * @return a random generated Ghost Point2D location that is inside the game map 
      */
-    public Point2D generateRandomGhostPoint2DLocation(){                
+    private Point2D generateRandomGhostPoint2DLocation(){                
         Random randomizer = new Random();
         int min = 1;
         int max = 7;
@@ -258,7 +265,7 @@ public class Game {
      * 
      * @return a random generated Human Point2D location that is inside the game map (height 1000 - width 1500)
      */
-    public Point2D generateRandomHumanPoint2DLocation(){
+    private Point2D generateRandomHumanPoint2DLocation(){
         Random randomizer = new Random();
         int min = 8;
         int max = 14;
