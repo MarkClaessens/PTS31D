@@ -182,5 +182,4 @@ public class GameTest {
         Timer timer = game.getTickTimer();
 
     }
-
 }

@@ -1,5 +1,6 @@
 package haunted;
 
+import java.awt.Color;
 import java.awt.geom.Point2D;
 import static java.lang.Math.ceil;
 import java.util.ArrayList;
@@ -32,6 +33,14 @@ public class Game {
      */
     public Level getCurrentLevel() {
         return this.currentLevel;
+    }
+    
+    /**
+     * Sets the current level of the game.
+     * @param level 
+     */
+    public void setCurrentLevel(Level level){
+        this.currentLevel = level;
     }
 
     /**
@@ -78,7 +87,8 @@ public class Game {
      */
     public void setTickTimer(Timer tickTimer) {
         this.tickTimer = tickTimer;
-    }
+    } 
+
 
     /**
      * creates the game
@@ -87,7 +97,15 @@ public class Game {
      * @param floors Cannot be 0.
      */
     public Game(List<Player> players, int floors) {       
-        // Generate random spawn positions for the characters
+        this.players = players;
+        this.floorAmount = floors;    
+    }
+    
+    /**
+     * Bind the characters to the players and give them a spawnposition
+     */
+     public List<Player> bindCharactersToPlayers(){
+         // Generate random spawn positions for the characters
         Point2D ghostSpawnPosition = generateRandomGhostPoint2DLocation();
         Point2D humanSpawnPosition = generateRandomHumanPoint2DLocation();
         
@@ -98,9 +116,23 @@ public class Game {
         humanSpawnPosition = spawnPoints.get(1);
         
         // Create the characters and bind them to the players
+        Ghost ghost = new Ghost(ghostSpawnPosition, Color.RED, "ghostRedDown", this);
+        Human human = new Human(humanSpawnPosition, Color.BLUE, "humanBlueDown", this);
         
-    }
-
+        // Choose random who becomes the human
+        Random randomizer = new Random();
+        int index = randomizer.nextInt(players.size() - 1);
+        players.get(index).setCharacter(human);
+        if(index == 0){
+            players.get(1).setCharacter(ghost);
+        }
+        else{
+            players.get(0).setCharacter(human);
+        }
+        
+        return players;
+     }
+    
     /**
      * sets the game to the next level Increases the currentRound with 1,
      * generates a new level object and calls the startRound method.

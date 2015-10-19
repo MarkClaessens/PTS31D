@@ -169,7 +169,7 @@ public class LevelTest {
     @Test
     public void testGenerateKeyLocation() {
         List<Obstacle> obstacles = current.getObstacles();
-        Obstacle key;
+        Obstacle key = null;
         for(Obstacle o : obstacles){
             if(o.getBehaviour() == ObstacleType.KEY){
                 key = o;
@@ -186,7 +186,7 @@ public class LevelTest {
     @Test
     public void testGenerateDoorLocation() {
         List<Obstacle> obstacles = current.getObstacles();
-        Obstacle door;
+        Obstacle door = null;
         for(Obstacle o : obstacles){
             if(o.getBehaviour() == ObstacleType.DOOR){
                 door = o;
@@ -203,11 +203,19 @@ public class LevelTest {
     @Test
     public void testGenerateLayout() {
 
-        // TODO for kevin
+        // TODO for kevin, check if this is done...
+        
+        List<Obstacle> obstacles = current.getObstacles();
+        Obstacle key = null;
+        for(Obstacle o : obstacles){
+            if(o.getBehaviour() == ObstacleType.KEY){
+                key = o;
+            }
+        }
         current.generateLayout();
         Assert.assertThat("generteLayout doesn't create a ", this, null);
-        assertEquals(Point2D.class, current.getKeyLocation());
-        assertEquals(Point2D.class, current.getDoorLocation());
+        assertEquals(Point2D.class, key.getPosition());
+        assertEquals(Point2D.class, key.getPosition());
     }
 
     /**
