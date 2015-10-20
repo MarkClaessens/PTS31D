@@ -195,27 +195,24 @@ public class Level {
      * @return 
      */
     public Point2D generateRandomPoint2DLocation(ObstacleType type){
-        int min;
-        int max;
-        int min2;
-        int max2;
+        int minX;
+        int maxX;
+        int minY;
+        int maxY;
         switch(type){
             case KEY:
             case WALL: 
-                min = 1; max = 14; min2 = 1; max2 = 9;
+                minX = 1; maxX = 14; minY = 1; maxY = 9;
                 break;
             default: // DOOR -> will be generated somewhere in the upper row of the map (x = [1/15]  && y = 0)
-                min = 0; max = 15; min2 = 0; max2 = 0;
+                minX = 0; maxX = 15; minY = 0; maxY = 0;
                 break;
         }
         
         Random randomizer = new Random();
-        int random = randomizer.nextInt(max - min + 1) + min;
-        int randomX = random * 100;
-
-        int random2 = randomizer.nextInt(max2 - min2 + 1) + min2;
-        int randomY = random2 * 100;
-        
+        int randomX = (randomizer.nextInt(maxX - minX + 1) + minX) * 100;
+        int randomY = (randomizer.nextInt(maxY - minY + 1) + minY) * 100;
+  
         Point2D randomPoint2D = new Point2D.Double(randomX, randomY);
         
         return randomPoint2D;
