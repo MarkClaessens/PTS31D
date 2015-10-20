@@ -39,8 +39,15 @@ public class MainGameFX extends Application {
     List<Obstacle> obstacles;
     int levelWidth;
     int levelHeight;
+    String backgroundImg;
 
+    /**
+     * Starting point of drawing. in animationTimer you can find the drawing in loop
+     * @param stage
+     * @throws Exception 
+     */
     public void start(Stage stage) throws Exception {
+        backgroundImg = "background.png";
         stage.setTitle("the game");
         Group root = new Group();
         Scene scene = new Scene(root);
@@ -83,8 +90,15 @@ public class MainGameFX extends Application {
         stage.setFullScreen(true);
     }
 
+    /**
+     * Draw the elements on screen every time AnimationTimer calls this.
+     * @param gc
+     * @param currentNanoTime 
+     */
     //TODO: handling 3 versions when moving
     public void drawElements(GraphicsContext gc, long currentNanoTime) {
+        Image backgroundImage = new Image(backgroundImg);
+        gc.drawImage(backgroundImage, 0, 0, width, height);
         int time = Math.round((currentNanoTime - startNanoTime) / 90000000);
         if (!pressedKeys.contains("UP") && !pressedKeys.contains("DOWN") && !pressedKeys.contains("LEFT") && !pressedKeys.contains("RIGHT")) {
             Image humanImg = new Image(human.getSprites()[0]);
@@ -126,6 +140,10 @@ public class MainGameFX extends Application {
         }
     }
 
+    /**
+     * sets the items from the game class
+     * @param game 
+     */
     public void setItems(Game game) {
         for (Player p : game.getPlayers()) {
             if (p.getCharacter().getClass().equals(human.getClass())) {
@@ -137,14 +155,27 @@ public class MainGameFX extends Application {
         Level lvl = game.getCurrentLevel();
         this.levelWidth = lvl.getWidth();
         this.levelHeight = lvl.getHeight();
-        this.obstacles = lvl.getObstacles();
+        for(Obstacle o : lvl.getObstacles()){
+            if(o.getBehaviour() == ObstacleType.DOOR){
+                this.obstacles.add(o);
+            }
+            else if(o.getBehaviour() == ObstacleType.KEY && human.getHasKey()==false){
+                this.obstacles.add(o);
+            }
+        }
+        //this.obstacles = lvl.getObstacles();
     }
 
+    /**
+     * returns the pressed keys
+     * @return pressed keys
+     */
     public ArrayList<String> getPressedKeys() {
         return pressedKeys;
     }
 
     /**
+     * start point of this executable class
      * @param args the command line arguments
      */
     public static void main(String[] args) {
