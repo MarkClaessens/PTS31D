@@ -72,7 +72,7 @@ public class Obstacle {
     }
 
     /**
-     * Is called when a character collides with an obstacle. Further actions are determined by obstacleType.
+     * Is called when the human collides with an obstacle. Further actions are determined by obstacleType.
      * @param human The human object that collides with the obstacle.
      * 
      */
