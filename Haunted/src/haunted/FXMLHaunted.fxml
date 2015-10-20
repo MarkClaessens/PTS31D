@@ -12,7 +12,7 @@
       <Pane layoutX="12.0" layoutY="6.0" prefHeight="392.0" prefWidth="592.0">
          <children>
             <Button fx:id="BTNrename" layoutX="73.0" layoutY="237.0" mnemonicParsing="false" onMouseClicked="#changename" text="rename" />
-            <Button fx:id="BTNcreategame" layoutX="278.0" layoutY="237.0" mnemonicParsing="false" onMouseClicked="#creategamelobby" prefHeight="25.0" prefWidth="134.0" text="create gamelobby" />
+            <Button fx:id="BTNcreategamelobby" layoutX="278.0" layoutY="237.0" mnemonicParsing="false" onMouseClicked="#creategamelobby" prefHeight="25.0" prefWidth="134.0" text="create gamelobby" />
             <TextField fx:id="TFpassword" layoutX="278.0" layoutY="193.0" promptText="password(optional)" />
             <TextField fx:id="TFroomname" layoutX="278.0" layoutY="153.0" promptText="roomname" />
             <TextField fx:id="TFchangenameplayer2" layoutX="73.0" layoutY="193.0" promptText="insert name here" />
