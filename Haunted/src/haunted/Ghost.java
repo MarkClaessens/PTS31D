@@ -111,10 +111,8 @@ public class Ghost extends Character {
         // If there are remaining lifes then respawn the ghost on the map.
         if(remainingGhostLifes > 0){
             // Respawn the ghost random on the map 
-            Point2D spawnPosition = game.generateRandomGhostPoint2DLocation();
-            // The second Point2D is null, but we don't need it here.
-            List<Point2D> spawnPoints = game.checkSpawnForCollision(spawnPosition, null);
-            super.setPosition(spawnPoints.get(0));
+            Point2D spawnPosition = game.pickRandomGhostSpawnPoint();
+            super.setPosition(spawnPosition);
         }
         // If the ghost has no more lifes then end the game with the winning player as the parameter.
         else{

@@ -1,6 +1,7 @@
 package haunted;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.geom.Point2D;
 import static java.lang.Math.ceil;
 import java.util.ArrayList;
@@ -113,15 +114,9 @@ public class Game {
      * Call this method after the game generated his level and sets his obstacles [ ! ] 
      */
      public List<Player> bindCharactersToPlayers(){
-         // Generate random spawn positions for the characters
-        Point2D ghostSpawnPosition = generateRandomGhostPoint2DLocation();
-        Point2D humanSpawnPosition = generateRandomHumanPoint2DLocation();
-        
-        // See javadoc for more information about checkSpawnForCollisio method
-        // spawnPoints.get(0) is the ghost spawnPoint and spawnPoints.get(1) is the human spawnPoint
-        List<Point2D> spawnPoints = checkSpawnForCollision(ghostSpawnPosition, humanSpawnPosition);
-        ghostSpawnPosition = spawnPoints.get(0);
-        humanSpawnPosition = spawnPoints.get(1);
+         // Pick the spawn positions for the characters
+         Point2D ghostSpawnPosition = pickRandomGhostSpawnPoint();
+         Point2D humanSpawnPosition = pickRandomHumanSpawnPoint();     
         
         // Create the characters and bind them to the players
         Ghost ghost = new Ghost(ghostSpawnPosition, Color.RED, new String[]{"ghostRedDown1.gif", "ghostRedDown2.gif", "ghostRedDown3.gif"}, this);
@@ -195,88 +190,47 @@ public class Game {
         // TODO - implement Game.tick
         throw new UnsupportedOperationException();
     }
-    
+        
     /**
-     * Check if the random spawn positions collide with a obstacle.
-     *  If so, create a new random spawn position and check for colliding again (recursive). 
-     *  After that the method will return the spawnpositions.
      * 
-     * @param ghostSpawnPoint
-     * @param humanSpawnPoint
-     * @return 
+     * @return The location on the map where the Ghost will spawn. 
      */
-    public List<Point2D> checkSpawnForCollision(Point2D ghostSpawnPointParameter, Point2D humanSpawnPointParameter){
-        Point2D ghostSpawnPoint = ghostSpawnPointParameter;
-        Point2D humanSpawnPoint = humanSpawnPointParameter;
-        boolean hasCollision = false;
+    public Point2D pickRandomGhostSpawnPoint(){                
+        // Make an array with the points where the Ghost is allowed to spawn.
+        Point2D[] spawnPoints = new Point2D[]{
+        new Point2D.Double(0, 0),
+        new Point2D.Double(0, 100),
+        new Point2D.Double(0, 200),
+        new Point2D.Double(100, 0),
+        new Point2D.Double(200, 0)
+        };
         
-        for(Obstacle o : currentLevel.getObstacles()){
-            if (o.getPosition() == ghostSpawnPoint){
-                hasCollision = true;
-                ghostSpawnPoint = generateRandomGhostPoint2DLocation();
-            }
-            else if (o.getPosition() == humanSpawnPoint){
-                hasCollision = true;
-                ghostSpawnPoint = generateRandomHumanPoint2DLocation();
-            }
-            else {
-                hasCollision = false;
-            }
-        }
-        
-        List<Point2D> spawnPoints = new ArrayList<>();
-        
-        if(hasCollision){
-            spawnPoints = checkSpawnForCollision(ghostSpawnPoint, humanSpawnPoint);
-        }
-        else{
-            spawnPoints.add(ghostSpawnPoint);
-            spawnPoints.add(humanSpawnPoint);
-        }
-             
-        return spawnPoints;
+        // Take a random point from the array. This is where the human will spawn.
+        Random randomizer = new Random();
+        Point2D spawnPoint = spawnPoints[randomizer.nextInt(6)];
+               
+        return spawnPoint;
     }
     
     /**
      * 
-     * @return a random generated Ghost Point2D location that is inside the game map 
+     * @return The location on the map where the Human will spawn. 
      */
-    public Point2D generateRandomGhostPoint2DLocation(){                
+    public Point2D pickRandomHumanSpawnPoint(){     
+        // Make an array with the points where the human is allowed to spawn.
+        Point2D[] spawnPoints = new Point2D[]{
+        new Point2D.Double(1400, 900),
+        new Point2D.Double(1400, 800),
+        new Point2D.Double(1400, 700),
+        new Point2D.Double(1300, 900),
+        new Point2D.Double(1200, 900)
+        };
+        
+        // Take a random point from the array. This is where the human will spawn.
         Random randomizer = new Random();
-        int min = 0;
-        int max = 3;
-        int random = randomizer.nextInt(max - min + 1) + min;
-        int randomX = random * 100;
-
-        int min2 = 0;
-        int max2 = 3;
-        int random2 = randomizer.nextInt(max2 - min2 + 1) + min2;
-        int randomY = random2 * 100;
-        
-        Point2D randomPoint2D = new Point2D.Double(randomX, randomY);
-        
-        return randomPoint2D;
-    }
-    
-    /**
-     * 
-     * @return a random generated Human Point2D location that is inside the game map (height 1000 - width 1500)
-     */
-    public Point2D generateRandomHumanPoint2DLocation(){
-        Random randomizer = new Random();
-        int min = 13;
-        int max = 15;
-        int random = randomizer.nextInt(max - min + 1) + min;
-        int randomX = random * 100;
-
-        int min2 = 7;
-        int max2 = 10;
-        int random2 = randomizer.nextInt(max2 - min2 + 1) + min2;
-        int randomY = random2 * 100;
-        
-        Point2D randomPoint2D = new Point2D.Double(randomX, randomY);
-        
-        return randomPoint2D;
+        Point2D spawnPoint = spawnPoints[randomizer.nextInt(6)];
+               
+        return spawnPoint;
     }
     
     

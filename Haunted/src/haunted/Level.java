@@ -299,13 +299,12 @@ public class Level {
         int maxY;
         switch (type) {
             case KEY:
-            case WALL:
                 minX = 1;
-                maxX = 14;
-                minY = 1;
-                maxY = 9;
+                maxX = 16;
+                minY = 16;
+                maxY = 16;
                 break;
-            default: // DOOR -> will be generated somewhere in the upper row of the map (x = [1/15]  && y = 0)
+            default: // DOOR 
                 minX = 0;
                 maxX = 15;
                 minY = 0;
