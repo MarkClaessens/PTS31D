@@ -14,7 +14,7 @@ public abstract class Character {
     private Point2D position;
     private Color color;
     private String[] sprites;
-    private Double movementSpeed = 0.0; //TODO the movementSpeed isn't set to the correct value yet
+    private Double movementSpeed = 25.0; // Mike: Don't know what the right value is for this is?
     private DirectionType direction;
 
     /**
@@ -116,16 +116,37 @@ public abstract class Character {
      *
      * @param direction
      */
-    public void move(String direction) {
-        // TODO - implement Character.move
-        throw new UnsupportedOperationException();
+    public void move(DirectionType direction) {
+        if(detectCollision()){
+            return;
+        }
+        else{
+            this.direction = direction;
+            Point2D oldPosition = position;
+            
+            switch(direction){
+                case UP:
+                    position.setLocation(oldPosition.getX(), oldPosition.getY() + movementSpeed );
+                    break;
+                case DOWN:
+                    position.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed );
+                    break;
+                case RIGHT:
+                    position.setLocation(oldPosition.getX() + movementSpeed, oldPosition.getY());
+                    break;
+                case LEFT:
+                    position.setLocation(oldPosition.getX() - movementSpeed, oldPosition.getY());
+                    break;
+            }
+        }
     }
     
     /**
      * Check if character collides with another object. 
      * Be aware of the private modifier!
+     * @return if there was collision or not
      */
-    private void detectCollision(){
+    private boolean detectCollision(){
         // TODO - implement Character.detectCollision
         throw new UnsupportedOperationException();
     }
