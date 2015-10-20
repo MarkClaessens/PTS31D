@@ -24,9 +24,14 @@ import javafx.stage.Stage;
  */
 public class MainGameFX extends Application {
 
+    double width;
+    double height;
+    
     Human human;
     Ghost ghost;
     List<Obstacle> obstacles;
+    int levelWidth;
+    int levelHeight;
 
     public void start(Stage stage) throws Exception {
         stage.setTitle("the game");
@@ -34,13 +39,14 @@ public class MainGameFX extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        double width = screenSize.getWidth();
-        double height = screenSize.getHeight();
+        width = screenSize.getWidth();
+        height = screenSize.getHeight();
         Canvas canvas = new Canvas(width, height);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         root.getChildren().add(canvas);
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
+                gc.clearRect(0, 0, width, height);
                 drawElements(gc);
             }
         }.start();
@@ -52,17 +58,17 @@ public class MainGameFX extends Application {
     public void drawElements(GraphicsContext gc) {
         for (String img : human.getSprites()) {
             Image humanImg = new Image(img);
-            gc.drawImage(humanImg, human.getPosition().getX(), human.getPosition().getY());
+            gc.drawImage(humanImg, human.getPosition().getX(), human.getPosition().getY(), width/levelWidth, height/levelHeight);
         }
 
         for (String img : ghost.getSprites()) {
             Image ghostImg = new Image(img);
-            gc.drawImage(ghostImg, ghost.getPosition().getX(), ghost.getPosition().getY());
+            gc.drawImage(ghostImg, ghost.getPosition().getX(), ghost.getPosition().getY(), width/levelWidth, height/levelHeight);
         }
 
         for (Obstacle o : obstacles) {
             Image obstImg = new Image(o.getSprite());
-            gc.drawImage(obstImg, o.getPosition().getX(), o.getPosition().getY());
+            gc.drawImage(obstImg, o.getPosition().getX(), o.getPosition().getY(), width/levelWidth, height/levelHeight);
         }
     }
 
@@ -75,6 +81,8 @@ public class MainGameFX extends Application {
             }
         }
         Level lvl = game.getCurrentLevel();
+        this.levelWidth = lvl.getWidth();
+        this.levelHeight = lvl.getHeight();
         this.obstacles = lvl.getObstacles();
     }
 
