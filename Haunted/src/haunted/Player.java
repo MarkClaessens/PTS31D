@@ -9,6 +9,7 @@ public class Player {
     Game game;
     private String name;
     private Boolean ready;
+    private Character character;
 
     /**
      * this creates the Player object.
@@ -20,6 +21,15 @@ public class Player {
         this.ready = false;
     }
 
+    public void setCharacter(Character character){
+        this.character = character;
+    }
+    
+    public Character getCharacter(){
+        return this.character;
+    }
+    
+    
     /**
      *
      * @return The name of the player.

@@ -1,5 +1,6 @@
 package haunted;
 
+import java.awt.Color;
 import java.awt.geom.Point2D;
 import static java.lang.Math.ceil;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.Timer;
 
 /**
  *
- * @author Mal
+ * @author Mal && Mike 
  */
 public class Game {
 
@@ -18,7 +19,7 @@ public class Game {
     private int currentRound = -1; //value is -1 because the first round (=floor) is equal to 0. 
     private Timer tickTimer;
     private Level currentLevel;
-    private boolean isRunning = false;
+    private boolean isRunning = false; // flaf that indicates if the game is active, like players are playing.
 
     /**
      * @return if the game isRunning (boolean)
@@ -26,12 +27,27 @@ public class Game {
     public boolean getIsRunning() {
         return this.isRunning;
     }
-
+    
+    /**
+     * Sets if the game is running or not. 
+     * @param isRunning 
+     */
+    public void setIsRunning(boolean isRunning){
+        this.isRunning = isRunning;
+    }
     /**
      * @return the current level of the game
      */
     public Level getCurrentLevel() {
         return this.currentLevel;
+    }
+    
+    /**
+     * Sets the current level of the game.
+     * @param level 
+     */
+    public void setCurrentLevel(Level level){
+        this.currentLevel = level;
     }
 
     /**
@@ -78,16 +94,26 @@ public class Game {
      */
     public void setTickTimer(Timer tickTimer) {
         this.tickTimer = tickTimer;
-    }
+    } 
+
 
     /**
      * creates the game
      *
      * @param players List can not be empty.
-     * @param floors Cannot be 0.
+     * @param floors Cannot be 0..
      */
     public Game(List<Player> players, int floors) {       
-        // Generate random spawn positions for the characters
+        this.players = players;
+        this.floorAmount = floors;    
+    }
+    
+    /**
+     * Bind the characters to the players and give them a spawnposition
+     * Call this method after the game generated his level and sets his obstacles [ ! ] 
+     */
+     public List<Player> bindCharactersToPlayers(){
+         // Generate random spawn positions for the characters
         Point2D ghostSpawnPosition = generateRandomGhostPoint2DLocation();
         Point2D humanSpawnPosition = generateRandomHumanPoint2DLocation();
         
@@ -98,9 +124,24 @@ public class Game {
         humanSpawnPosition = spawnPoints.get(1);
         
         // Create the characters and bind them to the players
+        Ghost ghost = new Ghost(ghostSpawnPosition, Color.RED, new String[]{"ghostRedDown1.gif", "ghostRedDown2.gif", "ghostRedDown3.gif"}, this);
+        Human human = new Human(humanSpawnPosition, Color.BLUE, new String[]{"humanBlueDown1.gif", "humanBlueDown2.gif", "humanBlueDown3.gif"}, this);
         
-    }
+        // Choose random who becomes the human
+        Random randomizer = new Random();
+        int index = randomizer.nextInt(players.size());
+        players.get(index).setCharacter(human);
+        if(index == 0){
+            players.get(1).setCharacter(ghost);
+        }
+        else{
+            players.get(0).setCharacter(ghost);
+        }
 
+        
+        return players;
+     }
+    
     /**
      * sets the game to the next level Increases the currentRound with 1,
      * generates a new level object and calls the startRound method.
@@ -130,8 +171,9 @@ public class Game {
     /**
      * Will be called when the game is done. isRunning has to be false. There
      * might be a victory screen.
+     * @param The player who has won the game.
      */
-    public void endGame() {
+    public void endGame(Player winner) {
         // TODO - implement Game.endGame
         throw new UnsupportedOperationException();
     }
@@ -164,23 +206,18 @@ public class Game {
      * @return 
      */
     public List<Point2D> checkSpawnForCollision(Point2D ghostSpawnPointParameter, Point2D humanSpawnPointParameter){
-        List<Obstacle> obstacles = new ArrayList<>();
-        obstacles.addAll(currentLevel.getObstacles());
-        
         Point2D ghostSpawnPoint = ghostSpawnPointParameter;
         Point2D humanSpawnPoint = humanSpawnPointParameter;
         boolean hasCollision = false;
         
-        for(Obstacle o : obstacles){
+        for(Obstacle o : currentLevel.getObstacles()){
             if (o.getPosition() == ghostSpawnPoint){
                 hasCollision = true;
-                Point2D newRandomPosition = generateRandomGhostPoint2DLocation();
-                ghostSpawnPoint.setLocation(newRandomPosition);
+                ghostSpawnPoint = generateRandomGhostPoint2DLocation();
             }
             else if (o.getPosition() == humanSpawnPoint){
                 hasCollision = true;
-                Point2D newRandomPosition = generateRandomHumanPoint2DLocation();
-                ghostSpawnPoint.setLocation(newRandomPosition);
+                ghostSpawnPoint = generateRandomHumanPoint2DLocation();
             }
             else {
                 hasCollision = false;
@@ -204,10 +241,17 @@ public class Game {
      * 
      * @return a random generated Ghost Point2D location that is inside the game map 
      */
-    public Point2D generateRandomGhostPoint2DLocation(){
+    public Point2D generateRandomGhostPoint2DLocation(){                
         Random randomizer = new Random();
-        double randomX = ceil(100 + ((700 - 100) * randomizer.nextDouble()));
-        double randomY = ceil(100 + ((500 - 100) * randomizer.nextDouble()));
+        int min = 0;
+        int max = 3;
+        int random = randomizer.nextInt(max - min + 1) + min;
+        int randomX = random * 100;
+
+        int min2 = 0;
+        int max2 = 3;
+        int random2 = randomizer.nextInt(max2 - min2 + 1) + min2;
+        int randomY = random2 * 100;
         
         Point2D randomPoint2D = new Point2D.Double(randomX, randomY);
         
@@ -220,8 +264,15 @@ public class Game {
      */
     public Point2D generateRandomHumanPoint2DLocation(){
         Random randomizer = new Random();
-        double randomX = ceil(800 + ((1400 - 800) * randomizer.nextDouble()));
-        double randomY = ceil(600 + ((1000 - 700) * randomizer.nextDouble()));
+        int min = 13;
+        int max = 15;
+        int random = randomizer.nextInt(max - min + 1) + min;
+        int randomX = random * 100;
+
+        int min2 = 7;
+        int max2 = 10;
+        int random2 = randomizer.nextInt(max2 - min2 + 1) + min2;
+        int randomY = random2 * 100;
         
         Point2D randomPoint2D = new Point2D.Double(randomX, randomY);
         
@@ -231,3 +282,6 @@ public class Game {
     
 
 }
+
+
+        

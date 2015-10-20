@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
  * @author Mal
  */
 public class GhostTest {
-
+    String[] ghostSprites = new String[]{"humanBlueDown1.gif", "humanBlueDown2.gif", "humanBlueDown3.gif"};
     Game game;
     public GhostTest() {
     }
@@ -53,7 +53,7 @@ public class GhostTest {
     @Test
     public void testMakeGhost() {                
         Point2D spawnPosition = new Point2D.Double(300, 500);
-        Ghost ghost1 = new Ghost(spawnPosition, Color.RED, "redGhost", game);
+        Ghost ghost1 = new Ghost(spawnPosition, Color.RED, ghostSprites, game);
     }
 
     /**
@@ -64,7 +64,7 @@ public class GhostTest {
         System.out.println("isVulnerable");
 
         Point2D spawnPosition = new Point2D.Double(300, 500);
-        Ghost ghost = new Ghost(spawnPosition, Color.RED, "redGhost", game);
+        Ghost ghost = new Ghost(spawnPosition, Color.RED, ghostSprites, game);
         assertTrue("Ghost is not vulnerable at initiliazing", ghost.isVulnerable());
     }
 
@@ -76,7 +76,7 @@ public class GhostTest {
         System.out.println("setVulnerable");
         
         Point2D spawnPosition = new Point2D.Double(300, 500);
-        Ghost ghost = new Ghost(spawnPosition, Color.RED, "redGhost", game);
+        Ghost ghost = new Ghost(spawnPosition, Color.RED, ghostSprites, game);
         ghost.setVulnerable(false);
         assertFalse("Ghost vulnerable was not correctly set to false", ghost.isVulnerable());
     }
@@ -88,7 +88,7 @@ public class GhostTest {
     public void testPossess() {
         System.out.println("possess");
         Point2D spawnPosition = new Point2D.Double(300, 500);
-        Ghost ghost = new Ghost(spawnPosition, Color.RED, "redGhost", game);
+        Ghost ghost = new Ghost(spawnPosition, Color.RED, ghostSprites, game);
         ghost.possess();
         // TODO review the generated test code and remove the default call to fail.
         fail("the ghost has not been possessed to human");
@@ -101,11 +101,9 @@ public class GhostTest {
     public void testChangeAppearance() {
         System.out.println("changeAppearance");
         Point2D spawnPosition = new Point2D.Double(300, 500);
-        Ghost ghost = new Ghost(spawnPosition, Color.RED, "redGhost", game);
+        Ghost ghost = new Ghost(spawnPosition, Color.RED, ghostSprites, game);
         ghost.changeAppearance();
         assertTrue("ghost is still vulnerable", ghost.isVulnerable());
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -115,7 +113,7 @@ public class GhostTest {
     public void testVanish() {
         System.out.println("vanish");
         Point2D spawnPosition = new Point2D.Double(300, 500);
-        Ghost ghost = new Ghost(spawnPosition, Color.RED, "redGhost", game);
+        Ghost ghost = new Ghost(spawnPosition, Color.RED, ghostSprites, game);
         ghost.vanish();
         assertTrue("ghost is still vulnerable", ghost.isVulnerable());
         // TODO review the generated test code and remove the default call to fail.

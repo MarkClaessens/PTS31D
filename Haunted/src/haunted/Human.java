@@ -2,6 +2,7 @@ package haunted;
 
 import java.awt.Color;
 import java.awt.geom.Point2D;
+import java.util.List;
 
 
 
@@ -74,31 +75,52 @@ public class Human extends Character {
      * @param sprite, sprite of the Ghost
      * @param game, the game in which the Ghost is active
      */
-    public Human(Point2D position, Color color, String sprite, Game game) {
-        super(position, color, sprite, game);
+    public Human(Point2D position, Color color, String[] sprites, Game game) {
+        super(position, color, sprites, game);
         this.hasKey = false;
     }
 
-    /**
-     * The controls of the current ghost as human goes to the new ghost as human
-     */
-    public void transferHuman() {
-        // TODO - implement Human.transferHuman
-        throw new UnsupportedOperationException();
-    }
+       // Mike: i commented this out because I programed the transformation in the Ghost class.
+//    /**
+//     * The controls of the current ghost as human goes to the new ghost as human.
+//     */
+//    public void transferHuman() {
+//        
+//        }
+//    }
 
     /**
      * Let the human pick up a key, called when the human touches the key
      */
     public void pickUpKey() {
-        
+        this.hasKey = true;
+        List<Obstacle> obstacles = game.getCurrentLevel().getObstacles();
+        for(Obstacle obstacle : obstacles){
+            if(obstacle.getBehaviour() == ObstacleType.KEY){
+                obstacles.remove(obstacle);
+            }
+        }
+        game.getCurrentLevel().setObstacles(obstacles);
+                
     }
 
     /**
-     * Let the human get into the door, but only if the human has a key and
-     * touches the door.
+     * Let the human get into the door.
+     * Timer tick will check if the human has the key and touches the door.
      */
     public void enterDoor() {
-        
+        // First check if this entering was on the last floor (last level).
+        if(game.getFloorAmount() - 1 == game.getCurrentRound()){
+            game.setIsRunning(false);
+            for(Player player : game.getPlayers()){
+                if (player.getCharacter() instanceof Human){
+                    game.endGame(player);
+                }
+            }
+        }
+        else{
+            game.setIsRunning(false);
+            game.endRound();
+        }
     }
 }

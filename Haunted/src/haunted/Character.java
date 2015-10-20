@@ -13,7 +13,7 @@ public abstract class Character {
     protected Game game; 
     private Point2D position;
     private Color color;
-    private String sprite;
+    private String[] sprites;
     private Double movementSpeed = 0.0; //TODO the movementSpeed isn't set to the correct value yet
     private DirectionType direction;
 
@@ -55,19 +55,19 @@ public abstract class Character {
 
     /**
      *
-     * @return the character's sprite (human/ghost/wall)
+     * @return the character's sprites (human/ghost/wall)
      */
-    public String getSprite() {
-        return this.sprite;
+    public String[] getSprites() {
+        return this.sprites;
     }
 
     /**
-     * Sets the character's sprite (human/ghost/wall)
+     * Sets the character's sprites (human/ghost/wall)
      *
      * @param sprite
      */
-    public void setSprite(String sprite) {
-        this.sprite = sprite;
+    public void setSprites(String[] sprites) {
+        this.sprites = sprites;
     }
 
     /**
@@ -103,10 +103,10 @@ public abstract class Character {
         this.direction = direction;
     }
     
-    public Character(Point2D position, Color color, String sprite, Game game){
+    public Character(Point2D position, Color color, String[] sprites, Game game){
         this.position = position;
         this.color = color;
-        this.sprite = sprite;
+        this.sprites = sprites;
         this.direction = DirectionType.DOWN; // Set a default direction
         this.game = game;
     }

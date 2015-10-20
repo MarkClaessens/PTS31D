@@ -5,9 +5,13 @@
  */
 package advancingwithsprites;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.List;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -23,88 +27,87 @@ import javafx.stage.Stage;
  */
 public class AdvancingWithSprites extends Application {
 
-    double x = 0;
-    double y = 131;
-    int movespeed = 10;
+    Human human;
+    final long startNanoTime = System.nanoTime();
+    int x = 0;
+    int time;
 
-    @Override
     public void start(Stage stage) throws Exception {
-        stage.setTitle("Advancing with sprites");
+        String[] sprites = new String[]{"human1.gif", "human2.gif", "human3.gif"};
+        Human hum = new Human(sprites);
+        setItems(hum);
+        stage.setTitle("the game");
         Group root = new Group();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        double width = screenSize.getWidth();
+        double height = screenSize.getHeight();
+        Canvas canvas = new Canvas(width, height);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        root.getChildren().add(canvas);
+        
         ArrayList<String> input = new ArrayList<String>();
 
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            public void handle(KeyEvent e) {
-                String code = e.getCode().toString();
+        scene.setOnKeyPressed(
+                new EventHandler<KeyEvent>() {
+                    public void handle(KeyEvent e) {
+                        String code = e.getCode().toString();
 
-                // only add once... prevent duplicates
-                if (!input.contains(code)) {
-                    input.add(code);
-                }
-            }
-        });
+                        // only add once... prevent duplicates
+                        if (!input.contains(code)) {
+                            input.add(code);
+                        }
+                    }
+                });
 
-        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            public void handle(KeyEvent e) {
-                String code = e.getCode().toString();
-                input.remove(code);
-            }
-        });
-
-        Canvas canvas = new Canvas(500, 500);
-        root.getChildren().add(canvas);
-
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-
-        Image human = new Image("human.gif");
-        Image wall = new Image("wall.png");
-
-        final long startNanoTime = System.nanoTime();
-
+        scene.setOnKeyReleased(
+                new EventHandler<KeyEvent>() {
+                    public void handle(KeyEvent e) {
+                        String code = e.getCode().toString();
+                        input.remove(code);
+                    }
+                });
+        
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
-                double t = (currentNanoTime - startNanoTime) / 1000000000.0;
-                if (input.contains("LEFT")) {
-                    if (x - movespeed >= 0) {
-                        x -= movespeed;
-                    } else {
-                        x = 0;
-                    }
-                }
                 if (input.contains("RIGHT")) {
-                    if (x + movespeed <= canvas.getWidth()-112) {
-                        x += movespeed;
-                    } else {
-                        x = canvas.getWidth() - movespeed - 112;
-                    }
+                    human.setIsMoving(true);
+                }  
+                else{
+                    human.setIsMoving(false);
                 }
-                if (input.contains("UP")) {
-                    if (y - movespeed >= 0) {
-                        y -= movespeed;
-                    } else {
-                        y = 0;
-                    }
-                }
-                if (input.contains("DOWN")) {
-                    if (y + movespeed <= canvas.getHeight()-133) {
-                        y += movespeed;
-                    } else {
-                        y = canvas.getHeight() - movespeed - 133;
-                    }
-                }
-
-                // background image clears canvas
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-                gc.drawImage(human, x, y);
-                gc.drawImage(wall, 0, 0);
-                gc.drawImage(wall, 0, 264);
+                drawElements(gc);
+                time = Math.round((currentNanoTime - startNanoTime) / 90000000);
             }
         }.start();
-
         stage.show();
+        stage.setFullScreen(true);
+    }
+
+    public void drawElements(GraphicsContext gc) {
+        if (human.getIsMoving()) {
+            x++;
+            Image drawImage = null;
+            if (time % 3 == 0) {
+                drawImage = new Image(human.getSprites()[0]);
+            } else if (time % 3 == 1) {
+                drawImage = new Image(human.getSprites()[1]);
+            } else if (time % 3 == 2) {
+                drawImage = new Image(human.getSprites()[2]);
+            }
+            if (drawImage != null) {
+                gc.drawImage(drawImage, x, 0, 1600/15, 900/10);
+            }
+        }
+        else{
+            gc.drawImage(new Image(human.getSprites()[0]), x, 0, 1600/15, 900/10);
+        }
+    }
+
+    public void setItems(Human human) {
+        this.human = human;
     }
 
     /**
@@ -113,5 +116,4 @@ public class AdvancingWithSprites extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
 }

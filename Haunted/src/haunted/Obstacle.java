@@ -10,12 +10,14 @@ public class Obstacle {
 
     private Point2D position;
     private String sprite;
-    private ObstacleType obstacleType;
+    private ObstacleType behaviour;
+    private Level level;
 
-    public Obstacle(ObstacleType obstacleType, String sprite, Point2D position) {
-        this.obstacleType = obstacleType;
+    public Obstacle(ObstacleType obstacleType, String sprite, Point2D position, Level level) {
+        this.behaviour = obstacleType;
         this.sprite = sprite;
         this.position = position;
+        this.level = level;
     }
     
     /**
@@ -57,16 +59,16 @@ public class Obstacle {
      * 
      * @return the behaviour of the obstacle 
      */
-    public ObstacleType getObstacleType() {
-        return this.obstacleType;
+    public ObstacleType getBehaviour() {
+        return this.behaviour;
     }
     
     /**
      * Sets the behaviour of the obstacle, must be an ObstacleType (door,key,wall)
      * @param obstacleType 
      */
-    public void setObstacleType(ObstacleType obstacleType) {
-        this.obstacleType = obstacleType;
+    public void setBehaviour(ObstacleType behaviour) {
+        this.behaviour = behaviour;
     }
 
     /**
@@ -74,16 +76,13 @@ public class Obstacle {
      * For example: if obstacleType = wall > character can not move any further.
      */
     public void interact() {
-        if(obstacleType == ObstacleType.KEY) {
-            //Implementation needed
-        }
-        
-        if(obstacleType == ObstacleType.DOOR) {
-            //Implementation needed
-        }
-        
-        if(obstacleType == ObstacleType.WALL) {
-            //Implementation needed
+        switch(this.behaviour){
+            case KEY: 
+                break;
+            case DOOR: 
+                break;
+            case WALL: 
+                break; 
         }
     }
 }
