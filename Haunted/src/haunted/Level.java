@@ -201,6 +201,8 @@ public class Level {
         int maxY;
         switch(type){
             case KEY:
+                minX = 0; maxX = 15; minY = 10; maxY = 10;
+                break;
             case WALL: 
                 minX = 1; maxX = 14; minY = 1; maxY = 9;
                 break;
