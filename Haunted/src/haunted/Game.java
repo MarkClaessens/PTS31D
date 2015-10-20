@@ -113,7 +113,7 @@ public class Game {
      * Bind the characters to the players and give them a spawnposition
      * Call this method after the game generated his level and sets his obstacles [ ! ] 
      */
-     public List<Player> bindCharactersToPlayers(){
+     public void bindCharactersToPlayers(){
          // Pick the spawn positions for the characters
          Point2D ghostSpawnPosition = pickRandomGhostSpawnPoint();
          Point2D humanSpawnPosition = pickRandomHumanSpawnPoint();     
@@ -132,9 +132,6 @@ public class Game {
         else{
             players.get(0).setCharacter(ghost);
         }
-
-        
-        return players;
      }
     
     /**

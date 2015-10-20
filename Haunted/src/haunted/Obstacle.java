@@ -73,7 +73,7 @@ public class Obstacle {
 
     /**
      * Is called when a character collides with an obstacle. Further actions are determined by obstacleType.
-     * For example: if obstacleType = wall > character can not move any further.
+     * 
      */
     public void interact() {
         switch(this.behaviour){
@@ -81,8 +81,6 @@ public class Obstacle {
                 break;
             case DOOR: 
                 break;
-            case WALL: 
-                break; 
         }
     }
 }
