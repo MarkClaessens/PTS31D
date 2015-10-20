@@ -73,13 +73,16 @@ public class Obstacle {
 
     /**
      * Is called when a character collides with an obstacle. Further actions are determined by obstacleType.
+     * @param human The human object that collides with the obstacle.
      * 
      */
-    public void interact() {
+    public void interact(Human human) {
         switch(this.behaviour){
             case KEY: 
+                human.pickUpKey();
                 break;
             case DOOR: 
+                human.enterDoor();
                 break;
         }
     }
