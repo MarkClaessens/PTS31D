@@ -43,7 +43,7 @@ import javafx.stage.StageStyle;
 public class FXMLHauntedController implements Initializable {
 
     Stage stage; 
-    Parent root;
+    Parent gamelobbyPath;
     Lobby lobby;
     GameLobby gamelobby;
     private List<Player> players;
@@ -59,14 +59,14 @@ public class FXMLHauntedController implements Initializable {
     @FXML TextField TFroomname;    
     @FXML TextField TFpassword;    
     @FXML Button BTNrename;    
-    @FXML Button BTNcreategame;
+    @FXML Button BTNcreategamelobby;
     @FXML Button BTNsettings;
     @FXML Button BTNexit;
       
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
+          
           lobby = new Lobby();   
           TFchangenameplayer1.setText(lobby.getPlayer1().getName());
           TFchangenameplayer2.setText(lobby.getPlayer2().getName());
@@ -83,16 +83,15 @@ public class FXMLHauntedController implements Initializable {
         if(!(TFroomname.getText().equals("")))
         {
             GameLobby gamelobby = lobby.createGameLobby(TFroomname.getText(), TFpassword.getText());
-            Stage newstage = new Stage();
-            stage=(Stage) BTNcreategame.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("FXMLGameLobby.fxml"));
-            Scene scene = new Scene(root);
-            newstage.setScene(scene);
-            newstage.show();
+            stage =(Stage) BTNcreategamelobby.getScene().getWindow();
+            gamelobbyPath = FXMLLoader.load(getClass().getResource("FXMLGameLobby.fxml"));
+            Scene scene = new Scene(gamelobbyPath);
+            stage.setScene(scene);
+            stage.show();
             playernames = new ArrayList();
-            for(Player ply : gamelobby.getPlayers())
+            for(Player player : gamelobby.getPlayers())
             {
-             playernames.add(ply.getName() + " ready:" + ply.getReady());   
+             playernames.add(player.getName() + " ready:" + player.getReady());   
             } 
             
             this.observablePersonen = FXCollections.observableList(this.playernames);            
