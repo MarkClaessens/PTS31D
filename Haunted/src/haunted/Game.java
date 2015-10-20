@@ -243,13 +243,13 @@ public class Game {
      */
     public Point2D generateRandomGhostPoint2DLocation(){                
         Random randomizer = new Random();
-        int min = 1;
-        int max = 7;
+        int min = 0;
+        int max = 3;
         int random = randomizer.nextInt(max - min + 1) + min;
         int randomX = random * 100;
 
-        int min2 = 1;
-        int max2 = 5;
+        int min2 = 0;
+        int max2 = 3;
         int random2 = randomizer.nextInt(max2 - min2 + 1) + min2;
         int randomY = random2 * 100;
         
@@ -264,13 +264,13 @@ public class Game {
      */
     public Point2D generateRandomHumanPoint2DLocation(){
         Random randomizer = new Random();
-        int min = 8;
-        int max = 14;
+        int min = 13;
+        int max = 15;
         int random = randomizer.nextInt(max - min + 1) + min;
         int randomX = random * 100;
 
         int min2 = 7;
-        int max2 = 9;
+        int max2 = 10;
         int random2 = randomizer.nextInt(max2 - min2 + 1) + min2;
         int randomY = random2 * 100;
         
