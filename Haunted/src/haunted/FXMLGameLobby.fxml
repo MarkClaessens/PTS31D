@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="haunted.FXMLHauntedController">
+   <children>
+      <Button fx:id="BTNstartgame" layoutX="17.0" layoutY="130.0" mnemonicParsing="false" onMouseClicked="#startgame" prefHeight="55.0" prefWidth="130.0" text="Start game" />
+      <Button fx:id="BTNready" layoutX="20.0" layoutY="62.0" mnemonicParsing="false" onMouseClicked="#changeready" prefHeight="55.0" prefWidth="124.0" text="Ready" />
+      <ListView fx:id="LVplayers" layoutX="160.0" layoutY="45.0" prefHeight="169.0" prefWidth="417.0" />
+   </children>
+</AnchorPane>

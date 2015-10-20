@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="haunted.FXMLHauntedController">
-    <children>
-        <Button layoutX="126" layoutY="90" text="Click Me!" onAction="#handleButtonAction" fx:id="button" />
-        <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label" />
-    </children>
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="haunted.FXMLHauntedController">
+   <children>
+      <Pane layoutX="12.0" layoutY="6.0" prefHeight="392.0" prefWidth="592.0">
+         <children>
+            <Button fx:id="BTNrename" layoutX="73.0" layoutY="237.0" mnemonicParsing="false" onMouseClicked="#changename" text="rename" />
+            <Button fx:id="BTNcreategamelobby" layoutX="278.0" layoutY="237.0" mnemonicParsing="false" onMouseClicked="#creategamelobby" prefHeight="25.0" prefWidth="134.0" text="create gamelobby" />
+            <TextField fx:id="TFpassword" layoutX="278.0" layoutY="193.0" promptText="password(optional)" />
+            <TextField fx:id="TFroomname" layoutX="278.0" layoutY="153.0" promptText="roomname" />
+            <TextField fx:id="TFchangenameplayer2" layoutX="73.0" layoutY="193.0" promptText="insert name here" />
+            <TextField fx:id="TFchangenameplayer1" layoutX="73.0" layoutY="153.0" promptText="insert name here" />
+            <Button fx:id="BTNsettings" layoutX="450.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#settings" text="Settings" />
+            <Button fx:id="BTNexit" layoutX="526.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#exit" text="Exit" />
+         </children>
+      </Pane>
+   </children>
 </AnchorPane>

@@ -1,6 +1,7 @@
 package haunted;
 
 import static com.sun.deploy.cache.MemoryCache.shutdown;
+import javafx.application.Platform;
 
 
 
@@ -20,7 +21,14 @@ public class Lobby {
     }
 
 
-
+    public Player getPlayer1()
+    {
+        return speler1;
+    }
+    public Player getPlayer2()
+    {
+        return speler2;
+    }
     /**
      * change the name of the current player
      *
@@ -35,7 +43,7 @@ public class Lobby {
      * this exits the lobby
      */
     public void exit() {        
-        shutdown();        
+        Platform.exit();       
     }
 
     /**
@@ -45,9 +53,10 @@ public class Lobby {
      * @param name
      * @param password
      */
-    public void createGameLobby(String name, String password) {               
+    public GameLobby createGameLobby(String name, String password) {               
         GameLobby gamelobby = new GameLobby(name, password, speler1);
         gamelobby.addPlayer(speler2);
+        return gamelobby;
     }
     
    

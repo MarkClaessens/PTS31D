@@ -35,10 +35,11 @@ public class GameLobby {
         } else {
             this.password = null;
         }
-        this.host = Host;
-        this.addPlayer(Host);
         this.players = new ArrayList();
         this.messages = new ArrayList();
+        this.host = Host;
+        this.addPlayer(Host);
+        
 
     }
 

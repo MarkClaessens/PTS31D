@@ -79,7 +79,7 @@ public class AdvancingWithSprites extends Application {
                 }
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
                 drawElements(gc);
-                time = Math.round((currentNanoTime - startNanoTime) / 200000000);
+                time = Math.round((currentNanoTime - startNanoTime) / 90000000);
             }
         }.start();
         stage.show();
@@ -98,11 +98,11 @@ public class AdvancingWithSprites extends Application {
                 drawImage = new Image(human.getSprites()[2]);
             }
             if (drawImage != null) {
-                gc.drawImage(drawImage, x, 0);
+                gc.drawImage(drawImage, x, 0, 1600/15, 900/10);
             }
         }
         else{
-            gc.drawImage(new Image(human.getSprites()[0]), x, 0);
+            gc.drawImage(new Image(human.getSprites()[0]), x, 0, 1600/15, 900/10);
         }
     }
 
