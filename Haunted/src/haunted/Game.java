@@ -172,14 +172,14 @@ public class Game {
     }
 
     /**
-     * Will be called when the game is done. isRunning has to be false. There
+     * Will be called when the game is done. Sets isRunning to  false. There
      * might be a victory screen.
      *
      * @param The player who has won the game.
      */
     public void endGame(Player winner) {
-        // TODO - implement Game.endGame
-        throw new UnsupportedOperationException();
+       this.isRunning = false;
+       // TODO: call in view (FXML) the method to launch the victory screen with the winner (inside the parameter)
     }
 
     /**
