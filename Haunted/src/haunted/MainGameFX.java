@@ -91,43 +91,15 @@ public class MainGameFX extends Application {
         gc.drawImage(backgroundImage, 0, 0, screenWidth, screenHeight);
 
         //Draw Human
-        if (human != null) {
-            if (human.isIsMoving()) {
-                Image humanImg = new Image(human.getSpritesUp()[0]);
-                gc.drawImage(humanImg, human.getPosition().getX(), human.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
-            } else {
-                Image humanImg = null;
-                if (time % 3 == 0) {
-                    humanImg = new Image(human.getSpritesUp()[0]);
-                } else if (time % 3 == 1) {
-                    humanImg = new Image(human.getSpritesUp()[1]);
-                } else if (time % 3 == 2) {
-                    humanImg = new Image(human.getSpritesUp()[2]);
-                }
-                if (humanImg != null) {
-                    gc.drawImage(humanImg, human.getPosition().getX(), human.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
-                }
-            }
+        Image drawHumanImage = drawCharacter(human, time);
+        if (drawHumanImage != null) {
+            gc.drawImage(drawHumanImage, human.getPosition().getX(), human.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
         }
 
         //Draw Ghost
-        if (ghost != null) {
-            if (ghost.isIsMoving()) {
-                Image ghostImg = new Image(ghost.getSpritesUp()[0]);
-                gc.drawImage(ghostImg, ghost.getPosition().getX(), ghost.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
-            } else {
-                Image ghostImg = null;
-                if (time % 3 == 0) {
-                    ghostImg = new Image(human.getSpritesUp()[0]);
-                } else if (time % 3 == 1) {
-                    ghostImg = new Image(human.getSpritesUp()[1]);
-                } else if (time % 3 == 2) {
-                    ghostImg = new Image(human.getSpritesUp()[2]);
-                }
-                if (ghostImg != null) {
-                    gc.drawImage(ghostImg, ghost.getPosition().getX(), ghost.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
-                }
-            }
+        Image drawGhostImage = drawCharacter(ghost, time);
+        if (drawGhostImage != null) {
+            gc.drawImage(drawGhostImage, ghost.getPosition().getX(), ghost.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
         }
 
         //Draw Key
@@ -141,6 +113,72 @@ public class MainGameFX extends Application {
             Image doorImage = new Image(door.getSprite());
             gc.drawImage(doorImage, screenWidth / levelWidth, screenHeight / levelHeight);
         }
+    }
+
+    /**
+     * gives the right image when drawing human
+     *
+     * @param human
+     * @param time
+     * @return the image for drawing a character
+     */
+    private Image drawCharacter(Character character, int time) {
+        Image image = null;
+        if (character != null) {
+            switch (character.getDirection()) {
+                case UP:
+                    if (!character.isIsMoving()) {
+                        image = new Image(character.getSpritesUp()[0]);
+                    } else {
+                        getAnimatedImage(time, character.getSpritesUp());
+                    }
+                    break;
+                case DOWN:
+                    if (!character.isIsMoving()) {
+                        image = new Image(character.getSpritesDown()[0]);
+                    } else {
+                        getAnimatedImage(time, character.getSpritesDown());
+                    }
+                    break;
+                case LEFT:
+                    if (!character.isIsMoving()) {
+                        image = new Image(character.getSpritesLeft()[0]);
+                    } else {
+                        getAnimatedImage(time, character.getSpritesLeft());
+                    }
+                    break;
+                case RIGHT:
+                    if (!character.isIsMoving()) {
+                        image = new Image(character.getSpritesDown()[0]);
+                    } else {
+                        getAnimatedImage(time, character.getSpritesRight());
+                    }
+                    break;
+            }
+        }
+        return image;
+    }
+
+    /**
+     * if animated, this returns the rigth animated image
+     * @param time
+     * @param sprites
+     * @return image to draw
+     */
+    private Image getAnimatedImage(int time, String[] sprites) {
+        Image returnImage = null;
+        switch (time % 3) {
+            case 0:
+                returnImage = new Image(sprites[0]);
+                break;
+            case 1:
+                returnImage = new Image(sprites[1]);
+                break;
+            case 2:
+                returnImage = new Image(sprites[2]);
+                break;
+        }
+        return returnImage;
     }
 
     /**
