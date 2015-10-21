@@ -11,5 +11,6 @@ package haunted;
  */
 public enum ObstacleType {
     DOOR,
-    KEY;
+    KEY,
+    WALL;
 }

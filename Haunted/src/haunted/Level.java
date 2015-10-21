@@ -152,7 +152,7 @@ public class Level {
     /**
      * @return The location on the map where the key will spawn.
      */
-    public Point2D pickRandomKeySpawnPoint() {
+    private Point2D pickRandomKeySpawnPoint() {
         // Make an array with the points where the key is allowed to spawn.
         Point2D[] spawnPoints = new Point2D[]{
         new Point2D.Double(0, 800),
@@ -172,7 +172,7 @@ public class Level {
     /**
      * @return The location on the map where the door will spawn.
      */
-    public Point2D pickRandomDoorSpawnPoint() {
+    private Point2D pickRandomDoorSpawnPoint() {
         // Make an array with the points where the door is allowed to spawn.
         Point2D[] spawnPoints = new Point2D[]{
         new Point2D.Double(0, 300),
@@ -297,12 +297,4 @@ public class Level {
 //        }
 //        System.out.println(wallLayout.toString());
 //    }
-
-    /**
-     * Places obstacles on the map, this happens when generating the level's
-     * layout.
-     */
-    public void placeObstacles() {
-        // Mike: is this method unnecessary ??
-    }
 }

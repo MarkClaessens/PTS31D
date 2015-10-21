@@ -125,39 +125,68 @@ public abstract class Character {
      * @param direction
      */
     public void move(DirectionType direction) {
-        if(detectCollision()){
-            return;
-        }
-        else{
-            this.direction = direction;
-            this.setIsMoving(true);
-            Point2D oldPosition = position;
+        Point2D proposedLocation = position; // set to position just for init. 
+        Point2D oldPosition = position;
             
-            switch(direction){
-                case UP:
-                    position.setLocation(oldPosition.getX(), oldPosition.getY() + movementSpeed );
+        switch(direction){
+            case UP:
+                proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() + movementSpeed);
+                if(detectCollision(proposedLocation)){
+                    // TODO
+                }
+                else{
+                    this.direction = direction;
+                    this.setIsMoving(true);
+                    position.setLocation(oldPosition.getX(), oldPosition.getY() + movementSpeed);
                     break;
-                case DOWN:
-                    position.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed );
+                }
+            case DOWN:
+                proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
+                if(detectCollision(proposedLocation)){
+                    // TODO
+                }
+                else{
+                    this.direction = direction;
+                    this.setIsMoving(true);
+                    position.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
                     break;
-                case RIGHT:
+                }           
+            case RIGHT:
+                proposedLocation.setLocation(oldPosition.getX() + movementSpeed, oldPosition.getY());
+                if(detectCollision(proposedLocation)){
+                    // TODO
+                }
+                else{
+                    this.direction = direction;
+                    this.setIsMoving(true);
                     position.setLocation(oldPosition.getX() + movementSpeed, oldPosition.getY());
                     break;
-                case LEFT:
+                }
+            case LEFT:
+                proposedLocation.setLocation(oldPosition.getX() - movementSpeed, oldPosition.getY());
+                if(detectCollision(proposedLocation)){
+                    // TODO
+                }
+                else{
+                    this.direction = direction;
+                    this.setIsMoving(true);
                     position.setLocation(oldPosition.getX() - movementSpeed, oldPosition.getY());
                     break;
-            }
+                }
         }
     }
+
     
+
     /**
      * Check if character collides with another object. 
      * Be aware of the private modifier!
+     * @param proposedLocation the location where the Character wants to move to.
      * @return if there was collision or not
      */
-    private boolean detectCollision(){
-        // TODO - implement Character.detectCollision
-        throw new UnsupportedOperationException();
+    private ObstacleType detectCollision(Point2D proposedLocation){
+        // todo not implemented yet
+        return null;
     }
 
     /**
