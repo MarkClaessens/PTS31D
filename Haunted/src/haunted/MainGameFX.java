@@ -37,10 +37,10 @@ public class MainGameFX extends Application {
     private String[] pressedKeys;
     private final long startNanoTime = System.nanoTime();
 
-    private Human human;
-    private Ghost ghost;
-    private Obstacle key;
-    private Obstacle door;
+    private Human human = null;
+    private Ghost ghost = null;
+    private Obstacle key = null;
+    private Obstacle door = null;
 
     private final String backgroundImg = "background.png";
 
@@ -93,38 +93,42 @@ public class MainGameFX extends Application {
         gc.drawImage(backgroundImage, 0, 0, screenWidth, screenHeight);
 
         //Draw Human
-        if (human.isIsMoving()) {
-            Image humanImg = new Image(human.getSprites()[0]);
-            gc.drawImage(humanImg, human.getPosition().getX(), human.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
-        } else {
-            Image humanImg = null;
-            if (time % 3 == 0) {
-                humanImg = new Image(human.getSprites()[0]);
-            } else if (time % 3 == 1) {
-                humanImg = new Image(human.getSprites()[1]);
-            } else if (time % 3 == 2) {
-                humanImg = new Image(human.getSprites()[2]);
-            }
-            if (humanImg != null) {
+        if (human != null) {
+            if (human.isIsMoving()) {
+                Image humanImg = new Image(human.getSprites()[0]);
                 gc.drawImage(humanImg, human.getPosition().getX(), human.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
+            } else {
+                Image humanImg = null;
+                if (time % 3 == 0) {
+                    humanImg = new Image(human.getSprites()[0]);
+                } else if (time % 3 == 1) {
+                    humanImg = new Image(human.getSprites()[1]);
+                } else if (time % 3 == 2) {
+                    humanImg = new Image(human.getSprites()[2]);
+                }
+                if (humanImg != null) {
+                    gc.drawImage(humanImg, human.getPosition().getX(), human.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
+                }
             }
         }
 
         //Draw Ghost
-        if (ghost.isIsMoving()) {
-            Image ghostImg = new Image(ghost.getSprites()[0]);
-            gc.drawImage(ghostImg, ghost.getPosition().getX(), ghost.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
-        } else {
-            Image ghostImg = null;
-            if (time % 3 == 0) {
-                ghostImg = new Image(human.getSprites()[0]);
-            } else if (time % 3 == 1) {
-                ghostImg = new Image(human.getSprites()[1]);
-            } else if (time % 3 == 2) {
-                ghostImg = new Image(human.getSprites()[2]);
-            }
-            if (ghostImg != null) {
+        if (ghost != null) {
+            if (ghost.isIsMoving()) {
+                Image ghostImg = new Image(ghost.getSprites()[0]);
                 gc.drawImage(ghostImg, ghost.getPosition().getX(), ghost.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
+            } else {
+                Image ghostImg = null;
+                if (time % 3 == 0) {
+                    ghostImg = new Image(human.getSprites()[0]);
+                } else if (time % 3 == 1) {
+                    ghostImg = new Image(human.getSprites()[1]);
+                } else if (time % 3 == 2) {
+                    ghostImg = new Image(human.getSprites()[2]);
+                }
+                if (ghostImg != null) {
+                    gc.drawImage(ghostImg, ghost.getPosition().getX(), ghost.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
+                }
             }
         }
 
@@ -135,8 +139,10 @@ public class MainGameFX extends Application {
         }
 
         //Draw Door
-        Image doorImage = new Image(door.getSprite());
-        gc.drawImage(doorImage, screenWidth / levelWidth, screenHeight / levelHeight);
+        if (door != null) {
+            Image doorImage = new Image(door.getSprite());
+            gc.drawImage(doorImage, screenWidth / levelWidth, screenHeight / levelHeight);
+        }
     }
 
     /**
