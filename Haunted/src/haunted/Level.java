@@ -1,9 +1,16 @@
 package haunted;
 
 import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -17,6 +24,7 @@ public class Level {
     private int height;
     private String theme;
     private List<Obstacle> obstacles = new ArrayList<>();
+    BufferedImage img = null;
 
     /**
      *
@@ -131,7 +139,7 @@ public class Level {
      *
      * @param floorNr
      */
-    public Level(int floorNr) {
+    public Level(int floorNr) throws FileNotFoundException, IOException {
         this.floorNr = floorNr;
         this.height = 1000;
         this.width = 1500;
@@ -146,6 +154,11 @@ public class Level {
         
         obstacles.add(keyObstacle);
         obstacles.add(doorObstacle);
+        
+        
+        File sourceimage = new File("C://bc.png");
+        BufferedInputStream fis = new BufferedInputStream(new FileInputStream(sourceimage));
+        img  = ImageIO.read(fis);
         
     }
 
@@ -189,6 +202,10 @@ public class Level {
         Point2D spawnPoint = spawnPoints[randomizer.nextInt(7)];
                
         return spawnPoint;
+    }
+    
+    public BufferedImage getCollisionImage(){
+        return this.img;
     }
 
     /**

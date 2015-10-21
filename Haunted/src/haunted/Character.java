@@ -2,6 +2,13 @@ package haunted;
 
 import java.awt.Color;
 import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.List;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -189,10 +196,14 @@ public abstract class Character {
      * @return true if there is an obstacle
      */
     private boolean detectCollision(Point2D proposedLocation) {
-        // <editor-fold defaultstate="collapsed" desc="RIGHT">
-        // </editor-fold>
-        // todo not implemented yet
-        return false;
+        int pXl = (int) proposedLocation.getX();
+        int pXr = (int) proposedLocation.getX() + 100;
+        int pYt = (int) proposedLocation.getY();
+        int pYb = (int) proposedLocation.getY() + 100;
+        List<Obstacle> obst = this.game.getCurrentLevel().getObstacles();
+        BufferedImage colImg = this.game.getCurrentLevel().getCollisionImage();
+        return pXl >= 0 && pYt >= 0 && pYt < 901 && pXr < 1401 && colImg.getRGB(pXl, pYt) + colImg.getRGB(pXr, pYt) + colImg.getRGB(pXr, pYb) + colImg.getRGB(pXl, pYb) == -4;
+
     }
 
     /**
