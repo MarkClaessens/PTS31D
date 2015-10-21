@@ -127,16 +127,13 @@ public abstract class Character {
     public void move(DirectionType direction) {
         Point2D proposedLocation = position; // set to position just for init. 
         Point2D oldPosition = position;
-        ObstacleType obstacle;
 
         switch (direction) {
             case UP:
                 // <editor-fold defaultstate="collapsed" desc="UP">
-                proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() + movementSpeed);
-                obstacle = detectCollision(proposedLocation);
-                if (obstacle == ObstacleType.WALL) {
+                proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() + movementSpeed);               
+                if (detectCollision(proposedLocation)) {
                     this.setIsMoving(false);
-                    return;
                 } else {
                     this.direction = direction;
                     this.setIsMoving(true);
@@ -147,10 +144,8 @@ public abstract class Character {
             case DOWN:
                 // <editor-fold defaultstate="collapsed" desc="DOWN">
                 proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
-                obstacle = detectCollision(proposedLocation);
-                if (obstacle == ObstacleType.WALL) {
+                if (detectCollision(proposedLocation)){
                     this.setIsMoving(false);
-                    return;
                 } else {
                     this.direction = direction;
                     this.setIsMoving(true);
@@ -161,10 +156,8 @@ public abstract class Character {
             case RIGHT:
                 // <editor-fold defaultstate="collapsed" desc="RIGHT">
                 proposedLocation.setLocation(oldPosition.getX() + movementSpeed, oldPosition.getY());
-                obstacle = detectCollision(proposedLocation);
-                if (obstacle == ObstacleType.WALL) {
+                if (detectCollision(proposedLocation)){
                     this.setIsMoving(false);
-                    return;
                 } else {
                     this.direction = direction;
                     this.setIsMoving(true);
@@ -175,10 +168,8 @@ public abstract class Character {
             case LEFT:
                 //        // <editor-fold defaultstate="collapsed" desc="LEFT">
                 proposedLocation.setLocation(oldPosition.getX() - movementSpeed, oldPosition.getY());
-                obstacle = detectCollision(proposedLocation);
-                if (obstacle == ObstacleType.WALL) {
+                if (detectCollision(proposedLocation)){
                     this.setIsMoving(false);
-                    return;
                 } else {
                     this.direction = direction;
                     this.setIsMoving(true);
