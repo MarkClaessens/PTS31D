@@ -45,13 +45,14 @@ public class FXMLHauntedController extends BaseController implements Initializab
     public static final String URL_FXML = "FXMLHaunted.fxml";
     
     Lobby lobby;  
-    GameLobby gamelobby;
+    GameLobby gamelobby;    
     
-    @FXML Label label;    
     @FXML TextField TFchangenameplayer1;    
     @FXML TextField TFchangenameplayer2;    
     @FXML TextField TFroomname;    
-    @FXML TextField TFpassword;    
+    @FXML TextField TFpassword;
+    @FXML TextField TFplayers; 
+    @FXML TextField TFfloors; 
     @FXML Button BTNrename;    
     @FXML Button BTNcreategamelobby;
     @FXML Button BTNsettings;
@@ -74,7 +75,9 @@ public class FXMLHauntedController extends BaseController implements Initializab
     {
         if(!(TFroomname.getText().equals("")))
         {
-            gamelobby = lobby.createGameLobby(TFroomname.getText(), TFpassword.getText());            
+            gamelobby = lobby.createGameLobby(TFroomname.getText(), TFpassword.getText());
+            gamelobby.setMaxPlayers(Integer.parseInt(TFplayers.getText()));
+            gamelobby.setFloorAmount(Integer.parseInt(TFfloors.getText()));
             FXMLGameLobbyController GMC = (FXMLGameLobbyController)Haunted.getNavigation().load(FXMLGameLobbyController.URL_FXML);
             GMC.setGameLobby(gamelobby);
             GMC.Show();

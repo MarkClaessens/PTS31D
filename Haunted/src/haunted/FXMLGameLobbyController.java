@@ -15,6 +15,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -33,6 +35,9 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
     @FXML private Button BTNstartgame;
     @FXML private Button BTNready;
     @FXML private ListView LVplayers;
+    @FXML private Button BTNsendMessage;
+    @FXML private TextField TFmessage;
+    @FXML private TextArea TAchatBox;
 
     /**
      * Initializes the controller class.
@@ -82,6 +87,11 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
             
        }
        playernames();
+    }
+    @FXML
+    private void sendMessage(MouseEvent event)
+    {
+     gamelobby.sendMessage(TFmessage.getText());
     }
     
     @Override
