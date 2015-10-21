@@ -40,19 +40,13 @@ import javafx.stage.StageStyle;
  * Mike Evers
  *
  */
-public class FXMLHauntedController implements Initializable {
+public class FXMLHauntedController extends BaseController implements Initializable {
 
-    Stage stage; 
-    Parent gamelobbyPath;
-    Lobby lobby;
+    public static final String URL_FXML = "FXMLHaunted.fxml";
+    
+    Lobby lobby;  
     GameLobby gamelobby;
-    private List<Player> players;
-    private List<String> playernames;
-    private transient ObservableList<String> observablePersonen;
-   
-    @FXML Button BTNready;    
-    @FXML Button BTNstartgame;
-    @FXML ListView LVplayers;
+    
     @FXML Label label;    
     @FXML TextField TFchangenameplayer1;    
     @FXML TextField TFchangenameplayer2;    
@@ -61,12 +55,10 @@ public class FXMLHauntedController implements Initializable {
     @FXML Button BTNrename;    
     @FXML Button BTNcreategamelobby;
     @FXML Button BTNsettings;
-    @FXML Button BTNexit;
-      
+    @FXML Button BTNexit;  
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-          
+    public void initialize(URL url, ResourceBundle rb) {          
           lobby = new Lobby();   
           TFchangenameplayer1.setText(lobby.getPlayer1().getName());
           TFchangenameplayer2.setText(lobby.getPlayer2().getName());
@@ -82,20 +74,11 @@ public class FXMLHauntedController implements Initializable {
     {
         if(!(TFroomname.getText().equals("")))
         {
-            GameLobby gamelobby = lobby.createGameLobby(TFroomname.getText(), TFpassword.getText());
-            stage =(Stage) BTNcreategamelobby.getScene().getWindow();
-            gamelobbyPath = FXMLLoader.load(getClass().getResource("FXMLGameLobby.fxml"));
-            Scene scene = new Scene(gamelobbyPath);
-            stage.setScene(scene);
-            stage.show();
-            playernames = new ArrayList();
-            for(Player player : gamelobby.getPlayers())
-            {
-             playernames.add(player.getName() + " ready:" + player.getReady());   
-            } 
+            gamelobby = lobby.createGameLobby(TFroomname.getText(), TFpassword.getText());            
+            FXMLGameLobbyController GMC = (FXMLGameLobbyController)Haunted.getNavigation().load(FXMLGameLobbyController.URL_FXML);
+            GMC.setGameLobby(gamelobby);
+            GMC.Show();
             
-            this.observablePersonen = FXCollections.observableList(this.playernames);            
-            LVplayers.setItems(observablePersonen);
         }
         else
         {
@@ -111,32 +94,5 @@ public class FXMLHauntedController implements Initializable {
     public void settings()
     {
         //weet nog niet precies hoe dit gedaan moet worden. 
-    }
-    public void changeready()
-    {
-       String totaaltekst = (String)LVplayers.getSelectionModel().getSelectedItem();
-       String naam = totaaltekst.substring(0, totaaltekst.indexOf(" "));
-       for(Player player : players)
-       {
-           if(player.getName().equals(naam))
-           {
-            if(player.getReady())
-            {
-                player.setReady(Boolean.FALSE);
-            }
-             else
-            {
-                player.setReady(Boolean.TRUE); 
-            }     
-           }
-            
-       }
-       
-    }
-    public void startgame()
-    {
-        gamelobby.startGame();
-    }
-    
-
+    }     
 }

@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="haunted.FXMLHauntedController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="haunted.FXMLGameLobbyController">
    <children>
       <Button fx:id="BTNstartgame" layoutX="17.0" layoutY="130.0" mnemonicParsing="false" onMouseClicked="#startgame" prefHeight="55.0" prefWidth="130.0" text="Start game" />
       <Button fx:id="BTNready" layoutX="20.0" layoutY="62.0" mnemonicParsing="false" onMouseClicked="#changeready" prefHeight="55.0" prefWidth="124.0" text="Ready" />

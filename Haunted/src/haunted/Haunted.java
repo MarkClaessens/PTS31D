@@ -18,14 +18,24 @@ import javafx.stage.Stage;
  */
 public class Haunted extends Application {
 
+    
+    private static Navigation navigation;
+
+    public static Navigation getNavigation()
+    {
+        return navigation;
+    }
+
     @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLHaunted.fxml"));
+    public void start(Stage primaryStage) throws Exception{
 
-        Scene scene = new Scene(root);
+        navigation = new Navigation(primaryStage);
 
-        stage.setScene(scene);
-        stage.show();
+        primaryStage.setTitle("Haunted");
+        primaryStage.show();
+
+        //navigate to first view
+        Haunted.getNavigation().load(FXMLHauntedController.URL_FXML).Show();
     }
 
     /**
