@@ -138,7 +138,7 @@ public abstract class Character {
         switch (direction) {
             case UP:
                 // <editor-fold defaultstate="collapsed" desc="UP">
-                proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() + movementSpeed);               
+                proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() + movementSpeed);
                 if (detectCollision(proposedLocation)) {
                     this.setIsMoving(false);
                 } else {
@@ -151,7 +151,7 @@ public abstract class Character {
             case DOWN:
                 // <editor-fold defaultstate="collapsed" desc="DOWN">
                 proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
-                if (detectCollision(proposedLocation)){
+                if (detectCollision(proposedLocation)) {
                     this.setIsMoving(false);
                 } else {
                     this.direction = direction;
@@ -163,7 +163,7 @@ public abstract class Character {
             case RIGHT:
                 // <editor-fold defaultstate="collapsed" desc="RIGHT">
                 proposedLocation.setLocation(oldPosition.getX() + movementSpeed, oldPosition.getY());
-                if (detectCollision(proposedLocation)){
+                if (detectCollision(proposedLocation)) {
                     this.setIsMoving(false);
                 } else {
                     this.direction = direction;
@@ -175,7 +175,7 @@ public abstract class Character {
             case LEFT:
                 //        // <editor-fold defaultstate="collapsed" desc="LEFT">
                 proposedLocation.setLocation(oldPosition.getX() - movementSpeed, oldPosition.getY());
-                if (detectCollision(proposedLocation)){
+                if (detectCollision(proposedLocation)) {
                     this.setIsMoving(false);
                 } else {
                     this.direction = direction;
@@ -197,12 +197,50 @@ public abstract class Character {
      */
     private boolean detectCollision(Point2D proposedLocation) {
         int pXl = (int) proposedLocation.getX();
-        int pXr = (int) proposedLocation.getX() + 100;
+        int pXr = pXl + 100;
         int pYt = (int) proposedLocation.getY();
-        int pYb = (int) proposedLocation.getY() + 100;
-        List<Obstacle> obst = this.game.getCurrentLevel().getObstacles();
+        int pYb = pYt + 100;
+        Point2D door = this.game.getCurrentLevel().getDoorLocation();
+        Point2D key = this.game.getCurrentLevel().getKeyLocation();
+
+        if (this instanceof Human) {
+            Human h = (Human) this;
+            //key hitbox
+            int kXl = (int) key.getX();
+            int kXr = kXl + 100;
+            int kYt = (int) key.getY();
+            int kYb = kYt + 100;
+
+            //door hitbox
+            int dXl = (int) door.getX();
+            int dXr = dXl + 10;
+            int dY = (int) door.getY();
+            
+            // character position
+            int cXl = (int) this.position.getX();
+            int cXr = cXl+100;
+            int cYt = (int) this.position.getY();
+            int cYb = cYt+100;
+            
+            
+            //door collision
+            if (dXl < cXl && cXl < dXr && dY == cYt && h.getHasKey()) {
+                this.game.endRound();
+            }
+            //key collision
+            //if right part of characterhitbox is within the key bounds keyT = CharY
+            if(kXl < cXr && kXr > cXr && cYt == cYt){
+              h.pickUpKey();
+            }
+            
+            //TODO rest van de keyhitboxes
+            //TODO ghost hitbox
+        }
+
         BufferedImage colImg = this.game.getCurrentLevel().getCollisionImage();
-        return pXl >= 0 && pYt >= 0 && pYt < 901 && pXr < 1401 && colImg.getRGB(pXl, pYt) + colImg.getRGB(pXr, pYt) + colImg.getRGB(pXr, pYb) + colImg.getRGB(pXl, pYb) == -4;
+        return pXl >= 0 && pYt >= 0 && pYt < 901 && pXr
+                < 1401 && colImg.getRGB(pXl, pYt)
+                + colImg.getRGB(pXr, pYt) + colImg.getRGB(pXr, pYb) + colImg.getRGB(pXl, pYb) == -4;
 
     }
 

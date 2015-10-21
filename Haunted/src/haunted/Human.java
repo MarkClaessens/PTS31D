@@ -98,6 +98,7 @@ public class Human extends Character {
         for(Obstacle obstacle : obstacles){
             if(obstacle.getBehaviour() == ObstacleType.KEY){
                 obstacles.remove(obstacle);
+                break;
             }
         }
         game.getCurrentLevel().setObstacles(obstacles);

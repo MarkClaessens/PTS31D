@@ -24,6 +24,8 @@ public class Level {
     private int height;
     private String theme;
     private List<Obstacle> obstacles = new ArrayList<>();
+    private Point2D keyLocation;
+    private Point2D doorLocation;
     BufferedImage img = null;
 
     /**
@@ -154,7 +156,8 @@ public class Level {
         
         obstacles.add(keyObstacle);
         obstacles.add(doorObstacle);
-        
+        this.keyLocation= keySpawnPoint;
+        this.doorLocation= doorSpawnPoint;
         
         File sourceimage = new File("C://bc.png");
         BufferedInputStream fis = new BufferedInputStream(new FileInputStream(sourceimage));
@@ -207,7 +210,15 @@ public class Level {
     public BufferedImage getCollisionImage(){
         return this.img;
     }
-
+    
+    
+    public Point2D getKeyLocation(){
+        return this.keyLocation;
+    }
+    
+    public Point2D getDoorLocation(){
+        return this.doorLocation;
+    }
     /**
      * Generate the level's layout. It happens in this order: obstacles, door,
      * key, characters [!] characters are placed and bind in the game class
