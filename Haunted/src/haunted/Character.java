@@ -195,13 +195,13 @@ public abstract class Character {
      *
      * @param proposedLocation the location where the Character wants to move
      * to.
-     * @return if there was collision or not
+     * @return true if there is an obstacle
      */
-    private ObstacleType detectCollision(Point2D proposedLocation) {
+    private boolean detectCollision(Point2D proposedLocation) {
         // <editor-fold defaultstate="collapsed" desc="RIGHT">
         // </editor-fold>
         // todo not implemented yet
-        return null;
+        return false;
     }
 
     /**
