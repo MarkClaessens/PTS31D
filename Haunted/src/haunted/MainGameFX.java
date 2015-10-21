@@ -7,8 +7,6 @@ package haunted;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -95,16 +93,16 @@ public class MainGameFX extends Application {
         //Draw Human
         if (human != null) {
             if (human.isIsMoving()) {
-                Image humanImg = new Image(human.getSprites()[0]);
+                Image humanImg = new Image(human.getSpritesUp()[0]);
                 gc.drawImage(humanImg, human.getPosition().getX(), human.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
             } else {
                 Image humanImg = null;
                 if (time % 3 == 0) {
-                    humanImg = new Image(human.getSprites()[0]);
+                    humanImg = new Image(human.getSpritesUp()[0]);
                 } else if (time % 3 == 1) {
-                    humanImg = new Image(human.getSprites()[1]);
+                    humanImg = new Image(human.getSpritesUp()[1]);
                 } else if (time % 3 == 2) {
-                    humanImg = new Image(human.getSprites()[2]);
+                    humanImg = new Image(human.getSpritesUp()[2]);
                 }
                 if (humanImg != null) {
                     gc.drawImage(humanImg, human.getPosition().getX(), human.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
@@ -115,16 +113,16 @@ public class MainGameFX extends Application {
         //Draw Ghost
         if (ghost != null) {
             if (ghost.isIsMoving()) {
-                Image ghostImg = new Image(ghost.getSprites()[0]);
+                Image ghostImg = new Image(ghost.getSpritesUp()[0]);
                 gc.drawImage(ghostImg, ghost.getPosition().getX(), ghost.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
             } else {
                 Image ghostImg = null;
                 if (time % 3 == 0) {
-                    ghostImg = new Image(human.getSprites()[0]);
+                    ghostImg = new Image(human.getSpritesUp()[0]);
                 } else if (time % 3 == 1) {
-                    ghostImg = new Image(human.getSprites()[1]);
+                    ghostImg = new Image(human.getSpritesUp()[1]);
                 } else if (time % 3 == 2) {
-                    ghostImg = new Image(human.getSprites()[2]);
+                    ghostImg = new Image(human.getSpritesUp()[2]);
                 }
                 if (ghostImg != null) {
                     gc.drawImage(ghostImg, ghost.getPosition().getX(), ghost.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);

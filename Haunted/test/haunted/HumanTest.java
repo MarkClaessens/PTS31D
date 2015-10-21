@@ -21,8 +21,13 @@ import static org.junit.Assert.*;
  * @author Mal
  */
 public class HumanTest {
-    String[] humanSprites = new String[]{"ghostRedDown1.gif", "ghostRedDown2.gif", "ghostRedDown3.gif"};
+
+    String[] humSpritesUp = new String[]{"humanBlueUp1.gif", "humanBlueUp2.gif", "humanBlueUp3.gif"};
+    String[] humSpritesDown = new String[]{"humanBlueDown1.gif", "humanBlueDown2.gif", "humanBlueDown3.gif"};
+    String[] humSpritesLeft = new String[]{"humanBlueLeft1.gif", "humanBlueLeft2.gif", "humanBlueLeft3.gif"};
+    String[] humSpritesRight = new String[]{"humanBlueRight1.gif", "humanBlueRight2.gif", "humanBlueRight3.gif"};
     Game game;
+
     public HumanTest() {
     }
 
@@ -39,7 +44,7 @@ public class HumanTest {
         List<Player> players = new ArrayList<>();
         players.add(new Player("testPlayer1"));
         players.add(new Player("testPlayer2"));
-        
+
         game = new Game(players, 3);
     }
 
@@ -53,7 +58,7 @@ public class HumanTest {
     @Test
     public void testMakeHuman() {
         Point2D spawnPosition = new Point2D.Double(300, 500);
-        Human human = new Human(spawnPosition, Color.BLUE, humanSprites, game);
+        Human human = new Human(spawnPosition, Color.BLUE, humSpritesUp, humSpritesDown, humSpritesLeft, humSpritesRight, game);
     }
 
     /**
@@ -63,7 +68,7 @@ public class HumanTest {
     public void testGetFlashlightRange() {
         System.out.println("getFlashlightRange");
         Point2D spawnPosition = new Point2D.Double(300, 500);
-        Human human = new Human(spawnPosition, Color.BLUE, humanSprites, game);
+        Human human = new Human(spawnPosition, Color.BLUE, humSpritesUp, humSpritesDown, humSpritesLeft, humSpritesRight, game);
         int expResult = 12;
         int result = human.getFlashlightRange();
         assertEquals("the result is not equal to 12", expResult, result);
@@ -77,7 +82,7 @@ public class HumanTest {
         System.out.println("setFlashlightRange");
         int flashlightRange = 10;
         Point2D spawnPosition = new Point2D.Double(300, 500);
-        Human human = new Human(spawnPosition, Color.BLUE, humanSprites, game);
+        Human human = new Human(spawnPosition, Color.BLUE, humSpritesUp, humSpritesDown, humSpritesLeft, humSpritesRight, game);
 
         human.setFlashlightRange(flashlightRange);
         assertEquals("the flashlight range is not changed", 10, human.getFlashlightRange());
@@ -90,7 +95,7 @@ public class HumanTest {
     public void testGetFlashlightAngle() {
         System.out.println("getFlashlightAngle");
         Point2D spawnPosition = new Point2D.Double(300, 500);
-        Human human = new Human(spawnPosition, Color.BLUE, humanSprites, game);
+        Human human = new Human(spawnPosition, Color.BLUE, humSpritesUp, humSpritesDown, humSpritesLeft, humSpritesRight, game);
 
         int expResult = 45;
         int result = human.getFlashlightAngle();
@@ -105,7 +110,7 @@ public class HumanTest {
         System.out.println("setFlashlightAngle");
         int flashlightAngle = 30;
         Point2D spawnPosition = new Point2D.Double(300, 500);
-        Human human = new Human(spawnPosition, Color.BLUE, humanSprites, game);
+        Human human = new Human(spawnPosition, Color.BLUE, humSpritesUp, humSpritesDown, humSpritesLeft, humSpritesRight, game);
 
         human.setFlashlightAngle(flashlightAngle);
         assertEquals("the flashlight angle isn't changed", 30, human.getFlashlightAngle());
@@ -118,7 +123,7 @@ public class HumanTest {
     public void testGetHasKey() {
         System.out.println("isHasKey");
         Point2D spawnPosition = new Point2D.Double(300, 500);
-        Human human = new Human(spawnPosition, Color.BLUE, humanSprites, game);
+        Human human = new Human(spawnPosition, Color.BLUE, humSpritesUp, humSpritesDown, humSpritesLeft, humSpritesRight, game);
 
         assertFalse("human has key", human.getHasKey());
     }
@@ -131,7 +136,7 @@ public class HumanTest {
         System.out.println("setHasKey");
         boolean hasKey = true;
         Point2D spawnPosition = new Point2D.Double(300, 500);
-        Human human = new Human(spawnPosition, Color.BLUE, humanSprites, game);
+        Human human = new Human(spawnPosition, Color.BLUE, humSpritesUp, humSpritesDown, humSpritesLeft, humSpritesRight, game);
 
         human.setHasKey(hasKey);
         assertTrue("human has key isn't changed", human.getHasKey());
@@ -151,7 +156,6 @@ public class HumanTest {
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 //    }
-
     /**
      * Test of pickUpKey method, of class Human.
      */
@@ -159,7 +163,7 @@ public class HumanTest {
     public void testPickUpKey() {
         System.out.println("pickUpKey");
         Point2D spawnPosition = new Point2D.Double(300, 500);
-        Human human = new Human(spawnPosition, Color.BLUE, humanSprites, game);
+        Human human = new Human(spawnPosition, Color.BLUE, humSpritesUp, humSpritesDown, humSpritesLeft, humSpritesRight, game);
 
         human.pickUpKey();
         assertTrue("human has not the key", human.getHasKey());
@@ -172,7 +176,7 @@ public class HumanTest {
     public void testEnterDoor() {
         System.out.println("enterDoor");
         Point2D spawnPosition = new Point2D.Double(300, 500);
-        Human human = new Human(spawnPosition, Color.BLUE, humanSprites, game);
+        Human human = new Human(spawnPosition, Color.BLUE, humSpritesUp, humSpritesDown, humSpritesLeft, humSpritesRight, game);
 
         human.pickUpKey();
         human.enterDoor();

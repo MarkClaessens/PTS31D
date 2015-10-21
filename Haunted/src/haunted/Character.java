@@ -13,7 +13,10 @@ public abstract class Character {
     protected Game game; 
     private Point2D position;
     private Color color;
-    private String[] sprites;
+    private String[] spritesUp;
+    private String[] spritesDown;
+    private String[] spritesLeft;
+    private String[] spritesRight;
     private Double movementSpeed = 25.0; // Mike: Don't know what the right value is for this is?
     private DirectionType direction;
     private boolean isMoving;
@@ -56,19 +59,19 @@ public abstract class Character {
 
     /**
      *
-     * @return the character's sprites (human/ghost/wall)
+     * @return the character's spritesUp (human/ghost/wall)
      */
-    public String[] getSprites() {
-        return this.sprites;
+    public String[] getSpritesUp() {
+        return this.spritesUp;
     }
 
     /**
-     * Sets the character's sprites (human/ghost/wall)
+     * Sets the character's spritesUp (human/ghost/wall)
      *
      * @param sprite
      */
-    public void setSprites(String[] sprites) {
-        this.sprites = sprites;
+    public void setSpritesUp(String[] spritesUp) {
+        this.spritesUp = spritesUp;
     }
 
     /**
@@ -104,10 +107,13 @@ public abstract class Character {
         this.direction = direction;
     }
     
-    public Character(Point2D position, Color color, String[] sprites, Game game){
+    public Character(Point2D position, Color color, String[] spritesUp, String[] spritesDown, String[] spritesLeft, String[] spritesRight, Game game){
         this.position = position;
         this.color = color;
-        this.sprites = sprites;
+        this.spritesUp = spritesUp;
+        this.spritesDown = spritesDown;
+        this.spritesLeft = spritesLeft;
+        this.spritesRight = spritesRight;
         this.direction = DirectionType.DOWN; // Set a default direction
         this.game = game;
         this.isMoving = false;
@@ -166,5 +172,47 @@ public abstract class Character {
      */
     public void setIsMoving(boolean isMoving) {
         this.isMoving = isMoving;
+    }
+
+    /**
+     * @return the spritesDown
+     */
+    public String[] getSpritesDown() {
+        return spritesDown;
+    }
+
+    /**
+     * @param spritesDown the spritesDown to set
+     */
+    public void setSpritesDown(String[] spritesDown) {
+        this.spritesDown = spritesDown;
+    }
+
+    /**
+     * @return the spritesLeft
+     */
+    public String[] getSpritesLeft() {
+        return spritesLeft;
+    }
+
+    /**
+     * @param spritesLeft the spritesLeft to set
+     */
+    public void setSpritesLeft(String[] spritesLeft) {
+        this.spritesLeft = spritesLeft;
+    }
+
+    /**
+     * @return the spritesRight
+     */
+    public String[] getSpritesRight() {
+        return spritesRight;
+    }
+
+    /**
+     * @param spritesRight the spritesRight to set
+     */
+    public void setSpritesRight(String[] spritesRight) {
+        this.spritesRight = spritesRight;
     }
 }

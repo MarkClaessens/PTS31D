@@ -21,8 +21,13 @@ import static org.junit.Assert.*;
  * @author Mal
  */
 public class GhostTest {
-    String[] ghostSprites = new String[]{"humanBlueDown1.gif", "humanBlueDown2.gif", "humanBlueDown3.gif"};
+
+    String[] ghoSpritesUp = new String[]{"ghostRedUp1.gif", "ghostRedUp2.gif", "ghostRedUp3.gif"};
+    String[] ghoSpritesDown = new String[]{"ghostRedDown1.gif", "ghostRedDown2.gif", "ghostRedDown3.gif"};
+    String[] ghoSpritesLeft = new String[]{"ghostRedLeft1.gif", "ghostRedLeft2.gif", "ghostRedLeft3.gif"};
+    String[] ghoSpritesRight = new String[]{"ghostRedRight1.gif", "ghostRedRight2.gif", "ghostRedRight3.gif"};
     Game game;
+
     public GhostTest() {
     }
 
@@ -39,7 +44,7 @@ public class GhostTest {
         List<Player> players = new ArrayList<>();
         players.add(new Player("testPlayer1"));
         players.add(new Player("testPlayer2"));
-        
+
         game = new Game(players, 3);
     }
 
@@ -51,9 +56,9 @@ public class GhostTest {
      * Test of Ghost constructor, of class Ghost.
      */
     @Test
-    public void testMakeGhost() {                
+    public void testMakeGhost() {
         Point2D spawnPosition = new Point2D.Double(300, 500);
-        Ghost ghost1 = new Ghost(spawnPosition, Color.RED, ghostSprites, game);
+        Ghost ghost1 = new Ghost(spawnPosition, Color.RED, ghoSpritesUp, ghoSpritesDown, ghoSpritesLeft, ghoSpritesRight, game);
     }
 
     /**
@@ -64,7 +69,7 @@ public class GhostTest {
         System.out.println("isVulnerable");
 
         Point2D spawnPosition = new Point2D.Double(300, 500);
-        Ghost ghost = new Ghost(spawnPosition, Color.RED, ghostSprites, game);
+        Ghost ghost = new Ghost(spawnPosition, Color.RED, ghoSpritesUp, ghoSpritesDown, ghoSpritesLeft, ghoSpritesRight, game);
         assertTrue("Ghost is not vulnerable at initiliazing", ghost.isVulnerable());
     }
 
@@ -74,9 +79,9 @@ public class GhostTest {
     @Test
     public void testSetVulnerable() {
         System.out.println("setVulnerable");
-        
+
         Point2D spawnPosition = new Point2D.Double(300, 500);
-        Ghost ghost = new Ghost(spawnPosition, Color.RED, ghostSprites, game);
+        Ghost ghost = new Ghost(spawnPosition, Color.RED, ghoSpritesUp, ghoSpritesDown, ghoSpritesLeft, ghoSpritesRight, game);
         ghost.setVulnerable(false);
         assertFalse("Ghost vulnerable was not correctly set to false", ghost.isVulnerable());
     }
@@ -88,7 +93,7 @@ public class GhostTest {
     public void testPossess() {
         System.out.println("possess");
         Point2D spawnPosition = new Point2D.Double(300, 500);
-        Ghost ghost = new Ghost(spawnPosition, Color.RED, ghostSprites, game);
+        Ghost ghost = new Ghost(spawnPosition, Color.RED, ghoSpritesUp, ghoSpritesDown, ghoSpritesLeft, ghoSpritesRight, game);
         ghost.possess();
         // TODO review the generated test code and remove the default call to fail.
         fail("the ghost has not been possessed to human");
@@ -101,7 +106,7 @@ public class GhostTest {
     public void testChangeAppearance() {
         System.out.println("changeAppearance");
         Point2D spawnPosition = new Point2D.Double(300, 500);
-        Ghost ghost = new Ghost(spawnPosition, Color.RED, ghostSprites, game);
+        Ghost ghost = new Ghost(spawnPosition, Color.RED, ghoSpritesUp, ghoSpritesDown, ghoSpritesLeft, ghoSpritesRight, game);
         ghost.changeAppearance();
         assertTrue("ghost is still vulnerable", ghost.isVulnerable());
     }
@@ -113,7 +118,7 @@ public class GhostTest {
     public void testVanish() {
         System.out.println("vanish");
         Point2D spawnPosition = new Point2D.Double(300, 500);
-        Ghost ghost = new Ghost(spawnPosition, Color.RED, ghostSprites, game);
+        Ghost ghost = new Ghost(spawnPosition, Color.RED, ghoSpritesUp, ghoSpritesDown, ghoSpritesLeft, ghoSpritesRight, game);
         ghost.vanish();
         assertTrue("ghost is still vulnerable", ghost.isVulnerable());
         // TODO review the generated test code and remove the default call to fail.
