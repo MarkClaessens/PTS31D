@@ -34,7 +34,7 @@ public class MainGameFX extends Application {
     private int levelHeight;
     private long animationSpeed = 90000000;
 
-    private ArrayList<String> pressedKeys;
+    private String[] pressedKeys;
     private final long startNanoTime = System.nanoTime();
 
     private Human human;
@@ -59,7 +59,7 @@ public class MainGameFX extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         determineScreenSize();
-        pressedKeys = new ArrayList();
+        pressedKeys = new String[2];
 
         //Make canvas and gc and put it on the screen
         Canvas canvas = new Canvas(screenWidth, screenHeight);
@@ -93,7 +93,7 @@ public class MainGameFX extends Application {
         gc.drawImage(backgroundImage, 0, 0, screenWidth, screenHeight);
 
         //Draw Human
-        if (!pressedKeys.contains("UP") && !pressedKeys.contains("DOWN") && !pressedKeys.contains("LEFT") && !pressedKeys.contains("RIGHT")) {
+        if (human.isIsMoving()) {
             Image humanImg = new Image(human.getSprites()[0]);
             gc.drawImage(humanImg, human.getPosition().getX(), human.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
         } else {
@@ -111,7 +111,7 @@ public class MainGameFX extends Application {
         }
 
         //Draw Ghost
-        if (!pressedKeys.contains("W") && !pressedKeys.contains("A") && !pressedKeys.contains("S") && !pressedKeys.contains("D")) {
+        if (ghost.isIsMoving()) {
             Image ghostImg = new Image(ghost.getSprites()[0]);
             gc.drawImage(ghostImg, ghost.getPosition().getX(), ghost.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
         } else {
@@ -188,18 +188,28 @@ public class MainGameFX extends Application {
                         String code = e.getCode().toString();
 
                         // only add once... prevent duplicates
-                        if (!pressedKeys.contains(code)) {
-                            pressedKeys.add(code);
+                        if (code == "W" || code == "A" || code == "S" || code == "D") {
+                            pressedKeys[0] = code;
+                        } else if (code == "UP" || code == "DOWN" || code == "LEFT" || code == "RIGHT") {
+                            pressedKeys[1] = code;
                         }
+
                     }
-                });
+                }
+        );
         scene.setOnKeyReleased(
                 new EventHandler<KeyEvent>() {
+
                     public void handle(KeyEvent e) {
                         String code = e.getCode().toString();
-                        pressedKeys.remove(code);
+                        if (code == "W" || code == "A" || code == "S" || code == "D") {
+                            pressedKeys[0] = null;
+                        } else if (code == "UP" || code == "DOWN" || code == "LEFT" || code == "RIGHT") {
+                            pressedKeys[1] = null;
+                        }
                     }
-                });
+                }
+        );
     }
 
     /**
@@ -207,7 +217,7 @@ public class MainGameFX extends Application {
      *
      * @return pressed keys
      */
-    public ArrayList<String> getPressedKeys() {
+    public String[] getPressedKeys() {
         return pressedKeys;
     }
 

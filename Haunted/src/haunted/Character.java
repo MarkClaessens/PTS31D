@@ -16,6 +16,7 @@ public abstract class Character {
     private String[] sprites;
     private Double movementSpeed = 25.0; // Mike: Don't know what the right value is for this is?
     private DirectionType direction;
+    private boolean isMoving;
 
     /**
      *
@@ -109,6 +110,7 @@ public abstract class Character {
         this.sprites = sprites;
         this.direction = DirectionType.DOWN; // Set a default direction
         this.game = game;
+        this.isMoving = false;
     }
     
     /**
@@ -122,6 +124,7 @@ public abstract class Character {
         }
         else{
             this.direction = direction;
+            this.setIsMoving(true);
             Point2D oldPosition = position;
             
             switch(direction){
@@ -149,5 +152,19 @@ public abstract class Character {
     private boolean detectCollision(){
         // TODO - implement Character.detectCollision
         throw new UnsupportedOperationException();
+    }
+
+    /**
+     * @return the isMoving
+     */
+    public boolean isIsMoving() {
+        return isMoving;
+    }
+
+    /**
+     * @param isMoving the isMoving to set
+     */
+    public void setIsMoving(boolean isMoving) {
+        this.isMoving = isMoving;
     }
 }
