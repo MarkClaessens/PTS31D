@@ -53,6 +53,9 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
     public void initialize(URL url, ResourceBundle rb) {            
             
     }
+    /***
+     * sets playernames in listview
+     */
     private void playernames()
     {
             playernames = new ArrayList();
@@ -64,13 +67,24 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
             this.observablePersonen = FXCollections.observableList(this.playernames);            
             LVplayers.setItems(observablePersonen); 
     }
+    /***
+     * sets the gamelobby
+     * @param Gamelobby 
+     */
     public void setGameLobby(GameLobby Gamelobby) {
         this.gamelobby = Gamelobby;
     }
+    /***
+     * sets the lobby
+     * @param lobby 
+     */
     public void setLobby(Lobby lobby) {
         this.lobby = lobby;
     }
-
+/***
+ * starts the game. This can only happen when everyone is ready
+ * @param event 
+ */
     @FXML
     private void startgame(MouseEvent event) {
          gamekanstarten = gamelobby.startGame();
@@ -85,7 +99,10 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
             alert.showAndWait();
          }
     }
-
+/***
+ * change your status to ready/undready depending on it's current status
+ * @param event 
+ */
     @FXML
     private void changeready(MouseEvent event) 
     {
@@ -108,7 +125,10 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
        }
        playernames();
     }
-    
+    /***
+     * sends message to the chatbox
+     * @param event 
+     */
     @FXML
     private void sendMessage(MouseEvent event)
     {
@@ -121,6 +141,9 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
      TAchatBox.setScrollTop(Double.MAX_VALUE);
      TFmessage.clear();
     }
+    /***
+     * leave the gamelobby. return to the lobby
+     */
     @FXML
     private void leavegamelobby()
     {
@@ -130,7 +153,9 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
             GLC.setLobby(lobby);
             GLC.Show(); 
     }
-    
+    /***
+     * before the gui will be shown
+     */
     @Override
     public void PreShowing() {
         super.PreShowing();

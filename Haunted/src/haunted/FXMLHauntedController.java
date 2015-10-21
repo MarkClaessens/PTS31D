@@ -54,42 +54,88 @@ public class FXMLHauntedController extends BaseController implements Initializab
     @FXML TextField TFplayers; 
     @FXML TextField TFfloors; 
     @FXML Button BTNrename;    
-    @FXML Button BTNcreategamelobby;
-    @FXML Button BTNsettings;
+    @FXML Button BTNcreategamelobby;    
     @FXML Button BTNexit;  
-
+/***
+ * initialize the Lobby of the game. first screen.
+ * @param url
+ * @param rb 
+ */
     @Override
     public void initialize(URL url, ResourceBundle rb) {        
           lobby = new Lobby();   
           setplayernames();        
     }
+    /***
+     * set the playernames in the textfields
+     */
     private void setplayernames()
     {
        TFchangenameplayer1.setText(lobby.getPlayer1().getName());
        TFchangenameplayer2.setText(lobby.getPlayer2().getName()); 
     }
-    
+    /***
+     * sets the lobby. There will always be one and the same lobby
+     * @param lobby 
+     */
     public void setLobby(Lobby lobby) {
         this.lobby = lobby;
     }
-    
+    /***
+     * change the name of both players
+     */
     public void changename()
     {
-        lobby.changePlayerName(TFchangenameplayer1.getText(), TFchangenameplayer2.getText());
-        TFchangenameplayer1.setText(lobby.getPlayer1().getName());
-        TFchangenameplayer2.setText(lobby.getPlayer2().getName());
+        if(!TFchangenameplayer1.getText().isEmpty() && !TFchangenameplayer2.getText().isEmpty())
+        {
+           lobby.changePlayerName(TFchangenameplayer1.getText(), TFchangenameplayer2.getText());
+           setplayernames(); 
+        }
+        else if(!TFchangenameplayer1.getText().isEmpty() && TFchangenameplayer2.getText().isEmpty())
+        {
+           lobby.changePlayerName(TFchangenameplayer1.getText(), lobby.getPlayer2().getName());
+           setplayernames();     
+        }
+        else if(TFchangenameplayer1.getText().isEmpty() && !TFchangenameplayer2.getText().isEmpty())
+        {
+           lobby.changePlayerName(lobby.getPlayer1().getName(), TFchangenameplayer2.getText());
+           setplayernames();    
+        }
+        else {
+           Alert alert = new Alert(AlertType.INFORMATION);
+           alert.setContentText("voer tekst in");
+           alert.showAndWait();
+           setplayernames(); 
+        }
+        
+        
     }
+    /***
+     * creates a gamelobby from which the players can play a game
+     * @throws IOException 
+     */
     public void creategamelobby() throws IOException
     {
-        if(!(TFroomname.getText().equals("")))
+        if(!(TFroomname.getText().equals(""))||!(TFplayers.getText().equals(""))||!(TFfloors.getText().equals("")))
         {
             gamelobby = lobby.createGameLobby(TFroomname.getText(), TFpassword.getText());
-            gamelobby.setMaxPlayers(Integer.parseInt(TFplayers.getText()));
-            gamelobby.setFloorAmount(Integer.parseInt(TFfloors.getText()));
-            FXMLGameLobbyController GMC = (FXMLGameLobbyController)Haunted.getNavigation().load(FXMLGameLobbyController.URL_FXML);
-            GMC.setGameLobby(gamelobby);
-            GMC.setLobby(lobby);
-            GMC.Show();
+            try
+            {
+             gamelobby.setMaxPlayers(Integer.parseInt(TFplayers.getText()));
+             gamelobby.setFloorAmount(Integer.parseInt(TFfloors.getText())); 
+             FXMLGameLobbyController GMC = (FXMLGameLobbyController)Haunted.getNavigation().load(FXMLGameLobbyController.URL_FXML);
+             GMC.setGameLobby(gamelobby);
+             GMC.setLobby(lobby);
+             GMC.Show();
+            }
+            catch(NumberFormatException e)
+            {
+              Alert alert = new Alert(AlertType.INFORMATION);
+              alert.setContentText("voer nummer in");
+              alert.showAndWait();          
+            }
+            
+            
             
         }
         else
@@ -99,14 +145,16 @@ public class FXMLHauntedController extends BaseController implements Initializab
            alert.showAndWait();
         }        
     }
+    /***
+     * close the whole game
+     */
     public void exit()
     {
         lobby.exit();
     }
-    public void settings()
-    {
-        //weet nog niet precies hoe dit gedaan moet worden. 
-    }  
+    /***
+     * before the gui will be shown
+     */
     public void PreShowing() {
         super.PreShowing();
         setplayernames();         
