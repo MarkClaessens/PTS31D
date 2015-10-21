@@ -1,7 +1,10 @@
 package haunted;
 
 import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.util.Calendar;
 
 /**
  *
@@ -9,7 +12,7 @@ import java.time.LocalTime;
  */
 public class Message {
 
-    private Time timeStamp;
+    private Calendar timeStamp;
     private String text;
     private Player player;
 
@@ -18,7 +21,7 @@ public class Message {
      *
      * @return timestamp
      */
-    public Time getTimeStamp() {
+    public Calendar getTimeStamp() {
         return this.timeStamp;
     }
 
@@ -42,10 +45,14 @@ public class Message {
      */
     public Message(String text, Player player) {
         if (!text.isEmpty()) {
-            this.timeStamp = Time.valueOf(LocalTime.MIN);
+            this.timeStamp = Calendar.getInstance();
             this.text = text;
             this.player = player;
         }
+    }
+    private String timestamp(){
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        return dateFormat.format(timeStamp.getTime());
     }
 
     /**
@@ -55,7 +62,7 @@ public class Message {
      * @return string
      */
     public String toString() {
-        return "[" + this.timeStamp.toString() + "]" + " " + this.player.getName() + ": " + this.getText();
+        return "[" + timestamp() + "]" + " " + this.player.getName() + ": " + this.getText();
     }
 
 }
