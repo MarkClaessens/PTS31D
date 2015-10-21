@@ -179,6 +179,9 @@ public class Game {
      */
     public void endGame(Player winner) {
        this.isRunning = false;
+            FXMLvictoryController VC = (FXMLvictoryController)Haunted.getNavigation().load(FXMLvictoryController.URL_FXML);
+             VC.setWinnaarnaam(winner.getName());
+             VC.Show();
        // TODO: call in view (FXML) the method to launch the victory screen with the winner (inside the parameter)
     }
 

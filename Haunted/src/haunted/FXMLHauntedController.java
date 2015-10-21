@@ -155,6 +155,7 @@ public class FXMLHauntedController extends BaseController implements Initializab
     /***
      * before the gui will be shown
      */
+    @Override
     public void PreShowing() {
         super.PreShowing();
         setplayernames();         
