@@ -141,9 +141,13 @@ public class GameLobby {
     /**
      * you can start the game when everyone is ready. this starts a timer
      */
-    public void startGame() {
+    public boolean startGame() {
         if (this.readyCheck()) {
             this.game = new Game(this.players, this.floorAmount);
+            return true;
+        } else
+        {
+            return false;
         }
     }
 
