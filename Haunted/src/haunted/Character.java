@@ -17,7 +17,7 @@ public abstract class Character {
     private String[] spritesDown;
     private String[] spritesLeft;
     private String[] spritesRight;
-    private Double movementSpeed = 25.0; // Mike: Don't know what the right value is for this is?
+    private Double movementSpeed = 2.0;
     private DirectionType direction;
     private boolean isMoving;
 
@@ -127,12 +127,15 @@ public abstract class Character {
     public void move(DirectionType direction) {
         Point2D proposedLocation = position; // set to position just for init. 
         Point2D oldPosition = position;
+        ObstacleType obstacle;
             
         switch(direction){
             case UP:
                 proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() + movementSpeed);
-                if(detectCollision(proposedLocation)){
-                    // TODO
+                obstacle = detectCollision(proposedLocation);
+                if(obstacle == ObstacleType.WALL){
+                    this.setIsMoving(false);
+                    return;
                 }
                 else{
                     this.direction = direction;
@@ -142,8 +145,10 @@ public abstract class Character {
                 }
             case DOWN:
                 proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
-                if(detectCollision(proposedLocation)){
-                    // TODO
+                obstacle = detectCollision(proposedLocation);
+                if(obstacle == ObstacleType.WALL){
+                    this.setIsMoving(false);
+                    return;
                 }
                 else{
                     this.direction = direction;
@@ -153,8 +158,10 @@ public abstract class Character {
                 }           
             case RIGHT:
                 proposedLocation.setLocation(oldPosition.getX() + movementSpeed, oldPosition.getY());
-                if(detectCollision(proposedLocation)){
-                    // TODO
+                obstacle = detectCollision(proposedLocation);
+                if(obstacle == ObstacleType.WALL){
+                    this.setIsMoving(false);
+                    return;
                 }
                 else{
                     this.direction = direction;
@@ -164,8 +171,10 @@ public abstract class Character {
                 }
             case LEFT:
                 proposedLocation.setLocation(oldPosition.getX() - movementSpeed, oldPosition.getY());
-                if(detectCollision(proposedLocation)){
-                    // TODO
+                obstacle = detectCollision(proposedLocation);
+                if(obstacle == ObstacleType.WALL){
+                    this.setIsMoving(false);
+                    return;
                 }
                 else{
                     this.direction = direction;
