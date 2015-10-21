@@ -27,40 +27,161 @@ import javafx.stage.Stage;
  */
 public class MainGameFX extends Application {
 
-    double width;
-    double height;
+    //FIELDS
+    private double screenWidth;
+    private double screenHeight;
+    private int levelWidth;
+    private int levelHeight;
+    private long animationSpeed = 90000000;
 
-    ArrayList<String> pressedKeys;
-    
-    final long startNanoTime = System.nanoTime();
+    private ArrayList<String> pressedKeys;
+    private final long startNanoTime = System.nanoTime();
 
-    Human human;
-    Ghost ghost;
-    List<Obstacle> obstacles;
-    int levelWidth;
-    int levelHeight;
-    String backgroundImg;
+    private Human human;
+    private Ghost ghost;
+    private Obstacle key;
+    private Obstacle door;
+
+    private final String backgroundImg = "background.png";
 
     /**
-     * Starting point of drawing. in animationTimer you can find the drawing in loop
+     * Starting point of drawing. in animationTimer you can find the drawing in
+     * loop
+     *
      * @param stage
-     * @throws Exception 
+     * @throws Exception
      */
+    @Override
     public void start(Stage stage) throws Exception {
-        backgroundImg = "background.png";
-        stage.setTitle("the game");
+        //Initialize GUI
+        stage.setTitle("The Game");
         Group root = new Group();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        width = screenSize.getWidth();
-        height = screenSize.getHeight();
-        Canvas canvas = new Canvas(width, height);
+        determineScreenSize();
+        pressedKeys = new ArrayList();
+
+        //Make canvas and gc and put it on the screen
+        Canvas canvas = new Canvas(screenWidth, screenHeight);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         root.getChildren().add(canvas);
 
-        pressedKeys = new ArrayList();
+        //Handle key pressings
+        onKeyPresses(scene);
 
+        //Animation timer start and handling
+        new AnimationTimer() {
+            public void handle(long currentNanoTime) {
+                gc.clearRect(0, 0, screenWidth, screenHeight);
+                drawElements(gc, currentNanoTime);
+            }
+        }.start();
+        stage.show();
+        stage.setFullScreen(true);
+    }
+
+    /**
+     * Draw the elements on screen every time AnimationTimer calls this.
+     *
+     * @param gc
+     * @param currentNanoTime
+     */
+    private void drawElements(GraphicsContext gc, long currentNanoTime) {
+        int time = Math.round((currentNanoTime - startNanoTime) / animationSpeed);
+        //Set backgroundImage
+        Image backgroundImage = new Image(backgroundImg);
+        gc.drawImage(backgroundImage, 0, 0, screenWidth, screenHeight);
+
+        //Draw Human
+        if (!pressedKeys.contains("UP") && !pressedKeys.contains("DOWN") && !pressedKeys.contains("LEFT") && !pressedKeys.contains("RIGHT")) {
+            Image humanImg = new Image(human.getSprites()[0]);
+            gc.drawImage(humanImg, human.getPosition().getX(), human.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
+        } else {
+            Image humanImg = null;
+            if (time % 3 == 0) {
+                humanImg = new Image(human.getSprites()[0]);
+            } else if (time % 3 == 1) {
+                humanImg = new Image(human.getSprites()[1]);
+            } else if (time % 3 == 2) {
+                humanImg = new Image(human.getSprites()[2]);
+            }
+            if (humanImg != null) {
+                gc.drawImage(humanImg, human.getPosition().getX(), human.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
+            }
+        }
+
+        //Draw Ghost
+        if (!pressedKeys.contains("W") && !pressedKeys.contains("A") && !pressedKeys.contains("S") && !pressedKeys.contains("D")) {
+            Image ghostImg = new Image(ghost.getSprites()[0]);
+            gc.drawImage(ghostImg, ghost.getPosition().getX(), ghost.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
+        } else {
+            Image ghostImg = null;
+            if (time % 3 == 0) {
+                ghostImg = new Image(human.getSprites()[0]);
+            } else if (time % 3 == 1) {
+                ghostImg = new Image(human.getSprites()[1]);
+            } else if (time % 3 == 2) {
+                ghostImg = new Image(human.getSprites()[2]);
+            }
+            if (ghostImg != null) {
+                gc.drawImage(ghostImg, ghost.getPosition().getX(), ghost.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
+            }
+        }
+
+        //Draw Key
+        if (key != null) {
+            Image keyImg = new Image(key.getSprite());
+            gc.drawImage(keyImg, screenWidth / levelWidth, screenHeight / levelHeight);
+        }
+
+        //Draw Door
+        Image doorImage = new Image(door.getSprite());
+        gc.drawImage(doorImage, screenWidth / levelWidth, screenHeight / levelHeight);
+    }
+
+    /**
+     * sets the items from the game class
+     *
+     * @param game
+     */
+    public void setItems(Game game) {
+        //Set human and ghost
+        for (Player p : game.getPlayers()) {
+            if (p.getCharacter().getClass().equals(human.getClass())) {
+                this.human = (Human) p.getCharacter();
+            } else {
+                this.ghost = (Ghost) p.getCharacter();
+            }
+        }
+
+        //Set door and key
+        Level lvl = game.getCurrentLevel();
+        this.levelWidth = lvl.getWidth();
+        this.levelHeight = lvl.getHeight();
+        for (Obstacle o : lvl.getObstacles()) {
+            if (o.getBehaviour() == ObstacleType.DOOR) {
+                this.door = o;
+            } else if (o.getBehaviour() == ObstacleType.KEY) {
+                this.key = o;
+            }
+        }
+    }
+
+    /**
+     * Determines the screen resolution of the device the user is using.
+     */
+    private void determineScreenSize() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        screenWidth = screenSize.getWidth();
+        screenHeight = screenSize.getHeight();
+    }
+
+    /**
+     * handle the on key pressings
+     *
+     * @param scene
+     */
+    private void onKeyPresses(Scene scene) {
         scene.setOnKeyPressed(
                 new EventHandler<KeyEvent>() {
                     public void handle(KeyEvent e) {
@@ -79,95 +200,11 @@ public class MainGameFX extends Application {
                         pressedKeys.remove(code);
                     }
                 });
-
-        new AnimationTimer() {
-            public void handle(long currentNanoTime) {
-                gc.clearRect(0, 0, width, height);
-                drawElements(gc, currentNanoTime);
-            }
-        }.start();
-        stage.show();
-        stage.setFullScreen(true);
-    }
-
-    /**
-     * Draw the elements on screen every time AnimationTimer calls this.
-     * @param gc
-     * @param currentNanoTime 
-     */
-    //TODO: handling 3 versions when moving
-    public void drawElements(GraphicsContext gc, long currentNanoTime) {
-        Image backgroundImage = new Image(backgroundImg);
-        gc.drawImage(backgroundImage, 0, 0, width, height);
-        int time = Math.round((currentNanoTime - startNanoTime) / 90000000);
-        if (!pressedKeys.contains("UP") && !pressedKeys.contains("DOWN") && !pressedKeys.contains("LEFT") && !pressedKeys.contains("RIGHT")) {
-            Image humanImg = new Image(human.getSprites()[0]);
-            gc.drawImage(humanImg, human.getPosition().getX(), human.getPosition().getY(), width / levelWidth, height / levelHeight);
-        } else {
-            Image humanImg = null;
-            if (time % 3 == 0) {
-                humanImg = new Image(human.getSprites()[0]);
-            } else if (time % 3 == 1) {
-                humanImg = new Image(human.getSprites()[1]);
-            } else if (time % 3 == 2) {
-                humanImg = new Image(human.getSprites()[2]);
-            }
-            if(humanImg != null){
-                gc.drawImage(humanImg, human.getPosition().getX(), human.getPosition().getY(), width / levelWidth, height / levelHeight);
-            }
-        }
-
-        if (!pressedKeys.contains("W") && !pressedKeys.contains("A") && !pressedKeys.contains("S") && !pressedKeys.contains("D")) {
-            Image ghostImg = new Image(ghost.getSprites()[0]);
-            gc.drawImage(ghostImg, ghost.getPosition().getX(), ghost.getPosition().getY(), width / levelWidth, height / levelHeight);
-        } else {
-            Image ghostImg = null;
-            if (time % 3 == 0) {
-                ghostImg = new Image(human.getSprites()[0]);
-            } else if (time % 3 == 1) {
-                ghostImg = new Image(human.getSprites()[1]);
-            } else if (time % 3 == 2) {
-                ghostImg = new Image(human.getSprites()[2]);
-            }
-            if(ghostImg != null){
-                gc.drawImage(ghostImg, ghost.getPosition().getX(), ghost.getPosition().getY(), width / levelWidth, height / levelHeight);
-            }
-        }
-
-        for (Obstacle o : obstacles) {
-            Image obstImg = new Image(o.getSprite());
-            gc.drawImage(obstImg, o.getPosition().getX(), o.getPosition().getY(), width / levelWidth, height / levelHeight);
-        }
-    }
-
-    /**
-     * sets the items from the game class
-     * @param game 
-     */
-    public void setItems(Game game) {
-        for (Player p : game.getPlayers()) {
-            if (p.getCharacter().getClass().equals(human.getClass())) {
-                this.human = (Human) p.getCharacter();
-            } else {
-                this.ghost = (Ghost) p.getCharacter();
-            }
-        }
-        Level lvl = game.getCurrentLevel();
-        this.levelWidth = lvl.getWidth();
-        this.levelHeight = lvl.getHeight();
-        for(Obstacle o : lvl.getObstacles()){
-            if(o.getBehaviour() == ObstacleType.DOOR){
-                this.obstacles.add(o);
-            }
-            else if(o.getBehaviour() == ObstacleType.KEY && human.getHasKey()==false){
-                this.obstacles.add(o);
-            }
-        }
-        //this.obstacles = lvl.getObstacles();
     }
 
     /**
      * returns the pressed keys
+     *
      * @return pressed keys
      */
     public ArrayList<String> getPressedKeys() {
@@ -176,6 +213,7 @@ public class MainGameFX extends Application {
 
     /**
      * start point of this executable class
+     *
      * @param args the command line arguments
      */
     public static void main(String[] args) {
