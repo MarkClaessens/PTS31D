@@ -59,12 +59,20 @@ public class FXMLHauntedController extends BaseController implements Initializab
     @FXML Button BTNexit;  
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {          
+    public void initialize(URL url, ResourceBundle rb) {        
           lobby = new Lobby();   
-          TFchangenameplayer1.setText(lobby.getPlayer1().getName());
-          TFchangenameplayer2.setText(lobby.getPlayer2().getName());
-        
+          setplayernames();        
     }
+    private void setplayernames()
+    {
+       TFchangenameplayer1.setText(lobby.getPlayer1().getName());
+       TFchangenameplayer2.setText(lobby.getPlayer2().getName()); 
+    }
+    
+    public void setLobby(Lobby lobby) {
+        this.lobby = lobby;
+    }
+    
     public void changename()
     {
         lobby.changePlayerName(TFchangenameplayer1.getText(), TFchangenameplayer2.getText());
@@ -80,6 +88,7 @@ public class FXMLHauntedController extends BaseController implements Initializab
             gamelobby.setFloorAmount(Integer.parseInt(TFfloors.getText()));
             FXMLGameLobbyController GMC = (FXMLGameLobbyController)Haunted.getNavigation().load(FXMLGameLobbyController.URL_FXML);
             GMC.setGameLobby(gamelobby);
+            GMC.setLobby(lobby);
             GMC.Show();
             
         }
@@ -97,5 +106,9 @@ public class FXMLHauntedController extends BaseController implements Initializab
     public void settings()
     {
         //weet nog niet precies hoe dit gedaan moet worden. 
-    }     
+    }  
+    public void PreShowing() {
+        super.PreShowing();
+        setplayernames();         
+    }
 }

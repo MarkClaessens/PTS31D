@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -32,12 +33,14 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
     GameLobby gamelobby;
     boolean gamekanstarten;
     String currentText;
+    Lobby lobby;
     
     private List<String> playernames;
     private transient ObservableList<String> observablePersonen;
-    
+    @FXML private TextArea TAgegevens;
     @FXML private Button BTNstartgame;
     @FXML private Button BTNready;
+    @FXML private Button BTNleavegamelobby;
     @FXML private ListView LVplayers;
     @FXML private Button BTNsendMessage;
     @FXML private TextField TFmessage;
@@ -55,7 +58,7 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
             playernames = new ArrayList();
             for(Player player : gamelobby.getPlayers())
             {
-             playernames.add(player.getName() + " ready:" + player.getReady());   
+             playernames.add(player.getName() + " ready: " + player.getReady());   
             } 
             
             this.observablePersonen = FXCollections.observableList(this.playernames);            
@@ -63,6 +66,9 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
     }
     public void setGameLobby(GameLobby Gamelobby) {
         this.gamelobby = Gamelobby;
+    }
+    public void setLobby(Lobby lobby) {
+        this.lobby = lobby;
     }
 
     @FXML
@@ -102,6 +108,7 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
        }
        playernames();
     }
+    
     @FXML
     private void sendMessage(MouseEvent event)
     {
@@ -114,10 +121,20 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
      TAchatBox.setScrollTop(Double.MAX_VALUE);
      TFmessage.clear();
     }
+    @FXML
+    private void leavegamelobby()
+    {
+            lobby.getPlayer1().setReady(false);
+            lobby.getPlayer2().setReady(false);
+            FXMLHauntedController GLC = (FXMLHauntedController)Haunted.getNavigation().load(FXMLHauntedController.URL_FXML);            
+            GLC.setLobby(lobby);
+            GLC.Show(); 
+    }
     
     @Override
     public void PreShowing() {
         super.PreShowing();
+        TAgegevens.setText("gamelobbyname: " + gamelobby.getName() + "\n" + "maximum aantal spelers: " + gamelobby.getMaxPlayers() + "\n" + "maximum aantal vloeren: " + gamelobby.getFloorAmount());
         playernames();
         
     }
