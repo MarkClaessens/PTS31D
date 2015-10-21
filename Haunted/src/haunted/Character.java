@@ -7,10 +7,9 @@ import java.awt.geom.Point2D;
  *
  * @author Mike Evers
  */
-
 public abstract class Character {
-    
-    protected Game game; 
+
+    protected Game game;
     private Point2D position;
     private Color color;
     private String[] spritesUp;
@@ -90,24 +89,25 @@ public abstract class Character {
     public void setMovementSpeed(Double movementSpeed) {
         this.movementSpeed = movementSpeed;
     }
-    
-    /** 
-     * 
+
+    /**
+     *
      * @return the direction in which the Character looks or is moving
      */
-    public DirectionType getDirection(){
+    public DirectionType getDirection() {
         return this.direction;
     }
-    
-    /** 
+
+    /**
      * Set the direction in which the Character looks or is moving
-     * @param direction 
+     *
+     * @param direction
      */
-    public void setDirection(DirectionType direction){
+    public void setDirection(DirectionType direction) {
         this.direction = direction;
     }
-    
-    public Character(Point2D position, Color color, String[] spritesUp, String[] spritesDown, String[] spritesLeft, String[] spritesRight, Game game){
+
+    public Character(Point2D position, Color color, String[] spritesUp, String[] spritesDown, String[] spritesLeft, String[] spritesRight, Game game) {
         this.position = position;
         this.color = color;
         this.spritesUp = spritesUp;
@@ -118,7 +118,7 @@ public abstract class Character {
         this.game = game;
         this.isMoving = false;
     }
-    
+
     /**
      * Makes the character move in the pointed direction, be aware of collision!
      *
@@ -128,72 +128,78 @@ public abstract class Character {
         Point2D proposedLocation = position; // set to position just for init. 
         Point2D oldPosition = position;
         ObstacleType obstacle;
-            
-        switch(direction){
+
+        switch (direction) {
             case UP:
+                // <editor-fold defaultstate="collapsed" desc="UP">
                 proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() + movementSpeed);
                 obstacle = detectCollision(proposedLocation);
-                if(obstacle == ObstacleType.WALL){
+                if (obstacle == ObstacleType.WALL) {
                     this.setIsMoving(false);
                     return;
-                }
-                else{
+                } else {
                     this.direction = direction;
                     this.setIsMoving(true);
                     position.setLocation(oldPosition.getX(), oldPosition.getY() + movementSpeed);
                     break;
                 }
+            // </editor-fold>
             case DOWN:
+                // <editor-fold defaultstate="collapsed" desc="DOWN">
                 proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
                 obstacle = detectCollision(proposedLocation);
-                if(obstacle == ObstacleType.WALL){
+                if (obstacle == ObstacleType.WALL) {
                     this.setIsMoving(false);
                     return;
-                }
-                else{
+                } else {
                     this.direction = direction;
                     this.setIsMoving(true);
                     position.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
                     break;
-                }           
+                }
+            // </editor-fold>
             case RIGHT:
+                // <editor-fold defaultstate="collapsed" desc="RIGHT">
                 proposedLocation.setLocation(oldPosition.getX() + movementSpeed, oldPosition.getY());
                 obstacle = detectCollision(proposedLocation);
-                if(obstacle == ObstacleType.WALL){
+                if (obstacle == ObstacleType.WALL) {
                     this.setIsMoving(false);
                     return;
-                }
-                else{
+                } else {
                     this.direction = direction;
                     this.setIsMoving(true);
                     position.setLocation(oldPosition.getX() + movementSpeed, oldPosition.getY());
                     break;
                 }
+            // </editor-fold>
             case LEFT:
+                //        // <editor-fold defaultstate="collapsed" desc="LEFT">
                 proposedLocation.setLocation(oldPosition.getX() - movementSpeed, oldPosition.getY());
                 obstacle = detectCollision(proposedLocation);
-                if(obstacle == ObstacleType.WALL){
+                if (obstacle == ObstacleType.WALL) {
                     this.setIsMoving(false);
                     return;
-                }
-                else{
+                } else {
                     this.direction = direction;
                     this.setIsMoving(true);
                     position.setLocation(oldPosition.getX() - movementSpeed, oldPosition.getY());
                     break;
                 }
+            // </editor-fold>
         }
     }
 
-    
-
     /**
-     * Check if character collides with another object. 
-     * Be aware of the private modifier!
-     * @param proposedLocation the location where the Character wants to move to.
+     * Check if character collides with another object. Be aware of the private
+     * modifier!
+     *
+     * @param proposedLocation the location where the Character wants to move
+     * to.
      * @return if there was collision or not
      */
-    private ObstacleType detectCollision(Point2D proposedLocation){
+    private ObstacleType detectCollision(Point2D proposedLocation) {
+        // <editor-fold defaultstate="collapsed" desc="RIGHT">
+        // </editor-fold>
         // todo not implemented yet
         return null;
     }
