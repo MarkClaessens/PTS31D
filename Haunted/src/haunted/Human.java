@@ -15,10 +15,10 @@ public class Human extends Character {
     private int flashlightRange = 100; // Mike: setted default range to 100
     private int flashlightAngle = 45; // Mike: setted default angle to 45
     private boolean hasKey;
-    
+
     private double flX3 = 0, flY3 = 0, flX2 = 0, flY2 = 0, flX1, flY1;
-    private    double flY23, flX32, flY31, flX13;
-    private    double flDet, flMinD, flMaxD;
+    private double flY23, flX32, flY31, flX13;
+    private double flDet, flMinD, flMaxD;
 
     /**
      *
@@ -142,19 +142,20 @@ public class Human extends Character {
         setFlashLight();
         List<Ghost> deadghosts = new ArrayList();
         this.game.getGhosts().stream().forEach((g) -> {
-            boolean hit = false;
-            for(Point2D p : g.getHitboxPoints()){
-                if(flashlightCollision(p)){
-                    hit=true;
+            if (g.isVulnerable()) {
+                boolean hit = false;
+                for (Point2D p : g.getHitboxPoints()) {
+                    if (flashlightCollision(p)) {
+                        hit = true;
+                        break;
+                    }
+                }
+                if (hit) {
+                    deadghosts.add(g);
+                    g.vanish();
                 }
             }
-            if (hit && g.isVulnerable()) {
-                deadghosts.add(g);
-                g.vanish();
-            }
         });
-     
-     
 
     }
 
@@ -167,8 +168,8 @@ public class Human extends Character {
         }
         return null;
     }
-    
-    private void setFlashLight(){
+
+    private void setFlashLight() {
         flX1 = this.getPosition().getX() + 50;
         flY1 = this.getPosition().getY() + 50;
 
@@ -197,6 +198,7 @@ public class Human extends Character {
                 flY3 = flY1 - tan(this.flashlightAngle) * this.flashlightRange;
         }
     }
+
     public boolean flashlightCollision(Point2D point) {
 
         flY23 = flY2 - flY3;
@@ -223,14 +225,14 @@ public class Human extends Character {
         return !(c < flMinD || c > flMaxD);
 
     }
-    
+
     @Override
-    public List<Point2D> getHitboxPoints(){
+    public List<Point2D> getHitboxPoints() {
         List<Point2D> hitboxes = new ArrayList();
         hitboxes.add(this.getPosition());
-        hitboxes.add(new Point2D.Double(this.getPosition().getX()+100,this.getPosition().getY()));
-        hitboxes.add(new Point2D.Double(this.getPosition().getX(),this.getPosition().getY()+100));
-        hitboxes.add(new Point2D.Double(this.getPosition().getX()+100,this.getPosition().getY()+100));
+        hitboxes.add(new Point2D.Double(this.getPosition().getX() + 100, this.getPosition().getY()));
+        hitboxes.add(new Point2D.Double(this.getPosition().getX(), this.getPosition().getY() + 100));
+        hitboxes.add(new Point2D.Double(this.getPosition().getX() + 100, this.getPosition().getY() + 100));
         return hitboxes;
     }
 }
