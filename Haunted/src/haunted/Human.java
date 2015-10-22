@@ -2,6 +2,7 @@ package haunted;
 
 import java.awt.Color;
 import java.awt.geom.Point2D;
+import static java.lang.Math.tan;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,10 @@ public class Human extends Character {
     private int flashlightRange = 100; // Mike: setted default range to 100
     private int flashlightAngle = 45; // Mike: setted default angle to 45
     private boolean hasKey;
+    
+    private double flX3 = 0, flY3 = 0, flX2 = 0, flY2 = 0, flX1, flY1;
+    private    double flY23, flX32, flY31, flX13;
+    private    double flDet, flMinD, flMaxD;
 
     /**
      *
@@ -126,13 +131,30 @@ public class Human extends Character {
         Point2D key = this.game.getCurrentLevel().getKeyLocation();
 
         //door collision
-        if ((checkHitboxCollision(this.getPosition(), 10, 1, door, 10, 1)&& this.hasKey)) //key collision   
+        if ((checkHitboxCollision(this.getPosition(), 10, 1, door, 10, 1) && this.hasKey)) //key collision   
         {
             this.game.endRound();
         }
         if (checkHitboxCollision(this.getPosition(), 100, 100, key, 100, 100)) {
             this.pickUpKey();
         }
+        //flashlight and ghost collision
+        setFlashLight();
+        List<Ghost> deadghosts = new ArrayList();
+        this.game.getGhosts().stream().forEach((g) -> {
+            boolean hit = false;
+            for(Point2D p : g.getHitboxPoints()){
+                if(flashlightCollision(p)){
+                    hit=true;
+                }
+            }
+            if (hit && g.isVulnerable()) {
+                deadghosts.add(g);
+                g.vanish();
+            }
+        });
+     
+     
 
     }
 
@@ -145,25 +167,70 @@ public class Human extends Character {
         }
         return null;
     }
+    
+    private void setFlashLight(){
+        flX1 = this.getPosition().getX() + 50;
+        flY1 = this.getPosition().getY() + 50;
 
-    private boolean betweenInclusive(int i, int min, int max) {
-        return i >= min && i <= max;
+        switch (this.getDirection()) {
+            case UP:
+                flX2 = flX1 - tan(this.flashlightAngle) * this.flashlightRange;
+                flY2 = flY1 - this.flashlightRange;
+                flX3 = flX1 + tan(this.flashlightAngle) * this.flashlightRange;
+                flY3 = flY1 - this.flashlightRange;
+                break;
+            case DOWN:
+                flX2 = flX1 + tan(this.flashlightAngle) * this.flashlightRange;
+                flX3 = flX1 - tan(this.flashlightAngle) * this.flashlightRange;
+                flY2 = flY1 + this.flashlightRange;
+                flY3 = flY2;
+                break;
+            case RIGHT:
+                flX2 = flX1 + this.flashlightRange;
+                flX3 = flX2;
+                flY2 = flY1 + tan(this.flashlightAngle) * this.flashlightRange;
+                flY3 = flY1 - tan(this.flashlightAngle) * this.flashlightRange;
+            case LEFT:
+                flX2 = flX1 - this.flashlightRange;
+                flX3 = flX2;
+                flY2 = flY1 + tan(this.flashlightAngle) * this.flashlightRange;
+                flY3 = flY1 - tan(this.flashlightAngle) * this.flashlightRange;
+        }
     }
+    public boolean flashlightCollision(Point2D point) {
 
-    private boolean checkHitboxCollision(Point2D point1, int width1, int height1, Point2D point2, int width2, int height2) {
-        //convert point1 in leftmost and rightmost X value and top and bottom Y value;
-        int p1Xmax = (int) point1.getX();
-        int p1Xmin = (int) p1Xmax + width1;
-        int p1Ymin = (int) point1.getY();
-        int p1Ymax = (int) p1Ymin + height1;
+        flY23 = flY2 - flY3;
+        flX32 = flX3 - flX2;
+        flY31 = flY3 - flY1;
+        flX13 = flX1 - flX3;
+        flDet = flY23 * flX13 - flX32 * flY31;
+        flMinD = Math.min(flDet, 0);
+        flMaxD = Math.max(flDet, 0);
 
-        //convert point2 in leftmost and rightmost X value and top and bottom Y value;
-        int p2Xmax = (int) point2.getX();
-        int p2Xmin = (int) p2Xmax + width2;
-        int p2Ymin = (int) point2.getY();
-        int p2Ymax = (int) p2Ymin + height2;
+        double x = point.getX();
+        double y = point.getY();
+        double dx = x - flX3;
+        double dy = y - flY3;
+        double a = flY23 * dx + flX32 * dy;
+        if (a < flMinD || a > flMaxD) {
+            return false;
+        }
+        double b = flY31 * dx + flX13 * dy;
+        if (b < flMinD || b > flMaxD) {
+            return false;
+        }
+        double c = flDet - a - b;
+        return !(c < flMinD || c > flMaxD);
 
-        return (betweenInclusive(p1Xmax, p2Xmin, p2Xmax) && (betweenInclusive(p1Ymin, p2Ymin, p2Ymax) || betweenInclusive(p1Ymax, p2Ymin, p2Ymax))) || (betweenInclusive(p1Xmin, p2Xmin, p2Xmax) && (betweenInclusive(p1Ymin, p2Ymin, p2Ymax) || betweenInclusive(p1Ymax, p2Ymin, p2Ymax)));
-
+    }
+    
+    @Override
+    public List<Point2D> getHitboxPoints(){
+        List<Point2D> hitboxes = new ArrayList();
+        hitboxes.add(this.getPosition());
+        hitboxes.add(new Point2D.Double(this.getPosition().getX()+100,this.getPosition().getY()));
+        hitboxes.add(new Point2D.Double(this.getPosition().getX(),this.getPosition().getY()+100));
+        hitboxes.add(new Point2D.Double(this.getPosition().getX()+100,this.getPosition().getY()+100));
+        return hitboxes;
     }
 }

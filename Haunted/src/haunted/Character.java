@@ -195,7 +195,7 @@ public abstract class Character {
      * to.
      * @return true if there is an obstacle
      */
-    private boolean detectCollision(Point2D proposedLocation) {
+    public boolean detectCollision(Point2D proposedLocation) {
         int pXl = (int) proposedLocation.getX();
         int pXr = pXl + 100;
         int pYt = (int) proposedLocation.getY();
@@ -262,5 +262,29 @@ public abstract class Character {
      */
     public void setSpritesRight(String[] spritesRight) {
         this.spritesRight = spritesRight;
+    }
+    
+    public boolean betweenInclusive(int i, int min, int max) {
+        return i >= min && i <= max;
+    }
+    
+    public List<Point2D> getHitboxPoints(){
+        return null;    
+    }
+
+    public boolean checkHitboxCollision(Point2D point1, int width1, int height1, Point2D point2, int width2, int height2) {
+        //convert point1 in leftmost and rightmost X value and top and bottom Y value;
+        int p1Xmax = (int) point1.getX();
+        int p1Xmin = (int) p1Xmax + width1;
+        int p1Ymin = (int) point1.getY();
+        int p1Ymax = (int) p1Ymin + height1;
+
+        //convert point2 in leftmost and rightmost X value and top and bottom Y value;
+        int p2Xmax = (int) point2.getX();
+        int p2Xmin = (int) p2Xmax + width2;
+        int p2Ymin = (int) point2.getY();
+        int p2Ymax = (int) p2Ymin + height2;
+
+        return (betweenInclusive(p1Xmax, p2Xmin, p2Xmax) && (betweenInclusive(p1Ymin, p2Ymin, p2Ymax) || betweenInclusive(p1Ymax, p2Ymin, p2Ymax))) || (betweenInclusive(p1Xmin, p2Xmin, p2Xmax) && (betweenInclusive(p1Ymin, p2Ymin, p2Ymax) || betweenInclusive(p1Ymax, p2Ymin, p2Ymax)));
     }
 }
