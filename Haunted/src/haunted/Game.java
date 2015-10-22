@@ -21,7 +21,8 @@ public class Game {
     private Timer tickTimer;
     private Level currentLevel;
     private boolean isRunning = false; // flaf that indicates if the game is active, like players are playing.
-
+    private List<Ghost> ghosts = new ArrayList();
+    private Human human;
     /**
      * @return if the game isRunning (boolean)
      */
@@ -127,17 +128,18 @@ public class Game {
         String[] ghoSpritesLeft = new String[]{"ghostRedLeft1.gif", "ghostRedLeft2.gif", "ghostRedLeft3.gif"};
         String[] ghoSpritesRight = new String[]{"ghostRedRight1.gif", "ghostRedRight2.gif", "ghostRedRight3.gif"};
         Ghost ghost = new Ghost(ghostSpawnPosition, Color.RED, ghoSpritesUp, ghoSpritesDown, ghoSpritesLeft, ghoSpritesRight, this);
-
+        ghosts.add(ghost);
+        
         String[] humSpritesUp = new String[]{"humanBlueUp1.gif", "humanBlueUp2.gif", "humanBlueUp3.gif"};
         String[] humSpritesDown = new String[]{"humanBlueDown1.gif", "humanBlueDown2.gif", "humanBlueDown3.gif"};
         String[] humSpritesLeft = new String[]{"humanBlueLeft1.gif", "humanBlueLeft2.gif", "humanBlueLeft3.gif"};
         String[] humSpritesRight = new String[]{"humanBlueRight1.gif", "humanBlueRight2.gif", "humanBlueRight3.gif"};
-        Human human = new Human(humanSpawnPosition, Color.BLUE, humSpritesUp, humSpritesDown, humSpritesLeft, humSpritesRight, this);
+        human = new Human(humanSpawnPosition, Color.BLUE, humSpritesUp, humSpritesDown, humSpritesLeft, humSpritesRight, this);
 
         // Choose random who becomes the human
         Random randomizer = new Random();
         int index = randomizer.nextInt(players.size());
-        players.get(index).setCharacter(human);
+        players.get(index).setCharacter(human);        
         if (index == 0) {
             players.get(1).setCharacter(ghost);
         } else {
@@ -244,5 +246,12 @@ public class Game {
 
         return spawnPoint;
     }
-
+    
+    public List<Ghost> getGhosts(){
+        return this.ghosts;
+    }
+    
+    public Human getHuman(){
+        return this.human;
+    }
 }
