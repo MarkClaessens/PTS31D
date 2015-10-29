@@ -227,8 +227,7 @@ public class Game {
      */
     public void tick() {
 
-        // TODO - implement Game.tick
-       
+        // TODO - implement Game.tick    
 
         if (this.isRunning && !this.isPauzed) {
 
