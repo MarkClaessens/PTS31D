@@ -31,6 +31,8 @@ public class MainGameFX extends Application {
     private double screenHeight;
     private int levelWidth;
     private int levelHeight;
+    private double horScale;
+    private double verScale;
     private long animationSpeed = 90000000;
 
     private Object[] pressedKeys;
@@ -47,7 +49,6 @@ public class MainGameFX extends Application {
     private final String backgroundImg = "background.png";
 
     public MainGameFX() {
-        this.showEmpty = false;
     }
 
     /**
@@ -60,6 +61,9 @@ public class MainGameFX extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         //Initialize GUI
+        this.levelWidth = 1500;
+        this.levelHeight = 1000;
+        this.showEmpty = false;
         stage.setTitle("The Game");
         Group root = new Group();
         Scene scene = new Scene(root);
@@ -118,19 +122,19 @@ public class MainGameFX extends Application {
         //Draw Door
         Image doorImage = new Image(door.getSprite());
 
-        gc.drawImage(backgroundImage, 0, 0);//, screenWidth, screenHeight
+        gc.drawImage(backgroundImage, 0, 0, levelWidth * horScale, levelHeight * verScale);//, screenWidth, screenHeight
         //, screenWidth / levelWidth, screenHeight / levelHeight
         if (drawHumanImage != null) {
-            gc.drawImage(drawHumanImage, human.getPosition().getX(), human.getPosition().getY());
+            gc.drawImage(drawHumanImage, human.getPosition().getX() * horScale, human.getPosition().getY() * verScale, 100 * horScale, 100 * verScale);
         }
         if (drawGhostImage != null) {
-            gc.drawImage(drawGhostImage, ghost.getPosition().getX(), ghost.getPosition().getY());
+            gc.drawImage(drawGhostImage, ghost.getPosition().getX() * horScale, ghost.getPosition().getY() * verScale, 100 * horScale, 100 * verScale);
         }
         if (key != null) {
-           gc.drawImage(keyImg, level.getKeyLocation().getX(), level.getKeyLocation().getY()-200);
+            gc.drawImage(keyImg, level.getKeyLocation().getX() * horScale, level.getKeyLocation().getY() * verScale, 100 * horScale, 100 * verScale);
         }
         if (door != null) {
-           gc.drawImage(doorImage, level.getDoorLocation().getX(), level.getDoorLocation().getY());
+            gc.drawImage(doorImage, level.getDoorLocation().getX()*horScale, level.getDoorLocation().getY() *verScale, 100*horScale, 100*verScale);
         }
     }
 
@@ -147,7 +151,7 @@ public class MainGameFX extends Application {
             switch (character.getDirection()) {
                 case UP:
                     if (!character.isIsMoving()) {
-                        image = new Image(character.getSpritesUp()[0]);  
+                        image = new Image(character.getSpritesUp()[0]);
                     } else {
                         getAnimatedImage(time, character.getSpritesUp());
                     }
@@ -168,7 +172,7 @@ public class MainGameFX extends Application {
                     break;
                 case RIGHT:
                     if (!character.isIsMoving()) {
-                        image = new Image(character.getSpritesDown()[0]);
+                        image = new Image(character.getSpritesRight()[0]);
                     } else {
                         getAnimatedImage(time, character.getSpritesRight());
                     }
@@ -237,6 +241,8 @@ public class MainGameFX extends Application {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         screenWidth = screenSize.getWidth();
         screenHeight = screenSize.getHeight();
+        horScale = screenWidth / levelWidth;
+        verScale = screenHeight / levelHeight;
     }
 
     /**
