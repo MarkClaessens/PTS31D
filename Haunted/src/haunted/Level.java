@@ -152,8 +152,8 @@ public class Level {
         // Spawn the key and the door and add it to de obstacles list.
         Point2D keySpawnPoint = pickRandomKeySpawnPoint();
         Point2D doorSpawnPoint = pickRandomDoorSpawnPoint();
-        Obstacle keyObstacle = new Obstacle(ObstacleType.KEY, "KeySprite?", keySpawnPoint, this);
-        Obstacle doorObstacle = new Obstacle(ObstacleType.DOOR, "DoorSprite?", doorSpawnPoint, this);
+        Obstacle keyObstacle = new Obstacle(ObstacleType.KEY, "Key.png", keySpawnPoint, this);
+        Obstacle doorObstacle = new Obstacle(ObstacleType.DOOR, "Door.png", doorSpawnPoint, this);
 
         obstacles.add(keyObstacle);
         obstacles.add(doorObstacle);

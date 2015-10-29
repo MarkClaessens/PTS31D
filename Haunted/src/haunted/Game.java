@@ -109,14 +109,11 @@ public class Game {
         this.isRunning = false;
         this.isPauzed = true;
         this.currentLevel = new Level(0);
+        this.setupGameClasses();
+        this.bindCharactersToPlayers();
     }
 
-    /**
-     * Bind the characters to the players and give them a spawnposition Call
-     * this method after the game generated his level and sets his obstacles [ !
-     * ]
-     */
-    public void bindCharactersToPlayers() {
+    public void setupGameClasses() {
         // Pick the spawn positions for the characters
         Point2D ghostSpawnPosition = pickRandomGhostSpawnPoint();
         Point2D humanSpawnPosition = pickRandomHumanSpawnPoint();
@@ -134,15 +131,22 @@ public class Game {
         String[] humSpritesLeft = new String[]{"humanBlueLeft1.png", "humanBlueLeft2.png", "humanBlueLeft3.png"};
         String[] humSpritesRight = new String[]{"humanBlueRight1.png", "humanBlueRight2.png", "humanBlueRight3.png"};
         human = new Human(humanSpawnPosition, Color.BLUE, humSpritesUp, humSpritesDown, humSpritesLeft, humSpritesRight, this);
+    }
 
+    /**
+     * Bind the characters to the players and give them a spawnposition Call
+     * this method after the game generated his level and sets his obstacles [ !
+     * ]
+     */
+    public void bindCharactersToPlayers() {
         // Choose random who becomes the human
         Random randomizer = new Random();
         int index = randomizer.nextInt(players.size());
         players.get(index).setCharacter(human);
         if (index == 0) {
-            players.get(1).setCharacter(ghost);
+            players.get(1).setCharacter(ghosts.get(1));
         } else {
-            players.get(0).setCharacter(ghost);
+            players.get(0).setCharacter(ghosts.get(1));
         }
     }
 
@@ -215,9 +219,13 @@ public class Game {
      * there are any changes to the game state.
      */
     public void tick() {
+
         // TODO - implement Game.tick
        
-        throw new UnsupportedOperationException();
+
+        if (this.isRunning && !this.isPauzed) {
+
+        }
     }
 
     /**
