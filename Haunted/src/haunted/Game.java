@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Timer;
+import java.util.logging.Logger;
 
 /**
  *
@@ -151,7 +152,13 @@ public class Game {
      */
     public void nextLevel() {
         // TODO - implement Game.nextLevel
-        throw new UnsupportedOperationException();
+        currentRound++;
+        try {
+            this.currentLevel = new Level(currentRound);
+        } catch (IOException ex) {
+            Logger.getLogger(Game.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        startRound();
     }
 
     /**
@@ -168,7 +175,7 @@ public class Game {
      */
     public void endRound() {
         // TODO - implement Game.endRound
-        throw new UnsupportedOperationException();
+        
     }
 
     /**
