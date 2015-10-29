@@ -22,10 +22,10 @@ import static org.junit.Assert.*;
  */
 public class GhostTest {
 
-    String[] ghoSpritesUp = new String[]{"ghostRedUp1.gif", "ghostRedUp2.gif", "ghostRedUp3.gif"};
-    String[] ghoSpritesDown = new String[]{"ghostRedDown1.gif", "ghostRedDown2.gif", "ghostRedDown3.gif"};
-    String[] ghoSpritesLeft = new String[]{"ghostRedLeft1.gif", "ghostRedLeft2.gif", "ghostRedLeft3.gif"};
-    String[] ghoSpritesRight = new String[]{"ghostRedRight1.gif", "ghostRedRight2.gif", "ghostRedRight3.gif"};
+    String[] ghoSpritesUp = new String[]{"ghostRedUp1.png", "ghostRedUp2.png", "ghostRedUp3.png"};
+    String[] ghoSpritesDown = new String[]{"ghostRedDown1.png", "ghostRedDown2.png", "ghostRedDown3.png"};
+    String[] ghoSpritesLeft = new String[]{"ghostRedLeft1.png", "ghostRedLeft2.png", "ghostRedLeft3.png"};
+    String[] ghoSpritesRight = new String[]{"ghostRedRight1.png", "ghostRedRight2.png", "ghostRedRight3.png"};
     Game game;
 
     public GhostTest() {

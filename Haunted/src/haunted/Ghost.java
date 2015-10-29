@@ -93,7 +93,7 @@ public class Ghost extends Character {
     public void changeAppearance() {
         if (this.isGhost && System.currentTimeMillis() >= stationaryTime.getTimeInMillis() + 1500) {
             this.vulnerable = false;
-            this.setSpritesUp(new String[]{"ghostRedDown1.gif", "ghostRedDown2.gif", "ghostRedDown3.gif"});
+            this.setSpritesUp(new String[]{"ghostRedDown1.png", "ghostRedDown2.png", "ghostRedDown3.png"});
             this.isGhost = false;
         } else if (this.isGhost == false) {
             this.isGhost = true;

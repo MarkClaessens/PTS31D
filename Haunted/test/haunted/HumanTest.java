@@ -22,10 +22,10 @@ import static org.junit.Assert.*;
  */
 public class HumanTest {
 
-    String[] humSpritesUp = new String[]{"humanBlueUp1.gif", "humanBlueUp2.gif", "humanBlueUp3.gif"};
-    String[] humSpritesDown = new String[]{"humanBlueDown1.gif", "humanBlueDown2.gif", "humanBlueDown3.gif"};
-    String[] humSpritesLeft = new String[]{"humanBlueLeft1.gif", "humanBlueLeft2.gif", "humanBlueLeft3.gif"};
-    String[] humSpritesRight = new String[]{"humanBlueRight1.gif", "humanBlueRight2.gif", "humanBlueRight3.gif"};
+    String[] humSpritesUp = new String[]{"humanBlueUp1.png", "humanBlueUp2.png", "humanBlueUp3.png"};
+    String[] humSpritesDown = new String[]{"humanBlueDown1.png", "humanBlueDown2.png", "humanBlueDown3.png"};
+    String[] humSpritesLeft = new String[]{"humanBlueLeft1.png", "humanBlueLeft2.png", "humanBlueLeft3.png"};
+    String[] humSpritesRight = new String[]{"humanBlueRight1.png", "humanBlueRight2.png", "humanBlueRight3.png"};
     Game game;
 
     public HumanTest() {

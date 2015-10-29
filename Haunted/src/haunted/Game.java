@@ -121,17 +121,17 @@ public class Game {
         Point2D humanSpawnPosition = pickRandomHumanSpawnPoint();
 
         // Create the characters and bind them to the players
-        String[] ghoSpritesUp = new String[]{"ghostRedUp1.gif", "ghostRedUp2.gif", "ghostRedUp3.gif"};
-        String[] ghoSpritesDown = new String[]{"ghostRedDown1.gif", "ghostRedDown2.gif", "ghostRedDown3.gif"};
-        String[] ghoSpritesLeft = new String[]{"ghostRedLeft1.gif", "ghostRedLeft2.gif", "ghostRedLeft3.gif"};
-        String[] ghoSpritesRight = new String[]{"ghostRedRight1.gif", "ghostRedRight2.gif", "ghostRedRight3.gif"};
+        String[] ghoSpritesUp = new String[]{"ghostRedUp1.png", "ghostRedUp2.png", "ghostRedUp3.png"};
+        String[] ghoSpritesDown = new String[]{"ghostRedDown1.png", "ghostRedDown2.png", "ghostRedDown3.png"};
+        String[] ghoSpritesLeft = new String[]{"ghostRedLeft1.png", "ghostRedLeft2.png", "ghostRedLeft3.png"};
+        String[] ghoSpritesRight = new String[]{"ghostRedRight1.png", "ghostRedRight2.png", "ghostRedRight3.png"};
         Ghost ghost = new Ghost(ghostSpawnPosition, Color.RED, ghoSpritesUp, ghoSpritesDown, ghoSpritesLeft, ghoSpritesRight, this);
         ghosts.add(ghost);
 
-        String[] humSpritesUp = new String[]{"humanBlueUp1.gif", "humanBlueUp2.gif", "humanBlueUp3.gif"};
-        String[] humSpritesDown = new String[]{"humanBlueDown1.gif", "humanBlueDown2.gif", "humanBlueDown3.gif"};
-        String[] humSpritesLeft = new String[]{"humanBlueLeft1.gif", "humanBlueLeft2.gif", "humanBlueLeft3.gif"};
-        String[] humSpritesRight = new String[]{"humanBlueRight1.gif", "humanBlueRight2.gif", "humanBlueRight3.gif"};
+        String[] humSpritesUp = new String[]{"humanBlueUp1.png", "humanBlueUp2.png", "humanBlueUp3.png"};
+        String[] humSpritesDown = new String[]{"humanBlueDown1.png", "humanBlueDown2.png", "humanBlueDown3.png"};
+        String[] humSpritesLeft = new String[]{"humanBlueLeft1.png", "humanBlueLeft2.png", "humanBlueLeft3.png"};
+        String[] humSpritesRight = new String[]{"humanBlueRight1.png", "humanBlueRight2.png", "humanBlueRight3.png"};
         human = new Human(humanSpawnPosition, Color.BLUE, humSpritesUp, humSpritesDown, humSpritesLeft, humSpritesRight, this);
 
         // Choose random who becomes the human
@@ -158,8 +158,8 @@ public class Game {
      * starts the next round at the current floor.
      */
     public void startRound() {
-        // TODO - implement Game.startRound
-        throw new UnsupportedOperationException();
+        this.isRunning =true;
+        this.isPauzed = false;
     }
 
     /**
