@@ -18,16 +18,14 @@ import javafx.stage.Stage;
  */
 public class Haunted extends Application {
 
-    
     private static Navigation navigation;
 
-    public static Navigation getNavigation()
-    {
+    public static Navigation getNavigation() {
         return navigation;
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
 
         navigation = new Navigation(primaryStage);
 

@@ -10,6 +10,7 @@ package haunted;
  * @author Kevin
  */
 public enum ObstacleType {
+
     DOOR,
     KEY,
     WALL;

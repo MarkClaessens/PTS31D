@@ -52,12 +52,11 @@ public class MessageTest {
      */
     @Test
     public void testGetTimeStamp() {
-        System.out.println("getTimeStamp");        
+        System.out.println("getTimeStamp");
         assertEquals(Time.valueOf(LocalTime.MIN), bericht.getTimeStamp());
         // TODO review the generated test code and remove the default call to fail.
 
-    }   
-    
+    }
 
     /**
      * Test of getText method, of class Message.
@@ -67,8 +66,5 @@ public class MessageTest {
         System.out.println("getText");
         assertEquals("hallo", bericht.getText());
     }
-
-    
-    
 
 }

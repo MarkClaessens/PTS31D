@@ -50,7 +50,8 @@ public class Message {
             this.player = player;
         }
     }
-    private String timestamp(){
+
+    private String timestamp() {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm");
         return dateFormat.format(timeStamp.getTime());
     }

@@ -19,7 +19,7 @@ public class Obstacle {
         this.position = position;
         this.level = level;
     }
-    
+
     /**
      *
      * @return the obstacle's position on the map.
@@ -54,34 +54,38 @@ public class Obstacle {
     public void setSprite(String sprite) {
         this.sprite = sprite;
     }
-    
+
     /**
-     * 
-     * @return the behaviour of the obstacle 
+     *
+     * @return the behaviour of the obstacle
      */
     public ObstacleType getBehaviour() {
         return this.behaviour;
     }
-    
+
     /**
-     * Sets the behaviour of the obstacle, must be an ObstacleType (door,key,wall)
-     * @param obstacleType 
+     * Sets the behaviour of the obstacle, must be an ObstacleType
+     * (door,key,wall)
+     *
+     * @param obstacleType
      */
     public void setBehaviour(ObstacleType behaviour) {
         this.behaviour = behaviour;
     }
 
     /**
-     * Is called when the human collides with an obstacle. Further actions are determined by obstacleType.
+     * Is called when the human collides with an obstacle. Further actions are
+     * determined by obstacleType.
+     *
      * @param human The human object that collides with the obstacle.
-     * 
+     *
      */
     public void interact(Human human) {
-        switch(this.behaviour){
-            case KEY: 
+        switch (this.behaviour) {
+            case KEY:
                 human.pickUpKey();
                 break;
-            case DOOR: 
+            case DOOR:
                 human.enterDoor();
                 break;
         }

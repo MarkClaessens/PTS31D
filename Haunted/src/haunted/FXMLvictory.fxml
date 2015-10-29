@@ -9,16 +9,16 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="haunted.FXMLvictoryController">
-   <children>
-      <TextField layoutX="62.0" layoutY="99.0" prefHeight="203.0" prefWidth="508.0" text="VICTORY">
-         <font>
-            <Font size="95.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="lblwinner" layoutX="62.0" layoutY="302.0" prefHeight="84.0" prefWidth="508.0" text="kaas">
-         <font>
-            <Font size="42.0" />
-         </font>
-      </TextField>
-   </children>
+    <children>
+        <TextField layoutX="62.0" layoutY="99.0" prefHeight="203.0" prefWidth="508.0" text="VICTORY">
+            <font>
+                <Font size="95.0" />
+            </font>
+        </TextField>
+        <TextField fx:id="lblwinner" layoutX="62.0" layoutY="302.0" prefHeight="84.0" prefWidth="508.0" text="kaas">
+            <font>
+                <Font size="42.0" />
+            </font>
+        </TextField>
+    </children>
 </AnchorPane>

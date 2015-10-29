@@ -148,21 +148,21 @@ public class Level {
         this.width = 1500;
         this.ghostLifePool = 3;
         this.theme = "";
-        
+
         // Spawn the key and the door and add it to de obstacles list.
         Point2D keySpawnPoint = pickRandomKeySpawnPoint();
         Point2D doorSpawnPoint = pickRandomDoorSpawnPoint();
         Obstacle keyObstacle = new Obstacle(ObstacleType.KEY, "KeySprite?", keySpawnPoint, this);
         Obstacle doorObstacle = new Obstacle(ObstacleType.DOOR, "DoorSprite?", doorSpawnPoint, this);
-        
+
         obstacles.add(keyObstacle);
         obstacles.add(doorObstacle);
-        this.keyLocation= keySpawnPoint;
-        this.doorLocation= doorSpawnPoint;
-        
-        URL url = new URL("http://sxealex.com/qoni/temp/img/8Bc.png");  
-        img  = ImageIO.read(url);
-        
+        this.keyLocation = keySpawnPoint;
+        this.doorLocation = doorSpawnPoint;
+
+        URL url = new URL("http://sxealex.com/qoni/temp/img/8Bc.png");
+        img = ImageIO.read(url);
+
     }
 
     /**
@@ -171,17 +171,17 @@ public class Level {
     private Point2D pickRandomKeySpawnPoint() {
         // Make an array with the points where the key is allowed to spawn.
         Point2D[] spawnPoints = new Point2D[]{
-        new Point2D.Double(0, 800),
-        new Point2D.Double(0, 700),
-        new Point2D.Double(0, 900),
-        new Point2D.Double(100, 900),
-        new Point2D.Double(200, 900)
+            new Point2D.Double(0, 800),
+            new Point2D.Double(0, 700),
+            new Point2D.Double(0, 900),
+            new Point2D.Double(100, 900),
+            new Point2D.Double(200, 900)
         };
-        
+
         // Take a random point from the array. This is where the human will spawn.
         Random randomizer = new Random();
         Point2D spawnPoint = spawnPoints[randomizer.nextInt(6)];
-               
+
         return spawnPoint;
     }
 
@@ -191,32 +191,30 @@ public class Level {
     private Point2D pickRandomDoorSpawnPoint() {
         // Make an array with the points where the door is allowed to spawn.
         Point2D[] spawnPoints = new Point2D[]{
-        new Point2D.Double(0, 300),
-        new Point2D.Double(0, 400),
-        new Point2D.Double(0, 500),
-        new Point2D.Double(0, 600),
-        new Point2D.Double(0, 700),
-        new Point2D.Double(0, 800),
-        new Point2D.Double(0, 900),
-        };
-        
+            new Point2D.Double(0, 300),
+            new Point2D.Double(0, 400),
+            new Point2D.Double(0, 500),
+            new Point2D.Double(0, 600),
+            new Point2D.Double(0, 700),
+            new Point2D.Double(0, 800),
+            new Point2D.Double(0, 900),};
+
         // Take a random point from the array. This is where the human will spawn.
         Random randomizer = new Random();
         Point2D spawnPoint = spawnPoints[randomizer.nextInt(7)];
-               
+
         return spawnPoint;
     }
-    
-    public BufferedImage getCollisionImage(){
+
+    public BufferedImage getCollisionImage() {
         return this.img;
     }
-    
-    
-    public Point2D getKeyLocation(){
+
+    public Point2D getKeyLocation() {
         return this.keyLocation;
     }
-    
-    public Point2D getDoorLocation(){
+
+    public Point2D getDoorLocation() {
         return this.doorLocation;
     }
     /**

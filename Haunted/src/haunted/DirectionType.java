@@ -10,6 +10,7 @@ package haunted;
  * @author Mike Evers
  */
 public enum DirectionType {
+
     UP,
     DOWN,
     RIGHT,

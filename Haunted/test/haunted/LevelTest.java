@@ -143,7 +143,6 @@ public class LevelTest {
         Assert.fail("setHeight allows a negative number");
     }
 
-
     /**
      * Test of getTheme method, of class Level.
      */
@@ -170,14 +169,14 @@ public class LevelTest {
     public void testGenerateKeyLocation() {
         List<Obstacle> obstacles = current.getObstacles();
         Obstacle key = null;
-        for(Obstacle o : obstacles){
-            if(o.getBehaviour() == ObstacleType.KEY){
+        for (Obstacle o : obstacles) {
+            if (o.getBehaviour() == ObstacleType.KEY) {
                 key = o;
             }
         }
         current.pickRandomKeySpawnPoint();
         Assert.assertThat("generateKeyLocation doesn't create a Point2D object",
-                key.getPosition() , instanceOf(Point2D.class));
+                key.getPosition(), instanceOf(Point2D.class));
     }
 
     /**
@@ -187,8 +186,8 @@ public class LevelTest {
     public void testGenerateDoorLocation() {
         List<Obstacle> obstacles = current.getObstacles();
         Obstacle door = null;
-        for(Obstacle o : obstacles){
-            if(o.getBehaviour() == ObstacleType.DOOR){
+        for (Obstacle o : obstacles) {
+            if (o.getBehaviour() == ObstacleType.DOOR) {
                 door = o;
             }
         }
@@ -217,7 +216,6 @@ public class LevelTest {
 //        assertEquals(Point2D.class, key.getPosition());
 //        assertEquals(Point2D.class, key.getPosition());
 //    }
-
     /**
      * Test of placeObstacles method, of class Level.
      */

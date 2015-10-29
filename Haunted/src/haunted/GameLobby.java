@@ -41,7 +41,6 @@ public class GameLobby {
         this.messages = new ArrayList();
         this.host = Host;
         this.addPlayer(Host);
-        
 
     }
 
@@ -142,7 +141,8 @@ public class GameLobby {
 
     /**
      * you can start the game when everyone is ready. this starts a timer
-     * @return 
+     *
+     * @return
      * @throws java.io.IOException
      * @throws java.lang.InterruptedException
      */
@@ -152,8 +152,7 @@ public class GameLobby {
             sleep(3000);
             this.game.startRound();
             return true;
-        } else
-        {
+        } else {
             return false;
         }
     }

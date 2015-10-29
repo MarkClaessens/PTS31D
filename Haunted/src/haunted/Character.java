@@ -263,13 +263,13 @@ public abstract class Character {
     public void setSpritesRight(String[] spritesRight) {
         this.spritesRight = spritesRight;
     }
-    
+
     public boolean betweenInclusive(int i, int min, int max) {
         return i >= min && i <= max;
     }
-    
-    public List<Point2D> getHitboxPoints(){
-        return null;    
+
+    public List<Point2D> getHitboxPoints() {
+        return null;
     }
 
     public boolean checkHitboxCollision(Point2D point1, int width1, int height1, Point2D point2, int width2, int height2) {

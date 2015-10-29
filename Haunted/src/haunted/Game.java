@@ -107,7 +107,7 @@ public class Game {
         this.floorAmount = floors;
         this.isRunning = false;
         this.isPauzed = true;
-        this.currentLevel = new Level(0);  
+        this.currentLevel = new Level(0);
     }
 
     /**
@@ -158,7 +158,7 @@ public class Game {
      * starts the next round at the current floor.
      */
     public void startRound() {
-        this.isRunning =true;
+        this.isRunning = true;
         this.isPauzed = false;
     }
 

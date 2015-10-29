@@ -21,15 +21,14 @@ public class Player {
         this.ready = false;
     }
 
-    public void setCharacter(Character character){
+    public void setCharacter(Character character) {
         this.character = character;
     }
-    
-    public Character getCharacter(){
+
+    public Character getCharacter() {
         return this.character;
     }
-    
-    
+
     /**
      *
      * @return The name of the player.

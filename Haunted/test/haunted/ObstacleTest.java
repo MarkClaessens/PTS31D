@@ -22,6 +22,7 @@ public class ObstacleTest {
     public ObstacleTest() {
     }
     Level level;
+
     @BeforeClass
     public static void setUpClass() {
     }
@@ -58,7 +59,7 @@ public class ObstacleTest {
         Point2D position = new Point2D.Double(600, 600);
         Obstacle instance = new Obstacle(ObstacleType.DOOR, "obstacleDoor", new Point2D.Double(1400, 0), level);
         instance.setPosition(position);
-        
+
         assertEquals("Obstacle setPosition isn't correct", position, instance.getPosition());
     }
 }

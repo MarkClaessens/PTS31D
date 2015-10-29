@@ -19,26 +19,27 @@ import javafx.scene.control.Label;
 public class FXMLvictoryController extends BaseController implements Initializable {
 
     public static final String URL_FXML = "FXMLvictory.fxml";
-    
+
     String winnaarnaam;
-    @FXML private Label lblwinner;
+    @FXML
+    private Label lblwinner;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         winnaarnaam = "";
-    }  
-    public void setWinnaarnaam(String naam)
-    {
+    }
+
+    public void setWinnaarnaam(String naam) {
         this.winnaarnaam = naam;
     }
-    
+
     @Override
     public void PreShowing() {
         super.PreShowing();
         lblwinner.setText(winnaarnaam);
     }
-    
-    
+
 }

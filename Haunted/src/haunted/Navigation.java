@@ -1,6 +1,5 @@
 package haunted;
 
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 
+ *
  */
 public class Navigation {
 
@@ -21,16 +20,13 @@ public class Navigation {
 
     private List<Controller> controllers = new ArrayList<>();
 
-
-    public Navigation(Stage stage)
-    {
+    public Navigation(Stage stage) {
         this.stage = stage;
         scene = new Scene(new Pane());
         stage.setScene(scene);
     }
 
-    public Controller load(String sUrl)
-    {
+    public Controller load(String sUrl) {
         try {
 
             //loads the fxml file
@@ -42,22 +38,20 @@ public class Navigation {
 
             return controller;
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public void Show(Controller controller)
-    {
+    public void Show(Controller controller) {
         try {
             scene.setRoot((Parent) controller.getView());
             controllers.add(controller);
 
             System.out.println("Add to history: " + controller.toString() + ". Total scenes: " + controllers.size());
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-    }    
+    }
 }

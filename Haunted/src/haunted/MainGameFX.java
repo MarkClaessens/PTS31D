@@ -161,6 +161,7 @@ public class MainGameFX extends Application {
 
     /**
      * if animated, this returns the rigth animated image
+     *
      * @param time
      * @param sprites
      * @return image to draw
@@ -234,7 +235,7 @@ public class MainGameFX extends Application {
                             pressedKeys[0] = code;
                         } else if (code == "UP" || code == "DOWN" || code == "LEFT" || code == "RIGHT") {
                             pressedKeys[1] = code;
-                        } else if(code == "ESCAPE"){
+                        } else if (code == "ESCAPE") {
                             pressedKeys[2] = code;
                         }
 
@@ -250,7 +251,7 @@ public class MainGameFX extends Application {
                             pressedKeys[0] = null;
                         } else if (code == "UP" || code == "DOWN" || code == "LEFT" || code == "RIGHT") {
                             pressedKeys[1] = null;
-                        } else if (code == "ESCAPE"){
+                        } else if (code == "ESCAPE") {
                             pressedKeys[2] = null;
                         }
                     }
@@ -266,9 +267,9 @@ public class MainGameFX extends Application {
     public String[] getPressedKeys() {
         return pressedKeys;
     }
-    
-    public void clearPressedKeys(){
-        for (String key : pressedKeys){
+
+    public void clearPressedKeys() {
+        for (String key : pressedKeys) {
             key = null;
         }
     }

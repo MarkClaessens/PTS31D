@@ -122,22 +122,22 @@ public class Ghost extends Character {
             });
         }
     }
-    
+
     @Override
-    public List<Point2D> getHitboxPoints(){
+    public List<Point2D> getHitboxPoints() {
         // a  ab  b
         // ac    bd
         // c  cd  d
-        
+
         List<Point2D> hitboxes = new ArrayList();
         hitboxes.add(this.getPosition());                                                               //a
-        hitboxes.add(new Point2D.Double(this.getPosition().getX()+50,this.getPosition().getY()));       //ab
-        hitboxes.add(new Point2D.Double(this.getPosition().getX()+100,this.getPosition().getY()));      //b
-        hitboxes.add(new Point2D.Double(this.getPosition().getX()+100,this.getPosition().getY()+50));   //bd
-        hitboxes.add(new Point2D.Double(this.getPosition().getX()+100,this.getPosition().getY()+100));  //d
-        hitboxes.add(new Point2D.Double(this.getPosition().getX()+50,this.getPosition().getY()+100));   //cd
-        hitboxes.add(new Point2D.Double(this.getPosition().getX(),this.getPosition().getY()+100));      //c
-        hitboxes.add(new Point2D.Double(this.getPosition().getX(),this.getPosition().getY()+50));       //ac
+        hitboxes.add(new Point2D.Double(this.getPosition().getX() + 50, this.getPosition().getY()));       //ab
+        hitboxes.add(new Point2D.Double(this.getPosition().getX() + 100, this.getPosition().getY()));      //b
+        hitboxes.add(new Point2D.Double(this.getPosition().getX() + 100, this.getPosition().getY() + 50));   //bd
+        hitboxes.add(new Point2D.Double(this.getPosition().getX() + 100, this.getPosition().getY() + 100));  //d
+        hitboxes.add(new Point2D.Double(this.getPosition().getX() + 50, this.getPosition().getY() + 100));   //cd
+        hitboxes.add(new Point2D.Double(this.getPosition().getX(), this.getPosition().getY() + 100));      //c
+        hitboxes.add(new Point2D.Double(this.getPosition().getX(), this.getPosition().getY() + 50));       //ac
 
         return hitboxes;
     }
