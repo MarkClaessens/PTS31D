@@ -7,6 +7,7 @@ package haunted;
 
 import java.awt.Point;
 import java.awt.geom.Point2D;
+import java.io.IOException;
 import java.util.List;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import org.junit.After;
@@ -37,7 +38,7 @@ public class LevelTest {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
         current = new Level(1);
     }
 
@@ -49,7 +50,7 @@ public class LevelTest {
      * Test of getFloorNr method, of class Level.
      */
     @Test
-    public void testGetFloorNr() {
+    public void testGetFloorNr() throws IOException {
         Level current = new Level(5);
 
         assertEquals("getFloorNr incorrect, expected another floorNr", 5, current.getFloorNr());

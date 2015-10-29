@@ -6,6 +6,7 @@
 package haunted;
 
 import java.awt.geom.Point2D;
+import java.io.IOException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -32,7 +33,7 @@ public class ObstacleTest {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
         level = new Level(3);
     }
 

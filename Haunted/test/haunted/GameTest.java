@@ -5,6 +5,7 @@
  */
 package haunted;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -38,7 +39,7 @@ public class GameTest {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
         player1 = new Player("John Doe");
         player2 = new Player("Lucky Luck");
         players = new ArrayList<>();
@@ -63,7 +64,7 @@ public class GameTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testGameConstructorPlayers() {
+    public void testGameConstructorPlayers() throws IOException {
         /**
          * @param players List can not be empty.
          */
@@ -73,7 +74,7 @@ public class GameTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testGameConstructorFloors() {
+    public void testGameConstructorFloors() throws IOException {
         /**
          * @param floors Cannot be 0.
          */
@@ -142,7 +143,7 @@ public class GameTest {
     }
 
     @Test
-    public void testEndGameIsRunning() {
+    public void testEndGameIsRunning() throws IOException {
         /**
          * isRunning has to be false
          */
