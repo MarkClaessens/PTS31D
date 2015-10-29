@@ -234,7 +234,7 @@ public class MainGameFX extends Application {
                             pressedKeys[0] = code;
                         } else if (code == "UP" || code == "DOWN" || code == "LEFT" || code == "RIGHT") {
                             pressedKeys[1] = code;
-                        } else if(code == "ESC"){
+                        } else if(code == "ESCAPE"){
                             pressedKeys[2] = code;
                         }
 
@@ -250,7 +250,7 @@ public class MainGameFX extends Application {
                             pressedKeys[0] = null;
                         } else if (code == "UP" || code == "DOWN" || code == "LEFT" || code == "RIGHT") {
                             pressedKeys[1] = null;
-                        } else if (code == "ESC"){
+                        } else if (code == "ESCAPE"){
                             pressedKeys[2] = null;
                         }
                     }
@@ -265,6 +265,12 @@ public class MainGameFX extends Application {
      */
     public String[] getPressedKeys() {
         return pressedKeys;
+    }
+    
+    public void clearPressedKeys(){
+        for (String key : pressedKeys){
+            key = null;
+        }
     }
 
     /**

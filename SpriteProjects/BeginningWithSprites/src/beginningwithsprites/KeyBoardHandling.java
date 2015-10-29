@@ -64,8 +64,11 @@ public class KeyBoardHandling extends Application {
             public void handle(long currentNanoTime) {
                 // Clear the canvas
                 gc.clearRect(0, 0, 512, 512);
+                for (String in : input){
+                    System.out.println(in);
+                }
 
-                if (input.contains("A") || input.contains("LEFT")) {
+                if (input.contains("ESCAPE") || input.contains("LEFT")) {
                     gc.drawImage(leftG, 64, 64);
                     gc.drawImage(right, 256, 64);
                 } else if (input.contains("D")  || input.contains("RIGHT")) {
