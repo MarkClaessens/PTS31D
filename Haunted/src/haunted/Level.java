@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -159,9 +160,8 @@ public class Level {
         this.keyLocation= keySpawnPoint;
         this.doorLocation= doorSpawnPoint;
         
-        File sourceimage = new File("C://bc.png");
-        BufferedInputStream fis = new BufferedInputStream(new FileInputStream(sourceimage));
-        img  = ImageIO.read(fis);
+        URL url = new URL("http://sxealex.com/qoni/temp/img/8Bc.png");  
+        img  = ImageIO.read(url);
         
     }
 

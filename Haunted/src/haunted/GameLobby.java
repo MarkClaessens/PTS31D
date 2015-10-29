@@ -1,5 +1,7 @@
 package haunted;
 
+import java.io.IOException;
+import static java.lang.Thread.sleep;
 import java.util.List;
 import java.util.Timer;
 import java.util.ArrayList;
@@ -140,10 +142,15 @@ public class GameLobby {
 
     /**
      * you can start the game when everyone is ready. this starts a timer
+     * @return 
+     * @throws java.io.IOException
+     * @throws java.lang.InterruptedException
      */
-    public boolean startGame() {
+    public boolean startGame() throws IOException, InterruptedException {
         if (this.readyCheck()) {
             this.game = new Game(this.players, this.floorAmount);
+            sleep(3000);
+            this.game.startRound();
             return true;
         } else
         {

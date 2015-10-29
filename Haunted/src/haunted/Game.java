@@ -3,6 +3,7 @@ package haunted;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.geom.Point2D;
+import java.io.IOException;
 import static java.lang.Math.ceil;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,12 +18,14 @@ public class Game {
 
     private List<Player> players;
     private int floorAmount;
-    private int currentRound = -1; //value is -1 because the first round (=floor) is equal to 0. 
+    private int currentRound = 0; //value is -1 because the first round (=floor) is equal to 0. 
     private Timer tickTimer;
     private Level currentLevel;
-    private boolean isRunning = false; // flaf that indicates if the game is active, like players are playing.
+    private boolean isRunning = false; // flag that indicates if the game is active, like players are playing.
     private List<Ghost> ghosts = new ArrayList();
     private Human human;
+    private boolean isPauzed = false;
+
     /**
      * @return if the game isRunning (boolean)
      */
@@ -93,23 +96,18 @@ public class Game {
     }
 
     /**
-     * sets the tick timer
-     *
-     * @param tickTimer
-     */
-    public void setTickTimer(Timer tickTimer) {
-        this.tickTimer = tickTimer;
-    }
-
-    /**
      * creates the game
      *
      * @param players List can not be empty.
      * @param floors Cannot be 0..
+     * @throws java.io.IOException
      */
-    public Game(List<Player> players, int floors) {
+    public Game(List<Player> players, int floors) throws IOException {
         this.players = players;
         this.floorAmount = floors;
+        this.isRunning = false;
+        this.isPauzed = true;
+        this.currentLevel = new Level(0);  
     }
 
     /**
@@ -129,7 +127,7 @@ public class Game {
         String[] ghoSpritesRight = new String[]{"ghostRedRight1.gif", "ghostRedRight2.gif", "ghostRedRight3.gif"};
         Ghost ghost = new Ghost(ghostSpawnPosition, Color.RED, ghoSpritesUp, ghoSpritesDown, ghoSpritesLeft, ghoSpritesRight, this);
         ghosts.add(ghost);
-        
+
         String[] humSpritesUp = new String[]{"humanBlueUp1.gif", "humanBlueUp2.gif", "humanBlueUp3.gif"};
         String[] humSpritesDown = new String[]{"humanBlueDown1.gif", "humanBlueDown2.gif", "humanBlueDown3.gif"};
         String[] humSpritesLeft = new String[]{"humanBlueLeft1.gif", "humanBlueLeft2.gif", "humanBlueLeft3.gif"};
@@ -139,7 +137,7 @@ public class Game {
         // Choose random who becomes the human
         Random randomizer = new Random();
         int index = randomizer.nextInt(players.size());
-        players.get(index).setCharacter(human);        
+        players.get(index).setCharacter(human);
         if (index == 0) {
             players.get(1).setCharacter(ghost);
         } else {
@@ -174,17 +172,17 @@ public class Game {
     }
 
     /**
-     * Will be called when the game is done. Sets isRunning to  false. There
+     * Will be called when the game is done. Sets isRunning to false. There
      * might be a victory screen.
      *
      * @param The player who has won the game.
      */
     public void endGame(Player winner) {
-       this.isRunning = false;
-            FXMLvictoryController VC = (FXMLvictoryController)Haunted.getNavigation().load(FXMLvictoryController.URL_FXML);
-             VC.setWinnaarnaam(winner.getName());
-             VC.Show();
-       // TODO: call in view (FXML) the method to launch the victory screen with the winner (inside the parameter)
+        this.isRunning = false;
+        FXMLvictoryController VC = (FXMLvictoryController) Haunted.getNavigation().load(FXMLvictoryController.URL_FXML);
+        VC.setWinnaarnaam(winner.getName());
+        VC.Show();
+        // TODO: call in view (FXML) the method to launch the victory screen with the winner (inside the parameter)
     }
 
     /**
@@ -202,6 +200,7 @@ public class Game {
      */
     public void tick() {
         // TODO - implement Game.tick
+
         throw new UnsupportedOperationException();
     }
 
@@ -246,12 +245,12 @@ public class Game {
 
         return spawnPoint;
     }
-    
-    public List<Ghost> getGhosts(){
+
+    public List<Ghost> getGhosts() {
         return this.ghosts;
     }
-    
-    public Human getHuman(){
+
+    public Human getHuman() {
         return this.human;
     }
 }
