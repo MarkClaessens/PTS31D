@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -25,7 +26,7 @@ public class Game {
     private List<Ghost> ghosts = new ArrayList();
     private Human human;
     private boolean isPauzed = false;
-
+    private Thread tickThread;
     /**
      * @return if the game isRunning (boolean)
      */
@@ -160,6 +161,21 @@ public class Game {
     public void startRound() {
         this.isRunning = true;
         this.isPauzed = false;
+        tickThread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                Timer timer = new Timer();
+                TimerTask task = new TimerTask(){
+
+                    @Override
+                    public void run() {
+                        
+                    }
+                    
+                };
+            }
+        });        
     }
 
     /**
@@ -167,8 +183,8 @@ public class Game {
      * the current round will increase with one.
      */
     public void endRound() {
-        // TODO - implement Game.endRound
-        throw new UnsupportedOperationException();
+        tickThread.interrupt();
+       
     }
 
     /**
@@ -200,7 +216,7 @@ public class Game {
      */
     public void tick() {
         // TODO - implement Game.tick
-
+       
         throw new UnsupportedOperationException();
     }
 
