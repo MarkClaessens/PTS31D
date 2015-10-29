@@ -26,7 +26,7 @@ public class Game {
     private boolean isRunning = false; // flag that indicates if the game is active, like players are playing.
     private List<Ghost> ghosts = new ArrayList();
     private Human human;
-    private boolean isPauzed = false;
+    private boolean isPaused = false;
     private Thread tickThread;
     private MainGameFX gameFX;
 
@@ -114,7 +114,7 @@ public class Game {
         this.players = players;
         this.floorAmount = floors;
         this.isRunning = false;
-        this.isPauzed = true;
+        this.isPaused = true;
         this.currentLevel = new Level(0);
         this.setupGameClasses();
         this.bindCharactersToPlayers();
@@ -181,7 +181,7 @@ public class Game {
     public void startRound() {
 
         this.isRunning = true;
-        this.isPauzed = false;
+        this.isPaused = false;
         tickThread = new Thread(new Runnable() {
 
             @Override
@@ -198,6 +198,7 @@ public class Game {
             }
         });
         gameFX.setShowEmpty(false);
+        tickThread.start();
     }
 
     /**
@@ -244,13 +245,13 @@ public class Game {
      * there are any changes to the game state.
      */
     public void tick() {
-        if (this.isRunning && !this.isPauzed) {
+        if (this.isRunning && !this.isPaused) {
             if (!this.ghosts.isEmpty()) {
                 Object[] keyboard = this.gameFX.getPressedKeys();
                 this.gameFX.clearPressedKeys();
 
                 if ((boolean) keyboard[2]) {
-                    this.isPauzed = !this.isPauzed;
+                    this.isPaused = !this.isPaused;
                 }
 
                 for (int i = 0; i <= this.players.size(); i++) {
