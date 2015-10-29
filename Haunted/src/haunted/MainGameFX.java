@@ -32,7 +32,7 @@ public class MainGameFX extends Application {
     private int levelHeight;
     private long animationSpeed = 90000000;
 
-    private String[] pressedKeys;
+    private Object[] pressedKeys;
     private final long startNanoTime = System.nanoTime();
 
     private Human human = null;
@@ -57,7 +57,7 @@ public class MainGameFX extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         determineScreenSize();
-        pressedKeys = new String[3];
+        pressedKeys = new DirectionType[3];
 
         //Make canvas and gc and put it on the screen
         Canvas canvas = new Canvas(screenWidth, screenHeight);
@@ -231,28 +231,33 @@ public class MainGameFX extends Application {
                         String code = e.getCode().toString();
 
                         // only add once... prevent duplicates
-                        if (code == "W" || code == "A" || code == "S" || code == "D") {
-                            pressedKeys[0] = code;
-                        } else if (code == "UP" || code == "DOWN" || code == "LEFT" || code == "RIGHT") {
-                            pressedKeys[1] = code;
-                        } else if (code == "ESCAPE") {
-                            pressedKeys[2] = code;
-                        }
-
-                    }
-                }
-        );
-        scene.setOnKeyReleased(
-                new EventHandler<KeyEvent>() {
-
-                    public void handle(KeyEvent e) {
-                        String code = e.getCode().toString();
-                        if (code == "W" || code == "A" || code == "S" || code == "D") {
-                            pressedKeys[0] = null;
-                        } else if (code == "UP" || code == "DOWN" || code == "LEFT" || code == "RIGHT") {
-                            pressedKeys[1] = null;
-                        } else if (code == "ESCAPE") {
-                            pressedKeys[2] = null;
+                        switch(code){
+                            case "W": 
+                                pressedKeys[0] = DirectionType.UP;
+                                break;
+                            case "A": 
+                                pressedKeys[0] = DirectionType.LEFT;
+                                break;
+                            case "S": 
+                                pressedKeys[0] = DirectionType.DOWN;
+                                break;
+                            case "D": 
+                                pressedKeys[0] = DirectionType.RIGHT;
+                                break;
+                            case "UP": 
+                                pressedKeys[1] = DirectionType.UP;
+                                break;
+                            case "DOWN": 
+                                pressedKeys[1] = DirectionType.DOWN;
+                                break;
+                            case "LEFT": 
+                                pressedKeys[1] = DirectionType.LEFT;
+                                break;
+                            case "RIGHT": 
+                                pressedKeys[1] = DirectionType.RIGHT;
+                                break;
+                            case "ESCAPE":
+                                pressedKeys[2] = true;
                         }
                     }
                 }
@@ -264,12 +269,12 @@ public class MainGameFX extends Application {
      *
      * @return pressed keys
      */
-    public String[] getPressedKeys() {
+    public Object[] getPressedKeys() {
         return pressedKeys;
     }
 
     public void clearPressedKeys() {
-        for (String key : pressedKeys) {
+        for (Object key : pressedKeys) {
             key = null;
         }
     }
