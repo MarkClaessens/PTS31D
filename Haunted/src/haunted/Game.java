@@ -118,6 +118,9 @@ public class Game {
 
     }
 
+    /**
+     * Create the spawnPositions for the Characters and  create their objects.
+     */
     public void setupGameClasses() {
         // Pick the spawn positions for the characters
         Point2D ghostSpawnPosition = pickRandomGhostSpawnPoint();
@@ -139,9 +142,7 @@ public class Game {
     }
 
     /**
-     * Bind the characters to the players and give them a spawnposition Call
-     * this method after the game generated his level and sets his obstacles [ !
-     * ]
+     * Bind the characters to the players at random
      */
     public void bindCharactersToPlayers() {
         // Choose random who becomes the human
@@ -161,7 +162,7 @@ public class Game {
      */
     public void nextLevel() {
         // TODO - implement Game.nextLevel
-        currentRound++;
+        endRound();
         try {
             this.currentLevel = new Level(currentRound);
         } catch (IOException ex) {
@@ -174,6 +175,7 @@ public class Game {
      * starts the next round at the current floor.
      */
     public void startRound() {
+        
         this.isRunning = true;
         this.isPauzed = false;
         tickThread = new Thread(new Runnable() {
@@ -199,10 +201,12 @@ public class Game {
      */
     public void endRound() {
         tickThread.interrupt();
-        if(this.currentRound == this.floorAmount){
+        if(this.currentRound >= this.floorAmount){
             this.players.stream().filter((P) -> (P.getCharacter() instanceof Human)).forEach((P) -> {
                 this.endGame(P);
             });
+        } else {
+            this.currentRound++;
         }
     }
 
