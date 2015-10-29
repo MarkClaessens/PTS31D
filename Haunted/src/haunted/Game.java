@@ -114,6 +114,9 @@ public class Game {
         this.bindCharactersToPlayers();
     }
 
+    /**
+     * Create the spawnPositions for the Characters and  create their objects.
+     */
     public void setupGameClasses() {
         // Pick the spawn positions for the characters
         Point2D ghostSpawnPosition = pickRandomGhostSpawnPoint();
@@ -135,9 +138,7 @@ public class Game {
     }
 
     /**
-     * Bind the characters to the players and give them a spawnposition Call
-     * this method after the game generated his level and sets his obstacles [ !
-     * ]
+     * Bind the characters to the players at random
      */
     public void bindCharactersToPlayers() {
         // Choose random who becomes the human
