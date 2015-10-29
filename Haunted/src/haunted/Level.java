@@ -191,13 +191,13 @@ public class Level {
     private Point2D pickRandomDoorSpawnPoint() {
         // Make an array with the points where the door is allowed to spawn.
         Point2D[] spawnPoints = new Point2D[]{
-            new Point2D.Double(0, 300),
-            new Point2D.Double(0, 400),
-            new Point2D.Double(0, 500),
-            new Point2D.Double(0, 600),
-            new Point2D.Double(0, 700),
-            new Point2D.Double(0, 800),
-            new Point2D.Double(0, 900),};
+            new Point2D.Double(300, 0),
+            new Point2D.Double(400, 0),
+            new Point2D.Double(500, 0),
+            new Point2D.Double(600, 0),
+            new Point2D.Double(700, 0),
+            new Point2D.Double(800, 0),
+            new Point2D.Double(900, 0),};
 
         // Take a random point from the array. This is where the human will spawn.
         Random randomizer = new Random();
