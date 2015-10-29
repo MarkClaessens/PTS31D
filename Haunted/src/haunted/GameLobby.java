@@ -138,6 +138,10 @@ public class GameLobby {
             this.floorAmount = FloorAmount;
         }
     }
+    
+    public Game getGame(){
+        return this.game;
+    }
 
     /**
      * you can start the game when everyone is ready. this starts a timer

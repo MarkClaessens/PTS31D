@@ -19,14 +19,19 @@ import javafx.stage.Stage;
 public class Haunted extends Application {
 
     private static Navigation navigation;
+    private static Stage currentStage;
 
     public static Navigation getNavigation() {
         return navigation;
     }
+    
+    public static Stage getStage(){
+        return currentStage;
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
+        this.currentStage = primaryStage;
         navigation = new Navigation(primaryStage);
 
         primaryStage.setTitle("Haunted");

@@ -76,6 +76,10 @@ public class Game {
         return this.floorAmount;
     }
 
+    public MainGameFX getFX() {
+        return gameFX;
+    }
+
     /**
      * sets amount of floors the game will contain
      *
@@ -119,7 +123,7 @@ public class Game {
     }
 
     /**
-     * Create the spawnPositions for the Characters and  create their objects.
+     * Create the spawnPositions for the Characters and create their objects.
      */
     public void setupGameClasses() {
         // Pick the spawn positions for the characters
@@ -150,9 +154,9 @@ public class Game {
         int index = randomizer.nextInt(players.size());
         players.get(index).setCharacter(human);
         if (index == 0) {
-            players.get(1).setCharacter(ghosts.get(1));
+            players.get(1).setCharacter(ghosts.get(0));
         } else {
-            players.get(0).setCharacter(ghosts.get(1));
+            players.get(0).setCharacter(ghosts.get(0));
         }
     }
 
@@ -175,7 +179,7 @@ public class Game {
      * starts the next round at the current floor.
      */
     public void startRound() {
-        
+
         this.isRunning = true;
         this.isPauzed = false;
         tickThread = new Thread(new Runnable() {
@@ -203,7 +207,7 @@ public class Game {
     public void endRound() {
         tickThread.interrupt();
         gameFX.setShowEmpty(true);
-        if(this.currentRound >= this.floorAmount){
+        if (this.currentRound >= this.floorAmount) {
             this.players.stream().filter((P) -> (P.getCharacter() instanceof Human)).forEach((P) -> {
                 this.endGame(P);
             });
@@ -243,20 +247,21 @@ public class Game {
         if (this.isRunning && !this.isPauzed) {
             if (!this.ghosts.isEmpty()) {
                 Object[] keyboard = this.gameFX.getPressedKeys();
-                if (keyboard[2] != null) {
-                    if ((boolean) keyboard[2]) {
-                        this.isPauzed = !this.isPauzed;
-                    }
+                this.gameFX.clearPressedKeys();
+
+                if ((boolean) keyboard[2]) {
+                    this.isPauzed = !this.isPauzed;
                 }
+
                 for (int i = 0; i <= this.players.size(); i++) {
                     if (keyboard[i] != null) {
                         this.players.get(i).getCharacter().move((DirectionType) keyboard[i]);
-                        if(this.players.get(i).getCharacter() instanceof Ghost){
+                        if (this.players.get(i).getCharacter() instanceof Ghost) {
                             this.players.get(i).getCharacter().setIsMoving(true);
                         }
-                    } else if (this.players.get(i).getCharacter() instanceof Ghost){
-                        Ghost G = (Ghost)this.players.get(i).getCharacter();
-                        if(G.isIsMoving()){
+                    } else if (this.players.get(i).getCharacter() instanceof Ghost) {
+                        Ghost G = (Ghost) this.players.get(i).getCharacter();
+                        if (G.isIsMoving()) {
                             G.setIsMoving(false);
                             G.setStationaryTime();
                         }
@@ -289,7 +294,7 @@ public class Game {
 
         // Take a random point from the array. This is where the human will spawn.
         Random randomizer = new Random();
-        Point2D spawnPoint = spawnPoints[randomizer.nextInt(6)];
+        Point2D spawnPoint = spawnPoints[randomizer.nextInt(5)];
 
         return spawnPoint;
     }
@@ -310,7 +315,7 @@ public class Game {
 
         // Take a random point from the array. This is where the human will spawn.
         Random randomizer = new Random();
-        Point2D spawnPoint = spawnPoints[randomizer.nextInt(6)];
+        Point2D spawnPoint = spawnPoints[randomizer.nextInt(5)];
 
         return spawnPoint;
     }

@@ -7,6 +7,7 @@ package haunted;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -63,7 +64,7 @@ public class MainGameFX extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         determineScreenSize();
-        pressedKeys = new DirectionType[3];
+        pressedKeys = new Object[3];
 
         //Make canvas and gc and put it on the screen
         Canvas canvas = new Canvas(screenWidth, screenHeight);
@@ -287,9 +288,8 @@ public class MainGameFX extends Application {
     }
 
     public void clearPressedKeys() {
-        for (Object key : pressedKeys) {
-            key = null;
-        }
+        pressedKeys  = new Object[2];
+        pressedKeys[2] = false;
     }
 
     /**

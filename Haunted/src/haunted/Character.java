@@ -145,7 +145,9 @@ public abstract class Character {
                     this.direction = direction;
                     this.setIsMoving(true);
                     position.setLocation(oldPosition.getX(), oldPosition.getY() + movementSpeed);
+                    System.out.println("UP");
                     break;
+                    
                 }
             // </editor-fold>
             case DOWN:
@@ -157,6 +159,7 @@ public abstract class Character {
                     this.direction = direction;
                     this.setIsMoving(true);
                     position.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
+                    System.out.println("DOWN");
                     break;
                 }
             // </editor-fold>
@@ -169,6 +172,7 @@ public abstract class Character {
                     this.direction = direction;
                     this.setIsMoving(true);
                     position.setLocation(oldPosition.getX() + movementSpeed, oldPosition.getY());
+                    System.out.println("RIGHT");
                     break;
                 }
             // </editor-fold>
@@ -181,6 +185,7 @@ public abstract class Character {
                     this.direction = direction;
                     this.setIsMoving(true);
                     position.setLocation(oldPosition.getX() - movementSpeed, oldPosition.getY());
+                    System.out.println("LEFT");
                     break;
                 }
             // </editor-fold>

@@ -180,7 +180,7 @@ public class Level {
 
         // Take a random point from the array. This is where the human will spawn.
         Random randomizer = new Random();
-        Point2D spawnPoint = spawnPoints[randomizer.nextInt(6)];
+        Point2D spawnPoint = spawnPoints[randomizer.nextInt(5)];
 
         return spawnPoint;
     }
