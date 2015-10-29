@@ -181,10 +181,10 @@ public class Game {
 
                     @Override
                     public void run() {
-                        
-                    }
-                    
+                        tick();
+                    }               
                 };
+                timer.scheduleAtFixedRate(task, 0, 16);
             }
         });        
     }
