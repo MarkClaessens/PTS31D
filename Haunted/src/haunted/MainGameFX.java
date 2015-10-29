@@ -57,7 +57,7 @@ public class MainGameFX extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         determineScreenSize();
-        pressedKeys = new String[2];
+        pressedKeys = new String[3];
 
         //Make canvas and gc and put it on the screen
         Canvas canvas = new Canvas(screenWidth, screenHeight);
@@ -234,6 +234,8 @@ public class MainGameFX extends Application {
                             pressedKeys[0] = code;
                         } else if (code == "UP" || code == "DOWN" || code == "LEFT" || code == "RIGHT") {
                             pressedKeys[1] = code;
+                        } else if(code == "ESC"){
+                            pressedKeys[2] = code;
                         }
 
                     }
@@ -248,6 +250,8 @@ public class MainGameFX extends Application {
                             pressedKeys[0] = null;
                         } else if (code == "UP" || code == "DOWN" || code == "LEFT" || code == "RIGHT") {
                             pressedKeys[1] = null;
+                        } else if (code == "ESC"){
+                            pressedKeys[2] = null;
                         }
                     }
                 }
