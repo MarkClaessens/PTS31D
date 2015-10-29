@@ -85,14 +85,7 @@ public class Human extends Character {
         this.hasKey = false;
     }
 
-    // Mike: i commented this out because I programed the transformation in the Ghost class.
-//    /**
-//     * The controls of the current ghost as human goes to the new ghost as human.
-//     */
-//    public void transferHuman() {
-//        
-//        }
-//    }
+
     /**
      * Let the human pick up a key, called when the human touches the key
      */
