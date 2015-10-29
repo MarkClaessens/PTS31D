@@ -38,6 +38,7 @@ public class MainGameFX extends Application {
 
     private Human human = null;
     private Ghost ghost = null;
+    private Level level = null;
     private Obstacle key = null;
     private Obstacle door = null;
 
@@ -117,19 +118,19 @@ public class MainGameFX extends Application {
         //Draw Door
         Image doorImage = new Image(door.getSprite());
 
-        //gc.drawImage(backgroundImage, 0, 0, screenWidth, screenHeight);
-        
+        gc.drawImage(backgroundImage, 0, 0);//, screenWidth, screenHeight
+        //, screenWidth / levelWidth, screenHeight / levelHeight
         if (drawHumanImage != null) {
-            gc.drawImage(drawHumanImage, human.getPosition().getX(), human.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
+            gc.drawImage(drawHumanImage, human.getPosition().getX(), human.getPosition().getY());
         }
         if (drawGhostImage != null) {
             gc.drawImage(drawGhostImage, ghost.getPosition().getX(), ghost.getPosition().getY());
         }
         if (key != null) {
-       //     gc.drawImage(keyImg, screenWidth / levelWidth, screenHeight / levelHeight);
+           gc.drawImage(keyImg, level.getKeyLocation().getX(), level.getKeyLocation().getY()-200);
         }
         if (door != null) {
-        //    gc.drawImage(doorImage, screenWidth / levelWidth, screenHeight / levelHeight);
+           gc.drawImage(doorImage, level.getDoorLocation().getX(), level.getDoorLocation().getY());
         }
     }
 
@@ -217,6 +218,7 @@ public class MainGameFX extends Application {
 
         //Set door and key
         Level lvl = game.getCurrentLevel();
+        this.level = lvl;
         this.levelWidth = lvl.getWidth();
         this.levelHeight = lvl.getHeight();
         for (Obstacle o : lvl.getObstacles()) {
