@@ -269,6 +269,7 @@ public class Game {
             } else {
                 this.endRound();
             }
+            gameFX.setItems(this);
         }
     }
 
