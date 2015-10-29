@@ -197,7 +197,8 @@ public class Level {
             new Point2D.Double(600, 0),
             new Point2D.Double(700, 0),
             new Point2D.Double(800, 0),
-            new Point2D.Double(900, 0),};
+            new Point2D.Double(900, 0)
+        };
 
         // Take a random point from the array. This is where the human will spawn.
         Random randomizer = new Random();
