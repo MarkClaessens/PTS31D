@@ -28,6 +28,8 @@ public class Game {
     private Human human;
     private boolean isPauzed = false;
     private Thread tickThread;
+    private MainGameFX gameFX;
+
     /**
      * @return if the game isRunning (boolean)
      */
@@ -112,6 +114,8 @@ public class Game {
         this.currentLevel = new Level(0);
         this.setupGameClasses();
         this.bindCharactersToPlayers();
+        this.gameFX = new MainGameFX();
+
     }
 
     public void setupGameClasses() {
@@ -177,16 +181,16 @@ public class Game {
             @Override
             public void run() {
                 Timer timer = new Timer();
-                TimerTask task = new TimerTask(){
+                TimerTask task = new TimerTask() {
 
                     @Override
                     public void run() {
                         tick();
-                    }               
+                    }
                 };
                 timer.scheduleAtFixedRate(task, 0, 16);
             }
-        });        
+        });
     }
 
     /**
@@ -194,8 +198,12 @@ public class Game {
      * the current round will increase with one.
      */
     public void endRound() {
-        // TODO - implement Game.endRound
         tickThread.interrupt();
+        if(this.currentRound == this.floorAmount){
+            this.players.stream().filter((P) -> (P.getCharacter() instanceof Human)).forEach((P) -> {
+                this.endGame(P);
+            });
+        }
     }
 
     /**
@@ -226,12 +234,35 @@ public class Game {
      * there are any changes to the game state.
      */
     public void tick() {
-
-        // TODO - implement Game.tick
-       
-
         if (this.isRunning && !this.isPauzed) {
-
+            if (!this.ghosts.isEmpty()) {
+                Object[] keyboard = this.gameFX.getPressedKeys();
+                if (keyboard[2] != null) {
+                    if ((boolean) keyboard[2]) {
+                        this.isPauzed = !this.isPauzed;
+                    }
+                }
+                for (int i = 0; i <= this.players.size(); i++) {
+                    if (keyboard[i] != null) {
+                        this.players.get(i).getCharacter().move((DirectionType) keyboard[i]);
+                        if(this.players.get(i).getCharacter() instanceof Ghost){
+                            this.players.get(i).getCharacter().setIsMoving(true);
+                        }
+                    } else if (this.players.get(i).getCharacter() instanceof Ghost){
+                        Ghost G = (Ghost)this.players.get(i).getCharacter();
+                        if(G.isIsMoving()){
+                            G.setIsMoving(false);
+                            G.setStationaryTime();
+                        }
+                    }
+                }
+                this.human.checkInteract();
+                this.ghosts.stream().forEach((G) -> {
+                    G.changeAppearance();
+                });
+            } else {
+                this.endRound();
+            }
         }
     }
 

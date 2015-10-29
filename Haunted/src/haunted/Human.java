@@ -133,7 +133,7 @@ public class Human extends Character {
         //door collision
         if ((checkHitboxCollision(this.getPosition(), 10, 1, door, 10, 1) && this.hasKey)) //key collision   
         {
-            this.game.endRound();
+            this.enterDoor();
         }
         if (checkHitboxCollision(this.getPosition(), 100, 100, key, 100, 100)) {
             this.pickUpKey();

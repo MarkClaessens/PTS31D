@@ -30,8 +30,8 @@ public class Ghost extends Character {
      *
      * @param stationaryTime
      */
-    public void setStationaryTime(Calendar stationaryTime) {
-        this.stationaryTime = stationaryTime;
+    public void setStationaryTime() {
+       this.stationaryTime = Calendar.getInstance();
     }
 
     /**
@@ -118,7 +118,7 @@ public class Ghost extends Character {
         } // If the ghost has no more lifes then end the game with the winning player as the parameter.
         else {
             game.getPlayers().stream().filter((player) -> (player.getCharacter() instanceof Human)).forEach((player) -> {
-                game.endGame(player);
+                this.game.getGhosts().remove(this);
             });
         }
     }
