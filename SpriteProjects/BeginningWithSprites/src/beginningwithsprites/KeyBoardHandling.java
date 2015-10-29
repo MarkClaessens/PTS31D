@@ -71,17 +71,21 @@ public class KeyBoardHandling extends Application {
                 if (input.contains("ESCAPE") || input.contains("LEFT")) {
                     gc.drawImage(leftG, 64, 64);
                     gc.drawImage(right, 256, 64);
+                    gc.strokeText("Please wait...", 0, 0);
                 } else if (input.contains("D")  || input.contains("RIGHT")) {
                     gc.drawImage(rightG, 256, 64);
                     gc.drawImage(left, 64, 64);
+                    gc.strokeText("Please wait...", 0, 0);
                 } 
                 else{
                     gc.drawImage(right, 256, 64);
                     gc.drawImage(left, 64, 64);
+                    gc.strokeText("Please wait...", 0, 0);
                 }
                 if(input.isEmpty()){
                     gc.drawImage(right, 256, 64);
                     gc.drawImage(left, 64, 64);
+                                gc.strokeText("Please wait...", 0, 0);
                 }
                 
             }

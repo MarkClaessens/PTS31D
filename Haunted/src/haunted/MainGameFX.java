@@ -39,8 +39,14 @@ public class MainGameFX extends Application {
     private Ghost ghost = null;
     private Obstacle key = null;
     private Obstacle door = null;
+    
+    private boolean showEmpty;
 
     private final String backgroundImg = "background.png";
+
+    public MainGameFX() {
+        this.showEmpty = false;
+    }
 
     /**
      * Starting point of drawing. in animationTimer you can find the drawing in
@@ -70,8 +76,15 @@ public class MainGameFX extends Application {
         //Animation timer start and handling
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
+                if(!showEmpty){
                 gc.clearRect(0, 0, screenWidth, screenHeight);
                 drawElements(gc, currentNanoTime);
+                }
+                else{
+                    gc.clearRect(0, 0, screenWidth, screenHeight);
+                    Image waitImage = new Image("waiting.png");
+                    gc.drawImage(waitImage, 0, 0, screenWidth, screenHeight);
+                }
             }
         }.start();
         stage.show();
@@ -286,5 +299,19 @@ public class MainGameFX extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+
+    /**
+     * @return the showEmpty
+     */
+    public boolean isShowEmpty() {
+        return showEmpty;
+    }
+
+    /**
+     * @param showEmpty the showEmpty to set
+     */
+    public void setShowEmpty(boolean showEmpty) {
+        this.showEmpty = showEmpty;
     }
 }

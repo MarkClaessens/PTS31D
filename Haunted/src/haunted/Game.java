@@ -158,7 +158,7 @@ public class Game {
      */
     public void nextLevel() {
         // TODO - implement Game.nextLevel
-        currentRound++;
+        endRound();
         try {
             this.currentLevel = new Level(currentRound);
         } catch (IOException ex) {
@@ -171,6 +171,7 @@ public class Game {
      * starts the next round at the current floor.
      */
     public void startRound() {
+        
         this.isRunning = true;
         this.isPauzed = false;
         tickThread = new Thread(new Runnable() {
@@ -195,6 +196,7 @@ public class Game {
      * the current round will increase with one.
      */
     public void endRound() {
+        currentRound++;
         // TODO - implement Game.endRound
         tickThread.interrupt();
     }
