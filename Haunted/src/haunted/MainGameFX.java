@@ -40,7 +40,7 @@ public class MainGameFX extends Application {
     private Ghost ghost = null;
     private Obstacle key = null;
     private Obstacle door = null;
-    
+
     private boolean showEmpty;
 
     private final String backgroundImg = "background.png";
@@ -65,6 +65,7 @@ public class MainGameFX extends Application {
         stage.setScene(scene);
         determineScreenSize();
         pressedKeys = new Object[3];
+        this.clearPressedKeys();
 
         //Make canvas and gc and put it on the screen
         Canvas canvas = new Canvas(screenWidth, screenHeight);
@@ -77,11 +78,10 @@ public class MainGameFX extends Application {
         //Animation timer start and handling
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
-                if(!showEmpty){
-                gc.clearRect(0, 0, screenWidth, screenHeight);
-                drawElements(gc, currentNanoTime);
-                }
-                else{
+                if (!showEmpty) {
+                    gc.clearRect(0, 0, screenWidth, screenHeight);
+                    drawElements(gc, currentNanoTime);
+                } else {
                     gc.clearRect(0, 0, screenWidth, screenHeight);
                     Image waitImage = new Image("waiting.png");
                     gc.drawImage(waitImage, 0, 0, screenWidth, screenHeight);
@@ -204,7 +204,7 @@ public class MainGameFX extends Application {
     public void setItems(Game game) {
         //Set human and ghost
         for (Player p : game.getPlayers()) {
-            if (p.getCharacter().getClass().equals(human.getClass())) {
+            if (p.getCharacter() instanceof Human) {
                 this.human = (Human) p.getCharacter();
             } else {
                 this.ghost = (Ghost) p.getCharacter();
@@ -245,29 +245,29 @@ public class MainGameFX extends Application {
                         String code = e.getCode().toString();
 
                         // only add once... prevent duplicates
-                        switch(code){
-                            case "W": 
+                        switch (code) {
+                            case "W":
                                 pressedKeys[0] = DirectionType.UP;
                                 break;
-                            case "A": 
+                            case "A":
                                 pressedKeys[0] = DirectionType.LEFT;
                                 break;
-                            case "S": 
+                            case "S":
                                 pressedKeys[0] = DirectionType.DOWN;
                                 break;
-                            case "D": 
+                            case "D":
                                 pressedKeys[0] = DirectionType.RIGHT;
                                 break;
-                            case "UP": 
+                            case "UP":
                                 pressedKeys[1] = DirectionType.UP;
                                 break;
-                            case "DOWN": 
+                            case "DOWN":
                                 pressedKeys[1] = DirectionType.DOWN;
                                 break;
-                            case "LEFT": 
+                            case "LEFT":
                                 pressedKeys[1] = DirectionType.LEFT;
                                 break;
-                            case "RIGHT": 
+                            case "RIGHT":
                                 pressedKeys[1] = DirectionType.RIGHT;
                                 break;
                             case "ESCAPE":
@@ -288,7 +288,7 @@ public class MainGameFX extends Application {
     }
 
     public void clearPressedKeys() {
-        pressedKeys  = new Object[2];
+        pressedKeys = new Object[3];
         pressedKeys[2] = false;
     }
 

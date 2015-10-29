@@ -111,6 +111,7 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
             gamelobby.startGame();
             MainGameFX gameFX = gamelobby.getGame().getFX();
             gameFX.start(Haunted.getStage());
+
         } else {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setContentText("niet iedereen is ready");

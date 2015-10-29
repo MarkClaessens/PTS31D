@@ -6,7 +6,9 @@ import java.awt.geom.Point2D;
 import java.io.IOException;
 import static java.lang.Math.ceil;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 import java.util.Timer;
 import java.util.logging.Logger;
@@ -29,6 +31,7 @@ public class Game {
     private boolean isPaused = false;
     private Thread tickThread;
     private MainGameFX gameFX;
+    public Calendar cl;
 
     /**
      * @return if the game isRunning (boolean)
@@ -119,6 +122,7 @@ public class Game {
         this.setupGameClasses();
         this.bindCharactersToPlayers();
         this.gameFX = new MainGameFX();
+        cl = Calendar.getInstance();
 
     }
 
@@ -131,17 +135,17 @@ public class Game {
         Point2D humanSpawnPosition = pickRandomHumanSpawnPoint();
 
         // Create the characters and bind them to the players
-        String[] ghoSpritesUp = new String[]{"ghostRedUp1.png", "ghostRedUp2.png", "ghostRedUp3.png"};
-        String[] ghoSpritesDown = new String[]{"ghostRedDown1.png", "ghostRedDown2.png", "ghostRedDown3.png"};
-        String[] ghoSpritesLeft = new String[]{"ghostRedLeft1.png", "ghostRedLeft2.png", "ghostRedLeft3.png"};
-        String[] ghoSpritesRight = new String[]{"ghostRedRight1.png", "ghostRedRight2.png", "ghostRedRight3.png"};
+        String[] ghoSpritesUp = new String[]{"GhostRedUp1.png", "GhostRedUp2.png", "GhostRedUp3.png"};
+        String[] ghoSpritesDown = new String[]{"GhostRedDown1.png", "GhostRedDown2.png", "GhostRedDown3.png"};
+        String[] ghoSpritesLeft = new String[]{"GhostRedLeft1.png", "GhostRedLeft2.png", "GhostRedLeft3.png"};
+        String[] ghoSpritesRight = new String[]{"GhostRedRight1.png", "GhostRedRight2.png", "GhostRedRight3.png"};
         Ghost ghost = new Ghost(ghostSpawnPosition, Color.RED, ghoSpritesUp, ghoSpritesDown, ghoSpritesLeft, ghoSpritesRight, this);
         ghosts.add(ghost);
 
-        String[] humSpritesUp = new String[]{"humanBlueUp1.png", "humanBlueUp2.png", "humanBlueUp3.png"};
-        String[] humSpritesDown = new String[]{"humanBlueDown1.png", "humanBlueDown2.png", "humanBlueDown3.png"};
-        String[] humSpritesLeft = new String[]{"humanBlueLeft1.png", "humanBlueLeft2.png", "humanBlueLeft3.png"};
-        String[] humSpritesRight = new String[]{"humanBlueRight1.png", "humanBlueRight2.png", "humanBlueRight3.png"};
+        String[] humSpritesUp = new String[]{"HumanBlueUp1.png", "HumanBlueUp2.png", "HumanBlueUp3.png"};
+        String[] humSpritesDown = new String[]{"HumanBlueDown1.png", "HumanBlueDown2.png", "HumanBlueDown3.png"};
+        String[] humSpritesLeft = new String[]{"HumanBlueLeft1.png", "HumanBlueLeft2.png", "HumanBlueLeft3.png"};
+        String[] humSpritesRight = new String[]{"HumanBlueRight1.png", "HumanBlueRight2.png", "HumanBlueRight3.png"};
         human = new Human(humanSpawnPosition, Color.BLUE, humSpritesUp, humSpritesDown, humSpritesLeft, humSpritesRight, this);
     }
 
@@ -191,6 +195,8 @@ public class Game {
 
                     @Override
                     public void run() {
+                        long l = System.currentTimeMillis() - cl.getTimeInMillis();
+                        System.out.println(l);
                         tick();
                     }
                 };
@@ -248,23 +254,25 @@ public class Game {
         if (this.isRunning && !this.isPaused) {
             if (!this.ghosts.isEmpty()) {
                 Object[] keyboard = this.gameFX.getPressedKeys();
-                this.gameFX.clearPressedKeys();
+                if (keyboard != null) {
+                    this.gameFX.clearPressedKeys();
 
-                if ((boolean) keyboard[2]) {
-                    this.isPaused = !this.isPaused;
-                }
+                    if ((boolean) keyboard[2]) {
+                        this.isPaused = !this.isPaused;
+                    }
 
-                for (int i = 0; i <= this.players.size(); i++) {
-                    if (keyboard[i] != null) {
-                        this.players.get(i).getCharacter().move((DirectionType) keyboard[i]);
-                        if (this.players.get(i).getCharacter() instanceof Ghost) {
-                            this.players.get(i).getCharacter().setIsMoving(true);
-                        }
-                    } else if (this.players.get(i).getCharacter() instanceof Ghost) {
-                        Ghost G = (Ghost) this.players.get(i).getCharacter();
-                        if (G.isIsMoving()) {
-                            G.setIsMoving(false);
-                            G.setStationaryTime();
+                    for (int i = 0; i < this.players.size(); i++) {
+                        if (keyboard[i] != null) {
+                            this.players.get(i).getCharacter().move((DirectionType) keyboard[i]);
+                            if (this.players.get(i).getCharacter() instanceof Ghost) {
+                                this.players.get(i).getCharacter().setIsMoving(true);
+                            }
+                        } else if (this.players.get(i).getCharacter() instanceof Ghost) {
+                            Ghost G = (Ghost) this.players.get(i).getCharacter();
+                            if (G.isIsMoving()) {
+                                G.setIsMoving(false);
+                                G.setStationaryTime();
+                            }
                         }
                     }
                 }
@@ -276,6 +284,7 @@ public class Game {
                 this.endRound();
             }
             gameFX.setItems(this);
+
         }
     }
 

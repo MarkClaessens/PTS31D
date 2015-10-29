@@ -207,8 +207,8 @@ public abstract class Character {
         int pYb = pYt + 100;
 
         BufferedImage colImg = this.game.getCurrentLevel().getCollisionImage();
-        return pXl >= 0 && pYt >= 0 && pYt < 901 && pXr
-                < 1401 && colImg.getRGB(pXl, pYt)
+        return pXl >= 0 && pYt >= 0 && pYt < 900 && pXr
+                < 1400 && colImg.getRGB(pXl, pYt)
                 + colImg.getRGB(pXr, pYt) + colImg.getRGB(pXr, pYb) + colImg.getRGB(pXl, pYb) == -4;
 
     }

@@ -14,7 +14,7 @@ public class Ghost extends Character {
 
     private boolean vulnerable;
     private boolean isGhost;
-    private Calendar stationaryTime = null;
+    private Calendar stationaryTime = Calendar.getInstance();
 
     /**
      *
