@@ -102,30 +102,34 @@ public class MainGameFX extends Application {
         int time = Math.round((currentNanoTime - startNanoTime) / animationSpeed);
         //Set backgroundImage
         Image backgroundImage = new Image(backgroundImg);
-        gc.drawImage(backgroundImage, 0, 0, screenWidth, screenHeight);
 
         //Draw Human
         Image drawHumanImage = drawCharacter(human, time);
-        if (drawHumanImage != null) {
-            gc.drawImage(drawHumanImage, human.getPosition().getX(), human.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
-        }
+        System.out.println(human.getPosition().getX() + "X");
+        System.out.println(human.getPosition().getY() + "Y");
 
         //Draw Ghost
         Image drawGhostImage = drawCharacter(ghost, time);
-        if (drawGhostImage != null) {
-            gc.drawImage(drawGhostImage, ghost.getPosition().getX(), ghost.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
-        }
 
         //Draw Key
-        if (key != null) {
-            Image keyImg = new Image(key.getSprite());
-            gc.drawImage(keyImg, screenWidth / levelWidth, screenHeight / levelHeight);
-        }
+        Image keyImg = new Image(key.getSprite());
 
         //Draw Door
+        Image doorImage = new Image(door.getSprite());
+
+        //gc.drawImage(backgroundImage, 0, 0, screenWidth, screenHeight);
+        
+        if (drawHumanImage != null) {
+            gc.drawImage(drawHumanImage, human.getPosition().getX(), human.getPosition().getY(), screenWidth / levelWidth, screenHeight / levelHeight);
+        }
+        if (drawGhostImage != null) {
+            gc.drawImage(drawGhostImage, ghost.getPosition().getX(), ghost.getPosition().getY());
+        }
+        if (key != null) {
+       //     gc.drawImage(keyImg, screenWidth / levelWidth, screenHeight / levelHeight);
+        }
         if (door != null) {
-            Image doorImage = new Image(door.getSprite());
-            gc.drawImage(doorImage, screenWidth / levelWidth, screenHeight / levelHeight);
+        //    gc.drawImage(doorImage, screenWidth / levelWidth, screenHeight / levelHeight);
         }
     }
 
