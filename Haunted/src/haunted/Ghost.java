@@ -91,14 +91,16 @@ public class Ghost extends Character {
      * wall" immediately.
      */
     public void changeAppearance() {
-        if (this.isGhost && System.currentTimeMillis() >= stationaryTime.getTimeInMillis() + 1500) {
+        //LET OP: DIT VEROORZAAKT KNIPPEREN VAN WALL/GHOST
+        //ISGHOST VERANDERT VERKEERD
+        if (this.isGhost && System.currentTimeMillis() >= stationaryTime.getTimeInMillis() + 1500 && !isIsMoving()) {
             this.vulnerable = false;
             this.setSpritesUp(new String[]{"wall.png"});
             this.setSpritesDown(new String[]{"wall.png"});
             this.setSpritesLeft(new String[]{"wall.png"});
             this.setSpritesRight(new String[]{"wall.png"});
             this.isGhost = false;
-        } else if (this.isGhost == false) {
+        } else if (this.isGhost == false && isIsMoving()) {
             this.isGhost = true;
             this.setSpritesUp(new String[]{"GhostRedUp1.png", "GhostRedUp2.png", "GhostRedUp3.png"});
             this.setSpritesDown(new String[]{"GhostRedDown1.png", "GhostRedDown2.png", "GhostRedDown3.png"});
