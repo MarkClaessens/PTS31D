@@ -142,7 +142,7 @@ public class MainGameFX extends Application {
             switch (character.getDirection()) {
                 case UP:
                     if (!character.isIsMoving()) {
-                        image = new Image(character.getSpritesUp()[0]);
+                        image = new Image(character.getSpritesUp()[0]);  
                     } else {
                         getAnimatedImage(time, character.getSpritesUp());
                     }

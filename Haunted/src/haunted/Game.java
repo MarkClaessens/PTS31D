@@ -215,6 +215,7 @@ public class Game {
      * the current round will increase with one.
      */
     public void endRound() {
+        System.out.println("endRoundCalled!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         tickThread.interrupt();
         gameFX.setShowEmpty(true);
         if (this.currentRound >= this.floorAmount) {

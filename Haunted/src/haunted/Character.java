@@ -74,7 +74,7 @@ public abstract class Character {
     /**
      * Sets the character's spritesUp (human/ghost/wall)
      *
-     * @param sprite
+     * @param spritesUp
      */
     public void setSpritesUp(String[] spritesUp) {
         this.spritesUp = spritesUp;
@@ -144,7 +144,7 @@ public abstract class Character {
                 } else {
                     this.direction = direction;
                     this.setIsMoving(true);
-                    position.setLocation(oldPosition.getX(), oldPosition.getY() + movementSpeed);
+                    position.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
                     System.out.println("UP");
                     break;
                     
@@ -158,7 +158,7 @@ public abstract class Character {
                 } else {
                     this.direction = direction;
                     this.setIsMoving(true);
-                    position.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
+                    position.setLocation(oldPosition.getX(), oldPosition.getY() + movementSpeed);
                     System.out.println("DOWN");
                     break;
                 }
