@@ -93,11 +93,17 @@ public class Ghost extends Character {
     public void changeAppearance() {
         if (this.isGhost && System.currentTimeMillis() >= stationaryTime.getTimeInMillis() + 1500) {
             this.vulnerable = false;
-            this.setSpritesUp(new String[]{"ghostRedDown1.png", "ghostRedDown2.png", "ghostRedDown3.png"});
+            this.setSpritesUp(new String[]{"wall.png"});
+            this.setSpritesDown(new String[]{"wall.png"});
+            this.setSpritesLeft(new String[]{"wall.png"});
+            this.setSpritesRight(new String[]{"wall.png"});
             this.isGhost = false;
         } else if (this.isGhost == false) {
             this.isGhost = true;
-            this.setSpritesUp(new String[]{"Ghost"});
+            this.setSpritesUp(new String[]{"ghostRedUp1.png", "ghostRedUp2.png", "ghostRedUp3.png"});
+            this.setSpritesDown(new String[]{"ghostRedDown1.png", "ghostRedDown2.png", "ghostRedDown3.png"});
+            this.setSpritesLeft(new String[]{"ghostRedLeft1.png", "ghostRedLeft2.png", "ghostRedLeft3.png"});
+            this.setSpritesRight(new String[]{"ghostRedRight1.png", "ghostRedRight2.png", "ghostRedRight3.png"});
             this.vulnerable = true;
         }
     }
