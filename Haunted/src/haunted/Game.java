@@ -193,6 +193,7 @@ public class Game {
                 timer.scheduleAtFixedRate(task, 0, 16);
             }
         });
+        gameFX.setShowEmpty(false);
     }
 
     /**
@@ -201,6 +202,7 @@ public class Game {
      */
     public void endRound() {
         tickThread.interrupt();
+        gameFX.setShowEmpty(true);
         if(this.currentRound >= this.floorAmount){
             this.players.stream().filter((P) -> (P.getCharacter() instanceof Human)).forEach((P) -> {
                 this.endGame(P);
