@@ -132,7 +132,7 @@ public abstract class Character {
      * @param direction
      */
     public void move(DirectionType direction) {
-        Point2D proposedLocation = position; // set to position just for init. 
+        Point2D proposedLocation = new Point2D.Double(); // set to position just for init. 
         Point2D oldPosition = position;
 
         switch (direction) {
@@ -207,9 +207,9 @@ public abstract class Character {
         int pYb = pYt + 80;
 
         BufferedImage colImg = this.game.getCurrentLevel().getCollisionImage();
-        return 0 > pXl || 900 < pYb || 1400
-                < pXr || pYt <= 0 || (colImg.getRGB(pXl, pYt)
-                + colImg.getRGB(pXr, pYt) + colImg.getRGB(pXr, pYb) + colImg.getRGB(pXl, pYb)) != -4;
+        return 0 > pXl || 1000 < pYb || 1500
+                < pXr || pYt <= 0 || ((colImg.getRGB(pXl, pYt)
+                + colImg.getRGB(pXr, pYt) + colImg.getRGB(pXr, pYb) + colImg.getRGB(pXl, pYb)) != -4);
 
     }
 
