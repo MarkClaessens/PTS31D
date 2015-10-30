@@ -18,6 +18,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
@@ -242,8 +243,14 @@ public class MainGameFX extends Application {
                 this.ghost = (Ghost) p.getCharacter();
             }
         }
-        flashlight = human.getFlashLightPolygon();
+        if (human.getFlashLightPolygon()!=null){
+        int[] i = human.getFlashLightPolygon();
+        flashlight = new Polygon();
+        flashlight.getPoints().clear();
+        flashlight.getPoints().addAll(new Double[]{(double)(i[0]+100)*horScale,(double)(i[1]+100)*verScale,(double)(i[2]+100)*horScale,(double)(i[3]+100)*verScale,(double)(i[4]+100)*horScale,(double)(i[5]+100)*verScale});
         flashlight.setFill(Color.YELLOW);
+        flashlight.setBlendMode(BlendMode.SOFT_LIGHT);
+        }
         //Set door and key.
         Level lvl = game.getCurrentLevel();
         this.level = lvl;

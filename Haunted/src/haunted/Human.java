@@ -15,7 +15,7 @@ import java.util.List;
 public class Human extends Character {
 
     private int flashlightRange = 100; // Mike: setted default range to 100
-    private int flashlightAngle = 45; // Mike: setted default angle to 45
+    private int flashlightAngle = 15; // Mike: setted default angle to 45
     private boolean hasKey;
 
     private double flX3 = 0, flY3 = 0, flX2 = 0, flY2 = 0, flX1, flY1;
@@ -125,7 +125,7 @@ public class Human extends Character {
         Point2D key = this.game.getCurrentLevel().getKeyLocation();
 
         //door collision
-        if ((checkHitboxCollision(this.getPosition(), 10, 1, door, 10, 1) && this.hasKey)) //key collision   
+        if ((checkHitboxCollision(this.getPosition(), 10, 5, door, 10, 5) && this.hasKey)) //key collision   
         {
             this.enterDoor();
         }
@@ -168,8 +168,8 @@ public class Human extends Character {
     }
 
     private void setFlashLight() {
-        flX1 = this.getPosition().getX() + 50;
-        flY1 = this.getPosition().getY() + 50;
+        flX1 = this.getPosition().getX()+50;
+        flY1 = this.getPosition().getY()+50;
         switch (this.getDirection()) {
             case UP:
                 flX2 = flX1 - tan(this.flashlightAngle) * this.flashlightRange;
@@ -188,21 +188,25 @@ public class Human extends Character {
                 flX3 = flX2;
                 flY2 = flY1 + tan(this.flashlightAngle) * this.flashlightRange;
                 flY3 = flY1 - tan(this.flashlightAngle) * this.flashlightRange;
+                break;
             case LEFT:
                 flX2 = flX1 - this.flashlightRange;
                 flX3 = flX2;
                 flY2 = flY1 + tan(this.flashlightAngle) * this.flashlightRange;
                 flY3 = flY1 - tan(this.flashlightAngle) * this.flashlightRange;
+                break;
         }
     }
 
-    public Polygon getFlashLightPolygon() {
-        Polygon p = new Polygon();
-        p.getPoints().addAll(new Double[]{
-            this.getPosition().getX()+100, 100+this.getPosition().getY(),
-            flX2+100, flY2+100,
-            flX3+100, flY3+100});
-        return p;
+    public int[] getFlashLightPolygon() {
+        int[] i = new int[6];
+        i[0] = (int) this.getPosition().getX()+50;
+        i[1] = (int) this.getPosition().getY()+50;
+        i[2] = (int) flX2;
+        i[3] = (int) flY2;
+        i[4] = (int) flX3;
+        i[5] = (int) flY3;
+        return i;
 
     }
 
