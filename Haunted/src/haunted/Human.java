@@ -125,11 +125,11 @@ public class Human extends Character {
         Point2D key = this.game.getCurrentLevel().getKeyLocation();
 
         //door collision
-        if ((checkHitboxCollision(this.getPosition(), 10, 5, door, 10, 5) && this.hasKey)) //key collision   
+        if ((checkHitboxCollision(this.getPosition(), 10, 10, door, 10, 10) && this.hasKey)) //key collision   
         {
             this.enterDoor();
         }
-        if (checkHitboxCollision(this.getPosition(), 100, 100, key, 100, 100)) {
+        if (checkHitboxCollision(this.getPosition(), 80, 80, key, 80, 80)) {
             this.pickUpKey();
         }
         //flashlight and ghost collision
@@ -160,7 +160,7 @@ public class Human extends Character {
     public Ghost checkGhostCollision() {
         //ghost collision
         for (Ghost g : this.game.getGhosts()) {
-            if (checkHitboxCollision(this.getPosition(), 100, 100, g.getPosition(), 100, 100)) {
+            if (checkHitboxCollision(this.getPosition(), 90, 90, g.getPosition(), 90, 90)) {
                 return g;
             }
         }
