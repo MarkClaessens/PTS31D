@@ -6,8 +6,10 @@
 package haunted;
 
 import java.awt.Dimension;
+import javafx.scene.shape.Polygon;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.List;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -18,6 +20,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -37,7 +40,8 @@ public class MainGameFX extends Application {
 
     private Object[] pressedKeys;
     private final long startNanoTime = System.nanoTime();
-
+    
+    private Polygon flashlight = null;
     private Human human = null;
     private Ghost ghost = null;
     private Level level = null;
@@ -47,7 +51,7 @@ public class MainGameFX extends Application {
     private boolean showEmpty;
 
     private final String backgroundImg = "background.png";
-
+    private Group root;
     public MainGameFX() {
     }
 
@@ -65,7 +69,7 @@ public class MainGameFX extends Application {
         this.levelDrawHeight = 1200;
         this.showEmpty = false;
         stage.setTitle("The Game");
-        Group root = new Group();
+        root = new Group();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         determineScreenSize();
@@ -86,13 +90,20 @@ public class MainGameFX extends Application {
         //Animation timer start and handling
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
-                if (!showEmpty) {
+                List<Object> obj = new ArrayList();
+                root.getChildren().stream().filter((o) -> (o instanceof Polygon)).forEach((o) -> {
+                    obj.add(o);
+                });
+                root.getChildren().removeAll(obj);         
+                if (!showEmpty) {               
                     gc.clearRect(0, 0, screenWidth, screenHeight);
                     drawElements(gc, currentNanoTime);
+                    root.getChildren().add(flashlight);
                 } else {
                     gc.clearRect(0, 0, screenWidth, screenHeight);
                     Image waitImage = new Image("waiting.png");
                     gc.drawImage(waitImage, 0, 0, screenWidth, screenHeight);
+                    root.getChildren().add(flashlight);
                 }
             }
         }.start();
@@ -113,6 +124,9 @@ public class MainGameFX extends Application {
 
         //Draw Human
         Image drawHumanImage = drawCharacter(human, time);
+        
+        
+        
         //System.out.println("HumanX: " + human.getPosition().getX());
         //System.out.println("HumanY: " + human.getPosition().getY());
 
@@ -129,7 +143,7 @@ public class MainGameFX extends Application {
 
         //Draw Door
         Image doorImage = new Image("Door.png");
-
+        
         gc.drawImage(backgroundImage, 0, 0, levelDrawWidth * horScale, levelDrawHeight * verScale);//, screenWidth, screenHeight
         //, screenWidth / levelWidth, screenHeight / levelHeight
         if (drawHumanImage != null) {
@@ -199,7 +213,7 @@ public class MainGameFX extends Application {
      * @return image to draw
      */
     private Image getAnimatedImage(int time, String[] sprites) {
-        Image returnImage = null;
+        Image returnImage = new Image(sprites[0]);
         switch (time % 3) {
             case 0:
                 returnImage = new Image(sprites[0]);
@@ -228,7 +242,8 @@ public class MainGameFX extends Application {
                 this.ghost = (Ghost) p.getCharacter();
             }
         }
-
+        flashlight = human.getFlashLightPolygon();
+        flashlight.setFill(Color.YELLOW);
         //Set door and key.
         Level lvl = game.getCurrentLevel();
         this.level = lvl;
