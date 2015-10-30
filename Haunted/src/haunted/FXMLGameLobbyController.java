@@ -164,7 +164,16 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
     private void sendMessage(MouseEvent event) {
         currentText = TAchatBox.getText();
         TAchatBox.clear();
-        gamelobby.sendMessage(TFmessage.getText());
+        String totaaltekst = (String) LVplayers.getSelectionModel().getSelectedItem();
+        String naam = totaaltekst.substring(0, totaaltekst.indexOf(" "));
+        
+         for (Player player : gamelobby.getPlayers()) 
+         {
+            if (player.getName().equals(naam)) 
+            {
+               gamelobby.sendMessage(TFmessage.getText(), player); 
+            }
+         }
         List<Message> messages = gamelobby.getMessages();
         Message message = messages.get(messages.size() - 1);
         TAchatBox.setText(currentText + message.toString() + "\n");
