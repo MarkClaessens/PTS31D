@@ -279,14 +279,14 @@ public abstract class Character {
 
     public boolean checkHitboxCollision(Point2D point1, int width1, int height1, Point2D point2, int width2, int height2) {
         //convert point1 in leftmost and rightmost X value and top and bottom Y value;
-        int p1Xmax = (int) point1.getX();
-        int p1Xmin = (int) p1Xmax + width1-1;
+        int p1Xmin = (int) point1.getX();
+        int p1Xmax = (int) p1Xmin + width1-1;
         int p1Ymin = (int) point1.getY();
         int p1Ymax = (int) p1Ymin + height1-1;
 
         //convert point2 in leftmost and rightmost X value and top and bottom Y value;
-        int p2Xmax = (int) point2.getX();
-        int p2Xmin = (int) p2Xmax + width2-1;
+        int p2Xmin = (int) point2.getX();
+        int p2Xmax = (int) p2Xmin + width2-1;
         int p2Ymin = (int) point2.getY();
         int p2Ymax = (int) p2Ymin + height2-1;
 
