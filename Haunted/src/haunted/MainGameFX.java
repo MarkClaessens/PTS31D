@@ -110,17 +110,18 @@ public class MainGameFX extends Application {
 
         //Draw Human
         Image drawHumanImage = drawCharacter(human, time);
-        System.out.println("HumanX: " + human.getPosition().getX());
-        System.out.println("HumanY: " + human.getPosition().getY());
+        //System.out.println("HumanX: " + human.getPosition().getX());
+        //System.out.println("HumanY: " + human.getPosition().getY());
 
         //Draw Ghost
         Image drawGhostImage = drawCharacter(ghost, time);
-        System.out.println("GhostX: " + ghost.getPosition().getX());
-        System.out.println("GhostY: " + ghost.getPosition().getY());
+        //System.out.println("GhostX: " + ghost.getPosition().getX());
+        //System.out.println("GhostY: " + ghost.getPosition().getY());
 
         //Draw Key
+        
         Image keyImg = new Image(key.getSprite());
-
+        
         //Draw Door
         Image doorImage = new Image(door.getSprite());
 
@@ -132,7 +133,7 @@ public class MainGameFX extends Application {
         if (drawGhostImage != null) {
             gc.drawImage(drawGhostImage, ghost.getPosition().getX() * horScale, ghost.getPosition().getY() * verScale, 100 * horScale, 100 * verScale);
         }
-        if (key != null) {
+        if (key != null && !human.getHasKey()) {
             gc.drawImage(keyImg, level.getKeyLocation().getX() * horScale, level.getKeyLocation().getY() * verScale, 100 * horScale, 100 * verScale);
         }
         if (door != null) {

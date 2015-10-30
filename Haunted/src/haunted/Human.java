@@ -130,9 +130,12 @@ public class Human extends Character {
         }
         if (checkHitboxCollision(this.getPosition(), 100, 100, key, 100, 100)) {
             this.pickUpKey();
+            System.out.println("keyOpgepakt");
         }
         //flashlight and ghost collision
-        this.checkGhostCollision();
+        if (this.checkGhostCollision() != null){
+            this.checkGhostCollision().possess();
+        }
         setFlashLight();
         List<Ghost> deadghosts = new ArrayList();
         this.game.getGhosts().stream().forEach((g) -> {
@@ -157,6 +160,7 @@ public class Human extends Character {
         //ghost collision
         for (Ghost g : this.game.getGhosts()) {
             if (checkHitboxCollision(this.getPosition(), 100, 100, g.getPosition(), 100, 100)) {
+                System.out.println("collide!");
                 return g;
             }
         }

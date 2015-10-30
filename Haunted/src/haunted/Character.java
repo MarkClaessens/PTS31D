@@ -145,7 +145,7 @@ public abstract class Character {
                     this.direction = direction;
                     this.setIsMoving(true);
                     position.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
-                    System.out.println("UP");
+                    //System.out.println("UP");
                     break;
                     
                 }
@@ -159,7 +159,7 @@ public abstract class Character {
                     this.direction = direction;
                     this.setIsMoving(true);
                     position.setLocation(oldPosition.getX(), oldPosition.getY() + movementSpeed);
-                    System.out.println("DOWN");
+                    //System.out.println("DOWN");
                     break;
                 }
             // </editor-fold>
@@ -172,7 +172,7 @@ public abstract class Character {
                     this.direction = direction;
                     this.setIsMoving(true);
                     position.setLocation(oldPosition.getX() + movementSpeed, oldPosition.getY());
-                    System.out.println("RIGHT");
+                    //System.out.println("RIGHT");
                     break;
                 }
             // </editor-fold>
@@ -185,7 +185,7 @@ public abstract class Character {
                     this.direction = direction;
                     this.setIsMoving(true);
                     position.setLocation(oldPosition.getX() - movementSpeed, oldPosition.getY());
-                    System.out.println("LEFT");
+                    //System.out.println("LEFT");
                     break;
                 }
             // </editor-fold>
@@ -207,7 +207,7 @@ public abstract class Character {
         int pYb = pYt + 80;
 
         BufferedImage colImg = this.game.getCurrentLevel().getCollisionImage();
-        return pXl >= 0 && pYt >= 0 && pYb < 900 && pXr
+        return pXl > 0 && pYt > 0 && pYb < 900 && pXr
                 < 1400 && colImg.getRGB(pXl, pYt)
                 + colImg.getRGB(pXr, pYt) + colImg.getRGB(pXr, pYb) + colImg.getRGB(pXl, pYb) != -4;
 
@@ -280,15 +280,15 @@ public abstract class Character {
     public boolean checkHitboxCollision(Point2D point1, int width1, int height1, Point2D point2, int width2, int height2) {
         //convert point1 in leftmost and rightmost X value and top and bottom Y value;
         int p1Xmax = (int) point1.getX();
-        int p1Xmin = (int) p1Xmax + width1;
+        int p1Xmin = (int) p1Xmax + width1-1;
         int p1Ymin = (int) point1.getY();
-        int p1Ymax = (int) p1Ymin + height1;
+        int p1Ymax = (int) p1Ymin + height1-1;
 
         //convert point2 in leftmost and rightmost X value and top and bottom Y value;
         int p2Xmax = (int) point2.getX();
-        int p2Xmin = (int) p2Xmax + width2;
+        int p2Xmin = (int) p2Xmax + width2-1;
         int p2Ymin = (int) point2.getY();
-        int p2Ymax = (int) p2Ymin + height2;
+        int p2Ymax = (int) p2Ymin + height2-1;
 
         return (betweenInclusive(p1Xmax, p2Xmin, p2Xmax) && (betweenInclusive(p1Ymin, p2Ymin, p2Ymax) || betweenInclusive(p1Ymax, p2Ymin, p2Ymax))) || (betweenInclusive(p1Xmin, p2Xmin, p2Xmax) && (betweenInclusive(p1Ymin, p2Ymin, p2Ymax) || betweenInclusive(p1Ymax, p2Ymin, p2Ymax)));
     }
