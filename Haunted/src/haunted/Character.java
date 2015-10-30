@@ -141,6 +141,7 @@ public abstract class Character {
                 proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
                 if (detectCollision(proposedLocation)) {
                     this.setIsMoving(false);
+                    break;
                 } else {
                     this.direction = direction;
                     this.setIsMoving(true);
@@ -155,6 +156,7 @@ public abstract class Character {
                 proposedLocation.setLocation(oldPosition.getX(), (oldPosition.getY() + movementSpeed));
                 if (detectCollision(proposedLocation)) {
                     this.setIsMoving(false);
+                    break;
                 } else {
                     this.direction = direction;
                     this.setIsMoving(true);
@@ -168,6 +170,7 @@ public abstract class Character {
                 proposedLocation.setLocation(oldPosition.getX() + movementSpeed, oldPosition.getY());
                 if (detectCollision(proposedLocation)) {
                     this.setIsMoving(false);
+                    break;
                 } else {
                     this.direction = direction;
                     this.setIsMoving(true);
@@ -181,6 +184,7 @@ public abstract class Character {
                 proposedLocation.setLocation((oldPosition.getX() - movementSpeed), oldPosition.getY());
                 if (detectCollision(proposedLocation)) {
                     this.setIsMoving(false);
+                    break;
                 } else {
                     this.direction = direction;
                     this.setIsMoving(true);
