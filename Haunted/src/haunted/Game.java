@@ -15,10 +15,7 @@ import java.util.logging.Logger;
 import java.util.TimerTask;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 /**
  *
@@ -282,6 +279,10 @@ public class Game {
                     for (int i = 0; i < this.players.size(); i++) {
                         if (keyboard[i] != null) {
                             this.players.get(i).getCharacter().move((DirectionType) keyboard[i]);
+                            if(this.players.get(i).getCharacter() instanceof Ghost){
+                               Ghost G = (Ghost)this.players.get(i).getCharacter();
+                               G.getStationaryTime().clear();
+                            }
                         } else if (this.players.get(i).getCharacter() instanceof Ghost) {
                             Ghost G = (Ghost) this.players.get(i).getCharacter();
                             if (G.isIsMoving()) {
