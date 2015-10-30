@@ -258,8 +258,6 @@ public class Game {
             if (!this.ghosts.isEmpty()) {
                 Object[] keyboard = this.gameFX.getPressedKeys();
                 if (keyboard != null) {
-                    this.gameFX.clearPressedKeys();
-
                     if ((boolean) keyboard[2]) {
                         this.isPaused = !this.isPaused;
                     }

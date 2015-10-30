@@ -185,8 +185,7 @@ public class MainGameFX extends Application {
                     }
                     break;
             }
-        }
-        
+        }        
         return image;
     }
 
@@ -210,7 +209,6 @@ public class MainGameFX extends Application {
                 returnImage = new Image(sprites[2]);
                 break;
         }
-        //System.out.println(returnImage.impl_getUrl());
         return returnImage;
     }
 
