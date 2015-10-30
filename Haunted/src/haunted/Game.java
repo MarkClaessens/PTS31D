@@ -239,18 +239,24 @@ public class Game {
      *
      * @param The player who has won the game.
      */
-    public void endGame(Player winner) throws IOException {
+    public void endGame(Player winner){
         this.isRunning = false;
-        Stage stage = gameFX.getStage();
-        scene = new Scene(new Pane());
-        stage.setScene(scene);
+        
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXMLvictoryController.URL_FXML));
-        Node root = fxmlLoader.load();
-        Controller controller = fxmlLoader.getController();
-        controller.setView(root);
-        FXMLvictoryController VC = (FXMLvictoryController) fxmlLoader.getController();
-        VC.setWinnaarnaam(winner.getName());
-        VC.Show();        
+        try{
+          Node root = fxmlLoader.load();
+          Controller controller = fxmlLoader.getController();
+          controller.setView(root);
+          FXMLvictoryController VC = (FXMLvictoryController) fxmlLoader.getController();
+          VC.setWinnaarnaam(winner.getName());
+          VC.Show();
+        }
+        catch(IOException ex)
+        {
+          Logger.getLogger(Game.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);  
+        }
+        
+                
         // TODO: call in view (FXML) the method to launch the victory screen with the winner (inside the parameter)
     }
 
