@@ -47,8 +47,6 @@ public class MainGameFX extends Application {
     private boolean showEmpty;
 
     private final String backgroundImg = "background.png";
-    
-    private int state = 2;
 
     public MainGameFX() {
     }
@@ -202,19 +200,15 @@ public class MainGameFX extends Application {
      */
     private Image getAnimatedImage(int time, String[] sprites) {
         Image returnImage = null;
-        
-        switch (state) {
-            case 2:
-                returnImage = new Image(sprites[0]);
-                state = 0;
-                break;
+        switch (time % 3) {
             case 0:
-                returnImage = new Image(sprites[1]);
-                state = 1;
+                returnImage = new Image(sprites[0]);
                 break;
             case 1:
+                returnImage = new Image(sprites[1]);
+                break;
+            case 2:
                 returnImage = new Image(sprites[2]);
-                state = 2;
                 break;
         }
         return returnImage;
