@@ -16,7 +16,7 @@ import javafx.scene.control.Button;
  *
  * @author Mark
  */
-public class FXMLnextroundController implements Initializable {
+public class FXMLnextroundController extends BaseController implements Initializable {
     
 public static final String URL_FXML = "FXMLGameLobby.fxml";
 private MainGameFX gameFX;

@@ -13,6 +13,12 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.logging.Logger;
 import java.util.TimerTask;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /**
  *
@@ -20,6 +26,7 @@ import java.util.TimerTask;
  */
 public class Game {
 
+    private Scene scene;
     private List<Player> players;
     private int floorAmount;
     private int currentRound = 0; //value is -1 because the first round (=floor) is equal to 0. 
@@ -123,7 +130,7 @@ public class Game {
         this.bindCharactersToPlayers();
         this.gameFX = new MainGameFX();
         cl = Calendar.getInstance();
-
+        
     }
 
     /**
@@ -232,11 +239,18 @@ public class Game {
      *
      * @param The player who has won the game.
      */
-    public void endGame(Player winner) {
+    public void endGame(Player winner) throws IOException {
         this.isRunning = false;
-        FXMLvictoryController VC = (FXMLvictoryController) Haunted.getNavigation().load(FXMLvictoryController.URL_FXML);
+        Stage stage = gameFX.getStage();
+        scene = new Scene(new Pane());
+        stage.setScene(scene);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXMLvictoryController.URL_FXML));
+        Node root = fxmlLoader.load();
+        Controller controller = fxmlLoader.getController();
+        controller.setView(root);
+        FXMLvictoryController VC = (FXMLvictoryController) fxmlLoader.getController();
         VC.setWinnaarnaam(winner.getName());
-        VC.Show();
+        VC.Show();        
         // TODO: call in view (FXML) the method to launch the victory screen with the winner (inside the parameter)
     }
 
