@@ -42,7 +42,7 @@ public class MainGameFX extends Application {
     private Ghost ghost = null;
     private Level level = null;
     //private Obstacle key = null;
-    private Obstacle door = null;
+    // private Obstacle door = null;
 
     private boolean showEmpty;
 
@@ -125,9 +125,8 @@ public class MainGameFX extends Application {
             keyImg = new Image("Key.png");
         }
 
-
         //Draw Door
-        Image doorImage = new Image(door.getSprite());
+        Image doorImage = new Image("Door.png");
 
         gc.drawImage(backgroundImage, 0, 0, levelDrawWidth * horScale, levelDrawHeight * verScale);//, screenWidth, screenHeight
         //, screenWidth / levelWidth, screenHeight / levelHeight
@@ -137,12 +136,12 @@ public class MainGameFX extends Application {
         if (drawGhostImage != null) {
             gc.drawImage(drawGhostImage, (ghost.getPosition().getX() + 100) * horScale, (ghost.getPosition().getY() + 100) * verScale, 100 * horScale, 100 * verScale);
         }
-        if (/*key != null && */ !human.getHasKey()) {
+        if (/*key != null && */!human.getHasKey()) {
             gc.drawImage(keyImg, (level.getKeyLocation().getX() + 100) * horScale, (level.getKeyLocation().getY() + 100) * verScale, 100 * horScale, 100 * verScale);
         }
-        if (door != null) {
-            gc.drawImage(doorImage, (level.getDoorLocation().getX() + 100) * horScale, level.getDoorLocation().getY() * verScale, 100 * horScale, 100 * verScale);
-        }
+
+        gc.drawImage(doorImage, (level.getDoorLocation().getX() + 100) * horScale, level.getDoorLocation().getY() * verScale, 100 * horScale, 100 * verScale);
+
     }
 
     /**
