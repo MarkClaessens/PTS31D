@@ -91,8 +91,6 @@ public class Ghost extends Character {
      * wall" immediately.
      */
     public void changeAppearance() {
-        //LET OP: DIT VEROORZAAKT KNIPPEREN VAN WALL/GHOST
-        //ISGHOST VERANDERT VERKEERD
         if (this.isGhost && System.currentTimeMillis() >= stationaryTime.getTimeInMillis() + 1500 && !isIsMoving()) {
             this.vulnerable = false;
             this.setSpritesUp(new String[]{"wall.png"});
@@ -122,6 +120,11 @@ public class Ghost extends Character {
         if (remainingGhostLifes > 0) {
             // Respawn the ghost random on the map 
             Point2D spawnPosition = game.pickRandomGhostSpawnPoint();
+            // Create a delay for 1,5 seconds when respawning
+            super.setPosition(new Point2D.Double(-100,-100));
+            if(System.currentTimeMillis() >= (System.currentTimeMillis() + 1500)){
+                super.setPosition(spawnPosition);
+            }
             super.setPosition(spawnPosition);
         } // If the ghost has no more lifes then end the game with the winning player as the parameter.
         else {

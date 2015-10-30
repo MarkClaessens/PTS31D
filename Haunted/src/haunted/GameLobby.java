@@ -205,9 +205,9 @@ public class GameLobby {
      *
      * @param message
      */
-    public void sendMessage(String message) {
+    public void sendMessage(String message, Player player) {
         if (message != null && !message.equalsIgnoreCase("")) {
-            this.messages.add(new Message(message, this.host));
+            this.messages.add(new Message(message, player));
         }
     }
 
