@@ -305,6 +305,8 @@ public class MainGameFX extends Application {
 
     public void clearPressedKeys() {
         pressedKeys = new Object[3];
+        pressedKeys[0] = null;
+        pressedKeys[1] = null;
         pressedKeys[2] = false;
     }
 
