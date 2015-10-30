@@ -215,7 +215,6 @@ public class Game {
      * the current round will increase with one.
      */
     public void endRound() {
-        System.out.println("endRoundCalled!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         tickThread.interrupt();
         gameFX.setShowEmpty(true);
         if (this.currentRound >= this.floorAmount) {
@@ -279,8 +278,7 @@ public class Game {
                             }
                         } else {
                             this.players.get(i).getCharacter().setIsMoving(false);
-                        }
-                        
+                        } 
                     }
                 }
                 this.human.checkInteract();
