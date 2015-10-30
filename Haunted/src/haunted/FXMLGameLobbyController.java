@@ -22,7 +22,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 
 /**
  * FXML Controller class
@@ -55,13 +62,18 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
     private TextField TFmessage;
     @FXML
     private TextArea TAchatBox;
-
+    @FXML
+    AnchorPane paneel;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        BackgroundImage myBI= new BackgroundImage(new Image("gamelobby.jpg",1024,576,false,true),
+        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+        BackgroundSize.DEFAULT);
+         //then you set to your node
+        paneel.setBackground(new Background(myBI));
     }
 
     /**

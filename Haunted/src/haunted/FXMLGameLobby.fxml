@@ -6,15 +6,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="haunted.FXMLGameLobbyController">
+<AnchorPane id="AnchorPane" fx:id="paneel" prefHeight="576.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="haunted.FXMLGameLobbyController">
     <children>
-        <Button fx:id="BTNstartgame" layoutX="17.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#startgame" prefHeight="55.0" prefWidth="130.0" text="Start game" />
-        <Button fx:id="BTNready" layoutX="17.0" layoutY="165.0" mnemonicParsing="false" onMouseClicked="#changeready" prefHeight="55.0" prefWidth="130.0" text="Ready" />
-        <ListView fx:id="LVplayers" layoutX="356.0" layoutY="47.0" prefHeight="124.0" prefWidth="221.0" />
-        <TextArea fx:id="TAchatBox" editable="false" layoutX="160.0" layoutY="181.0" prefHeight="151.0" prefWidth="417.0" />
-        <TextField fx:id="TFmessage" layoutX="160.0" layoutY="338.0" prefHeight="25.0" prefWidth="358.0" />
-        <Button fx:id="BTNsendMessage" layoutX="517.0" layoutY="338.0" mnemonicParsing="false" onMouseClicked="#sendMessage" prefHeight="25.0" prefWidth="59.0" text="send" />
-        <Button fx:id="BTNleavegamelobby" layoutX="17.0" layoutY="311.0" mnemonicParsing="false" onMouseClicked="#leavegamelobby" prefHeight="55.0" prefWidth="130.0" text="leave gamelobby" />
-        <TextArea fx:id="TAgegevens" editable="false" layoutX="159.0" layoutY="47.0" prefHeight="124.0" prefWidth="189.0" />
+        <Button fx:id="BTNstartgame" layoutX="147.0" layoutY="208.0" mnemonicParsing="false" onMouseClicked="#startgame" prefHeight="55.0" prefWidth="130.0" text="Start game" />
+        <Button fx:id="BTNready" layoutX="147.0" layoutY="132.0" mnemonicParsing="false" onMouseClicked="#changeready" prefHeight="55.0" prefWidth="130.0" text="Ready" />
+        <ListView fx:id="LVplayers" layoutX="528.0" layoutY="47.0" prefHeight="124.0" prefWidth="221.0" />
+        <TextArea fx:id="TAchatBox" editable="false" layoutX="333.0" layoutY="269.0" prefHeight="151.0" prefWidth="417.0" />
+        <TextField fx:id="TFmessage" layoutX="333.0" layoutY="420.0" prefHeight="25.0" prefWidth="358.0" />
+        <Button fx:id="BTNsendMessage" layoutX="691.0" layoutY="420.0" mnemonicParsing="false" onMouseClicked="#sendMessage" prefHeight="25.0" prefWidth="59.0" text="send" />
+        <Button fx:id="BTNleavegamelobby" layoutX="147.0" layoutY="393.0" mnemonicParsing="false" onMouseClicked="#leavegamelobby" prefHeight="55.0" prefWidth="130.0" text="leave gamelobby" />
+        <TextArea fx:id="TAgegevens" editable="false" layoutX="332.0" layoutY="47.0" prefHeight="124.0" prefWidth="189.0" />
     </children>
 </AnchorPane>
