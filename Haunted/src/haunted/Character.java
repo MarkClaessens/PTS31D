@@ -23,7 +23,7 @@ public abstract class Character {
     private String[] spritesDown;
     private String[] spritesLeft;
     private String[] spritesRight;
-    private Double movementSpeed = 4.0;
+    private Double movementSpeed = 2.0;
     private DirectionType direction;
     private boolean isMoving;
 
