@@ -122,10 +122,9 @@ public class Ghost extends Character {
             Point2D spawnPosition = game.pickRandomGhostSpawnPoint();
             // Create a delay for 1,5 seconds when respawning
             super.setPosition(new Point2D.Double(-100,-100));
-            if(System.currentTimeMillis() >= (System.currentTimeMillis() + 1500)){
+            if(System.currentTimeMillis() >= (System.currentTimeMillis() + 15000)){
                 super.setPosition(spawnPosition);
             }
-            super.setPosition(spawnPosition);
         } // If the ghost has no more lifes then end the game with the winning player as the parameter.
         else {
             game.getPlayers().stream().filter((player) -> (player.getCharacter() instanceof Human)).forEach((player) -> {
