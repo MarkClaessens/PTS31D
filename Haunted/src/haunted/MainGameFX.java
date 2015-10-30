@@ -273,6 +273,8 @@ public class MainGameFX extends Application {
                             case "D":
                                 pressedKeys[0] = DirectionType.RIGHT;
                                 break;
+                        }
+                        switch(code) {
                             case "UP":
                                 pressedKeys[1] = DirectionType.UP;
                                 break;
