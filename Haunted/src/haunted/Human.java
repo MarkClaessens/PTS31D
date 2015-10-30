@@ -1,6 +1,7 @@
 package haunted;
 
 import java.awt.Color;
+import javafx.scene.shape.Polygon;
 import java.awt.geom.Point2D;
 import static java.lang.Math.tan;
 import java.util.ArrayList;
@@ -85,7 +86,6 @@ public class Human extends Character {
         this.hasKey = false;
     }
 
-
     /**
      * Let the human pick up a key, called when the human touches the key
      */
@@ -130,10 +130,9 @@ public class Human extends Character {
         }
         if (checkHitboxCollision(this.getPosition(), 100, 100, key, 100, 100)) {
             this.pickUpKey();
-            System.out.println("keyOpgepakt");
         }
         //flashlight and ghost collision
-        if (this.checkGhostCollision() != null){
+        if (this.checkGhostCollision() != null) {
             this.checkGhostCollision().possess();
         }
         setFlashLight();
@@ -160,7 +159,6 @@ public class Human extends Character {
         //ghost collision
         for (Ghost g : this.game.getGhosts()) {
             if (checkHitboxCollision(this.getPosition(), 100, 100, g.getPosition(), 100, 100)) {
-                System.out.println("collide!");
                 return g;
             }
         }
@@ -170,7 +168,6 @@ public class Human extends Character {
     private void setFlashLight() {
         flX1 = this.getPosition().getX() + 50;
         flY1 = this.getPosition().getY() + 50;
-
         switch (this.getDirection()) {
             case UP:
                 flX2 = flX1 - tan(this.flashlightAngle) * this.flashlightRange;
@@ -195,6 +192,16 @@ public class Human extends Character {
                 flY2 = flY1 + tan(this.flashlightAngle) * this.flashlightRange;
                 flY3 = flY1 - tan(this.flashlightAngle) * this.flashlightRange;
         }
+    }
+
+    public Polygon getFlashLightPolygon() {
+        Polygon p = new Polygon();
+        p.getPoints().addAll(new Double[]{
+            this.getPosition().getX()+100, 100+this.getPosition().getY(),
+            flX2+100, flY2+100,
+            flX3+100, flY3+100});
+        return p;
+
     }
 
     public boolean flashlightCollision(Point2D point) {

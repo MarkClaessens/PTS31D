@@ -49,7 +49,7 @@ public class Navigation {
             scene.setRoot((Parent) controller.getView());
             controllers.add(controller);
 
-            System.out.println("Add to history: " + controller.toString() + ". Total scenes: " + controllers.size());
+            //System.out.println("Add to history: " + controller.toString() + ". Total scenes: " + controllers.size());
         } catch (Exception e) {
             e.printStackTrace();
         }
