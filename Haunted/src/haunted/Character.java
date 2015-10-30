@@ -138,7 +138,7 @@ public abstract class Character {
         switch (direction) {
             case UP:
                 // <editor-fold defaultstate="collapsed" desc="UP">
-                proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() + movementSpeed);
+                proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
                 if (detectCollision(proposedLocation)) {
                     this.setIsMoving(false);
                 } else {
@@ -152,7 +152,7 @@ public abstract class Character {
             // </editor-fold>
             case DOWN:
                 // <editor-fold defaultstate="collapsed" desc="DOWN">
-                proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
+                proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() + movementSpeed);
                 if (detectCollision(proposedLocation)) {
                     this.setIsMoving(false);
                 } else {
@@ -207,7 +207,7 @@ public abstract class Character {
         int pYb = pYt + 100;
 
         BufferedImage colImg = this.game.getCurrentLevel().getCollisionImage();
-        return pXl >= 0 && pYt >= 0 && pYt < 900 && pXr
+        return pXl >= 0 && pYt >= 0 && pYb < 900 && pXr
                 < 1400 && colImg.getRGB(pXl, pYt)
                 + colImg.getRGB(pXr, pYt) + colImg.getRGB(pXr, pYb) + colImg.getRGB(pXl, pYb) == -4;
 
