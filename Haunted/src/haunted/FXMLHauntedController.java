@@ -128,7 +128,7 @@ public class FXMLHauntedController extends BaseController implements Initializab
             setplayernames();
         } else {
             Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setContentText("voer tekst in");
+            alert.setContentText("voer tekst in bij beide spelers.");
             alert.showAndWait();
             setplayernames();
         }
@@ -153,13 +153,13 @@ public class FXMLHauntedController extends BaseController implements Initializab
                 GMC.Show();
             } catch (NumberFormatException e) {
                 Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setContentText("voer nummer in");
+                alert.setContentText("zorg ervoor dat bij maximum spelers en floor amount er een getal staat");
                 alert.showAndWait();
             }
 
         } else {
             Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setContentText("fill in roomname");
+            alert.setContentText("voer gamelobbynaam in");
             alert.showAndWait();
         }
     }
