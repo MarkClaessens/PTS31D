@@ -29,8 +29,8 @@ public class MainGameFX extends Application {
     //FIELDS
     private double screenWidth;
     private double screenHeight;
-    private int levelWidth;
-    private int levelHeight;
+    private int levelDrawWidth;
+    private int levelDrawHeight;
     private double horScale;
     private double verScale;
     private long animationSpeed = 90000000;
@@ -61,8 +61,8 @@ public class MainGameFX extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         //Initialize GUI
-        this.levelWidth = 1500;
-        this.levelHeight = 1000;
+        this.levelDrawWidth = 1500;
+        this.levelDrawHeight = 1000;
         this.showEmpty = false;
         stage.setTitle("The Game");
         Group root = new Group();
@@ -119,25 +119,24 @@ public class MainGameFX extends Application {
         //System.out.println("GhostY: " + ghost.getPosition().getY());
 
         //Draw Key
-        
         Image keyImg = new Image(key.getSprite());
-        
+
         //Draw Door
         Image doorImage = new Image(door.getSprite());
 
-        gc.drawImage(backgroundImage, 0, 0, levelWidth * horScale, levelHeight * verScale);//, screenWidth, screenHeight
+        gc.drawImage(backgroundImage, 0, 0, levelDrawWidth * horScale, levelDrawHeight * verScale);//, screenWidth, screenHeight
         //, screenWidth / levelWidth, screenHeight / levelHeight
         if (drawHumanImage != null) {
-            gc.drawImage(drawHumanImage, human.getPosition().getX() * horScale, human.getPosition().getY() * verScale, 100 * horScale, 100 * verScale);
+            gc.drawImage(drawHumanImage, (human.getPosition().getX() + 100) * horScale, (human.getPosition().getY() + 100) * verScale, 100 * horScale, 100 * verScale);
         }
         if (drawGhostImage != null) {
-            gc.drawImage(drawGhostImage, ghost.getPosition().getX() * horScale, ghost.getPosition().getY() * verScale, 100 * horScale, 100 * verScale);
+            gc.drawImage(drawGhostImage, (ghost.getPosition().getX() + 100) * horScale, (ghost.getPosition().getY() + 100) * verScale, 100 * horScale, 100 * verScale);
         }
         if (key != null && !human.getHasKey()) {
-            gc.drawImage(keyImg, level.getKeyLocation().getX() * horScale, level.getKeyLocation().getY() * verScale, 100 * horScale, 100 * verScale);
+            gc.drawImage(keyImg, (level.getKeyLocation().getX() + 100) * horScale, level.getKeyLocation().getY() * verScale, 100 * horScale, 100 * verScale);
         }
         if (door != null) {
-            gc.drawImage(doorImage, level.getDoorLocation().getX()*horScale, level.getDoorLocation().getY() *verScale, 100*horScale, 100*verScale);
+            gc.drawImage(doorImage, (level.getDoorLocation().getX() + 100) * horScale, (level.getDoorLocation().getY() + 100) * verScale, 100 * horScale, 100 * verScale);
         }
     }
 
@@ -226,8 +225,8 @@ public class MainGameFX extends Application {
         //Set door and key
         Level lvl = game.getCurrentLevel();
         this.level = lvl;
-        this.levelWidth = lvl.getWidth();
-        this.levelHeight = lvl.getHeight();
+        this.levelDrawWidth = lvl.getWidth();
+        this.levelDrawHeight = lvl.getHeight();
         for (Obstacle o : lvl.getObstacles()) {
             if (o.getBehaviour() == ObstacleType.DOOR) {
                 this.door = o;
@@ -244,8 +243,8 @@ public class MainGameFX extends Application {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         screenWidth = screenSize.getWidth();
         screenHeight = screenSize.getHeight();
-        horScale = screenWidth / levelWidth;
-        verScale = screenHeight / levelHeight;
+        horScale = screenWidth / levelDrawWidth;
+        verScale = screenHeight / levelDrawHeight;
     }
 
     /**
