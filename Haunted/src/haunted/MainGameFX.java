@@ -171,7 +171,6 @@ public class MainGameFX extends Application {
      */
     private Image drawCharacter(Character character, int time) {
         Image image = null;
-        System.out.println(character + " is dit null???????");
         if (character != null) {
             switch (character.getDirection()) {
                 case UP:
