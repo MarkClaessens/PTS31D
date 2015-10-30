@@ -263,7 +263,7 @@ public class Game {
                     }
 
                     for (int i = 0; i < this.players.size(); i++) {
-                        if (keyboard[i] != null) {
+                        if (keyboard[i] != null) {                         
                             this.players.get(i).getCharacter().move((DirectionType) keyboard[i]);
                         } else if (this.players.get(i).getCharacter() instanceof Ghost) {
                             Ghost G = (Ghost) this.players.get(i).getCharacter();

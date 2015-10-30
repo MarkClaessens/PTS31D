@@ -70,8 +70,9 @@ public class MainGameFX extends Application {
         stage.setScene(scene);
         determineScreenSize();
         pressedKeys = new Object[3];
+        pressedKeys[0] = null;
+        pressedKeys[1] = null;
         pressedKeys[2] = false;
-//        this.clearPressedKeys();
 
         //Make canvas and gc and put it on the screen
         Canvas canvas = new Canvas(screenWidth, screenHeight);
@@ -348,12 +349,12 @@ public class MainGameFX extends Application {
         return pressedKeys;
     }
 
-    public void clearPressedKeys() {
+//    public void clearPressedKeys() {
 //        pressedKeys = new Object[3];
 //        pressedKeys[0] = null;
 //        pressedKeys[1] = null;
 //        pressedKeys[2] = false;
-    }
+//    }
 
     /**
      * start point of this executable class
