@@ -132,6 +132,7 @@ public class Human extends Character {
             this.pickUpKey();
         }
         //flashlight and ghost collision
+        this.checkGhostCollision();
         setFlashLight();
         List<Ghost> deadghosts = new ArrayList();
         this.game.getGhosts().stream().forEach((g) -> {

@@ -23,7 +23,7 @@ public abstract class Character {
     private String[] spritesDown;
     private String[] spritesLeft;
     private String[] spritesRight;
-    private Double movementSpeed = 2.0;
+    private Double movementSpeed = 4.0;
     private DirectionType direction;
     private boolean isMoving;
 
@@ -201,15 +201,15 @@ public abstract class Character {
      * @return true if there is an obstacle
      */
     public boolean detectCollision(Point2D proposedLocation) {
-        int pXl = (int) proposedLocation.getX();
-        int pXr = pXl + 100;
-        int pYt = (int) proposedLocation.getY();
-        int pYb = pYt + 100;
+        int pXl = (int) proposedLocation.getX()+10;
+        int pXr = pXl + 80;
+        int pYt = (int) proposedLocation.getY()+10;
+        int pYb = pYt + 80;
 
         BufferedImage colImg = this.game.getCurrentLevel().getCollisionImage();
         return pXl >= 0 && pYt >= 0 && pYb < 900 && pXr
                 < 1400 && colImg.getRGB(pXl, pYt)
-                + colImg.getRGB(pXr, pYt) + colImg.getRGB(pXr, pYb) + colImg.getRGB(pXl, pYb) == -4;
+                + colImg.getRGB(pXr, pYt) + colImg.getRGB(pXr, pYb) + colImg.getRGB(pXl, pYb) != -4;
 
     }
 

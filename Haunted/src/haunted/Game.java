@@ -19,7 +19,7 @@ import java.util.TimerTask;
  * @author Mal && Mike
  */
 public class Game {
-
+    
     private List<Player> players;
     private int floorAmount;
     private int currentRound = 0; //value is -1 because the first round (=floor) is equal to 0. 
@@ -78,7 +78,7 @@ public class Game {
     public int getFloorAmount() {
         return this.floorAmount;
     }
-
+    
     public MainGameFX getFX() {
         return gameFX;
     }
@@ -123,7 +123,7 @@ public class Game {
         this.bindCharactersToPlayers();
         this.gameFX = new MainGameFX();
         cl = Calendar.getInstance();
-
+        
     }
 
     /**
@@ -141,7 +141,7 @@ public class Game {
         String[] ghoSpritesRight = new String[]{"GhostRedRight1.png", "GhostRedRight2.png", "GhostRedRight3.png"};
         Ghost ghost = new Ghost(ghostSpawnPosition, Color.RED, ghoSpritesUp, ghoSpritesDown, ghoSpritesLeft, ghoSpritesRight, this);
         ghosts.add(ghost);
-
+        
         String[] humSpritesUp = new String[]{"HumanBlueUp1.png", "HumanBlueUp2.png", "HumanBlueUp3.png"};
         String[] humSpritesDown = new String[]{"HumanBlueDown1.png", "HumanBlueDown2.png", "HumanBlueDown3.png"};
         String[] humSpritesLeft = new String[]{"HumanBlueLeft1.png", "HumanBlueLeft2.png", "HumanBlueLeft3.png"};
@@ -183,22 +183,22 @@ public class Game {
      * starts the next round at the current floor.
      */
     public void startRound() {
-
+        
         this.isRunning = true;
         this.isPaused = false;
         tickThread = new Thread(new Runnable() {
-
+            
             @Override
             public void run() {
                 Timer timer = new Timer();
                 TimerTask task = new TimerTask() {
-
+                    
                     @Override
                     public void run() {
                         long l = System.currentTimeMillis() - cl.getTimeInMillis();
                         cl = Calendar.getInstance();
-                        if (l >  18){
-                        //System.out.println(l);
+                        if (l > 18) {
+                            //System.out.println(l);
                         }
                         tick();
                     }
@@ -260,24 +260,27 @@ public class Game {
                 Object[] keyboard = this.gameFX.getPressedKeys();
                 if (keyboard != null) {
                     this.gameFX.clearPressedKeys();
-
+                    
                     if ((boolean) keyboard[2]) {
                         this.isPaused = !this.isPaused;
                     }
-
+                    
                     for (int i = 0; i < this.players.size(); i++) {
                         if (keyboard[i] != null) {
                             this.players.get(i).getCharacter().move((DirectionType) keyboard[i]);
-                            if (this.players.get(i).getCharacter() instanceof Ghost) {
-                                this.players.get(i).getCharacter().setIsMoving(true);
-                            }
+                            
+                            this.players.get(i).getCharacter().setIsMoving(true);
+                            
                         } else if (this.players.get(i).getCharacter() instanceof Ghost) {
                             Ghost G = (Ghost) this.players.get(i).getCharacter();
                             if (G.isIsMoving()) {
                                 G.setIsMoving(false);
                                 G.setStationaryTime();
                             }
+                        } else {
+                            this.players.get(i).getCharacter().setIsMoving(false);
                         }
+                        
                     }
                 }
                 this.human.checkInteract();
@@ -288,7 +291,7 @@ public class Game {
                 this.endRound();
             }
             gameFX.setItems(this);
-
+            
         }
     }
 
@@ -309,7 +312,7 @@ public class Game {
         // Take a random point from the array. This is where the human will spawn.
         Random randomizer = new Random();
         Point2D spawnPoint = spawnPoints[randomizer.nextInt(5)];
-
+        
         return spawnPoint;
     }
 
@@ -330,14 +333,14 @@ public class Game {
         // Take a random point from the array. This is where the human will spawn.
         Random randomizer = new Random();
         Point2D spawnPoint = spawnPoints[randomizer.nextInt(5)];
-
+        
         return spawnPoint;
     }
-
+    
     public List<Ghost> getGhosts() {
         return this.ghosts;
     }
-
+    
     public Human getHuman() {
         return this.human;
     }
