@@ -186,7 +186,7 @@ public class MainGameFX extends Application {
                     break;
             }
         }
-        System.out.println(image.impl_getUrl());
+        
         return image;
     }
 
