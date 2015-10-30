@@ -50,6 +50,8 @@ public class MainGameFX extends Application {
     // private Obstacle door = null;
 
     private boolean showEmpty;
+    
+    private int state = 2;
 
     private final String backgroundImg = "background.png";
     private Group root;
@@ -170,7 +172,6 @@ public class MainGameFX extends Application {
      */
     private Image drawCharacter(Character character, int time) {
         Image image = null;
-        System.out.println(character + " is dit null???????");
         if (character != null) {
             switch (character.getDirection()) {
                 case UP:
@@ -214,16 +215,20 @@ public class MainGameFX extends Application {
      * @return image to draw
      */
     private Image getAnimatedImage(int time, String[] sprites) {
-        Image returnImage = new Image(sprites[0]);
-        switch (time % 3) {
-            case 0:
+        Image returnImage = null;
+        
+        switch (state) {
+            case 2:
                 returnImage = new Image(sprites[0]);
+                state = 0;
+                break;
+            case 0:
+                returnImage = new Image(sprites[1]);
+                state = 1;
                 break;
             case 1:
-                returnImage = new Image(sprites[1]);
-                break;
-            case 2:
                 returnImage = new Image(sprites[2]);
+                state = 2;
                 break;
         }
         return returnImage;
