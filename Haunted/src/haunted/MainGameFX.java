@@ -61,8 +61,8 @@ public class MainGameFX extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         //Initialize GUI
-        this.levelDrawWidth = 1500;
-        this.levelDrawHeight = 1000;
+        this.levelDrawWidth = 1700;
+        this.levelDrawHeight = 1200;
         this.showEmpty = false;
         stage.setTitle("The Game");
         Group root = new Group();
@@ -118,8 +118,11 @@ public class MainGameFX extends Application {
         //System.out.println("GhostX: " + ghost.getPosition().getX());
         //System.out.println("GhostY: " + ghost.getPosition().getY());
 
+        Image keyImg = null;
         //Draw Key
-        Image keyImg = new Image(key.getSprite());
+        if (!human.getHasKey()) {
+            keyImg = new Image(key.getSprite());
+        }
 
         //Draw Door
         Image doorImage = new Image(door.getSprite());
@@ -133,7 +136,7 @@ public class MainGameFX extends Application {
             gc.drawImage(drawGhostImage, (ghost.getPosition().getX() + 100) * horScale, (ghost.getPosition().getY() + 100) * verScale, 100 * horScale, 100 * verScale);
         }
         if (key != null && !human.getHasKey()) {
-            gc.drawImage(keyImg, (level.getKeyLocation().getX() + 100) * horScale, (level.getKeyLocation().getY()+100) * verScale, 100 * horScale, 100 * verScale);
+            gc.drawImage(keyImg, (level.getKeyLocation().getX() + 100) * horScale, (level.getKeyLocation().getY() + 100) * verScale, 100 * horScale, 100 * verScale);
         }
         if (door != null) {
             gc.drawImage(doorImage, (level.getDoorLocation().getX() + 100) * horScale, level.getDoorLocation().getY() * verScale, 100 * horScale, 100 * verScale);
@@ -225,8 +228,8 @@ public class MainGameFX extends Application {
         //Set door and key
         Level lvl = game.getCurrentLevel();
         this.level = lvl;
-        this.levelDrawWidth = lvl.getWidth();
-        this.levelDrawHeight = lvl.getHeight();
+        this.levelDrawWidth = lvl.getWidth()+200;
+        this.levelDrawHeight = lvl.getHeight()+200;
         for (Obstacle o : lvl.getObstacles()) {
             if (o.getBehaviour() == ObstacleType.DOOR) {
                 this.door = o;
@@ -273,7 +276,7 @@ public class MainGameFX extends Application {
                                 pressedKeys[0] = DirectionType.RIGHT;
                                 break;
                         }
-                        switch(code) {
+                        switch (code) {
                             case "UP":
                                 pressedKeys[1] = DirectionType.UP;
                                 break;
