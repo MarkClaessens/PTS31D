@@ -41,7 +41,7 @@ public class MainGameFX extends Application {
     private Human human = null;
     private Ghost ghost = null;
     private Level level = null;
-    private Obstacle key = null;
+    //private Obstacle key = null;
     private Obstacle door = null;
 
     private boolean showEmpty;
@@ -122,7 +122,7 @@ public class MainGameFX extends Application {
         Image keyImg = null;
         //Draw Key
         if (!human.getHasKey()) {
-            keyImg = new Image(key.getSprite());
+            keyImg = new Image("Key.png");
         }
 
         //Draw Door
@@ -136,7 +136,7 @@ public class MainGameFX extends Application {
         if (drawGhostImage != null) {
             gc.drawImage(drawGhostImage, (ghost.getPosition().getX() + 100) * horScale, (ghost.getPosition().getY() + 100) * verScale, 100 * horScale, 100 * verScale);
         }
-        if (key != null && !human.getHasKey()) {
+        if (/*key != null && */ !human.getHasKey()) {
             gc.drawImage(keyImg, (level.getKeyLocation().getX() + 100) * horScale, (level.getKeyLocation().getY() + 100) * verScale, 100 * horScale, 100 * verScale);
         }
         if (door != null) {
@@ -231,13 +231,13 @@ public class MainGameFX extends Application {
         this.level = lvl;
         this.levelDrawWidth = lvl.getWidth() + 200;
         this.levelDrawHeight = lvl.getHeight() + 200;
-        for (Obstacle o : lvl.getObstacles()) {
-            if (o.getBehaviour() == ObstacleType.DOOR) {
-                this.door = o;
-            } else if (o.getBehaviour() == ObstacleType.KEY) {
-                this.key = o;
-            }
-        }
+//        for (Obstacle o : lvl.getObstacles()) {
+//            if (o.getBehaviour() == ObstacleType.DOOR) {
+//                this.door = o;
+//            } else if (o.getBehaviour() == ObstacleType.KEY) {
+//                this.key = o;
+//            }
+//        }
     }
 
     /**
