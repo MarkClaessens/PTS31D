@@ -133,10 +133,10 @@ public class MainGameFX extends Application {
             gc.drawImage(drawGhostImage, (ghost.getPosition().getX() + 100) * horScale, (ghost.getPosition().getY() + 100) * verScale, 100 * horScale, 100 * verScale);
         }
         if (key != null && !human.getHasKey()) {
-            gc.drawImage(keyImg, (level.getKeyLocation().getX() + 100) * horScale, level.getKeyLocation().getY() * verScale, 100 * horScale, 100 * verScale);
+            gc.drawImage(keyImg, (level.getKeyLocation().getX() + 100) * horScale, (level.getKeyLocation().getY()+100) * verScale, 100 * horScale, 100 * verScale);
         }
         if (door != null) {
-            gc.drawImage(doorImage, (level.getDoorLocation().getX() + 100) * horScale, (level.getDoorLocation().getY() + 100) * verScale, 100 * horScale, 100 * verScale);
+            gc.drawImage(doorImage, (level.getDoorLocation().getX() + 100) * horScale, level.getDoorLocation().getY() * verScale, 100 * horScale, 100 * verScale);
         }
     }
 
