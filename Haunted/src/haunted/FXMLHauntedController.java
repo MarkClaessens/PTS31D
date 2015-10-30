@@ -128,6 +128,7 @@ public class FXMLHauntedController extends BaseController implements Initializab
             setplayernames();
         } else {
             Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setHeaderText("onjuiste tekst");
             alert.setContentText("voer tekst in bij beide spelers.");
             alert.showAndWait();
             setplayernames();
@@ -143,23 +144,36 @@ public class FXMLHauntedController extends BaseController implements Initializab
      */
     public void creategamelobby() throws IOException {
         if (!(TFroomname.getText().equals("")) || !(TFplayers.getText().equals("")) || !(TFfloors.getText().equals(""))) {
-            gamelobby = lobby.createGameLobby(TFroomname.getText(), TFpassword.getText());
+            gamelobby = lobby.createGameLobby(TFroomname.getText(), TFpassword.getText());            
             try {
-                gamelobby.setMaxPlayers(Integer.parseInt(TFplayers.getText()));
-                gamelobby.setFloorAmount(Integer.parseInt(TFfloors.getText()));
-                FXMLGameLobbyController GMC = (FXMLGameLobbyController) Haunted.getNavigation().load(FXMLGameLobbyController.URL_FXML);
-                GMC.setGameLobby(gamelobby);
-                GMC.setLobby(lobby);
-                GMC.Show();
+                if(Integer.parseInt(TFplayers.getText()) < 7 && Integer.parseInt(TFfloors.getText()) < 11)
+                {
+                   gamelobby.setMaxPlayers(Integer.parseInt(TFplayers.getText()));
+                   gamelobby.setFloorAmount(Integer.parseInt(TFfloors.getText()));                
+                   FXMLGameLobbyController GMC = (FXMLGameLobbyController) Haunted.getNavigation().load(FXMLGameLobbyController.URL_FXML);
+                   GMC.setGameLobby(gamelobby);
+                   GMC.setLobby(lobby);
+                   GMC.Show(); 
+                }
+                else
+                {
+                   Alert alert = new Alert(AlertType.INFORMATION);
+                   alert.setHeaderText("maximum overschreden");
+                   alert.setContentText("het maximum van een van de 2 getallen is overschreden. Het maximum voor spelers is 6 en voor floors 10");
+                   alert.showAndWait(); 
+                }
+                
             } catch (NumberFormatException e) {
                 Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setHeaderText("geen getal");
                 alert.setContentText("zorg ervoor dat bij maximum spelers en floor amount er een getal staat");
                 alert.showAndWait();
             }
 
         } else {
             Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setContentText("voer gamelobbynaam in");
+            alert.setHeaderText("invoer velden leeg");
+            alert.setContentText("voer velden van naam, maximum spelers en floor amount in!");
             alert.showAndWait();
         }
     }

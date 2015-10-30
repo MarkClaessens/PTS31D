@@ -74,8 +74,9 @@ public class MainGameFX extends Application {
         stage.setScene(scene);
         determineScreenSize();
         pressedKeys = new Object[3];
+        pressedKeys[0] = null;
+        pressedKeys[1] = null;
         pressedKeys[2] = false;
-//        this.clearPressedKeys();
 
         //Make canvas and gc and put it on the screen
         Canvas canvas = new Canvas(screenWidth, screenHeight);
@@ -168,38 +169,39 @@ public class MainGameFX extends Application {
      */
     private Image drawCharacter(Character character, int time) {
         Image image = null;
+        System.out.println(character + " is dit null???????");
         if (character != null) {
             switch (character.getDirection()) {
                 case UP:
                     if (!character.isIsMoving()) {
                         image = new Image(character.getSpritesUp()[0]);
                     } else {
-                        getAnimatedImage(time, character.getSpritesUp());
+                        image = getAnimatedImage(time, character.getSpritesUp());
                     }
                     break;
                 case DOWN:
                     if (!character.isIsMoving()) {
                         image = new Image(character.getSpritesDown()[0]);
                     } else {
-                        getAnimatedImage(time, character.getSpritesDown());
+                        image = getAnimatedImage(time, character.getSpritesDown());
                     }
                     break;
                 case LEFT:
                     if (!character.isIsMoving()) {
                         image = new Image(character.getSpritesLeft()[0]);
                     } else {
-                        getAnimatedImage(time, character.getSpritesLeft());
+                        image = getAnimatedImage(time, character.getSpritesLeft());
                     }
                     break;
                 case RIGHT:
                     if (!character.isIsMoving()) {
                         image = new Image(character.getSpritesRight()[0]);
                     } else {
-                        getAnimatedImage(time, character.getSpritesRight());
+                        image = getAnimatedImage(time, character.getSpritesRight());
                     }
                     break;
             }
-        }
+        }        
         return image;
     }
 
@@ -223,7 +225,6 @@ public class MainGameFX extends Application {
                 returnImage = new Image(sprites[2]);
                 break;
         }
-        System.out.println(returnImage.impl_getUrl());
         return returnImage;
     }
 
@@ -364,12 +365,12 @@ public class MainGameFX extends Application {
         return pressedKeys;
     }
 
-    public void clearPressedKeys() {
+//    public void clearPressedKeys() {
 //        pressedKeys = new Object[3];
 //        pressedKeys[0] = null;
 //        pressedKeys[1] = null;
 //        pressedKeys[2] = false;
-    }
+//    }
 
     /**
      * start point of this executable class

@@ -5,6 +5,7 @@ import javafx.scene.shape.Polygon;
 import java.awt.geom.Point2D;
 import static java.lang.Math.tan;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -148,6 +149,7 @@ public class Human extends Character {
                 }
                 if (hit) {
                     deadghosts.add(g);
+                    g.setBeginSpawnTime(Calendar.getInstance());
                     g.vanish();
                 }
             }
