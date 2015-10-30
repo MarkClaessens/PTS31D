@@ -110,11 +110,13 @@ public class MainGameFX extends Application {
 
         //Draw Human
         Image drawHumanImage = drawCharacter(human, time);
-        System.out.println(human.getPosition().getX() + "X");
-        System.out.println(human.getPosition().getY() + "Y");
+        System.out.println("HumanX: " + human.getPosition().getX());
+        System.out.println("HumanY: " + human.getPosition().getY());
 
         //Draw Ghost
         Image drawGhostImage = drawCharacter(ghost, time);
+        System.out.println("GhostX: " + ghost.getPosition().getX());
+        System.out.println("GhostY: " + ghost.getPosition().getY());
 
         //Draw Key
         Image keyImg = new Image(key.getSprite());

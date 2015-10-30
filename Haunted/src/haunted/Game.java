@@ -198,7 +198,7 @@ public class Game {
                         long l = System.currentTimeMillis() - cl.getTimeInMillis();
                         cl = Calendar.getInstance();
                         if (l >  18){
-                        System.out.println(l);
+                        //System.out.println(l);
                         }
                         tick();
                     }
