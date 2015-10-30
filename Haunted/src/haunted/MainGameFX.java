@@ -125,6 +125,7 @@ public class MainGameFX extends Application {
             keyImg = new Image("Key.png");
         }
 
+
         //Draw Door
         Image doorImage = new Image(door.getSprite());
 
