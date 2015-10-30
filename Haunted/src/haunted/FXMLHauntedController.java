@@ -146,7 +146,7 @@ public class FXMLHauntedController extends BaseController implements Initializab
         if (!(TFroomname.getText().equals("")) || !(TFplayers.getText().equals("")) || !(TFfloors.getText().equals(""))) {
             gamelobby = lobby.createGameLobby(TFroomname.getText(), TFpassword.getText());            
             try {
-                if(Integer.parseInt(TFplayers.getText()) < 7 && Integer.parseInt(TFfloors.getText()) < 11)
+                if(Integer.parseInt(TFplayers.getText()) > 1 && Integer.parseInt(TFplayers.getText()) < 7 && Integer.parseInt(TFfloors.getText()) < 11 )
                 {
                    gamelobby.setMaxPlayers(Integer.parseInt(TFplayers.getText()));
                    gamelobby.setFloorAmount(Integer.parseInt(TFfloors.getText()));                
