@@ -228,8 +228,8 @@ public class MainGameFX extends Application {
         //Set door and key.
         Level lvl = game.getCurrentLevel();
         this.level = lvl;
-        this.levelDrawWidth = lvl.getWidth()+200;
-        this.levelDrawHeight = lvl.getHeight()+200;
+        this.levelDrawWidth = lvl.getWidth() + 200;
+        this.levelDrawHeight = lvl.getHeight() + 200;
         for (Obstacle o : lvl.getObstacles()) {
             if (o.getBehaviour() == ObstacleType.DOOR) {
                 this.door = o;
@@ -291,6 +291,43 @@ public class MainGameFX extends Application {
                                 break;
                             case "ESCAPE":
                                 pressedKeys[2] = true;
+                        }
+                    }
+                }
+        );
+        scene.setOnKeyReleased(
+                new EventHandler<KeyEvent>() {
+                    public void handle(KeyEvent e) {
+                        String code = e.getCode().toString();
+                        switch (code) {
+                            case "W":
+                                pressedKeys[0] = null;
+                                break;
+                            case "A":
+                                pressedKeys[0] = null;
+                                break;
+                            case "S":
+                                pressedKeys[0] = null;
+                                break;
+                            case "D":
+                                pressedKeys[0] = null;
+                                break;
+                        }
+                        switch (code) {
+                            case "UP":
+                                pressedKeys[1] = null;
+                                break;
+                            case "DOWN":
+                                pressedKeys[1] = null;
+                                break;
+                            case "LEFT":
+                                pressedKeys[1] = null;
+                                break;
+                            case "RIGHT":
+                                pressedKeys[1] = null;
+                                break;
+                            case "ESCAPE":
+                                pressedKeys[2] = false;
                         }
                     }
                 }
