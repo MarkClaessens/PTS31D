@@ -17,26 +17,27 @@ import javafx.scene.control.Button;
  * @author Mark
  */
 public class FXMLnextroundController extends BaseController implements Initializable {
-    
-public static final String URL_FXML = "FXMLGameLobby.fxml";
-private MainGameFX gameFX;
+
+    public static final String URL_FXML = "FXMLGameLobby.fxml";
+    private MainGameFX gameFX;
 
     @FXML
     private Button BTNnextRound;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }   
-    
+    }
+
     public void setGamefx(MainGameFX GameFX) {
         this.gameFX = GameFX;
     }
-    
+
     @FXML
-    private void nextround() throws Exception{
+    private void nextround() throws Exception {
         gameFX.setShowEmpty(false);
         gameFX.start(Haunted.getStage());
     }

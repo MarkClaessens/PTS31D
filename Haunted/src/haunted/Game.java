@@ -130,7 +130,7 @@ public class Game {
         this.bindCharactersToPlayers();
         this.gameFX = new MainGameFX();
         cl = Calendar.getInstance();
-        
+
     }
 
     /**
@@ -239,24 +239,21 @@ public class Game {
      *
      * @param The player who has won the game.
      */
-    public void endGame(Player winner){
+    public void endGame(Player winner) {
         this.isRunning = false;
-        
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXMLvictoryController.URL_FXML));
-        try{
-          Node root = fxmlLoader.load();
-          Controller controller = fxmlLoader.getController();
-          controller.setView(root);
-          FXMLvictoryController VC = (FXMLvictoryController) fxmlLoader.getController();
-          VC.setWinnaarnaam(winner.getName());
-          VC.Show();
+        try {
+            Node root = fxmlLoader.load();
+            Controller controller = fxmlLoader.getController();
+            controller.setView(root);
+            FXMLvictoryController VC = (FXMLvictoryController) fxmlLoader.getController();
+            VC.setWinnaarnaam(winner.getName());
+            VC.Show();
+        } catch (IOException ex) {
+            Logger.getLogger(Game.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        catch(IOException ex)
-        {
-          Logger.getLogger(Game.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);  
-        }
-        
-                
+
         // TODO: call in view (FXML) the method to launch the victory screen with the winner (inside the parameter)
     }
 
@@ -283,7 +280,7 @@ public class Game {
                     }
 
                     for (int i = 0; i < this.players.size(); i++) {
-                        if (keyboard[i] != null) {                         
+                        if (keyboard[i] != null) {
                             this.players.get(i).getCharacter().move((DirectionType) keyboard[i]);
                         } else if (this.players.get(i).getCharacter() instanceof Ghost) {
                             Ghost G = (Ghost) this.players.get(i).getCharacter();

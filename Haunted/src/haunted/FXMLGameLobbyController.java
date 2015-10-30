@@ -64,15 +64,16 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
     private TextArea TAchatBox;
     @FXML
     AnchorPane paneel;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        BackgroundImage myBI= new BackgroundImage(new Image("gamelobby.jpg",1024,576,false,true),
-        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-        BackgroundSize.DEFAULT);
-         //then you set to your node
+        BackgroundImage myBI = new BackgroundImage(new Image("gamelobby.jpg", 1024, 576, false, true),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        //then you set to your node
         paneel.setBackground(new Background(myBI));
     }
 
@@ -166,14 +167,12 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
         TAchatBox.clear();
         String totaaltekst = (String) LVplayers.getSelectionModel().getSelectedItem();
         String naam = totaaltekst.substring(0, totaaltekst.indexOf(" "));
-        
-         for (Player player : gamelobby.getPlayers()) 
-         {
-            if (player.getName().equals(naam)) 
-            {
-               gamelobby.sendMessage(TFmessage.getText(), player); 
+
+        for (Player player : gamelobby.getPlayers()) {
+            if (player.getName().equals(naam)) {
+                gamelobby.sendMessage(TFmessage.getText(), player);
             }
-         }
+        }
         List<Message> messages = gamelobby.getMessages();
         Message message = messages.get(messages.size() - 1);
         TAchatBox.setText(currentText + message.toString() + "\n");

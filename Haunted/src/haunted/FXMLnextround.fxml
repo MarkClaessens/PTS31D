@@ -8,7 +8,7 @@
 
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="haunted.FXMLnextroundController">
-   <children>
-      <Button fx:id="BTNnextRound" layoutX="280.0" layoutY="209.0" mnemonicParsing="false" onMouseClicked="#nextround" text="Next Round" />
-   </children>
+    <children>
+        <Button fx:id="BTNnextRound" layoutX="280.0" layoutY="209.0" mnemonicParsing="false" onMouseClicked="#nextround" text="Next Round" />
+    </children>
 </AnchorPane>

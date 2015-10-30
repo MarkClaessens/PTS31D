@@ -5,7 +5,6 @@
  */
 package haunted;
 
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import javafx.scene.control.Button;
@@ -75,6 +74,7 @@ public class FXMLHauntedController extends BaseController implements Initializab
     Button BTNexit;
     @FXML
     AnchorPane paneel;
+
     /**
      * *
      * initialize the Lobby of the game. first screen.
@@ -85,10 +85,10 @@ public class FXMLHauntedController extends BaseController implements Initializab
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         lobby = new Lobby();
-        BackgroundImage myBI= new BackgroundImage(new Image("lobbypic.jpg",1024,576,false,true),
-        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-        BackgroundSize.DEFAULT);
-         //then you set to your node
+        BackgroundImage myBI = new BackgroundImage(new Image("lobbypic.jpg", 1024, 576, false, true),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        //then you set to your node
         paneel.setBackground(new Background(myBI));
         setplayernames();
     }
@@ -109,7 +109,7 @@ public class FXMLHauntedController extends BaseController implements Initializab
      * @param lobby
      */
     public void setLobby(Lobby lobby) {
-        this.lobby = lobby;        
+        this.lobby = lobby;
     }
 
     /**
@@ -144,25 +144,22 @@ public class FXMLHauntedController extends BaseController implements Initializab
      */
     public void creategamelobby() throws IOException {
         if (!(TFroomname.getText().equals("")) || !(TFplayers.getText().equals("")) || !(TFfloors.getText().equals(""))) {
-            gamelobby = lobby.createGameLobby(TFroomname.getText(), TFpassword.getText());            
+            gamelobby = lobby.createGameLobby(TFroomname.getText(), TFpassword.getText());
             try {
-                if(Integer.parseInt(TFplayers.getText()) > 1 && Integer.parseInt(TFplayers.getText()) < 7 && Integer.parseInt(TFfloors.getText()) < 11 )
-                {
-                   gamelobby.setMaxPlayers(Integer.parseInt(TFplayers.getText()));
-                   gamelobby.setFloorAmount(Integer.parseInt(TFfloors.getText()));                
-                   FXMLGameLobbyController GMC = (FXMLGameLobbyController) Haunted.getNavigation().load(FXMLGameLobbyController.URL_FXML);
-                   GMC.setGameLobby(gamelobby);
-                   GMC.setLobby(lobby);
-                   GMC.Show(); 
+                if (Integer.parseInt(TFplayers.getText()) > 1 && Integer.parseInt(TFplayers.getText()) < 7 && Integer.parseInt(TFfloors.getText()) < 11) {
+                    gamelobby.setMaxPlayers(Integer.parseInt(TFplayers.getText()));
+                    gamelobby.setFloorAmount(Integer.parseInt(TFfloors.getText()));
+                    FXMLGameLobbyController GMC = (FXMLGameLobbyController) Haunted.getNavigation().load(FXMLGameLobbyController.URL_FXML);
+                    GMC.setGameLobby(gamelobby);
+                    GMC.setLobby(lobby);
+                    GMC.Show();
+                } else {
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setHeaderText("maximum overschreden");
+                    alert.setContentText("het maximum van een van de 2 getallen is overschreden. Het maximum voor spelers is 6 en voor floors 10");
+                    alert.showAndWait();
                 }
-                else
-                {
-                   Alert alert = new Alert(AlertType.INFORMATION);
-                   alert.setHeaderText("maximum overschreden");
-                   alert.setContentText("het maximum van een van de 2 getallen is overschreden. Het maximum voor spelers is 6 en voor floors 10");
-                   alert.showAndWait(); 
-                }
-                
+
             } catch (NumberFormatException e) {
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setHeaderText("geen getal");

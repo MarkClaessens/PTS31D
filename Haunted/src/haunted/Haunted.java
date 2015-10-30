@@ -24,8 +24,8 @@ public class Haunted extends Application {
     public static Navigation getNavigation() {
         return navigation;
     }
-    
-    public static Stage getStage(){
+
+    public static Stage getStage() {
         return currentStage;
     }
 

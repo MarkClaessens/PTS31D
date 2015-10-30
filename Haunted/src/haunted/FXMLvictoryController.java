@@ -38,10 +38,10 @@ public class FXMLvictoryController extends BaseController implements Initializab
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        BackgroundImage myBI= new BackgroundImage(new Image("victoryscreen.jpg",1024,576,false,true),
-        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-        BackgroundSize.DEFAULT);
-         //then you set to your node
+        BackgroundImage myBI = new BackgroundImage(new Image("victoryscreen.jpg", 1024, 576, false, true),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        //then you set to your node
         paneel.setBackground(new Background(myBI));
         winnaarnaam = "";
     }
@@ -52,7 +52,7 @@ public class FXMLvictoryController extends BaseController implements Initializab
 
     @Override
     public void PreShowing() {
-        super.PreShowing();        
+        super.PreShowing();
         lblwinner.setText(winnaarnaam);
     }
 

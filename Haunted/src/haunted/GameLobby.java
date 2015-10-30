@@ -138,8 +138,8 @@ public class GameLobby {
             this.floorAmount = FloorAmount;
         }
     }
-    
-    public Game getGame(){
+
+    public Game getGame() {
         return this.game;
     }
 

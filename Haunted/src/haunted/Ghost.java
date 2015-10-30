@@ -17,14 +17,14 @@ public class Ghost extends Character {
     private Calendar stationaryTime = Calendar.getInstance();
     private Calendar beginSpawnTime;
 
-    public Calendar getBeginSpawnTime(){
+    public Calendar getBeginSpawnTime() {
         return this.beginSpawnTime;
     }
 
-    public void setBeginSpawnTime(Calendar spawnTime){
+    public void setBeginSpawnTime(Calendar spawnTime) {
         this.beginSpawnTime = spawnTime;
     }
-    
+
     /**
      *
      * @return the time when the Ghost started standing still.
@@ -40,7 +40,7 @@ public class Ghost extends Character {
      * @param stationaryTime
      */
     public void setStationaryTime() {
-       this.stationaryTime = Calendar.getInstance();
+        this.stationaryTime = Calendar.getInstance();
     }
 
     /**
@@ -128,7 +128,7 @@ public class Ghost extends Character {
         // If there are remaining lifes then respawn the ghost on the map.
         if (remainingGhostLifes > 0) {
             // Vanish the Ghost by setting in off the screen
-            super.setPosition(new Point2D.Double(-800,-800));       
+            super.setPosition(new Point2D.Double(-800, -800));
         } // If the ghost has no more lifes then end the game with the winning player as the parameter.
         else {
             game.getPlayers().stream().filter((player) -> (player.getCharacter() instanceof Human)).forEach((player) -> {

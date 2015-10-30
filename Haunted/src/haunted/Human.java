@@ -168,8 +168,8 @@ public class Human extends Character {
     }
 
     private void setFlashLight() {
-        flX1 = this.getPosition().getX()+50;
-        flY1 = this.getPosition().getY()+50;
+        flX1 = this.getPosition().getX() + 50;
+        flY1 = this.getPosition().getY() + 50;
         switch (this.getDirection()) {
             case UP:
                 flX2 = flX1 - tan(this.flashlightAngle) * this.flashlightRange;
@@ -200,8 +200,8 @@ public class Human extends Character {
 
     public int[] getFlashLightPolygon() {
         int[] i = new int[6];
-        i[0] = (int) this.getPosition().getX()+50;
-        i[1] = (int) this.getPosition().getY()+50;
+        i[0] = (int) this.getPosition().getX() + 50;
+        i[1] = (int) this.getPosition().getY() + 50;
         i[2] = (int) flX2;
         i[3] = (int) flY2;
         i[4] = (int) flX3;

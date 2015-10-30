@@ -41,7 +41,7 @@ public class MainGameFX extends Application {
 
     private Object[] pressedKeys;
     private final long startNanoTime = System.nanoTime();
-    
+
     private Polygon flashlight = null;
     private Human human = null;
     private Ghost ghost = null;
@@ -50,11 +50,12 @@ public class MainGameFX extends Application {
     // private Obstacle door = null;
 
     private boolean showEmpty;
-    
+
     private int state = 2;
 
     private final String backgroundImg = "background.png";
     private Group root;
+
     public MainGameFX() {
     }
 
@@ -97,8 +98,8 @@ public class MainGameFX extends Application {
                 root.getChildren().stream().filter((o) -> (o instanceof Polygon)).forEach((o) -> {
                     obj.add(o);
                 });
-                root.getChildren().removeAll(obj);         
-                if (!showEmpty) {               
+                root.getChildren().removeAll(obj);
+                if (!showEmpty) {
                     gc.clearRect(0, 0, screenWidth, screenHeight);
                     drawElements(gc, currentNanoTime);
                     root.getChildren().add(flashlight);
@@ -127,12 +128,9 @@ public class MainGameFX extends Application {
 
         //Draw Human
         Image drawHumanImage = drawCharacter(human, time);
-        
-        
-        
+
         //System.out.println("HumanX: " + human.getPosition().getX());
         //System.out.println("HumanY: " + human.getPosition().getY());
-
         //Draw Ghost
         Image drawGhostImage = drawCharacter(ghost, time);
         //System.out.println("GhostX: " + ghost.getPosition().getX());
@@ -146,7 +144,7 @@ public class MainGameFX extends Application {
 
         //Draw Door
         Image doorImage = new Image("Door.png");
-        
+
         gc.drawImage(backgroundImage, 0, 0, levelDrawWidth * horScale, levelDrawHeight * verScale);//, screenWidth, screenHeight
         //, screenWidth / levelWidth, screenHeight / levelHeight
         if (drawHumanImage != null) {
@@ -203,7 +201,7 @@ public class MainGameFX extends Application {
                     }
                     break;
             }
-        }        
+        }
         return image;
     }
 
@@ -216,7 +214,7 @@ public class MainGameFX extends Application {
      */
     private Image getAnimatedImage(int time, String[] sprites) {
         Image returnImage = null;
-        
+
         switch (state) {
             case 2:
                 returnImage = new Image(sprites[0]);
@@ -248,13 +246,13 @@ public class MainGameFX extends Application {
                 this.ghost = (Ghost) p.getCharacter();
             }
         }
-        if (human.getFlashLightPolygon()!=null){
-        int[] i = human.getFlashLightPolygon();
-        flashlight = new Polygon();
-        flashlight.getPoints().clear();
-        flashlight.getPoints().addAll(new Double[]{(double)(i[0]+100)*horScale,(double)(i[1]+100)*verScale,(double)(i[2]+100)*horScale,(double)(i[3]+100)*verScale,(double)(i[4]+100)*horScale,(double)(i[5]+100)*verScale});
-        flashlight.setFill(Color.YELLOW);
-        flashlight.setBlendMode(BlendMode.SOFT_LIGHT);
+        if (human.getFlashLightPolygon() != null) {
+            int[] i = human.getFlashLightPolygon();
+            flashlight = new Polygon();
+            flashlight.getPoints().clear();
+            flashlight.getPoints().addAll(new Double[]{(double) (i[0] + 100) * horScale, (double) (i[1] + 100) * verScale, (double) (i[2] + 100) * horScale, (double) (i[3] + 100) * verScale, (double) (i[4] + 100) * horScale, (double) (i[5] + 100) * verScale});
+            flashlight.setFill(Color.YELLOW);
+            flashlight.setBlendMode(BlendMode.SOFT_LIGHT);
         }
         //Set door and key.
         Level lvl = game.getCurrentLevel();
@@ -327,8 +325,8 @@ public class MainGameFX extends Application {
                 }
         );
     }
-    
-    private void onKeyReleases(Scene scene){
+
+    private void onKeyReleases(Scene scene) {
         scene.setOnKeyReleased(
                 new EventHandler<KeyEvent>() {
                     public void handle(KeyEvent e) {
@@ -383,7 +381,6 @@ public class MainGameFX extends Application {
 //        pressedKeys[1] = null;
 //        pressedKeys[2] = false;
 //    }
-
     /**
      * start point of this executable class
      *

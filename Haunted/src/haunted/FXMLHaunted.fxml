@@ -10,20 +10,20 @@
 
 <AnchorPane id="AnchorPane" fx:id="paneel" prefHeight="576.0" prefWidth="756.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="haunted.FXMLHauntedController">
     <children>
-      <Label layoutX="401.0" layoutY="207.0" text="flooramount:" textFill="WHITE" />
-      <Label layoutX="401.0" layoutY="167.0" text="max. players:" textFill="WHITE" />
-      <Label layoutX="408.0" layoutY="126.0" text="password:" textFill="WHITE" />
-      <Label layoutX="404.0" layoutY="85.0" text="roomname:" textFill="WHITE" />
-      <Label layoutX="10.0" layoutY="207.0" text="naam speler2:" textFill="WHITE" />
-      <Label layoutX="10.0" layoutY="167.0" text="naam speler1:" textFill="WHITE" />
-      <TextField fx:id="TFfloors" layoutX="490.0" layoutY="203.0" promptText="floor amount" />
-      <TextField fx:id="TFplayers" layoutX="490.0" layoutY="163.0" promptText="maximum players" />
-      <Button fx:id="BTNexit" layoutX="30.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#exit" text="Exit" />
-      <TextField fx:id="TFchangenameplayer1" layoutX="91.0" layoutY="163.0" promptText="insert name here" />
-      <TextField fx:id="TFchangenameplayer2" layoutX="91.0" layoutY="203.0" promptText="insert name here" />
-      <TextField fx:id="TFroomname" layoutX="490.0" layoutY="81.0" promptText="roomname" />
-      <TextField fx:id="TFpassword" layoutX="490.0" layoutY="122.0" promptText="password(optional)" />
-      <Button fx:id="BTNcreategamelobby" layoutX="497.0" layoutY="247.0" mnemonicParsing="false" onMouseClicked="#creategamelobby" prefHeight="25.0" prefWidth="134.0" text="create gamelobby" />
-      <Button fx:id="BTNrename" layoutX="137.0" layoutY="247.0" mnemonicParsing="false" onMouseClicked="#changename" text="rename" />
+        <Label layoutX="401.0" layoutY="207.0" text="flooramount:" textFill="WHITE" />
+        <Label layoutX="401.0" layoutY="167.0" text="max. players:" textFill="WHITE" />
+        <Label layoutX="408.0" layoutY="126.0" text="password:" textFill="WHITE" />
+        <Label layoutX="404.0" layoutY="85.0" text="roomname:" textFill="WHITE" />
+        <Label layoutX="10.0" layoutY="207.0" text="naam speler2:" textFill="WHITE" />
+        <Label layoutX="10.0" layoutY="167.0" text="naam speler1:" textFill="WHITE" />
+        <TextField fx:id="TFfloors" layoutX="490.0" layoutY="203.0" promptText="floor amount" />
+        <TextField fx:id="TFplayers" layoutX="490.0" layoutY="163.0" promptText="maximum players" />
+        <Button fx:id="BTNexit" layoutX="30.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#exit" text="Exit" />
+        <TextField fx:id="TFchangenameplayer1" layoutX="91.0" layoutY="163.0" promptText="insert name here" />
+        <TextField fx:id="TFchangenameplayer2" layoutX="91.0" layoutY="203.0" promptText="insert name here" />
+        <TextField fx:id="TFroomname" layoutX="490.0" layoutY="81.0" promptText="roomname" />
+        <TextField fx:id="TFpassword" layoutX="490.0" layoutY="122.0" promptText="password(optional)" />
+        <Button fx:id="BTNcreategamelobby" layoutX="497.0" layoutY="247.0" mnemonicParsing="false" onMouseClicked="#creategamelobby" prefHeight="25.0" prefWidth="134.0" text="create gamelobby" />
+        <Button fx:id="BTNrename" layoutX="137.0" layoutY="247.0" mnemonicParsing="false" onMouseClicked="#changename" text="rename" />
     </children>
 </AnchorPane>
