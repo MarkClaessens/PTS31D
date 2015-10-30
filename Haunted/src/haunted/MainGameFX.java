@@ -225,7 +225,7 @@ public class MainGameFX extends Application {
             }
         }
 
-        //Set door and key
+        //Set door and key.
         Level lvl = game.getCurrentLevel();
         this.level = lvl;
         this.levelDrawWidth = lvl.getWidth()+200;
