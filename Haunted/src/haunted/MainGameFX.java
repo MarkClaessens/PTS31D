@@ -80,6 +80,7 @@ public class MainGameFX extends Application {
 
         //Handle key pressings
         onKeyPresses(scene);
+        onKeyReleases(scene);
 
         //Animation timer start and handling
         new AnimationTimer() {
@@ -185,6 +186,7 @@ public class MainGameFX extends Application {
                     break;
             }
         }
+        System.out.println(image.impl_getUrl());
         return image;
     }
 
@@ -208,6 +210,7 @@ public class MainGameFX extends Application {
                 returnImage = new Image(sprites[2]);
                 break;
         }
+        //System.out.println(returnImage.impl_getUrl());
         return returnImage;
     }
 
@@ -296,6 +299,9 @@ public class MainGameFX extends Application {
                     }
                 }
         );
+    }
+    
+    private void onKeyReleases(Scene scene){
         scene.setOnKeyReleased(
                 new EventHandler<KeyEvent>() {
                     public void handle(KeyEvent e) {
