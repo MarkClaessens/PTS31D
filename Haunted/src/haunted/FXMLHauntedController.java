@@ -5,6 +5,7 @@
  */
 package haunted;
 
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import javafx.scene.control.Button;
@@ -27,8 +28,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Pane;
 
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -65,7 +73,8 @@ public class FXMLHauntedController extends BaseController implements Initializab
     Button BTNcreategamelobby;
     @FXML
     Button BTNexit;
-
+    @FXML
+    AnchorPane paneel;
     /**
      * *
      * initialize the Lobby of the game. first screen.
@@ -76,6 +85,11 @@ public class FXMLHauntedController extends BaseController implements Initializab
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         lobby = new Lobby();
+        BackgroundImage myBI= new BackgroundImage(new Image("lobbypic.jpg",1024,576,false,true),
+        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+        BackgroundSize.DEFAULT);
+         //then you set to your node
+        paneel.setBackground(new Background(myBI));
         setplayernames();
     }
 
@@ -95,7 +109,7 @@ public class FXMLHauntedController extends BaseController implements Initializab
      * @param lobby
      */
     public void setLobby(Lobby lobby) {
-        this.lobby = lobby;
+        this.lobby = lobby;        
     }
 
     /**
