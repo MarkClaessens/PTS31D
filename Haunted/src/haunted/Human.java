@@ -131,7 +131,7 @@ public class Human extends Character {
         }
         if (checkHitboxCollision(this.getPosition(), 100, 100, key, 100, 100)) {
             this.pickUpKey();
-            System.out.println("keyOpgepakt");
+            //System.out.println("keyOpgepakt");
         }
         //flashlight and ghost collision
         if (this.checkGhostCollision() != null){
