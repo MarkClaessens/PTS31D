@@ -91,14 +91,14 @@ public class Human extends Character {
      */
     public void pickUpKey() {
         this.hasKey = true;
-        List<Obstacle> obstacles = game.getCurrentLevel().getObstacles();
-        for (Obstacle obstacle : obstacles) {
-            if (obstacle.getBehaviour() == ObstacleType.KEY) {
-                obstacles.remove(obstacle);
-                break;
-            }
-        }
-        game.getCurrentLevel().setObstacles(obstacles);
+//        List<Obstacle> obstacles = game.getCurrentLevel().getObstacles();
+//        for (Obstacle obstacle : obstacles) {
+//            if (obstacle.getBehaviour() == ObstacleType.KEY) {
+//                obstacles.remove(obstacle);
+//                break;
+//            }
+//        }
+//        game.getCurrentLevel().setObstacles(obstacles);
 
     }
 

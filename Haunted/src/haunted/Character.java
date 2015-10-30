@@ -152,13 +152,13 @@ public abstract class Character {
             // </editor-fold>
             case DOWN:
                 // <editor-fold defaultstate="collapsed" desc="DOWN">
-                proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() + movementSpeed);
+                proposedLocation.setLocation(oldPosition.getX(), (oldPosition.getY() + movementSpeed));
                 if (detectCollision(proposedLocation)) {
                     this.setIsMoving(false);
                 } else {
                     this.direction = direction;
                     this.setIsMoving(true);
-                    position.setLocation(oldPosition.getX(), oldPosition.getY() + movementSpeed);
+                    position.setLocation(oldPosition.getX(), (oldPosition.getY() + movementSpeed));
                     //System.out.println("DOWN");
                     break;
                 }
@@ -178,13 +178,13 @@ public abstract class Character {
             // </editor-fold>
             case LEFT:
                 //        // <editor-fold defaultstate="collapsed" desc="LEFT">
-                proposedLocation.setLocation(oldPosition.getX() - movementSpeed, oldPosition.getY());
+                proposedLocation.setLocation((oldPosition.getX() - movementSpeed), oldPosition.getY());
                 if (detectCollision(proposedLocation)) {
                     this.setIsMoving(false);
                 } else {
                     this.direction = direction;
                     this.setIsMoving(true);
-                    position.setLocation(oldPosition.getX() - movementSpeed, oldPosition.getY());
+                    position.setLocation((oldPosition.getX() - movementSpeed), oldPosition.getY());
                     //System.out.println("LEFT");
                     break;
                 }
@@ -207,9 +207,9 @@ public abstract class Character {
         int pYb = pYt + 80;
 
         BufferedImage colImg = this.game.getCurrentLevel().getCollisionImage();
-        return pXl > 0 && pYt > 0 && pYb < 900 && pXr
-                < 1400 && colImg.getRGB(pXl, pYt)
-                + colImg.getRGB(pXr, pYt) + colImg.getRGB(pXr, pYb) + colImg.getRGB(pXl, pYb) != -4;
+        return 0 > pXl || 900 < pYb || 1400
+                < pXr || pYt <= 0 || (colImg.getRGB(pXl, pYt)
+                + colImg.getRGB(pXr, pYt) + colImg.getRGB(pXr, pYb) + colImg.getRGB(pXl, pYb)) != -4;
 
     }
 
