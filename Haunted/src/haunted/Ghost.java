@@ -124,7 +124,6 @@ public class Ghost extends Character {
             this.setSpritesLeft(new String[]{"GhostRedLeft1.png", "GhostRedLeft2.png", "GhostRedLeft3.png"});
             this.setSpritesRight(new String[]{"GhostRedRight1.png", "GhostRedRight2.png", "GhostRedRight3.png"});
             this.vulnerable = true;
-            this.stationaryTime.clear();
         }
     }
 

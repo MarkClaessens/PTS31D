@@ -148,7 +148,7 @@ public abstract class Character {
                     break;
                 } else {
                     this.direction = direction;
-                    this.setIsMoving(true);
+                    this.setIsMoving(true);                 
                     position.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
                     //System.out.println("UP");
                     break;
