@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import java.util.TimerTask;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 /**
@@ -238,7 +239,7 @@ public class Game {
      */
     public void endGame(Player winner) {
         this.isRunning = false;
-
+        scene = gameFX.getScene();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXMLvictoryController.URL_FXML));
         try {
             Node root = fxmlLoader.load();
@@ -246,7 +247,7 @@ public class Game {
             controller.setView(root);
             FXMLvictoryController VC = (FXMLvictoryController) fxmlLoader.getController();
             VC.setWinnaarnaam(winner.getName());
-            VC.Show();
+            scene.setRoot((Parent) VC.getView());            
         } catch (IOException ex) {
             Logger.getLogger(Game.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }

@@ -55,6 +55,7 @@ public class MainGameFX extends Application {
 
     private final String backgroundImg = "background.png";
     private Group root;
+    private Scene scene;
 
     public MainGameFX() {
     }
@@ -74,7 +75,7 @@ public class MainGameFX extends Application {
         this.showEmpty = false;
         stage.setTitle("The Game");
         root = new Group();
-        Scene scene = new Scene(root);
+        scene = new Scene(root);
         stage.setScene(scene);
         determineScreenSize();
         pressedKeys = new Object[3];
@@ -402,5 +403,8 @@ public class MainGameFX extends Application {
      */
     public void setShowEmpty(boolean showEmpty) {
         this.showEmpty = showEmpty;
+    }
+    public Scene getScene(){
+        return scene;
     }
 }

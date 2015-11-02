@@ -27,7 +27,7 @@ public class FXMLvictoryController extends BaseController implements Initializab
 
     public static final String URL_FXML = "FXMLvictory.fxml";
 
-    String winnaarnaam;
+    private String winnaarnaam;
     @FXML
     private Label lblwinner;
     @FXML
@@ -42,18 +42,17 @@ public class FXMLvictoryController extends BaseController implements Initializab
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
         //then you set to your node
-        paneel.setBackground(new Background(myBI));
-        winnaarnaam = "";
+        paneel.setBackground(new Background(myBI));        
     }
 
     public void setWinnaarnaam(String naam) {
         this.winnaarnaam = naam;
+        lblwinner.setText(winnaarnaam);
     }
 
     @Override
     public void PreShowing() {
-        super.PreShowing();
-        lblwinner.setText(winnaarnaam);
-    }
+        super.PreShowing();        
+       }
 
 }
