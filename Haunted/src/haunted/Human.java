@@ -126,11 +126,11 @@ public class Human extends Character {
      * check the interaction between the human and the key, door
      */
     public void checkInteract() {
-        Point2D door = this.game.getCurrentLevel().getDoorLocation();
+        Point2D door = new Point2D.Double(this.game.getCurrentLevel().getDoorLocation().getX()+40,this.game.getCurrentLevel().getDoorLocation().getY());
         Point2D key = this.game.getCurrentLevel().getKeyLocation();
 
         //door collision
-        if ((checkHitboxCollision(this.getPosition(), 10, 10, door, 10, 10) && this.hasKey)) //key collision   
+        if ((checkHitboxCollision(new Point2D.Double(this.getPosition().getX()+45,this.getPosition().getY()), 10, 3, door, 20, 5) && this.hasKey)) //key collision   
         {
             this.enterDoor();
         }

@@ -127,7 +127,7 @@ public class FXMLHauntedController extends BaseController implements Initializab
      * @throws IOException
      */
     public void creategamelobby() throws IOException {
-        if (!(TFroomname.getText().equals("")) || !(TFplayers.getText().equals("")) || !(TFfloors.getText().equals(""))) {
+        if ((!(TFroomname.getText().equals("")) && !(TFplayers.getText().equals("")) && !(TFfloors.getText().equals("")))) {
             gamelobby = lobby.createGameLobby(TFroomname.getText(), TFpassword.getText());
             try {
                 if (Integer.parseInt(TFplayers.getText()) > 1 && Integer.parseInt(TFplayers.getText()) < 7 && Integer.parseInt(TFfloors.getText()) < 11) {
