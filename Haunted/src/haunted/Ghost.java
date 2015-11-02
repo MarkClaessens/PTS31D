@@ -17,10 +17,18 @@ public class Ghost extends Character {
     private Calendar stationaryTime = Calendar.getInstance();
     private Calendar beginSpawnTime;
 
+    /**
+     * 
+     * @return the begin spawntime
+     */
     public Calendar getBeginSpawnTime() {
         return this.beginSpawnTime;
     }
 
+    /**
+     * sets the begin spawntime
+     * @param spawnTime 
+     */
     public void setBeginSpawnTime(Calendar spawnTime) {
         this.beginSpawnTime = spawnTime;
     }
@@ -34,10 +42,9 @@ public class Ghost extends Character {
     }
 
     /**
-     * Sets the time when the Ghost started standing still. Started standing
+     * Sets the stationary time to now when the Ghost started standing still. Started standing
      * still = pressing no moving keys.
      *
-     * @param stationaryTime
      */
     public void setStationaryTime() {
         this.stationaryTime = Calendar.getInstance();
@@ -67,7 +74,10 @@ public class Ghost extends Character {
      *
      * @param position, the Point2D position of the Ghost on the map
      * @param color, color of the Ghost
-     * @param sprite, sprite of the Ghost
+     * @param spritesUp, up sprites of the Ghost
+     * @param spritesDown, down sprites of the Ghost
+     * @param spritesLeft, left sprites of the Ghost
+     * @param spritesRight, right sprites of the Ghost
      * @param game, the game in which the Ghost is active
      */
     public Ghost(Point2D position, Color color, String[] spritesUp, String[] spritesDown, String[] spritesLeft, String[] spritesRight, Game game) {
@@ -138,6 +148,10 @@ public class Ghost extends Character {
         }
     }
 
+    /**
+     * gives the hitboxpoints where te ghost can collide with
+     * @return hitboxpoints
+     */
     @Override
     public List<Point2D> getHitboxPoints() {
         // a  ab  b
