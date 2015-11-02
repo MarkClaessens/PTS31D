@@ -160,6 +160,10 @@ public abstract class Character {
                     this.direction = direction;
                     this.setIsMoving(true);                 
                     position.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
+                    if(this instanceof Ghost){
+                        Ghost g = (Ghost)this;
+                        g.getStationaryTime().clear();
+                    }
                     //System.out.println("UP");
                     break;
 
