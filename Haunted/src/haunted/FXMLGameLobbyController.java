@@ -175,26 +175,25 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
 
             for (Player player : gamelobby.getPlayers()) {
                 if (player.getName().equals(naam)) {
-                    if(!TFmessage.getText().isEmpty())
-                    {
-                      gamelobby.sendMessage(TFmessage.getText(), player);  
+                    if (!TFmessage.getText().isEmpty()) {
+                        gamelobby.sendMessage(TFmessage.getText(), player);
+                        List<Message> messages = gamelobby.getMessages();
+                        Message message = messages.get(messages.size() - 1);
+                        TAchatBox.setText(currentText + message.toString() + "\n");
+                        TAchatBox.setScrollTop(Double.MAX_VALUE);
+                        TFmessage.clear();
+                    } else {
+                        TAchatBox.setText(currentText);
+                        TAchatBox.setScrollTop(Double.MAX_VALUE);
+                        Alert alert = new Alert(AlertType.INFORMATION);
+                        alert.setContentText("geen message ingevoerd");
+                        alert.showAndWait();
+                        
                     }
-                    else
-                    {
-                      Alert alert = new Alert(AlertType.INFORMATION);
-                      alert.setContentText("geen message ingevoerd");
-                      alert.showAndWait();  
-                    }                    
                 }
             }
-            List<Message> messages = gamelobby.getMessages();
-            Message message = messages.get(messages.size() - 1);
-            TAchatBox.setText(currentText + message.toString() + "\n");
-            TAchatBox.setScrollTop(Double.MAX_VALUE);
-            TFmessage.clear();
-        }
-        else
-        {
+
+        } else {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setContentText("geen speler geselecteerd");
             alert.showAndWait();
