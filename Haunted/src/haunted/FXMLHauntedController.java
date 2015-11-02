@@ -59,6 +59,7 @@ public class FXMLHauntedController extends BaseController implements Initializab
     ImageView IVRename;
     @FXML
     ImageView IVCreategamelobby;
+
     /**
      * *
      * initialize the Lobby of the game. first screen.
@@ -102,9 +103,18 @@ public class FXMLHauntedController extends BaseController implements Initializab
      */
     public void changename() {
         if (!TFchangenameplayer1.getText().isEmpty() && !TFchangenameplayer2.getText().isEmpty()) {
-            lobby.changePlayerName(TFchangenameplayer1.getText(), TFchangenameplayer2.getText());
-            setplayernames();
-        } else if (!TFchangenameplayer1.getText().isEmpty() && TFchangenameplayer2.getText().isEmpty()) {
+            if (TFchangenameplayer1.getText().isEmpty() == TFchangenameplayer2.getText().isEmpty()) 
+            {
+               lobby.changePlayerName(TFchangenameplayer1.getText(), TFchangenameplayer2.getText() + "(1)");
+                setplayernames(); 
+            } 
+            else 
+            {
+                lobby.changePlayerName(TFchangenameplayer1.getText(), TFchangenameplayer2.getText());
+                setplayernames();
+            }            
+        } 
+        else if (!TFchangenameplayer1.getText().isEmpty() && TFchangenameplayer2.getText().isEmpty()) {
             lobby.changePlayerName(TFchangenameplayer1.getText(), lobby.getPlayer2().getName());
             setplayernames();
         } else if (TFchangenameplayer1.getText().isEmpty() && !TFchangenameplayer2.getText().isEmpty()) {

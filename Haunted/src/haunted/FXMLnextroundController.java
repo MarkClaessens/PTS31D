@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -40,6 +41,8 @@ public class FXMLnextroundController extends BaseController implements Initializ
     private Button BTNnextRound;
     @FXML
     AnchorPane paneel;
+    @FXML
+    ImageView IVNext;
     /**
      * Initializes the controller class.
      * @param url

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -8,6 +9,10 @@
 
 <AnchorPane id="AnchorPane" fx:id="paneel" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="haunted.FXMLnextroundController">
     <children>
-        <Button fx:id="BTNnextRound" layoutX="280.0" layoutY="209.0" mnemonicParsing="false" onMouseClicked="#nextround" text="Next Round" />
+      <ImageView fx:id="IVNext" fitHeight="150.0" fitWidth="200.0" layoutX="220.0" layoutY="147.0" onMouseClicked="#nextround" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../btnNextRound.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>
