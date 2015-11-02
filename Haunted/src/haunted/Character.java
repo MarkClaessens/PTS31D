@@ -150,20 +150,12 @@ public abstract class Character {
                 // <editor-fold defaultstate="collapsed" desc="UP">
                 proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
                 if (detectCollision(proposedLocation)) {
-                    if(this instanceof Ghost){
-                        Ghost g = (Ghost)this;
-                        g.setStationaryTime();
-                    }
                     this.setIsMoving(false);
                     break;
                 } else {
                     this.direction = direction;
                     this.setIsMoving(true);                 
-                    position.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
-                    if(this instanceof Ghost){
-                        Ghost g = (Ghost)this;
-                        g.getStationaryTime().clear();
-                    }
+                    position.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);                 
                     //System.out.println("UP");
                     break;
 
@@ -172,7 +164,7 @@ public abstract class Character {
             case DOWN:
                 // <editor-fold defaultstate="collapsed" desc="DOWN">
                 proposedLocation.setLocation(oldPosition.getX(), (oldPosition.getY() + movementSpeed));
-                if (detectCollision(proposedLocation)) {
+                if (detectCollision(proposedLocation)) {                  
                     this.setIsMoving(false);
                     break;
                 } else {
@@ -247,6 +239,18 @@ public abstract class Character {
      */
     public void setIsMoving(boolean isMoving) {
         this.isMoving = isMoving;
+        if(!isMoving){
+            if(this instanceof Ghost){
+                Ghost g = (Ghost)this;
+                g.setStationaryTime();
+            }
+            else{
+                if(this instanceof Ghost){
+                    Ghost g = (Ghost)this;
+                    g.getStationaryTime().clear();
+                }
+            }
+        }
     }
 
     /**
