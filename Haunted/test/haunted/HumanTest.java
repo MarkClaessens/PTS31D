@@ -7,8 +7,11 @@ package haunted;
 
 import java.awt.Color;
 import java.awt.geom.Point2D;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -45,7 +48,12 @@ public class HumanTest {
         players.add(new Player("testPlayer1"));
         players.add(new Player("testPlayer2"));
 
-        game = new Game(players, 3);
+        try {
+            game = new Game(players, 3);
+            game.startRound();
+        } catch (IOException ex) {
+            Logger.getLogger(HumanTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @After
@@ -69,9 +77,9 @@ public class HumanTest {
         System.out.println("getFlashlightRange");
         Point2D spawnPosition = new Point2D.Double(300, 500);
         Human human = new Human(spawnPosition, Color.BLUE, humSpritesUp, humSpritesDown, humSpritesLeft, humSpritesRight, game);
-        int expResult = 12;
+        int expResult = 100;
         int result = human.getFlashlightRange();
-        assertEquals("the result is not equal to 12", expResult, result);
+        assertEquals("the result is not equal to 100", expResult, result);
     }
 
     /**
@@ -97,9 +105,9 @@ public class HumanTest {
         Point2D spawnPosition = new Point2D.Double(300, 500);
         Human human = new Human(spawnPosition, Color.BLUE, humSpritesUp, humSpritesDown, humSpritesLeft, humSpritesRight, game);
 
-        int expResult = 45;
+        int expResult = 15;
         int result = human.getFlashlightAngle();
-        assertEquals("the result is not equal to 45", expResult, result);
+        assertEquals("the result is not equal to 15", expResult, result);
     }
 
     /**

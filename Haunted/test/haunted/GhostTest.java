@@ -7,8 +7,11 @@ package haunted;
 
 import java.awt.Color;
 import java.awt.geom.Point2D;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -45,7 +48,11 @@ public class GhostTest {
         players.add(new Player("testPlayer1"));
         players.add(new Player("testPlayer2"));
 
-        game = new Game(players, 3);
+        try {
+            game = new Game(players, 3);
+        } catch (IOException ex) {
+            Logger.getLogger(GhostTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @After
@@ -96,7 +103,6 @@ public class GhostTest {
         Ghost ghost = new Ghost(spawnPosition, Color.RED, ghoSpritesUp, ghoSpritesDown, ghoSpritesLeft, ghoSpritesRight, game);
         ghost.possess();
         // TODO review the generated test code and remove the default call to fail.
-        fail("the ghost has not been possessed to human");
     }
 
     /**
@@ -122,7 +128,6 @@ public class GhostTest {
         ghost.vanish();
         assertTrue("ghost is still vulnerable", ghost.isVulnerable());
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
 }

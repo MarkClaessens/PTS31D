@@ -227,7 +227,7 @@ public class GameLobbyTest {
         System.out.println("sendMessage");
         String message = "message1";
         GameLobby instance = globby;
-        instance.sendMessage(message);
+        instance.sendMessage(message, host);
         boolean expResult = true;
         boolean result = false;
         for (Message M : instance.getMessages()) {

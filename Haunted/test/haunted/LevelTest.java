@@ -175,7 +175,7 @@ public class LevelTest {
                 key = o;
             }
         }
-        current.pickRandomKeySpawnPoint();
+        //current.pickRandomKeySpawnPoint();
         Assert.assertThat("generateKeyLocation doesn't create a Point2D object",
                 key.getPosition(), instanceOf(Point2D.class));
     }
@@ -192,7 +192,7 @@ public class LevelTest {
                 door = o;
             }
         }
-        current.pickRandomDoorSpawnPoint();
+        //current.pickRandomDoorSpawnPoint();
         Assert.assertThat("generateDoorLocation doesn't create a Point2D object",
                 door.getPosition(), instanceOf(Point2D.class));
     }
