@@ -244,12 +244,12 @@ public abstract class Character {
                 Ghost g = (Ghost)this;
                 g.setStationaryTime();
             }
-            else{
-                if(this instanceof Ghost){
-                    Ghost g = (Ghost)this;
-                    g.getStationaryTime().clear();
-                }
-            }
+        }
+        else {
+            if(this instanceof Ghost){
+                Ghost g = (Ghost)this;
+                g.getStationaryTime().clear();
+             }          
         }
     }
 
