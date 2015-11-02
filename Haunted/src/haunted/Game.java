@@ -124,9 +124,9 @@ public class Game {
         this.isRunning = false;
         this.isPaused = true;
         this.currentLevel = new Level(0);
-        this.setupGameClasses();
-        this.bindCharactersToPlayers();
         this.gameFX = new MainGameFX();
+        setupGameClasses();
+        this.bindCharactersToPlayers();        
         cl = Calendar.getInstance();
 
     }
@@ -188,10 +188,22 @@ public class Game {
      * starts the next round at the current floor.
      */
     public void startRound() {
-
+        human.setPosition(pickRandomHumanSpawnPoint());
+        human.setHasKey(false);
+        for(Ghost g : ghosts)
+        {
+            g.setPosition(pickRandomGhostSpawnPoint());
+        }
+        try {
+            this.currentLevel = new Level(currentRound);
+        } catch (IOException ex) {
+            Logger.getLogger(Game.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         this.isRunning = true;
         this.isPaused = false;
-        tickThread = new Thread(new Runnable() {
+        if(currentRound == 0)
+        {
+          tickThread = new Thread(new Runnable() {
 
             @Override
             public void run() {
@@ -210,9 +222,12 @@ public class Game {
                 };
                 timer.scheduleAtFixedRate(task, 0, 16);
             }
-        });
+        });  
+          tickThread.start();
+        }
+        
         gameFX.setShowEmpty(false);
-        tickThread.start();
+        
     }
 
     /**
@@ -227,6 +242,19 @@ public class Game {
                 this.endGame(P);
             });
         } else {
+            scene = gameFX.getScene();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXMLnextroundController.URL_FXML));
+        try {
+            Node root = fxmlLoader.load();
+            Controller controller = fxmlLoader.getController();
+            controller.setView(root);
+            FXMLnextroundController NRC = (FXMLnextroundController) fxmlLoader.getController();
+            NRC.setGame(this);
+            NRC.setStage(gameFX.getStage());
+            scene.setRoot((Parent) NRC.getView());            
+        } catch (IOException ex) {
+            Logger.getLogger(Game.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
             this.currentRound++;
         }
     }
@@ -280,17 +308,11 @@ public class Game {
                     for (int i = 0; i < this.players.size(); i++) {
                         if (keyboard[i] != null) {
                             this.players.get(i).getCharacter().move((DirectionType) keyboard[i]);
-                            if(this.players.get(i).getCharacter() instanceof Ghost){
-                               Ghost G = (Ghost)this.players.get(i).getCharacter();
-                               G.getStationaryTime().clear();
-                            }
-                        } else if (this.players.get(i).getCharacter() instanceof Ghost) {
-                            Ghost G = (Ghost) this.players.get(i).getCharacter();
-                            if (G.isIsMoving()) {
-                                G.setIsMoving(false);
-                                G.setStationaryTime();
-                            }
                         } else {
+                            if(this.players.get(i).getCharacter() instanceof Ghost){
+                                Ghost g = (Ghost) this.players.get(i).getCharacter();
+                                g.setStationaryTime();
+                            }
                             this.players.get(i).getCharacter().setIsMoving(false);
                         }
                     }
@@ -361,5 +383,12 @@ public class Game {
 
     public Human getHuman() {
         return this.human;
+    }
+    public Scene getScene(){
+        return scene;
+    }
+    public void setgameFX(MainGameFX gameFX)
+    {
+        this.gameFX = gameFX;
     }
 }
