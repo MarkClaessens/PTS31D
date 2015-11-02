@@ -280,17 +280,11 @@ public class Game {
                     for (int i = 0; i < this.players.size(); i++) {
                         if (keyboard[i] != null) {
                             this.players.get(i).getCharacter().move((DirectionType) keyboard[i]);
-                            if(this.players.get(i).getCharacter() instanceof Ghost){
-                               Ghost G = (Ghost)this.players.get(i).getCharacter();
-                               G.getStationaryTime().clear();
-                            }
-                        } else if (this.players.get(i).getCharacter() instanceof Ghost) {
-                            Ghost G = (Ghost) this.players.get(i).getCharacter();
-                            if (G.isIsMoving()) {
-                                G.setIsMoving(false);
-                                G.setStationaryTime();
-                            }
                         } else {
+                            if(this.players.get(i).getCharacter() instanceof Ghost){
+                                Ghost g = (Ghost) this.players.get(i).getCharacter();
+                                g.setStationaryTime();
+                            }
                             this.players.get(i).getCharacter().setIsMoving(false);
                         }
                     }

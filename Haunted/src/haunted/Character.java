@@ -140,10 +140,18 @@ public abstract class Character {
                 // <editor-fold defaultstate="collapsed" desc="UP">
                 proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
                 if (detectCollision(proposedLocation)) {
+                    if(this instanceof Ghost){
+                        Ghost g = (Ghost)this;
+                        g.setStationaryTime();
+                    }
                     this.setIsMoving(false);
                     break;
                 } else {
                     this.direction = direction;
+                    if(this instanceof Ghost){
+                        Ghost g = (Ghost)this;
+                        g.getStationaryTime().clear();
+                    }
                     this.setIsMoving(true);
                     position.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
                     //System.out.println("UP");
