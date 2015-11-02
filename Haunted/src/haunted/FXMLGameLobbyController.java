@@ -21,6 +21,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -65,7 +66,8 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
     private TextArea TAchatBox;
     @FXML
     AnchorPane paneel;
-
+    @FXML
+    ImageView IVexit;
     /**
      * Initializes the controller class.
      *

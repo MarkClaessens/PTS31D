@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -58,7 +59,8 @@ public class FXMLHauntedController extends BaseController implements Initializab
     Button BTNexit;
     @FXML
     AnchorPane paneel;
-
+    @FXML
+    ImageView IVexit;
     /**
      * *
      * initialize the Lobby of the game. first screen.

@@ -18,12 +18,16 @@
         <Label layoutX="10.0" layoutY="167.0" text="naam speler1:" textFill="WHITE" />
         <TextField fx:id="TFfloors" layoutX="490.0" layoutY="203.0" promptText="floor amount" />
         <TextField fx:id="TFplayers" layoutX="490.0" layoutY="163.0" promptText="maximum players" />
-        <Button fx:id="BTNexit" layoutX="30.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#exit" text="Exit" />
         <TextField fx:id="TFchangenameplayer1" layoutX="91.0" layoutY="163.0" promptText="insert name here" />
         <TextField fx:id="TFchangenameplayer2" layoutX="91.0" layoutY="203.0" promptText="insert name here" />
         <TextField fx:id="TFroomname" layoutX="490.0" layoutY="81.0" promptText="roomname" />
         <TextField fx:id="TFpassword" layoutX="490.0" layoutY="122.0" promptText="password(optional)" />
         <Button fx:id="BTNcreategamelobby" layoutX="497.0" layoutY="247.0" mnemonicParsing="false" onMouseClicked="#creategamelobby" prefHeight="25.0" prefWidth="134.0" text="create gamelobby" />
         <Button fx:id="BTNrename" layoutX="137.0" layoutY="247.0" mnemonicParsing="false" onMouseClicked="#changename" text="rename" />
+      <ImageView fx:id="IVexit" fitHeight="56.0" fitWidth="134.0" layoutX="91.0" layoutY="38.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../btnExit.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>
