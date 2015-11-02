@@ -31,7 +31,7 @@ public class FXMLnextroundController extends BaseController implements Initializ
     /**
      * the fxml location for FXMLnextRoundController
      */
-    public static final String URL_FXML = "FXMLGameLobby.fxml";
+    public static final String URL_FXML = "FXMLnextround.fxml";
     private MainGameFX gameFX;
     private Game game;
     private Stage stage;
