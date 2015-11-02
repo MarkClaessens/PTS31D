@@ -68,6 +68,7 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
@@ -166,21 +167,39 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
      */
     @FXML
     private void sendMessage(MouseEvent event) {
-        currentText = TAchatBox.getText();
-        TAchatBox.clear();
-        String totaaltekst = (String) LVplayers.getSelectionModel().getSelectedItem();
-        String naam = totaaltekst.substring(0, totaaltekst.indexOf(" "));
+        if (LVplayers.getSelectionModel().getSelectedItem() != null) {
+            currentText = TAchatBox.getText();
+            TAchatBox.clear();
+            String totaaltekst = (String) LVplayers.getSelectionModel().getSelectedItem();
+            String naam = totaaltekst.substring(0, totaaltekst.indexOf(" "));
 
-        for (Player player : gamelobby.getPlayers()) {
-            if (player.getName().equals(naam)) {
-                gamelobby.sendMessage(TFmessage.getText(), player);
+            for (Player player : gamelobby.getPlayers()) {
+                if (player.getName().equals(naam)) {
+                    if(!TFmessage.getText().isEmpty())
+                    {
+                      gamelobby.sendMessage(TFmessage.getText(), player);  
+                    }
+                    else
+                    {
+                      Alert alert = new Alert(AlertType.INFORMATION);
+                      alert.setContentText("geen message ingevoerd");
+                      alert.showAndWait();  
+                    }                    
+                }
             }
+            List<Message> messages = gamelobby.getMessages();
+            Message message = messages.get(messages.size() - 1);
+            TAchatBox.setText(currentText + message.toString() + "\n");
+            TAchatBox.setScrollTop(Double.MAX_VALUE);
+            TFmessage.clear();
         }
-        List<Message> messages = gamelobby.getMessages();
-        Message message = messages.get(messages.size() - 1);
-        TAchatBox.setText(currentText + message.toString() + "\n");
-        TAchatBox.setScrollTop(Double.MAX_VALUE);
-        TFmessage.clear();
+        else
+        {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setContentText("geen speler geselecteerd");
+            alert.showAndWait();
+        }
+
     }
 
     /**
