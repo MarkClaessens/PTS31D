@@ -1,7 +1,6 @@
 package haunted;
 
 import java.awt.Color;
-import javafx.scene.shape.Polygon;
 import java.awt.geom.Point2D;
 import static java.lang.Math.tan;
 import java.util.ArrayList;
@@ -79,7 +78,10 @@ public class Human extends Character {
      *
      * @param position, the Point2D position of the Ghost on the map
      * @param color, color of the Ghost
-     * @param sprite, sprite of the Ghost
+     * @param spritesUp, up sprites of the Ghost
+     * @param spritesDown, down sprites of the Ghost
+     * @param spritesLeft, left sprites of the Ghost
+     * @param spritesRight, right sprites of the Ghost
      * @param game, the game in which the Ghost is active
      */
     public Human(Point2D position, Color color, String[] spritesUp, String[] spritesDown, String[] spritesLeft, String[] spritesRight, Game game) {
@@ -120,6 +122,9 @@ public class Human extends Character {
         }
     }
 
+    /**
+     * check the interaction between the human and the key, door
+     */
     public void checkInteract() {
         Point2D door = this.game.getCurrentLevel().getDoorLocation();
         Point2D key = this.game.getCurrentLevel().getKeyLocation();
@@ -157,6 +162,10 @@ public class Human extends Character {
 
     }
 
+    /**
+     * check if human collides with a ghost
+     * @return the ghost where the human collides with
+     */
     public Ghost checkGhostCollision() {
         //ghost collision
         for (Ghost g : this.game.getGhosts()) {
@@ -167,6 +176,9 @@ public class Human extends Character {
         return null;
     }
 
+    /**
+     * sets and configures the flashlight for the human
+     */
     private void setFlashLight() {
         flX1 = this.getPosition().getX() + 50;
         flY1 = this.getPosition().getY() + 50;
@@ -198,6 +210,10 @@ public class Human extends Character {
         }
     }
 
+    /**
+     * get the flashlight polygon, so that you can see where the flashlight is.
+     * @return the coordinates of the flashlight polygon
+     */
     public int[] getFlashLightPolygon() {
         int[] i = new int[6];
         i[0] = (int) this.getPosition().getX() + 50;
@@ -210,6 +226,11 @@ public class Human extends Character {
 
     }
 
+    /**
+     * check if the given position collides with the flashlight.
+     * @param point
+     * @return 
+     */
     public boolean flashlightCollision(Point2D point) {
 
         flY23 = flY2 - flY3;
@@ -237,6 +258,10 @@ public class Human extends Character {
 
     }
 
+    /**
+     * gives the hitboxes where the human can collide with.
+     * @return list of hitbox points
+     */
     @Override
     public List<Point2D> getHitboxPoints() {
         List<Point2D> hitboxes = new ArrayList();

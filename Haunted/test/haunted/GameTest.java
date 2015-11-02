@@ -122,7 +122,7 @@ public class GameTest {
          */
         game.startRound();
         game.endRound();
-        Assert.assertEquals("endRound() method isn't ccrrect because the isRunning state is still true",
+        Assert.assertEquals("endRound() method isn't correct because the isRunning state is still true",
                 false, game.getIsRunning());
     }
 
