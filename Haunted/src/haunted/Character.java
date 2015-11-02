@@ -3,12 +3,8 @@ package haunted;
 import java.awt.Color;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+//import java.util.Collections;
 import java.util.List;
-import javax.imageio.ImageIO;
 
 /**
  *
@@ -16,7 +12,11 @@ import javax.imageio.ImageIO;
  */
 public abstract class Character {
 
+    /**
+     * the game where the character is in
+     */
     protected Game game;
+    
     private Point2D position;
     private Color color;
     private String[] spritesUp;
@@ -68,7 +68,7 @@ public abstract class Character {
      * @return the character's spritesUp (human/ghost/wall)
      */
     public String[] getSpritesUp() {
-        return this.spritesUp;
+        return spritesUp;
     }
 
     /**
@@ -114,6 +114,16 @@ public abstract class Character {
         this.direction = direction;
     }
 
+    /**
+     * the constructor for character
+     * @param position
+     * @param color
+     * @param spritesUp
+     * @param spritesDown
+     * @param spritesLeft
+     * @param spritesRight
+     * @param game 
+     */
     public Character(Point2D position, Color color, String[] spritesUp, String[] spritesDown, String[] spritesLeft, String[] spritesRight, Game game) {
         this.position = position;
         this.color = color;
@@ -277,14 +287,35 @@ public abstract class Character {
         this.spritesRight = spritesRight;
     }
 
+    /**
+     * returns true if i is between the min and max value including the min and max value
+     * @param i
+     * @param min
+     * @param max
+     * @return 
+     */
     public boolean betweenInclusive(int i, int min, int max) {
         return i >= min && i <= max;
     }
 
+    /**
+     * 
+     * @return the hitbox points of character
+     */
     public List<Point2D> getHitboxPoints() {
         return null;
     }
 
+    /**
+     * check if hitbox collides with the points
+     * @param point1
+     * @param width1
+     * @param height1
+     * @param point2
+     * @param width2
+     * @param height2
+     * @return 
+     */
     public boolean checkHitboxCollision(Point2D point1, int width1, int height1, Point2D point2, int width2, int height2) {
         //convert point1 in leftmost and rightmost X value and top and bottom Y value;
         int p1Xmin = (int) point1.getX();

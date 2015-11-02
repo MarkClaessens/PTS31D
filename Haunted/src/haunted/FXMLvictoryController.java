@@ -54,8 +54,8 @@ public class FXMLvictoryController extends BaseController implements Initializab
     }
 
     @Override
-    public void PreShowing() {
-        super.PreShowing();        
+    public void preShowing() {
+        super.preShowing();        
        }
 
 }

@@ -14,11 +14,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -38,6 +36,9 @@ import javafx.scene.layout.BackgroundSize;
  */
 public class FXMLGameLobbyController extends BaseController implements Initializable {
 
+    /**
+     * the fxml location of FXMLGameLobbyController
+     */
     public static final String URL_FXML = "FXMLGameLobby.fxml";
     GameLobby gamelobby;
     boolean gamekanstarten;
@@ -67,6 +68,8 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -190,7 +193,7 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
         lobby.getPlayer2().setReady(false);
         FXMLHauntedController GLC = (FXMLHauntedController) Haunted.getNavigation().load(FXMLHauntedController.URL_FXML);
         GLC.setLobby(lobby);
-        GLC.Show();
+        GLC.show();
     }
 
     /**
@@ -198,8 +201,8 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
      * before the gui will be shown
      */
     @Override
-    public void PreShowing() {
-        super.PreShowing();
+    public void preShowing() {
+        super.preShowing();
         TAgegevens.setText("gamelobbyname: " + gamelobby.getName() + "\n" + "maximum aantal spelers: " + gamelobby.getMaxPlayers() + "\n" + "maximum aantal vloeren: " + gamelobby.getFloorAmount());
         playernames();
 

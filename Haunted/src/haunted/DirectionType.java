@@ -11,8 +11,20 @@ package haunted;
  */
 public enum DirectionType {
 
+    /**
+     * DIRECTION UP
+     */
     UP,
+    /**
+     * DIRECTION DOWN
+     */
     DOWN,
+    /**
+     * DIRECTION RIGHT
+     */
     RIGHT,
+    /**
+     * DIRECTION LEFT
+     */
     LEFT
 }

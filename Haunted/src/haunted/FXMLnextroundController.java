@@ -28,7 +28,11 @@ import javafx.stage.Stage;
  */
 public class FXMLnextroundController extends BaseController implements Initializable {
 
-    public static final String URL_FXML = "FXMLnextround.fxml";
+    /**
+     * the fxml location for FXMLnextRoundController
+     */
+    public static final String URL_FXML = "FXMLGameLobby.fxml";
+    private MainGameFX gameFX;
     private Game game;
     private Stage stage;
 
@@ -38,6 +42,8 @@ public class FXMLnextroundController extends BaseController implements Initializ
     AnchorPane paneel;
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -49,6 +55,13 @@ public class FXMLnextroundController extends BaseController implements Initializ
         paneel.setBackground(new Background(myBI));   
     }
 
+    /**
+     * sets the game fx
+     * @param GameFX 
+     */
+    public void setGamefx(MainGameFX GameFX) {
+        this.gameFX = GameFX;
+    }
     public void setGame(Game Game) {
         this.game = Game;
     }
