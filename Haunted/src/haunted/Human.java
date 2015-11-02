@@ -130,7 +130,7 @@ public class Human extends Character {
         Point2D key = this.game.getCurrentLevel().getKeyLocation();
 
         //door collision
-        if ((checkHitboxCollision(new Point2D.Double(this.getPosition().getX()+45,this.getPosition().getY()), 10, 3, door, 20, 5) && this.hasKey)) //key collision   
+        if ((checkHitboxCollision(new Point2D.Double(this.getPosition().getX()+45,this.getPosition().getY()+10), 10, 3, door, 20, 5) && this.hasKey)) //key collision   
         {
             this.enterDoor();
         }
