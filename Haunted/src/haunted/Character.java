@@ -150,11 +150,15 @@ public abstract class Character {
                 // <editor-fold defaultstate="collapsed" desc="UP">
                 proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
                 if (detectCollision(proposedLocation)) {
-                    this.setIsMoving(false);
+                    if(this.isMoving){
+                        this.setIsMoving(false);
+                    }                  
                     break;
                 } else {
                     this.direction = direction;
-                    this.setIsMoving(true);                 
+                    if(!this.isMoving){
+                        this.setIsMoving(true);   
+                    }                                
                     position.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);                 
                     //System.out.println("UP");
                     break;
@@ -165,11 +169,15 @@ public abstract class Character {
                 // <editor-fold defaultstate="collapsed" desc="DOWN">
                 proposedLocation.setLocation(oldPosition.getX(), (oldPosition.getY() + movementSpeed));
                 if (detectCollision(proposedLocation)) {                  
-                    this.setIsMoving(false);
+                    if(this.isMoving){
+                        this.setIsMoving(false);
+                    } 
                     break;
                 } else {
                     this.direction = direction;
-                    this.setIsMoving(true);
+                    if(!this.isMoving){
+                        this.setIsMoving(true);   
+                    }
                     position.setLocation(oldPosition.getX(), (oldPosition.getY() + movementSpeed));
                     //System.out.println("DOWN");
                     break;
@@ -179,11 +187,15 @@ public abstract class Character {
                 // <editor-fold defaultstate="collapsed" desc="RIGHT">
                 proposedLocation.setLocation(oldPosition.getX() + movementSpeed, oldPosition.getY());
                 if (detectCollision(proposedLocation)) {
-                    this.setIsMoving(false);
+                    if(this.isMoving){
+                        this.setIsMoving(false);
+                    } 
                     break;
                 } else {
                     this.direction = direction;
-                    this.setIsMoving(true);
+                    if(!this.isMoving){
+                        this.setIsMoving(true);   
+                    }
                     position.setLocation(oldPosition.getX() + movementSpeed, oldPosition.getY());
                     //System.out.println("RIGHT");
                     break;
@@ -193,11 +205,15 @@ public abstract class Character {
                 //        // <editor-fold defaultstate="collapsed" desc="LEFT">
                 proposedLocation.setLocation((oldPosition.getX() - movementSpeed), oldPosition.getY());
                 if (detectCollision(proposedLocation)) {
-                    this.setIsMoving(false);
+                    if(this.isMoving){
+                        this.setIsMoving(false);
+                    } 
                     break;
                 } else {
                     this.direction = direction;
-                    this.setIsMoving(true);
+                    if(!this.isMoving){
+                        this.setIsMoving(true);   
+                    }
                     position.setLocation((oldPosition.getX() - movementSpeed), oldPosition.getY());
                     //System.out.println("LEFT");
                     break;
