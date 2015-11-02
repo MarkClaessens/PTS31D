@@ -150,14 +150,22 @@ public abstract class Character {
                 // <editor-fold defaultstate="collapsed" desc="UP">
                 proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
                 if (detectCollision(proposedLocation)) {
+                    this.setIsMoving(false);
                     if(this.isMoving){
-                        this.setIsMoving(false);
+                        if(this instanceof Ghost){
+                        Ghost g = (Ghost)this;
+                        g.setStationaryTime();
+                        }
                     }                  
                     break;
                 } else {
                     this.direction = direction;
+                    this.setIsMoving(true);
                     if(!this.isMoving){
-                        this.setIsMoving(true);   
+                        if(this instanceof Ghost){
+                            Ghost g = (Ghost)this;
+                            g.getStationaryTime().clear();
+                        }                       
                     }                                
                     position.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);                 
                     //System.out.println("UP");
@@ -168,15 +176,23 @@ public abstract class Character {
             case DOWN:
                 // <editor-fold defaultstate="collapsed" desc="DOWN">
                 proposedLocation.setLocation(oldPosition.getX(), (oldPosition.getY() + movementSpeed));
-                if (detectCollision(proposedLocation)) {                  
+                if (detectCollision(proposedLocation)) { 
+                    this.setIsMoving(false);
                     if(this.isMoving){
-                        this.setIsMoving(false);
-                    } 
+                        if(this instanceof Ghost){
+                        Ghost g = (Ghost)this;
+                        g.setStationaryTime();
+                        }
+                    }
                     break;
                 } else {
                     this.direction = direction;
+                    this.setIsMoving(true);
                     if(!this.isMoving){
-                        this.setIsMoving(true);   
+                        if(this instanceof Ghost){
+                            Ghost g = (Ghost)this;
+                            g.getStationaryTime().clear();
+                        }                       
                     }
                     position.setLocation(oldPosition.getX(), (oldPosition.getY() + movementSpeed));
                     //System.out.println("DOWN");
@@ -187,14 +203,22 @@ public abstract class Character {
                 // <editor-fold defaultstate="collapsed" desc="RIGHT">
                 proposedLocation.setLocation(oldPosition.getX() + movementSpeed, oldPosition.getY());
                 if (detectCollision(proposedLocation)) {
+                    this.setIsMoving(false);
                     if(this.isMoving){
-                        this.setIsMoving(false);
-                    } 
+                        if(this instanceof Ghost){
+                        Ghost g = (Ghost)this;
+                        g.setStationaryTime();
+                        }
+                    }
                     break;
                 } else {
                     this.direction = direction;
+                    this.setIsMoving(true);
                     if(!this.isMoving){
-                        this.setIsMoving(true);   
+                        if(this instanceof Ghost){
+                            Ghost g = (Ghost)this;
+                            g.getStationaryTime().clear();
+                        }                       
                     }
                     position.setLocation(oldPosition.getX() + movementSpeed, oldPosition.getY());
                     //System.out.println("RIGHT");
@@ -205,14 +229,22 @@ public abstract class Character {
                 //        // <editor-fold defaultstate="collapsed" desc="LEFT">
                 proposedLocation.setLocation((oldPosition.getX() - movementSpeed), oldPosition.getY());
                 if (detectCollision(proposedLocation)) {
+                    this.setIsMoving(false);
                     if(this.isMoving){
-                        this.setIsMoving(false);
+                        if(this instanceof Ghost){
+                        Ghost g = (Ghost)this;
+                        g.setStationaryTime();
+                        }
                     } 
                     break;
                 } else {
                     this.direction = direction;
+                    this.setIsMoving(true);
                     if(!this.isMoving){
-                        this.setIsMoving(true);   
+                        if(this instanceof Ghost){
+                            Ghost g = (Ghost)this;
+                            g.getStationaryTime().clear();
+                        }                       
                     }
                     position.setLocation((oldPosition.getX() - movementSpeed), oldPosition.getY());
                     //System.out.println("LEFT");
@@ -255,18 +287,6 @@ public abstract class Character {
      */
     public void setIsMoving(boolean isMoving) {
         this.isMoving = isMoving;
-        if(!isMoving){
-            if(this instanceof Ghost){
-                Ghost g = (Ghost)this;
-                g.setStationaryTime();
-            }
-        }
-        else {
-            if(this instanceof Ghost){
-                Ghost g = (Ghost)this;
-                g.getStationaryTime().clear();
-             }          
-        }
     }
 
     /**

@@ -225,9 +225,6 @@ public class Game {
         });  
           tickThread.start();
         }
-        
-        gameFX.setShowEmpty(false);
-        
     }
 
     /**
@@ -236,7 +233,6 @@ public class Game {
      */
     public void endRound() {
         tickThread.interrupt();
-        gameFX.setShowEmpty(true);
         if (this.currentRound >= this.floorAmount) {
             this.players.stream().filter((P) -> (P.getCharacter() instanceof Human)).forEach((P) -> {
                 this.endGame(P);
@@ -309,6 +305,14 @@ public class Game {
                         if (keyboard[i] != null) {
                             this.players.get(i).getCharacter().move((DirectionType) keyboard[i]);
                         } else {
+                            if(this.players.get(i).getCharacter() instanceof Ghost){
+                                Ghost g = (Ghost) this.players.get(i).getCharacter();
+                                if(g.getIsMoving()){
+                                    if(this.players.get(i).getCharacter() instanceof Ghost){                                       
+                                        g.setStationaryTime();
+                                     }                                   
+                                }
+                            }  
                             this.players.get(i).getCharacter().setIsMoving(false);
                         }
                     }

@@ -46,10 +46,6 @@ public class MainGameFX extends Application {
     private Human human = null;
     private Ghost ghost = null;
     private Level level = null;
-    //private Obstacle key = null;
-    // private Obstacle door = null;
-
-    private boolean showEmpty;
 
     private int state = 2;
 
@@ -57,7 +53,7 @@ public class MainGameFX extends Application {
     private Group root;
     private Scene scene;
     private Stage stage;
-    
+
     public MainGameFX() {
     }
 
@@ -73,7 +69,6 @@ public class MainGameFX extends Application {
         //Initialize GUI
         this.levelDrawWidth = 1700;
         this.levelDrawHeight = 1200;
-        this.showEmpty = false;
         stage.setTitle("The Game");
         root = new Group();
         scene = new Scene(root);
@@ -84,7 +79,6 @@ public class MainGameFX extends Application {
         pressedKeys[0] = null;
         pressedKeys[1] = null;
         pressedKeys[2] = false;
-        
 
         //Make canvas and gc and put it on the screen
         Canvas canvas = new Canvas(screenWidth, screenHeight);
@@ -103,14 +97,9 @@ public class MainGameFX extends Application {
                     obj.add(o);
                 });
                 root.getChildren().removeAll(obj);
-                if (!showEmpty) {
-                    gc.clearRect(0, 0, screenWidth, screenHeight);
-                    drawElements(gc, currentNanoTime);
-                    root.getChildren().add(flashlight);
-                } else {
-                    gc.clearRect(0, 0, screenWidth, screenHeight);                    
-                    root.getChildren().add(flashlight);
-                }
+                gc.clearRect(0, 0, screenWidth, screenHeight);
+                drawElements(gc, currentNanoTime);
+                root.getChildren().add(flashlight);
             }
         }.start();
         stage.show();
@@ -392,22 +381,10 @@ public class MainGameFX extends Application {
         launch(args);
     }
 
-    /**
-     * @return the showEmpty
-     */
-    public boolean isShowEmpty() {
-        return showEmpty;
-    }
-
-    /**
-     * @param showEmpty the showEmpty to set
-     */
-    public void setShowEmpty(boolean showEmpty) {
-        this.showEmpty = showEmpty;
-    }
-    public Scene getScene(){
+    public Scene getScene() {
         return scene;
     }
+
     public Stage getStage() {
         return stage;
     }
