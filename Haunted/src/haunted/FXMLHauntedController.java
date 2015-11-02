@@ -152,7 +152,7 @@ public class FXMLHauntedController extends BaseController implements Initializab
                     FXMLGameLobbyController GMC = (FXMLGameLobbyController) Haunted.getNavigation().load(FXMLGameLobbyController.URL_FXML);
                     GMC.setGameLobby(gamelobby);
                     GMC.setLobby(lobby);
-                    GMC.Show();
+                    GMC.show();
                 } else {
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setHeaderText("maximum overschreden");
@@ -188,8 +188,8 @@ public class FXMLHauntedController extends BaseController implements Initializab
      * before the gui will be shown
      */
     @Override
-    public void PreShowing() {
-        super.PreShowing();
+    public void preShowing() {
+        super.preShowing();
         setplayernames();
     }
 }

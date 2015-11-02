@@ -38,7 +38,7 @@ public class Haunted extends Application {
         primaryStage.show();
 
         //navigate to first view
-        Haunted.getNavigation().load(FXMLHauntedController.URL_FXML).Show();
+        Haunted.getNavigation().load(FXMLHauntedController.URL_FXML).show();
     }
 
     /**
