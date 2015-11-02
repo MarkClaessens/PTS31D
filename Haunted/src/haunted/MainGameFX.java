@@ -175,28 +175,28 @@ public class MainGameFX extends Application {
         if (character != null) {
             switch (character.getDirection()) {
                 case UP:
-                    if (!character.isIsMoving()) {
+                    if (!character.getIsMoving()) {
                         image = new Image(character.getSpritesUp()[0]);
                     } else {
                         image = getAnimatedImage(time, character.getSpritesUp());
                     }
                     break;
                 case DOWN:
-                    if (!character.isIsMoving()) {
+                    if (!character.getIsMoving()) {
                         image = new Image(character.getSpritesDown()[0]);
                     } else {
                         image = getAnimatedImage(time, character.getSpritesDown());
                     }
                     break;
                 case LEFT:
-                    if (!character.isIsMoving()) {
+                    if (!character.getIsMoving()) {
                         image = new Image(character.getSpritesLeft()[0]);
                     } else {
                         image = getAnimatedImage(time, character.getSpritesLeft());
                     }
                     break;
                 case RIGHT:
-                    if (!character.isIsMoving()) {
+                    if (!character.getIsMoving()) {
                         image = new Image(character.getSpritesRight()[0]);
                     } else {
                         image = getAnimatedImage(time, character.getSpritesRight());

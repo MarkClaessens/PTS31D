@@ -111,14 +111,14 @@ public class Ghost extends Character {
      */
     public void changeAppearance() {
         System.out.println(System.currentTimeMillis() >= stationaryTime.getTimeInMillis() + 1500);
-        if (this.isGhost && System.currentTimeMillis() >= stationaryTime.getTimeInMillis() + 1500 && !isIsMoving()) {
+        if (this.isGhost && System.currentTimeMillis() >= stationaryTime.getTimeInMillis() + 1500 && !getIsMoving()) {
             this.vulnerable = false;
             this.setSpritesUp(new String[]{"wall.png"});
             this.setSpritesDown(new String[]{"wall.png"});
             this.setSpritesLeft(new String[]{"wall.png"});
             this.setSpritesRight(new String[]{"wall.png"});
             this.isGhost = false;
-        } else if (this.isGhost == false && isIsMoving()) {
+        } else if (this.isGhost == false && getIsMoving()) {
             this.isGhost = true;
             this.setSpritesUp(new String[]{"GhostRedUp1.png", "GhostRedUp2.png", "GhostRedUp3.png"});
             this.setSpritesDown(new String[]{"GhostRedDown1.png", "GhostRedDown2.png", "GhostRedDown3.png"});

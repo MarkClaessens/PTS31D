@@ -230,7 +230,7 @@ public abstract class Character {
     /**
      * @return the isMoving
      */
-    public boolean isIsMoving() {
+    public boolean getIsMoving() {
         return isMoving;
     }
 
