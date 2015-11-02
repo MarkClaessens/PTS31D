@@ -201,8 +201,6 @@ public class Game {
         }
         this.isRunning = true;
         this.isPaused = false;
-        if(currentRound == 0)
-        {
             timer = new Timer();
             TimerTask task = new TimerTask() {
                 @Override
@@ -212,8 +210,7 @@ public class Game {
                     tick();
                 }
             };
-            timer.scheduleAtFixedRate(task, 0, 16);        
-        }
+            timer.scheduleAtFixedRate(task, 0, 16);               
     }
 
     /**
