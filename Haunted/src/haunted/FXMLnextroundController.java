@@ -61,6 +61,7 @@ public class FXMLnextroundController extends BaseController implements Initializ
      */
     public void setGamefx(MainGameFX GameFX) {
         this.gameFX = GameFX;
+    }
     public void setGame(Game Game) {
         this.game = Game;
     }
