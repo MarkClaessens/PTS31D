@@ -34,7 +34,7 @@ public class Game {
     private List<Ghost> ghosts = new ArrayList();
     private Human human;
     private boolean isPaused = false;
-    private Thread tickThread;
+    private Timer timer;
     private MainGameFX gameFX;
     public Calendar cl;
 
@@ -203,24 +203,16 @@ public class Game {
         this.isPaused = false;
         if(currentRound == 0)
         {
-          tickThread = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                Timer timer = new Timer();
-                TimerTask task = new TimerTask() {
-
-                    @Override
-                    public void run() {
-                        long l = System.currentTimeMillis() - cl.getTimeInMillis();
-                        cl = Calendar.getInstance();
-                        tick();
-                    }
-                };
-                timer.scheduleAtFixedRate(task, 0, 16);
-            }
-        });  
-          tickThread.start();
+            timer = new Timer();
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    long l = System.currentTimeMillis() - cl.getTimeInMillis();
+                    cl = Calendar.getInstance();
+                    tick();
+                }
+            };
+            timer.scheduleAtFixedRate(task, 0, 16);        
         }
     }
 
@@ -229,7 +221,7 @@ public class Game {
      * the current round will increase with one.
      */
     public void endRound() {
-        tickThread.interrupt();
+        timer.cancel();
         if (this.currentRound >= this.floorAmount) {
             this.players.stream().filter((P) -> (P.getCharacter() instanceof Human)).forEach((P) -> {
                 this.endGame(P);
