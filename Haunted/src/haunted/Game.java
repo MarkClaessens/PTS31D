@@ -309,10 +309,6 @@ public class Game {
                         if (keyboard[i] != null) {
                             this.players.get(i).getCharacter().move((DirectionType) keyboard[i]);
                         } else {
-                            if(this.players.get(i).getCharacter() instanceof Ghost){
-                                Ghost g = (Ghost) this.players.get(i).getCharacter();
-                                g.setStationaryTime();
-                            }
                             this.players.get(i).getCharacter().setIsMoving(false);
                         }
                     }
