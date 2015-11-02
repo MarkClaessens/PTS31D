@@ -16,7 +16,7 @@ public abstract class Character {
      * the game where the character is in
      */
     protected Game game;
-    
+
     private Point2D position;
     private Color color;
     private String[] spritesUp;
@@ -116,13 +116,14 @@ public abstract class Character {
 
     /**
      * the constructor for character
+     *
      * @param position
      * @param color
      * @param spritesUp
      * @param spritesDown
      * @param spritesLeft
      * @param spritesRight
-     * @param game 
+     * @param game
      */
     public Character(Point2D position, Color color, String[] spritesUp, String[] spritesDown, String[] spritesLeft, String[] spritesRight, Game game) {
         this.position = position;
@@ -151,23 +152,23 @@ public abstract class Character {
                 proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
                 if (detectCollision(proposedLocation)) {
                     this.setIsMoving(false);
-                    if(this.isMoving){
-                        if(this instanceof Ghost){
-                        Ghost g = (Ghost)this;
-                        g.setStationaryTime();
+                    if (this.isMoving) {
+                        if (this instanceof Ghost) {
+                            Ghost g = (Ghost) this;
+                            g.setStationaryTime();
                         }
-                    }                  
+                    }
                     break;
                 } else {
                     this.direction = direction;
                     this.setIsMoving(true);
-                    if(!this.isMoving){
-                        if(this instanceof Ghost){
-                            Ghost g = (Ghost)this;
+                    if (!this.isMoving) {
+                        if (this instanceof Ghost) {
+                            Ghost g = (Ghost) this;
                             g.getStationaryTime().clear();
-                        }                       
-                    }                                
-                    position.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);                 
+                        }
+                    }
+                    position.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
                     //System.out.println("UP");
                     break;
 
@@ -176,23 +177,23 @@ public abstract class Character {
             case DOWN:
                 // <editor-fold defaultstate="collapsed" desc="DOWN">
                 proposedLocation.setLocation(oldPosition.getX(), (oldPosition.getY() + movementSpeed));
-                if (detectCollision(proposedLocation)) { 
+                if (detectCollision(proposedLocation)) {
                     this.setIsMoving(false);
-                    if(this.isMoving){
-                        if(this instanceof Ghost){
-                        Ghost g = (Ghost)this;
-                        g.setStationaryTime();
+                    if (this.isMoving) {
+                        if (this instanceof Ghost) {
+                            Ghost g = (Ghost) this;
+                            g.setStationaryTime();
                         }
                     }
                     break;
                 } else {
                     this.direction = direction;
                     this.setIsMoving(true);
-                    if(!this.isMoving){
-                        if(this instanceof Ghost){
-                            Ghost g = (Ghost)this;
+                    if (!this.isMoving) {
+                        if (this instanceof Ghost) {
+                            Ghost g = (Ghost) this;
                             g.getStationaryTime().clear();
-                        }                       
+                        }
                     }
                     position.setLocation(oldPosition.getX(), (oldPosition.getY() + movementSpeed));
                     //System.out.println("DOWN");
@@ -204,21 +205,21 @@ public abstract class Character {
                 proposedLocation.setLocation(oldPosition.getX() + movementSpeed, oldPosition.getY());
                 if (detectCollision(proposedLocation)) {
                     this.setIsMoving(false);
-                    if(this.isMoving){
-                        if(this instanceof Ghost){
-                        Ghost g = (Ghost)this;
-                        g.setStationaryTime();
+                    if (this.isMoving) {
+                        if (this instanceof Ghost) {
+                            Ghost g = (Ghost) this;
+                            g.setStationaryTime();
                         }
                     }
                     break;
                 } else {
                     this.direction = direction;
                     this.setIsMoving(true);
-                    if(!this.isMoving){
-                        if(this instanceof Ghost){
-                            Ghost g = (Ghost)this;
+                    if (!this.isMoving) {
+                        if (this instanceof Ghost) {
+                            Ghost g = (Ghost) this;
                             g.getStationaryTime().clear();
-                        }                       
+                        }
                     }
                     position.setLocation(oldPosition.getX() + movementSpeed, oldPosition.getY());
                     //System.out.println("RIGHT");
@@ -230,21 +231,21 @@ public abstract class Character {
                 proposedLocation.setLocation((oldPosition.getX() - movementSpeed), oldPosition.getY());
                 if (detectCollision(proposedLocation)) {
                     this.setIsMoving(false);
-                    if(this.isMoving){
-                        if(this instanceof Ghost){
-                        Ghost g = (Ghost)this;
-                        g.setStationaryTime();
+                    if (this.isMoving) {
+                        if (this instanceof Ghost) {
+                            Ghost g = (Ghost) this;
+                            g.setStationaryTime();
                         }
-                    } 
+                    }
                     break;
                 } else {
                     this.direction = direction;
                     this.setIsMoving(true);
-                    if(!this.isMoving){
-                        if(this instanceof Ghost){
-                            Ghost g = (Ghost)this;
+                    if (!this.isMoving) {
+                        if (this instanceof Ghost) {
+                            Ghost g = (Ghost) this;
                             g.getStationaryTime().clear();
-                        }                       
+                        }
                     }
                     position.setLocation((oldPosition.getX() - movementSpeed), oldPosition.getY());
                     //System.out.println("LEFT");
@@ -263,16 +264,20 @@ public abstract class Character {
      * @return true if there is an obstacle
      */
     public boolean detectCollision(Point2D proposedLocation) {
-        int pXl = (int) proposedLocation.getX() + 10;
-        int pXr = pXl + 80;
-        int pYt = (int) proposedLocation.getY() + 10;
-        int pYb = pYt + 80;
+        int pXl = (int) proposedLocation.getX() + 15;
+        int pXr = pXl + 70;
+        int pYt = (int) proposedLocation.getY() + 15;
+        int pYb = pYt + 70;
 
         BufferedImage colImg = this.game.getCurrentLevel().getCollisionImage();
-        return 0 > pXl || 1000 < pYb || 1500
-                < pXr || pYt <= 0 || ((colImg.getRGB(pXl, pYt)
-                + colImg.getRGB(pXr, pYt) + colImg.getRGB(pXr, pYb) + colImg.getRGB(pXl, pYb)) != -4);
-
+        if (0 <= pXl && 1000 >= pYb && 1500
+                >= pXr && pYt >= 0) {
+            if ((colImg.getRGB(pXl, pYt) + colImg.getRGB(pXr, pYt) + colImg.getRGB(pXr, pYb) + colImg.getRGB(pXl, pYb)) == -4) {
+                return false;
+            }
+        } else {
+            return true;}
+        return true;
     }
 
     /**
@@ -332,18 +337,20 @@ public abstract class Character {
     }
 
     /**
-     * returns true if i is between the min and max value including the min and max value
+     * returns true if i is between the min and max value including the min and
+     * max value
+     *
      * @param i
      * @param min
      * @param max
-     * @return 
+     * @return
      */
     public boolean betweenInclusive(int i, int min, int max) {
         return i >= min && i <= max;
     }
 
     /**
-     * 
+     *
      * @return the hitbox points of character
      */
     public List<Point2D> getHitboxPoints() {
@@ -352,13 +359,14 @@ public abstract class Character {
 
     /**
      * check if hitbox collides with the points
+     *
      * @param point1
      * @param width1
      * @param height1
      * @param point2
      * @param width2
      * @param height2
-     * @return 
+     * @return
      */
     public boolean checkHitboxCollision(Point2D point1, int width1, int height1, Point2D point2, int width2, int height2) {
         //convert point1 in leftmost and rightmost X value and top and bottom Y value;
