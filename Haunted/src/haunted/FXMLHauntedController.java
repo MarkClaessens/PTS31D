@@ -52,15 +52,13 @@ public class FXMLHauntedController extends BaseController implements Initializab
     @FXML
     TextField TFfloors;
     @FXML
-    Button BTNrename;
-    @FXML
-    Button BTNcreategamelobby;
-    @FXML
-    Button BTNexit;
-    @FXML
     AnchorPane paneel;
     @FXML
     ImageView IVexit;
+    @FXML
+    ImageView IVRename;
+    @FXML
+    ImageView IVCreategamelobby;
     /**
      * *
      * initialize the Lobby of the game. first screen.

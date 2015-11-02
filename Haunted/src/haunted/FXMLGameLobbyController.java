@@ -51,12 +51,6 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
     @FXML
     private TextArea TAgegevens;
     @FXML
-    private Button BTNstartgame;
-    @FXML
-    private Button BTNready;
-    @FXML
-    private Button BTNleavegamelobby;
-    @FXML
     private ListView LVplayers;
     @FXML
     private Button BTNsendMessage;
@@ -68,6 +62,7 @@ public class FXMLGameLobbyController extends BaseController implements Initializ
     AnchorPane paneel;
     @FXML
     ImageView IVexit;
+    
     /**
      * Initializes the controller class.
      *
