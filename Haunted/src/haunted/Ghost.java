@@ -110,6 +110,7 @@ public class Ghost extends Character {
      * wall" immediately.
      */
     public void changeAppearance() {
+        System.out.println(System.currentTimeMillis() >= stationaryTime.getTimeInMillis() + 1500);
         if (this.isGhost && System.currentTimeMillis() >= stationaryTime.getTimeInMillis() + 1500 && !isIsMoving()) {
             this.vulnerable = false;
             this.setSpritesUp(new String[]{"wall.png"});

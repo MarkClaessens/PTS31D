@@ -18,6 +18,9 @@ import javafx.scene.control.Button;
  */
 public class FXMLnextroundController extends BaseController implements Initializable {
 
+    /**
+     * the fxml location for FXMLnextRoundController
+     */
     public static final String URL_FXML = "FXMLGameLobby.fxml";
     private MainGameFX gameFX;
 
@@ -26,12 +29,18 @@ public class FXMLnextroundController extends BaseController implements Initializ
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
 
+    /**
+     * sets the game fx
+     * @param GameFX 
+     */
     public void setGamefx(MainGameFX GameFX) {
         this.gameFX = GameFX;
     }
