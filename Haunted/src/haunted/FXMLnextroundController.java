@@ -72,8 +72,6 @@ public class FXMLnextroundController extends BaseController implements Initializ
     @FXML
     private void nextround() throws Exception {
             game.startRound();
-            MainGameFX gameFX = new MainGameFX();
-            game.setgameFX(gameFX);
             gameFX.start(stage);
     }
 }

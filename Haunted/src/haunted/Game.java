@@ -13,6 +13,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.logging.Logger;
 import java.util.TimerTask;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -126,7 +127,7 @@ public class Game {
         this.currentLevel = new Level(0);
         this.gameFX = new MainGameFX();
         setupGameClasses();
-        this.bindCharactersToPlayers();        
+        this.bindCharactersToPlayers();
         cl = Calendar.getInstance();
 
     }
@@ -190,8 +191,7 @@ public class Game {
     public void startRound() {
         human.setPosition(pickRandomHumanSpawnPoint());
         human.setHasKey(false);
-        for(Ghost g : ghosts)
-        {
+        for (Ghost g : ghosts) {
             g.setPosition(pickRandomGhostSpawnPoint());
         }
         try {
@@ -201,16 +201,16 @@ public class Game {
         }
         this.isRunning = true;
         this.isPaused = false;
-            timer = new Timer();
-            TimerTask task = new TimerTask() {
-                @Override
-                public void run() {
-                    long l = System.currentTimeMillis() - cl.getTimeInMillis();
-                    cl = Calendar.getInstance();
-                    tick();
-                }
-            };
-            timer.scheduleAtFixedRate(task, 0, 16);               
+        timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                long l = System.currentTimeMillis() - cl.getTimeInMillis();
+                cl = Calendar.getInstance();
+                tick();
+            }
+        };
+        timer.scheduleAtFixedRate(task, 0, 16);
     }
 
     /**
@@ -224,20 +224,28 @@ public class Game {
                 this.endGame(P);
             });
         } else {
-            scene = gameFX.getScene();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXMLnextroundController.URL_FXML));
-        try {
-            Node root = fxmlLoader.load();
-            Controller controller = fxmlLoader.getController();
-            controller.setView(root);
-            FXMLnextroundController NRC = (FXMLnextroundController) fxmlLoader.getController();
-            NRC.setGame(this);
-            NRC.setStage(gameFX.getStage());
-            scene.setRoot((Parent) NRC.getView());            
-        } catch (IOException ex) {
-            Logger.getLogger(Game.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
             this.currentRound++;
+            Platform.runLater(new Runnable() {
+
+                @Override
+                public void run() {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXMLnextroundController.URL_FXML));
+                    try {
+
+                        Node root = fxmlLoader.load();
+                        Controller controller = fxmlLoader.getController();
+                        controller.setView(root);
+                        FXMLnextroundController NRC = (FXMLnextroundController) fxmlLoader.getController();
+                        NRC.setGame(Game.this);
+                        NRC.setGamefx(gameFX);
+                        NRC.setStage(gameFX.getStage());
+                        gameFX.getStage().setScene(new Scene((Parent) NRC.getView()));
+                    } catch (IOException ex) {
+                        Logger.getLogger(Game.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                    }
+                }
+            });
+
         }
     }
 
@@ -257,7 +265,7 @@ public class Game {
             controller.setView(root);
             FXMLvictoryController VC = (FXMLvictoryController) fxmlLoader.getController();
             VC.setWinnaarnaam(winner.getName());
-            scene.setRoot((Parent) VC.getView());            
+            scene.setRoot((Parent) VC.getView());
         } catch (IOException ex) {
             Logger.getLogger(Game.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
@@ -291,14 +299,14 @@ public class Game {
                         if (keyboard[i] != null) {
                             this.players.get(i).getCharacter().move((DirectionType) keyboard[i]);
                         } else {
-                            if(this.players.get(i).getCharacter() instanceof Ghost){
+                            if (this.players.get(i).getCharacter() instanceof Ghost) {
                                 Ghost g = (Ghost) this.players.get(i).getCharacter();
-                                if(g.getIsMoving()){
-                                    if(this.players.get(i).getCharacter() instanceof Ghost){                                       
+                                if (g.getIsMoving()) {
+                                    if (this.players.get(i).getCharacter() instanceof Ghost) {
                                         g.setStationaryTime();
-                                     }                                   
+                                    }
                                 }
-                            }  
+                            }
                             this.players.get(i).getCharacter().setIsMoving(false);
                         }
                     }
@@ -370,11 +378,12 @@ public class Game {
     public Human getHuman() {
         return this.human;
     }
-    public Scene getScene(){
+
+    public Scene getScene() {
         return scene;
     }
-    public void setgameFX(MainGameFX gameFX)
-    {
+
+    public void setgameFX(MainGameFX gameFX) {
         this.gameFX = gameFX;
     }
 }
