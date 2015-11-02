@@ -5,6 +5,8 @@
  */
 package haunted;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -38,7 +40,8 @@ public class FXMLvictoryController extends BaseController implements Initializab
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        BackgroundImage myBI = new BackgroundImage(new Image("victoryscreen.jpg", 1024, 576, false, true),
+         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        BackgroundImage myBI = new BackgroundImage(new Image("victoryscreen.jpg", screenSize.getWidth(), screenSize.getHeight(), false, true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
         //then you set to your node

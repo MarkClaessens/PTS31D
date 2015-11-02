@@ -56,7 +56,8 @@ public class MainGameFX extends Application {
     private final String backgroundImg = "background.png";
     private Group root;
     private Scene scene;
-
+    private Stage stage;
+    
     public MainGameFX() {
     }
 
@@ -76,12 +77,14 @@ public class MainGameFX extends Application {
         stage.setTitle("The Game");
         root = new Group();
         scene = new Scene(root);
+        this.stage = stage;
         stage.setScene(scene);
         determineScreenSize();
         pressedKeys = new Object[3];
         pressedKeys[0] = null;
         pressedKeys[1] = null;
         pressedKeys[2] = false;
+        
 
         //Make canvas and gc and put it on the screen
         Canvas canvas = new Canvas(screenWidth, screenHeight);
@@ -105,9 +108,7 @@ public class MainGameFX extends Application {
                     drawElements(gc, currentNanoTime);
                     root.getChildren().add(flashlight);
                 } else {
-                    gc.clearRect(0, 0, screenWidth, screenHeight);
-                    Image waitImage = new Image("waiting.png");
-                    gc.drawImage(waitImage, 0, 0, screenWidth, screenHeight);
+                    gc.clearRect(0, 0, screenWidth, screenHeight);                    
                     root.getChildren().add(flashlight);
                 }
             }
@@ -406,5 +407,8 @@ public class MainGameFX extends Application {
     }
     public Scene getScene(){
         return scene;
+    }
+    public Stage getStage() {
+        return stage;
     }
 }
