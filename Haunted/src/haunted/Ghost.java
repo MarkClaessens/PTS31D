@@ -18,7 +18,7 @@ public class Ghost extends Character {
     private Calendar beginSpawnTime;
 
     /**
-     * 
+     *
      * @return the begin spawntime
      */
     public Calendar getBeginSpawnTime() {
@@ -27,7 +27,8 @@ public class Ghost extends Character {
 
     /**
      * sets the begin spawntime
-     * @param spawnTime 
+     *
+     * @param spawnTime
      */
     public void setBeginSpawnTime(Calendar spawnTime) {
         this.beginSpawnTime = spawnTime;
@@ -42,8 +43,8 @@ public class Ghost extends Character {
     }
 
     /**
-     * Sets the stationary time to now when the Ghost started standing still. Started standing
-     * still = pressing no moving keys.
+     * Sets the stationary time to now when the Ghost started standing still.
+     * Started standing still = pressing no moving keys.
      *
      */
     public void setStationaryTime() {
@@ -140,16 +141,16 @@ public class Ghost extends Character {
         if (remainingGhostLifes > 0) {
             // Vanish the Ghost by setting in off the screen
             super.setPosition(new Point2D.Double(-800, -800));
+            game.getCurrentLevel().setGhostLifePool(remainingGhostLifes - 1);
         } // If the ghost has no more lifes then end the game with the winning player as the parameter.
         else {
-            game.getPlayers().stream().filter((player) -> (player.getCharacter() instanceof Human)).forEach((player) -> {
-                this.game.getGhosts().remove(this);
-            });
+            game.endRound();
         }
     }
 
     /**
      * gives the hitboxpoints where te ghost can collide with
+     *
      * @return hitboxpoints
      */
     @Override
