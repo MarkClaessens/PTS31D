@@ -102,14 +102,15 @@ public class FXMLHauntedController extends BaseController implements Initializab
      * change the name of both players
      */
     public void changename() {
+        System.out.println(TFchangenameplayer1.getText() + " " + TFchangenameplayer1.getText());
         if (!TFchangenameplayer1.getText().isEmpty() && !TFchangenameplayer2.getText().isEmpty()) {
-            if (TFchangenameplayer1.getText().isEmpty() == TFchangenameplayer2.getText().isEmpty()) 
+            if (TFchangenameplayer1.getText().equals(TFchangenameplayer2.getText())) 
             {
                lobby.changePlayerName(TFchangenameplayer1.getText(), TFchangenameplayer2.getText() + "(1)");
                 setplayernames(); 
             } 
             else 
-            {
+            {                
                 lobby.changePlayerName(TFchangenameplayer1.getText(), TFchangenameplayer2.getText());
                 setplayernames();
             }            
