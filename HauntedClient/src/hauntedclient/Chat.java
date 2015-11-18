@@ -16,7 +16,7 @@ public class Chat {
     private List<String> messages;
     
     /**
-     * 
+     * Constructor for chat
      */
     public Chat(){
         this.messages = new ArrayList();
