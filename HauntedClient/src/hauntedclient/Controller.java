@@ -17,6 +17,10 @@ public class Controller extends UnicastRemoteObject implements IController {
     private GameInfo gameInfo;
     private Chat chat;
 
+    
+    public Controller() throws RemoteException{
+        
+    }
     /**
      * 
      * @param pce

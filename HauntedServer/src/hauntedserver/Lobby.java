@@ -16,7 +16,7 @@ import java.util.List;
  * @author jvdwi
  */
 public class Lobby implements ILobby {
-    private singleton Lobby;
+    //private singleton Lobby;
     private BasicPublisher publisher;
     private List<IGameLobby> gameLobbys;
     
