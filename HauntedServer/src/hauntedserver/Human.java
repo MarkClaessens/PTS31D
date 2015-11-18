@@ -58,7 +58,7 @@ public class Human extends Character {
     /**
      * Returns the coordinates of the flashlight polygon
      * So the fx part can draw this for the human.
-     * @returns polygon of the flashlight.
+     * @return polygon of the flashlight.
      */
     public int[] getFlashlightPolygon(){
         return null;
