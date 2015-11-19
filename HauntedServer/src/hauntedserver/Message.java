@@ -16,14 +16,22 @@ import java.util.Date;
 public class Message {
     private Date timestamp;
     private String text;
-    private boolean allChat;
+    private boolean visibleForEveryone = true;
     private Player player;
+    
+    public String getText(){
+        return text;
+    }
+    
+    public Player getPlayer(){
+        return player;
+    }
     
     /**
      * Constructs the message object. 
      * This object represents a message inside the chatbox.
      * @param text the text that represents the message. 
-     * text is not null, empty or only containing white spaces.
+     * text is not null, empty or only containing whitespaces.
      * @param player the player that sends the message.
      * player is not null.
      * @exception IllegalArgumentException thrown when the text is null, empty or only containing white spaces  
@@ -39,6 +47,13 @@ public class Message {
         this.text = text;
         this.player = player;
         this.timestamp = new Date();
+        
+        // If the player's character is a ghost then the message is not visibible for the human
+        if(player.getCharacter() != null){
+            if(player.getCharacter() instanceof Ghost){
+            this.visibleForEveryone = false;
+            }
+        }
     }
     
     /**
@@ -46,6 +61,7 @@ public class Message {
      * Example --> 15:34 - Mike23HeroJeWeetZelf : Hoi allemaal, veel succes!
      * @return the string that represents a chat message. 
      */
+    @Override
     public String toString(){
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
         String timeToString = formatter.format(timestamp);
