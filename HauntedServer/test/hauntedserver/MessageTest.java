@@ -87,7 +87,7 @@ public class MessageTest {
     /**
      * Creates a string of the message object.
      * Example --> 15:34 - Mike23HeroJeWeetZelf : Hoi allemaal, veel succes!
-     * @return the string that represents a chat message. 
+     * returns the string that represents a chat message. 
      */
     @Test
     public void testToString() {
