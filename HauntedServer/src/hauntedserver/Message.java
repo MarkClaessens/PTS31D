@@ -5,14 +5,16 @@
  */
 package hauntedserver;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
  * @author jvdwi
  */
 public class Message {
-    private Calendar timestamp;
+    private Date timestamp;
     private String text;
     private boolean allChat;
     private Player player;
@@ -24,19 +26,36 @@ public class Message {
      * text is not null, empty or only containing white spaces.
      * @param player the player that sends the message.
      * player is not null.
+     * @exception IllegalArgumentException thrown when the text is null, empty or only containing white spaces  
+     * and when de player is null.
      */
-    public Message(String text, Player player){
+    public Message(String text, Player player) throws IllegalArgumentException{
+        if(text == null || player == null || text.isEmpty() || text.trim().length() == 0){
+            throw new IllegalArgumentException("The message was not created, "
+                    + "check if the text and player are not null and if the text is not empty "
+                    + "or only containing white spaces.");
+        }
+        
         this.text = text;
         this.player = player;
+        this.timestamp = new Date();
     }
     
     /**
      * Creates a string of the message object.
-     * Example --> Mike23Hero : Hoi allemaal, veel succes!
+     * Example --> 15:34 - Mike23HeroJeWeetZelf : Hoi allemaal, veel succes!
      * @return the string that represents a chat message. 
-     * Returns always a string that is not null.
      */
     public String toString(){
-        return null;
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+        String timeToString = formatter.format(timestamp);
+        
+        StringBuilder sb = new StringBuilder(timeToString);
+        sb.append(" - ");
+        sb.append(player.getName());
+        sb.append(" : ");
+        sb.append(text);
+        
+        return sb.toString();
     }
 }

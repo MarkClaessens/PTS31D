@@ -10,6 +10,13 @@ package hauntedclient;
  * @author jvdwi
  */
 public interface IPlayer {
+    
+    /**
+     * 
+     * @return 
+     */
+    public Character getCharacter();
+    
     /**
      * 
      * @return 
@@ -20,13 +27,13 @@ public interface IPlayer {
      * 
      * @return 
      */
-    public String getReady();
+    public boolean getReady();
     
     /**
      * 
      * @param ready 
      */
-    public void setReady(String ready);
+    public void setReady(boolean ready);
     
     /**
      * 

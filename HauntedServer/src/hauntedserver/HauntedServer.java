@@ -16,6 +16,8 @@ public class HauntedServer {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Message message = new Message("blabla", new Player("Mike", "123"));
+        message.toString();
     }
     
 }

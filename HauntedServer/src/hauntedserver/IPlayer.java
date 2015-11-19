@@ -12,6 +12,13 @@ import fontys.observer.RemotePublisher;
  * @author jvdwi
  */
 public interface IPlayer extends RemotePublisher{
+    
+    /**
+     * 
+     * @return 
+     */
+    public Character getCharacter();
+    
     /**
      * 
      * @return 
@@ -22,13 +29,13 @@ public interface IPlayer extends RemotePublisher{
      * 
      * @return 
      */
-    public String getReady();
+    public boolean getReady();
     
     /**
      * 
      * @param ready 
      */
-    public void setReady(String ready);
+    public void setReady(boolean ready);
     
     /**
      * 

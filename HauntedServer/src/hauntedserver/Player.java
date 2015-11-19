@@ -17,7 +17,49 @@ public class Player implements IPlayer{
     private String name, color, ipAddress;
     private boolean ready;
     private DirectionType input;
+    private Character character;
     
+    @Override
+    public Character getCharacter() {
+        return character;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    @Override
+    public String getName() {
+       return name;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    @Override
+    public boolean getReady() {
+        return ready;
+    }
+
+    /**
+     * 
+     * @param ready 
+     */
+    @Override
+    public void setReady(boolean ready) {
+        this.ready = ready;
+    }
+
+    /**
+     * 
+     * @param direction 
+     */
+    @Override
+    public void setInput(DirectionType direction) {
+        this.input = direction;
+    }
+
     /**
      * 
      * @param name
@@ -35,42 +77,6 @@ public class Player implements IPlayer{
         
     }
     
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public String getName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public String getReady() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    /**
-     * 
-     * @param ready 
-     */
-    @Override
-    public void setReady(String ready) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    /**
-     * 
-     * @param direction 
-     */
-    @Override
-    public void setInput(DirectionType direction) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     /**
      * 
      * @param rl
@@ -91,6 +97,5 @@ public class Player implements IPlayer{
     @Override
     public void removeListener(RemotePropertyListener rl, String string) throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+    }    
 }

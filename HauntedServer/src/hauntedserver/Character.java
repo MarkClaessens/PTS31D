@@ -17,7 +17,7 @@ public abstract class Character {
     private double movementSpeed;
     private DirectionType direction;
     private boolean moving;
-    private Player controller;
+
     
     /**
      * Constructor for character
