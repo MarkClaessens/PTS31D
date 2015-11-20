@@ -34,15 +34,10 @@ public class Ghost extends Character {
      * super variables in Character
      *
      * @param position, the Point2D position of the Ghost on the map
-     * @param color, color of the Ghost
-     * @param spritesUp, up sprites of the Ghost
-     * @param spritesDown, down sprites of the Ghost
-     * @param spritesLeft, left sprites of the Ghost
-     * @param spritesRight, right sprites of the Ghost
      * @param game, the game in which the Ghost is active
      */
-    public Ghost(Point2D position, Color color, String[] spritesUp, String[] spritesDown, String[] spritesLeft, String[] spritesRight, Game game) {
-        super(position, spritesUp, spritesDown, spritesLeft, spritesRight, game);
+    public Ghost(Point2D position, Game game) {
+        super(position, game);
         this.isGhost = true;
         this.vulnerable = true;
     }

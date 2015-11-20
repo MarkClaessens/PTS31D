@@ -20,10 +20,6 @@ import static org.junit.Assert.*;
  */
 public class GhostTest {
 
-    String[] ghoSpritesUp = new String[]{"ghostRedUp1.png", "ghostRedUp2.png", "ghostRedUp3.png"};
-    String[] ghoSpritesDown = new String[]{"ghostRedDown1.png", "ghostRedDown2.png", "ghostRedDown3.png"};
-    String[] ghoSpritesLeft = new String[]{"ghostRedLeft1.png", "ghostRedLeft2.png", "ghostRedLeft3.png"};
-    String[] ghoSpritesRight = new String[]{"ghostRedRight1.png", "ghostRedRight2.png", "ghostRedRight3.png"};
     Point2D spawnPosition = new Point2D.Double(300, 500);
     Game game;
 

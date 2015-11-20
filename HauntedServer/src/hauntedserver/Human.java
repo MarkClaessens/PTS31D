@@ -5,6 +5,8 @@
  */
 package hauntedserver;
 
+import java.awt.geom.Point2D;
+
 /**
  *
  * @author jvdwi
@@ -20,8 +22,9 @@ public class Human extends Character {
      * This initializes the flashlightRange, flashlightAngle and the flashlightPoints by calling setFlashlight
      * Also initialize the base class Character!
      */
-    public Human() {
-        
+    public Human(Point2D position, Game game) {
+        super(position, game);
+        this.hasKey = false;
     }
     
     /**
