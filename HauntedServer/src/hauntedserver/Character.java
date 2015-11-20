@@ -5,6 +5,7 @@
  */
 package hauntedserver;
 
+import java.awt.Color;
 import java.awt.geom.Point2D;
 import java.util.List;
 
@@ -17,14 +18,31 @@ public abstract class Character {
     private double movementSpeed;
     private DirectionType direction;
     private boolean moving;
-
+    private String[] spritesUp;
+    private String[] spritesLeft;
+    private String[] spritesDown;
+    private String[] spritesRight;
+    private Game game;
     
     /**
-     * Constructor for character
-     * Initialize position, movementSpeed, controller
+     * the constructor for character
+     *
+     * @param position
+     * @param color
+     * @param spritesUp
+     * @param spritesDown
+     * @param spritesLeft
+     * @param spritesRight
+     * @param game
      */
-    public Character(){
-        
+    public Character(Point2D position, String[] spritesUp, String[] spritesDown, String[] spritesLeft, String[] spritesRight, Game game) {
+        this.spritesUp = spritesUp;
+        this.spritesDown = spritesDown;
+        this.spritesLeft = spritesLeft;
+        this.spritesRight = spritesRight;
+        this.direction = DirectionType.DOWN; // Set a default direction
+        this.game = game;
+        this.moving = false;
     }
     
     /**
