@@ -19,14 +19,13 @@ import static org.junit.Assert.*;
  *
  * @author jvdwi
  */
-public class CharacterTest {
+public class HumanTest {
 
     private Human human;
-    private Ghost ghost;
     private Point2D spawnPosition = new Point2D.Double(300, 500);
     private Game game;
 
-    public CharacterTest() {
+    public HumanTest() {
     }
 
     @BeforeClass
@@ -44,8 +43,6 @@ public class CharacterTest {
         players.add(new Player("testPlayer2", "192.69.133.14"));
         game = new Game(players, 3);
         human = new Human(spawnPosition, game);
-        ghost = new Ghost(spawnPosition, game);
-
     }
 
     @After
@@ -59,19 +56,46 @@ public class CharacterTest {
     // public void hello() {}
     
     /**
-     * Tests for moving character
+     * Test for adding a human
      */
     @Test
-    public void moveTest(){
-        human.move(DirectionType.UP);
-        human.move(DirectionType.DOWN);
-        human.move(DirectionType.LEFT);
-        human.move(DirectionType.RIGHT);
-        ghost.move(DirectionType.UP);
-        ghost.move(DirectionType.DOWN);
-        ghost.move(DirectionType.LEFT);
-        ghost.move(DirectionType.RIGHT);
+    public void testAddHuman(){
+        Human h = new Human(spawnPosition, game);
     }
     
-    //Verder zou ik niet weten of je de rest ook fatsoenlijk kan testen...
+    /**
+     * test for picking up key
+     */
+    @Test
+    public void testPickupKey(){
+        assertFalse("Human shouldn't have picked up the key yet", human.isHasKey());
+        human.pickUpKey();
+        assertTrue("Human should have picked up the key now", human.isHasKey());
+    }
+    
+    /**
+     * test for entering the door
+     */
+    @Test
+    public void enterDoor(){
+        human.enterDoor();
+        human.pickUpKey();
+        human.enterDoor();
+    }
+    
+    /**
+     * test if human interacts with something
+     */
+    @Test
+    public void testCheckInteract(){
+        assertFalse("Human shouldn't interact with something", human.checkInteract());
+    }
+    
+    /**
+     * test for getting flashlight polygon
+     */
+    @Test
+    public void testGetFlashlightPolygon(){
+        assertEquals("should return a polygon", new int[]{2, 2}, human.getFlashlightPolygon());
+    }
 }

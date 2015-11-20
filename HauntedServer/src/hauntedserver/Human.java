@@ -28,6 +28,14 @@ public class Human extends Character {
     }
     
     /**
+     * 
+     * @return true if human has picked up the key
+     */
+    public boolean isHasKey(){
+        return hasKey;
+    }
+    
+    /**
      * if haskey == false, hasKey becomes true
      */
     public void pickUpKey(){
@@ -36,7 +44,7 @@ public class Human extends Character {
     
     /**
      * if haskey == true, enterDoor will cause endround, so the game can continue to the next round or go to the victory screen.
-     * Otherwise, this method won't do anything.
+     * Otherwise, this method won't cause anything.
      */
     public void enterDoor(){
         
@@ -44,9 +52,10 @@ public class Human extends Character {
     
     /**
      * check if the human interacts with ghost, key, door or wall
+     * @return true if human interacts with something
      */
-    public void checkInteract(){
-        
+    public boolean checkInteract(){
+        return false;
     }
     
     /**
@@ -54,7 +63,7 @@ public class Human extends Character {
      * With this, the human can see the things in the level, but only the things in range of the flashlight.
      * Flashlight is a triangle.
      */
-    public void setFlashlight(){
+    private void setFlashlight(){
         
     }
     

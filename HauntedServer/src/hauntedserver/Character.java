@@ -47,9 +47,10 @@ public abstract class Character {
     /**
      * Checks if there is a collision with another character, walls, key or
      * door.
+     * @return true if collision with another object
      */
-    public void detectCollision() {
-
+    public boolean detectCollision() {
+        return false;
     }
 
     /**
