@@ -20,7 +20,7 @@ public class GameLobby implements IGameLobby {
     private List<Message> messages;
     
     /**
-     * 
+     * maakt een niewe gamelobby aan
      * @param name
      * @param password
      * @param host 
@@ -33,7 +33,7 @@ public class GameLobby implements IGameLobby {
     }
     
     /**
-     * 
+     * als alle spelers klaar zijn dan start de game
      */
     @Override
     public void startGame() {
@@ -41,7 +41,7 @@ public class GameLobby implements IGameLobby {
     }
 
     /**
-     * 
+     * verstuurt een message naar de andere spelers
      * @param message 
      */
     @Override
@@ -50,7 +50,7 @@ public class GameLobby implements IGameLobby {
     }
 
     /**
-     * 
+     * verwijdert een speler uit de gamelobby
      * @param player
      * @return 
      */
@@ -60,7 +60,7 @@ public class GameLobby implements IGameLobby {
     }
 
     /**
-     * 
+     * voegt een speler toe aan de gamelobby
      * @param player
      * @return 
      */
@@ -70,7 +70,7 @@ public class GameLobby implements IGameLobby {
     }
 
     /**
-     * 
+     * vraagt de naam op van de gamelobby
      * @return 
      */
     @Override
@@ -79,7 +79,7 @@ public class GameLobby implements IGameLobby {
     }
 
     /**
-     * 
+     * vraagt het maximum aantal spelers van de gamelobby op
      * @return 
      */
     @Override
@@ -88,7 +88,7 @@ public class GameLobby implements IGameLobby {
     }
 
     /**
-     * 
+     * vraagt het maximum aantal vloeren van de gamelobby op
      * @return 
      */
     @Override
@@ -97,11 +97,11 @@ public class GameLobby implements IGameLobby {
     }
 
     /**
-     * 
+     * vraagt lijst met spelers die in de gamelobby zit op
      * @return 
      */
     @Override
-    public int getPlayers() {
+    public List<Player> getPlayers() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

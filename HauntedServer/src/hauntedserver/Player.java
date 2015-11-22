@@ -25,7 +25,7 @@ public class Player implements IPlayer{
     }
 
     /**
-     * 
+     * vraagt de naam van de speler
      * @return 
      */
     @Override
@@ -34,7 +34,7 @@ public class Player implements IPlayer{
     }
 
     /**
-     * 
+     * vraagt de status van de speler
      * @return 
      */
     @Override
@@ -43,7 +43,7 @@ public class Player implements IPlayer{
     }
 
     /**
-     * 
+     * set de status van de speler
      * @param ready 
      */
     @Override
@@ -52,7 +52,7 @@ public class Player implements IPlayer{
     }
 
     /**
-     * 
+     * set de directie van de speler
      * @param direction 
      */
     @Override
@@ -61,7 +61,7 @@ public class Player implements IPlayer{
     }
 
     /**
-     * 
+     * maakt de speler aan
      * @param name
      * @param ipAddress 
      */
@@ -71,14 +71,14 @@ public class Player implements IPlayer{
     }
     
     /**
-     * 
+     * verandert de ready status van de speler
      */
     public void toggleReady(){
         
     }
     
     /**
-     * 
+     * voegt de listener toe aan de lijst van listeners
      * @param rl
      * @param string
      * @throws RemoteException 
@@ -89,7 +89,7 @@ public class Player implements IPlayer{
     }
 
     /**
-     * 
+     * verwijdert de listener van de lijst van listeners
      * @param rl
      * @param string
      * @throws RemoteException 
