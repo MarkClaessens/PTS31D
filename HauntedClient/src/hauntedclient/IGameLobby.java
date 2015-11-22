@@ -7,55 +7,55 @@ package hauntedclient;
 
 /**
  *
- * @author jvdwi
+ * @author Mark Claessens
  */
 public interface IGameLobby {
     /**
-     * 
+     * het spel wordt gestart
      */
     public void startGame();
     
     /**
-     * 
+     * een speler verstuurt een bericht naar de andere spelers in de gamelobby
      * @param message 
      */
     public void sendMessage(String message);
     
     /**
-     * 
+     * kijkt of een speler uit de room verwijdert kan worden. als dit kan dan wordt hij verwijdert.
      * @param player
-     * @return 
+     * @return boolean
      */
     public boolean removePlayer(IPlayer player);
     
     /**
-     * 
+     * kijkt of een speler bij de room toegevoegt kan worden. als dit kan dan wordt hij toegevoegt.
      * @param player
-     * @return 
+     * @return boolean
      */
     public boolean addPlayer(IPlayer player);
     
     /**
-     * 
-     * @return 
+     * geeft naam van de gamelobby terug
+     * @return name
      */
     public String getName();
     
     /**
-     * 
-     * @return 
+     * geeft het maximum aantal spelers terug die in de gamelobby mogen
+     * @return maxplayers
      */
     public int getMaxPlayer();
     
     /**
-     * 
-     * @return 
+     * geeft het maximum aantal floors terug die in de game zitten
+     * @return maxfloors
      */
     public int getMaxFloors();
     
     /**
-     * 
-     * @return 
+     * geeft het aantal players terug die in de game zitten
+     * @return players
      */
     public int getPlayers();
 }
