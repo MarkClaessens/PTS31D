@@ -13,6 +13,7 @@ public class HauntedServer {
     private static final String bindingNameLobby = "lobby";
     private Registry registry = null;
     private Lobby lobby = null;
+    private Socket soc;
     
     // Constructor
     public HauntedServer(){
@@ -23,6 +24,13 @@ public class HauntedServer {
             System.out.println("Server: RemoteException: " + ex.getMessage());
             System.out.println("Server: Cannot create lobby, it's null now.");
             lobby = null;
+        }
+        //open the socket
+        try {
+            soc = new Socket();
+            soc.socketSetup("234.56.78.90",9876);
+        } catch (Exception ex){
+            System.out.println(ex.toString());
         }
         
         // Create registry at port number

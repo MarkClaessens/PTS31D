@@ -41,7 +41,7 @@ public class Socket {
         NetworkInterface nic = null;//this.getnetworkinterface(); //commented for futuure over internet support
         if (nic == null) {
             listNics();
-            System.out.println("WHATS THE NAME OF THE NIC MOTHERF*CKER?");
+            System.out.println("What Network interface do you want to connect with?");
             nic = NetworkInterface.getByName(input.nextLine());
         }
 
