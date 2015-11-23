@@ -58,4 +58,6 @@ public interface IGameLobby {
      * @return players
      */
     public int getPlayers();
+    
+    public boolean readycheck();
 }

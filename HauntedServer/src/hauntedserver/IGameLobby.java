@@ -61,4 +61,6 @@ public interface IGameLobby extends Remote {
      * @return players
      */
     public List<Player> getPlayers();
+    
+    public boolean readycheck();
 }

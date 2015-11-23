@@ -59,7 +59,7 @@ public class GameLobby implements IGameLobby {
      */
     @Override
     public void sendMessage(String message) {
-       
+       Message bericht = new Message(message, host);
     }
 
     /**
