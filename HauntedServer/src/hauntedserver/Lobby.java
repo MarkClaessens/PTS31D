@@ -19,42 +19,42 @@ import java.util.List;
 public class Lobby extends UnicastRemoteObject implements ILobby {
     //private singleton Lobby;
     private final List<IGameLobby> gameLobbys;
+
     private final BasicPublisher basicPublisher;
-    private final List<Player> players; 
-    
+    private List<Player> players; 
+ 
     /**
      * @throws java.rmi.RemoteException
      */
     public Lobby() throws RemoteException {
-        super(0, new MyRMISocketFactory(), new MyRMISocketFactory());
-        
         String[] props = new String[1];
         props[0] = "gamelobbys";
         basicPublisher = new BasicPublisher(props);
         this.gameLobbys = new ArrayList();
 	this.players = new ArrayList();
-    } 
-    
+    }
+  
     @Override
     public List<IGameLobby> getGameLobbys() throws RemoteException {
         return gameLobbys;
     }
 
     @Override
-    public void createGameLobby(String name, String password, IPlayer host,
-            int maxFloors, int maxPlayers) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void createGameLobby(String name, String password, IPlayer host, int maxFloors, int maxPlayers) throws RemoteException {
+        GameLobby gamelobby = new GameLobby(name, password, host, maxFloors, maxPlayers);
+        gameLobbys.add(gamelobby);
     }
 
     @Override
     public void exit() throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        
     }
 
 
     @Override
     public void createPlayer(String name, String ipAddress) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        Player player = new Player(name, ipAddress);
+        players.add(player);
     }
 
     @Override

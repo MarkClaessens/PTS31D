@@ -36,7 +36,7 @@ public class GameLobbyTest {
     @Before
     public void setUp() {
         host = new Player("host", "ipadres");
-        globby = new GameLobby("lobby1", "pass1", host);
+        globby = new GameLobby("lobby1", "pass1", host, 4 , 4);
     }
 
     @After
