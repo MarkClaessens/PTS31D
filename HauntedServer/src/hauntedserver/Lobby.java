@@ -8,85 +8,59 @@ package hauntedserver;
 import fontys.observer.BasicPublisher;
 import fontys.observer.RemotePropertyListener;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author jvdwi
+ * @author Mike Evers + ..
  */
-public class Lobby implements ILobby {
+public class Lobby extends UnicastRemoteObject implements ILobby {
     //private singleton Lobby;
-    private BasicPublisher publisher;
-    private List<IGameLobby> gameLobbys;
+    private final List<IGameLobby> gameLobbys;
+    private final BasicPublisher basicPublisher;
+    
     
     /**
-     * 
+     * @throws java.rmi.RemoteException
      */
-    private Lobby(){
+    public Lobby() throws RemoteException {
+        String[] props = new String[1];
+        props[0] = "gamelobbys";
+        basicPublisher = new BasicPublisher(props);
         this.gameLobbys = new ArrayList();
     }
-
-    /**
-     * 
-     * @return 
-     */
+  
     @Override
-    public List<IGameLobby> getGameLobbys() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<IGameLobby> getGameLobbys() throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
-    /**
-     * 
-     * @param name
-     * @param password
-     * @param host
-     * @param maxFloors
-     * @param maxPlayers 
-     */
     @Override
-    public void createGameLobby(String name, String password, IPlayer host, int maxFloors, int maxPlayers) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void createGameLobby(String name, String password, IPlayer host,
+            int maxFloors, int maxPlayers) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    /**
-     * 
-     */
     @Override
-    public void exit() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void exit() throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
-    /**
-     * 
-     * @param name
-     * @param ipAddress 
-     */
     @Override
-    public void createPlayer(String name, String ipAddress) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void createPlayer(String name, String ipAddress) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
-    /**
-     * 
-     * @param rl
-     * @param string
-     * @throws RemoteException 
-     */
+
     @Override
     public void addListener(RemotePropertyListener rl, String string) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
-    /**
-     * 
-     * @param rl
-     * @param string
-     * @throws RemoteException 
-     */
     @Override
     public void removeListener(RemotePropertyListener rl, String string) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
-   
 }
