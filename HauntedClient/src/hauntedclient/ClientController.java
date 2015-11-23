@@ -24,7 +24,7 @@ public class ClientController extends UnicastRemoteObject implements IController
     private final HauntedClient client;
     private Registry registry = null;
     private ILobby lobby = null;
-    private List<IGameLobby> gamelobbys = new ArrayList();
+    private List<IGameLobby> gamelobbys;
     
     // Binding name for lobby
     private static final String bindingNameLobby = "lobby";
@@ -34,6 +34,7 @@ public class ClientController extends UnicastRemoteObject implements IController
     }
     
     public ClientController(HauntedClient client, String ip) throws RemoteException {
+        gamelobbys = new ArrayList();
         this.client = client;
         startClient(ip);
         gamelobbys = lobby.getGameLobbys();
