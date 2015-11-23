@@ -18,10 +18,11 @@ import java.util.List;
  */
 public class Lobby extends UnicastRemoteObject implements ILobby {
     //private singleton Lobby;
-    private final List<IGameLobby> gameLobbys;
+<<<<<<< HEAD
+    private final List<GameLobby> gameLobbys;
     private final BasicPublisher basicPublisher;
-    
-    
+    private List<Player> players; 
+ 
     /**
      * @throws java.rmi.RemoteException
      */
@@ -30,6 +31,7 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
         props[0] = "gamelobbys";
         basicPublisher = new BasicPublisher(props);
         this.gameLobbys = new ArrayList();
+	this.players = new ArrayList();
     }
   
     @Override
@@ -48,10 +50,12 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
 
+
     @Override
     public void createPlayer(String name, String ipAddress) throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
+
 
 
     @Override
