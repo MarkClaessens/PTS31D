@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  *
- * @author S31D
+ * @author Mike Evers, 
  */
 public class ClientController extends UnicastRemoteObject implements IClientController {
     private GameInfo gameInfo;
