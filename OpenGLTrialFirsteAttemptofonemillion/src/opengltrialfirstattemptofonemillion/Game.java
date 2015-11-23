@@ -31,6 +31,7 @@ public class Game extends JFrame implements GLEventListener {
 
     private static final long serialVersionUID = 1L;
 
+    private int xPos = 2;
     GLCanvas canvas;
     final private int width = 800;
     final private int height = 600;
@@ -44,16 +45,17 @@ public class Game extends JFrame implements GLEventListener {
         canvas.addGLEventListener(this);
 
         this.setName("Minimal OpenGL");
+
         Button bt = new Button("Test");
         bt.setSize(30, 30);
         Button bt2 = new Button("Another Test");
-        bt2.setSize(40,40);
+        bt2.setSize(40, 40);
         Button bt3 = new Button("More tests");
-        bt3.setSize(50,50);
+        bt3.setSize(50, 50);
         this.getContentPane().add(canvas);
-        this.getContentPane().add(bt);
-        this.getContentPane().add(bt2);
-        this.getContentPane().add(bt3);
+//        this.getContentPane().add(bt);
+//        this.getContentPane().add(bt2);
+//        this.getContentPane().add(bt3);
 
         this.setSize(width, height);
         this.setLocationRelativeTo(null);
@@ -63,7 +65,7 @@ public class Game extends JFrame implements GLEventListener {
     }
 
     public void play() {
-
+        
     }
 
     @Override
@@ -83,7 +85,7 @@ public class Game extends JFrame implements GLEventListener {
             System.out.println(e.getMessage());
         }
 
-        g.drawImage(image, 20, 20, this);
+        g.drawImage(image, xPos, 20, this);
 
         canvas.display();
 
@@ -104,7 +106,6 @@ public class Game extends JFrame implements GLEventListener {
 
     @Override
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
-
     }
 
 }
