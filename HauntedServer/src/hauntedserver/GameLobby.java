@@ -7,6 +7,7 @@ package hauntedserver;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -18,7 +19,7 @@ public class GameLobby implements IGameLobby {
     private int maxPlayer, maxFloors;
     private Player host;
     private List<Message> messages;
-    
+    private List<Player> players;
     /**
      * maakt een niewe gamelobby aan
      * @param name
@@ -32,6 +33,8 @@ public class GameLobby implements IGameLobby {
         this.messages = new ArrayList();
         this.maxPlayer = maxPlayers;
         this.maxFloors = maxFloors;
+        this.players = new ArrayList();
+        players.add(host);
     }
     
     /**
@@ -39,7 +42,15 @@ public class GameLobby implements IGameLobby {
      */
     @Override
     public void startGame() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      if(players.size() > 2)
+      {
+        boolean ready = readycheck();
+        if(ready)
+        {           
+           Game game = new Game(players, maxFloors);
+           game.startRound();
+        }
+      }       
     }
 
     /**
@@ -48,7 +59,7 @@ public class GameLobby implements IGameLobby {
      */
     @Override
     public void sendMessage(String message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
 
     /**
@@ -58,7 +69,24 @@ public class GameLobby implements IGameLobby {
      */
     @Override
     public boolean removePlayer(IPlayer player) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      boolean exist = false;
+        for(Player speler : players)
+      {
+          if(player == speler)
+          {
+              exist = true;
+          }
+      }
+        if(exist)
+        {
+           players.remove(player);
+           return true;
+        }
+        else
+        {
+            return false;
+        }
+      
     }
 
     /**
@@ -68,8 +96,24 @@ public class GameLobby implements IGameLobby {
      */
     @Override
     public boolean addPlayer(IPlayer player) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        boolean exist = false;
+        for(Player speler : players)
+        {
+            if(speler == player)
+            {
+              exist = true;
+            }
+        }
+        if(exist == false)
+        {
+            players.add((Player) player);
+            return true;
+        }
+        else
+        {
+            return false;
+        }        
+      }
 
     /**
      * vraagt de naam op van de gamelobby
@@ -77,7 +121,7 @@ public class GameLobby implements IGameLobby {
      */
     @Override
     public String getName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     return name;    
     }
 
     /**
@@ -86,7 +130,7 @@ public class GameLobby implements IGameLobby {
      */
     @Override
     public int getMaxPlayer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     return maxPlayer;    
     }
 
     /**
@@ -95,7 +139,7 @@ public class GameLobby implements IGameLobby {
      */
     @Override
     public int getMaxFloors() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     return maxFloors;    
     }
 
     /**
@@ -104,7 +148,19 @@ public class GameLobby implements IGameLobby {
      */
     @Override
     public List<Player> getPlayers() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     return players;    
+    }
+    
+    private boolean readycheck()
+    {
+        for(Player speler : players)
+        {
+            if(!speler.getReady())
+            {
+                return false;
+            }
+        }
+        return true;
     }
     
 }
