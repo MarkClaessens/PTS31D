@@ -29,6 +29,10 @@ public class Controller extends UnicastRemoteObject implements IController {
     // Binding name for lobby
     private static final String bindingNameLobby = "lobby";
     
+    public List<IGameLobby> getGameLobbys(){
+        return gamelobbys;
+    }
+    
     public Controller(HauntedClient client, String ip) throws RemoteException {
         this.client = client;
         startClient(ip);
