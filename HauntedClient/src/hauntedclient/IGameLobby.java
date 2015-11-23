@@ -3,14 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hauntedclient;
+package hauntedserver;
+
+import java.rmi.Remote;
+import java.util.List;
 
 /**
  *
- * @author Mark Claessens
+ * @author jvdwi
  */
-public interface IGameLobby {
-    /**
+public interface IGameLobby extends Remote {
+       /**
      * het spel wordt gestart
      */
     public void startGame();
@@ -57,7 +60,7 @@ public interface IGameLobby {
      * geeft het aantal players terug die in de game zitten
      * @return players
      */
-    public int getPlayers();
+    public List<IPlayer> getPlayers();
     
     public boolean readycheck();
 }
