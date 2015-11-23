@@ -5,7 +5,6 @@
  */
 package hauntedserver;
 
-import java.awt.Color;
 import java.awt.geom.Point2D;
 import java.util.Calendar;
 
@@ -16,6 +15,8 @@ import java.util.Calendar;
 public class Ghost extends Character {
     private boolean vulnerable, isGhost;
     private Calendar stationaryTime, timeOfDeath;
+    private Point2D spawnPosition;
+    private Game game;
     
     public boolean isVulnerable(){
         return vulnerable;
@@ -29,6 +30,14 @@ public class Ghost extends Character {
         return timeOfDeath;
     }
     
+    public Point2D getSpawnPosition(){
+        return spawnPosition;
+    }
+    
+    public Game getGame(){
+        return game;
+    }
+    
     /**
      * Constructor for Ghost sets vulnerable and isGhost to true and sets the
      * super variables in Character
@@ -38,6 +47,8 @@ public class Ghost extends Character {
      */
     public Ghost(Point2D position, Game game) {
         super(position, game);
+        this.spawnPosition = position;
+        this.game = game;
         this.isGhost = true;
         this.vulnerable = true;
     }
