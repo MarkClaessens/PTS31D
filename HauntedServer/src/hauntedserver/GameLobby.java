@@ -151,7 +151,8 @@ public class GameLobby implements IGameLobby {
      return players;    
     }
     
-    private boolean readycheck()
+    @Override
+    public boolean readycheck()
     {
         for(Player speler : players)
         {

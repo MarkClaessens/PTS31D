@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class Lobby extends UnicastRemoteObject implements ILobby {
     //private singleton Lobby;
-<<<<<<< HEAD
+
     private final List<GameLobby> gameLobbys;
     private final BasicPublisher basicPublisher;
     private List<Player> players; 
@@ -36,35 +36,36 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
   
     @Override
     public List<IGameLobby> getGameLobbys() throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        return gameLobbys;
     }
 
     @Override
-    public void createGameLobby(String name, String password, IPlayer host,
-            int maxFloors, int maxPlayers) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void createGameLobby(String name, String password, IPlayer host, int maxFloors, int maxPlayers) throws RemoteException {
+        GameLobby gamelobby = new GameLobby(name, password, host, maxFloors, maxPlayers);
+        gameLobbys.add(gamelobby);
     }
 
     @Override
     public void exit() throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        
     }
 
 
     @Override
     public void createPlayer(String name, String ipAddress) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        Player player = new Player(name, ipAddress);
+        players.add(player);
     }
 
 
 
     @Override
     public void addListener(RemotePropertyListener rl, String string) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        basicPublisher.addListener(rl, string);
     }
 
     @Override
     public void removeListener(RemotePropertyListener rl, String string) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        basicPublisher.removeListener(rl, string);
     }
 }
