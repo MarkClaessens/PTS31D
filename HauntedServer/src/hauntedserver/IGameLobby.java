@@ -60,7 +60,7 @@ public interface IGameLobby extends Remote {
      * geeft het aantal players terug die in de game zitten
      * @return players
      */
-    public List<Player> getPlayers();
+    public List<IPlayer> getPlayers();
     
     public boolean readycheck();
 }

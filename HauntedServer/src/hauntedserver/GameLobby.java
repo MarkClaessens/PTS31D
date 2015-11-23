@@ -19,7 +19,7 @@ public class GameLobby implements IGameLobby {
     private int maxPlayer, maxFloors;
     private Player host;
     private List<Message> messages;
-    private List<Player> players;
+    private List<IPlayer> players;
     /**
      * maakt een niewe gamelobby aan
      * @param name
@@ -70,7 +70,7 @@ public class GameLobby implements IGameLobby {
     @Override
     public boolean removePlayer(IPlayer player) {
       boolean exist = false;
-        for(Player speler : players)
+        for(IPlayer speler : players)
       {
           if(player == speler)
           {
@@ -97,7 +97,7 @@ public class GameLobby implements IGameLobby {
     @Override
     public boolean addPlayer(IPlayer player) {
         boolean exist = false;
-        for(Player speler : players)
+        for(IPlayer speler : players)
         {
             if(speler == player)
             {
@@ -147,14 +147,14 @@ public class GameLobby implements IGameLobby {
      * @return 
      */
     @Override
-    public List<Player> getPlayers() {
+    public List<IPlayer> getPlayers() {
      return players;    
     }
     
     @Override
     public boolean readycheck()
     {
-        for(Player speler : players)
+        for(IPlayer speler : players)
         {
             if(!speler.getReady())
             {

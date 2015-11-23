@@ -36,7 +36,7 @@ public class GhostTest {
 
     @Before
     public void setUp() {
-        List<Player> players = new ArrayList<>();
+        List<IPlayer> players = new ArrayList<>();
         players.add(new Player("testPlayer1", "192.68.132.13"));
         players.add(new Player("testPlayer2", "192.69.133.14"));
         game = new Game(players, 3);

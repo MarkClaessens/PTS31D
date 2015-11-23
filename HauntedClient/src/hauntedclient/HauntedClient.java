@@ -7,13 +7,8 @@ package hauntedclient;
 
 import java.rmi.RemoteException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -22,7 +17,7 @@ import javafx.stage.Stage;
  * @author Mike Evers + ..
  */
 public class HauntedClient extends Application {
-    private Controller controller;    
+    private ClientController controller;    
     private Stage primaryStage;
     
     @Override
@@ -33,7 +28,7 @@ public class HauntedClient extends Application {
         String ipAddress = input.nextLine();
 
         try {
-            controller = new Controller(this, ipAddress);
+            controller = new ClientController(this, ipAddress);
         } catch (RemoteException ex) {
             System.out.println("Client: following exception was found: " + ex.getMessage());
             primaryStage.close();

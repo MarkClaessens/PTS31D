@@ -5,6 +5,7 @@
  */
 package hauntedserver;
 
+import hauntedclient.IPlayer;
 import java.rmi.Remote;
 import java.util.List;
 

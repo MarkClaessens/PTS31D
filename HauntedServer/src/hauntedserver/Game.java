@@ -25,7 +25,7 @@ public class Game {
      * @param players
      * @param floors 
      */
-    public Game(List<Player> players, int floors){
+    public Game(List<IPlayer> players, int floors){
         this.floorAmount = floors;
     }
     

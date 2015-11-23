@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author S31D
  */
-public class Controller extends UnicastRemoteObject implements IController {
+public class ClientController extends UnicastRemoteObject implements IController {
     private GameInfo gameInfo;
     private Chat chat;
     private final HauntedClient client;
@@ -33,7 +33,7 @@ public class Controller extends UnicastRemoteObject implements IController {
         return gamelobbys;
     }
     
-    public Controller(HauntedClient client, String ip) throws RemoteException {
+    public ClientController(HauntedClient client, String ip) throws RemoteException {
         this.client = client;
         startClient(ip);
         gamelobbys = lobby.getGameLobbys();
