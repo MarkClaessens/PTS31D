@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author jvdwi
  */
-public interface ILobby extends Remote, RemotePublisher{
+public interface ILobby extends Remote, RemotePublisher {
     
     /** 
      * @return all the gameLobby's in the lobby.

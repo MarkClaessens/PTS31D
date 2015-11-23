@@ -18,22 +18,23 @@ import java.util.List;
  */
 public class Lobby extends UnicastRemoteObject implements ILobby {
     //private singleton Lobby;
-<<<<<<< HEAD
     private final List<GameLobby> gameLobbys;
     private final BasicPublisher basicPublisher;
-    private List<Player> players; 
- 
+    private final List<Player> players; 
+    
     /**
      * @throws java.rmi.RemoteException
      */
     public Lobby() throws RemoteException {
+        super(0, new MyRMISocketFactory(), new MyRMISocketFactory());
+        
         String[] props = new String[1];
         props[0] = "gamelobbys";
         basicPublisher = new BasicPublisher(props);
         this.gameLobbys = new ArrayList();
 	this.players = new ArrayList();
-    }
-  
+    } 
+    
     @Override
     public List<IGameLobby> getGameLobbys() throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); 
