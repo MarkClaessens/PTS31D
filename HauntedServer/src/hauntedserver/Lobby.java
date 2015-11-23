@@ -19,7 +19,7 @@ public class Lobby implements ILobby {
     //private singleton Lobby;
     private BasicPublisher publisher;
     private List<IGameLobby> gameLobbys;
-    
+    private Player player;
     /**
      * 
      */
@@ -33,7 +33,7 @@ public class Lobby implements ILobby {
      */
     @Override
     public List<IGameLobby> getGameLobbys() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return gameLobbys;    
     }
 
     /**
@@ -46,7 +46,7 @@ public class Lobby implements ILobby {
      */
     @Override
     public void createGameLobby(String name, String password, IPlayer host, int maxFloors, int maxPlayers) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        GameLobby gamelobby = new GameLobby(name, password, (Player)host, maxFloors, maxPlayers);        
     }
 
     /**
@@ -54,8 +54,8 @@ public class Lobby implements ILobby {
      */
     @Override
     public void exit() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        
+        }
 
     /**
      * 
@@ -64,8 +64,8 @@ public class Lobby implements ILobby {
      */
     @Override
     public void createPlayer(String name, String ipAddress) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        player = new Player(String name, String ipAddress);
+        }
 
     /**
      * 

@@ -25,11 +25,13 @@ public class GameLobby implements IGameLobby {
      * @param password
      * @param host 
      */
-    public GameLobby(String name, String password, Player host){
+    public GameLobby(String name, String password, Player host, int maxFloors, int maxPlayers){
         this.name = name;
         this.password = password;
         this.host = host;
         this.messages = new ArrayList();
+        this.maxPlayer = maxPlayers;
+        this.maxFloors = maxFloors;
     }
     
     /**
