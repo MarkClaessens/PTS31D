@@ -31,6 +31,7 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
         props[0] = "gamelobbys";
         basicPublisher = new BasicPublisher(props);
         this.gameLobbys = new ArrayList();
+        gameLobbys.add(new GameLobby("gamelobbyMike", null, new Player("Mike", "1223"), 5, 5));
 	this.players = new ArrayList();
     }
   

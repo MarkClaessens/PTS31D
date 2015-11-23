@@ -29,6 +29,10 @@ public class Controller extends UnicastRemoteObject implements IController {
     // Binding name for lobby
     private static final String bindingNameLobby = "lobby";
     
+    public List<IGameLobby> getGameLobbys(){
+        return gamelobbys;
+    }
+    
     public Controller(HauntedClient client, String ip) throws RemoteException {
         this.client = client;
         startClient(ip);
@@ -48,11 +52,11 @@ public class Controller extends UnicastRemoteObject implements IController {
             try {
                 lobby = (ILobby)registry.lookup(bindingNameLobby);
             } catch (RemoteException ex) {
-                System.out.println("Client: Cannot bind student administration");
+                System.out.println("Client: Cannot bind lobby");
                 System.out.println("Client: RemoteException: " + ex.getMessage());
                 lobby = null;
             } catch (NotBoundException ex) {
-                System.out.println("Client: Cannot bind student administration");
+                System.out.println("Client: Cannot bind lobby");
                 System.out.println("Client: NotBoundException: " + ex.getMessage());
                 lobby = null;
             }
