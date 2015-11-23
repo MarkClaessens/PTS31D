@@ -1,23 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hauntedserver;
 
+import java.rmi.registry.Registry;
+
 /**
- *
- * @author Mal
+ * This class starts the game server. 
+ * @author Mike Evers
  */
 public class HauntedServer {
 
+    // Set port number
+    private static final int portNumber = 1099;
+
+    // Set binding name for lobby
+    private static final String bindingName = "lobby";
+
+    // Create references to registry and lobby
+    private final Registry registry = null;
+    private Lobby lobby = null;
+    
+    // Constructor
+    public HauntedServer(){
+        // Create the lobby
+        lobby = new Lobby();
+    }
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        Message message = new Message("blabla", new Player("Mike", "123"));
-        message.toString();
+        
     }
     
 }
