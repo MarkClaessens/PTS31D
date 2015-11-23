@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class Lobby extends UnicastRemoteObject implements ILobby {
     //private singleton Lobby;
-    private final List<GameLobby> gameLobbys;
+    private final List<IGameLobby> gameLobbys;
     private final BasicPublisher basicPublisher;
     private final List<Player> players; 
     
@@ -37,7 +37,7 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
     
     @Override
     public List<IGameLobby> getGameLobbys() throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        return gameLobbys;
     }
 
     @Override
@@ -57,15 +57,16 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
 
-
-
     @Override
-    public void addListener(RemotePropertyListener rl, String string) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); 
+    public void addListener(RemotePropertyListener remotePropertyListener, String string) throws RemoteException {
+        basicPublisher.addListener(remotePropertyListener, string);
     }
 
     @Override
-    public void removeListener(RemotePropertyListener rl, String string) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void removeListener(RemotePropertyListener remotePropertyListener, String string) throws RemoteException {
+        basicPublisher.removeListener(remotePropertyListener, string);
     }
+
+
+
 }

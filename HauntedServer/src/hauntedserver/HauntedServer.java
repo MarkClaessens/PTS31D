@@ -10,7 +10,7 @@ import java.rmi.registry.Registry;
  */
 public class HauntedServer {
     private static final int portNumber = 1099;
-    private static final String bindingName = "lobby";
+    private static final String bindingNameLobby = "lobby";
     private Registry registry = null;
     private Lobby lobby = null;
     
@@ -36,7 +36,7 @@ public class HauntedServer {
                 
         // Bind effectenbeurs using registry
         try {  
-            registry.rebind(bindingName, lobby);
+            registry.rebind(bindingNameLobby, lobby);
         } catch (RemoteException ex) {
             System.out.println("Server: RemoteException: " + ex.getMessage());
             System.out.println("Server: Cannot bind lobby to registry.");
