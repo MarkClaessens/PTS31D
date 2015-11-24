@@ -55,8 +55,8 @@ public class HauntedServer {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // Create server
+        // Create serversdasd
         HauntedServer server = new HauntedServer();
-    }
-    
+        System.setSecurityManager(new SecurityManager());
+    }    
 }

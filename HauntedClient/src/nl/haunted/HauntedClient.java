@@ -52,6 +52,7 @@ public class HauntedClient extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+        System.setSecurityManager(new SecurityManager());
     }
     
 }
