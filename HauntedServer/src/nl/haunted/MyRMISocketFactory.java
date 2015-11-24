@@ -12,7 +12,6 @@ import java.rmi.server.RMISocketFactory;
  * @see http://scis.athabascau.ca/html/courses/comp489/mysql/rmi-firewall.htm
  */
 public class MyRMISocketFactory extends RMISocketFactory implements Serializable {
-    private static final int PREFERED_PORT = 1098;
 
     @Override
     public Socket createSocket(String host, int port) throws IOException {
@@ -22,9 +21,7 @@ public class MyRMISocketFactory extends RMISocketFactory implements Serializable
 
     @Override
     public ServerSocket createServerSocket(int port) throws IOException {
-        if(port == 0){
-            port = PREFERED_PORT;
-        }
+        port = (port == 0 ? 1098 : port);
         System.out.println("creating ServerSocket on port " + port); 
         return new ServerSocket(port);
     }  
