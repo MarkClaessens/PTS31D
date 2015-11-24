@@ -6,6 +6,7 @@
 package nl.haunted;
 
 import fontys.observer.RemotePublisher;
+import java.awt.Color;
 
 /**
  *
@@ -31,6 +32,7 @@ public interface IPlayer extends RemotePublisher{
      */
     public boolean getReady();
     
+    public Color getColor();
     /**
      * set de ready status van de speler naar de waarde van de param
      * @param ready 

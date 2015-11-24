@@ -5,9 +5,12 @@
  */
 package nl.haunted;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,13 +23,15 @@ public class GameLobby implements IGameLobby {
     private Player host;
     private List<Message> messages;
     private List<IPlayer> players;
+
     /**
      * maakt een niewe gamelobby aan
+     *
      * @param name
      * @param password
-     * @param host 
+     * @param host
      */
-    public GameLobby(String name, String password, Player host, int maxFloors, int maxPlayers){
+    public GameLobby(String name, String password, Player host, int maxFloors, int maxPlayers) {
         this.name = name;
         this.password = password;
         this.host = host;
@@ -36,132 +41,130 @@ public class GameLobby implements IGameLobby {
         this.players = new ArrayList();
         players.add(host);
     }
-    
+
     /**
      * als alle spelers klaar zijn dan start de game
      */
     @Override
     public void startGame() {
-      if(players.size() > 2)
-      {
-        boolean ready = readycheck();
-        if(ready)
-        {           
-           Game game = new Game(players, maxFloors);
-           game.startRound();
+        if (players.size() > 2) {
+            boolean ready = readycheck();
+            if (ready) {
+                Game game;
+                try {
+                    game = new Game(players, maxFloors);
+                    game.startRound();
+                } catch (IOException ex) {
+                    Logger.getLogger(GameLobby.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
         }
-      }       
     }
 
     /**
      * verstuurt een message naar de andere spelers
-     * @param message 
+     *
+     * @param message
      */
     @Override
     public void sendMessage(String message) {
-       Message bericht = new Message(message, host);
+        Message bericht = new Message(message, host);
     }
 
     /**
      * verwijdert een speler uit de gamelobby
+     *
      * @param player
-     * @return 
+     * @return
      */
     @Override
     public boolean removePlayer(IPlayer player) {
-      boolean exist = false;
-        for(IPlayer speler : players)
-      {
-          if(player == speler)
-          {
-              exist = true;
-          }
-      }
-        if(exist)
-        {
-           players.remove(player);
-           return true;
+        boolean exist = false;
+        for (IPlayer speler : players) {
+            if (player == speler) {
+                exist = true;
+            }
         }
-        else
-        {
+        if (exist) {
+            players.remove(player);
+            return true;
+        } else {
             return false;
         }
-      
+
     }
 
     /**
      * voegt een speler toe aan de gamelobby
+     *
      * @param player
-     * @return 
+     * @return
      */
     @Override
     public boolean addPlayer(IPlayer player) {
         boolean exist = false;
-        for(IPlayer speler : players)
-        {
-            if(speler == player)
-            {
-              exist = true;
+        for (IPlayer speler : players) {
+            if (speler == player) {
+                exist = true;
             }
         }
-        if(exist == false)
-        {
+        if (exist == false) {
             players.add((Player) player);
             return true;
-        }
-        else
-        {
+        } else {
             return false;
-        }        
-      }
+        }
+    }
 
     /**
      * vraagt de naam op van de gamelobby
-     * @return 
+     *
+     * @return
      */
     @Override
     public String getName() {
-     return name;    
+        return name;
     }
 
     /**
      * vraagt het maximum aantal spelers van de gamelobby op
-     * @return 
+     *
+     * @return
      */
     @Override
     public int getMaxPlayer() {
-     return maxPlayer;    
+        return maxPlayer;
     }
 
     /**
      * vraagt het maximum aantal vloeren van de gamelobby op
-     * @return 
+     *
+     * @return
      */
     @Override
     public int getMaxFloors() {
-     return maxFloors;    
+        return maxFloors;
     }
 
     /**
      * vraagt lijst met spelers die in de gamelobby zit op
-     * @return 
+     *
+     * @return
      */
     @Override
     public List<IPlayer> getPlayers() {
-     return players;    
+        return players;
     }
-    
+
     @Override
-    public boolean readycheck()
-    {
-        for(IPlayer speler : players)
-        {
-            if(!speler.getReady())
-            {
+    public boolean readycheck() {
+        for (IPlayer speler : players) {
+            if (!speler.getReady()) {
                 return false;
             }
         }
         return true;
     }
-    
+
 }

@@ -39,7 +39,7 @@ public class GhostTest {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
         List<IPlayer> players = new ArrayList<>();
         players.add(new Player("testPlayer1", "192.68.132.13"));
         players.add(new Player("testPlayer2", "192.69.133.14"));

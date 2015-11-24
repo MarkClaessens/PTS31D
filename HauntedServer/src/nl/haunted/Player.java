@@ -6,6 +6,7 @@
 package nl.haunted;
 
 import fontys.observer.RemotePropertyListener;
+import java.awt.Color;
 import java.rmi.RemoteException;
 
 /**
@@ -14,14 +15,19 @@ import java.rmi.RemoteException;
  */
 public class Player implements IPlayer{
 
-    private String name, color, ipAddress;
+    private String name, ipAddress;
     private boolean ready;
     private DirectionType input;
     private Character character;
+    private Color color;
     
     @Override
     public Character getCharacter() {
         return character;
+    }
+    
+    public Color getColor(){
+        return this.color;
     }
 
     /**
