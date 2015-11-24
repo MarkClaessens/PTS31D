@@ -9,6 +9,7 @@ import nl.haunted.Player;
 import nl.haunted.Game;
 import nl.haunted.Human;
 import java.awt.geom.Point2D;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
@@ -40,7 +41,7 @@ public class HumanTest {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
         List<IPlayer> players = new ArrayList<>();
         players.add(new Player("testPlayer1", "192.68.132.13"));
         players.add(new Player("testPlayer2", "192.69.133.14"));
@@ -71,9 +72,9 @@ public class HumanTest {
      */
     @Test
     public void testPickupKey(){
-        assertFalse("Human shouldn't have picked up the key yet", human.isHasKey());
+        assertFalse("Human shouldn't have picked up the key yet", human.hasKey());
         human.pickUpKey();
-        assertTrue("Human should have picked up the key now", human.isHasKey());
+        assertTrue("Human should have picked up the key now", human.hasKey());
     }
     
     /**

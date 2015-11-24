@@ -31,7 +31,7 @@ public class Human extends Character {
      * 
      * @return true if human has picked up the key
      */
-    public boolean isHasKey(){
+    public boolean hasKey(){
         return hasKey;
     }
     

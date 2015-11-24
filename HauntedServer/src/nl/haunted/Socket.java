@@ -33,12 +33,13 @@ public class Socket {
 
     MulticastSocket sock;
     InetAddress groupIp;
+    NetworkInterface nic;
 
     public void socketSetup(String groupname, int port) throws IOException {
         sock = new MulticastSocket(port);
         groupIp = InetAddress.getByName(groupname);
         Scanner input = new Scanner(System.in);
-        NetworkInterface nic = null;//this.getnetworkinterface(); //commented for futuure over internet support
+        nic = null;//this.getCurrentNIC(); //commented for futuure over internet support
         if (nic == null) {
             listNics();
             System.out.println("What Network interface do you want to connect with?");
@@ -46,6 +47,10 @@ public class Socket {
         }
 
         sock.joinGroup(new InetSocketAddress(groupIp, port), nic);
+    }
+    
+    public NetworkInterface getNIC(){
+       return nic;
     }
 
     public void send(Object o) throws IOException {
@@ -101,7 +106,7 @@ public class Socket {
         out.printf("\n");
     }
 
-    public NetworkInterface getnetworkinterface() throws SocketException, IOException {
+    public NetworkInterface getCurrentNIC() throws SocketException, IOException {
         // iterate over the network interfaces known to java
         Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
         OUTER:

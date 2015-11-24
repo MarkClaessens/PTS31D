@@ -13,51 +13,68 @@ import java.awt.image.BufferedImage;
  * @author jvdwi
  */
 public class Level {
-    private int floorNr, ghostLifePool, width, height;    
+
+    private int floorNr, ghostLifePool, width, height;
     private Point2D keyLocation, doorLocation;
     private BufferedImage collisionMap, map;
-    
+
     /**
-     * 
-     * @param floorNr 
+     *
+     * @param floorNr
      */
-    public Level(int floorNr){
+    public Level(int floorNr) {
         this.floorNr = floorNr;
     }
-    
-    /**
-     * 
-     */
-    private void generateKeyLocation(){
-        
+
+    public int getGhostLifePool() {
+        return this.ghostLifePool;
     }
-    
-    /**
-     * 
-     */
-    private void generateDoorLocation(){
-        
+
+    public Point2D getKeyLocation() {
+        return this.keyLocation;
     }
-    
-    /**
-     * 
-     */
-    private void generateLayout(){
-        
+
+    public Point2D getDoorLocation() {
+        return this.doorLocation;
     }
-    
+
     /**
-     * 
+     *
      */
-    private void placeObstacles(){
-        
+    private void generateKeyLocation() {
+
     }
-    
+
     /**
-     * 
-     * @return 
+     *
      */
-    public BufferedImage generateMapFiles(){
-       return null; 
+    private void generateDoorLocation() {
+
+    }
+
+    /**
+     *
+     */
+    private void generateLayout() {
+
+    }
+
+    /**
+     *
+     */
+    private void placeObstacles() {
+
+    }
+
+    /**
+     *
+     * @return
+     */
+    public BufferedImage generateMapFiles() {
+        return null;
+    }
+
+    public int getCurrentFoor() {
+        return this.floorNr;
     }
 }

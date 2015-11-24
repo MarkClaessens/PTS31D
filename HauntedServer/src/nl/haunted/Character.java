@@ -62,7 +62,33 @@ public abstract class Character {
     public List<Point2D> getHitBoxPoints() {
         return null;
     }
-
+    
+    public Point2D getPosition() {
+        return this.position;
+    }
+    
+    /**
+     *
+     * @return the character's movement speed
+     */
+    public Double getMovementSpeed() {
+        return this.movementSpeed;
+    }
+    
+    /**
+     *
+     * @return the direction in which the Character looks or is moving
+     */
+    public DirectionType getDirection() {
+        return this.direction;
+    }
+    
+    /**
+     * @return the isMoving
+     */
+    public boolean getIsMoving() {
+        return this.moving;
+    }
     /**
      * returns true if i is between or equal to min and max
      *
