@@ -1,3 +1,4 @@
 grant codeBase "http://athena.fhict.nl/users/i318908/PTS/" {
     permission java.security.AllPermission;
 };
+
