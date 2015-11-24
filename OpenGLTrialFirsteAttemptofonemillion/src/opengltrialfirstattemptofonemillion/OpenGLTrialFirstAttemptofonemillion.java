@@ -7,6 +7,7 @@ package opengltrialfirstattemptofonemillion;
 
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.FPSAnimator;
+import com.jogamp.opengl.util.texture.*;
 import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
