@@ -6,12 +6,9 @@ import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLEventListener;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.awt.GLCanvas;
+import com.jogamp.opengl.util.*;
 import java.awt.Button;
-import java.awt.Color;
-import java.awt.Frame;
 import java.awt.Graphics;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -35,6 +32,7 @@ public class Game extends JFrame implements GLEventListener {
     GLCanvas canvas;
     final private int width = 800;
     final private int height = 600;
+    FPSAnimator animator = null;
 
     public Game() {
         super("Minimal OpenGL");
@@ -64,8 +62,10 @@ public class Game extends JFrame implements GLEventListener {
         this.setResizable(true);
     }
 
+
     public void play() {
-        
+//        animator = new FPSAnimator(canvas, 60, true);
+//        animator.start();
     }
 
     @Override
@@ -85,12 +85,16 @@ public class Game extends JFrame implements GLEventListener {
             System.out.println(e.getMessage());
         }
 
-        g.drawImage(image, xPos, 20, this);
-
+        g.drawImage(image, xPos, xPos, this);
+        xPos++;
         canvas.display();
 
         gl.glFlush();
 
+    }
+    
+    public GLCanvas getCanvas(){
+        return canvas;
     }
 
     @Override
