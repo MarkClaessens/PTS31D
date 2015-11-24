@@ -5,6 +5,8 @@
  */
 package opengltrialfirstattemptofonemillion;
 
+import com.jogamp.opengl.util.FPSAnimator;
+
 /**
  *
  * @author jvdwi
