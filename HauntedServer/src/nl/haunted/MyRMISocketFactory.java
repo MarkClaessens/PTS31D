@@ -22,7 +22,9 @@ public class MyRMISocketFactory extends RMISocketFactory implements Serializable
 
     @Override
     public ServerSocket createServerSocket(int port) throws IOException {
-        port = (port == 0 ? PREFERED_PORT : port); 
+        if(port == 0){
+            port = PREFERED_PORT;
+        }
         System.out.println("creating ServerSocket on port " + port); 
         return new ServerSocket(port);
     }  

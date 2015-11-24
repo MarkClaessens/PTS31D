@@ -5,9 +5,12 @@
  */
 package nl.haunted;
 
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -37,7 +40,7 @@ public class Message {
      * @exception IllegalArgumentException thrown when the text is null, empty or only containing white spaces  
      * and when de player is null.
      */
-    public Message(String text, Player player) throws IllegalArgumentException{
+    public Message(String text, Player player) throws IllegalArgumentException, RemoteException{
         if(text == null || player == null || text.isEmpty() || text.trim().length() == 0){
             throw new IllegalArgumentException("The message was not created, "
                     + "check if the text and player are not null and if the text is not empty "
@@ -68,7 +71,11 @@ public class Message {
         
         StringBuilder sb = new StringBuilder(timeToString);
         sb.append(" - ");
-        sb.append(player.getName());
+        try {
+            sb.append(player.getName());
+        } catch (RemoteException ex) {
+            Logger.getLogger(Message.class.getName()).log(Level.SEVERE, null, ex);
+        }
         sb.append(" : ");
         sb.append(text);
         

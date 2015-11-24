@@ -10,6 +10,7 @@ import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Timer;
 
@@ -89,7 +90,7 @@ public class Game {
      *
      * @return
      */
-    public Object[][] compressGameInfo() throws UnknownHostException {
+    public Object[][] compressGameInfo() throws UnknownHostException, RemoteException {
         Object[][] obj;
         int ghosts = this.characters.size() - 1;
         obj = new Object[this.ghosts.size() + 6][7];
