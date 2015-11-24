@@ -8,12 +8,13 @@ package nl.haunted;
 import fontys.observer.RemotePropertyListener;
 import java.awt.Color;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 /**
  *
  * @author jvdwi
  */
-public class Player implements IPlayer{
+public class Player extends UnicastRemoteObject implements IPlayer{
 
     private String name, ipAddress;
     private boolean ready;
@@ -22,11 +23,12 @@ public class Player implements IPlayer{
     private Color color;
     
     @Override
-    public Character getCharacter() {
+    public Character getCharacter() throws RemoteException{
         return character;
     }
     
-    public Color getColor(){
+    @Override
+    public Color getColor() throws RemoteException{
         return this.color;
     }
 
@@ -35,7 +37,7 @@ public class Player implements IPlayer{
      * @return 
      */
     @Override
-    public String getName() {
+    public String getName() throws RemoteException{
        return name;
     }
 
@@ -44,7 +46,7 @@ public class Player implements IPlayer{
      * @return 
      */
     @Override
-    public boolean getReady() {
+    public boolean getReady() throws RemoteException{
         return ready;
     }
 
@@ -53,7 +55,7 @@ public class Player implements IPlayer{
      * @param ready 
      */
     @Override
-    public void setReady(boolean ready) {
+    public void setReady(boolean ready) throws RemoteException{
         this.ready = ready;
     }
 
@@ -62,7 +64,7 @@ public class Player implements IPlayer{
      * @param direction 
      */
     @Override
-    public void setInput(DirectionType direction) {
+    public void setInput(DirectionType direction) throws RemoteException {
         this.input = direction;
     }
 
@@ -70,16 +72,20 @@ public class Player implements IPlayer{
      * maakt de speler aan
      * @param name
      * @param ipAddress 
+     * @throws java.rmi.RemoteException 
      */
-    public Player(String name, String ipAddress){
+    public Player(String name, String ipAddress) throws RemoteException {
+        super(0, new MyRMISocketFactory(), new MyRMISocketFactory());
+        
         this.name = name;
         this.ipAddress = ipAddress;
     }
     
     /**
      * verandert de ready status van de speler
+     * @throws java.rmi.RemoteException
      */
-    public void toggleReady(){
+    public void toggleReady() throws RemoteException{
         
     }
     
