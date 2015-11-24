@@ -1,14 +1,22 @@
 package opengltrialfirstattemptofonemillion;
 
+import static com.jogamp.opengl.GL.GL_DEPTH_TEST;
+import static com.jogamp.opengl.GL.GL_LEQUAL;
+import static com.jogamp.opengl.GL.GL_NICEST;
+import static com.jogamp.opengl.GL2ES1.GL_PERSPECTIVE_CORRECTION_HINT;
 import com.jogamp.opengl.GL4;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLEventListener;
 import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.awt.GLCanvas;
+import static com.jogamp.opengl.fixedfunc.GLLightingFunc.GL_SMOOTH;
+import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.util.*;
 import java.awt.Button;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +32,7 @@ import javax.swing.JFrame;
  *
  * @author jvdwi
  */
-public class Game extends JFrame implements GLEventListener {
+public class Game extends GLCanvas implements GLEventListener {
 
     private static final long serialVersionUID = 1L;
 
@@ -33,35 +41,12 @@ public class Game extends JFrame implements GLEventListener {
     final private int width = 800;
     final private int height = 600;
     FPSAnimator animator = null;
+    private GLU glu;
 
     public Game() {
-        super("Minimal OpenGL");
-        GLProfile profile = GLProfile.get(GLProfile.GL4);
-        GLCapabilities capabilities = new GLCapabilities(profile);
+        this.addGLEventListener(this);
 
-        canvas = new GLCanvas(capabilities);
-        canvas.addGLEventListener(this);
-
-        this.setName("Minimal OpenGL");
-
-        Button bt = new Button("Test");
-        bt.setSize(30, 30);
-        Button bt2 = new Button("Another Test");
-        bt2.setSize(40, 40);
-        Button bt3 = new Button("More tests");
-        bt3.setSize(50, 50);
-        this.getContentPane().add(canvas);
-//        this.getContentPane().add(bt);
-//        this.getContentPane().add(bt2);
-//        this.getContentPane().add(bt3);
-
-        this.setSize(width, height);
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setVisible(true);
-        this.setResizable(true);
     }
-
 
     public void play() {
 //        animator = new FPSAnimator(canvas, 60, true);
@@ -70,13 +55,10 @@ public class Game extends JFrame implements GLEventListener {
 
     @Override
     public void display(GLAutoDrawable drawable) {
-        GL4 gl = drawable.getGL().getGL4();
-        gl.glClear(GL4.GL_COLOR_BUFFER_BIT | GL4.GL_DEPTH_BUFFER_BIT);
-
+        GL2 gl2 = drawable.getGL().getGL2();
+        gl2.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
+        gl2.glLoadIdentity();
         //call your draw code here
-        canvas.destroy();
-        Graphics g = canvas.getGraphics();
-        g.clearRect(0, 0, width, height);
 
         BufferedImage image = null;
         try {
@@ -84,16 +66,29 @@ public class Game extends JFrame implements GLEventListener {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+        
+        Graphics2D g = image.createGraphics();
+        g.drawImage(image, null, null);
 
-        g.drawImage(image, xPos, xPos, this);
-        xPos++;
-        canvas.display();
-
-        gl.glFlush();
+//        canvas.destroy();
+//        Graphics g = canvas.getGraphics();
+//        g.clearRect(0, 0, width, height);
+//
+//        BufferedImage image = null;
+//        try {
+//            image = ImageIO.read(new File("C:\\Users\\jvdwi\\Documents\\[School]\\FONTYS\\Jaar 2\\Semester 3\\PTS3\\Software\\PTS31D\\StandAlone\\HumanBlueDown1.png"));
+//        } catch (IOException e) {
+//            System.out.println(e.getMessage());
+//        }
+//
+//        g.drawImage(image, xPos, xPos, this);
+//        xPos++;
+//        canvas.display();
+        gl2.glFlush();
 
     }
-    
-    public GLCanvas getCanvas(){
+
+    public GLCanvas getCanvas() {
         return canvas;
     }
 
@@ -105,7 +100,13 @@ public class Game extends JFrame implements GLEventListener {
     @Override
     public void init(GLAutoDrawable drawable) {
         GL4 gl = drawable.getGL().getGL4();
-        gl.glClearColor(1f, 1f, 1f, 1f);
+        glu = new GLU();
+        gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // set background (clear) color
+        gl.glClearDepth(1.0f);      // set clear depth value to farthest
+        gl.glEnable(GL_DEPTH_TEST); // enables depth testing
+        gl.glDepthFunc(GL_LEQUAL);  // the type of depth test to do
+        gl.glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); // best perspective correction
+        //gl.glShadeModel(GL_SMOOTH); // blends colors nicely, and smoothes out lighting
     }
 
     @Override
