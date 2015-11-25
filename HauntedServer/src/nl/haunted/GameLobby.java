@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author jvdwi
  */
-public class GameLobby extends UnicastRemoteObject implements IGameLobby {
+public class GameLobby implements IGameLobby {
 
     private String name, password;
     private int maxPlayer, maxFloors;
@@ -37,8 +37,8 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
      * @throws java.rmi.RemoteException
      */
     public GameLobby(String name, String password, Player host, int maxFloors, int maxPlayers) throws RemoteException{
-        super(0, new MyRMISocketFactory(), new MyRMISocketFactory());
-        
+        //super(0, new MyRMISocketFactory(), new MyRMISocketFactory());
+        UnicastRemoteObject.exportObject(this, 1097);
         this.name = name;
         this.password = password;
         this.host = host;

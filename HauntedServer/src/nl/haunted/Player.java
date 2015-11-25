@@ -14,7 +14,7 @@ import java.rmi.server.UnicastRemoteObject;
  *
  * @author jvdwi
  */
-public class Player extends UnicastRemoteObject implements IPlayer{
+public class Player implements IPlayer{
 
     private String name, ipAddress;
     private boolean ready;
@@ -75,8 +75,7 @@ public class Player extends UnicastRemoteObject implements IPlayer{
      * @throws java.rmi.RemoteException 
      */
     public Player(String name, String ipAddress) throws RemoteException {
-        super(0, new MyRMISocketFactory(), new MyRMISocketFactory());
-        
+        UnicastRemoteObject.exportObject(this, 1098);
         this.name = name;
         this.ipAddress = ipAddress;
     }
