@@ -3,5 +3,5 @@ grant codeBase "http://athena.fhict.nl/users/i318908/PTS/" {
 };
 
 grant{
-	permission java.net.SocketPermission "*:*", "connect, accept, listen resolve";
+	permission java.net.SocketPermission "*:*", "connect, accept, listen, resolve";
 };
