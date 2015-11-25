@@ -1,7 +1,6 @@
 package nl.haunted;
 
-import nl.haunted.Player;
-import nl.haunted.Message;
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.junit.After;
@@ -32,7 +31,7 @@ public class MessageTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws RemoteException {
         timeOfTestToString = new SimpleDateFormat("HH:mm").format(new Date());
         player = new Player("MikeEvers123", "94.219.136.19");
         message = new Message("this is a test", player);
@@ -61,7 +60,7 @@ public class MessageTest {
      * text is not null.
      */
     @Test (expected = IllegalArgumentException.class)
-    public void testTextNotNull(){
+    public void testTextNotNull() throws IllegalArgumentException, RemoteException{
         Message illegalMessage = new Message(null, player);
         fail("IllegalArgumentException not thrown when text is null");
     }
@@ -71,7 +70,7 @@ public class MessageTest {
      * text is not empty.
      */
      @Test (expected = IllegalArgumentException.class)
-    public void testTextNotEmpty(){
+    public void testTextNotEmpty() throws IllegalArgumentException, RemoteException{
         Message illegalMessage = new Message("", player);
         fail("IllegalArgumentException not thrown when text is empty");
     }
@@ -79,9 +78,10 @@ public class MessageTest {
     /**
      * /**
      * text doesn't only contain whitespaces
+     * @throws java.rmi.RemoteException
      */
      @Test (expected = IllegalArgumentException.class)
-    public void testTextNotOnlyWhitespaces(){
+    public void testTextNotOnlyWhitespaces() throws IllegalArgumentException, RemoteException{
         Message illegalMessage = new Message("     ", player);
         fail("IllegalArgumentException not thrown when text only contains whitespaces");
     }
@@ -90,9 +90,10 @@ public class MessageTest {
      * Creates a string of the message object.
      * Example --> 15:34 - Mike23HeroJeWeetZelf : Hoi allemaal, veel succes!
      * returns the string that represents a chat message. 
+     * @throws java.rmi.RemoteException
      */
     @Test
-    public void testToString() {
+    public void testToString() throws RemoteException {
         String expected = timeOfTestToString + " - " + message.getPlayer().getName() + " : " + message.getText();
         assertEquals("The message toString method returns something unexpected", expected, message.toString());
     }

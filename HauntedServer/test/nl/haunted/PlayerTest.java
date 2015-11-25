@@ -6,8 +6,7 @@
 package nl.haunted;
 
 
-import nl.haunted.Player;
-import nl.haunted.DirectionType;
+import java.rmi.RemoteException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -32,7 +31,7 @@ public class PlayerTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws RemoteException {
         player1 = new Player("Mark","ipadres");
         player2 = new Player("Kees","ipadres");
     }
@@ -42,7 +41,7 @@ public class PlayerTest {
     }
     
     @Test
-    public void testGetName() {        
+    public void testGetName() throws RemoteException {        
         String expResultaat = "Mark";
         String resultaat = player1.getName();
         assertEquals(expResultaat, resultaat);
@@ -53,14 +52,14 @@ public class PlayerTest {
 
     
     @Test
-    public void testGetReady() {      
+    public void testGetReady() throws RemoteException {      
         Boolean expResultaat = false;        
         assertEquals(expResultaat, player1.getReady());
         assertEquals(expResultaat, player2.getReady());    
     }
     
     @Test
-    public void testSetReady() {        
+    public void testSetReady() throws RemoteException {        
         Boolean ready = true;        
         player1.setReady(ready);
         assertEquals(ready, player1.getReady());
@@ -73,7 +72,7 @@ public class PlayerTest {
     }
     
      @Test
-    public void testtoggleready() {
+    public void testtoggleready() throws RemoteException {
         assertEquals(false, player1.getReady());
         player1.toggleReady();
         assertEquals(true, player1.getReady());
@@ -87,7 +86,7 @@ public class PlayerTest {
     }
     
     @Test
-    public void testinput() {        
+    public void testinput() throws RemoteException {        
         player1.setInput(DirectionType.UP);
         player1.setInput(DirectionType.DOWN);
         player1.setInput(DirectionType.LEFT);

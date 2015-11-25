@@ -6,8 +6,7 @@
 package nl.haunted;
 
 
-import nl.haunted.Player;
-import nl.haunted.GameLobby;
+import java.rmi.RemoteException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -36,7 +35,7 @@ public class GameLobbyTest {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws RemoteException {
         host = new Player("host", "ipadres");
         globby = new GameLobby("lobby1", "pass1", host, 4 , 4);
     }
@@ -47,7 +46,7 @@ public class GameLobbyTest {
 
     
     @Test
-    public void testGetName() {
+    public void testGetName() throws RemoteException {
         System.out.println("getName");
         GameLobby instance = globby;
         String expResult = "lobby1";
@@ -61,7 +60,7 @@ public class GameLobbyTest {
      * Test of getMaxPlayers method, of class GameLobby.
      */
     @Test
-    public void testGetMaxPlayers() {
+    public void testGetMaxPlayers() throws RemoteException {
         System.out.println("getMaxPlayers");
         GameLobby instance = globby;
         int expResult = 4;
@@ -73,7 +72,7 @@ public class GameLobbyTest {
      * Test of getFloorAmount method, of class GameLobby.
      */
     @Test
-    public void testGetFloorAmount() {
+    public void testGetFloorAmount() throws RemoteException {
         System.out.println("getFloorAmount");
         GameLobby instance = globby;
         int expResult = 4;
@@ -88,7 +87,7 @@ public class GameLobbyTest {
      * Test of startGame method, of class GameLobby.
      */
     @Test
-    public void testStartGame() {
+    public void testStartGame() throws RemoteException {
         System.out.println("startGame");
         GameLobby instance = globby;
         instance.startGame();
@@ -101,7 +100,7 @@ public class GameLobbyTest {
      * Test of removePlayer method, of class GameLobby.
      */
     @Test
-    public void testRemovePlayer() {
+    public void testRemovePlayer() throws RemoteException {
         System.out.println("removePlayer");
         GameLobby instance = globby;
         Player p1 = new Player("player1", "ipadres");
@@ -122,7 +121,7 @@ public class GameLobbyTest {
      * Test of sendMessage method, of class GameLobby.
      */
     @Test
-    public void testSendMessage() {
+    public void testSendMessage() throws RemoteException {
         System.out.println("sendMessage");
         String message = "message1";
         GameLobby instance = globby;
@@ -136,7 +135,7 @@ public class GameLobbyTest {
      * Test of addPlayer method, of class GameLobby.
      */
     @Test
-    public void testAddPlayer() {
+    public void testAddPlayer() throws RemoteException {
         System.out.println("addPlayer");
         Player player = new Player("player2", "ipadres");
         GameLobby instance = globby;
