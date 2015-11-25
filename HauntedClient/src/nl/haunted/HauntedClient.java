@@ -54,5 +54,4 @@ public class HauntedClient extends Application {
         launch(args);
         System.setSecurityManager(new SecurityManager());
     }
-    
 }

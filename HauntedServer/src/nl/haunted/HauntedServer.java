@@ -57,7 +57,7 @@ public class HauntedServer {
         } catch (IOException ex) {
             Logger.getLogger(HauntedServer.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.setSecurityManager(new SecurityManager());
+        //System.setSecurityManager(new SecurityManager());
         HauntedServer server = new HauntedServer();
     }    
 }
