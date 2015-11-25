@@ -37,7 +37,6 @@ public class GameLobby implements IGameLobby {
      * @throws java.rmi.RemoteException
      */
     public GameLobby(String name, String password, Player host, int maxFloors, int maxPlayers) throws RemoteException{
-        //super(0, new MyRMISocketFactory(), new MyRMISocketFactory());
         UnicastRemoteObject.exportObject(this, 1097);
         this.name = name;
         this.password = password;

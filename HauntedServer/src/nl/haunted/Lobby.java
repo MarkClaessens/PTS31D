@@ -27,8 +27,6 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
      * @throws java.rmi.RemoteException
      */
     public Lobby() throws RemoteException {
-        //super(0, new MyRMISocketFactory(), new MyRMISocketFactory());
-        UnicastRemoteObject.exportObject(this, 1096);
         String[] props = new String[1];
         props[0] = "gamelobbys";
         basicPublisher = new BasicPublisher(props);
