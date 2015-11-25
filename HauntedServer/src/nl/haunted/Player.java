@@ -7,14 +7,18 @@ package nl.haunted;
 
 import fontys.observer.RemotePropertyListener;
 import java.awt.Color;
+import java.io.IOException;
 import java.rmi.RemoteException;
+import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author jvdwi
  */
-public class Player implements IPlayer{
+public class Player extends UnicastRemoteObject implements IPlayer{
 
     private String name, ipAddress;
     private boolean ready;
@@ -75,7 +79,6 @@ public class Player implements IPlayer{
      * @throws java.rmi.RemoteException 
      */
     public Player(String name, String ipAddress) throws RemoteException {
-        UnicastRemoteObject.exportObject(this, 1098);
         this.name = name;
         this.ipAddress = ipAddress;
     }

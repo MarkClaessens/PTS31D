@@ -3,7 +3,6 @@ grant codeBase "http://athena.fhict.nl/users/i318908/PTS/" {
 };
 
 grant{
-	permission java.net.SocketPermission "*:1097", "connect, accept, resolve";
 	permission java.net.SocketPermission "*:1098", "connect, accept, resolve";
 	permission java.net.SocketPermission "*:1099", "connect, accept, resolve";
 	permission java.net.SocketPermission "*:9870-9879", "connect, accept, resolve";

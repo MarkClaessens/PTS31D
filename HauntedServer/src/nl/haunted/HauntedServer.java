@@ -1,8 +1,12 @@
 package nl.haunted;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.RMISocketFactory;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class starts the game server. 
@@ -47,7 +51,12 @@ public class HauntedServer {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // Create server
+        try {
+            // Create server
+            RMISocketFactory.setSocketFactory(new MyRMISocketFactory());
+        } catch (IOException ex) {
+            Logger.getLogger(HauntedServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
         HauntedServer server = new HauntedServer();
         System.setSecurityManager(new SecurityManager());
     }    
