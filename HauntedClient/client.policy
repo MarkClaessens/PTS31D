@@ -1,7 +1,3 @@
-grant codeBase "http://athena.fhict.nl/users/i318908/PTS/" {
-    permission java.security.AllPermission;
-};
-
 grant{
 	permission java.net.SocketPermission "*:*", "connect, accept, listen, resolve";
 };

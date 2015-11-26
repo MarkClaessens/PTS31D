@@ -1,8 +1,8 @@
 #surefire
-#Thu Nov 26 14:12:26 CET 2015
+#Thu Nov 26 14:47:06 CET 2015
 testClassesDirectory=C\:\\Users\\User\\Documents\\GitHub\\PTS31D\\HauntedServer\\target\\test-classes
 forkMode=once
-classPathUrl.3=C\:\\Users\\User\\Documents\\GitHub\\PTS31D\\HauntedServer\\lib\\FontysObserver.jar
+classPathUrl.3=C\:\\Users\\User\\.m2\\repository\\nl\\haunted\\FontysObserver\\1\\FontysObserver-1.jar
 classPathUrl.2=C\:\\Users\\User\\.m2\\repository\\junit\\junit\\4.4\\junit-4.4.jar
 useManifestOnlyJar=true
 classPathUrl.1=C\:\\Users\\User\\Documents\\GitHub\\PTS31D\\HauntedServer\\target\\classes
