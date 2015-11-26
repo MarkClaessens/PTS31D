@@ -10,6 +10,14 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+    
+    <repositories>
+      <repository>
+         <id>localrepository</id>
+         <url>file://${basedir}/lib</url>
+      </repository>
+   </repositories>
+   
     <dependencies>  
         <dependency>
             <groupId>junit</groupId>
@@ -18,11 +26,9 @@
         </dependency>
         
         <dependency>
-            <groupId>fontysObserver</groupId>
-            <artifactId>fontysObserver</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${pom.basedir}/lib/FontysObserver.jar</systemPath>
-        </dependency>
+         <groupId>nl.haunted</groupId>
+         <artifactId>FontysObserver</artifactId>
+         <version>1</version>
+      </dependency>
     </dependencies>
 </project>
