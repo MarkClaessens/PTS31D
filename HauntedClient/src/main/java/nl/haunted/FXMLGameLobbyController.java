@@ -54,7 +54,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     String currentText;
     ILobby lobby;
 
-    private List<String> playernames;
+    private List<IPlayer> players;
     private transient ObservableList<String> observablePersonen;
     @FXML
     private TextArea TAgegevens;
@@ -93,7 +93,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         } catch (RemoteException ex) {
             Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        players = new ArrayList<>();
         subscribeToAllPlayers();
     }
 
@@ -115,6 +115,16 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         this.gamelobby = Gamelobby;
     }
 
+    public void setPlayers() {
+        try {
+            for(IPlayer player : gamelobby.getPlayers())
+            {
+                players.add(player);
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     /**
      * *
      * sets the lobby
@@ -174,6 +184,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         String propertyName = evt.getPropertyName();
         
         if(propertyName == "players"){
+            
             subscribeToAllPlayers();
             //todo teken nieuwe lijst met players op het scherm
         }
