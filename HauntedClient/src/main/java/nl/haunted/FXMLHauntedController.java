@@ -44,6 +44,7 @@ public class FXMLHauntedController implements Initializable {
 
     ILobby lobby;
     IGameLobby gamelobby;
+    ClientController controller;
     IPlayer tisplayer;
     @FXML
     TextField TFchangenameplayer1;
@@ -75,7 +76,8 @@ public class FXMLHauntedController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        setController();
+        settisPlayer();
         BackgroundImage myBI = new BackgroundImage(new Image("lobbypic.jpg", 1024, 576, false, true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
@@ -106,10 +108,13 @@ public class FXMLHauntedController implements Initializable {
     public void setLobby(ILobby lobby) {
         this.lobby = lobby;
     }
-    public void settisPlayer(IPlayer player) {
-        this.tisplayer = player;
+    public void settisPlayer() {
+        this.tisplayer = controller.getPlayer();
     }
-
+    public void setController()
+    {
+        this.controller = HauntedClient.getController();
+    }
     /**
      * *
      * change the name of both players
@@ -118,7 +123,7 @@ public class FXMLHauntedController implements Initializable {
         
         if (!TFchangenameplayer1.getText().isEmpty()) 
         {     
-            ////SET AANMAKEN VOOR NAAM PLAYER!!!!!!!!!
+            //tisplayer.setName(TFchangenameplayer1.getText()); !!!!Create setName for player!!!!
         }
     }
 

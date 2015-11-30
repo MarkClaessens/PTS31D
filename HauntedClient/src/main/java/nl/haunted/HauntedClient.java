@@ -21,7 +21,7 @@ import javafx.stage.Stage;
  * @author Mike Evers + ..
  */
 public class HauntedClient extends Application {
-    private ClientController controller;    
+    private static ClientController controller;    
     private Stage primaryStage;
     
     @Override
@@ -49,7 +49,9 @@ public class HauntedClient extends Application {
         
         primaryStage.show();
     }
-
+    public static ClientController getController(){
+        return controller;
+    }
     /**
      * @param args the command line arguments
      */
