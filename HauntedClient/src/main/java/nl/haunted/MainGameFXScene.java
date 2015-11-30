@@ -7,10 +7,14 @@ package nl.haunted;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.List;
+import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.shape.Polygon;
 
 /**
  *
@@ -25,7 +29,7 @@ public class MainGameFXScene {
     private Canvas bgLayer;
     private GraphicsContext bgGc;
         
-    public Scene MainGameFX(Gamefeed gf){
+    public Scene MainGameFX(gamefeed gf){
         root = new Group();
         scene = new Scene(root);
         determineScreenSizes();
@@ -33,6 +37,16 @@ public class MainGameFXScene {
         bgLayer = new Canvas(screenWidth, screenHeight);
         bgGc = bgLayer.getGraphicsContext2D();
         root.getChildren().add(bgLayer);
+        
+        new AnimationTimer() {
+            public void handle(long currentNanoTime) {
+                List<Object> obj = new ArrayList();
+                root.getChildren().stream().filter((o) -> (o instanceof Polygon)).forEach((o) -> {
+                    obj.add(o);
+                });
+                root.getChildren().removeAll(obj);
+            }
+        }.start();
         
         return scene;
     }
