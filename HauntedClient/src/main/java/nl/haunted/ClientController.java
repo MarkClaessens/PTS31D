@@ -25,7 +25,7 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
     private static Registry registry = null;
     private ILobby lobby = null;
     private List<IGameLobby> gamelobbys;
-    
+    private IPlayer player;
     // Binding name for lobby
     private static final String bindingNameLobby = "lobby";
     
@@ -38,12 +38,13 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
         this.client = client;
         startClient(ip);
         gamelobbys = lobby.getGameLobbys();
+        //player = lobby.createPlayer("player", "get ip adress not implemented yeti");create return type for createplayer 
     }
     
     public void startClient(String ip){
-        // Locate registry at ip address (server) with port 1099.
+        // Locate registry at ip address (server) with port 8761.
         try {
-            registry = LocateRegistry.getRegistry(ip, 1099);
+            registry = LocateRegistry.getRegistry(ip, 8761);
         } catch (RemoteException ex) {
             System.out.println("Client: following exception was found: " + ex.getMessage());
         }
@@ -80,5 +81,9 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
     @Override
     public void propertyChange(PropertyChangeEvent propertyChangeEvent) throws RemoteException {
         gamelobbys = (List<IGameLobby>)propertyChangeEvent.getNewValue();
+    }
+    public IPlayer getPlayer()
+    {
+        return player;
     }
 }

@@ -84,16 +84,4 @@ public class PlayerTest {
         player2.toggleReady();
         assertEquals(false, player2.getReady());
     }
-    
-    @Test
-    public void testinput() throws RemoteException {        
-        player1.setInput(DirectionType.UP);
-        player1.setInput(DirectionType.DOWN);
-        player1.setInput(DirectionType.LEFT);
-        player1.setInput(DirectionType.RIGHT);
-        player2.setInput(DirectionType.UP);
-        player2.setInput(DirectionType.DOWN);
-        player2.setInput(DirectionType.LEFT);
-        player2.setInput(DirectionType.RIGHT);
-    }
 }

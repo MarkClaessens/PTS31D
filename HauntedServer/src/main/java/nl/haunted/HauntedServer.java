@@ -14,7 +14,7 @@ import static javafx.application.Application.launch;
  * @author Mike Evers
  */
 public class HauntedServer {
-    private static final int portNumber = 1099;
+    private static final int portNumber = 8761;
     private static final String bindingNameLobby = "lobby";
     private static Registry registry = null;
     private Lobby lobby = null;
@@ -59,7 +59,7 @@ public class HauntedServer {
         } catch (IOException ex) {
             Logger.getLogger(HauntedServer.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.setProperty("java.rmi.server.hostname", "94.211.138.14");
+        System.setProperty("java.rmi.server.hostname", "127.0.0.1");
         HauntedServer server = new HauntedServer();
     }    
 }

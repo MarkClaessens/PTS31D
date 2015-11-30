@@ -18,14 +18,10 @@ public class Level {
     private Point2D keyLocation, doorLocation;
     private BufferedImage collisionMap, map;
 
-    /**
-     *
-     * @param floorNr
-     */
-    public Level(int floorNr) {
-        this.floorNr = floorNr;
+    public int getCurrentFoor() {
+        return this.floorNr;
     }
-
+    
     public int getGhostLifePool() {
         return this.ghostLifePool;
     }
@@ -37,6 +33,19 @@ public class Level {
     public Point2D getDoorLocation() {
         return this.doorLocation;
     }
+    
+    public BufferedImage getCollisionMap(){
+        return collisionMap;
+    }
+    
+    /**
+     *
+     * @param floorNr
+     */
+    public Level(int floorNr) {
+        this.floorNr = floorNr;
+    }
+
 
     /**
      *
@@ -72,9 +81,5 @@ public class Level {
      */
     public BufferedImage generateMapFiles() {
         return null;
-    }
-
-    public int getCurrentFoor() {
-        return this.floorNr;
     }
 }

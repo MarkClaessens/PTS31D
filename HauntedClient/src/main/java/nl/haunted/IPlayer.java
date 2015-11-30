@@ -7,13 +7,14 @@ package nl.haunted;
 
 import fontys.observer.RemotePublisher;
 import java.awt.Color;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
  *
  * @author jvdwi
  */
-public interface IPlayer extends RemotePublisher{
+public interface IPlayer extends Remote, RemotePublisher{
     
     /**
      * 
@@ -50,10 +51,5 @@ public interface IPlayer extends RemotePublisher{
      */
     public void setReady(boolean ready) throws RemoteException;
     
-    /**
-     * set de directie waar de speler naar toe gaat
-     * @param direction 
-     * @throws java.rmi.RemoteException 
-     */
-    public void setInput(DirectionType direction) throws RemoteException;
+    public void setCharacter(Character character) throws RemoteException;
 }

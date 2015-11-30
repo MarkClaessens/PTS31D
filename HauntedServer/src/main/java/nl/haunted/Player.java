@@ -30,6 +30,11 @@ public class Player extends UnicastRemoteObject implements IPlayer{
     }
     
     @Override
+    public void setCharacter(Character character) throws RemoteException {
+        this.character = character;
+    }
+    
+    @Override
     public Color getColor() throws RemoteException{
         return this.color;
     }
@@ -59,15 +64,6 @@ public class Player extends UnicastRemoteObject implements IPlayer{
     @Override
     public void setReady(boolean ready) throws RemoteException{
         this.ready = ready;
-    }
-
-    /**
-     * set de directie van de speler
-     * @param direction 
-     */
-    @Override
-    public void setInput(DirectionType direction) throws RemoteException {
-        this.input = direction;
     }
 
     /**

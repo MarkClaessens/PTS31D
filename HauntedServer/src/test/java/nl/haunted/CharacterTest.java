@@ -50,7 +50,7 @@ public class CharacterTest {
         players.add(new Player("testPlayer2", "192.69.133.14"));
         game = new Game(players, 3);
         human = new Human(spawnPosition, game);
-        ghost = new Ghost(spawnPosition, game);
+        ghost = new Ghost(spawnPosition, game, (Player)players.get(0));
 
     }
 

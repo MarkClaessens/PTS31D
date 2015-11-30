@@ -44,7 +44,8 @@ public class FXMLHauntedController implements Initializable {
 
     ILobby lobby;
     IGameLobby gamelobby;
-
+    ClientController controller;
+    IPlayer tisplayer;
     @FXML
     TextField TFchangenameplayer1;
     @FXML
@@ -75,21 +76,27 @@ public class FXMLHauntedController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        setController();
+        settisPlayer();
         BackgroundImage myBI = new BackgroundImage(new Image("lobbypic.jpg", 1024, 576, false, true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
         //then you set to your node
         paneel.setBackground(new Background(myBI));
-        setplayernames();
+        try {
+            setplayername();
+        } catch (RemoteException ex) {
+            Logger.getLogger(FXMLHauntedController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     /**
      * *
      * set the playernames in the textfields
      */
-    private void setplayernames() {
-     //   TFchangenameplayer1.setText(lobby.getPlayer().getName());        
+    private void setplayername() throws RemoteException {
+       TFchangenameplayer1.setText(tisplayer.getName());        
     }
 
     /**
@@ -101,7 +108,13 @@ public class FXMLHauntedController implements Initializable {
     public void setLobby(ILobby lobby) {
         this.lobby = lobby;
     }
-
+    public void settisPlayer() {
+        this.tisplayer = controller.getPlayer();
+    }
+    public void setController()
+    {
+        this.controller = HauntedClient.getController();
+    }
     /**
      * *
      * change the name of both players
@@ -110,7 +123,7 @@ public class FXMLHauntedController implements Initializable {
         
         if (!TFchangenameplayer1.getText().isEmpty()) 
         {     
-             
+            //tisplayer.setName(TFchangenameplayer1.getText()); !!!!Create setName for player!!!!
         }
     }
 
@@ -121,7 +134,39 @@ public class FXMLHauntedController implements Initializable {
      * @throws IOException
      */
     public void creategamelobby() throws IOException {
-        
+        if ((!(TFroomname.getText().equals("")) && !(TFplayers.getText().equals("")) && !(TFfloors.getText().equals("")))) 
+        {            
+            try 
+            {
+                if (Integer.parseInt(TFplayers.getText()) > 1 && Integer.parseInt(TFplayers.getText()) < 7 && Integer.parseInt(TFfloors.getText()) < 11) 
+                {
+                    lobby.createGameLobby(TFroomname.getText(), TFpassword.getText(),tisplayer, Integer.parseInt(TFfloors.getText()), Integer.parseInt(TFplayers.getText()));                    
+                } 
+                else 
+                {
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setHeaderText("maximum overschreden");
+                    alert.setContentText("het maximum van een van de 2 getallen is overschreden. Het maximum voor spelers is 6 en voor floors 10");
+                    alert.showAndWait();
+                }
+
+            } 
+            catch (NumberFormatException e) 
+            {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setHeaderText("geen getal");
+                alert.setContentText("zorg ervoor dat bij maximum spelers en floor amount er een getal staat");
+                alert.showAndWait();
+            }
+
+        } 
+        else 
+        {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setHeaderText("invoer velden leeg");
+            alert.setContentText("voer velden van naam, maximum spelers en floor amount in!");
+            alert.showAndWait();
+        }
     }
 
     /**
