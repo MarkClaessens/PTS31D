@@ -15,12 +15,12 @@ import javafx.scene.paint.Color;
  *
  * @author Mal
  */
-public class gamefeed {
+public class Gamefeed {
 
     Socket soc;
     GameInfo gameInfo;
 
-    public gamefeed(Socket socket) throws IOException, ClassNotFoundException {
+    public Gamefeed(Socket socket) throws IOException, ClassNotFoundException {
         this.soc = socket;
         setupGameInfo();
     }
