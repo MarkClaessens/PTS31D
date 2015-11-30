@@ -13,5 +13,4 @@ import java.rmi.Remote;
  * @author jvdwi
  */
 public interface IClientController extends RemotePropertyListener, Remote {
-    
 }

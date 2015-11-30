@@ -38,6 +38,7 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
         this.client = client;
         startClient(ip);
         gamelobbys = lobby.getGameLobbys();
+        this.lobby.addListener(this, "gamelobbys");
     }
     
     public void startClient(String ip){
@@ -79,6 +80,7 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
      */
     @Override
     public void propertyChange(PropertyChangeEvent propertyChangeEvent) throws RemoteException {
+//        String property
         gamelobbys = (List<IGameLobby>)propertyChangeEvent.getNewValue();
     }  
 }

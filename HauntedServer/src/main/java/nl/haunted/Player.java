@@ -5,14 +5,11 @@
  */
 package nl.haunted;
 
+import fontys.observer.BasicPublisher;
 import fontys.observer.RemotePropertyListener;
 import java.awt.Color;
-import java.io.IOException;
 import java.rmi.RemoteException;
-import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -25,6 +22,7 @@ public class Player extends UnicastRemoteObject implements IPlayer{
     private DirectionType input;
     private Character character;
     private Color color;
+    private BasicPublisher basicPublisher;
     
     @Override
     public Character getCharacter() throws RemoteException{
@@ -81,6 +79,9 @@ public class Player extends UnicastRemoteObject implements IPlayer{
     public Player(String name, String ipAddress) throws RemoteException {
         this.name = name;
         this.ipAddress = ipAddress;
+        String[] props = new String[1];
+        props[0] = "ready";
+        this.basicPublisher = new BasicPublisher(props);
     }
     
     /**
@@ -88,28 +89,22 @@ public class Player extends UnicastRemoteObject implements IPlayer{
      * @throws java.rmi.RemoteException
      */
     public void toggleReady() throws RemoteException{
-        
+        if(this.ready){
+            this.ready = false;
+        }
+        else if (this.ready == false){
+            this.ready = true;
+        }
+        basicPublisher.inform(this, "ready", null, this.ready);
     }
     
-    /**
-     * voegt de listener toe aan de lijst van listeners
-     * @param rl
-     * @param string
-     * @throws RemoteException 
-     */
     @Override
-    public void addListener(RemotePropertyListener rl, String string) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addListener(RemotePropertyListener remotePropertyListener, String string) throws RemoteException {
+        basicPublisher.addListener(remotePropertyListener, string);
     }
 
-    /**
-     * verwijdert de listener van de lijst van listeners
-     * @param rl
-     * @param string
-     * @throws RemoteException 
-     */
     @Override
-    public void removeListener(RemotePropertyListener rl, String string) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }    
+    public void removeListener(RemotePropertyListener remotePropertyListener, String string) throws RemoteException {
+        basicPublisher.removeListener(remotePropertyListener, string);
+    }   
 }

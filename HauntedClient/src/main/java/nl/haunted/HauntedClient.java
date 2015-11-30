@@ -43,7 +43,6 @@ public class HauntedClient extends Application {
         primaryStage.setTitle("Haunted");
         primaryStage.setScene(scene);
         
-        System.out.println(controller.getGameLobbys().size());
         primaryStage.show();
     }
 

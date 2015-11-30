@@ -31,7 +31,6 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
         props[0] = "gamelobbys";
         basicPublisher = new BasicPublisher(props);
         this.gameLobbys = new ArrayList();
-        gameLobbys.add(new GameLobby("gamelobbyMike", null, new Player("Mike", "1223"), 5, 5));
 	this.players = new ArrayList();
     }
   
@@ -44,6 +43,7 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
     public void createGameLobby(String name, String password, IPlayer host, int maxFloors, int maxPlayers) throws RemoteException {
         GameLobby gamelobby = new GameLobby(name, password, (Player)host, maxFloors, maxPlayers);
         gameLobbys.add(gamelobby);
+        basicPublisher.inform(this, "gamelobbys", null, gameLobbys);
     }
 
     @Override
@@ -67,7 +67,4 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
     public void removeListener(RemotePropertyListener remotePropertyListener, String string) throws RemoteException {
         basicPublisher.removeListener(remotePropertyListener, string);
     }
-
-
-
 }
