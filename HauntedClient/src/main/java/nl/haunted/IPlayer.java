@@ -56,4 +56,6 @@ public interface IPlayer extends RemotePublisher{
      * @throws java.rmi.RemoteException 
      */
     public void setInput(DirectionType direction) throws RemoteException;
+    
+    public void toggleReady() throws RemoteException;
 }

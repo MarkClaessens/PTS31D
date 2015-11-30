@@ -53,7 +53,8 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     boolean gamekanstarten;
     String currentText;
     ILobby lobby;
-
+    IPlayer tisplayer;    
+    
     private List<IPlayer> players;
     private transient ObservableList<String> observablePersonen;
     @FXML
@@ -95,14 +96,27 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         }
         players = new ArrayList<>();
         subscribeToAllPlayers();
+        try {
+            playernames();
+        } catch (RemoteException ex) {
+            Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
      * *
      * sets playernames in listview
      */
-    private void playernames() {
+    private void playernames() throws RemoteException 
+    {
+        List<String> namen = new ArrayList<>();
+        for (IPlayer player : players) 
+        {
+          namen.add(player.getName() + " ready: " + player.getReady());
+        }
+        LVplayers.setItems(FXCollections.observableList(namen));
         
+         
     }
 
     /**
@@ -113,6 +127,9 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
      */
     public void setGameLobby(IGameLobby Gamelobby) {
         this.gamelobby = Gamelobby;
+    }
+    public void settisPlayer(IPlayer player) {
+        this.tisplayer = player;
     }
 
     public void setPlayers() {
@@ -143,7 +160,18 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
      */
     @FXML
     private void startgame(MouseEvent event) throws IOException, InterruptedException, Exception {
-        
+        boolean startable = true;
+        for(IPlayer player : players)
+        {
+            if(!player.getReady())
+            {
+                startable = false;
+            }
+        }
+        if(startable)
+        {
+            // START THE GAME ALREIDY
+        }
     }
 
     /**
@@ -153,8 +181,8 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
      * @param event
      */
     @FXML
-    private void changeready(MouseEvent event) {
-        
+    private void changeready(MouseEvent event) throws RemoteException {
+        tisplayer.toggleReady();
     }
 
     /**
@@ -165,9 +193,27 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
      */
     @FXML
     private void sendMessage(MouseEvent event) 
-    {
-        
-
+    {        
+        currentText = TAchatBox.getText();
+        TAchatBox.clear();
+        if (!TFmessage.getText().isEmpty()) 
+        {
+            String bericht = TFmessage.getText();
+            try {
+                gamelobby.sendMessage(bericht);
+            } catch (RemoteException ex) {
+                Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        } 
+        else 
+        {
+            TAchatBox.setText(currentText);
+            TAchatBox.setScrollTop(Double.MAX_VALUE);
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setContentText("geen message ingevoerd");
+            alert.showAndWait();                        
+        }
     }
 
     /**
@@ -175,21 +221,43 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
      * leave the gamelobby. return to the lobby
      */
     @FXML
-    private void leavegamelobby() {
-        
+    private void leavegamelobby() throws RemoteException {
+        gamelobby.removePlayer(tisplayer);
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) throws RemoteException {
         String propertyName = evt.getPropertyName();
-        
+        List<IPlayer> INplayers = (List<IPlayer>) evt.getNewValue();
         if(propertyName == "players"){
+            if(INplayers.size() > players.size())
+            {
+               subscribeToAllPlayers(); 
+            }
+            else
+            {
+                for(IPlayer INplayer : INplayers)
+                {
+                    boolean found = false;
+                    for(IPlayer EXplayer : players)
+                    {  
+                        if(INplayer == EXplayer)
+                        {
+                            found = true;
+                        }
+                    }
+                    if(!found)
+                    {
+                       INplayer.removeListener(this, propertyName);
+                    }
+                }
+            }
             
-            subscribeToAllPlayers();
             //todo teken nieuwe lijst met players op het scherm
         }
         else if(propertyName == "ready"){
-            // vraag alle ready statussen op van de players en teken deze. 
+            // vraag alle ready statussen op van de players en teken deze.
+            playernames();
         }
     }
 
