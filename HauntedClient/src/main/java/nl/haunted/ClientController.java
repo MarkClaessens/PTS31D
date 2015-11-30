@@ -41,9 +41,9 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
     }
     
     public void startClient(String ip){
-        // Locate registry at ip address (server) with port 1099.
+        // Locate registry at ip address (server) with port 8761.
         try {
-            registry = LocateRegistry.getRegistry(ip, 1099);
+            registry = LocateRegistry.getRegistry(ip, 8761);
         } catch (RemoteException ex) {
             System.out.println("Client: following exception was found: " + ex.getMessage());
         }

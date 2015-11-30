@@ -51,10 +51,5 @@ public interface IPlayer extends Remote, RemotePublisher{
      */
     public void setReady(boolean ready) throws RemoteException;
     
-    /**
-     * set de directie waar de speler naar toe gaat
-     * @param direction 
-     * @throws java.rmi.RemoteException 
-     */
-    public void setInput(DirectionType direction) throws RemoteException;
+    public void setCharacter(Character character) throws RemoteException;
 }

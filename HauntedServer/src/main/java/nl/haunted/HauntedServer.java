@@ -14,7 +14,7 @@ import static javafx.application.Application.launch;
  * @author Mike Evers
  */
 public class HauntedServer {
-    private static final int portNumber = 1099;
+    private static final int portNumber = 8761;
     private static final String bindingNameLobby = "lobby";
     private static Registry registry = null;
     private Lobby lobby = null;

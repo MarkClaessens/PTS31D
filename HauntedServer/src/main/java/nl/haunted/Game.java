@@ -5,7 +5,6 @@
  */
 package nl.haunted;
 
-import java.awt.Color;
 import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.net.InetAddress;
@@ -16,7 +15,7 @@ import java.util.Timer;
 
 /**
  *
- * @author jvdwi
+ * @author Mal + Mike
  */
 public class Game {
 
@@ -28,11 +27,15 @@ public class Game {
     private List<Ghost> ghosts;
     private Human human;
     private final Socket soc;
-    private List<IPlayer> players;
+    private List<Player> players;
     private IPlayer currentHuman;
 
     public Level getLevel(){
         return level;
+    }
+    
+    public List<Player> getPlayers(){
+        return players;
     }
     
     /**

@@ -21,7 +21,7 @@ public class MyServerRMISocketFactory extends RMISocketFactory implements Serial
 
     @Override
     public ServerSocket createServerSocket(int port) throws IOException {
-        port = (port == 0 ? 1098 : port);
+        port = (port == 0 ? 8762 : port);
         System.out.println("creating ServerSocket on port " + port); 
         return new ServerSocket(port);
     }  

@@ -6,7 +6,11 @@
 package nl.haunted;
 
 import java.awt.geom.Point2D;
+import java.rmi.RemoteException;
 import java.util.Calendar;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,26 +20,31 @@ public class Ghost extends Character {
     private boolean vulnerable, isGhost, dead;
     private Calendar stationaryTime, timeOfDeath;
     private Point2D spawnPosition;
+    private Player bestuurder;
     private Game game;
     
     public boolean isVulnerable(){
         return vulnerable;
     }
     
-    public void setDead(boolean bool){
-        this.dead = bool;
+    public void setVulnerable(boolean isVulnerable){
+        this.vulnerable = isVulnerable;
+    }
+    
+    public void setDead(boolean isDead){
+        this.dead = isDead;
     }
     
     public boolean getDead(){
         return this.dead;
     }
     
-    public void setVulnerable(boolean isVulnerable){
-        this.vulnerable = isVulnerable;
-    }
-    
     public Calendar getTimeOfDeath(){
         return timeOfDeath;
+    }
+    
+    public void setTimeOfDeath(){
+        this.timeOfDeath = Calendar.getInstance();
     }
     
     public Point2D getSpawnPosition(){
@@ -69,22 +78,36 @@ public class Ghost extends Character {
      *
      * @param position, the Point2D position of the Ghost on the map
      * @param game, the game in which the Ghost is active
+     * @param bestuurder the player that owns this object
      */
-    public Ghost(Point2D position, Game game) {
+    public Ghost(Point2D position, Game game, Player bestuurder) {
         super(position, game);
         this.spawnPosition = position;
         this.game = game;
         this.isGhost = true;
         this.vulnerable = true;
         this.dead = false;
+        this.stationaryTime = null;
+        this.timeOfDeath = null;
+        this.bestuurder = bestuurder;
     }
     
     /**
      * This possesses a human, this ghost becomes the human, the previous human
-     * becomes the ghost object but has its own sprites. 
+     * becomes a ghost (with his own coloured sprites).
      */
     public void possess(){
-        
+        List<Player> players = game.getPlayers();
+        for(Player player : players){
+            try {
+                if(player.getCharacter() instanceof Human){
+                    Character human = player.getCharacter();
+                    player.setCharacter(this);
+                }
+            } catch (RemoteException ex) {
+                Logger.getLogger(Ghost.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     
     /**
