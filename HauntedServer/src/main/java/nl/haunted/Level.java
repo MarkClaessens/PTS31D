@@ -25,6 +25,10 @@ public class Level {
     public int getGhostLifePool() {
         return this.ghostLifePool;
     }
+    
+    public void setGhostLifePool(int ghostLifePool){
+        this.ghostLifePool = ghostLifePool;
+    }
 
     public Point2D getKeyLocation() {
         return this.keyLocation;

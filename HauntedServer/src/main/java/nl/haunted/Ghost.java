@@ -76,7 +76,7 @@ public class Ghost extends Character {
      * Constructor for Ghost sets vulnerable and isGhost to true and sets the
      * super variables in Character
      *
-     * @param position, the Point2D position of the Ghost on the map
+     * @param position, the spawn Point2D position of the Ghost on the map
      * @param game, the game in which the Ghost is active
      * @param bestuurder the player that owns this object
      */
@@ -125,15 +125,33 @@ public class Ghost extends Character {
      * wall" immediately.
      */
     public void changeAppearance(){
-        
+        if (this.isGhost && System.currentTimeMillis() >= stationaryTime.getTimeInMillis() + 1500 && !getIsMoving()) {
+            this.vulnerable = false;
+            this.isGhost = false;
+        } else if (this.isGhost == false && getIsMoving()) {
+            this.vulnerable = true;
+            this.isGhost = true;
+            this.stationaryTime.clear();
+        }
     }
     
     /**
      * Respawns the ghost when hit by the flashlight. If there aren't remaining
-     * lifes for the ghost then the level is over. The ghost whil respawn when the timeOfDeath is 
-     * 3 seconds ago.
+     * lifes for the ghost then the ghost dead attribute will be set to true. 
+     * The ghost whil respawn when the timeOfDeath is 3 seconds ago.
      */
     public void vanish(){
-        
+        // Get the remaining lifes that the ghost has.
+        int remainingGhostLifes = game.getLevel().getGhostLifePool();
+
+        // If there are remaining lifes then respawn the ghost on the map.
+        if (remainingGhostLifes > 0) {
+            // Vanish the Ghost by setting in off the screen
+            super.setPosition(new Point2D.Double(-800, -800));
+            game.getLevel().setGhostLifePool(remainingGhostLifes - 1);
+        } 
+        else {
+            this.dead = true;
+        }
     }
 }

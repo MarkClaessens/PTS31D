@@ -11,6 +11,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.rmi.RemoteException;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 
 /**
@@ -19,7 +20,8 @@ import java.util.Timer;
  */
 public class Game {
 
-    private int floorAmount, currentRound;
+    private final int floorAmount;
+    private int currentFloor;
     private Timer tickTimer;
     private boolean running, roundEnded, nextRound;
     private Level level;
@@ -39,6 +41,25 @@ public class Game {
     }
     
     /**
+     * 
+     * @return the amount of floors in this game.
+     */
+    public int getFloorAmount(){
+        return floorAmount;
+    }
+    
+    public void setRunning(boolean isRunning){
+        this.running = isRunning;
+    }
+    /**
+     * 
+     * @return the current floor of the game, starts at 0.
+     */
+    public int getCurrentFloor(){
+        return currentFloor;
+    }
+    
+    /**
      *
      * @param players
      * @param floors
@@ -48,7 +69,9 @@ public class Game {
         //Setup the socket for this game;
         soc = new Socket();
         soc.socketSetup("234.56.78.90", 9876);
-        this.floorAmount = floors;
+        Random randomizer = new Random();
+        this.floorAmount = randomizer.nextInt(floors - 3 + 1) + 3;
+        this.currentFloor = 0;
     }
 
     /**
