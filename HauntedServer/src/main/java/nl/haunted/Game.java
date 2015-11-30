@@ -119,11 +119,14 @@ public class Game {
         for (IPlayer p : players) {
             for (Ghost G : this.ghosts) {
                 if (p.getCharacter().equals(G)) {
-                    obj[i][0] = G.getPosition();
-                    obj[i][1] = G.getDirection();
-                    obj[i][2] = G.getIsMoving();
-                    obj[i][3] = p.getColor();
-                    obj[i][4] = !G.isVulnerable();
+                    if (G.getDead()) {
+                        obj[i][0] = G.getPosition();
+                        obj[i][1] = G.getDirection();
+                        obj[i][2] = G.getIsMoving();
+                        obj[i][3] = p.getColor();
+                        obj[i][4] = !G.isVulnerable();
+                    }
+                    obj[i][5] = G.getDead();
                     i++;
                 }
             }

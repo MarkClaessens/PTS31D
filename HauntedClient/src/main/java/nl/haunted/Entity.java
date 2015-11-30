@@ -7,6 +7,7 @@ package nl.haunted;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -15,25 +16,56 @@ import java.util.ArrayList;
 public class Entity {
     private Point2D position;
     private DirectionType direction;
-    private boolean moving, wall;
+    private boolean moving, wall, Dead;
     private ArrayList<String> sprites;
-    private EntityType type;
-    
+    private final EntityType type;
+    private Color color;
     /**
      * 
      * @param position
-     * @param direction
-     * @param moving
-     * @param sprites
-     * @param wall
      * @param type 
      */
-    public Entity(Point2D position, DirectionType direction, boolean moving, ArrayList<String> sprites, boolean wall, EntityType type){
+    public Entity(Point2D position, EntityType type){
         this.position = position;
-        this.direction = direction;
-        this.moving = moving;
-        this.sprites = sprites;
-        this.wall = wall;
         this.type = type;
+    }
+    public void setWall(boolean var){
+        this.wall = var;
+    }
+    
+    public void setDead(boolean bool){
+        this.Dead = bool;
+    }
+    
+    public boolean getDead(){
+        return this.Dead;
+    }
+    
+    public boolean getWall(){
+        return this.wall;
+    }
+    
+    public EntityType getType(){
+        return this.type;
+    }
+    
+    public void setDirection(DirectionType dir){
+        this.direction = dir;
+    }
+    
+    public void setMoving(boolean mov){
+        this.moving = mov;
+    }
+    
+    public void setSprites(ArrayList<String> spriteList){
+        this.sprites = spriteList;
+    }
+    
+    public void setPosition(Point2D pos){
+        this.position = pos;
+    }
+    
+    public void setColor(Color col){
+        this.color = col;
     }
 }

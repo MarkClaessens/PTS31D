@@ -13,13 +13,21 @@ import java.util.Calendar;
  * @author jvdwi
  */
 public class Ghost extends Character {
-    private boolean vulnerable, isGhost;
+    private boolean vulnerable, isGhost, dead;
     private Calendar stationaryTime, timeOfDeath;
     private Point2D spawnPosition;
     private Game game;
     
     public boolean isVulnerable(){
         return vulnerable;
+    }
+    
+    public void setDead(boolean bool){
+        this.dead = bool;
+    }
+    
+    public boolean getDead(){
+        return this.dead;
     }
     
     public void setVulnerable(boolean isVulnerable){
@@ -51,6 +59,7 @@ public class Ghost extends Character {
         this.game = game;
         this.isGhost = true;
         this.vulnerable = true;
+        this.dead = false;
     }
     
     /**
