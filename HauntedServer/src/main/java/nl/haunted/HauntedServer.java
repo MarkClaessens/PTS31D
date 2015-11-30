@@ -59,7 +59,7 @@ public class HauntedServer {
         } catch (IOException ex) {
             Logger.getLogger(HauntedServer.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.setProperty("java.rmi.server.hostname", "94.211.138.14");
+        System.setProperty("java.rmi.server.hostname", "127.0.0.1");
         HauntedServer server = new HauntedServer();
     }    
 }
