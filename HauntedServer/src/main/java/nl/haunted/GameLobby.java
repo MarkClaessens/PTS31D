@@ -5,6 +5,8 @@
  */
 package nl.haunted;
 
+import fontys.observer.BasicPublisher;
+import fontys.observer.RemotePropertyListener;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
@@ -26,9 +28,10 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
     private Player host;
     private List<Message> messages;
     private List<IPlayer> players;
-
+    private BasicPublisher basicPublisher;
+    
     /**
-     * maakt een niewe gamelobby aan
+     * maakt een nieuwe gamelobby aan
      *
      * @param name
      * @param password
@@ -45,6 +48,9 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         this.maxPlayer = maxPlayers;
         this.maxFloors = maxFloors;
         this.players = new ArrayList();
+        String[] props = new String[1];
+        props[0] = "players";
+        this.basicPublisher = new BasicPublisher(props);
         players.add(host);
     }
 
@@ -173,4 +179,13 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         return true;
     }
 
+    @Override
+    public void addListener(RemotePropertyListener remotePropertyListener, String string) throws RemoteException {
+        basicPublisher.addListener(remotePropertyListener, string);
+    }
+
+    @Override
+    public void removeListener(RemotePropertyListener remotePropertyListener, String string) throws RemoteException {
+        basicPublisher.removeListener(remotePropertyListener, string);
+    }
 }

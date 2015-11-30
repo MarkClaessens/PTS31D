@@ -5,6 +5,7 @@
  */
 package nl.haunted;
 
+import fontys.observer.RemotePublisher;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  *
  * @author jvdwi
  */
-public interface IGameLobby extends Remote {
+public interface IGameLobby extends Remote, RemotePublisher {
        /**
      * het spel wordt gestart
      * @throws java.rmi.RemoteException
