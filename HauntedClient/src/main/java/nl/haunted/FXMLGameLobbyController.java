@@ -182,7 +182,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
      */
     @FXML
     private void changeready(MouseEvent event) throws RemoteException {
-        tisplayer.toggleReady();
+     //   tisplayer.toggleReady();
     }
 
     /**
