@@ -14,11 +14,15 @@ public abstract class Character {
     private double movementSpeed;
     private DirectionType direction;
     private boolean moving;
-    private Game game;
+    protected Game game;
 
     
     public Point2D getPosition() {
         return this.position;
+    }
+    
+    public void setPosition(Point2D position){
+        this.position = position;
     }
     
     /**

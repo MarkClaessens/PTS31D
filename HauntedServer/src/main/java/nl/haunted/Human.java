@@ -21,6 +21,8 @@ public class Human extends Character {
      * The Constructor for human.
      * This initializes the flashlightRange, flashlightAngle and the flashlightPoints by calling setFlashlight
      * Also initialize the base class Character!
+     * @param position the spawn Point2D position of the Human on the map
+     * @param game 
      */
     public Human(Point2D position, Game game) {
         super(position, game);
@@ -39,7 +41,9 @@ public class Human extends Character {
      * if haskey == false, hasKey becomes true
      */
     public void pickUpKey(){
-        
+        if(!hasKey){
+            hasKey = true;
+        }
     }
     
     /**
@@ -47,7 +51,16 @@ public class Human extends Character {
      * Otherwise, this method won't cause anything.
      */
     public void enterDoor(){
-        
+        // First check if this entering was on the last floor (last level).
+//        if (game.getFloorAmount() - 1 == game.getCurrentFloor()) {
+//            game.setRunning(false);
+//            game.getPlayers().stream().filter((player) -> (player.getCharacter() instanceof Human)).forEach((player) -> {
+//                game.endGame(player);
+//            });
+//        } else {
+//            game.setIsRunning(false);
+//            game.endRound();
+//        }
     }
     
     /**
