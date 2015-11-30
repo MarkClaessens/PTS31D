@@ -5,8 +5,12 @@
  */
 package nl.haunted;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
+import java.rmi.server.RMISocketFactory;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
@@ -51,5 +55,11 @@ public class HauntedClient extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+        try {
+            // Create server
+            RMISocketFactory.setSocketFactory(new MyClientRMISocketFactory());
+        } catch (IOException ex) {
+            Logger.getLogger(HauntedClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

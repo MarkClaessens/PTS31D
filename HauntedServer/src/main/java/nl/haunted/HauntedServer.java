@@ -7,6 +7,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.RMISocketFactory;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javafx.application.Application.launch;
 
 /**
  * This class starts the game server. 
@@ -51,9 +52,10 @@ public class HauntedServer {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        launch(args);
         try {
             // Create server
-            RMISocketFactory.setSocketFactory(new MyRMISocketFactory());
+            RMISocketFactory.setSocketFactory(new MyServerRMISocketFactory());
         } catch (IOException ex) {
             Logger.getLogger(HauntedServer.class.getName()).log(Level.SEVERE, null, ex);
         }

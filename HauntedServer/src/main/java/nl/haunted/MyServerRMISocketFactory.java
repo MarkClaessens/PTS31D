@@ -11,7 +11,7 @@ import java.rmi.server.RMISocketFactory;
  * @author Mike Evers
  * @see http://scis.athabascau.ca/html/courses/comp489/mysql/rmi-firewall.htm
  */
-public class MyRMISocketFactory extends RMISocketFactory implements Serializable {
+public class MyServerRMISocketFactory extends RMISocketFactory implements Serializable {
 
     @Override
     public Socket createSocket(String host, int port) throws IOException {
