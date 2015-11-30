@@ -90,6 +90,7 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
      */
     @Override
     public void propertyChange(PropertyChangeEvent propertyChangeEvent) throws RemoteException {
+        // NOG NIET AF WORK IN PROGRESS methode toevoegen om uit gamelobby te gaan.
         gamelobbys = (List<IGameLobby>)propertyChangeEvent.getNewValue();
         for(IGameLobby GL : gamelobbys)
         {
