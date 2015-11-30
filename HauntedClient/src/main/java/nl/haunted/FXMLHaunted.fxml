@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="paneel" prefHeight="576.0" prefWidth="756.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.haunted.FXMLHauntedController">
+    <children>
+        <Label layoutX="401.0" layoutY="207.0" text="flooramount:" />
+        <Label layoutX="401.0" layoutY="167.0" text="max. players:" />
+        <Label layoutX="408.0" layoutY="126.0" text="password:" />
+        <Label layoutX="404.0" layoutY="85.0" text="roomname:" />
+        <Label layoutX="10.0" layoutY="167.0" text="naam speler1:" />
+        <TextField fx:id="TFfloors" layoutX="490.0" layoutY="203.0" promptText="floor amount" />
+        <TextField fx:id="TFplayers" layoutX="490.0" layoutY="163.0" promptText="maximum players" />
+        <TextField fx:id="TFchangenameplayer1" layoutX="91.0" layoutY="163.0" promptText="insert name here" />
+        <TextField fx:id="TFroomname" layoutX="490.0" layoutY="81.0" promptText="roomname" />
+        <TextField fx:id="TFpassword" layoutX="490.0" layoutY="122.0" promptText="password(optional)" />
+      <ImageView fx:id="IVexit" fitHeight="56.0" fitWidth="134.0" layoutX="91.0" layoutY="38.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../StandAlone/Haunted/src/btnExit.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="IVexit1" fitHeight="56.0" fitWidth="134.0" layoutX="24.0" layoutY="200.0" onMouseClicked="#changename" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../btnRename.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="IVexit11" fitHeight="56.0" fitWidth="134.0" layoutX="490.0" layoutY="253.0" onMouseClicked="#creategamelobby" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../btnCreateGameLobby.png" />
+         </image>
+      </ImageView>
+      <ListView layoutX="6.0" layoutY="275.0" prefHeight="287.0" prefWidth="282.0" />
+    </children>
+</AnchorPane>
