@@ -16,8 +16,12 @@ public class ImageProps {
     private Image[] images;
     private Entity entity;
     
-    public Image[] getImg() {
+    public Image[] getImages() {
         return images;
+    }
+    
+    public Image getImage(int id){
+        return images[id];
     }
 
     public Entity getEntity() {
