@@ -98,14 +98,22 @@ public class Ghost extends Character {
      */
     public void possess(){
         List<Player> players = game.getPlayers();
-        for(Player player : players){
-            try {
-                if(player.getCharacter() instanceof Human){
-                    Character human = player.getCharacter();
-                    player.setCharacter(this);
+        boolean humanFound = false;
+        
+        while(!humanFound){
+            for(Player player : players){
+                try {
+                    if(player.getCharacter() instanceof Human){
+                        Character human = player.getCharacter();
+
+                        player.setCharacter(this);
+                        this.bestuurder.setCharacter(human);
+
+                        humanFound = true;
+                    }
+                } catch (RemoteException ex) {
+                    Logger.getLogger(Ghost.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (RemoteException ex) {
-                Logger.getLogger(Ghost.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
