@@ -6,6 +6,7 @@
 package nl.haunted;
 
 import java.beans.PropertyChangeEvent;
+import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -13,6 +14,11 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 
 /**
  *
@@ -25,7 +31,9 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
     private static Registry registry = null;
     private ILobby lobby = null;
     private List<IGameLobby> gamelobbys;
-    private IPlayer player;
+    private IPlayer tisplayer;
+    private boolean INGameLobby;
+    private IGameLobby YourGL;
     // Binding name for lobby
     private static final String bindingNameLobby = "lobby";
     
@@ -38,6 +46,8 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
         this.client = client;
         startClient(ip);
         gamelobbys = lobby.getGameLobbys();
+        INGameLobby = false;
+        YourGL = null;
         //player = lobby.createPlayer("player", "get ip adress not implemented yeti");create return type for createplayer 
     }
     
@@ -81,9 +91,29 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
     @Override
     public void propertyChange(PropertyChangeEvent propertyChangeEvent) throws RemoteException {
         gamelobbys = (List<IGameLobby>)propertyChangeEvent.getNewValue();
+        for(IGameLobby GL : gamelobbys)
+        {
+          for(IPlayer player : GL.getPlayers())
+          {
+              if(tisplayer == player)
+              {
+                INGameLobby = true;
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLGameLobby.fxml"));
+                  try {
+                      Node root = fxmlLoader.load();
+                      FXMLGameLobbyController GMC = (FXMLGameLobbyController) fxmlLoader.getController();
+                      GMC.setGameLobby(GL);
+                      HauntedClient.getStage().getScene().setRoot((Parent)root);
+                  } catch (IOException ex) {
+                      Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+                  }
+                
+              }
+          }
+        }
     }
     public IPlayer getPlayer()
     {
-        return player;
+        return tisplayer;
     }
 }

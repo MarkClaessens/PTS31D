@@ -251,12 +251,11 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
                        INplayer.removeListener(this, propertyName);
                     }
                 }
-            }
+            }            
             
-            //todo teken nieuwe lijst met players op het scherm
         }
         else if(propertyName == "ready"){
-            // vraag alle ready statussen op van de players en teken deze.
+            
             playernames();
         }
     }
