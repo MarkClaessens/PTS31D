@@ -123,6 +123,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         }
         if (exist == false) {
             players.add((Player) player);
+            this.basicPublisher.inform(this, "players", null, players);
             return true;
         } else {
             return false;

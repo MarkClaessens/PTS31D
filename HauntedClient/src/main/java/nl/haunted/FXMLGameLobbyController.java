@@ -5,11 +5,16 @@
  */
 package nl.haunted;
 
+import java.beans.PropertyChangeEvent;
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -38,7 +43,7 @@ import nl.haunted.IPlayer;
  *
  * @author Mark
  */
-public class FXMLGameLobbyController implements Initializable {
+public class FXMLGameLobbyController extends UnicastRemoteObject implements Initializable, IFXMLGameLobbyController{
 
     /**
      * the fxml location of FXMLGameLobbyController
@@ -66,6 +71,9 @@ public class FXMLGameLobbyController implements Initializable {
     @FXML
     ImageView IVexit;
     
+    public FXMLGameLobbyController() throws RemoteException{
+    }
+    
     /**
      * Initializes the controller class.
      *
@@ -79,6 +87,14 @@ public class FXMLGameLobbyController implements Initializable {
                 BackgroundSize.DEFAULT);
         //then you set to your node
         paneel.setBackground(new Background(myBI));
+        
+        try {
+            gamelobby.addListener(this, "players");
+        } catch (RemoteException ex) {
+            Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        subscribeToAllPlayers();
     }
 
     /**
@@ -153,10 +169,41 @@ public class FXMLGameLobbyController implements Initializable {
         
     }
 
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) throws RemoteException {
+        String propertyName = evt.getPropertyName();
+        
+        if(propertyName == "players"){
+            subscribeToAllPlayers();
+            //todo teken nieuwe lijst met players op het scherm
+        }
+        else if(propertyName == "ready"){
+            // vraag alle ready statussen op van de players en teken deze. 
+        }
+    }
+
     /**
      * *
      * before the gui will be shown
      */
     
-
+    public void subscribeToAllPlayers(){
+        // When joining the gamelobby subscribe to every player's ready status.
+        List<IPlayer> players = null;
+        try {
+            players = gamelobby.getPlayers();
+        } catch (RemoteException ex) {
+            Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if(players != null){
+            for(IPlayer player : players){
+                try {
+                    player.addListener(this, "ready");
+                } catch (RemoteException ex) {
+                    Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
 }
