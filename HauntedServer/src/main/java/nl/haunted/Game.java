@@ -31,6 +31,10 @@ public class Game {
     private List<IPlayer> players;
     private IPlayer currentHuman;
 
+    public Level getLevel(){
+        return level;
+    }
+    
     /**
      *
      * @param players

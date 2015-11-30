@@ -47,6 +47,23 @@ public class Ghost extends Character {
     }
     
     /**
+     * Sets the stationary time to now when the Ghost started standing still.
+     * Started standing still means pressing no moving keys.
+     *
+     */
+    public void setStationaryTime() {
+        this.stationaryTime = Calendar.getInstance();
+    }
+    
+    /**
+     *
+     * @return the time when the Ghost started standing still.
+     */
+    public Calendar getStationaryTime() {
+        return this.stationaryTime;
+    }
+    
+    /**
      * Constructor for Ghost sets vulnerable and isGhost to true and sets the
      * super variables in Character
      *
