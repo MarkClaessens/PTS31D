@@ -6,6 +6,7 @@
 package nl.haunted;
 
 import java.awt.geom.Point2D;
+import static java.lang.Math.tan;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -22,6 +23,8 @@ public class Human extends Character {
     private int flashlightRange, flashlightAngle;
     private boolean hasKey;
     private double[][] flashlightPoints;
+    
+    private double flX3 = 0, flY3 = 0, flX2 = 0, flY2 = 0, flX1, flY1, flY23, flX32, flY31, flX13, flDet, flMinD, flMaxD;
 
     /**
      * The Constructor for human. This initializes the flashlightRange,
@@ -43,14 +46,76 @@ public class Human extends Character {
     public boolean hasKey() {
         return hasKey;
     }
+    
+    //<editor-fold defaultstate="collapsed" desc="Flashlight">
+    /**
+     *
+     * @return the flashlight range
+     */
+    public int getFlashlightRange() {
+        return this.flashlightRange;
+    }
 
+    /**
+     * Sets the flashlight range
+     *
+     * @param flashlightRange
+     */
+    public void setFlashlightRange(int flashlightRange) {
+        this.flashlightRange = flashlightRange;
+    }
+    
+    /**
+     *
+     * @return the flashlight angle
+     */
+    public int getFlashlightAngle() {
+        return this.flashlightAngle;
+    }
+
+    /**
+     * Sets the flashlight angle
+     *
+     * @param flashlightAngle
+     */
+    public void setFlashlightAngle(int flashlightAngle) {
+        this.flashlightAngle = flashlightAngle;
+    }
+    
     /**
      * Initializes the flashlight for the human. With this, the human can see
      * the things in the level, but only the things in range of the flashlight.
      * Flashlight is a triangle.
      */
     private void setFlashlight() {
-        // TODO
+        flX1 = this.getPosition().getX() + 50;
+        flY1 = this.getPosition().getY() + 50;
+        switch (this.getDirection()) {
+            case UP:
+                flX2 = flX1 - tan(this.flashlightAngle) * this.flashlightRange;
+                flY2 = flY1 - this.flashlightRange;
+                flX3 = flX1 + tan(this.flashlightAngle) * this.flashlightRange;
+                flY3 = flY1 - this.flashlightRange;
+                break;
+            case DOWN:
+                flX2 = flX1 + tan(this.flashlightAngle) * this.flashlightRange;
+                flX3 = flX1 - tan(this.flashlightAngle) * this.flashlightRange;
+                flY2 = flY1 + this.flashlightRange;
+                flY3 = flY2;
+                break;
+            case RIGHT:
+                flX2 = flX1 + this.flashlightRange;
+                flX3 = flX2;
+                flY2 = flY1 + tan(this.flashlightAngle) * this.flashlightRange;
+                flY3 = flY1 - tan(this.flashlightAngle) * this.flashlightRange;
+                break;
+            case LEFT:
+                flX2 = flX1 - this.flashlightRange;
+                flX3 = flX2;
+                flY2 = flY1 + tan(this.flashlightAngle) * this.flashlightRange;
+                flY3 = flY1 - tan(this.flashlightAngle) * this.flashlightRange;
+                break;
+        }
     }
 
     /**
@@ -60,9 +125,19 @@ public class Human extends Character {
      * @return polygon of the flashlight.
      */
     public int[] getFlashlightPolygon() {
-        //TODO
-        return null;
+        int[] i = new int[6];
+        i[0] = (int) this.getPosition().getX() + 50;
+        i[1] = (int) this.getPosition().getY() + 50;
+        i[2] = (int) flX2;
+        i[3] = (int) flY2;
+        i[4] = (int) flX3;
+        i[5] = (int) flY3;
+        return i;
+
     }
+    
+    //</editor-fold>
+    
     
     /**
      * if haskey == false, hasKey becomes true
@@ -142,6 +217,38 @@ public class Human extends Character {
             }
         }
         return null;
+    }
+    
+    /**
+     * check if the given position collides with the flashlight.
+     * @param point
+     * @return 
+     */
+    public boolean flashlightCollision(Point2D point) {
+
+        flY23 = flY2 - flY3;
+        flX32 = flX3 - flX2;
+        flY31 = flY3 - flY1;
+        flX13 = flX1 - flX3;
+        flDet = flY23 * flX13 - flX32 * flY31;
+        flMinD = Math.min(flDet, 0);
+        flMaxD = Math.max(flDet, 0);
+
+        double x = point.getX();
+        double y = point.getY();
+        double dx = x - flX3;
+        double dy = y - flY3;
+        double a = flY23 * dx + flX32 * dy;
+        if (a < flMinD || a > flMaxD) {
+            return false;
+        }
+        double b = flY31 * dx + flX13 * dy;
+        if (b < flMinD || b > flMaxD) {
+            return false;
+        }
+        double c = flDet - a - b;
+        return !(c < flMinD || c > flMaxD);
+
     }
     
     /**
