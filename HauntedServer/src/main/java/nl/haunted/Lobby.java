@@ -17,12 +17,13 @@ import java.util.List;
  * @author Mike Evers + ..
  */
 public class Lobby extends UnicastRemoteObject implements ILobby {
+
     //private singleton Lobby;
     private final List<IGameLobby> gameLobbys;
 
     private final BasicPublisher basicPublisher;
-    private List<Player> players; 
- 
+    private List<Player> players;
+
     /**
      * @throws java.rmi.RemoteException
      */
@@ -31,9 +32,9 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
         props[0] = "gamelobbys";
         basicPublisher = new BasicPublisher(props);
         this.gameLobbys = new ArrayList();
-	this.players = new ArrayList();
+        this.players = new ArrayList();
     }
-  
+
     @Override
     public List<IGameLobby> getGameLobbys() throws RemoteException {
         return gameLobbys;
@@ -41,16 +42,15 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
 
     @Override
     public void createGameLobby(String name, String password, IPlayer host, int maxFloors, int maxPlayers) throws RemoteException {
-        GameLobby gamelobby = new GameLobby(name, password, (Player)host, maxFloors, maxPlayers);
+        GameLobby gamelobby = new GameLobby(name, password, (Player) host, maxFloors, maxPlayers);
         gameLobbys.add(gamelobby);
         basicPublisher.inform(this, "gamelobbys", null, gameLobbys);
     }
 
     @Override
     public void exit() throws RemoteException {
-        
-    }
 
+    }
 
     @Override
     public void createPlayer(String name, String ipAddress) throws RemoteException {

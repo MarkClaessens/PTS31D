@@ -29,7 +29,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
     private List<Message> messages;
     private List<IPlayer> players;
     private BasicPublisher basicPublisher;
-    
+
     /**
      * maakt een nieuwe gamelobby aan
      *
@@ -40,7 +40,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
      * @param maxPlayers
      * @throws java.rmi.RemoteException
      */
-    public GameLobby(String name, String password, Player host, int maxFloors, int maxPlayers) throws RemoteException{
+    public GameLobby(String name, String password, Player host, int maxFloors, int maxPlayers) throws RemoteException {
         this.name = name;
         this.password = password;
         this.host = host;
@@ -58,7 +58,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
      * als alle spelers klaar zijn dan start de game
      */
     @Override
-    public void startGame() throws RemoteException{
+    public void startGame() throws RemoteException {
         if (players.size() > 2) {
             boolean ready = readycheck();
             if (ready) {
@@ -80,7 +80,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
      * @param message
      */
     @Override
-    public void sendMessage(String message) throws RemoteException{
+    public void sendMessage(String message) throws RemoteException {
         Message bericht = new Message(message, host);
     }
 
@@ -91,7 +91,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
      * @return
      */
     @Override
-    public boolean removePlayer(IPlayer player) throws RemoteException{
+    public boolean removePlayer(IPlayer player) throws RemoteException {
         boolean exist = false;
         for (IPlayer speler : players) {
             if (player == speler) {
@@ -114,7 +114,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
      * @return
      */
     @Override
-    public boolean addPlayer(IPlayer player) throws RemoteException{
+    public boolean addPlayer(IPlayer player) throws RemoteException {
         boolean exist = false;
         for (IPlayer speler : players) {
             if (speler == player) {
@@ -136,7 +136,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
      * @return
      */
     @Override
-    public String getName() throws RemoteException{
+    public String getName() throws RemoteException {
         return name;
     }
 
@@ -146,7 +146,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
      * @return
      */
     @Override
-    public int getMaxPlayer() throws RemoteException{
+    public int getMaxPlayer() throws RemoteException {
         return maxPlayer;
     }
 
@@ -156,7 +156,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
      * @return
      */
     @Override
-    public int getMaxFloors() throws RemoteException{
+    public int getMaxFloors() throws RemoteException {
         return maxFloors;
     }
 
@@ -166,12 +166,12 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
      * @return
      */
     @Override
-    public List<IPlayer> getPlayers() throws RemoteException{
+    public List<IPlayer> getPlayers() throws RemoteException {
         return players;
     }
 
     @Override
-    public boolean readycheck() throws RemoteException{
+    public boolean readycheck() throws RemoteException {
         for (IPlayer speler : players) {
             if (!speler.getReady()) {
                 return false;

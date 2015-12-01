@@ -48,9 +48,9 @@ public class Socket {
 
         sock.joinGroup(new InetSocketAddress(groupIp, port), nic);
     }
-    
-    public NetworkInterface getNIC(){
-       return nic;
+
+    public NetworkInterface getNIC() {
+        return nic;
     }
 
     public void send(Object o) throws IOException {
@@ -90,7 +90,7 @@ public class Socket {
     public void listNics() throws SocketException {
         Enumeration<NetworkInterface> nets = NetworkInterface.getNetworkInterfaces();
         for (NetworkInterface netint : Collections.list(nets)) {
-            if (!netint.isVirtual()&& !netint.getDisplayName().toLowerCase().contains("vmware") && !netint.getDisplayName().toLowerCase().contains("6to4") && netint.isUp() && !netint.isLoopback()) {
+            if (!netint.isVirtual() && !netint.getDisplayName().toLowerCase().contains("vmware") && !netint.getDisplayName().toLowerCase().contains("6to4") && netint.isUp() && !netint.isLoopback()) {
                 displayInterfaceInformation(netint);
             }
         }

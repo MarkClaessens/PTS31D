@@ -50,7 +50,7 @@ public class CharacterTest {
         players.add(new Player("testPlayer2", "192.69.133.14"));
         game = new Game(players, 3);
         human = new Human(spawnPosition, game);
-        ghost = new Ghost(spawnPosition, game, (Player)players.get(0));
+        ghost = new Ghost(spawnPosition, game, (Player) players.get(0));
 
     }
 
@@ -63,12 +63,11 @@ public class CharacterTest {
     //
     // @Test
     // public void hello() {}
-    
     /**
      * Tests for moving character
      */
     @Test
-    public void moveTest(){
+    public void moveTest() {
         human.move(DirectionType.UP);
         human.move(DirectionType.DOWN);
         human.move(DirectionType.LEFT);
@@ -78,6 +77,6 @@ public class CharacterTest {
         ghost.move(DirectionType.LEFT);
         ghost.move(DirectionType.RIGHT);
     }
-    
+
     //Verder zou ik niet weten of je de rest ook fatsoenlijk kan testen...
 }

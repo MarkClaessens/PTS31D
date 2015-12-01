@@ -21,12 +21,12 @@ public class Level {
     public int getCurrentFoor() {
         return this.floorNr;
     }
-    
+
     public int getGhostLifePool() {
         return this.ghostLifePool;
     }
-    
-    public void setGhostLifePool(int ghostLifePool){
+
+    public void setGhostLifePool(int ghostLifePool) {
         this.ghostLifePool = ghostLifePool;
     }
 
@@ -37,11 +37,11 @@ public class Level {
     public Point2D getDoorLocation() {
         return this.doorLocation;
     }
-    
-    public BufferedImage getCollisionMap(){
+
+    public BufferedImage getCollisionMap() {
         return collisionMap;
     }
-    
+
     /**
      *
      * @param floorNr
@@ -49,7 +49,6 @@ public class Level {
     public Level(int floorNr) {
         this.floorNr = floorNr;
     }
-
 
     /**
      *

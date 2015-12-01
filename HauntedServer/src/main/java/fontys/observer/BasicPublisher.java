@@ -7,17 +7,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * <p>Title: </p>
+ * <p>
+ * Title: </p>
  *
- * <p>Description: </p>
+ * <p>
+ * Description: </p>
  *
- * <p>Copyright: Copyright (c) 2010</p>
+ * <p>
+ * Copyright: Copyright (c) 2010</p>
  *
- * <p>Company: Fontys Hogeschool ICT</p>
+ * <p>
+ * Company: Fontys Hogeschool ICT</p>
  *
  * @author Frank Peeters
- * @version 1.4 Usage of Publisher-interface is removed because this interface is
- * Remote and objects of this class work locally within the same virtual
+ * @version 1.4 Usage of Publisher-interface is removed because this interface
+ * is Remote and objects of this class work locally within the same virtual
  * machine;
  */
 public class BasicPublisher {

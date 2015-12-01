@@ -58,48 +58,47 @@ public class HumanTest {
     //
     // @Test
     // public void hello() {}
-    
     /**
      * Test for adding a human
      */
     @Test
-    public void testAddHuman(){
+    public void testAddHuman() {
         Human h = new Human(spawnPosition, game);
     }
-    
+
     /**
      * test for picking up key
      */
     @Test
-    public void testPickupKey(){
+    public void testPickupKey() {
         assertFalse("Human shouldn't have picked up the key yet", human.hasKey());
         human.pickUpKey();
         assertTrue("Human should have picked up the key now", human.hasKey());
     }
-    
+
     /**
      * test for entering the door
      */
     @Test
-    public void enterDoor(){
+    public void enterDoor() {
         human.enterDoor();
         human.pickUpKey();
         human.enterDoor();
     }
-    
+
     /**
      * test if human interacts with something
      */
     @Test
-    public void testCheckInteract(){
+    public void testCheckInteract() {
         assertFalse("Human shouldn't interact with something", human.checkInteract());
     }
-    
+
     /**
      * test for getting flashlight polygon
      */
     @Test
-    public void testGetFlashlightPolygon(){
+    public void testGetFlashlightPolygon() {
         assertEquals("should return a polygon", new int[]{2, 2}, human.getFlashlightPolygon());
     }
 }
