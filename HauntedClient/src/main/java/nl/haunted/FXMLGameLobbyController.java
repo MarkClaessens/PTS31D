@@ -97,6 +97,8 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         }
         players = new ArrayList<>();
         subscribeToAllPlayers();
+        
+        
         try {
             playernames();
         } catch (RemoteException ex) {

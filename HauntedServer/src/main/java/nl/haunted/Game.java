@@ -102,9 +102,10 @@ public class Game {
     }
 
     /**
-     *
+     * Will be called when the last level is played. After calling the victory screen will be shown.
+     * @param player the player that wins the game by entering the last door.
      */
-    public void endGame() {
+    public void endGame(Player player) {
 
     }
 

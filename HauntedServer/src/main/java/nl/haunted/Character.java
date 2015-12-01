@@ -222,3 +222,4 @@ public abstract class Character {
         return true;
     }
 }
+

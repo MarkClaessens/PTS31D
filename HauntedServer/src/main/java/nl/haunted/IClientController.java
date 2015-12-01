@@ -5,15 +5,12 @@
  */
 package nl.haunted;
 
+import fontys.observer.RemotePropertyListener;
+import java.rmi.Remote;
+
 /**
  *
  * @author jvdwi
  */
-public enum DirectionType {
-
-
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT
+public interface IClientController extends RemotePropertyListener, Remote {
 }

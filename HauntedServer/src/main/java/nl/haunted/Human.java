@@ -6,6 +6,12 @@
 package nl.haunted;
 
 import java.awt.geom.Point2D;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -39,6 +45,26 @@ public class Human extends Character {
     }
 
     /**
+     * Initializes the flashlight for the human. With this, the human can see
+     * the things in the level, but only the things in range of the flashlight.
+     * Flashlight is a triangle.
+     */
+    private void setFlashlight() {
+        // TODO
+    }
+
+    /**
+     * Returns the coordinates of the flashlight polygon So the fx part can draw
+     * this for the human.
+     *
+     * @return polygon of the flashlight.
+     */
+    public int[] getFlashlightPolygon() {
+        //TODO
+        return null;
+    }
+    
+    /**
      * if haskey == false, hasKey becomes true
      */
     public void pickUpKey() {
@@ -54,42 +80,108 @@ public class Human extends Character {
      */
     public void enterDoor() {
         // First check if this entering was on the last floor (last level).
-//        if (game.getFloorAmount() - 1 == game.getCurrentFloor()) {
-//            game.setRunning(false);
-//            game.getPlayers().stream().filter((player) -> (player.getCharacter() instanceof Human)).forEach((player) -> {
-//                game.endGame(player);
-//            });
-//        } else {
-//            game.setIsRunning(false);
-//            game.endRound();
-//        }
+        if (game.getFloorAmount() - 1 == game.getCurrentFloor()) {
+            game.setRunning(false);
+            boolean humanFound = false;
+            
+            while(!humanFound){
+               for(Player player : game.getPlayers()){
+                   try {
+                       if(player.getCharacter() instanceof Human){
+                           game.endGame(player);
+                           humanFound = true;
+                        }  
+                    } catch (RemoteException ex) {
+                       Logger.getLogger(Human.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } 
+            }
+        } 
+        else {
+            game.setRunning(false);
+            game.endRound();
+        }
     }
 
+    /**
+     * check if hitbox collides with the points
+     *
+     * @param point1
+     * @param width1
+     * @param height1
+     * @param point2
+     * @param width2
+     * @param height2
+     * @return
+     */
+    public boolean checkHitboxCollision(Point2D point1, int width1, int height1, Point2D point2, int width2, int height2) {
+        //convert point1 in leftmost and rightmost X value and top and bottom Y value;
+        int p1Xmin = (int) point1.getX();
+        int p1Xmax = (int) p1Xmin + width1 - 1;
+        int p1Ymin = (int) point1.getY();
+        int p1Ymax = (int) p1Ymin + height1 - 1;
+
+        //convert point2 in leftmost and rightmost X value and top and bottom Y value;
+        int p2Xmin = (int) point2.getX();
+        int p2Xmax = (int) p2Xmin + width2 - 1;
+        int p2Ymin = (int) point2.getY();
+        int p2Ymax = (int) p2Ymin + height2 - 1;
+
+        return (betweenInclusive(p1Xmax, p2Xmin, p2Xmax) && (betweenInclusive(p1Ymin, p2Ymin, p2Ymax) || betweenInclusive(p1Ymax, p2Ymin, p2Ymax))) || (betweenInclusive(p1Xmin, p2Xmin, p2Xmax) && (betweenInclusive(p1Ymin, p2Ymin, p2Ymax) || betweenInclusive(p1Ymax, p2Ymin, p2Ymax)));
+    }
+    
+    /**
+     * check if human collides with a ghost
+     * @return the ghost where the human collides with
+     */
+    public Ghost checkGhostCollision() {
+//        //ghost collision
+//        for (Ghost ghost : this.game.getGhosts()) {
+//            if (checkHitboxCollision(this.getPosition(), 90, 90, ghost.getPosition(), 90, 90)) {
+//                return ghost;
+//            }
+//        }
+//        return null;
+    }
+    
     /**
      * check if the human interacts with ghost, key, door or wall
      *
-     * @return true if human interacts with something
      */
-    public boolean checkInteract() {
-        return false;
-    }
+    public void checkInteract() {
+        Point2D door = new Point2D.Double(this.game.getLevel().getDoorLocation().getX()+40,this.game.getLevel().getDoorLocation().getY());
+        Point2D key = this.game.getLevel().getKeyLocation();
 
-    /**
-     * Initializes the flashlight for the human. With this, the human can see
-     * the things in the level, but only the things in range of the flashlight.
-     * Flashlight is a triangle.
-     */
-    private void setFlashlight() {
-
-    }
-
-    /**
-     * Returns the coordinates of the flashlight polygon So the fx part can draw
-     * this for the human.
-     *
-     * @return polygon of the flashlight.
-     */
-    public int[] getFlashlightPolygon() {
-        return null;
+        //door collision
+        if ((checkHitboxCollision(new Point2D.Double(this.getPosition().getX()+45,this.getPosition().getY()+10), 10, 3, door, 20, 5) && this.hasKey)) //key collision   
+        {
+            this.enterDoor();
+        }
+        //key collision
+        if (checkHitboxCollision(this.getPosition(), 80, 80, key, 80, 80)) {
+            this.pickUpKey();
+        }
+        //flashlight and ghost collision
+        if (this.checkGhostCollision() != null) {
+            this.checkGhostCollision().possess();
+        }
+        setFlashlight();
+        List<Ghost> deadghosts = new ArrayList();
+        this.game.getGhosts().stream().forEach((g) -> {
+            if (g.isVulnerable()) {
+                boolean hit = false;
+                for (Point2D p : g.getHitboxPoints()) {
+                    if (flashlightCollision(p)) {
+                        hit = true;
+                        break;
+                    }
+                }
+                if (hit) {
+                    deadghosts.add(g);
+                    g.setBeginSpawnTime(Calendar.getInstance());
+                    g.vanish();
+                }
+            }
+        });
     }
 }

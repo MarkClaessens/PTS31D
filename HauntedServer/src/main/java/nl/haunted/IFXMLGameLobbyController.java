@@ -5,15 +5,12 @@
  */
 package nl.haunted;
 
+import fontys.observer.RemotePropertyListener;
+import java.rmi.Remote;
+
 /**
  *
- * @author jvdwi
+ * @author Mark
  */
-public enum DirectionType {
-
-
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT
+public interface IFXMLGameLobbyController extends RemotePropertyListener, Remote { 
 }
