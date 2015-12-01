@@ -5,7 +5,6 @@
  */
 package nl.haunted;
 
-
 import java.rmi.RemoteException;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -37,14 +36,13 @@ public class GameLobbyTest {
     @Before
     public void setUp() throws RemoteException {
         host = new Player("host", "ipadres");
-        globby = new GameLobby("lobby1", "pass1", host, 4 , 4);
+        globby = new GameLobby("lobby1", "pass1", host, 4, 4);
     }
 
     @After
     public void tearDown() {
     }
 
-    
     @Test
     public void testGetName() throws RemoteException {
         System.out.println("getName");
@@ -53,8 +51,6 @@ public class GameLobbyTest {
         String result = instance.getName();
         assertEquals(expResult, result);
     }
-   
-   
 
     /**
      * Test of getMaxPlayers method, of class GameLobby.
@@ -80,9 +76,6 @@ public class GameLobbyTest {
         assertEquals(expResult, result);
     }
 
-    
-   
-
     /**
      * Test of startGame method, of class GameLobby.
      */
@@ -95,7 +88,7 @@ public class GameLobbyTest {
         boolean result = true;
         assertEquals(expResult, result);
     }
-   
+
     /**
      * Test of removePlayer method, of class GameLobby.
      */
@@ -127,7 +120,7 @@ public class GameLobbyTest {
         GameLobby instance = globby;
         instance.sendMessage(message);
         boolean expResult = true;
-        boolean result = false;        
+        boolean result = false;
         assertEquals(expResult, result);
     }
 

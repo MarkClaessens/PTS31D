@@ -18,39 +18,41 @@ public class Human extends Character {
     private double[][] flashlightPoints;
 
     /**
-     * The Constructor for human.
-     * This initializes the flashlightRange, flashlightAngle and the flashlightPoints by calling setFlashlight
-     * Also initialize the base class Character!
+     * The Constructor for human. This initializes the flashlightRange,
+     * flashlightAngle and the flashlightPoints by calling setFlashlight Also
+     * initialize the base class Character!
+     *
      * @param position the spawn Point2D position of the Human on the map
-     * @param game 
+     * @param game
      */
     public Human(Point2D position, Game game) {
         super(position, game);
         this.hasKey = false;
     }
-    
+
     /**
-     * 
+     *
      * @return true if human has picked up the key
      */
-    public boolean hasKey(){
+    public boolean hasKey() {
         return hasKey;
     }
-    
+
     /**
      * if haskey == false, hasKey becomes true
      */
-    public void pickUpKey(){
-        if(!hasKey){
+    public void pickUpKey() {
+        if (!hasKey) {
             hasKey = true;
         }
     }
-    
+
     /**
-     * if haskey == true, enterDoor will cause endround, so the game can continue to the next round or go to the victory screen.
-     * Otherwise, this method won't cause anything.
+     * if haskey == true, enterDoor will cause endround, so the game can
+     * continue to the next round or go to the victory screen. Otherwise, this
+     * method won't cause anything.
      */
-    public void enterDoor(){
+    public void enterDoor() {
         // First check if this entering was on the last floor (last level).
 //        if (game.getFloorAmount() - 1 == game.getCurrentFloor()) {
 //            game.setRunning(false);
@@ -62,30 +64,32 @@ public class Human extends Character {
 //            game.endRound();
 //        }
     }
-    
+
     /**
      * check if the human interacts with ghost, key, door or wall
+     *
      * @return true if human interacts with something
      */
-    public boolean checkInteract(){
+    public boolean checkInteract() {
         return false;
     }
-    
+
     /**
-     * Initializes the flashlight for the human.
-     * With this, the human can see the things in the level, but only the things in range of the flashlight.
+     * Initializes the flashlight for the human. With this, the human can see
+     * the things in the level, but only the things in range of the flashlight.
      * Flashlight is a triangle.
      */
-    private void setFlashlight(){
-        
+    private void setFlashlight() {
+
     }
-    
+
     /**
-     * Returns the coordinates of the flashlight polygon
-     * So the fx part can draw this for the human.
+     * Returns the coordinates of the flashlight polygon So the fx part can draw
+     * this for the human.
+     *
      * @return polygon of the flashlight.
      */
-    public int[] getFlashlightPolygon(){
+    public int[] getFlashlightPolygon() {
         return null;
     }
 }

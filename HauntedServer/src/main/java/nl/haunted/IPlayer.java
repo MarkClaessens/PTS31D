@@ -14,42 +14,44 @@ import java.rmi.RemoteException;
  *
  * @author jvdwi
  */
-public interface IPlayer extends Remote, RemotePublisher{
-    
+public interface IPlayer extends Remote, RemotePublisher {
+
     /**
-     * 
-     * @return 
-     * @throws java.rmi.RemoteException 
+     *
+     * @return @throws java.rmi.RemoteException
      */
     public Character getCharacter() throws RemoteException;
-    
+
     /**
      * vraag naam op van speler
-     * @return Name 
-     * @throws java.rmi.RemoteException 
+     *
+     * @return Name
+     * @throws java.rmi.RemoteException
      */
     public String getName() throws RemoteException;
-    
+
     /**
      * vraag de ready status op van de speler
+     *
      * @return ready
      * @throws java.rmi.RemoteException
      */
     public boolean getReady() throws RemoteException;
-    
+
     /**
-     * 
+     *
      * @return the color of the player
-     * @throws RemoteException 
+     * @throws RemoteException
      */
     public Color getColor() throws RemoteException;
-    
+
     /**
      * set de ready status van de speler naar de waarde van de param
-     * @param ready 
-     * @throws java.rmi.RemoteException 
+     *
+     * @param ready
+     * @throws java.rmi.RemoteException
      */
     public void setReady(boolean ready) throws RemoteException;
-    
+
     public void setCharacter(Character character) throws RemoteException;
 }

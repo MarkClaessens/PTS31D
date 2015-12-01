@@ -119,11 +119,12 @@ public class FXMLHauntedController implements Initializable {
      * *
      * change the name of both players
      */
-    public void changename() {
+    public void changename() throws RemoteException {
         
         if (!TFchangenameplayer1.getText().isEmpty()) 
         {     
             //tisplayer.setName(TFchangenameplayer1.getText()); !!!!Create setName for player!!!!
+            setplayername();
         }
     }
 

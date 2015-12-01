@@ -12,6 +12,9 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -22,10 +25,10 @@ import javafx.stage.Stage;
  */
 public class HauntedClient extends Application {
     private static ClientController controller;    
-    private Stage primaryStage;
+    private static Stage primaryStage;
     
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
         // Get ip address of server
         Scanner input = new Scanner(System.in);
         System.out.print("Client: Enter IP address of server: ");
@@ -40,9 +43,9 @@ public class HauntedClient extends Application {
         
         /***********ABOVE THIS IS ENTERING SERVER IP + INIT THE CONTROLLER*****************/
         this.primaryStage = primaryStage;
-        StackPane root = new StackPane();
-        
-        Scene scene = new Scene(root, 300, 250);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLHaunted.fxml"));
+        Node root = fxmlLoader.load();
+        Scene scene = new Scene((Parent)root);
         
         primaryStage.setTitle("Haunted");
         primaryStage.setScene(scene);
@@ -51,6 +54,9 @@ public class HauntedClient extends Application {
     }
     public static ClientController getController(){
         return controller;
+    }
+    public static Stage getStage(){
+        return primaryStage;
     }
     /**
      * @param args the command line arguments

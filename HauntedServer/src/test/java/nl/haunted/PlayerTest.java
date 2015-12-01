@@ -5,7 +5,6 @@
  */
 package nl.haunted;
 
-
 import java.rmi.RemoteException;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -18,30 +17,31 @@ import static org.junit.Assert.*;
  *
  * @author Mark Claessens
  */
-public class PlayerTest {   
-       
+public class PlayerTest {
+
     Player player1;
     Player player2;
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() throws RemoteException {
-        player1 = new Player("Mark","ipadres");
-        player2 = new Player("Kees","ipadres");
+        player1 = new Player("Mark", "ipadres");
+        player2 = new Player("Kees", "ipadres");
     }
-    
+
     @After
     public void tearDown() {
     }
-    
+
     @Test
-    public void testGetName() throws RemoteException {        
+    public void testGetName() throws RemoteException {
         String expResultaat = "Mark";
         String resultaat = player1.getName();
         assertEquals(expResultaat, resultaat);
@@ -50,28 +50,27 @@ public class PlayerTest {
         assertEquals(expResultaat, resultaat);
     }
 
-    
     @Test
-    public void testGetReady() throws RemoteException {      
-        Boolean expResultaat = false;        
+    public void testGetReady() throws RemoteException {
+        Boolean expResultaat = false;
         assertEquals(expResultaat, player1.getReady());
-        assertEquals(expResultaat, player2.getReady());    
+        assertEquals(expResultaat, player2.getReady());
     }
-    
+
     @Test
-    public void testSetReady() throws RemoteException {        
-        Boolean ready = true;        
+    public void testSetReady() throws RemoteException {
+        Boolean ready = true;
         player1.setReady(ready);
         assertEquals(ready, player1.getReady());
         assertEquals(false, player2.getReady());
     }
-    
+
     @Test
-    public void testgetCharacter() {        
+    public void testgetCharacter() {
         //geen idee hoe ik een character kan setten deze kan ook niet getten
     }
-    
-     @Test
+
+    @Test
     public void testtoggleready() throws RemoteException {
         assertEquals(false, player1.getReady());
         player1.toggleReady();

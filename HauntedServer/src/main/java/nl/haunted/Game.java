@@ -32,33 +32,34 @@ public class Game {
     private List<Player> players;
     private IPlayer currentHuman;
 
-    public Level getLevel(){
+    public Level getLevel() {
         return level;
     }
-    
-    public List<Player> getPlayers(){
+
+    public List<Player> getPlayers() {
         return players;
     }
-    
+
     /**
-     * 
+     *
      * @return the amount of floors in this game.
      */
-    public int getFloorAmount(){
+    public int getFloorAmount() {
         return floorAmount;
     }
-    
-    public void setRunning(boolean isRunning){
+
+    public void setRunning(boolean isRunning) {
         this.running = isRunning;
     }
+
     /**
-     * 
+     *
      * @return the current floor of the game, starts at 0.
      */
-    public int getCurrentFloor(){
+    public int getCurrentFloor() {
         return currentFloor;
     }
-    
+
     /**
      *
      * @param players
@@ -118,11 +119,11 @@ public class Game {
 
     /**
      *
-     * @return
+     * @return @throws java.net.UnknownHostException
+     * @throws java.rmi.RemoteException
      */
     public Object[][] compressGameInfo() throws UnknownHostException, RemoteException {
         Object[][] obj;
-        int ghosts = this.characters.size() - 1;
         obj = new Object[this.ghosts.size() + 6][7];
         obj[0][0] = "Server";
         obj[0][1] = InetAddress.getLocalHost();

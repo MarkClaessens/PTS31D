@@ -38,9 +38,9 @@ public class MainGameFXScene {
     Image bgImage;
 
 //    Image image;
-    private Gamefeed gf;
+    private gamefeed gf;
 
-    public Scene MainGameFX(Gamefeed gf) {
+    public Scene MainGameFX(gamefeed gf) {
         this.gf = gf;
         this.bgImage = gf.gameInfo.getBackgroundImage();
         levelDrawWidth = bgImage.getWidth();

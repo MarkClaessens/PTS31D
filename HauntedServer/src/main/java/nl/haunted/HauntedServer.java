@@ -10,26 +10,28 @@ import java.util.logging.Logger;
 import static javafx.application.Application.launch;
 
 /**
- * This class starts the game server. 
+ * This class starts the game server.
+ *
  * @author Mike Evers
  */
 public class HauntedServer {
+
     private static final int portNumber = 8761;
     private static final String bindingNameLobby = "lobby";
     private static Registry registry = null;
     private Lobby lobby = null;
-    
+
     // Constructor
-    public HauntedServer(){
+    public HauntedServer() {
         try {
             // Create the lobby
-            lobby = new Lobby();         
+            lobby = new Lobby();
         } catch (RemoteException ex) {
             System.out.println("Server: RemoteException: " + ex.getMessage());
             System.out.println("Server: Cannot create lobby, it's null now.");
             lobby = null;
         }
-        
+
         // Create registry at port number
         try {
             registry = LocateRegistry.createRegistry(portNumber);
@@ -38,16 +40,16 @@ public class HauntedServer {
             System.out.println("Server: Cannot create registry, it's null now.");
             registry = null;
         }
-                
+
         // Bind lobby using registry
-        try {  
+        try {
             registry.rebind(bindingNameLobby, lobby);
         } catch (RemoteException ex) {
             System.out.println("Server: RemoteException: " + ex.getMessage());
             System.out.println("Server: Cannot bind lobby to registry.");
         }
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -60,5 +62,5 @@ public class HauntedServer {
         }
         System.setProperty("java.rmi.server.hostname", "127.0.0.1");
         HauntedServer server = new HauntedServer();
-    }    
+    }
 }
