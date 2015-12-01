@@ -5,6 +5,7 @@
  */
 package nl.haunted;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -34,7 +35,7 @@ public class GameLobbyTest {
     }
 
     @Before
-    public void setUp() throws RemoteException {
+    public void setUp() throws RemoteException, IOException {
         host = new Player("host", "ipadres");
         globby = new GameLobby("lobby1", "pass1", host, 4, 4);
     }

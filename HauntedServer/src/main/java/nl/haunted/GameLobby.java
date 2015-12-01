@@ -29,6 +29,9 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
     private List<Message> messages;
     private List<IPlayer> players;
     private BasicPublisher basicPublisher;
+    private static int gameLobbyNum = 0;
+    private final Socket msgSoc;
+    private String groupID;
 
     /**
      * maakt een nieuwe gamelobby aan
@@ -40,7 +43,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
      * @param maxPlayers
      * @throws java.rmi.RemoteException
      */
-    public GameLobby(String name, String password, Player host, int maxFloors, int maxPlayers) throws RemoteException {
+    public GameLobby(String name, String password, Player host, int maxFloors, int maxPlayers) throws RemoteException, IOException {
         this.name = name;
         this.password = password;
         this.host = host;
@@ -52,6 +55,16 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         props[0] = "players";
         this.basicPublisher = new BasicPublisher(props);
         players.add(host);
+
+        //<socket>
+        msgSoc = new Socket();
+        int groupIdNum = 234567890 + gameLobbyNum;
+        String stringConverter = "" + groupIdNum;
+        groupID = stringConverter.substring(0, 3) + "." + stringConverter.substring(4, 5) + "." + stringConverter.substring(6, 7) + "." + stringConverter.substring(8, 9);
+        msgSoc.socketSetup(groupID, 9877);
+        gameLobbyNum++;
+        //</socket>
+
     }
 
     /**
@@ -64,7 +77,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
             if (ready) {
                 Game game;
                 try {
-                    game = new Game(players, maxFloors);
+                    game = new Game(players, maxFloors, groupID);
                     game.startRound();
                 } catch (IOException ex) {
                     Logger.getLogger(GameLobby.class.getName()).log(Level.SEVERE, null, ex);

@@ -34,6 +34,7 @@ public class Socket {
     MulticastSocket sock;
     InetAddress groupIp;
     NetworkInterface nic;
+    int port;
 
     public void socketSetup(String groupname, int port) throws IOException {
         sock = new MulticastSocket(port);
@@ -47,13 +48,14 @@ public class Socket {
         }
 
         sock.joinGroup(new InetSocketAddress(groupIp, port), nic);
+        this.port = port;
     }
 
     public NetworkInterface getNIC() {
         return nic;
     }
 
-    public void send(Object o) throws IOException {
+    public void sendObj(Object o) throws IOException {
         ByteArrayOutputStream byteStream = new ByteArrayOutputStream(5000);
         try (ObjectOutputStream os = new ObjectOutputStream(new BufferedOutputStream(byteStream))) {
             os.flush();
@@ -63,6 +65,21 @@ public class Socket {
             byte[] buf = byteStream.toByteArray();
             DatagramPacket packet = new DatagramPacket(
                     buf, buf.length, groupIp, 9876);
+            int byteCount = packet.getLength();
+            sock.send(packet);
+        }
+    }
+
+    public void sendMes(String s) throws IOException {
+        ByteArrayOutputStream byteStream = new ByteArrayOutputStream(5000);
+        try (ObjectOutputStream os = new ObjectOutputStream(new BufferedOutputStream(byteStream))) {
+            os.flush();
+            os.writeObject(s);
+            os.flush();
+            //retrieves byte array
+            byte[] buf = byteStream.toByteArray();
+            DatagramPacket packet = new DatagramPacket(
+                    buf, buf.length, groupIp, 9877);
             int byteCount = packet.getLength();
             sock.send(packet);
         }
