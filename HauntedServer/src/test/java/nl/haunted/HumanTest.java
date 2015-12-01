@@ -86,13 +86,6 @@ public class HumanTest {
         human.enterDoor();
     }
 
-    /**
-     * test if human interacts with something
-     */
-    @Test
-    public void testCheckInteract() {
-        assertFalse("Human shouldn't interact with something", human.checkInteract());
-    }
 
     /**
      * test for getting flashlight polygon

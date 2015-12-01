@@ -55,6 +55,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     ILobby lobby;
     IPlayer tisplayer;    
     ClientController controller;
+    private String groupID;
     
     private List<IPlayer> players;
     private transient ObservableList<String> observablePersonen;

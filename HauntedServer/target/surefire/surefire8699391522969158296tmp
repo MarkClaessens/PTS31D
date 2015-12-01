@@ -1,5 +1,5 @@
 #surefire
-#Tue Dec 01 13:41:35 CET 2015
+#Tue Dec 01 15:14:34 CET 2015
 testClassesDirectory=E\:\\Git\\PTS31D\\HauntedServer\\target\\test-classes
 forkMode=once
 classPathUrl.2=C\:\\Users\\Mal\\.m2\\repository\\junit\\junit\\4.4\\junit-4.4.jar

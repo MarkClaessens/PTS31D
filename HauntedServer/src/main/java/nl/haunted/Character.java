@@ -43,8 +43,12 @@ public abstract class Character {
     /**
      * @return the isMoving
      */
-    public boolean getIsMoving() {
+    public boolean getMoving() {
         return this.moving;
+    }
+    
+    public void setMoving(boolean bool){
+        this.moving = bool;
     }
 
     /**
@@ -218,3 +222,4 @@ public abstract class Character {
         return true;
     }
 }
+

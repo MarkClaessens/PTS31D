@@ -77,11 +77,11 @@ public class FXMLHauntedController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         setController();
         settisPlayer();
-        BackgroundImage myBI = new BackgroundImage(new Image("lobbypic.jpg", 1024, 576, false, true),
+       /* BackgroundImage myBI = new BackgroundImage(new Image("lobbypic.jpg", 1024, 576, false, true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
         //then you set to your node
-        paneel.setBackground(new Background(myBI));
+        paneel.setBackground(new Background(myBI));*/
         try {
             setplayername();
         } catch (RemoteException ex) {
