@@ -55,6 +55,7 @@ public class Ghost extends Character {
         return game;
     }
     
+    
     /**
      * Sets the stationary time to now when the Ghost started standing still.
      * Started standing still means pressing no moving keys.

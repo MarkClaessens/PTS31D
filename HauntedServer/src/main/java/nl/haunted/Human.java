@@ -135,13 +135,13 @@ public class Human extends Character {
      * @return the ghost where the human collides with
      */
     public Ghost checkGhostCollision() {
-//        //ghost collision
-//        for (Ghost ghost : this.game.getGhosts()) {
-//            if (checkHitboxCollision(this.getPosition(), 90, 90, ghost.getPosition(), 90, 90)) {
-//                return ghost;
-//            }
-//        }
-//        return null;
+        //ghost collision
+        for (Ghost ghost : this.game.getGhosts()) {
+            if (checkHitboxCollision(this.getPosition(), 90, 90, ghost.getPosition(), 90, 90)) {
+                return ghost;
+            }
+        }
+        return null;
     }
     
     /**
@@ -178,7 +178,7 @@ public class Human extends Character {
                 }
                 if (hit) {
                     deadghosts.add(g);
-                    g.setBeginSpawnTime(Calendar.getInstance());
+                    g.setTimeOfDeath();
                     g.vanish();
                 }
             }
