@@ -54,7 +54,6 @@ public class HauntedServer {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);
         try {
             // Create server
             RMISocketFactory.setSocketFactory(new MyServerRMISocketFactory());
