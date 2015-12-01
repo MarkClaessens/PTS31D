@@ -14,58 +14,65 @@ import javafx.scene.paint.Color;
  * @author jvdwi
  */
 public class Entity {
+
     private Point2D position;
     private DirectionType direction;
     private boolean moving, wall, Dead;
     private ArrayList<String> sprites;
     private final EntityType type;
     private Color color;
+
     /**
-     * 
+     *
      * @param position
-     * @param type 
+     * @param type
      */
-    public Entity(Point2D position, EntityType type){
+    public Entity(Point2D position, EntityType type) {
         this.position = position;
         this.type = type;
     }
-    public void setWall(boolean var){
-        this.wall = var;
-    }
-    
-    public void setDead(boolean bool){
-        this.Dead = bool;
-    }
-    
-    public boolean getDead(){
-        return this.Dead;
-    }
-    
-    public boolean getWall(){
+
+    public boolean getWall() {
         return this.wall;
     }
-    
-    public EntityType getType(){
+
+    public void setWall(boolean var) {
+        this.wall = var;
+    }
+
+    public boolean getDead() {
+        return this.Dead;
+    }
+
+    public void setDead(boolean bool) {
+        this.Dead = bool;
+    }
+
+    public EntityType getType() {
         return this.type;
     }
-    
-    public void setDirection(DirectionType dir){
+
+    public void setDirection(DirectionType dir) {
         this.direction = dir;
     }
-    
-    public void setMoving(boolean mov){
+
+    public void setMoving(boolean mov) {
         this.moving = mov;
     }
-    
-    public void setSprites(ArrayList<String> spriteList){
+
+    public void setSprites(ArrayList<String> spriteList) {
         this.sprites = spriteList;
     }
-    
-    public void setPosition(Point2D pos){
+
+    public void setPosition(Point2D pos) {
         this.position = pos;
     }
     
-    public void setColor(Color col){
+    public Color getColor(){
+        return this.color;
+    }
+
+    public void setColor(Color col) {
         this.color = col;
     }
 }

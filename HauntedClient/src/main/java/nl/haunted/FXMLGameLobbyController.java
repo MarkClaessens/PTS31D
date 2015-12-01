@@ -54,6 +54,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     String currentText;
     ILobby lobby;
     IPlayer tisplayer;    
+    ClientController controller;
     
     private List<IPlayer> players;
     private transient ObservableList<String> observablePersonen;
@@ -132,6 +133,10 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     }
     public void settisPlayer(IPlayer player) {
         this.tisplayer = player;
+    }
+    public void setController()
+    {
+        this.controller = HauntedClient.getController();
     }
 
     public void setPlayers() {
@@ -225,6 +230,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     @FXML
     private void leavegamelobby() throws RemoteException {
         gamelobby.removePlayer(tisplayer);
+        
     }
 
     @Override

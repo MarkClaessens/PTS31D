@@ -43,7 +43,6 @@ public class FXMLHauntedController implements Initializable {
     public static final String URL_FXML = "FXMLHaunted.fxml";
 
     ILobby lobby;
-    IGameLobby gamelobby;
     ClientController controller;
     IPlayer tisplayer;
     @FXML

@@ -7,10 +7,13 @@ package nl.haunted;
 
 import fontys.observer.BasicPublisher;
 import fontys.observer.RemotePropertyListener;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -42,9 +45,13 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
 
     @Override
     public void createGameLobby(String name, String password, IPlayer host, int maxFloors, int maxPlayers) throws RemoteException {
-        GameLobby gamelobby = new GameLobby(name, password, (Player) host, maxFloors, maxPlayers);
-        gameLobbys.add(gamelobby);
-        basicPublisher.inform(this, "gamelobbys", null, gameLobbys);
+        try {
+            GameLobby gamelobby = new GameLobby(name, password, (Player) host, maxFloors, maxPlayers);
+            gameLobbys.add(gamelobby);
+            basicPublisher.inform(this, "gamelobbys", null, gameLobbys);
+        } catch (IOException ex) {
+            Logger.getLogger(Lobby.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
