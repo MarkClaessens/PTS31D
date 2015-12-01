@@ -55,7 +55,6 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     ILobby lobby;
     IPlayer tisplayer;    
     ClientController controller;
-    private String groupID;
     
     private List<IPlayer> players;
     private transient ObservableList<String> observablePersonen;
@@ -99,6 +98,12 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         players = new ArrayList<>();
         subscribeToAllPlayers();
         
+        // Set the groupID in ClientController to the groupID of this gamelobby.
+        try {
+            controller.setGroupID(this.gamelobby.getGroupID());
+        } catch (RemoteException ex) {
+            Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         try {
             playernames();
