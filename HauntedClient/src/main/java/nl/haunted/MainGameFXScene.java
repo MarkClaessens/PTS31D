@@ -37,10 +37,13 @@ public class MainGameFXScene {
 
     Image bgImage;
 
+    List<ImageProps> imgProps;
+
 //    Image image;
     private gamefeed gf;
 
     public Scene MainGameFX(gamefeed gf) {
+        imgProps = new ArrayList();
         this.gf = gf;
         this.bgImage = gf.gameInfo.getBackgroundImage();
         levelDrawWidth = bgImage.getWidth();
@@ -55,9 +58,9 @@ public class MainGameFXScene {
         bgLayer = new Canvas(screenWidth, screenHeight);
         bgGc = bgLayer.getGraphicsContext2D();
         root.getChildren().add(bgLayer);
-        
+
         bgGc.drawImage(bgImage, 0, 0, levelDrawWidth * horScale, levelDrawHeight * verScale);
-        
+
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
                 List<Object> obj = new ArrayList();
@@ -76,7 +79,20 @@ public class MainGameFXScene {
     }
 
     private void loadInImages() {
-
+        for (Entity e : gf.gameInfo.getEntities()) {
+            switch (e.getType()) {
+                case Door:
+                    Image[] doorSprites = new Image[]{new Image("door.png")};
+                    imgProps.add(new ImageProps(doorSprites, e));
+                    break;
+                case Key:
+                    break;
+                case Human:
+                    break;
+                case Ghost:
+                    break;
+            }
+        }
     }
 
     private void determineScreenSizes() {
