@@ -118,8 +118,10 @@ public class Game {
 
     /**
      *
+     * @throws java.rmi.RemoteException
+     * @throws java.net.UnknownHostException
      */
-    public void tick() throws RemoteException {
+    public void tick() throws RemoteException, UnknownHostException, IOException {
         //check if the server is running and is not paused
         if (!this.running) {
         } else {
@@ -172,7 +174,7 @@ public class Game {
             else { // if there are no ghosts.
                 this.endRound();
             }
-            //gameFX.setItems(this);
+            srvSoc.sendObj(this.compressGameInfo());
         } // server runnin & !pauzed
          // server runnin & !pauzed
     }
