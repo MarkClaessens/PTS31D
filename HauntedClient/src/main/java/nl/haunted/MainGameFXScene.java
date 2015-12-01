@@ -16,6 +16,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.transform.Rotate;
 
@@ -90,16 +91,37 @@ public class MainGameFXScene {
                     imgProps.add(new ImageProps(keySprites, e));
                     break;
                 case Human:
-                    String humanImgText = "human" + e.getColor().toString().toLowerCase();
+                    String humanImgText = "human" + getStringFromColor(e.getColor());
                     Image[] humanSprites = new Image[]{new Image(humanImgText + "1.png"), new Image(humanImgText + "2.png"), new Image(humanImgText + "3.png")};
                     imgProps.add(new ImageProps(humanSprites, e));
                     break;
                 case Ghost:
-                    String ghostImgText = "ghost" + e.getColor().toString().toLowerCase();
+                    String ghostImgText = "ghost" + getStringFromColor(e.getColor());
                     Image[] ghostSprites = new Image[]{new Image(ghostImgText + "1.png"), new Image(ghostImgText + "2.png"), new Image(ghostImgText + "3.png")};
                     imgProps.add(new ImageProps(ghostSprites, e));
                     break;
             }
+        }
+    }
+
+    private String getStringFromColor(Color c) {
+        String name = "";
+        if (c == Color.WHITE) {
+            return "white";
+        } else if (c == Color.BLACK) {
+            return "black";
+        } else if (c == Color.GREEN) {
+            return "green";
+        } else if (c == Color.RED) {
+            return "red";
+        } else if (c == Color.BLUE) {
+            return "blue";
+        } else if (c == Color.ORANGE) {
+            return "orange";
+        } else if (c == Color.PURPLE) {
+            return "purple";
+        } else {
+            return "trans";
         }
     }
 
