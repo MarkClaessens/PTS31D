@@ -79,6 +79,7 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
             try {
                 lobby.addListener(this, "gamelobbys");
             } catch (RemoteException ex) {
+                ex.printStackTrace();
                 System.out.println("Client: Controller couldn't subscribe himself to the lobby.");
             }
         }

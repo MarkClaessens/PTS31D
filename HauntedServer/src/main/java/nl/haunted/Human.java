@@ -53,7 +53,7 @@ public class Human extends Character {
      * method won't cause anything.
      */
     public void enterDoor() {
-        // First check if this entering was on the last floor (last level).
+//        // First check if this entering was on the last floor (last level).
 //        if (game.getFloorAmount() - 1 == game.getCurrentFloor()) {
 //            game.setRunning(false);
 //            game.getPlayers().stream().filter((player) -> (player.getCharacter() instanceof Human)).forEach((player) -> {
