@@ -43,7 +43,7 @@ public class HauntedClient extends Application {
         
         /***********ABOVE THIS IS ENTERING SERVER IP + INIT THE CONTROLLER*****************/
         this.primaryStage = primaryStage;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLHaunted.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLHaunted.fxml"));
         Node root = fxmlLoader.load();
         Scene scene = new Scene((Parent)root);
         
