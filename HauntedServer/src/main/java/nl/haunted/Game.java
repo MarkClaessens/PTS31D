@@ -30,7 +30,7 @@ public class Game {
     private Human human;
     private List<Player> players;
     private IPlayer currentHuman;
-    private final Socket srvSoc;
+    private Socket srvSoc;
 
     public Level getLevel() {
         return level;
@@ -58,6 +58,10 @@ public class Game {
      */
     public int getCurrentFloor() {
         return currentFloor;
+    }
+    
+    public List<Ghost> getGhosts(){
+        return this.ghosts;
     }
 
     /**
@@ -114,8 +118,62 @@ public class Game {
     /**
      *
      */
-    public void tick() {
-
+    public void tick() throws RemoteException {
+        //check if the server is running and is not paused
+        if (!this.running) {
+        } else {
+            //check if the list of ghosts is empty
+            // <editor-fold defaultstate="collapsed" desc="if there are ghosts">
+            if (!this.ghosts.isEmpty()) {
+                Object[] keyboard =null;// = this.gameFX.getPressedKeys();
+                // <editor-fold defaultstate="collapsed" desc="if there is a pressed key TODO: get keypresses">
+                if (keyboard != null) {
+                    //go through every player
+                    for (int i = 0; i < this.players.size(); i++) {
+                        //check if the player pressed a button
+                        if (keyboard[i] != null) {
+                            this.players.get(i).getCharacter().move((DirectionType) keyboard[i]);
+                        } else {
+                            
+                            // <editor-fold defaultstate="collapsed" desc="set moving and check if a ghost needs to become a wall">
+                            //if the player didnt press a button and is a ghost check if it was moving.
+                            //if it was moving set the stationary time
+                            //set the characters moving on false
+                            if (this.players.get(i).getCharacter() instanceof Ghost) {
+                                Ghost g = (Ghost) this.players.get(i).getCharacter();
+                                if (g.getMoving()) {
+                                    if (this.players.get(i).getCharacter() instanceof Ghost) {
+                                        g.setStationaryTime();
+                                    }
+                                }
+                            }
+                            this.players.get(i).getCharacter().setMoving(false);
+                            //</editor-fold>
+                        }
+                    }
+                }
+                //</editor-fold>
+                this.human.checkInteract();
+                // <editor-fold defaultstate="collapsed" desc="loop  to change ghosts to wall and respawn them">
+                this.ghosts.stream().forEach((G) -> {
+                    G.changeAppearance();
+                    if (G.getTimeOfDeath() != null) {
+                        if (System.currentTimeMillis() >= (G.getTimeOfDeath().getTimeInMillis() + 2000)) {
+                            G.setPosition(this.pickSpawnPoint());
+                            
+                            G.setTimeOfDeath();
+                        }
+                    }
+                });
+                //</editor-fold>
+                
+            } // if there are ghosts </editor-fold> 
+            else { // if there are no ghosts.
+                this.endRound();
+            }
+            //gameFX.setItems(this);
+        } // server runnin & !pauzed
+         // server runnin & !pauzed
     }
 
     /**
@@ -141,7 +199,7 @@ public class Game {
         obj[3][0] = this.level.getKeyLocation();
         obj[4][0] = this.human.getPosition();
         obj[4][1] = this.human.getDirection();
-        obj[4][2] = this.human.getIsMoving();
+        obj[4][2] = this.human.getMoving();
         obj[4][3] = this.currentHuman.getColor();
         obj[5][0] = this.level.getDoorLocation();
         obj[5][1] = DirectionType.DOWN;
@@ -154,7 +212,7 @@ public class Game {
                     if (G.getDead()) {
                         obj[i][0] = G.getPosition();
                         obj[i][1] = G.getDirection();
-                        obj[i][2] = G.getIsMoving();
+                        obj[i][2] = G.getMoving();
                         obj[i][3] = p.getColor();
                         obj[i][4] = !G.isVulnerable();
                     }
