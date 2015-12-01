@@ -51,7 +51,7 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
         //player = lobby.createPlayer("player", "get ip adress not implemented yeti");create return type for createplayer 
     }
     
-    public void startClient(String ip){
+    public void startClient(String ip) throws RemoteException{
         // Locate registry at ip address (server) with port 8761.
         try {
             registry = LocateRegistry.getRegistry(ip, 8761);
@@ -83,6 +83,7 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
                 System.out.println("Client: Controller couldn't subscribe himself to the lobby.");
             }
         }
+        tisplayer = lobby.createPlayer("player", "ipadres");
     }
     
     /**

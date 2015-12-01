@@ -60,9 +60,10 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
     }
 
     @Override
-    public void createPlayer(String name, String ipAddress) throws RemoteException {
+    public IPlayer createPlayer(String name, String ipAddress) throws RemoteException {
         Player player = new Player(name, ipAddress);
         players.add(player);
+        return (IPlayer)player;
     }
 
     @Override
