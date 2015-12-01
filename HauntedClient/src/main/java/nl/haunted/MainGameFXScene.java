@@ -86,10 +86,18 @@ public class MainGameFXScene {
                     imgProps.add(new ImageProps(doorSprites, e));
                     break;
                 case Key:
+                    Image[] keySprites = new Image[]{new Image("key.png")};
+                    imgProps.add(new ImageProps(keySprites, e));
                     break;
                 case Human:
+                    String humanImgText = "human" + e.getColor().toString().toLowerCase();
+                    Image[] humanSprites = new Image[]{new Image(humanImgText + "1.png"), new Image(humanImgText + "2.png"), new Image(humanImgText + "3.png")};
+                    imgProps.add(new ImageProps(humanSprites, e));
                     break;
                 case Ghost:
+                    String ghostImgText = "ghost" + e.getColor().toString().toLowerCase();
+                    Image[] ghostSprites = new Image[]{new Image(ghostImgText + "1.png"), new Image(ghostImgText + "2.png"), new Image(ghostImgText + "3.png")};
+                    imgProps.add(new ImageProps(ghostSprites, e));
                     break;
             }
         }
