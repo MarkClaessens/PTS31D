@@ -47,6 +47,7 @@ public interface ILobby extends Remote, RemotePublisher {
      * 
      * @param name the name of the player
      * @param ipAddress the ipadress of the player
+     * @return 
      * 
      * @throws java.rmi.RemoteException
      */
