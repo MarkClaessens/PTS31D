@@ -24,6 +24,7 @@
       <ImageView fx:id="IVexit" fitHeight="56.0" fitWidth="134.0" layoutX="91.0" layoutY="38.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="IVRename" fitHeight="56.0" fitWidth="134.0" layoutX="24.0" layoutY="200.0" onMouseClicked="#changename" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="IVCreategamelobby" fitHeight="56.0" fitWidth="134.0" layoutX="490.0" layoutY="253.0" onMouseClicked="#creategamelobby" pickOnBounds="true" preserveRatio="true" />
-      <ListView layoutX="6.0" layoutY="275.0" prefHeight="287.0" prefWidth="282.0" />
+      <ListView fx:id="LVgamelobbys" layoutX="6.0" layoutY="275.0" prefHeight="287.0" prefWidth="282.0" />
+      <Button layoutX="356.0" layoutY="454.0" mnemonicParsing="false" onAction="#refresh" text="Button" />
     </children>
 </AnchorPane>
