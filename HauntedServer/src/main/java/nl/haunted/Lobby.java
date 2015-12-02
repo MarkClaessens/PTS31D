@@ -46,12 +46,13 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
     @Override
     public void createGameLobby(String name, String password, IPlayer host, int maxFloors, int maxPlayers) throws RemoteException {
         try {
-            GameLobby gamelobby = new GameLobby(name, password, (Player) host, maxFloors, maxPlayers);
-            gameLobbys.add(gamelobby);
-            basicPublisher.inform(this, "gamelobbys", null, gameLobbys);
+           GameLobby gamelobby = new GameLobby(name, password, host, maxFloors, maxPlayers);
+           gameLobbys.add(gamelobby);
+           basicPublisher.inform(this, "gamelobbys", null, gameLobbys);
         } catch (IOException ex) {
             Logger.getLogger(Lobby.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     @Override
