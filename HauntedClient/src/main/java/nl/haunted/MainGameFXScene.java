@@ -10,16 +10,19 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.animation.AnimationTimer;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.transform.Rotate;
 
+//important for full screen http://stackoverflow.com/questions/16713554/how-to-change-scene-when-in-fullscreen-in-javafx-and-avoid-press-esc-to-exit-fu
 /**
  *
  * @author jvdwi
@@ -32,6 +35,8 @@ public class MainGameFXScene {
 
     private Scene scene;
     private Group root;
+
+    private boolean isChat;
 
     private int state;
 
@@ -101,6 +106,10 @@ public class MainGameFXScene {
 
         bgGc.drawImage(bgImage, 0, 0, levelDrawWidth * horScale, levelDrawHeight * verScale);
 
+        //Handle key pressings
+        onKeyPresses(scene);
+        onKeyReleases(scene);
+
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
                 List<Object> obj = new ArrayList();
@@ -117,6 +126,34 @@ public class MainGameFXScene {
 //        iv.getTransforms().add(rotation);
 
         return scene;
+    }
+
+    /**
+     * handle the on key pressings
+     *
+     * @param scene
+     */
+    private void onKeyPresses(Scene scene) {
+        scene.setOnKeyPressed(
+                new EventHandler<KeyEvent>() {
+                    public void handle(KeyEvent e) {
+                        String code = e.getCode().toString();
+
+                        // only add once... prevent duplicates
+                    }
+                }
+        );
+    }
+
+    private void onKeyReleases(Scene scene) {
+        scene.setOnKeyReleased(
+                new EventHandler<KeyEvent>() {
+                    public void handle(KeyEvent e) {
+                        String code = e.getCode().toString();
+
+                    }
+                }
+        );
     }
 
     private void loadInImages() {
