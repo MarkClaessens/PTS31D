@@ -48,7 +48,11 @@ public class Player extends UnicastRemoteObject implements IPlayer {
     public String getName() throws RemoteException {
         return name;
     }
-
+    @Override
+    public void setName(String naam) throws RemoteException
+    {
+        this.name = naam;
+    }
     /**
      * vraagt de status van de speler
      *

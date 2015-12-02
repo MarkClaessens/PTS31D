@@ -125,7 +125,7 @@ public class FXMLHauntedController implements Initializable {
         
         if (!TFchangenameplayer1.getText().isEmpty()) 
         {     
-            tisplayer.setName(TFchangenameplayer1.getText()); !!!!Create setName for player!!!!
+            tisplayer.setName(TFchangenameplayer1.getText());
             setplayername();
         }
     }
