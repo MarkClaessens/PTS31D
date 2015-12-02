@@ -40,7 +40,7 @@ public class Socket {
         sock = new MulticastSocket(port);
         groupIp = InetAddress.getByName(groupname);
         Scanner input = new Scanner(System.in);
-        nic = null;//this.getCurrentNIC(); //commented for futuure over internet support
+        nic = this.getLoopbackNick();//this.getCurrentNIC(); //commented for futuure over internet support
         if (nic == null) {
             listNics();
             System.out.println("What Network interface do you want to connect with?");
@@ -122,7 +122,17 @@ public class Socket {
         });
         out.printf("\n");
     }
-
+    
+    public NetworkInterface getLoopbackNick() throws SocketException {
+        Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+        OUTER:
+        for(NetworkInterface interface_ : Collections.list(interfaces)){
+            if(interface_.isLoopback()){
+                return interface_;
+            }
+        }
+        return null;
+    }
     public NetworkInterface getCurrentNIC() throws SocketException, IOException {
         // iterate over the network interfaces known to java
         Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();

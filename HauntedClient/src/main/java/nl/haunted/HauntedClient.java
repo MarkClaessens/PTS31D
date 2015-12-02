@@ -30,10 +30,10 @@ public class HauntedClient extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         // Get ip address of server
-        Scanner input = new Scanner(System.in);
-        System.out.print("Client: Enter IP address of server: ");
-        String ipAddress = input.nextLine();
-
+        //Scanner input = new Scanner(System.in);
+        //System.out.print("Client: Enter IP address of server: ");
+        //String ipAddress = input.nextLine();
+        String ipAddress = "127.0.0.1";
         try {
             controller = new ClientController(this, ipAddress);
         } catch (RemoteException ex) {
