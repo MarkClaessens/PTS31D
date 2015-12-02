@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="paneel" prefHeight="576.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="haunted.FXMLGameLobbyController">
+<AnchorPane id="AnchorPane" fx:id="paneel" prefHeight="576.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.haunted.FXMLGameLobbyController">
     <children>
         <ListView fx:id="LVplayers" layoutX="528.0" layoutY="47.0" prefHeight="124.0" prefWidth="221.0" />
         <TextArea fx:id="TAchatBox" editable="false" layoutX="333.0" layoutY="269.0" prefHeight="151.0" prefWidth="417.0" />

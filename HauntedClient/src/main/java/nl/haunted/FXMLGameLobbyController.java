@@ -88,35 +88,16 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        BackgroundImage myBI = new BackgroundImage(new Image("gamelobby.jpg", 1024, 576, false, true),
+       /* BackgroundImage myBI = new BackgroundImage(new Image("gamelobby.jpg", 1024, 576, false, true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
         //then you set to your node
-        paneel.setBackground(new Background(myBI));
+        paneel.setBackground(new Background(myBI));*/
         
-        try {
-            gamelobby.addListener(this, "players");
-        } catch (RemoteException ex) {
-            Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        players = new ArrayList<>();
-        subscribeToAllPlayers();
+        
         
         // Set the groupID in ClientController to the groupID of this gamelobby.
-        try {
-            controller.setGroupID(this.gamelobby.getGroupID());
-            controller.getInputController().getInputSocket().socketSetup(controller.getGroupID(), 8765);
-        } catch (RemoteException ex) {
-            Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
-        try {
-            playernames();
-        } catch (RemoteException ex) {
-            Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**
@@ -143,6 +124,18 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
      */
     public void setGameLobby(IGameLobby Gamelobby) {
         this.gamelobby = Gamelobby;
+        try {
+            gamelobby.addListener(this, "players");
+        } catch (RemoteException ex) {
+            Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        players = new ArrayList<>();
+        subscribeToAllPlayers();
+        try {
+            playernames();
+        } catch (RemoteException ex) {
+            Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     public void settisPlayer(IPlayer player) {
         this.tisplayer = player;
@@ -150,6 +143,16 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     public void setController()
     {
         this.controller = HauntedClient.getController();
+        try {
+            controller.setGroupID(this.gamelobby.getGroupID());
+            controller.getInputController().getInputSocket().socketSetup(controller.getGroupID(), 8765);
+        } catch (RemoteException ex) {
+            Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }
 
     public void setPlayers() {

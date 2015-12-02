@@ -102,7 +102,8 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
         gamelobbys = (List<IGameLobby>) propertyChangeEvent.getNewValue();
         for (IGameLobby GL : gamelobbys) {
             for (IPlayer player : GL.getPlayers()) {
-                if (tisplayer == player) {
+                if (tisplayer.equals(player)) {
+                    YourGL = GL;
                     INGameLobby = true;
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLGameLobby.fxml"));
                     try {
