@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 public class GameLobby extends UnicastRemoteObject implements IGameLobby {
 
     private String name, password;
-    private int maxPlayer, maxFloors;
+    private int maxPlayers, maxFloors;
     private IPlayer host;
     private List<Message> messages;
     private List<IPlayer> players;
@@ -47,7 +47,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         this.password = password;
         this.host = host;
         this.messages = new ArrayList();
-        this.maxPlayer = maxPlayers;
+        this.maxPlayers = maxPlayers;
         this.maxFloors = maxFloors;
         this.players = new ArrayList();
         String[] props = new String[1];
@@ -130,7 +130,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
                 exist = true;
             }
         }
-        if (exist == false) {
+        if (exist == false && this.players.size() + 1 >= this.maxPlayers) {
             players.add((IPlayer) player);
             this.basicPublisher.inform(this, "players", null, players);
             return true;
@@ -156,7 +156,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
      */
     @Override
     public int getMaxPlayer() throws RemoteException {
-        return maxPlayer;
+        return maxPlayers;
     }
 
     /**
