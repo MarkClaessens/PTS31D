@@ -53,11 +53,12 @@ public class AdvancingWithSprites extends Application {
                 new EventHandler<KeyEvent>() {
                     public void handle(KeyEvent e) {
                         String code = e.getCode().toString();
-
+                        System.out.println(code);
                         // only add once... prevent duplicates
                         if (!input.contains(code)) {
                             input.add(code);
                         }
+                        
                     }
                 });
 

@@ -14,9 +14,9 @@ import java.util.ArrayList;
  */
 public class InputController {
 
-    Socket inputSocket;
-    ArrayList<String> messages;
-    DirectionType direction;
+    private Socket inputSocket;
+    private ArrayList<String> messages;
+    private DirectionType direction;
 
     public InputController() {
         this.inputSocket = new Socket();
@@ -25,6 +25,10 @@ public class InputController {
 
     public Socket getInputSocket() {
         return this.inputSocket;
+    }
+    
+    public void setDirection(DirectionType direction){
+        this.direction = direction;
     }
 
     public void addMessage(String s) {
