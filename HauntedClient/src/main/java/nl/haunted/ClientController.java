@@ -125,4 +125,9 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
     public void setGroupID(String groupID){
         this.groupID = groupID;
     }
+    public ILobby getLobby()
+    {
+        return lobby;
+    }
+    
 }
