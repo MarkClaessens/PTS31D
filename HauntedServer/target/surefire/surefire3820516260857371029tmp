@@ -1,0 +1,7 @@
+#surefire
+#Wed Dec 02 13:13:23 CET 2015
+maven.ext.class.path=C\:\\Program Files\\NetBeans 8.0.1\\java\\maven-nblib\\netbeans-eventspy.jar
+user.dir=C\:\\Users\\Mark\\Documents\\GitHub\\PTS31D\\HauntedServer
+file.encoding=UTF-8
+localRepository=C\:\\Users\\Mark\\.m2\\repository
+basedir=C\:\\Users\\Mark\\Documents\\GitHub\\PTS31D\\HauntedServer

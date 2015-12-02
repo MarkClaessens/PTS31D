@@ -80,6 +80,7 @@ public class FXMLHauntedController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         setController();
         settisPlayer();
+        setLobby();
        /* BackgroundImage myBI = new BackgroundImage(new Image("lobbypic.jpg", 1024, 576, false, true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);

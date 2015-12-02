@@ -25,7 +25,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
 
     private String name, password;
     private int maxPlayer, maxFloors;
-    private Player host;
+    private IPlayer host;
     private List<Message> messages;
     private List<IPlayer> players;
     private BasicPublisher basicPublisher;
@@ -43,7 +43,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
      * @param maxPlayers
      * @throws java.rmi.RemoteException
      */
-    public GameLobby(String name, String password, Player host, int maxFloors, int maxPlayers) throws RemoteException, IOException {
+    public GameLobby(String name, String password, IPlayer host, int maxFloors, int maxPlayers) throws RemoteException, IOException {
         this.name = name;
         this.password = password;
         this.host = host;
@@ -94,7 +94,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
      */
     @Override
     public void sendMessage(String message) throws RemoteException {
-        Message bericht = new Message(message, host);
+      //  Message bericht = new Message(message, host);
     }
 
     /**
@@ -135,7 +135,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
             }
         }
         if (exist == false) {
-            players.add((Player) player);
+            players.add((IPlayer) player);
             this.basicPublisher.inform(this, "players", null, players);
             return true;
         } else {

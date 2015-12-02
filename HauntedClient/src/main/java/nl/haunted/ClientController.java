@@ -8,6 +8,7 @@ package nl.haunted;
 
 import java.beans.PropertyChangeEvent;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -85,7 +86,7 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
                 System.out.println("Client: Controller couldn't subscribe himself to the lobby.");
             }
         }
-        tisplayer = lobby.createPlayer("player", "ipadres");
+        tisplayer = lobby.createPlayer("player", "ipadres");        
     }
     
     /**
