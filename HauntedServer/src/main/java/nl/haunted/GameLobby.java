@@ -142,7 +142,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
             return false;
         }
     }
-
+    
     /**
      * vraagt de naam op van de gamelobby
      *
@@ -201,5 +201,10 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
     @Override
     public void removeListener(RemotePropertyListener remotePropertyListener, String string) throws RemoteException {
         basicPublisher.removeListener(remotePropertyListener, string);
+    }
+
+    @Override
+    public String getGroupID() throws RemoteException {
+        return this.groupID;
     }
 }

@@ -34,6 +34,7 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
     private IPlayer tisplayer;
     private boolean INGameLobby;
     private IGameLobby YourGL;
+    private String groupID;
     // Binding name for lobby
     private static final String bindingNameLobby = "lobby";
     
@@ -118,5 +119,9 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
     public IPlayer getPlayer()
     {
         return tisplayer;
+    }
+    
+    public void setGroupID(String groupID){
+        this.groupID = groupID;
     }
 }
