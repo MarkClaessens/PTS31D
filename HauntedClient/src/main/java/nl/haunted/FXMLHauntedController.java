@@ -107,8 +107,8 @@ public class FXMLHauntedController implements Initializable {
      *
      * @param lobby
      */
-    public void setLobby(ILobby lobby) {
-        this.lobby = lobby;
+    public void setLobby() {
+        this.lobby = controller.getLobby();
     }
     public void settisPlayer() {
         this.tisplayer = controller.getPlayer();
@@ -127,6 +127,7 @@ public class FXMLHauntedController implements Initializable {
         {     
             tisplayer.setName(TFchangenameplayer1.getText());
             setplayername();
+            TFroomname.setText(tisplayer.getName());
         }
     }
 

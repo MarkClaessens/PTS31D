@@ -5,7 +5,6 @@
  */
 package nl.haunted;
 
-
 import java.beans.PropertyChangeEvent;
 import java.io.IOException;
 import java.rmi.NotBoundException;
@@ -23,9 +22,10 @@ import javafx.scene.Parent;
 
 /**
  *
- * @author Mike Evers, 
+ * @author Mike Evers,
  */
 public class ClientController extends UnicastRemoteObject implements IClientController {
+
     private GameInfo gameInfo;
     private Chat chat;
     private final HauntedClient client;
@@ -39,11 +39,11 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
     private final InputController inputController;
     // Binding name for lobby
     private static final String bindingNameLobby = "lobby";
-    
-    public List<IGameLobby> getGameLobbys(){
+
+    public List<IGameLobby> getGameLobbys() {
         return gamelobbys;
     }
-    
+
     public ClientController(HauntedClient client, String ip) throws RemoteException {
         gamelobbys = new ArrayList();
         this.client = client;
@@ -52,22 +52,22 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
         INGameLobby = false;
         YourGL = null;
         inputController = new InputController();
-        
+
         //player = lobby.createPlayer("player", "get ip adress not implemented yeti");create return type for createplayer 
     }
-    
-    public void startClient(String ip) throws RemoteException{
+
+    public void startClient(String ip) throws RemoteException {
         // Locate registry at ip address (server) with port 8761.
         try {
             registry = LocateRegistry.getRegistry(ip, 8761);
         } catch (RemoteException ex) {
             System.out.println("Client: following exception was found: " + ex.getMessage());
         }
-        
+
         // Bind Lobby using registry.
-        if(registry != null){
+        if (registry != null) {
             try {
-                lobby = (ILobby)registry.lookup(bindingNameLobby);
+                lobby = (ILobby) registry.lookup(bindingNameLobby);
             } catch (RemoteException ex) {
                 System.out.println("Client: Cannot bind lobby");
                 System.out.println("Client: RemoteException: " + ex.getMessage());
@@ -78,9 +78,9 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
                 lobby = null;
             }
         }
-        
+
         // Subscribe to all changes on the gamelobby list of the lobby.
-        if(lobby  != null){
+        if (lobby != null) {
             try {
                 lobby.addListener(this, "gamelobbys");
             } catch (RemoteException ex) {
@@ -90,50 +90,52 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
         }
         tisplayer = lobby.createPlayer("player", "ipadres");
     }
-    
+
     /**
      * @param propertyChangeEvent
-     * @throws RemoteException 
+     * @throws RemoteException
      */
     @Override
     public void propertyChange(PropertyChangeEvent propertyChangeEvent) throws RemoteException {
         // NOG NIET AF WORK IN PROGRESS methode toevoegen om uit gamelobby te gaan.
-        gamelobbys = (List<IGameLobby>)propertyChangeEvent.getNewValue();
-        for(IGameLobby GL : gamelobbys)
-        {
-          for(IPlayer player : GL.getPlayers())
-          {
-              if(tisplayer == player)
-              {
-                INGameLobby = true;
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLGameLobby.fxml"));
-                  try {
-                      Node root = fxmlLoader.load();
-                      FXMLGameLobbyController GMC = (FXMLGameLobbyController) fxmlLoader.getController();                      
-                      GMC.setGameLobby(GL);
-                      HauntedClient.getStage().getScene().setRoot((Parent)root);
-                  } catch (IOException ex) {
-                      Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
-                  }
-                
-              }
-          }
+        gamelobbys = (List<IGameLobby>) propertyChangeEvent.getNewValue();
+        for (IGameLobby GL : gamelobbys) {
+            for (IPlayer player : GL.getPlayers()) {
+                if (tisplayer == player) {
+                    INGameLobby = true;
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLGameLobby.fxml"));
+                    try {
+                        Node root = fxmlLoader.load();
+                        FXMLGameLobbyController GMC = (FXMLGameLobbyController) fxmlLoader.getController();
+                        GMC.setGameLobby(GL);
+                        HauntedClient.getStage().getScene().setRoot((Parent) root);
+                    } catch (IOException ex) {
+                        Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                }
+            }
         }
     }
-    public IPlayer getPlayer()
-    {
+
+    public IPlayer getPlayer() {
         return tisplayer;
     }
-    
-    public void setGroupID(String groupID){
+
+    public void setGroupID(String groupID) {
         this.groupID = groupID;
     }
-    
-    public String getGroupID(){
+
+    public String getGroupID() {
         return this.groupID;
     }
-    
-    public InputController getInputController(){
+
+    public InputController getInputController() {
         return this.inputController;
     }
+
+    public ILobby getLobby() {
+        return lobby;
+    }
+
 }
