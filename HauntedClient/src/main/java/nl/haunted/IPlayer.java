@@ -32,6 +32,7 @@ public interface IPlayer extends Remote, RemotePublisher{
     public void setName(String naam) throws RemoteException;
     /**
      * vraag de ready status op van de speler
+     * 
      * @return ready
      * @throws java.rmi.RemoteException
      */
@@ -46,6 +47,7 @@ public interface IPlayer extends Remote, RemotePublisher{
     
     /**
      * set de ready status van de speler naar de waarde van de param
+     * 
      * @param ready 
      * @throws java.rmi.RemoteException 
      */
