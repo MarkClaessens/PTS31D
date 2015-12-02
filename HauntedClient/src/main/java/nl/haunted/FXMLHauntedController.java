@@ -10,9 +10,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import java.net.URL;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -34,7 +37,7 @@ import nl.haunted.IPlayer;
 
 /**
  *
- * @author Kevin Stoelers, Joris van de Wijgert, Cyril Brugman, Mark Claesens,
+ * @author Joris van de Wijgert, Cyril Brugman, Mark Claesens,
  * Mike Evers
  *
  */
@@ -48,6 +51,7 @@ public class FXMLHauntedController implements Initializable {
     ILobby lobby;
     ClientController controller;
     IPlayer tisplayer;
+    List<IGameLobby> gamelobbys;
     @FXML
     TextField TFchangenameplayer1;
     @FXML
@@ -80,7 +84,12 @@ public class FXMLHauntedController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         setController();
         settisPlayer();
-        setLobby();
+        setLobby();  
+        try {
+            setgamelobbys();
+        } catch (RemoteException ex) {
+            Logger.getLogger(FXMLHauntedController.class.getName()).log(Level.SEVERE, null, ex);
+        }
        /* BackgroundImage myBI = new BackgroundImage(new Image("lobbypic.jpg", 1024, 576, false, true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
@@ -109,8 +118,9 @@ public class FXMLHauntedController implements Initializable {
      * @param lobby
      */
     public void setLobby() {
-        this.lobby = controller.getLobby();
+        this.lobby = controller.getLobby();        
     }
+    
     public void settisPlayer() {
         this.tisplayer = controller.getPlayer();
     }
@@ -180,7 +190,7 @@ public class FXMLHauntedController implements Initializable {
      */
     public void exit() {
         try {
-            lobby.exit();
+            lobby.exit(controller.getPlayer());
         } catch (RemoteException ex) {
             Logger.getLogger(FXMLHauntedController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -190,5 +200,20 @@ public class FXMLHauntedController implements Initializable {
      * *
      * before the gui will be shown
      */
+    public void setgamelobbys() throws RemoteException
+    {
+        setLobby();
+        List<String> namen = new ArrayList<>();
+        for (IGameLobby GL : lobby.getGameLobbys()) 
+        {
+          namen.add("naam: " + GL.getName() + " maxfloors: " + GL.getMaxFloors() + " maxplayers: " + GL.getMaxPlayer());
+        }
+        LVgamelobbys.setItems(FXCollections.observableList(namen));
+    }
+    
+    public void refresh() throws RemoteException
+    {
+        setgamelobbys();
+    }
     
 }

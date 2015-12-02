@@ -38,6 +38,7 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
     private IGameLobby YourGL;
     private String groupID;
     private final InputController inputController;
+    
     // Binding name for lobby
     private static final String bindingNameLobby = "lobby";
 
@@ -97,8 +98,8 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
      * @throws RemoteException
      */
     @Override
-    public void propertyChange(PropertyChangeEvent propertyChangeEvent) throws RemoteException {
-        // NOG NIET AF WORK IN PROGRESS methode toevoegen om uit gamelobby te gaan.
+    public void propertyChange(PropertyChangeEvent propertyChangeEvent) throws RemoteException {       
+                   
         gamelobbys = (List<IGameLobby>) propertyChangeEvent.getNewValue();
         for (IGameLobby GL : gamelobbys) {
             for (IPlayer player : GL.getPlayers()) {
@@ -139,5 +140,6 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
     public ILobby getLobby() {
         return lobby;
     }
+    
 
 }

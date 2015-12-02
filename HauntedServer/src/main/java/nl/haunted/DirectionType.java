@@ -10,8 +10,6 @@ package nl.haunted;
  * @author jvdwi
  */
 public enum DirectionType {
-
-
     UP,
     DOWN,
     LEFT,

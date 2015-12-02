@@ -28,7 +28,7 @@ public class gamefeed {
     private void setupGameInfo() throws IOException, ClassNotFoundException {
         boolean setup = false;
         while (!setup) {
-            Object[][] o = soc.receive();
+            Object[][] o = soc.receiveObject();
             if (o[0][0] == "Server") {
                 int ghostLives = (int) o[1][0];
                 int currentFloor = (int) o[1][1];
@@ -69,7 +69,7 @@ public class gamefeed {
     }
 
     public void decompressFeed() throws IOException, ClassNotFoundException {
-        Object[][] o = soc.receive();
+        Object[][] o = soc.receiveObject();
         if ("Server".equals((String) o[0][0])) {
             //set gameinfo
             gameInfo.setGhostLives((int) o[1][0]);

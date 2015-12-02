@@ -24,13 +24,12 @@ import java.util.logging.Logger;
 public class GameLobby extends UnicastRemoteObject implements IGameLobby {
 
     private String name, password;
-    private int maxPlayer, maxFloors;
+    private int maxPlayers, maxFloors;
     private IPlayer host;
     private List<Message> messages;
     private List<IPlayer> players;
     private BasicPublisher basicPublisher;
     private static int gameLobbyNum = 0;
-    private final Socket msgSoc;
     private String groupID;
 
     /**
@@ -48,7 +47,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         this.password = password;
         this.host = host;
         this.messages = new ArrayList();
-        this.maxPlayer = maxPlayers;
+        this.maxPlayers = maxPlayers;
         this.maxFloors = maxFloors;
         this.players = new ArrayList();
         String[] props = new String[1];
@@ -57,11 +56,9 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         players.add(host);
 
         //<socket>
-        msgSoc = new Socket();
         int groupIdNum = 234567890 + gameLobbyNum;
         String stringConverter = "" + groupIdNum;
         groupID = stringConverter.substring(0, 3) + "." + stringConverter.substring(4, 5) + "." + stringConverter.substring(6, 7) + "." + stringConverter.substring(8, 9);
-        msgSoc.socketSetup(groupID, 9877);
         gameLobbyNum++;
         //</socket>
 
@@ -82,19 +79,8 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
                 } catch (IOException ex) {
                     Logger.getLogger(GameLobby.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
             }
         }
-    }
-
-    /**
-     * verstuurt een message naar de andere spelers
-     *
-     * @param message
-     */
-    @Override
-    public void sendMessage(String message) throws RemoteException {
-      //  Message bericht = new Message(message, host);
     }
 
     /**
@@ -117,7 +103,6 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         } else {
             return false;
         }
-
     }
 
     /**
@@ -134,7 +119,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
                 exist = true;
             }
         }
-        if (exist == false) {
+        if (exist == false && this.players.size() + 1 >= this.maxPlayers) {
             players.add((IPlayer) player);
             this.basicPublisher.inform(this, "players", null, players);
             return true;
@@ -160,7 +145,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
      */
     @Override
     public int getMaxPlayer() throws RemoteException {
-        return maxPlayer;
+        return maxPlayers;
     }
 
     /**

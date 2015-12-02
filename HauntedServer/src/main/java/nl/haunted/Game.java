@@ -20,8 +20,8 @@ import java.util.Timer;
  */
 public class Game {
 
-    private final int floorAmount;
-    private int currentFloor;
+    private final int floorAmount; // starts at 1
+    private int currentFloor = -1; // starts at 0 so the init has to be -1.
     private Timer tickTimer;
     private boolean running, roundEnded, nextRound;
     private Level level;
@@ -77,16 +77,20 @@ public class Game {
         srvSoc = new Socket();
         srvSoc.socketSetup(groupID, 9876);
         Random randomizer = new Random();
+        // the minimum floors is hardcoded to 3 right now.
         this.floorAmount = randomizer.nextInt(floors - 3 + 1) + 3;
         this.currentFloor = 0;
         this.gameLobby = gl;
+        
+        // Create the first level.
     }
 
     /**
-     *
+     * Creates the new level object when a level has finished. 
      */
     public void nextLevel() {
-
+        this.currentFloor++;
+        this.level = new Level(currentFloor);
     }
 
     /**
@@ -130,7 +134,8 @@ public class Game {
             //check if the list of ghosts is empty
             // <editor-fold defaultstate="collapsed" desc="if there are ghosts">
             if (!this.ghosts.isEmpty()) {
-                Object[] keyboard =null;// = this.gameFX.getPressedKeys();
+                DirectionType[] keyboard = null; 
+                
                 // <editor-fold defaultstate="collapsed" desc="if there is a pressed key TODO: get keypresses">
                 if (keyboard != null) {
                     //go through every player
@@ -176,7 +181,7 @@ public class Game {
             else { // if there are no ghosts.
                 this.endRound();
             }
-            srvSoc.sendObj(this.compressGameInfo());
+            srvSoc.sendObject(this.compressGameInfo());
         } // server runnin & !pauzed
          // server runnin & !pauzed
     }
@@ -236,7 +241,7 @@ public class Game {
     public void setupGameClasses() {
 
     }
-
+    
     /**
      *
      */
@@ -253,10 +258,10 @@ public class Game {
     }
 
     /**
-     *
+     * Send with a socket the backgroundInt of the level to the Client
      */
-    public void sendMapFiles() {
-
+    public void sendLevelBackground() {
+        
     }
 
     private Human getCurrentHuman() {

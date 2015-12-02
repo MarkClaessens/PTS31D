@@ -36,12 +36,12 @@ public interface ILobby extends Remote, RemotePublisher {
             int maxFloors, int maxPlayers) throws RemoteException;
     
     /**
-     * This method will delete the player from the gamelobby.
+     * This method will delete the player from the lobby.
      * So the player can leave the gamelobby.
      * 
      * @throws java.rmi.RemoteException
      */
-    public void exit() throws RemoteException;
+    public void exit(IPlayer player) throws RemoteException;
     
     /**
      * 

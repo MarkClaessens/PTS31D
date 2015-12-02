@@ -5,9 +5,8 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.RMISocketFactory;
-import java.util.logging.Level;
+//import java.util.logging.Level;
 import java.util.logging.Logger;
-import static javafx.application.Application.launch;
 
 /**
  * This class starts the game server.
@@ -59,7 +58,7 @@ public class HauntedServer {
             // Create server
             RMISocketFactory.setSocketFactory(new MyServerRMISocketFactory());
         } catch (IOException ex) {
-            Logger.getLogger(HauntedServer.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         System.setProperty("java.rmi.server.hostname", "127.0.0.1");
         HauntedServer server = new HauntedServer();

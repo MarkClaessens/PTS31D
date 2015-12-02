@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 public class HauntedClient extends Application {
     private static ClientController controller;    
     private static Stage primaryStage;
+    private static FXMLHauntedController HC;
     
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -57,7 +58,7 @@ public class HauntedClient extends Application {
     }
     public static Stage getStage(){
         return primaryStage;
-    }
+    }    
     /**
      * @param args the command line arguments
      */

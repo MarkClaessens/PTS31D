@@ -17,10 +17,11 @@ public class InputController {
     private Socket inputSocket;
     private ArrayList<String> messages;
     private DirectionType direction;
+    Socket inputSocket;
+    DirectionType direction;
 
     public InputController() {
         this.inputSocket = new Socket();
-        messages = new ArrayList();
     }
 
     public Socket getInputSocket() {
@@ -31,29 +32,12 @@ public class InputController {
         this.direction = direction;
     }
 
-    public void addMessage(String s) {
-        this.messages.add(s);
+    public void sendMessage(String s) throws IOException {
+        this.inputSocket.sendInput(s, 9877);
     }
 
-    private String[] compressInput() throws IOException {
-        String[] sb = new String[messages.size()+1];
-        sb[0] = direction.toString();
-        int i = 1;
-        String ip = "["+this.inputSocket.getCurrentNIC().getInetAddresses().nextElement().getHostAddress()+"]:";
-        for(String s: messages){
-            sb[i] = ip+s;
-            i++;
-        }    
-        return sb;
-    }
-    
-    private void clearInput(){
-        this.direction = null;
-        this.messages.clear();
-    }
     public void sendInput() throws IOException{
-        this.inputSocket.sendInput(this.compressInput());
-        
+        this.inputSocket.sendInput(this.direction.toString(), 9876);
     }
     
 
