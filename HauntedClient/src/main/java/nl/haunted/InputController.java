@@ -32,7 +32,7 @@ public class InputController {
     }
 
     private String[] compressInput() throws IOException {
-        String[] sb = null;
+        String[] sb = new String[messages.size()+1];
         sb[0] = direction.toString();
         int i = 1;
         String ip = "["+this.inputSocket.getCurrentNIC().getInetAddresses().nextElement().getHostAddress()+"]:";
