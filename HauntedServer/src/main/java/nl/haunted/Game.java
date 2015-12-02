@@ -130,7 +130,8 @@ public class Game {
             //check if the list of ghosts is empty
             // <editor-fold defaultstate="collapsed" desc="if there are ghosts">
             if (!this.ghosts.isEmpty()) {
-                Object[] keyboard =null;// = this.gameFX.getPressedKeys();
+                DirectionType[] keyboard = null; 
+                
                 // <editor-fold defaultstate="collapsed" desc="if there is a pressed key TODO: get keypresses">
                 if (keyboard != null) {
                     //go through every player
@@ -176,7 +177,7 @@ public class Game {
             else { // if there are no ghosts.
                 this.endRound();
             }
-            srvSoc.sendObj(this.compressGameInfo());
+            srvSoc.sendObject(this.compressGameInfo());
         } // server runnin & !pauzed
          // server runnin & !pauzed
     }
@@ -236,7 +237,7 @@ public class Game {
     public void setupGameClasses() {
 
     }
-
+    
     /**
      *
      */

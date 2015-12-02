@@ -222,14 +222,14 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
      * @param event
      */
     @FXML
-    private void sendMessage(MouseEvent event) 
+    private void sendMessage(MouseEvent event) throws IOException 
     {        
         currentText = TAchatBox.getText();
         TAchatBox.clear();
         if (!TFmessage.getText().isEmpty()) 
         {
             String bericht = TFmessage.getText();
-            this.controller.getInputController().addMessage(bericht);
+            this.controller.getInputController().sendMessage(bericht);
             
             
         } 

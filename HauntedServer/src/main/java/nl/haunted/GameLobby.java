@@ -30,7 +30,6 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
     private List<IPlayer> players;
     private BasicPublisher basicPublisher;
     private static int gameLobbyNum = 0;
-    private final Socket msgSoc;
     private String groupID;
 
     /**
@@ -57,11 +56,9 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         players.add(host);
 
         //<socket>
-        msgSoc = new Socket();
         int groupIdNum = 234567890 + gameLobbyNum;
         String stringConverter = "" + groupIdNum;
         groupID = stringConverter.substring(0, 3) + "." + stringConverter.substring(4, 5) + "." + stringConverter.substring(6, 7) + "." + stringConverter.substring(8, 9);
-        msgSoc.socketSetup(groupID, 9877);
         gameLobbyNum++;
         //</socket>
 

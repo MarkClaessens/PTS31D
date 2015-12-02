@@ -38,6 +38,7 @@ public class Socket {
 
     public void socketSetup(String groupname, int port) throws IOException {
         sock = new MulticastSocket(port);
+        sock.setLoopbackMode(false);
         groupIp = InetAddress.getByName(groupname);
         Scanner input = new Scanner(System.in);
         nic = this.getLoopbackNick();//this.getCurrentNIC(); //commented for futuure over internet support
@@ -55,7 +56,7 @@ public class Socket {
         return nic;
     }
 
-    public void sendObj(Object o) throws IOException {
+    public void sendObject(Object o) throws IOException {
         ByteArrayOutputStream byteStream = new ByteArrayOutputStream(5000);
         try (ObjectOutputStream os = new ObjectOutputStream(new BufferedOutputStream(byteStream))) {
             os.flush();
@@ -70,22 +71,14 @@ public class Socket {
         }
     }
 
-    public void sendInput(String[] s) throws IOException {
-        ByteArrayOutputStream byteStream = new ByteArrayOutputStream(5000);
-        try (ObjectOutputStream os = new ObjectOutputStream(new BufferedOutputStream(byteStream))) {
-            os.flush();
-            os.writeObject(s);
-            os.flush();
-            //retrieves byte array
-            byte[] buf = byteStream.toByteArray();
-            DatagramPacket packet = new DatagramPacket(
-                    buf, buf.length, groupIp, 9877);
-            int byteCount = packet.getLength();
-            sock.send(packet);
-        }
+    public void sendInput(String s, int port) throws IOException {
+        byte[] buf = s.getBytes();
+        DatagramPacket packet = new DatagramPacket(
+                buf, buf.length, groupIp, port);
+        sock.send(packet);
     }
 
-    public Object[][] receive() throws IOException, ClassNotFoundException {
+    public Object[][] receiveObject() throws IOException, ClassNotFoundException {
         byte[] recvBuf = new byte[5000];
         DatagramPacket packet = new DatagramPacket(recvBuf,
                 recvBuf.length);
@@ -97,6 +90,15 @@ public class Socket {
             o = is.readObject();
         }
         return (Object[][]) (o);
+    }
+
+    public String receiveInput() throws IOException, ClassNotFoundException {
+        byte[] recvBuf = new byte[1000];
+        DatagramPacket packet = new DatagramPacket(recvBuf,
+                recvBuf.length);
+        sock.receive(packet);
+        String s = new String(packet.getData(), 0, packet.getLength());
+        return s;
     }
 
     public void close() throws IOException {
@@ -122,17 +124,18 @@ public class Socket {
         });
         out.printf("\n");
     }
-    
+
     public NetworkInterface getLoopbackNick() throws SocketException {
         Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
         OUTER:
-        for(NetworkInterface interface_ : Collections.list(interfaces)){
-            if(interface_.isLoopback()){
+        for (NetworkInterface interface_ : Collections.list(interfaces)) {
+            if (interface_.isLoopback()) {
                 return interface_;
             }
         }
         return null;
     }
+
     public NetworkInterface getCurrentNIC() throws SocketException, IOException {
         // iterate over the network interfaces known to java
         Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
