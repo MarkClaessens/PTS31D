@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author jvdwi
+ * @author Mike Evers
  */
 public class Message {
 
