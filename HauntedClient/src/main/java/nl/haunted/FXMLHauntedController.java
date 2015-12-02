@@ -37,7 +37,7 @@ import nl.haunted.IPlayer;
 
 /**
  *
- * @author Kevin Stoelers, Joris van de Wijgert, Cyril Brugman, Mark Claesens,
+ * @author Joris van de Wijgert, Cyril Brugman, Mark Claesens,
  * Mike Evers
  *
  */
@@ -190,7 +190,7 @@ public class FXMLHauntedController implements Initializable {
      */
     public void exit() {
         try {
-            lobby.exit();
+            lobby.exit(controller.getPlayer());
         } catch (RemoteException ex) {
             Logger.getLogger(FXMLHauntedController.class.getName()).log(Level.SEVERE, null, ex);
         }

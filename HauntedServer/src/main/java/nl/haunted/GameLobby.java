@@ -79,19 +79,8 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
                 } catch (IOException ex) {
                     Logger.getLogger(GameLobby.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
             }
         }
-    }
-
-    /**
-     * verstuurt een message naar de andere spelers
-     *
-     * @param message
-     */
-    @Override
-    public void sendMessage(String message) throws RemoteException {
-      //  Message bericht = new Message(message, host);
     }
 
     /**

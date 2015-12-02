@@ -24,14 +24,6 @@ public interface IGameLobby extends Remote, RemotePublisher {
     public void startGame() throws RemoteException;
 
     /**
-     * een speler verstuurt een bericht naar de andere spelers in de gamelobby
-     *
-     * @param message
-     * @throws java.rmi.RemoteException
-     */
-    public void sendMessage(String message) throws RemoteException;
-
-    /**
      * kijkt of een speler uit de room verwijdert kan worden. als dit kan dan
      * wordt hij verwijdert.
      *
