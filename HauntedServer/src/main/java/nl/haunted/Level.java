@@ -59,13 +59,15 @@ public class Level {
     public Level(int floorNr) {
         this.floorNr = floorNr;
         pickCollisionMap();
+        generateDoorLocation();
+        generateKeyLocation();
     }
 
     /**
      * Generates the spawn location of the key.
      */
     private void generateKeyLocation() {
-
+        // TODO mike
     }
 
     /**
