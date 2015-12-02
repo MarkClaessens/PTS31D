@@ -95,7 +95,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         paneel.setBackground(new Background(myBI));*/
         
         
-        
+        System.out.println("kaas");
         // Set the groupID in ClientController to the groupID of this gamelobby.
         
     }
@@ -104,6 +104,11 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
      * *
      * sets playernames in listview
      */
+    private void gamesettings() throws RemoteException 
+    {
+        TAgegevens.setText("naam: " + gamelobby.getName() + "\n" + "maxfloors: " + String.valueOf(gamelobby.getMaxFloors()) + "\n" + "maxplayers: " + String.valueOf(gamelobby.getMaxPlayer()));
+        
+    }
     private void playernames() throws RemoteException 
     {
         List<String> namen = new ArrayList<>();
@@ -133,6 +138,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         subscribeToAllPlayers();
         try {
             playernames();
+            gamesettings();
         } catch (RemoteException ex) {
             Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -151,6 +157,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         } catch (IOException ex) {
             Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         
         
     }
@@ -287,8 +294,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
      */
     
     public void subscribeToAllPlayers(){
-        // When joining the gamelobby subscribe to every player's ready status.
-        List<IPlayer> players = null;
+        // When joining the gamelobby subscribe to every player's ready status.       
         try {
             players = gamelobby.getPlayers();
         } catch (RemoteException ex) {

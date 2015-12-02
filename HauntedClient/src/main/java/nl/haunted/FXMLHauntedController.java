@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import java.net.URL;
 import java.rmi.RemoteException;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,6 +49,7 @@ public class FXMLHauntedController implements Initializable {
     ILobby lobby;
     ClientController controller;
     IPlayer tisplayer;
+    List<IGameLobby> gamelobbys;
     @FXML
     TextField TFchangenameplayer1;
     @FXML
@@ -110,6 +112,9 @@ public class FXMLHauntedController implements Initializable {
      */
     public void setLobby() {
         this.lobby = controller.getLobby();
+    }
+    public void setgamelobbys() {
+        this.gamelobbys = controller.getGameLobbys();
     }
     public void settisPlayer() {
         this.tisplayer = controller.getPlayer();
