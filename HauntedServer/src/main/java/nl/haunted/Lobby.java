@@ -25,7 +25,7 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
     private final List<IGameLobby> gameLobbys;
 
     private final BasicPublisher basicPublisher;
-    private List<Player> players;
+    private List<IPlayer> players;
 
     /**
      * @throws java.rmi.RemoteException
@@ -56,8 +56,16 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
     }
 
     @Override
-    public void exit() throws RemoteException {
-
+    public void exit(IPlayer player) throws RemoteException {
+        boolean exist = false;
+        for (IPlayer speler : players) {
+            if (player == speler) {
+                exist = true;
+            }
+        }
+        if (exist) {
+            players.remove(player);
+        } 
     }
 
     @Override

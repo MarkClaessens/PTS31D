@@ -114,7 +114,6 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         } else {
             return false;
         }
-
     }
 
     /**
