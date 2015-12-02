@@ -79,7 +79,7 @@ public class FXMLHauntedController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         setController();
-       // settisPlayer();
+        settisPlayer();
        /* BackgroundImage myBI = new BackgroundImage(new Image("lobbypic.jpg", 1024, 576, false, true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
@@ -98,7 +98,7 @@ public class FXMLHauntedController implements Initializable {
      * set the playernames in the textfields
      */
     private void setplayername() throws RemoteException {
-    //   TFchangenameplayer1.setText(tisplayer.getName());        
+       TFchangenameplayer1.setText(tisplayer.getName());        
     }
 
     /**
@@ -125,7 +125,7 @@ public class FXMLHauntedController implements Initializable {
         
         if (!TFchangenameplayer1.getText().isEmpty()) 
         {     
-            //tisplayer.setName(TFchangenameplayer1.getText()); !!!!Create setName for player!!!!
+            tisplayer.setName(TFchangenameplayer1.getText()); !!!!Create setName for player!!!!
             setplayername();
         }
     }
