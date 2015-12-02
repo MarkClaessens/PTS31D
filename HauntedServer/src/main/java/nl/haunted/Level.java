@@ -10,12 +10,13 @@ import java.awt.image.BufferedImage;
 
 /**
  *
- * @author jvdwi
+ * @author Mike Evers
  */
 public class Level {
 
-    private int floorNr, ghostLifePool, width, height;
+    private int floorNr, ghostLifePool;
     private Point2D keyLocation, doorLocation;
+    private DirectionType doorDirection;
     private BufferedImage collisionMap, map;
 
     public int getCurrentFoor() {
@@ -37,6 +38,10 @@ public class Level {
     public Point2D getDoorLocation() {
         return this.doorLocation;
     }
+    
+    public DirectionType getDoorDirection(){
+        return doorDirection;
+    }
 
     public BufferedImage getCollisionMap() {
         return collisionMap;
@@ -51,36 +56,29 @@ public class Level {
     }
 
     /**
-     *
+     * Generates the spawn location of the key.
      */
     private void generateKeyLocation() {
 
     }
 
     /**
-     *
+     * Generates the spawn location of the door.
      */
     private void generateDoorLocation() {
 
     }
 
     /**
-     *
+     * Generates the maze of the level. 
      */
     private void generateLayout() {
 
     }
 
     /**
-     *
-     */
-    private void placeObstacles() {
-
-    }
-
-    /**
-     *
-     * @return
+     * Generates the collisionmap of the level.
+     * @return the collisionmap of the level.
      */
     public BufferedImage generateMapFiles() {
         return null;
