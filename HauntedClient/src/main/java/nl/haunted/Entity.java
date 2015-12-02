@@ -52,6 +52,10 @@ public class Entity {
         return this.type;
     }
 
+    public DirectionType getDirection() {
+        return this.direction;
+    }
+
     public void setDirection(DirectionType dir) {
         this.direction = dir;
     }
@@ -63,16 +67,16 @@ public class Entity {
     public void setSprites(ArrayList<String> spriteList) {
         this.sprites = spriteList;
     }
-    
-    public Point2D getPosition(){
+
+    public Point2D getPosition() {
         return this.position;
     }
 
     public void setPosition(Point2D pos) {
         this.position = pos;
     }
-    
-    public Color getColor(){
+
+    public Color getColor() {
         return this.color;
     }
 

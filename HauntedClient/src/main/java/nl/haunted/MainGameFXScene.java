@@ -126,16 +126,17 @@ public class MainGameFXScene {
         for (ImageProps imgp : imgProps) {
             switch (imgp.getEntity().getType()) {
                 case Door:
-                    drawRotatedImage(keyDoorGc, imgp.getImage(0),0, imgp.getEntity().getPosition().getX(), imgp.getEntity().getPosition().getY(), horScale, verScale);
+                    drawRotatedImage(keyDoorGc, imgp.getImage(0), getAngle(imgp.getEntity().getDirection()), imgp.getEntity().getPosition().getX(), imgp.getEntity().getPosition().getY(), horScale, verScale);
                     break;
                 case Key:
                     //todo : draw key image
+                    drawRotatedImage(keyDoorGc, imgp.getImage(0), getAngle(imgp.getEntity().getDirection()), imgp.getEntity().getPosition().getX(), imgp.getEntity().getPosition().getY(), horScale, verScale);
                     break;
                 case Human:
-                    //todo : draw animated human
+                    //todo : draw animated human images
                     break;
                 case Ghost:
-                    //todo : draw animated ghost
+                    //todo : draw animated ghost images
                     break;
             }
         }
