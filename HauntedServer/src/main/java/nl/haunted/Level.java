@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package nl.haunted;
 
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 /**
  *
@@ -14,11 +10,15 @@ import java.awt.image.BufferedImage;
  */
 public class Level {
 
-    private int floorNr, ghostLifePool;
+    private int floorNr, ghostLifePool, backgroundInt;
     private Point2D keyLocation, doorLocation;
     private DirectionType doorDirection;
-    private BufferedImage collisionMap, map;
+    private BufferedImage collisionMap;
 
+    public int getBackgroundInt(){
+        return backgroundInt;
+    }
+    
     public int getCurrentFoor() {
         return this.floorNr;
     }
@@ -53,6 +53,7 @@ public class Level {
      */
     public Level(int floorNr) {
         this.floorNr = floorNr;
+        generateLayout();
     }
 
     /**
@@ -70,17 +71,11 @@ public class Level {
     }
 
     /**
-     * Generates the maze of the level. 
+     * Picks a random collisionMap (level background) and sets the background int.
      */
     private void generateLayout() {
-
-    }
-
-    /**
-     * Generates the collisionmap of the level.
-     * @return the collisionmap of the level.
-     */
-    public BufferedImage generateMapFiles() {
-        return null;
+        //Pick a number between 1 and 6 that represents the level (backgroundX)
+        Random randomizer = new Random();
+        this.backgroundInt =  randomizer.nextInt(6) + 1;
     }
 }

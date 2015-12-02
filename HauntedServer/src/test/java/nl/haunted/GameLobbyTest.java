@@ -113,20 +113,6 @@ public class GameLobbyTest {
     }
 
     /**
-     * Test of sendMessage method, of class GameLobby.
-     */
-    @Test
-    public void testSendMessage() throws RemoteException {
-        System.out.println("sendMessage");
-        String message = "message1";
-        GameLobby instance = globby;
-        instance.sendMessage(message);
-        boolean expResult = true;
-        boolean result = false;
-        assertEquals(expResult, result);
-    }
-
-    /**
      * Test of addPlayer method, of class GameLobby.
      */
     @Test

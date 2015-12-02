@@ -20,8 +20,8 @@ import java.util.Timer;
  */
 public class Game {
 
-    private final int floorAmount;
-    private int currentFloor;
+    private final int floorAmount; // starts at 1
+    private int currentFloor = -1; // starts at 0 so the init has to be -1.
     private Timer tickTimer;
     private boolean running, roundEnded, nextRound;
     private Level level;
@@ -77,16 +77,20 @@ public class Game {
         srvSoc = new Socket();
         srvSoc.socketSetup(groupID, 9876);
         Random randomizer = new Random();
+        // the minimum floors is hardcoded to 3 right now.
         this.floorAmount = randomizer.nextInt(floors - 3 + 1) + 3;
         this.currentFloor = 0;
         this.gameLobby = gl;
+        
+        // Create the first level.
     }
 
     /**
-     *
+     * Creates the new level object when a level has finished. 
      */
     public void nextLevel() {
-
+        this.currentFloor++;
+        this.level = new Level(currentFloor);
     }
 
     /**
@@ -254,10 +258,10 @@ public class Game {
     }
 
     /**
-     *
+     * Send with a socket the backgroundInt of the level to the Client
      */
-    public void sendMapFiles() {
-
+    public void sendBackground() {
+        
     }
 
     private Human getCurrentHuman() {
