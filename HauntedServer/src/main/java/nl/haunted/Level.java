@@ -3,6 +3,7 @@ package nl.haunted;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.Random;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -77,5 +78,11 @@ public class Level {
         //Pick a number between 1 and 6 that represents the level (backgroundX)
         Random randomizer = new Random();
         this.backgroundInt =  randomizer.nextInt(6) + 1;
+        
+        // Load the random choosen collisionMap.
+//        ImageIO.read("")
+//        ImageIO.read("res/testMap.png");
+
+//        this.collisionMap = new BufferedImage();
     }
 }

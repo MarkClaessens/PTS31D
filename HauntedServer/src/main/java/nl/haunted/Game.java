@@ -260,7 +260,7 @@ public class Game {
     /**
      * Send with a socket the backgroundInt of the level to the Client
      */
-    public void sendBackground() {
+    public void sendLevelBackground() {
         
     }
 
