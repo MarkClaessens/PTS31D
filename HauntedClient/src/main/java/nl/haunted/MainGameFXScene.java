@@ -33,6 +33,8 @@ public class MainGameFXScene {
     private Scene scene;
     private Group root;
 
+    private int state;
+
     //background
     private Canvas bgLayer;
     private GraphicsContext bgGc;
@@ -51,6 +53,7 @@ public class MainGameFXScene {
     public Scene MainGameFX(gamefeed gf) {
         imgProps = new ArrayList();
         this.gf = gf;
+        state = 0;
         this.bgImage = gf.gameInfo.getBackgroundImage();
         levelDrawWidth = bgImage.getWidth();
         levelDrawHeight = bgImage.getHeight();
@@ -129,14 +132,20 @@ public class MainGameFXScene {
                     drawRotatedImage(keyDoorGc, imgp.getImage(0), getAngle(imgp.getEntity().getDirection()), imgp.getEntity().getPosition().getX(), imgp.getEntity().getPosition().getY(), horScale, verScale);
                     break;
                 case Key:
-                    //todo : draw key image
                     drawRotatedImage(keyDoorGc, imgp.getImage(0), getAngle(imgp.getEntity().getDirection()), imgp.getEntity().getPosition().getX(), imgp.getEntity().getPosition().getY(), horScale, verScale);
                     break;
                 case Human:
                     //todo : draw animated human images
+                    drawRotatedImage(humanGc, getAnimatedImage(imgp.getImages()), getAngle(imgp.getEntity().getDirection()), imgp.getEntity().getPosition().getX(), imgp.getEntity().getPosition().getY(), horScale, verScale);
                     break;
                 case Ghost:
                     //todo : draw animated ghost images
+                    if (imgp.getEntity().getWall()) {
+                        int xPos = (((int) imgp.getEntity().getPosition().getX()) + 50) / 100 * 100;
+                        int yPos = (((int) imgp.getEntity().getPosition().getY()) + 50) / 100 * 100;
+                        drawRotatedImage(ghostGc, imgp.getImage(4), 0, xPos, yPos, horScale, verScale);
+                    }
+                    drawRotatedImage(ghostGc, getAnimatedImage(imgp.getImages()), getAngle(imgp.getEntity().getDirection()), imgp.getEntity().getPosition().getX(), imgp.getEntity().getPosition().getY(), horScale, verScale);
                     break;
             }
         }
@@ -188,6 +197,25 @@ public class MainGameFXScene {
         } else {
             return "trans";
         }
+    }
+
+    private Image getAnimatedImage(Image[] sprites) {
+        Image returnImage = null;
+        switch (state) {
+            case 2:
+                returnImage = sprites[0];
+                state = 0;
+                break;
+            case 0:
+                returnImage = sprites[1];
+                state = 1;
+                break;
+            case 1:
+                returnImage = sprites[2];
+                state = 2;
+                break;
+        }
+        return returnImage;
     }
 
     private void determineScreenSizes() {
