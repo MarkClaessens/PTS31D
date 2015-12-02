@@ -26,8 +26,11 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import nl.haunted.ClientController;
+import nl.haunted.HauntedClient;
 import nl.haunted.IGameLobby;
 import nl.haunted.ILobby;
+import nl.haunted.IPlayer;
 
 /**
  *
@@ -76,7 +79,7 @@ public class FXMLHauntedController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         setController();
-        settisPlayer();
+       // settisPlayer();
        /* BackgroundImage myBI = new BackgroundImage(new Image("lobbypic.jpg", 1024, 576, false, true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
@@ -95,7 +98,7 @@ public class FXMLHauntedController implements Initializable {
      * set the playernames in the textfields
      */
     private void setplayername() throws RemoteException {
-       TFchangenameplayer1.setText(tisplayer.getName());        
+    //   TFchangenameplayer1.setText(tisplayer.getName());        
     }
 
     /**

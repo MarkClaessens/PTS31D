@@ -5,6 +5,7 @@
  */
 package nl.haunted;
 
+
 import java.beans.PropertyChangeEvent;
 import java.io.IOException;
 import java.rmi.NotBoundException;
@@ -102,10 +103,10 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
               if(tisplayer == player)
               {
                 INGameLobby = true;
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLGameLobby.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLGameLobby.fxml"));
                   try {
                       Node root = fxmlLoader.load();
-                      FXMLGameLobbyController GMC = (FXMLGameLobbyController) fxmlLoader.getController();
+                      FXMLGameLobbyController GMC = (FXMLGameLobbyController) fxmlLoader.getController();                      
                       GMC.setGameLobby(GL);
                       HauntedClient.getStage().getScene().setRoot((Parent)root);
                   } catch (IOException ex) {

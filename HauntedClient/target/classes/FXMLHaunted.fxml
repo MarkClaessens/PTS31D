@@ -7,8 +7,9 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import nl.haunted.*?>
 
-<AnchorPane id="AnchorPane" fx:id="paneel" prefHeight="576.0" prefWidth="756.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.haunted.FXMLHauntedController">
+<AnchorPane id="AnchorPane" fx:id="paneel" prefHeight="576.0" prefWidth="756.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLHauntedController">
     <children>
         <Label layoutX="401.0" layoutY="207.0" text="flooramount:" />
         <Label layoutX="401.0" layoutY="167.0" text="max. players:" />
@@ -21,8 +22,8 @@
         <TextField fx:id="TFroomname" layoutX="490.0" layoutY="81.0" promptText="roomname" />
         <TextField fx:id="TFpassword" layoutX="490.0" layoutY="122.0" promptText="password(optional)" />
       <ImageView fx:id="IVexit" fitHeight="56.0" fitWidth="134.0" layoutX="91.0" layoutY="38.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="IVexit1" fitHeight="56.0" fitWidth="134.0" layoutX="24.0" layoutY="200.0" onMouseClicked="#changename" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="IVexit11" fitHeight="56.0" fitWidth="134.0" layoutX="490.0" layoutY="253.0" onMouseClicked="#creategamelobby" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="IVRename" fitHeight="56.0" fitWidth="134.0" layoutX="24.0" layoutY="200.0" onMouseClicked="#changename" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="IVCreategamelobby" fitHeight="56.0" fitWidth="134.0" layoutX="490.0" layoutY="253.0" onMouseClicked="#creategamelobby" pickOnBounds="true" preserveRatio="true" />
       <ListView layoutX="6.0" layoutY="275.0" prefHeight="287.0" prefWidth="282.0" />
     </children>
 </AnchorPane>
