@@ -77,7 +77,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
             if (ready) {
                 Game game;
                 try {
-                    game = new Game(players, maxFloors, groupID);
+                    game = new Game(players, maxFloors, groupID, this);
                     game.startRound();
                 } catch (IOException ex) {
                     Logger.getLogger(GameLobby.class.getName()).log(Level.SEVERE, null, ex);

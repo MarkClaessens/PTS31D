@@ -21,4 +21,8 @@ public class Chat {
     public Chat(){
         this.messages = new ArrayList();
     }
+    
+    public void addMessage(String s){
+        this.messages.add(s);
+    }
 }

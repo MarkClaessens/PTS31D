@@ -31,6 +31,7 @@ public class Game {
     private List<Player> players;
     private IPlayer currentHuman;
     private Socket srvSoc;
+    private GameLobby gameLobby;
 
     public Level getLevel() {
         return level;
@@ -71,13 +72,14 @@ public class Game {
      * @param groupID
      * @throws java.io.IOException
      */
-    public Game(List<IPlayer> players, int floors, String groupID) throws IOException {
+    public Game(List<IPlayer> players, int floors, String groupID, GameLobby gl) throws IOException {
         //Setup the socket for this game;
         srvSoc = new Socket();
         srvSoc.socketSetup(groupID, 9876);
         Random randomizer = new Random();
         this.floorAmount = randomizer.nextInt(floors - 3 + 1) + 3;
         this.currentFloor = 0;
+        this.gameLobby = gl;
     }
 
     /**

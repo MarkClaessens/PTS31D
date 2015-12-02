@@ -58,6 +58,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     ILobby lobby;
     IPlayer tisplayer;    
     ClientController controller;
+    Socket msgSoc;
     
     private List<IPlayer> players;
     private transient ObservableList<String> observablePersonen;
@@ -104,7 +105,10 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         // Set the groupID in ClientController to the groupID of this gamelobby.
         try {
             controller.setGroupID(this.gamelobby.getGroupID());
+            controller.getInputController().getInputSocket().socketSetup(controller.getGroupID(), 8765);
         } catch (RemoteException ex) {
+            Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -215,11 +219,8 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         if (!TFmessage.getText().isEmpty()) 
         {
             String bericht = TFmessage.getText();
-            try {
-                gamelobby.sendMessage(bericht);
-            } catch (RemoteException ex) {
-                Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            this.controller.getInputController().addMessage(bericht);
+            
             
         } 
         else 

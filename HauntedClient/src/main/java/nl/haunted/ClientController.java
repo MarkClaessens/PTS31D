@@ -36,6 +36,7 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
     private boolean INGameLobby;
     private IGameLobby YourGL;
     private String groupID;
+    private final InputController inputController;
     // Binding name for lobby
     private static final String bindingNameLobby = "lobby";
     
@@ -50,6 +51,8 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
         gamelobbys = lobby.getGameLobbys();
         INGameLobby = false;
         YourGL = null;
+        inputController = new InputController();
+        
         //player = lobby.createPlayer("player", "get ip adress not implemented yeti");create return type for createplayer 
     }
     
@@ -124,5 +127,13 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
     
     public void setGroupID(String groupID){
         this.groupID = groupID;
+    }
+    
+    public String getGroupID(){
+        return this.groupID;
+    }
+    
+    public InputController getInputController(){
+        return this.inputController;
     }
 }

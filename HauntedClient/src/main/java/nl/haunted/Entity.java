@@ -18,7 +18,6 @@ public class Entity {
     private Point2D position;
     private DirectionType direction;
     private boolean moving, wall, Dead;
-    private ArrayList<String> sprites;
     private final EntityType type;
     private Color color;
 
@@ -62,10 +61,6 @@ public class Entity {
 
     public void setMoving(boolean mov) {
         this.moving = mov;
-    }
-
-    public void setSprites(ArrayList<String> spriteList) {
-        this.sprites = spriteList;
     }
 
     public Point2D getPosition() {

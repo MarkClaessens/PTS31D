@@ -70,7 +70,7 @@ public class Socket {
         }
     }
 
-    public void sendMes(String s) throws IOException {
+    public void sendInput(String[] s) throws IOException {
         ByteArrayOutputStream byteStream = new ByteArrayOutputStream(5000);
         try (ObjectOutputStream os = new ObjectOutputStream(new BufferedOutputStream(byteStream))) {
             os.flush();

@@ -106,4 +106,9 @@ public class gamefeed {
             }
         }
     }
+    
+    
+    public void compressInput(){
+        
+    }
 }
