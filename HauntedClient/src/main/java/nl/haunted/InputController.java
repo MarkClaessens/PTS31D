@@ -17,8 +17,8 @@ public class InputController {
     private Socket inputSocket;
     private ArrayList<String> messages;
     private DirectionType direction;
-    Socket inputSocket;
-    DirectionType direction;
+//    Socket inputSocket;
+//    DirectionType direction;
 
     public InputController() {
         this.inputSocket = new Socket();

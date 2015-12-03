@@ -37,17 +37,34 @@ public class GameInfo {
         this.key = key;
         entities = new ArrayList();
     }
+    
+    public int getGhostLives(){
+        return this.ghostLives;
+    }
 
     public void setGhostLives(int i) {
         this.ghostLives = i;
     }
+    
+    public int getCurrentFloor(){
+        return this.currentFloor;
+    }
 
     public void setCurrentFloor(int i) {
-        this.setCurrentFloor(i);
+        //this.setCurrentFloor(i);
+        this.currentFloor = i;
+    }
+    
+    public String getCurrentHuman(){
+        return this.currentHuman;
     }
 
     public void setCurrentHuman(String s) {
         this.currentHuman = s;
+    }
+    
+    public boolean getKey(){
+        return this.key;
     }
     
     public void setKey(boolean bool){

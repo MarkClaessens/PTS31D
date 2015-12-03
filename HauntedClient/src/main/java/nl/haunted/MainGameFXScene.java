@@ -20,6 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
+import javafx.scene.text.Font;
 import javafx.scene.transform.Rotate;
 
 //important for full screen http://stackoverflow.com/questions/16713554/how-to-change-scene-when-in-fullscreen-in-javafx-and-avoid-press-esc-to-exit-fu
@@ -43,8 +44,8 @@ public class MainGameFXScene {
     private GraphicsContext bgGc;
 
     //foreground
-    private Canvas keyDoorLayer, humanLayer, ghostLayer;
-    private GraphicsContext keyDoorGc, humanGc, ghostGc;
+    private Canvas keyDoorLayer, humanLayer, ghostLayer, textLayer;
+    private GraphicsContext keyDoorGc, humanGc, ghostGc, textGc;
 
     //Images:
     //Background map
@@ -100,6 +101,10 @@ public class MainGameFXScene {
         ghostLayer = new Canvas(screenWidth, screenHeight);
         ghostGc = ghostLayer.getGraphicsContext2D();
         root.getChildren().add(ghostLayer);
+        
+        textLayer = new Canvas(screenWidth, screenHeight);
+        textGc = textLayer.getGraphicsContext2D();
+        root.getChildren().add(textLayer);
 
         bgGc.drawImage(bgImage, 0, 0, levelDrawWidth * horScale, levelDrawHeight * verScale);
 
@@ -117,7 +122,9 @@ public class MainGameFXScene {
                 keyDoorGc.clearRect(0, 0, screenWidth, screenHeight);
                 humanGc.clearRect(0, 0, screenWidth, screenHeight);
                 ghostGc.clearRect(0, 0, screenWidth, screenHeight);
+                textGc.clearRect(0, 0, screenWidth, screenHeight);
                 drawImages();
+                drawTexts();
             }
         }.start();
 //        ImageView iv = new ImageView(image);
@@ -126,6 +133,20 @@ public class MainGameFXScene {
 //        iv.getTransforms().add(rotation);
 
         return scene;
+    }
+    
+    private void drawTexts(){
+        textGc.setFont(new Font("Courier New", 14.0));
+        textGc.setStroke(Color.BLACK);
+        textGc.strokeText("Ghost lives left: "+gf.gameInfo.getGhostLives(), 10, 14);
+        textGc.strokeText("Current floor: " + gf.gameInfo.getCurrentFloor(), 10, 30);
+        textGc.strokeText("Current human: " + gf.gameInfo.getCurrentHuman(), 10, 46);
+        if(gf.gameInfo.getKey()){
+            textGc.strokeText("Key has been picked up by human", 10, 62);
+        }
+        else{
+            textGc.strokeText("Key hasn't been picked up by the human yet", 10, 62);
+        }
     }
 
     /**
