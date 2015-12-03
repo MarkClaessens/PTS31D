@@ -90,7 +90,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
      * @return
      */
     @Override
-    public boolean removePlayer(IPlayer player) throws RemoteException {
+    public synchronized boolean removePlayer(IPlayer player) throws RemoteException {
         boolean exist = false;
         for (IPlayer speler : players) {
             if (player == speler) {
@@ -112,7 +112,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
      * @return
      */
     @Override
-    public boolean addPlayer(IPlayer player) throws RemoteException {
+    public synchronized boolean addPlayer(IPlayer player) throws RemoteException {
         boolean exist = false;
         for (IPlayer speler : players) {
             if (speler == player) {
