@@ -183,33 +183,33 @@ public class MainGameFXScene {
                 new EventHandler<KeyEvent>() {
                     public void handle(KeyEvent e) {
                         String code = e.getCode().toString();
-                        
+
                         switch (code) {
-                                case "W":
-                                    HauntedClient.getController().getInputController().setDirection(null);
-                                    break;
-                                case "A":
-                                    HauntedClient.getController().getInputController().setDirection(null);
-                                    break;
-                                case "S":
-                                    HauntedClient.getController().getInputController().setDirection(null);
-                                    break;
-                                case "D":
-                                    HauntedClient.getController().getInputController().setDirection(null);
-                                    break;
-                                case "UP":
-                                    HauntedClient.getController().getInputController().setDirection(null);
-                                    break;
-                                case "LEFT":
-                                    HauntedClient.getController().getInputController().setDirection(null);
-                                    break;
-                                case "DOWN":
-                                    HauntedClient.getController().getInputController().setDirection(null);
-                                    break;
-                                case "RIGHT":
-                                    HauntedClient.getController().getInputController().setDirection(null);
-                                    break;
-                            }
+                            case "W":
+                                HauntedClient.getController().getInputController().setDirection(null);
+                                break;
+                            case "A":
+                                HauntedClient.getController().getInputController().setDirection(null);
+                                break;
+                            case "S":
+                                HauntedClient.getController().getInputController().setDirection(null);
+                                break;
+                            case "D":
+                                HauntedClient.getController().getInputController().setDirection(null);
+                                break;
+                            case "UP":
+                                HauntedClient.getController().getInputController().setDirection(null);
+                                break;
+                            case "LEFT":
+                                HauntedClient.getController().getInputController().setDirection(null);
+                                break;
+                            case "DOWN":
+                                HauntedClient.getController().getInputController().setDirection(null);
+                                break;
+                            case "RIGHT":
+                                HauntedClient.getController().getInputController().setDirection(null);
+                                break;
+                        }
                     }
                 }
         );
@@ -296,225 +296,283 @@ public class MainGameFXScene {
 
         Color c = e.getColor();
         if (c == Color.WHITE) {
-            switch (state) {
-                case 2:
-                    returnImage = humanWhiteImages[0];
-                    state = 0;
-                    break;
-                case 0:
-                    returnImage = humanWhiteImages[1];
-                    state = 1;
-                    break;
-                case 1:
-                    returnImage = humanWhiteImages[2];
-                    state = 2;
-                    break;
+            if (e.getMoving()) {
+                switch (state) {
+                    case 2:
+                        returnImage = humanWhiteImages[0];
+                        state = 0;
+                        break;
+                    case 0:
+                        returnImage = humanWhiteImages[1];
+                        state = 1;
+                        break;
+                    case 1:
+                        returnImage = humanWhiteImages[2];
+                        state = 2;
+                        break;
+                }
+            } else {
+                returnImage = humanWhiteImages[0];
             }
         } else if (c == Color.BLACK) {
-            switch (state) {
-                case 2:
-                    returnImage = humanBlackImages[0];
-                    state = 0;
-                    break;
-                case 0:
-                    returnImage = humanBlackImages[1];
-                    state = 1;
-                    break;
-                case 1:
-                    returnImage = humanBlackImages[2];
-                    state = 2;
-                    break;
+            if (e.getMoving()) {
+                switch (state) {
+                    case 2:
+                        returnImage = humanBlackImages[0];
+                        state = 0;
+                        break;
+                    case 0:
+                        returnImage = humanBlackImages[1];
+                        state = 1;
+                        break;
+                    case 1:
+                        returnImage = humanBlackImages[2];
+                        state = 2;
+                        break;
+                }
+            } else {
+                returnImage = humanBlackImages[0];
             }
         } else if (c == Color.GREEN) {
-            switch (state) {
-                case 2:
-                    returnImage = humanGreenImages[0];
-                    state = 0;
-                    break;
-                case 0:
-                    returnImage = humanGreenImages[1];
-                    state = 1;
-                    break;
-                case 1:
-                    returnImage = humanGreenImages[2];
-                    state = 2;
-                    break;
+            if (e.getMoving()) {
+
+                switch (state) {
+                    case 2:
+                        returnImage = humanGreenImages[0];
+                        state = 0;
+                        break;
+                    case 0:
+                        returnImage = humanGreenImages[1];
+                        state = 1;
+                        break;
+                    case 1:
+                        returnImage = humanGreenImages[2];
+                        state = 2;
+                        break;
+                }
+            } else {
+                returnImage = humanGreenImages[0];
             }
         } else if (c == Color.RED) {
-            switch (state) {
-                case 2:
-                    returnImage = humanRedImages[0];
-                    state = 0;
-                    break;
-                case 0:
-                    returnImage = humanRedImages[1];
-                    state = 1;
-                    break;
-                case 1:
-                    returnImage = humanRedImages[2];
-                    state = 2;
-                    break;
+            if (e.getMoving()) {
+                switch (state) {
+                    case 2:
+                        returnImage = humanRedImages[0];
+                        state = 0;
+                        break;
+                    case 0:
+                        returnImage = humanRedImages[1];
+                        state = 1;
+                        break;
+                    case 1:
+                        returnImage = humanRedImages[2];
+                        state = 2;
+                        break;
+                }
+            } else {
+                returnImage = humanRedImages[0];
             }
         } else if (c == Color.BLUE) {
-            switch (state) {
-                case 2:
-                    returnImage = humanBlueImages[0];
-                    state = 0;
-                    break;
-                case 0:
-                    returnImage = humanBlueImages[1];
-                    state = 1;
-                    break;
-                case 1:
-                    returnImage = humanBlueImages[2];
-                    state = 2;
-                    break;
+            if (e.getMoving()) {
+                switch (state) {
+                    case 2:
+                        returnImage = humanBlueImages[0];
+                        state = 0;
+                        break;
+                    case 0:
+                        returnImage = humanBlueImages[1];
+                        state = 1;
+                        break;
+                    case 1:
+                        returnImage = humanBlueImages[2];
+                        state = 2;
+                        break;
+                }
+            } else {
+                returnImage = humanBlueImages[0];
             }
         } else if (c == Color.ORANGE) {
-            switch (state) {
-                case 2:
-                    returnImage = humanOrangeImages[0];
-                    state = 0;
-                    break;
-                case 0:
-                    returnImage = humanOrangeImages[1];
-                    state = 1;
-                    break;
-                case 1:
-                    returnImage = humanOrangeImages[2];
-                    state = 2;
-                    break;
+            if (e.getMoving()) {
+                switch (state) {
+                    case 2:
+                        returnImage = humanOrangeImages[0];
+                        state = 0;
+                        break;
+                    case 0:
+                        returnImage = humanOrangeImages[1];
+                        state = 1;
+                        break;
+                    case 1:
+                        returnImage = humanOrangeImages[2];
+                        state = 2;
+                        break;
+                }
+            } else {
+                returnImage = humanOrangeImages[0];
             }
         } else if (c == Color.PURPLE) {
-            switch (state) {
-                case 2:
-                    returnImage = humanPurpleImages[0];
-                    state = 0;
-                    break;
-                case 0:
-                    returnImage = humanPurpleImages[1];
-                    state = 1;
-                    break;
-                case 1:
-                    returnImage = humanPurpleImages[2];
-                    state = 2;
-                    break;
+            if (e.getMoving()) {
+                switch (state) {
+                    case 2:
+                        returnImage = humanPurpleImages[0];
+                        state = 0;
+                        break;
+                    case 0:
+                        returnImage = humanPurpleImages[1];
+                        state = 1;
+                        break;
+                    case 1:
+                        returnImage = humanPurpleImages[2];
+                        state = 2;
+                        break;
+                }
             }
+        } else {
+            returnImage = humanPurpleImages[0];
         }
 
         return returnImage;
     }
 
     private Image getAnimatedGhostImage(Entity e) {
-        Image returnImage = null;
+         Image returnImage = null;
+
         Color c = e.getColor();
         if (c == Color.WHITE) {
-            switch (state) {
-                case 2:
-                    returnImage = ghostWhiteImages[0];
-                    state = 0;
-                    break;
-                case 0:
-                    returnImage = ghostWhiteImages[1];
-                    state = 1;
-                    break;
-                case 1:
-                    returnImage = ghostWhiteImages[2];
-                    state = 2;
-                    break;
+            if (e.getMoving()) {
+                switch (state) {
+                    case 2:
+                        returnImage = ghostWhiteImages[0];
+                        state = 0;
+                        break;
+                    case 0:
+                        returnImage = ghostWhiteImages[1];
+                        state = 1;
+                        break;
+                    case 1:
+                        returnImage = ghostWhiteImages[2];
+                        state = 2;
+                        break;
+                }
+            } else {
+                returnImage = ghostWhiteImages[0];
             }
         } else if (c == Color.BLACK) {
-            switch (state) {
-                case 2:
-                    returnImage = ghostBlackImages[0];
-                    state = 0;
-                    break;
-                case 0:
-                    returnImage = ghostBlackImages[1];
-                    state = 1;
-                    break;
-                case 1:
-                    returnImage = ghostBlackImages[2];
-                    state = 2;
-                    break;
+            if (e.getMoving()) {
+                switch (state) {
+                    case 2:
+                        returnImage = ghostBlackImages[0];
+                        state = 0;
+                        break;
+                    case 0:
+                        returnImage = ghostBlackImages[1];
+                        state = 1;
+                        break;
+                    case 1:
+                        returnImage = ghostBlackImages[2];
+                        state = 2;
+                        break;
+                }
+            } else {
+                returnImage = ghostBlackImages[0];
             }
         } else if (c == Color.GREEN) {
-            switch (state) {
-                case 2:
-                    returnImage = ghostGreenImages[0];
-                    state = 0;
-                    break;
-                case 0:
-                    returnImage = ghostGreenImages[1];
-                    state = 1;
-                    break;
-                case 1:
-                    returnImage = ghostGreenImages[2];
-                    state = 2;
-                    break;
+            if (e.getMoving()) {
+
+                switch (state) {
+                    case 2:
+                        returnImage = ghostGreenImages[0];
+                        state = 0;
+                        break;
+                    case 0:
+                        returnImage = ghostGreenImages[1];
+                        state = 1;
+                        break;
+                    case 1:
+                        returnImage = ghostGreenImages[2];
+                        state = 2;
+                        break;
+                }
+            } else {
+                returnImage = ghostGreenImages[0];
             }
         } else if (c == Color.RED) {
-            switch (state) {
-                case 2:
-                    returnImage = ghostRedImages[0];
-                    state = 0;
-                    break;
-                case 0:
-                    returnImage = ghostRedImages[1];
-                    state = 1;
-                    break;
-                case 1:
-                    returnImage = ghostRedImages[2];
-                    state = 2;
-                    break;
+            if (e.getMoving()) {
+                switch (state) {
+                    case 2:
+                        returnImage = ghostRedImages[0];
+                        state = 0;
+                        break;
+                    case 0:
+                        returnImage = ghostRedImages[1];
+                        state = 1;
+                        break;
+                    case 1:
+                        returnImage = ghostRedImages[2];
+                        state = 2;
+                        break;
+                }
+            } else {
+                returnImage = ghostRedImages[0];
             }
         } else if (c == Color.BLUE) {
-            switch (state) {
-                case 2:
-                    returnImage = ghostBlueImages[0];
-                    state = 0;
-                    break;
-                case 0:
-                    returnImage = ghostBlueImages[1];
-                    state = 1;
-                    break;
-                case 1:
-                    returnImage = ghostBlueImages[2];
-                    state = 2;
-                    break;
+            if (e.getMoving()) {
+                switch (state) {
+                    case 2:
+                        returnImage = ghostBlueImages[0];
+                        state = 0;
+                        break;
+                    case 0:
+                        returnImage = ghostBlueImages[1];
+                        state = 1;
+                        break;
+                    case 1:
+                        returnImage = ghostBlueImages[2];
+                        state = 2;
+                        break;
+                }
+            } else {
+                returnImage = ghostBlueImages[0];
             }
         } else if (c == Color.ORANGE) {
-            switch (state) {
-                case 2:
-                    returnImage = ghostOrangeImages[0];
-                    state = 0;
-                    break;
-                case 0:
-                    returnImage = ghostOrangeImages[1];
-                    state = 1;
-                    break;
-                case 1:
-                    returnImage = ghostOrangeImages[2];
-                    state = 2;
-                    break;
+            if (e.getMoving()) {
+                switch (state) {
+                    case 2:
+                        returnImage = ghostOrangeImages[0];
+                        state = 0;
+                        break;
+                    case 0:
+                        returnImage = ghostOrangeImages[1];
+                        state = 1;
+                        break;
+                    case 1:
+                        returnImage = ghostOrangeImages[2];
+                        state = 2;
+                        break;
+                }
+            } else {
+                returnImage = ghostOrangeImages[0];
             }
         } else if (c == Color.PURPLE) {
-            switch (state) {
-                case 2:
-                    returnImage = ghostPurpleImages[0];
-                    state = 0;
-                    break;
-                case 0:
-                    returnImage = ghostPurpleImages[1];
-                    state = 1;
-                    break;
-                case 1:
-                    returnImage = ghostPurpleImages[2];
-                    state = 2;
-                    break;
+            if (e.getMoving()) {
+                switch (state) {
+                    case 2:
+                        returnImage = ghostPurpleImages[0];
+                        state = 0;
+                        break;
+                    case 0:
+                        returnImage = ghostPurpleImages[1];
+                        state = 1;
+                        break;
+                    case 1:
+                        returnImage = ghostPurpleImages[2];
+                        state = 2;
+                        break;
+                }
             }
+        } else {
+            returnImage = ghostPurpleImages[0];
         }
-
         return returnImage;
     }
 
