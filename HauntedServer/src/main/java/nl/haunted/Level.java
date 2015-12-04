@@ -65,9 +65,42 @@ public class Level {
 
     /**
      * Generates the spawn location of the key.
+     * It will be in the oposite row of the door spawn location (not in corners)
+     * 
      */
     private void generateKeyLocation() {
-        // TODO mike
+        List<Point2D> spawnPoints = new ArrayList<>();
+        int possiblePoints;
+        switch(this.doorDirection){
+            case DOWN: // door is top row.
+                for(int i = 100; i < 1400; i += 100){
+                    spawnPoints.add(new Point2D.Double(i, 900));
+                }
+                possiblePoints = 13;
+                break;
+            case UP: // door is bottom row.
+                for(int i = 100; i < 1400; i += 100){
+                    spawnPoints.add(new Point2D.Double(i, 0));
+                }
+                possiblePoints = 13;
+                break;
+            case LEFT: // door is right row.
+                for(int i = 100; i < 900; i += 100){
+                    spawnPoints.add(new Point2D.Double(0, i));
+                }
+                possiblePoints = 8;
+                break;
+            default:    // door is left row.
+                for(int i = 100; i < 900; i += 100){
+                    spawnPoints.add(new Point2D.Double(1400, i));
+                }
+                possiblePoints = 8;
+                break;
+        }
+        
+        // Take a key spawnpoint
+        Random randomizer = new Random();
+        this.keyLocation = spawnPoints.get(randomizer.nextInt(possiblePoints));
     }
 
     /**
@@ -77,21 +110,21 @@ public class Level {
      */
     private void generateDoorLocation() {
         // Make an list with the points where the door is allowed to spawn.
-        List<Point2D> spawnPointsTop = new ArrayList<Point2D>();
-        List<Point2D> spawnPointsBottom = new ArrayList<Point2D>();
-        List<Point2D> spawnPointsLeft = new ArrayList<Point2D>();
-        List<Point2D> spawnPointsRight = new ArrayList<Point2D>();
+        List<Point2D> spawnPointsTop = new ArrayList<>();
+        List<Point2D> spawnPointsBottom = new ArrayList<>();
+        List<Point2D> spawnPointsLeft = new ArrayList<>();
+        List<Point2D> spawnPointsRight = new ArrayList<>();
         
-        for(int i = 0; i < 1000; i += 100){
+        for(int i = 100; i < 900; i += 100){
           spawnPointsLeft.add(new Point2D.Double(0, i));
         }
-        for(int i = 0; i < 1000; i += 100){
+        for(int i = 100; i < 900; i += 100){
           spawnPointsRight.add(new Point2D.Double(1400, i));
         }
-        for(int i = 100; i < 1500; i += 100){
+        for(int i = 100; i < 1400; i += 100){
           spawnPointsTop.add(new Point2D.Double(i, 0));
         }
-        for(int i = 100; i < 1500; i += 100){
+        for(int i = 100; i < 1400; i += 100){
           spawnPointsBottom.add(new Point2D.Double(i, 900));
         }
         
