@@ -119,9 +119,9 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
                 exist = true;
             }
         }
-        if (exist == false && this.players.size() + 1 >= this.maxPlayers) {
+        if (exist == false && this.players.size() + 1 <= this.maxPlayers) {
             players.add((IPlayer) player);
-            this.basicPublisher.inform(this, "players", null, players);
+            this.basicPublisher.inform(this, "players", null, players);            
             return true;
         } else {
             return false;

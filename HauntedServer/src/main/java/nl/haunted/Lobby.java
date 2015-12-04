@@ -84,4 +84,9 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
     public void removeListener(RemotePropertyListener remotePropertyListener, String string) throws RemoteException {
         basicPublisher.removeListener(remotePropertyListener, string);
     }
+    
+    public void informlobbys() throws RemoteException
+    {
+       basicPublisher.inform(this, "gamelobbys", null, gameLobbys); 
+    }
 }
