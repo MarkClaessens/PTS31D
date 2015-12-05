@@ -93,12 +93,13 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
     public synchronized boolean removePlayer(IPlayer player) throws RemoteException {
         boolean exist = false;
         for (IPlayer speler : players) {
-            if (player == speler) {
+            if (player.equals(speler)) {
                 exist = true;
             }
         }
         if (exist) {
             players.remove(player);
+            this.basicPublisher.inform(this, "players", null, players);
             return true;
         } else {
             return false;

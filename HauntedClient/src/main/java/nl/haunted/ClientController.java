@@ -99,8 +99,10 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
      */
     @Override
     public void propertyChange(PropertyChangeEvent propertyChangeEvent) throws RemoteException {       
-                   
-        gamelobbys = (List<IGameLobby>) propertyChangeEvent.getNewValue();
+              
+        if(!INGameLobby)
+        {
+          gamelobbys = (List<IGameLobby>) propertyChangeEvent.getNewValue();
         for (IGameLobby GL : gamelobbys) {
             for (IPlayer player : GL.getPlayers()) {
                 if (tisplayer.equals(player)) {
@@ -111,6 +113,9 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
                         Node root = fxmlLoader.load();
                         FXMLGameLobbyController GMC = (FXMLGameLobbyController) fxmlLoader.getController();
                         GMC.setGameLobby(GL);
+                        GMC.settisPlayer(tisplayer);
+                        GMC.setController();
+                        GMC.setLobby(lobby);
                         HauntedClient.getStage().getScene().setRoot((Parent) root);
                     } catch (IOException ex) {
                         Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
@@ -118,7 +123,10 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
 
                 }
             }
+        }  
         }
+        
+        
     }
 
     public IPlayer getPlayer() {
@@ -139,6 +147,10 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
 
     public ILobby getLobby() {
         return lobby;
+    }
+    public void setInGL(boolean status)
+    {
+        INGameLobby = status;
     }
     
 

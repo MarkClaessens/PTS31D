@@ -30,6 +30,7 @@ public interface IPlayer extends Remote, RemotePublisher {
      */
     public String getName() throws RemoteException;
     public void setName(String naam) throws RemoteException;
+    public void toggleReady() throws RemoteException;
     /**
      * vraag de ready status op van de speler
      *
