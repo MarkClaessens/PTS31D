@@ -216,4 +216,21 @@ public class FXMLHauntedController implements Initializable {
         setgamelobbys();
     }
     
+    public void addPlayerGL() throws RemoteException
+    {
+       String totaaltekst = (String) LVgamelobbys.getSelectionModel().getSelectedItem();
+       String naam = totaaltekst.substring(6, totaaltekst.indexOf(" maxfloors:"));
+       for(IGameLobby GL : lobby.getGameLobbys())
+       {
+           System.out.println(GL.getName());
+           if(GL.getName().equals(naam))
+           {
+              GL.addPlayer(tisplayer);
+              lobby.informlobbys();
+           }
+           
+       }
+       
+    }
+    
 }

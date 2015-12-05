@@ -52,4 +52,6 @@ public interface ILobby extends Remote, RemotePublisher {
      * @throws java.rmi.RemoteException
      */
     public IPlayer createPlayer(String name, String ipAddress) throws RemoteException;
+    
+    public void informlobbys();
 }

@@ -257,10 +257,11 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     public void propertyChange(PropertyChangeEvent evt) throws RemoteException {
         String propertyName = evt.getPropertyName();
         List<IPlayer> INplayers = (List<IPlayer>) evt.getNewValue();
-        if(propertyName == "players"){
+        if(propertyName.equals("players")){
             if(INplayers.size() > players.size())
             {
-               subscribeToAllPlayers(); 
+               subscribeToAllPlayers();
+               playernames();
             }
             else
             {
@@ -282,7 +283,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
             }            
             
         }
-        else if(propertyName == "ready"){
+        else if(propertyName.equals("ready")){
             
             playernames();
         }
