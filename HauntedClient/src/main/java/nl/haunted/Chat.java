@@ -6,6 +6,7 @@
 package nl.haunted;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -20,6 +21,10 @@ public class Chat {
      */
     public Chat(){
         this.messages = new ArrayList();
+    }
+    
+    public List<String> getMessages(){
+        return Collections.unmodifiableList(messages);
     }
     
     public void addMessage(String s){

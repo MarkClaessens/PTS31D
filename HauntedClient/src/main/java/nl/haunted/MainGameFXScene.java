@@ -10,18 +10,26 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.animation.AnimationTimer;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.scene.transform.Rotate;
+import javafx.stage.Stage;
 
 //important for full screen http://stackoverflow.com/questions/16713554/how-to-change-scene-when-in-fullscreen-in-javafx-and-avoid-press-esc-to-exit-fu
 /**
@@ -34,6 +42,8 @@ public class MainGameFXScene {
     private double levelDrawWidth, levelDrawHeight;
     private double horScale, verScale;
 
+    private Stage chatstage;
+    
     private Scene scene;
     private Group root;
 
@@ -148,6 +158,39 @@ public class MainGameFXScene {
             textGc.strokeText("Key hasn't been picked up by the human yet", 10, 62);
         }
     }
+    
+    private Scene getChatScene(){
+        Group chatRoot = new Group();
+        Scene chatScene = new Scene(chatRoot);
+        //TODO: add controls
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(25,25,25,25));
+        
+        TextFlow tf = new TextFlow();
+        //TODO: ADD PROPER GET CHAT MESSAGES BELOW
+        for(Entity chatString : gf.gameInfo.getEntities()){
+            Text txt = new Text(chatString.toString());
+            tf.getChildren().add(txt);
+        }
+        grid.add(tf, 0, 0, 8, 8);
+        
+        TextField tef = new TextField();
+        grid.add(tef, 0, 9);
+        
+        Button btCommit = new Button("Send");
+        btCommit.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent event){
+                //TODO: ADD PROPER SEND MESSAGE METHODE BELOW
+                gf.sendMessage();
+                chatstage.close();
+            }
+        });
+        
+        return chatScene;
+    }
 
     /**
      * handle the on key pressings
@@ -162,6 +205,10 @@ public class MainGameFXScene {
 
                         if (code == "ENTER") {
                             //TODO: call up chatbox popup
+                            chatstage = new Stage();
+                            chatstage.setTitle("Chat | Haunted");
+                            chatstage.setScene(scene);
+                            chatstage.show();
                         } else {
 
                             switch (code) {
