@@ -15,10 +15,14 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -116,7 +120,15 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         {
           namen.add(player.getName() + " ready: " + player.getReady());
         }
-        LVplayers.setItems(FXCollections.observableList(namen));
+        Platform.runLater(new Runnable() {
+
+            @Override
+            public void run() 
+            {
+                LVplayers.setItems(FXCollections.observableList(namen));
+            }
+        });
+        
         
          
     }
@@ -163,6 +175,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     }
 
     public void setPlayers() {
+        players.clear();
         try {
             for(IPlayer player : gamelobby.getPlayers())
             {
@@ -212,7 +225,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
      */
     @FXML
     private void changeready(MouseEvent event) throws RemoteException {
-     //   tisplayer.toggleReady();
+       tisplayer.toggleReady();
     }
 
     /**
@@ -249,18 +262,34 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
      */
     @FXML
     private void leavegamelobby() throws RemoteException {
-        gamelobby.removePlayer(tisplayer);
-        
+        gamelobby.removePlayer(tisplayer);        
+        controller.setInGL(false);
+       if(gamelobby.getPlayers().size() == 0)
+       {
+           lobby.getGameLobbys().remove(gamelobby);
+       }
+       if(tisplayer.getReady())
+       {
+           tisplayer.toggleReady();
+       }
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLHaunted.fxml"));
+                try {
+                    Node root = fxmlLoader.load();                    
+                    HauntedClient.getStage().getScene().setRoot((Parent) root);
+                } catch (IOException ex) {
+                    Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+                }
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) throws RemoteException {
-        String propertyName = evt.getPropertyName();
-        List<IPlayer> INplayers = (List<IPlayer>) evt.getNewValue();
+        String propertyName = evt.getPropertyName();        
         if(propertyName.equals("players")){
+            List<IPlayer> INplayers = (List<IPlayer>) evt.getNewValue();
             if(INplayers.size() > players.size())
             {
                subscribeToAllPlayers();
+               setPlayers();
                playernames();
             }
             else
@@ -278,6 +307,8 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
                     if(!found)
                     {
                        INplayer.removeListener(this, propertyName);
+                       setPlayers();
+                       playernames();                       
                     }
                 }
             }            

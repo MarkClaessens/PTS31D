@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="6" failures="0" name="nl.haunted.GhostTest" time="0.008" errors="3" skipped="0">
+<testsuite tests="6" failures="0" name="nl.haunted.GhostTest" time="0.014" errors="3" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_60\jre\bin"/>
@@ -62,8 +62,7 @@
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
   <testcase classname="nl.haunted.GhostTest" name="testIsVulnerable" time="0.001"/>
-  <testcase classname="nl.haunted.GhostTest" name="testMakeGhost" time="0"/>
-  <testcase classname="nl.haunted.GhostTest" name="testVanish" time="0.003">
+  <testcase classname="nl.haunted.GhostTest" name="testVanish" time="0.007">
     <error type="java.lang.NullPointerException">java.lang.NullPointerException
 	at nl.haunted.Ghost.vanish(Ghost.java:147)
 	at nl.haunted.GhostTest.testVanish(GhostTest.java:115)
@@ -97,7 +96,8 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 </error>
   </testcase>
-  <testcase classname="nl.haunted.GhostTest" name="testPossess" time="0.001">
+  <testcase classname="nl.haunted.GhostTest" name="testMakeGhost" time="0"/>
+  <testcase classname="nl.haunted.GhostTest" name="testPossess" time="0">
     <error type="java.lang.NullPointerException">java.lang.NullPointerException
 	at nl.haunted.Ghost.possess(Ghost.java:102)
 	at nl.haunted.GhostTest.testPossess(GhostTest.java:91)
@@ -131,8 +131,8 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 </error>
   </testcase>
-  <testcase classname="nl.haunted.GhostTest" name="testSetVulnerable" time="0.001"/>
-  <testcase classname="nl.haunted.GhostTest" name="testChangeAppearance" time="0.002">
+  <testcase classname="nl.haunted.GhostTest" name="testSetVulnerable" time="0"/>
+  <testcase classname="nl.haunted.GhostTest" name="testChangeAppearance" time="0">
     <error type="java.lang.NullPointerException">java.lang.NullPointerException
 	at nl.haunted.Ghost.changeAppearance(Ghost.java:130)
 	at nl.haunted.GhostTest.testChangeAppearance(GhostTest.java:102)

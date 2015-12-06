@@ -5,6 +5,8 @@
  */
 package nl.haunted;
 
+import fontys.observer.RemotePropertyListener;
+import java.beans.PropertyChangeEvent;
 import java.io.IOException;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -12,6 +14,8 @@ import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -84,7 +88,8 @@ public class FXMLHauntedController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         setController();
         settisPlayer();
-        setLobby();  
+        setLobby();
+        
         try {
             setgamelobbys();
         } catch (RemoteException ex) {
@@ -206,7 +211,7 @@ public class FXMLHauntedController implements Initializable {
         List<String> namen = new ArrayList<>();
         for (IGameLobby GL : lobby.getGameLobbys()) 
         {
-          namen.add("naam: " + GL.getName() + " maxfloors: " + GL.getMaxFloors() + " maxplayers: " + GL.getMaxPlayer());
+          namen.add("naam: " + GL.getName() + " players: " + GL.getPlayers().size() + "/" +GL.getMaxFloors() + " maxplayers: " + GL.getMaxPlayer());
         }
         LVgamelobbys.setItems(FXCollections.observableList(namen));
     }
@@ -219,7 +224,7 @@ public class FXMLHauntedController implements Initializable {
     public void addPlayerGL() throws RemoteException
     {
        String totaaltekst = (String) LVgamelobbys.getSelectionModel().getSelectedItem();
-       String naam = totaaltekst.substring(6, totaaltekst.indexOf(" maxfloors:"));
+       String naam = totaaltekst.substring(6, totaaltekst.indexOf(" players:"));
        for(IGameLobby GL : lobby.getGameLobbys())
        {
            System.out.println(GL.getName());

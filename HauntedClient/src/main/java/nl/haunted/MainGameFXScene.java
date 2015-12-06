@@ -184,7 +184,7 @@ public class MainGameFXScene {
             @Override
             public void handle(ActionEvent event){
                 //TODO: ADD PROPER SEND MESSAGE METHODE BELOW
-                gf.sendMessage();
+//                gf.sendMessage();
                 chatstage.close();
             }
         });
