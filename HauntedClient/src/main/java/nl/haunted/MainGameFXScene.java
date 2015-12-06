@@ -177,7 +177,7 @@ public class MainGameFXScene {
         grid.add(tf, 0, 0, 8, 8);
         
         TextField tef = new TextField();
-        grid.add(tef, 0, 9);
+        grid.add(tef, 0, 9, 1, 7);
         
         Button btCommit = new Button("Send");
         btCommit.setOnAction(new EventHandler<ActionEvent>(){
@@ -188,7 +188,8 @@ public class MainGameFXScene {
                 chatstage.close();
             }
         });
-        
+        grid.add(btCommit, 8, 9);
+        chatRoot.getChildren().add(grid);
         return chatScene;
     }
 
