@@ -12,6 +12,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.Timer;
@@ -27,7 +28,6 @@ public class Game {
     private Timer tickTimer;
     private boolean running, roundEnded, nextRound;
     private Level level;
-    private List<Character> characters;
     private List<Ghost> ghosts;
     private Human human;
     private List<Player> players;
@@ -87,7 +87,10 @@ public class Game {
         this.gameLobby = gl;
 
         // Create the first level.
-        nextLevel();
+        nextLevel();	
+		
+		// Create the characters and bind them to the players.
+        bindCharactersToPlayers();
     }
 
     /**
@@ -207,8 +210,8 @@ public class Game {
         obj[0][2] = this.level.getBackgroundInt();
         obj[1][0] = this.level.getGhostLifePool();
         obj[1][1] = this.level.getCurrentFoor();
-        obj[1][2] = this.getCurrentHuman();
-        obj[1][3] = !this.getCurrentHuman().hasKey();
+        obj[1][2] = this.human;
+        obj[1][3] = !this.human.hasKey();
         obj[1][4] = this.roundEnded;
         obj[1][5] = this.nextRound;
         obj[1][6] = this.ghosts.size();
@@ -243,19 +246,23 @@ public class Game {
         return obj;
 
     }
-
-    /**
-     *
+	
+	/**
+     * Create the ghosts and human and bind them random to the players.
+     * @throws java.rmi.RemoteException
      */
-    public void setupGameClasses() {
-
-    }
-
-    /**
-     *
-     */
-    public void bindCharactersToPlayers() {
-
+    public void bindCharactersToPlayers() throws RemoteException {
+        Collections.shuffle(this.players);
+        
+        for(int i = 0; i < this.players.size() - 1; i++){
+            Ghost ghost = new Ghost(pickGhostSpawnPoint(true), this, this.players.get(i));
+            this.players.get(i).setCharacter(ghost);
+            this.ghosts.add(ghost);
+        }
+        
+        Human newHuman = new Human(pickHumanSpawnpoint(), this);
+        this.players.get(this.players.size() - 1).setCharacter(newHuman);
+        this.human = newHuman;
     }
 
     /**
@@ -301,25 +308,14 @@ public class Game {
         Point2D spawnPoint = spawnPoints.get(randomInt);
         
         if(startOfGame){
-            for(Character character : this.characters){
-                if (character.getPosition() == spawnPoint){
+            for(Ghost ghost : this.ghosts){
+                if (ghost.getPosition() == spawnPoint){
                     spawnPoint = pickGhostSpawnPoint(true);
                 }
             }
         }
         
         return spawnPoint;
-    }
-
-    /**
-     * Send with a socket the backgroundInt of the level to the Client
-     */
-    public void sendLevelBackground() {
-
-    }
-
-    private Human getCurrentHuman() {
-        return human;
     }
 
     private DirectionType[] getPlayerInput() throws IOException, ClassNotFoundException {
