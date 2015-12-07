@@ -12,12 +12,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import java.util.Observable;
 
 /**
  *
  * @author jvdwi
  */
-public class Chat {
+public class Chat extends Observable{
     private List<String> messages;
     private final InputController IC;
     
@@ -37,10 +38,10 @@ public class Chat {
         this.messages.add(s);
     }
     
-    public void sendMessage(String s, Player p) throws IOException{
+    public void sendMessage(String s, IPlayer p) throws IOException{
         String sb = "";
         DateFormat df = new SimpleDateFormat("HH:mm");
-        sb = "["+df.format(Calendar.getInstance())+"]["+p.getName()+"]"+": "+s;
+        sb = "["+df.format(Calendar.getInstance().getTime())+"]["+p.getName()+"]"+": "+s;
         IC.sendMessage(sb);
     }
 }
