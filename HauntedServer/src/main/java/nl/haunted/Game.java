@@ -176,7 +176,7 @@ public class Game {
                     G.changeAppearance();
                     if (G.getTimeOfDeath() != null) {
                         if (System.currentTimeMillis() >= (G.getTimeOfDeath().getTimeInMillis() + 2000)) {
-                            G.setPosition(this.pickGhostSpawnPoint());
+                            G.setPosition(this.pickGhostSpawnPoint(false));
 
                             G.setTimeOfDeath();
                         }
@@ -282,23 +282,25 @@ public class Game {
     }
 
     /**
-     * Picks a ghost spawnpoint. The Ghosts spawn in any corner.
-     *
+     * Picks a ghost spawnpoint.
+     * The Ghosts spawn in any corner.
+     * @param startOfGame boolean if the spawnpoint is for the start of the game.
      * @return the ghost spawn point.
      */
-    public Point2D pickGhostSpawnPoint() {
+    public Point2D pickGhostSpawnPoint(boolean startOfGame){
         List<Point2D> spawnPoints = new ArrayList<>();
-        spawnPoints.add(new Point2D.Double(0, 0));
+        spawnPoints.add(new Point2D.Double(0,0));
         spawnPoints.add(new Point2D.Double(0, 1000));
         spawnPoints.add(new Point2D.Double(1500, 1500));
         spawnPoints.add(new Point2D.Double(1500, 1000));
         spawnPoints.add(new Point2D.Double(0, 500));
         spawnPoints.add(new Point2D.Double(1500, 500));
-
+        
         Random randomizer = new Random();
         int randomInt = randomizer.nextInt(6);
         Point2D spawnPoint = spawnPoints.get(randomInt);
-
+        
+        
         return null;
     }
 
