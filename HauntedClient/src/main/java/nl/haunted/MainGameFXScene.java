@@ -3,6 +3,7 @@ package nl.haunted;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -144,6 +145,7 @@ public class MainGameFXScene {
                 textGc.clearRect(0, 0, screenWidth, screenHeight);
                 drawImages();
                 drawTexts();
+                drawHumanPerspective();
             }
         }.start();
 //        ImageView iv = new ImageView(image);
@@ -362,6 +364,17 @@ public class MainGameFXScene {
                     break;
 
             }
+        }
+    }
+    
+    private void drawHumanPerspective(){
+        try {
+            if(p.getCharacter() instanceof Human){
+                Human h = (Human) p.getCharacter();
+                int[] i = h.getFlashlightPolygon();
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(MainGameFXScene.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
