@@ -132,15 +132,16 @@ public class Game {
      *
      * @throws java.rmi.RemoteException
      * @throws java.net.UnknownHostException
+     * @throws java.lang.ClassNotFoundException
      */
-    public void tick() throws RemoteException, UnknownHostException, IOException {
+    public void tick() throws RemoteException, UnknownHostException, IOException, ClassNotFoundException {
         //check if the server is running and is not paused
         if (!this.running) {
         } else {
             //check if the list of ghosts is empty
             // <editor-fold defaultstate="collapsed" desc="if there are ghosts">
             if (!this.ghosts.isEmpty()) {
-                DirectionType[] keyboard = null;
+                DirectionType[] keyboard = this.getPlayerInput();
 
                 // <editor-fold defaultstate="collapsed" desc="if there is a pressed key TODO: get keypresses">
                 if (keyboard != null) {
@@ -307,6 +308,8 @@ public class Game {
                                 dir[index] = DirectionType.LEFT;
                             case "RIGHT":
                                 dir[index] = DirectionType.RIGHT;
+                            case "":
+                                dir[index] = null;
                         }
                         filledPlayer[index] = true;
                     }
