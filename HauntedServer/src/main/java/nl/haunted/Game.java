@@ -150,7 +150,10 @@ public class Game {
      * @param player the player that wins the game by entering the last door.
      */
     public void endGame(Player player) {
-
+        this.running = false;
+        
+        // Opens the victory screen
+        // TODO for Marc open the victory screen with the name of the winner.
     }
 
     /**
