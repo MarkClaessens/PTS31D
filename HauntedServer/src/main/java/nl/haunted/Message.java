@@ -21,13 +21,13 @@ public class Message {
     private Date timestamp;
     private String text;
     private boolean visibleForEveryone = true;
-    private Player player;
+    private IPlayer player;
 
     public String getText() {
         return text;
     }
 
-    public Player getPlayer() {
+    public IPlayer getPlayer() {
         return player;
     }
 
@@ -41,7 +41,7 @@ public class Message {
      * @exception IllegalArgumentException thrown when the text is null, empty
      * or only containing white spaces and when de player is null.
      */
-    public Message(String text, Player player, boolean visibleForEveryone ) throws IllegalArgumentException, RemoteException {
+    public Message(String text, IPlayer player, boolean visibleForEveryone ) throws IllegalArgumentException, RemoteException {
         if (text == null || player == null || text.isEmpty() || text.trim().length() == 0) {
             throw new IllegalArgumentException("The message was not created, "
                     + "check if the text and player are not null and if the text is not empty "

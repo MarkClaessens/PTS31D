@@ -151,6 +151,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         try {
             playernames();
             gamesettings();
+            setController();
             controller.setGroupID(gamelobby.getGroupID());
             chat = new Chat(controller.getGroupID());
         } catch (RemoteException ex) {
@@ -236,7 +237,8 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     private void sendMessage(MouseEvent event) throws IOException {
 
         if (!TFmessage.getText().isEmpty()) {
-            chat.sendMessage(TFmessage.getText(), tisplayer);
+            Message message = new Message(TFmessage.getText(), tisplayer, true);
+            chat.sendMessage(message);
             TFmessage.clear();
 
         } else {
@@ -326,7 +328,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     }
 
     public void getmessages() {
-        TAchatBox.appendText(chat.getMessages().get(chat.getMessages().size()));
+        TAchatBox.appendText(chat.getMessages().get(chat.getMessages().size()).toString());
         TAchatBox.appendText("\n");
     }
 
