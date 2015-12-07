@@ -152,7 +152,6 @@ public class MainGameFXScene {
                 textGc.clearRect(0, 0, screenWidth, screenHeight);
                 drawImages();
                 drawTexts();
-                drawHumanPerspective();
             }
         }.start();
 //        ImageView iv = new ImageView(image);
@@ -370,7 +369,10 @@ public class MainGameFXScene {
                     keyDoorGc.drawImage(keyImage, e.getPosition().getX() + 100, e.getPosition().getY() + 100, keyImage.getWidth() * horScale, keyImage.getHeight() * verScale);
                     break;
                 case Human:
-                    //todo : draw animated human images
+                    if(gf.gameInfo.amIHuman()){
+                        //TODO: calculate proper x and y coordinates
+                        drawRotatedImage(humanPersGc, humanPerspectiveImage, getAngle(e.getDirection()), e.getPosition().getX() -1900, e.getPosition().getY()-1900, horScale, verScale);
+                    }
                     drawRotatedImage(humanGc, getAnimatedHumanImage(e), getAngle(e.getDirection()), e.getPosition().getX() + 100, e.getPosition().getY() + 100, horScale, verScale);
                     break;
                 case Ghost:
@@ -385,16 +387,7 @@ public class MainGameFXScene {
             }
         }
     }
-    
-    private void drawHumanPerspective() {
-        try {
-            if (p.getCharacter() instanceof Human) {
-                drawRotatedImage(humanPersGc, humanPerspectiveImage, getAngle(p.getCharacter().getDirection()), horScale, horScale, horScale, horScale);
-            }
-        } catch (RemoteException ex) {
-            Logger.getLogger(MainGameFXScene.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+   
 
     /**
      * convert directionType into angle degrees (example: LEFT == 270°)
