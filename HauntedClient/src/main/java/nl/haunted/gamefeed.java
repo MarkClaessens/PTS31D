@@ -7,6 +7,7 @@ package nl.haunted;
 
 import java.awt.geom.Point2D;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.paint.Color;
@@ -34,7 +35,7 @@ public class gamefeed {
                 int currentFloor = (int) o[1][1];
                 String currentHuman = (String) o[1][2];
                 boolean key = (boolean) o[1][3];
-                gameInfo = new GameInfo(ghostLives, currentFloor, currentHuman, key);
+                gameInfo = new GameInfo(ghostLives, currentFloor, InetAddress.getLocalHost().toString().equalsIgnoreCase(currentHuman), key);
                 fillGameInfo(o);
                 setup = true;
             }
@@ -75,7 +76,7 @@ public class gamefeed {
             gameInfo.setBackgroundImage((int) o[0][2]);
             gameInfo.setGhostLives((int) o[1][0]);
             gameInfo.setCurrentFloor((int) o[1][1]);
-            gameInfo.setCurrentHuman((String) o[1][2]);
+            gameInfo.setamIHuman(InetAddress.getLocalHost().toString().equalsIgnoreCase((String) o[1][2]));
             gameInfo.setKey((boolean) o[1][3]);
             int i = 6;
             boolean foundHuman = false;

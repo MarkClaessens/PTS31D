@@ -6,13 +6,14 @@
 package nl.haunted;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,8 +21,9 @@ import java.util.Observable;
  */
 public class Chat extends Observable {
 
-    private List<String> messages;
+    private List<Message> messages;
     private final InputController IC;
+    private Timer timer;
 
     /**
      * Constructor for chat
@@ -34,18 +36,35 @@ public class Chat extends Observable {
         IC = new InputController(groupID);
     }
 
-    public List<String> getMessages() {
+    public List<Message> getMessages() {
         return Collections.unmodifiableList(messages);
     }
 
-    public void addMessage(String s) {
-        this.messages.add(s);
+    public void addMessage(Message m) {
+        this.messages.add(m);
     }
 
-    public void sendMessage(String s, IPlayer p) throws IOException {
-        String sb = "";
-        DateFormat df = new SimpleDateFormat("HH:mm");
-        sb = "[" + df.format(Calendar.getInstance().getTime()) + "][" + p.getName() + "]" + ": " + s;
-        IC.sendMessage(sb);
+    public void sendMessage(Message m) throws IOException {
+        IC.sendMessage(m);
     }
+    
+    public void startMessageClient(){
+        timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {          
+                try {
+                    addMessage(IC.getMessage());
+                } catch (IOException | ClassNotFoundException ex) {
+                    Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        };
+        timer.scheduleAtFixedRate(task, 0, 16);
+    }
+    
+    public void stopMessageClient(){
+        timer.cancel();
+    }
+    
 }

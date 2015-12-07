@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class InputController {
 
-    private Socket inputSocket;
+    private Socket inputSocket, srvSocket;
     private ArrayList<String> messages;
     private DirectionType direction;
 //    Socket inputSocket;
@@ -23,6 +23,7 @@ public class InputController {
     public InputController(String groupID) throws IOException {
         this.inputSocket = new Socket();
         this.inputSocket.socketSetup(groupID, 9877);
+        this.srvSocket.socketSetup(groupID, 9876);
     }
 
     public Socket getInputSocket() {
@@ -33,12 +34,20 @@ public class InputController {
         this.direction = direction;
     }
 
-    public void sendMessage(String s) throws IOException {
-        this.inputSocket.sendInput(s, 9877);
+    public void sendMessage(Message m) throws IOException {
+        this.inputSocket.sendMessage(m);
     }
 
     public void sendInput() throws IOException {
-        this.inputSocket.sendInput(this.direction.toString(), 9876);
+        this.srvSocket.sendInput(this.direction.toString(), 9876);
+    }
+    
+    public void setSrvSocket(Socket s){
+        this.inputSocket = s;
+    }
+    
+    public Message getMessage() throws IOException, ClassNotFoundException{
+       return this.inputSocket.receiveMessage();
     }
 
 }

@@ -70,6 +70,22 @@ public class Socket {
             sock.send(packet);
         }
     }
+    
+    public void sendMessage(Message m) throws IOException {
+        ByteArrayOutputStream byteStream = new ByteArrayOutputStream(5000);
+        Object o = m;
+        try (ObjectOutputStream os = new ObjectOutputStream(new BufferedOutputStream(byteStream))) {
+            os.flush();
+            os.writeObject(o);
+            os.flush();
+            //retrieves byte array
+            byte[] buf = byteStream.toByteArray();
+            DatagramPacket packet = new DatagramPacket(
+                    buf, buf.length, groupIp, 9877);
+            int byteCount = packet.getLength();
+            sock.send(packet);
+        }
+    }
 
     public void sendInput(String s, int port) throws IOException {
         byte[] buf = s.getBytes();
@@ -89,7 +105,21 @@ public class Socket {
         try (ObjectInputStream is = new ObjectInputStream(new BufferedInputStream(byteStream))) {
             o = is.readObject();
         }
-        return (Object[][]) (o);
+        return (Object[][])o;
+    }
+    
+    public Message receiveMessage() throws IOException, ClassNotFoundException {
+        byte[] recvBuf = new byte[5000];
+        DatagramPacket packet = new DatagramPacket(recvBuf,
+                recvBuf.length);
+        sock.receive(packet);
+        int byteCount = packet.getLength();
+        ByteArrayInputStream byteStream = new ByteArrayInputStream(recvBuf);
+        Object o;
+        try (ObjectInputStream is = new ObjectInputStream(new BufferedInputStream(byteStream))) {
+            o = is.readObject();
+        }
+        return (Message)o;
     }
 
     public String[] receiveInput() throws IOException, ClassNotFoundException {

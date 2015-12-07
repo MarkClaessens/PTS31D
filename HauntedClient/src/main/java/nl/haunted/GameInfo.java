@@ -19,8 +19,7 @@ public class GameInfo {
     private String currentHuman;
     private boolean key;
     private List<Entity> entities;
-    private boolean roundEnd = false;
-    private boolean gameEnd = false;
+    private boolean roundEnd = false, gameEnd = false, amIHuman = false;
     private Image backgroundImage;
 
     /**
@@ -30,10 +29,10 @@ public class GameInfo {
      * @param currentHuman
      * @param key
      */
-    public GameInfo(int ghostLives, int currentFloor, String currentHuman, boolean key) {
+    public GameInfo(int ghostLives, int currentFloor, boolean amIHuman, boolean key) {
         this.ghostLives = ghostLives;
         this.currentFloor = currentFloor;
-        this.currentHuman = currentHuman;
+        this.amIHuman = amIHuman;
         this.key = key;
         entities = new ArrayList();
     }
@@ -55,12 +54,12 @@ public class GameInfo {
         this.currentFloor = i;
     }
 
-    public String getCurrentHuman() {
-        return this.currentHuman;
+    public Boolean amIHuman() {
+       return this.amIHuman;
     }
 
-    public void setCurrentHuman(String s) {
-        this.currentHuman = s;
+    public void setamIHuman(boolean b) {
+        this.amIHuman = b;
     }
 
     public boolean getKey() {
