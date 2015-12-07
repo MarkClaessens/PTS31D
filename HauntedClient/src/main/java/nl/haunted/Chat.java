@@ -5,6 +5,7 @@
  */
 package nl.haunted;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,12 +16,14 @@ import java.util.List;
  */
 public class Chat {
     private List<String> messages;
+    private InputController IC;
     
     /**
      * Constructor for chat
      */
     public Chat(){
         this.messages = new ArrayList();
+        IC = new InputController();
     }
     
     public List<String> getMessages(){
@@ -29,5 +32,10 @@ public class Chat {
     
     public void addMessage(String s){
         this.messages.add(s);
+    }
+    
+    public void sendMessage(String s) throws IOException{
+        //TODO set Player tags
+        IC.sendMessage(s);
     }
 }

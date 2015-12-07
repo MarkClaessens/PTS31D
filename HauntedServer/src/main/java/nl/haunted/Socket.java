@@ -92,12 +92,14 @@ public class Socket {
         return (Object[][]) (o);
     }
 
-    public String receiveInput() throws IOException, ClassNotFoundException {
+    public String[] receiveInput() throws IOException, ClassNotFoundException {
         byte[] recvBuf = new byte[1000];
         DatagramPacket packet = new DatagramPacket(recvBuf,
                 recvBuf.length);
         sock.receive(packet);
-        String s = new String(packet.getData(), 0, packet.getLength());
+        String[] s = new String[2];
+        s[0] = packet.getAddress().toString();
+        s[1] = new String(packet.getData(), 0, packet.getLength());
         return s;
     }
 

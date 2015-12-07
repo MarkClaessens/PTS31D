@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Timer;
@@ -60,8 +61,8 @@ public class Game {
     public int getCurrentFloor() {
         return currentFloor;
     }
-    
-    public List<Ghost> getGhosts(){
+
+    public List<Ghost> getGhosts() {
         return this.ghosts;
     }
 
@@ -81,12 +82,12 @@ public class Game {
         this.floorAmount = randomizer.nextInt(floors - 3 + 1) + 3;
         this.currentFloor = 0;
         this.gameLobby = gl;
-        
+
         // Create the first level.
     }
 
     /**
-     * Creates the new level object when a level has finished. 
+     * Creates the new level object when a level has finished.
      */
     public void nextLevel() {
         this.currentFloor++;
@@ -108,7 +109,9 @@ public class Game {
     }
 
     /**
-     * Will be called when the last level is played. After calling the victory screen will be shown.
+     * Will be called when the last level is played. After calling the victory
+     * screen will be shown.
+     *
      * @param player the player that wins the game by entering the last door.
      */
     public void endGame(Player player) {
@@ -134,8 +137,8 @@ public class Game {
             //check if the list of ghosts is empty
             // <editor-fold defaultstate="collapsed" desc="if there are ghosts">
             if (!this.ghosts.isEmpty()) {
-                DirectionType[] keyboard = null; 
-                
+                DirectionType[] keyboard = null;
+
                 // <editor-fold defaultstate="collapsed" desc="if there is a pressed key TODO: get keypresses">
                 if (keyboard != null) {
                     //go through every player
@@ -144,7 +147,7 @@ public class Game {
                         if (keyboard[i] != null) {
                             this.players.get(i).getCharacter().move((DirectionType) keyboard[i]);
                         } else {
-                            
+
                             // <editor-fold defaultstate="collapsed" desc="set moving and check if a ghost needs to become a wall">
                             //if the player didnt press a button and is a ghost check if it was moving.
                             //if it was moving set the stationary time
@@ -170,20 +173,20 @@ public class Game {
                     if (G.getTimeOfDeath() != null) {
                         if (System.currentTimeMillis() >= (G.getTimeOfDeath().getTimeInMillis() + 2000)) {
                             G.setPosition(this.pickSpawnPoint());
-                            
+
                             G.setTimeOfDeath();
                         }
                     }
                 });
                 //</editor-fold>
-                
+
             } // if there are ghosts </editor-fold> 
             else { // if there are no ghosts.
                 this.endRound();
             }
             srvSoc.sendObject(this.compressGameInfo());
         } // server runnin & !pauzed
-         // server runnin & !pauzed
+        // server runnin & !pauzed
     }
 
     /**
@@ -241,7 +244,7 @@ public class Game {
     public void setupGameClasses() {
 
     }
-    
+
     /**
      *
      */
@@ -261,7 +264,7 @@ public class Game {
      * Send with a socket the backgroundInt of the level to the Client
      */
     public void sendLevelBackground() {
-        
+
     }
 
     private Human getCurrentHuman() {
@@ -272,4 +275,34 @@ public class Game {
         }
         return null;
     }
-}
+
+    private DirectionType[] getPlayerInput() throws IOException, ClassNotFoundException {
+        DirectionType[] dir = new DirectionType[this.players.size()];
+        boolean[] filledPlayer = new boolean[this.players.size()];
+        boolean filled = false;
+        while (!filled) {
+            String[] input = this.srvSoc.receiveInput();
+                for (Player p : this.players) {
+                    if (p.getIpAdress().equals((String) input[0])) {
+                       int index = this.players.indexOf(p);                   
+                        switch (input[1]) {
+                            case "UP":
+                                dir[index] = DirectionType.UP;
+                            case "DOWN":
+                                dir[index] = DirectionType.DOWN;
+                            case "LEFT":
+                                dir[index] = DirectionType.LEFT;
+                            case "RIGHT":
+                                dir[index] = DirectionType.RIGHT;
+                        }
+                        filledPlayer[index] = true;
+                    }
+                }
+                filled = true;
+                for(boolean b : filledPlayer){
+                    if(!b){filled = false;}
+                }
+            }
+            return dir;
+        }
+    }

@@ -72,6 +72,10 @@ public class Player extends UnicastRemoteObject implements IPlayer {
     public void setReady(boolean ready) throws RemoteException {
         this.ready = ready;
     }
+    
+    public String getIpAdress(){
+        return this.ipAddress;
+    }
 
     /**
      * maakt de speler aan
