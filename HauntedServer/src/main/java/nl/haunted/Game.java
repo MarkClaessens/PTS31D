@@ -189,8 +189,8 @@ public class Game {
                 this.endRound();
             }
             srvSoc.sendObject(this.compressGameInfo());
-        } // server runnin & !pauzed
-        // server runnin & !pauzed
+        } // server runnin
+        // server runnin 
     }
 
     /**
