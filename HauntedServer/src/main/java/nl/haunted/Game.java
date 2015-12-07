@@ -6,6 +6,7 @@
 package nl.haunted;
 
 import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -71,6 +72,7 @@ public class Game {
      * @param players
      * @param floors
      * @param groupID
+     * @param gl
      * @throws java.io.IOException
      */
     public Game(List<IPlayer> players, int floors, String groupID, GameLobby gl) throws IOException {
@@ -84,6 +86,7 @@ public class Game {
         this.gameLobby = gl;
 
         // Create the first level.
+        nextLevel();
     }
 
     /**
@@ -253,11 +256,26 @@ public class Game {
     }
 
     /**
-     *
-     * @return
+     * Picks a human spawpoint.
+     * The human spawns anywhere in the middle of the map.
+     * @return the spawnpoint
      */
-    public Point2D pickSpawnPoint() {
-        return null;
+    public Point2D pickHumanSpawnpoint() {
+        // Pick random x and y positions in the middle of the map.
+        Random randomizer = new Random();
+        int x = randomizer.nextInt(800 - 600) + 600; // minimum is 600 and maximum is 800
+        int  y = randomizer.nextInt(600 - 300) + 300; // minimum is 300 and maximum is 600
+        
+        // Create a Point2D object with the random picked x and y values.
+        Point2D humanSpawnpoint = new Point2D.Double(x, y);
+        
+        // Check if the choosen spawnpoint doesn't collide with a wall.
+        BufferedImage collisionMap = this.level.getCollisionMap();
+        if(human.detectCollision(humanSpawnpoint)){
+            humanSpawnpoint = pickHumanSpawnpoint();
+        }
+        
+        return humanSpawnpoint; 
     }
 
     /**
@@ -268,12 +286,7 @@ public class Game {
     }
 
     private Human getCurrentHuman() {
-        for (Character C : this.characters) {
-            if (C instanceof Human) {
-                return (Human) C;
-            }
-        }
-        return null;
+        return human;
     }
 
     private DirectionType[] getPlayerInput() throws IOException, ClassNotFoundException {
