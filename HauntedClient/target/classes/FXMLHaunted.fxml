@@ -34,7 +34,6 @@
             <Image url="@btnCreateGameLobby.png" />
          </image></ImageView>
       <ListView fx:id="LVgamelobbys" layoutX="6.0" layoutY="275.0" prefHeight="287.0" prefWidth="282.0" />
-      <Button layoutX="356.0" layoutY="454.0" mnemonicParsing="false" onAction="#refresh" text="refresh" />
       <Button layoutX="356.0" layoutY="406.0" mnemonicParsing="false" onMouseClicked="#addPlayerGL" text="join game" />
     </children>
 </AnchorPane>
