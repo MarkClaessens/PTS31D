@@ -1,10 +1,10 @@
 -------------------------------------------------------------------------------
 Test set: nl.haunted.HumanTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0 sec <<< FAILURE!
+Tests run: 4, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.001 sec <<< FAILURE!
 enterDoor(nl.haunted.HumanTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NullPointerException
-	at nl.haunted.Human.enterDoor(Human.java:158)
+	at nl.haunted.Human.enterDoor(Human.java:156)
 	at nl.haunted.HumanTest.enterDoor(HumanTest.java:84)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -37,7 +37,7 @@ java.lang.NullPointerException
 testGetFlashlightPolygon(nl.haunted.HumanTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NullPointerException
 	at nl.haunted.Human.getFlashlightPolygon(Human.java:129)
-	at nl.haunted.HumanTest.testGetFlashlightPolygon(HumanTest.java:95)
+	at nl.haunted.HumanTest.testGetFlashlightPolygon(HumanTest.java:94)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

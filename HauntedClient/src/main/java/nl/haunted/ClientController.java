@@ -38,7 +38,7 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
     private IGameLobby YourGL;
     private String groupID;
     private InputController inputController = null;
-    
+
     // Binding name for lobby
     private static final String bindingNameLobby = "lobby";
 
@@ -53,7 +53,7 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
         gamelobbys = lobby.getGameLobbys();
         INGameLobby = false;
         YourGL = null;
-        
+
         //player = lobby.createPlayer("player", "get ip adress not implemented yeti");create return type for createplayer 
     }
 
@@ -89,7 +89,7 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
                 System.out.println("Client: Controller couldn't subscribe himself to the lobby.");
             }
         }
-        tisplayer = lobby.createPlayer("player", "ipadres");        
+        tisplayer = lobby.createPlayer("player", "ipadres");
     }
 
     /**
@@ -97,35 +97,33 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
      * @throws RemoteException
      */
     @Override
-    public void propertyChange(PropertyChangeEvent propertyChangeEvent) throws RemoteException {       
-              
-        if(!INGameLobby)
-        {
-          gamelobbys = (List<IGameLobby>) propertyChangeEvent.getNewValue();
-        for (IGameLobby GL : gamelobbys) {
-            for (IPlayer player : GL.getPlayers()) {
-                if (tisplayer.equals(player)) {
-                    YourGL = GL;
-                    INGameLobby = true;
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLGameLobby.fxml"));
-                    try {
-                        Node root = fxmlLoader.load();
-                        FXMLGameLobbyController GMC = (FXMLGameLobbyController) fxmlLoader.getController();
-                        GMC.setGameLobby(GL);
-                        GMC.settisPlayer(tisplayer);
-                        GMC.setController();
-                        GMC.setLobby(lobby);
-                        HauntedClient.getStage().getScene().setRoot((Parent) root);
-                    } catch (IOException ex) {
-                        Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+    public void propertyChange(PropertyChangeEvent propertyChangeEvent) throws RemoteException {
 
+        if (!INGameLobby) {
+            gamelobbys = (List<IGameLobby>) propertyChangeEvent.getNewValue();
+            for (IGameLobby GL : gamelobbys) {
+                for (IPlayer player : GL.getPlayers()) {
+                    if (tisplayer.equals(player)) {
+                        YourGL = GL;
+                        INGameLobby = true;
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLGameLobby.fxml"));
+                        try {
+                            Node root = fxmlLoader.load();
+                            FXMLGameLobbyController GMC = (FXMLGameLobbyController) fxmlLoader.getController();
+                            GMC.setGameLobby(GL);
+                            GMC.settisPlayer(tisplayer);
+                            GMC.setController();
+                            GMC.setLobby(lobby);
+                            HauntedClient.getStage().getScene().setRoot((Parent) root);
+                        } catch (IOException ex) {
+                            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    }
                 }
             }
-        }  
         }
-        
-        
+
     }
 
     public IPlayer getPlayer() {
@@ -148,10 +146,9 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
     public ILobby getLobby() {
         return lobby;
     }
-    public void setInGL(boolean status)
-    {
+
+    public void setInGL(boolean status) {
         INGameLobby = status;
     }
-    
 
 }

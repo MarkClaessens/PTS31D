@@ -79,6 +79,7 @@ public class GameLobbyTest {
 
     /**
      * Test of startGame method, of class GameLobby.
+     *
      * @throws java.rmi.RemoteException
      */
     @Test

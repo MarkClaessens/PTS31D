@@ -48,11 +48,12 @@ public class Player extends UnicastRemoteObject implements IPlayer {
     public String getName() throws RemoteException {
         return name;
     }
+
     @Override
-    public void setName(String naam) throws RemoteException
-    {
+    public void setName(String naam) throws RemoteException {
         this.name = naam;
     }
+
     /**
      * vraagt de status van de speler
      *
@@ -72,8 +73,8 @@ public class Player extends UnicastRemoteObject implements IPlayer {
     public void setReady(boolean ready) throws RemoteException {
         this.ready = ready;
     }
-    
-    public String getIpAdress(){
+
+    public String getIpAdress() {
         return this.ipAddress;
     }
 

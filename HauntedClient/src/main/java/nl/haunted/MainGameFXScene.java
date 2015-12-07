@@ -42,7 +42,7 @@ public class MainGameFXScene {
 
     private Chat chat;
     private Player p;
-    
+
     private Stage chatstage;
 
     private Scene scene;
@@ -366,10 +366,10 @@ public class MainGameFXScene {
             }
         }
     }
-    
-    private void drawHumanPerspective(){
+
+    private void drawHumanPerspective() {
         try {
-            if(p.getCharacter() instanceof Human){
+            if (p.getCharacter() instanceof Human) {
                 Human h = (Human) p.getCharacter();
                 int[] i = h.getFlashlightPolygon();
             }

@@ -18,40 +18,40 @@ import java.util.logging.Logger;
  * @author jvdwi
  */
 public class Ghost extends Character {
+
     private boolean vulnerable, isGhost, dead;
     private Calendar stationaryTime, timeOfDeath;
     private Player bestuurder;
     private Game game;
-    
-    public boolean isVulnerable(){
+
+    public boolean isVulnerable() {
         return vulnerable;
     }
-    
-    public void setVulnerable(boolean isVulnerable){
+
+    public void setVulnerable(boolean isVulnerable) {
         this.vulnerable = isVulnerable;
     }
-    
-    public void setDead(boolean isDead){
+
+    public void setDead(boolean isDead) {
         this.dead = isDead;
     }
-    
-    public boolean getDead(){
+
+    public boolean getDead() {
         return this.dead;
     }
-    
-    public Calendar getTimeOfDeath(){
+
+    public Calendar getTimeOfDeath() {
         return timeOfDeath;
     }
-    
-    public void setTimeOfDeath(){
+
+    public void setTimeOfDeath() {
         this.timeOfDeath = Calendar.getInstance();
     }
-        
-    public Game getGame(){
+
+    public Game getGame() {
         return game;
     }
-       
-    
+
     /**
      * Sets the stationary time to now when the Ghost started standing still.
      * Started standing still means pressing no moving keys.
@@ -60,7 +60,7 @@ public class Ghost extends Character {
     public void setStationaryTime() {
         this.stationaryTime = Calendar.getInstance();
     }
-    
+
     /**
      *
      * @return the time when the Ghost started standing still.
@@ -68,7 +68,7 @@ public class Ghost extends Character {
     public Calendar getStationaryTime() {
         return this.stationaryTime;
     }
-    
+
     /**
      * Constructor for Ghost sets vulnerable and isGhost to true and sets the
      * super variables in Character
@@ -87,19 +87,19 @@ public class Ghost extends Character {
         this.timeOfDeath = null;
         this.bestuurder = bestuurder;
     }
-    
+
     /**
      * This possesses a human, this ghost becomes the human, the previous human
      * becomes a ghost (with his own coloured sprites).
      */
-    public void possess(){
+    public void possess() {
         List<Player> players = game.getPlayers();
         boolean humanFound = false;
-        
-        while(!humanFound){
-            for(Player player : players){
+
+        while (!humanFound) {
+            for (Player player : players) {
                 try {
-                    if(player.getCharacter() instanceof Human){
+                    if (player.getCharacter() instanceof Human) {
                         Character human = player.getCharacter();
 
                         player.setCharacter(this);
@@ -113,14 +113,14 @@ public class Ghost extends Character {
             }
         }
     }
-    
+
     /**
      * Changes the appearance of the ghost, it becomes a wall or a ghost. If the
      * isGhost true and it will become "a wall" then the stationaryTime has to
-     * be at least 1,5 seconds ago. So the ghost object can't become "a
-     * wall" immediately.
+     * be at least 1,5 seconds ago. So the ghost object can't become "a wall"
+     * immediately.
      */
-    public void changeAppearance(){
+    public void changeAppearance() {
         if (this.isGhost && System.currentTimeMillis() >= stationaryTime.getTimeInMillis() + 1500 && !getMoving()) {
             this.vulnerable = false;
             this.isGhost = false;
@@ -130,13 +130,13 @@ public class Ghost extends Character {
             this.stationaryTime.clear();
         }
     }
-    
+
     /**
      * Respawns the ghost when hit by the flashlight. If there aren't remaining
-     * lifes for the ghost then the ghost dead attribute will be set to true. 
+     * lifes for the ghost then the ghost dead attribute will be set to true.
      * The ghost whil respawn when the timeOfDeath is 3 seconds ago.
      */
-    public void vanish(){
+    public void vanish() {
         // Get the remaining lifes that the ghost has.
         int remainingGhostLifes = game.getLevel().getGhostLifePool();
 
@@ -145,12 +145,11 @@ public class Ghost extends Character {
             // Vanish the Ghost by setting in off the screen
             super.setPosition(new Point2D.Double(-800, -800));
             game.getLevel().setGhostLifePool(remainingGhostLifes - 1);
-        } 
-        else {
+        } else {
             this.dead = true;
         }
     }
-    
+
     public List<Point2D> getHitboxPoints() {
         // a  ab  b
         // ac    bd

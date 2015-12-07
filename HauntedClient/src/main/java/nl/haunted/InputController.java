@@ -28,8 +28,8 @@ public class InputController {
     public Socket getInputSocket() {
         return this.inputSocket;
     }
-    
-    public void setDirection(DirectionType direction){
+
+    public void setDirection(DirectionType direction) {
         this.direction = direction;
     }
 
@@ -37,9 +37,8 @@ public class InputController {
         this.inputSocket.sendInput(s, 9877);
     }
 
-    public void sendInput() throws IOException{
+    public void sendInput() throws IOException {
         this.inputSocket.sendInput(this.direction.toString(), 9876);
     }
-    
 
 }

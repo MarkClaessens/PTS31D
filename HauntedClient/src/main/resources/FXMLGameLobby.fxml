@@ -14,20 +14,20 @@
         <TextField fx:id="TFmessage" layoutX="333.0" layoutY="420.0" prefHeight="25.0" prefWidth="358.0" />
         <Button fx:id="BTNsendMessage" layoutX="691.0" layoutY="420.0" mnemonicParsing="false" onMouseClicked="#sendMessage" prefHeight="25.0" prefWidth="59.0" text="send" />
         <TextArea fx:id="TAgegevens" editable="false" layoutX="332.0" layoutY="47.0" prefHeight="124.0" prefWidth="189.0" />
-      <ImageView fx:id="IVexit" fitHeight="55.0" fitWidth="130.0" layoutX="147.0" layoutY="47.0" onMouseClicked="#leavegamelobby" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@btnExit.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="IVexit1" fitHeight="55.0" fitWidth="130.0" layoutX="829.0" layoutY="47.0" onMouseClicked="#changeready" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@btnReady.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="55.0" fitWidth="130.0" layoutX="829.0" layoutY="116.0" onMouseClicked="#startgame" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@btnStartGame.png" />
-         </image>
-      </ImageView>
+        <ImageView fx:id="IVexit" fitHeight="55.0" fitWidth="130.0" layoutX="147.0" layoutY="47.0" onMouseClicked="#leavegamelobby" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@btnExit.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="IVexit1" fitHeight="55.0" fitWidth="130.0" layoutX="829.0" layoutY="47.0" onMouseClicked="#changeready" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@btnReady.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="55.0" fitWidth="130.0" layoutX="829.0" layoutY="116.0" onMouseClicked="#startgame" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@btnStartGame.png" />
+            </image>
+        </ImageView>
     </children>
 </AnchorPane>

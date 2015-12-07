@@ -86,7 +86,6 @@ public class HumanTest {
         human.enterDoor();
     }
 
-
     /**
      * test for getting flashlight polygon
      */

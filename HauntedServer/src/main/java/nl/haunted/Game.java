@@ -258,46 +258,47 @@ public class Game {
     }
 
     /**
-     * Picks a human spawnpoint.
-     * The human spawns anywhere in the middle of the map.
+     * Picks a human spawnpoint. The human spawns anywhere in the middle of the
+     * map.
+     *
      * @return the spawnpoint
      */
     public Point2D pickHumanSpawnpoint() {
         // Pick random x and y positions in the middle of the map.
         Random randomizer = new Random();
         int x = randomizer.nextInt(800 - 600) + 600; // minimum is 600 and maximum is 800
-        int  y = randomizer.nextInt(600 - 300) + 300; // minimum is 300 and maximum is 600
-        
+        int y = randomizer.nextInt(600 - 300) + 300; // minimum is 300 and maximum is 600
+
         // Create a Point2D object with the random picked x and y values.
         Point2D humanSpawnpoint = new Point2D.Double(x, y);
-        
+
         // Check if the choosen spawnpoint doesn't collide with a wall.
         BufferedImage collisionMap = this.level.getCollisionMap();
-        if(human.detectCollision(humanSpawnpoint)){
+        if (human.detectCollision(humanSpawnpoint)) {
             humanSpawnpoint = pickHumanSpawnpoint();
         }
-        
-        return humanSpawnpoint; 
+
+        return humanSpawnpoint;
     }
-    
+
     /**
-     * Picks a ghost spawnpoint.
-     * The Ghosts spawn in any corner.
+     * Picks a ghost spawnpoint. The Ghosts spawn in any corner.
+     *
      * @return the ghost spawn point.
      */
-    public Point2D pickGhostSpawnPoint(){
+    public Point2D pickGhostSpawnPoint() {
         List<Point2D> spawnPoints = new ArrayList<>();
-        spawnPoints.add(new Point2D.Double(0,0));
+        spawnPoints.add(new Point2D.Double(0, 0));
         spawnPoints.add(new Point2D.Double(0, 1000));
         spawnPoints.add(new Point2D.Double(1500, 1500));
         spawnPoints.add(new Point2D.Double(1500, 1000));
         spawnPoints.add(new Point2D.Double(0, 500));
         spawnPoints.add(new Point2D.Double(1500, 500));
-        
+
         Random randomizer = new Random();
         int randomInt = randomizer.nextInt(6);
         Point2D spawnPoint = spawnPoints.get(randomInt);
-        
+
         return null;
     }
 
@@ -318,29 +319,31 @@ public class Game {
         boolean filled = false;
         while (!filled) {
             String[] input = this.srvSoc.receiveInput();
-                for (Player p : this.players) {
-                    if (p.getIpAdress().equals((String) input[0])) {
-                       int index = this.players.indexOf(p);                   
-                        switch (input[1]) {
-                            case "UP":
-                                dir[index] = DirectionType.UP;
-                            case "DOWN":
-                                dir[index] = DirectionType.DOWN;
-                            case "LEFT":
-                                dir[index] = DirectionType.LEFT;
-                            case "RIGHT":
-                                dir[index] = DirectionType.RIGHT;
-                            case "":
-                                dir[index] = null;
-                        }
-                        filledPlayer[index] = true;
+            for (Player p : this.players) {
+                if (p.getIpAdress().equals((String) input[0])) {
+                    int index = this.players.indexOf(p);
+                    switch (input[1]) {
+                        case "UP":
+                            dir[index] = DirectionType.UP;
+                        case "DOWN":
+                            dir[index] = DirectionType.DOWN;
+                        case "LEFT":
+                            dir[index] = DirectionType.LEFT;
+                        case "RIGHT":
+                            dir[index] = DirectionType.RIGHT;
+                        case "":
+                            dir[index] = null;
                     }
-                }
-                filled = true;
-                for(boolean b : filledPlayer){
-                    if(!b){filled = false;}
+                    filledPlayer[index] = true;
                 }
             }
-            return dir;
+            filled = true;
+            for (boolean b : filledPlayer) {
+                if (!b) {
+                    filled = false;
+                }
+            }
         }
+        return dir;
     }
+}

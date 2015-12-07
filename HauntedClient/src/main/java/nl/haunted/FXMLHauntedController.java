@@ -43,8 +43,7 @@ import nl.haunted.IPlayer;
 
 /**
  *
- * @author Joris van de Wijgert, Cyril Brugman, Mark Claesens,
- * Mike Evers
+ * @author Joris van de Wijgert, Cyril Brugman, Mark Claesens, Mike Evers
  *
  */
 public class FXMLHauntedController extends TimerTask implements Initializable {
@@ -61,7 +60,7 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
     @FXML
     TextField TFchangenameplayer1;
     @FXML
-    ListView LVgamelobbys;    
+    ListView LVgamelobbys;
     @FXML
     TextField TFroomname;
     @FXML
@@ -91,17 +90,17 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
         setController();
         settisPlayer();
         setLobby();
-        
+
         try {
             setgamelobbys();
         } catch (RemoteException ex) {
             Logger.getLogger(FXMLHauntedController.class.getName()).log(Level.SEVERE, null, ex);
         }
-       /* BackgroundImage myBI = new BackgroundImage(new Image("lobbypic.jpg", 1024, 576, false, true),
-                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                BackgroundSize.DEFAULT);
-        //then you set to your node
-        paneel.setBackground(new Background(myBI));*/
+        /* BackgroundImage myBI = new BackgroundImage(new Image("lobbypic.jpg", 1024, 576, false, true),
+         BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+         BackgroundSize.DEFAULT);
+         //then you set to your node
+         paneel.setBackground(new Background(myBI));*/
         try {
             setplayername();
         } catch (RemoteException ex) {
@@ -111,7 +110,7 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
         //running timer task as daemon thread
         Timer timer = new Timer(true);
         timer.scheduleAtFixedRate(timerTask, 0, 2000);
-        
+
     }
 
     /**
@@ -119,7 +118,7 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
      * set the playernames in the textfields
      */
     private void setplayername() throws RemoteException {
-       TFchangenameplayer1.setText(tisplayer.getName());        
+        TFchangenameplayer1.setText(tisplayer.getName());
     }
 
     /**
@@ -129,24 +128,24 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
      * @param lobby
      */
     public void setLobby() {
-        this.lobby = controller.getLobby();        
+        this.lobby = controller.getLobby();
     }
-    
+
     public void settisPlayer() {
         this.tisplayer = controller.getPlayer();
     }
-    public void setController()
-    {
+
+    public void setController() {
         this.controller = HauntedClient.getController();
     }
+
     /**
      * *
      * change the name of both players
      */
     public void changename() throws RemoteException {
-        
-        if (!TFchangenameplayer1.getText().isEmpty()) 
-        {     
+
+        if (!TFchangenameplayer1.getText().isEmpty()) {
             tisplayer.setName(TFchangenameplayer1.getText());
             setplayername();
             TFroomname.setText(tisplayer.getName());
@@ -160,34 +159,25 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
      * @throws IOException
      */
     public void creategamelobby() throws IOException {
-        if ((!(TFroomname.getText().equals("")) && !(TFplayers.getText().equals("")) && !(TFfloors.getText().equals("")))) 
-        {            
-            try 
-            {
-                if (Integer.parseInt(TFplayers.getText()) > 2 && Integer.parseInt(TFplayers.getText()) < 8 && Integer.parseInt(TFfloors.getText()) < 11) 
-                {
-                    lobby.createGameLobby(TFroomname.getText(), TFpassword.getText(),tisplayer, Integer.parseInt(TFfloors.getText()), Integer.parseInt(TFplayers.getText()));                    
-                } 
-                else 
-                {
+        if ((!(TFroomname.getText().equals("")) && !(TFplayers.getText().equals("")) && !(TFfloors.getText().equals("")))) {
+            try {
+                if (Integer.parseInt(TFplayers.getText()) > 2 && Integer.parseInt(TFplayers.getText()) < 8 && Integer.parseInt(TFfloors.getText()) < 11) {
+                    lobby.createGameLobby(TFroomname.getText(), TFpassword.getText(), tisplayer, Integer.parseInt(TFfloors.getText()), Integer.parseInt(TFplayers.getText()));
+                } else {
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setHeaderText("maximum overschreden");
                     alert.setContentText("het maximum van een van de 2 getallen is overschreden. Het maximum voor spelers is 6 en voor floors 10");
                     alert.showAndWait();
                 }
 
-            } 
-            catch (NumberFormatException e) 
-            {
+            } catch (NumberFormatException e) {
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setHeaderText("geen getal");
                 alert.setContentText("zorg ervoor dat bij maximum spelers en floor amount er een getal staat");
                 alert.showAndWait();
             }
 
-        } 
-        else 
-        {
+        } else {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setHeaderText("invoer velden leeg");
             alert.setContentText("voer velden van naam, maximum spelers en floor amount in!");
@@ -211,32 +201,27 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
      * *
      * before the gui will be shown
      */
-    public void setgamelobbys() throws RemoteException
-    {
+    public void setgamelobbys() throws RemoteException {
         setLobby();
         List<String> namen = new ArrayList<>();
-        for (IGameLobby GL : lobby.getGameLobbys()) 
-        {
-          namen.add("naam: " + GL.getName() + " players: " + GL.getPlayers().size() + "/" +GL.getMaxPlayer() + " maxFloors: " + GL.getMaxFloors());
+        for (IGameLobby GL : lobby.getGameLobbys()) {
+            namen.add("naam: " + GL.getName() + " players: " + GL.getPlayers().size() + "/" + GL.getMaxPlayer() + " maxFloors: " + GL.getMaxFloors());
         }
         LVgamelobbys.setItems(FXCollections.observableList(namen));
     }
-    
-    public void addPlayerGL() throws RemoteException
-    {
-       String totaaltekst = (String) LVgamelobbys.getSelectionModel().getSelectedItem();
-       String naam = totaaltekst.substring(6, totaaltekst.indexOf(" players:"));
-       for(IGameLobby GL : lobby.getGameLobbys())
-       {
-           System.out.println(GL.getName());
-           if(GL.getName().equals(naam))
-           {
-              GL.addPlayer(tisplayer);
-              lobby.informlobbys();
-           }
-           
-       }
-       
+
+    public void addPlayerGL() throws RemoteException {
+        String totaaltekst = (String) LVgamelobbys.getSelectionModel().getSelectedItem();
+        String naam = totaaltekst.substring(6, totaaltekst.indexOf(" players:"));
+        for (IGameLobby GL : lobby.getGameLobbys()) {
+            System.out.println(GL.getName());
+            if (GL.getName().equals(naam)) {
+                GL.addPlayer(tisplayer);
+                lobby.informlobbys();
+            }
+
+        }
+
     }
 
     @Override
@@ -247,5 +232,5 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
             Logger.getLogger(FXMLHauntedController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

@@ -76,7 +76,7 @@ public interface IGameLobby extends Remote, RemotePublisher {
     public List<IPlayer> getPlayers() throws RemoteException;
 
     public String getGroupID() throws RemoteException;
-    
+
     /**
      * Check wether the player is ready or not.
      *

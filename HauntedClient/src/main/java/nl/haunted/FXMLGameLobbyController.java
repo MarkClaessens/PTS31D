@@ -54,7 +54,7 @@ import nl.haunted.IPlayer;
  *
  * @author Mark
  */
-public class FXMLGameLobbyController extends UnicastRemoteObject implements Initializable, IFXMLGameLobbyController{
+public class FXMLGameLobbyController extends UnicastRemoteObject implements Initializable, IFXMLGameLobbyController {
 
     /**
      * the fxml location of FXMLGameLobbyController
@@ -64,11 +64,11 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     boolean gamekanstarten;
     String currentText;
     ILobby lobby;
-    IPlayer tisplayer;    
+    IPlayer tisplayer;
     ClientController controller;
     Socket msgSoc;
     private Chat chat;
-    
+
     private List<IPlayer> players;
     private transient ObservableList<String> observablePersonen;
     @FXML
@@ -85,10 +85,10 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     AnchorPane paneel;
     @FXML
     ImageView IVexit;
-    
-    public FXMLGameLobbyController() throws RemoteException{
+
+    public FXMLGameLobbyController() throws RemoteException {
     }
-    
+
     /**
      * Initializes the controller class.
      *
@@ -97,45 +97,39 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       /* BackgroundImage myBI = new BackgroundImage(new Image("gamelobby.jpg", 1024, 576, false, true),
-                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                BackgroundSize.DEFAULT);
-        //then you set to your node
-        paneel.setBackground(new Background(myBI));*/
-        
-        
+        /* BackgroundImage myBI = new BackgroundImage(new Image("gamelobby.jpg", 1024, 576, false, true),
+         BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+         BackgroundSize.DEFAULT);
+         //then you set to your node
+         paneel.setBackground(new Background(myBI));*/
+
         System.out.println("kaas");
         // Set the groupID in ClientController to the groupID of this gamelobby.
-        
+
     }
 
     /**
      * *
      * sets playernames in listview
      */
-    private void gamesettings() throws RemoteException 
-    {
+    private void gamesettings() throws RemoteException {
         TAgegevens.setText("naam: " + gamelobby.getName() + "\n" + "maxfloors: " + String.valueOf(gamelobby.getMaxFloors()) + "\n" + "maxplayers: " + String.valueOf(gamelobby.getMaxPlayer()));
-        
+
     }
-    private void playernames() throws RemoteException 
-    {
+
+    private void playernames() throws RemoteException {
         List<String> namen = new ArrayList<>();
-        for (IPlayer player : players) 
-        {
-          namen.add(player.getName() + " ready: " + player.getReady());
+        for (IPlayer player : players) {
+            namen.add(player.getName() + " ready: " + player.getReady());
         }
         Platform.runLater(new Runnable() {
 
             @Override
-            public void run() 
-            {
+            public void run() {
                 LVplayers.setItems(FXCollections.observableList(namen));
             }
         });
-        
-        
-         
+
     }
 
     /**
@@ -147,7 +141,6 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
      */
     public void setGameLobby(IGameLobby Gamelobby) throws IOException {
         this.gamelobby = Gamelobby;
-        chat = new Chat();
         try {
             gamelobby.addListener(this, "players");
         } catch (RemoteException ex) {
@@ -162,13 +155,14 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
             chat = new Chat(controller.getGroupID());
         } catch (RemoteException ex) {
             Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        }
     }
+
     public void settisPlayer(IPlayer player) {
         this.tisplayer = player;
     }
-    public void setController()
-    {
+
+    public void setController() {
         this.controller = HauntedClient.getController();
         try {
             controller.setGroupID(this.gamelobby.getGroupID());
@@ -178,22 +172,20 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         } catch (IOException ex) {
             Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
+
     }
 
     public void setPlayers() {
         players.clear();
         try {
-            for(IPlayer player : gamelobby.getPlayers())
-            {
+            for (IPlayer player : gamelobby.getPlayers()) {
                 players.add(player);
             }
         } catch (RemoteException ex) {
             Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * *
      * sets the lobby
@@ -213,15 +205,12 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     @FXML
     private void startgame(MouseEvent event) throws IOException, InterruptedException, Exception {
         boolean startable = true;
-        for(IPlayer player : players)
-        {
-            if(!player.getReady())
-            {
+        for (IPlayer player : players) {
+            if (!player.getReady()) {
                 startable = false;
             }
         }
-        if(startable)
-        {
+        if (startable) {
             // START THE GAME ALREIDY
         }
     }
@@ -234,7 +223,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
      */
     @FXML
     private void changeready(MouseEvent event) throws RemoteException {
-       tisplayer.toggleReady();
+        tisplayer.toggleReady();
     }
 
     /**
@@ -244,22 +233,18 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
      * @param event
      */
     @FXML
-    private void sendMessage(MouseEvent event) throws IOException 
-    {        
-        
-        if (!TFmessage.getText().isEmpty()) 
-        {
+    private void sendMessage(MouseEvent event) throws IOException {
+
+        if (!TFmessage.getText().isEmpty()) {
             chat.sendMessage(TFmessage.getText(), tisplayer);
-            TFmessage.clear();           
-            
-        } 
-        else 
-        {
+            TFmessage.clear();
+
+        } else {
             TAchatBox.setText(currentText);
             TAchatBox.setScrollTop(Double.MAX_VALUE);
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setContentText("geen message ingevoerd");
-            alert.showAndWait();                        
+            alert.showAndWait();
         }
     }
 
@@ -269,60 +254,50 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
      */
     @FXML
     private void leavegamelobby() throws RemoteException {
-        gamelobby.removePlayer(tisplayer);        
+        gamelobby.removePlayer(tisplayer);
         controller.setInGL(false);
-       if(gamelobby.getPlayers().size() == 0)
-       {
-           lobby.removeGL(gamelobby);
-       }
-       if(tisplayer.getReady())
-       {
-           tisplayer.toggleReady();
-       }
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLHaunted.fxml"));
-                try {
-                    Node root = fxmlLoader.load();                    
-                    HauntedClient.getStage().getScene().setRoot((Parent) root);
-                } catch (IOException ex) {
-                    Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        if (gamelobby.getPlayers().size() == 0) {
+            lobby.removeGL(gamelobby);
+        }
+        if (tisplayer.getReady()) {
+            tisplayer.toggleReady();
+        }
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLHaunted.fxml"));
+        try {
+            Node root = fxmlLoader.load();
+            HauntedClient.getStage().getScene().setRoot((Parent) root);
+        } catch (IOException ex) {
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) throws RemoteException {
-        String propertyName = evt.getPropertyName();        
-        if(propertyName.equals("players")){
+        String propertyName = evt.getPropertyName();
+        if (propertyName.equals("players")) {
             List<IPlayer> INplayers = (List<IPlayer>) evt.getNewValue();
-            if(INplayers.size() > players.size())
-            {
-               subscribeToAllPlayers();
-               setPlayers();
-               playernames();
-            }
-            else
-            {
-                for(IPlayer INplayer : INplayers)
-                {
+            if (INplayers.size() > players.size()) {
+                subscribeToAllPlayers();
+                setPlayers();
+                playernames();
+            } else {
+                for (IPlayer INplayer : INplayers) {
                     boolean found = false;
-                    for(IPlayer EXplayer : players)
-                    {  
-                        if(INplayer == EXplayer)
-                        {
+                    for (IPlayer EXplayer : players) {
+                        if (INplayer == EXplayer) {
                             found = true;
                         }
                     }
-                    if(!found)
-                    {
-                       INplayer.removeListener(this, propertyName);
-                       setPlayers();
-                       playernames();                       
+                    if (!found) {
+                        INplayer.removeListener(this, propertyName);
+                        setPlayers();
+                        playernames();
                     }
                 }
-            }            
-            
-        }
-        else if(propertyName.equals("ready")){
-            
+            }
+
+        } else if (propertyName.equals("ready")) {
+
             playernames();
         }
     }
@@ -331,17 +306,16 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
      * *
      * before the gui will be shown
      */
-    
-    public void subscribeToAllPlayers(){
+    public void subscribeToAllPlayers() {
         // When joining the gamelobby subscribe to every player's ready status.       
         try {
             players = gamelobby.getPlayers();
         } catch (RemoteException ex) {
             Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        if(players != null){
-            for(IPlayer player : players){
+
+        if (players != null) {
+            for (IPlayer player : players) {
                 try {
                     player.addListener(this, "ready");
                 } catch (RemoteException ex) {
@@ -350,32 +324,30 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
             }
         }
     }
-    
-    public void getmessages()
-    {      
-      TAchatBox.appendText(chat.getMessages().get(chat.getMessages().size()));
-      TAchatBox.appendText("\n");
+
+    public void getmessages() {
+        TAchatBox.appendText(chat.getMessages().get(chat.getMessages().size()));
+        TAchatBox.appendText("\n");
     }
-    public Chat getchat()
-    {
+
+    public Chat getchat() {
         return chat;
     }
-    public class observermessages implements Observer{
-       
+
+    public class observermessages implements Observer {
+
         FXMLGameLobbyController GLC;
-        
-        public observermessages(FXMLGameLobbyController GLC)
-        {
+
+        public observermessages(FXMLGameLobbyController GLC) {
             this.GLC = GLC;
             GLC.getchat().addObserver(this);
         }
+
         @Override
-        public void update(Observable o, Object arg) 
-            {
-                GLC.getmessages();
-            }
-        
+        public void update(Observable o, Object arg) {
+            GLC.getmessages();
+        }
+
     }
-    
-    
+
 }

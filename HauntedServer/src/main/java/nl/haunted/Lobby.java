@@ -46,13 +46,13 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
     @Override
     public void createGameLobby(String name, String password, IPlayer host, int maxFloors, int maxPlayers) throws RemoteException {
         try {
-           GameLobby gamelobby = new GameLobby(name, password, host, maxFloors, maxPlayers);
-           gameLobbys.add(gamelobby);
-           basicPublisher.inform(this, "gamelobbys", null, gameLobbys);
+            GameLobby gamelobby = new GameLobby(name, password, host, maxFloors, maxPlayers);
+            gameLobbys.add(gamelobby);
+            basicPublisher.inform(this, "gamelobbys", null, gameLobbys);
         } catch (IOException ex) {
             Logger.getLogger(Lobby.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     @Override
@@ -65,14 +65,14 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
         }
         if (exist) {
             players.remove(player);
-        } 
+        }
     }
 
     @Override
     public IPlayer createPlayer(String name, String ipAddress) throws RemoteException {
         Player player = new Player(name, ipAddress);
         players.add(player);
-        return (IPlayer)player;
+        return (IPlayer) player;
     }
 
     @Override
@@ -84,23 +84,19 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
     public void removeListener(RemotePropertyListener remotePropertyListener, String string) throws RemoteException {
         basicPublisher.removeListener(remotePropertyListener, string);
     }
-    
-    public void informlobbys() throws RemoteException
-    {
-       basicPublisher.inform(this, "gamelobbys", null, gameLobbys); 
+
+    public void informlobbys() throws RemoteException {
+        basicPublisher.inform(this, "gamelobbys", null, gameLobbys);
     }
-    
-    public void removeGL(IGameLobby GL) throws RemoteException
-    {
+
+    public void removeGL(IGameLobby GL) throws RemoteException {
         IGameLobby EXGL = null;
-        for(IGameLobby INGL : gameLobbys)
-        {
-           if(INGL.getName().equals(GL.getName()))
-           {
-              EXGL = INGL;
-           }
+        for (IGameLobby INGL : gameLobbys) {
+            if (INGL.getName().equals(GL.getName())) {
+                EXGL = INGL;
+            }
         }
-       gameLobbys.remove(EXGL);
-       basicPublisher.inform(this, "gamelobbys", null, gameLobbys); 
+        gameLobbys.remove(EXGL);
+        basicPublisher.inform(this, "gamelobbys", null, gameLobbys);
     }
 }

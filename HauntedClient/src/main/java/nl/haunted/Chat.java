@@ -18,32 +18,34 @@ import java.util.Observable;
  *
  * @author jvdwi
  */
-public class Chat extends Observable{
+public class Chat extends Observable {
+
     private List<String> messages;
     private final InputController IC;
-    
+
     /**
      * Constructor for chat
+     *
      * @param groupID
      * @throws java.io.IOException
      */
-    public Chat(String groupID) throws IOException{
+    public Chat(String groupID) throws IOException {
         this.messages = new ArrayList();
         IC = new InputController(groupID);
     }
-    
-    public List<String> getMessages(){
+
+    public List<String> getMessages() {
         return Collections.unmodifiableList(messages);
     }
-    
-    public void addMessage(String s){
+
+    public void addMessage(String s) {
         this.messages.add(s);
     }
-    
-    public void sendMessage(String s, IPlayer p) throws IOException{
+
+    public void sendMessage(String s, IPlayer p) throws IOException {
         String sb = "";
         DateFormat df = new SimpleDateFormat("HH:mm");
-        sb = "["+df.format(Calendar.getInstance().getTime())+"]["+p.getName()+"]"+": "+s;
+        sb = "[" + df.format(Calendar.getInstance().getTime()) + "][" + p.getName() + "]" + ": " + s;
         IC.sendMessage(sb);
     }
 }

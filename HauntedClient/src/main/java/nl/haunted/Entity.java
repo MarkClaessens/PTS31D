@@ -58,8 +58,8 @@ public class Entity {
     public void setDirection(DirectionType dir) {
         this.direction = dir;
     }
-    
-    public boolean getMoving(){
+
+    public boolean getMoving() {
         return this.moving;
     }
 

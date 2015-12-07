@@ -20,7 +20,6 @@ public class HauntedServer {
     private static Registry registry = null;
     private Lobby lobby = null;
 
-    
     // Constructor
     public HauntedServer() {
         try {

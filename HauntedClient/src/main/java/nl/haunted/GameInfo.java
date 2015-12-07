@@ -74,10 +74,11 @@ public class GameInfo {
     public Image getBackgroundImage() {
         return this.backgroundImage;
     }
-    
+
     /**
      * Background1.png example;
-     * @param i 
+     *
+     * @param i
      */
     public void setBackgroundImage(int i) {
         this.backgroundImage = new Image("Background" + i + ".png");

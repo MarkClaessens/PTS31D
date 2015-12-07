@@ -12,5 +12,5 @@ import java.rmi.Remote;
  *
  * @author Mark
  */
-public interface IFXMLGameLobbyController extends RemotePropertyListener, Remote { 
+public interface IFXMLGameLobbyController extends RemotePropertyListener, Remote {
 }

@@ -29,8 +29,11 @@ public interface IPlayer extends Remote, RemotePublisher {
      * @throws java.rmi.RemoteException
      */
     public String getName() throws RemoteException;
+
     public void setName(String naam) throws RemoteException;
+
     public void toggleReady() throws RemoteException;
+
     /**
      * vraag de ready status op van de speler
      *
@@ -38,7 +41,7 @@ public interface IPlayer extends Remote, RemotePublisher {
      * @throws java.rmi.RemoteException
      */
     public boolean getReady() throws RemoteException;
-    
+
     /**
      *
      * @return the color of the player

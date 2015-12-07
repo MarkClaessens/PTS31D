@@ -24,10 +24,11 @@ import javafx.stage.Stage;
  * @author Mike Evers + ..
  */
 public class HauntedClient extends Application {
-    private static ClientController controller;    
+
+    private static ClientController controller;
     private static Stage primaryStage;
     private static FXMLHauntedController HC;
-    
+
     @Override
     public void start(Stage primaryStage) throws IOException {
         // Get ip address of server
@@ -41,24 +42,30 @@ public class HauntedClient extends Application {
             System.out.println("Client: following exception was found: " + ex.getMessage());
             primaryStage.close();
         }
-        
-        /***********ABOVE THIS IS ENTERING SERVER IP + INIT THE CONTROLLER*****************/
+
+        /**
+         * *********ABOVE THIS IS ENTERING SERVER IP + INIT THE
+         * CONTROLLER****************
+         */
         this.primaryStage = primaryStage;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLHaunted.fxml"));
         Node root = fxmlLoader.load();
-        Scene scene = new Scene((Parent)root);
-        
+        Scene scene = new Scene((Parent) root);
+
         primaryStage.setTitle("Haunted");
         primaryStage.setScene(scene);
-        
+
         primaryStage.show();
     }
-    public static ClientController getController(){
+
+    public static ClientController getController() {
         return controller;
     }
-    public static Stage getStage(){
+
+    public static Stage getStage() {
         return primaryStage;
-    }    
+    }
+
     /**
      * @param args the command line arguments
      */

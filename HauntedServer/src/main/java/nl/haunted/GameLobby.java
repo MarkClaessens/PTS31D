@@ -122,13 +122,13 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         }
         if (exist == false && this.players.size() + 1 <= this.maxPlayers) {
             players.add((IPlayer) player);
-            this.basicPublisher.inform(this, "players", null, players);            
+            this.basicPublisher.inform(this, "players", null, players);
             return true;
         } else {
             return false;
         }
     }
-    
+
     /**
      * vraagt de naam op van de gamelobby
      *

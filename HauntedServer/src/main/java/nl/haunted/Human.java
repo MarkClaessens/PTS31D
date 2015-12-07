@@ -23,7 +23,7 @@ public class Human extends Character {
     private int flashlightRange, flashlightAngle;
     private boolean hasKey;
     private double[][] flashlightPoints;
-    
+
     private double flX3 = 0, flY3 = 0, flX2 = 0, flY2 = 0, flX1, flY1, flY23, flX32, flY31, flX13, flDet, flMinD, flMaxD;
 
     /**
@@ -46,7 +46,7 @@ public class Human extends Character {
     public boolean hasKey() {
         return hasKey;
     }
-    
+
     //<editor-fold defaultstate="collapsed" desc="Flashlight">
     /**
      *
@@ -64,7 +64,7 @@ public class Human extends Character {
     public void setFlashlightRange(int flashlightRange) {
         this.flashlightRange = flashlightRange;
     }
-    
+
     /**
      *
      * @return the flashlight angle
@@ -81,7 +81,7 @@ public class Human extends Character {
     public void setFlashlightAngle(int flashlightAngle) {
         this.flashlightAngle = flashlightAngle;
     }
-    
+
     /**
      * Initializes the flashlight for the human. With this, the human can see
      * the things in the level, but only the things in range of the flashlight.
@@ -135,10 +135,8 @@ public class Human extends Character {
         return i;
 
     }
-    
+
     //</editor-fold>
-    
-    
     /**
      * if haskey == false, hasKey becomes true
      */
@@ -158,21 +156,20 @@ public class Human extends Character {
         if (game.getFloorAmount() - 1 == game.getCurrentFloor()) {
             game.setRunning(false);
             boolean humanFound = false;
-            
-            while(!humanFound){
-               for(Player player : game.getPlayers()){
-                   try {
-                       if(player.getCharacter() instanceof Human){
-                           game.endGame(player);
-                           humanFound = true;
-                        }  
+
+            while (!humanFound) {
+                for (Player player : game.getPlayers()) {
+                    try {
+                        if (player.getCharacter() instanceof Human) {
+                            game.endGame(player);
+                            humanFound = true;
+                        }
                     } catch (RemoteException ex) {
-                       Logger.getLogger(Human.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(Human.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                } 
+                }
             }
-        } 
-        else {
+        } else {
             game.setRunning(false);
             game.endRound();
         }
@@ -204,9 +201,10 @@ public class Human extends Character {
 
         return (betweenInclusive(p1Xmax, p2Xmin, p2Xmax) && (betweenInclusive(p1Ymin, p2Ymin, p2Ymax) || betweenInclusive(p1Ymax, p2Ymin, p2Ymax))) || (betweenInclusive(p1Xmin, p2Xmin, p2Xmax) && (betweenInclusive(p1Ymin, p2Ymin, p2Ymax) || betweenInclusive(p1Ymax, p2Ymin, p2Ymax)));
     }
-    
+
     /**
      * check if human collides with a ghost
+     *
      * @return the ghost where the human collides with
      */
     public Ghost checkGhostCollision() {
@@ -218,11 +216,12 @@ public class Human extends Character {
         }
         return null;
     }
-    
+
     /**
      * check if the given position collides with the flashlight.
+     *
      * @param point
-     * @return 
+     * @return
      */
     public boolean flashlightCollision(Point2D point) {
 
@@ -250,17 +249,17 @@ public class Human extends Character {
         return !(c < flMinD || c > flMaxD);
 
     }
-    
+
     /**
      * check if the human interacts with ghost, key, door or wall
      *
      */
     public void checkInteract() {
-        Point2D door = new Point2D.Double(this.game.getLevel().getDoorLocation().getX()+40,this.game.getLevel().getDoorLocation().getY());
+        Point2D door = new Point2D.Double(this.game.getLevel().getDoorLocation().getX() + 40, this.game.getLevel().getDoorLocation().getY());
         Point2D key = this.game.getLevel().getKeyLocation();
 
         //door collision
-        if ((checkHitboxCollision(new Point2D.Double(this.getPosition().getX()+45,this.getPosition().getY()+10), 10, 3, door, 20, 5) && this.hasKey)) //key collision   
+        if ((checkHitboxCollision(new Point2D.Double(this.getPosition().getX() + 45, this.getPosition().getY() + 10), 10, 3, door, 20, 5) && this.hasKey)) //key collision   
         {
             this.enterDoor();
         }
