@@ -12,7 +12,11 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -63,6 +67,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     IPlayer tisplayer;    
     ClientController controller;
     Socket msgSoc;
+    private Chat chat;
     
     private List<IPlayer> players;
     private transient ObservableList<String> observablePersonen;
@@ -141,6 +146,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
      */
     public void setGameLobby(IGameLobby Gamelobby) {
         this.gamelobby = Gamelobby;
+        chat = new Chat();
         try {
             gamelobby.addListener(this, "players");
         } catch (RemoteException ex) {
@@ -153,7 +159,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
             gamesettings();
         } catch (RemoteException ex) {
             Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }        
     }
     public void settisPlayer(IPlayer player) {
         this.tisplayer = player;
@@ -237,13 +243,11 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     @FXML
     private void sendMessage(MouseEvent event) throws IOException 
     {        
-        currentText = TAchatBox.getText();
-        TAchatBox.clear();
+        
         if (!TFmessage.getText().isEmpty()) 
         {
-            String bericht = TFmessage.getText();
-            this.controller.getInputController().sendMessage(bericht);
-            
+            chat.sendMessage(TFmessage.getText(), tisplayer);
+            TFmessage.clear();           
             
         } 
         else 
@@ -343,4 +347,32 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
             }
         }
     }
+    
+    public void getmessages()
+    {      
+      TAchatBox.appendText(chat.getMessages().get(chat.getMessages().size()));
+      TAchatBox.appendText("\n");
+    }
+    public Chat getchat()
+    {
+        return chat;
+    }
+    public class observermessages implements Observer{
+       
+        FXMLGameLobbyController GLC;
+        
+        public observermessages(FXMLGameLobbyController GLC)
+        {
+            this.GLC = GLC;
+            GLC.getchat().addObserver(this);
+        }
+        @Override
+        public void update(Observable o, Object arg) 
+            {
+                GLC.getmessages();
+            }
+        
+    }
+    
+    
 }
