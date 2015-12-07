@@ -201,7 +201,9 @@ public class MainGameFXScene {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    chat.sendMessage(tef.getText(), p);
+                    if (tef.getText().trim().length() >= 0) {
+                        chat.sendMessage(tef.getText(), p);
+                    }
                 } catch (IOException ex) {
                     Logger.getLogger(MainGameFXScene.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -318,23 +320,23 @@ public class MainGameFXScene {
      * Loads in the images to draw it.
      */
     private void loadInImages() {
-        keyImage = new Image("key.png");
-        doorImage = new Image("door.png");
-        wallImage = new Image("wall.png");
-        humanWhiteImages = new Image[]{new Image("humanWhite1.png"), new Image("humanWhite2.png"), new Image("humanWhite3.png")};
-        ghostWhiteImages = new Image[]{new Image("ghostWhite1.png"), new Image("ghostWhite2.png"), new Image("ghostWhite3.png")};
-        humanBlackImages = new Image[]{new Image("humanBlack1.png"), new Image("humanBlack2.png"), new Image("humanBlack3.png")};
-        ghostBlackImages = new Image[]{new Image("ghostBlack1.png"), new Image("ghostBlack2.png"), new Image("ghostBlack3.png")};
-        humanGreenImages = new Image[]{new Image("humanGreen1.png"), new Image("humanGreen2.png"), new Image("humanGreen3.png")};
-        ghostGreenImages = new Image[]{new Image("ghostGreen1.png"), new Image("ghostGreen2.png"), new Image("ghostGreen3.png")};
-        humanRedImages = new Image[]{new Image("humanRed1.png"), new Image("humanRed2.png"), new Image("humanRed3.png")};
-        ghostRedImages = new Image[]{new Image("ghostRed1.png"), new Image("ghostRed2.png"), new Image("ghostRed3.png")};
-        humanBlueImages = new Image[]{new Image("humanBlue1.png"), new Image("humanBlue2.png"), new Image("humanBlue3.png")};
-        ghostBlueImages = new Image[]{new Image("ghostBlue1.png"), new Image("ghostBlue2.png"), new Image("ghostBlue3.png")};
-        humanOrangeImages = new Image[]{new Image("humanOrange1.png"), new Image("humanOrange2.png"), new Image("humanOrange3.png")};
-        ghostOrangeImages = new Image[]{new Image("ghostOrange1.png"), new Image("ghostOrange2.png"), new Image("ghostOrange3.png")};
-        humanPurpleImages = new Image[]{new Image("humanPurple1.png"), new Image("humanPurple2.png"), new Image("humanPurple3.png")};
-        ghostPurpleImages = new Image[]{new Image("ghostPurple1.png"), new Image("ghostPurple2.png"), new Image("ghostPurple3.png")};
+        keyImage            =   new Image("key.png");
+        doorImage           =   new Image("door.png");
+        wallImage           =   new Image("wall.png");
+        humanWhiteImages    =   new Image[]{new Image("humanWhite1.png"),   new Image("humanWhite2.png"),   new Image("humanWhite3.png")};
+        ghostWhiteImages    =   new Image[]{new Image("ghostWhite1.png"),   new Image("ghostWhite2.png"),   new Image("ghostWhite3.png")};
+        humanBlackImages    =   new Image[]{new Image("humanBlack1.png"),   new Image("humanBlack2.png"),   new Image("humanBlack3.png")};
+        ghostBlackImages    =   new Image[]{new Image("ghostBlack1.png"),   new Image("ghostBlack2.png"),   new Image("ghostBlack3.png")};
+        humanGreenImages    =   new Image[]{new Image("humanGreen1.png"),   new Image("humanGreen2.png"),   new Image("humanGreen3.png")};
+        ghostGreenImages    =   new Image[]{new Image("ghostGreen1.png"),   new Image("ghostGreen2.png"),   new Image("ghostGreen3.png")};
+        humanRedImages      =   new Image[]{new Image("humanRed1.png"),     new Image("humanRed2.png"),     new Image("humanRed3.png")};
+        ghostRedImages      =   new Image[]{new Image("ghostRed1.png"),     new Image("ghostRed2.png"),     new Image("ghostRed3.png")};
+        humanBlueImages     =   new Image[]{new Image("humanBlue1.png"),    new Image("humanBlue2.png"),    new Image("humanBlue3.png")};
+        ghostBlueImages     =   new Image[]{new Image("ghostBlue1.png"),    new Image("ghostBlue2.png"),    new Image("ghostBlue3.png")};
+        humanOrangeImages   =   new Image[]{new Image("humanOrange1.png"),  new Image("humanOrange2.png"),  new Image("humanOrange3.png")};
+        ghostOrangeImages   =   new Image[]{new Image("ghostOrange1.png"),  new Image("ghostOrange2.png"),  new Image("ghostOrange3.png")};
+        humanPurpleImages   =   new Image[]{new Image("humanPurple1.png"),  new Image("humanPurple2.png"),  new Image("humanPurple3.png")};
+        ghostPurpleImages   =   new Image[]{new Image("ghostPurple1.png"),  new Image("ghostPurple2.png"),  new Image("ghostPurple3.png")};
 
     }
 
