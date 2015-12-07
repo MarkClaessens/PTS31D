@@ -16,6 +16,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.Timer;
+import java.util.logging.Logger;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.stage.Stage;
 
 /**
  *
@@ -33,8 +38,8 @@ public class Game {
     private List<Player> players;
     private IPlayer currentHuman;
     private Socket srvSoc;
-    private GameLobby gameLobby;
-    private List<Point2D> spawnPoints = new ArrayList<>();
+    private IGameLobby gameLobby;
+    private List<Point2D> spawnPoints = new ArrayList<>();    
     
     public Level getLevel() {
         return level;
@@ -76,7 +81,7 @@ public class Game {
      * @param gl
      * @throws java.io.IOException
      */
-    public Game(List<IPlayer> players, int floors, String groupID, GameLobby gl) throws IOException {
+    public Game(List<IPlayer> players, int floors, String groupID, IGameLobby gl) throws IOException {
         //Setup the socket for this game;
         srvSoc = new Socket();
         srvSoc.socketSetup(groupID, 9876);
@@ -85,6 +90,7 @@ public class Game {
         this.floorAmount = randomizer.nextInt(floors - 3 + 1) + 3;
         this.currentFloor = 0;
         this.gameLobby = gl;
+        
 
         // Create the first level.
         nextLevel();	
@@ -113,6 +119,7 @@ public class Game {
      */
     public void endRound() {
 
+        
     }
 
     /**

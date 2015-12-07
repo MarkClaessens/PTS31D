@@ -27,6 +27,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -212,7 +213,10 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
             }
         }
         if (startable) {
-            // START THE GAME ALREIDY
+               Game game = new Game(players, gamelobby.getMaxFloors(), gamelobby.getGroupID(), gamelobby);
+               MainGameFXScene MGS = new MainGameFXScene();
+               Scene scene = MGS.mainGameFX(null, chat, tisplayer);
+               HauntedClient.getStage().setScene(scene);
         }
     }
 

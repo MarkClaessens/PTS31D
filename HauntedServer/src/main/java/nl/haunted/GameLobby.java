@@ -25,8 +25,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
 
     private String name, password;
     private int maxPlayers, maxFloors;
-    private IPlayer host;
-    private List<Message> messages;
+    private IPlayer host;    
     private List<IPlayer> players;
     private BasicPublisher basicPublisher;
     private static int gameLobbyNum = 0;
@@ -45,8 +44,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
     public GameLobby(String name, String password, IPlayer host, int maxFloors, int maxPlayers) throws RemoteException, IOException {
         this.name = name;
         this.password = password;
-        this.host = host;
-        this.messages = new ArrayList();
+        this.host = host;        
         this.maxPlayers = maxPlayers;
         this.maxFloors = maxFloors;
         this.players = new ArrayList();

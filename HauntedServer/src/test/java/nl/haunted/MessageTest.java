@@ -35,7 +35,7 @@ public class MessageTest {
     public void setUp() throws RemoteException {
         timeOfTestToString = new SimpleDateFormat("HH:mm").format(new Date());
         player = new Player("MikeEvers123", "94.219.136.19");
-        message = new Message("this is a test", player);
+    //    message = new Message("this is a test", player);
     }
 
     @After
@@ -62,7 +62,7 @@ public class MessageTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void testTextNotNull() throws IllegalArgumentException, RemoteException {
-        Message illegalMessage = new Message(null, player);
+    //    Message illegalMessage = new Message(null, player);
         fail("IllegalArgumentException not thrown when text is null");
     }
 
@@ -72,7 +72,7 @@ public class MessageTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void testTextNotEmpty() throws IllegalArgumentException, RemoteException {
-        Message illegalMessage = new Message("", player);
+    //    Message illegalMessage = new Message("", player);
         fail("IllegalArgumentException not thrown when text is empty");
     }
 
@@ -84,7 +84,7 @@ public class MessageTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void testTextNotOnlyWhitespaces() throws IllegalArgumentException, RemoteException {
-        Message illegalMessage = new Message("     ", player);
+    //    Message illegalMessage = new Message("     ", player);
         fail("IllegalArgumentException not thrown when text only contains whitespaces");
     }
 
