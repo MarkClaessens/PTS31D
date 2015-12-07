@@ -45,6 +45,7 @@ public class MainGameFXScene {
     private double horScale, verScale;
 
     private Chat chat;
+    private Player p;
     
     private Stage chatstage;
 
@@ -93,9 +94,10 @@ public class MainGameFXScene {
      * @param gf
      * @return the scene to view in the mainActivity stage
      */
-    public Scene mainGameFX(gamefeed gf, Chat chat) {
+    public Scene mainGameFX(gamefeed gf, Chat chat, Player p) {
         this.gf = gf;
         this.chat = chat;
+        this.p = p;
         state = 0;
         this.bgImage = gf.gameInfo.getBackgroundImage();
         levelDrawWidth = bgImage.getWidth();
@@ -202,7 +204,7 @@ public class MainGameFXScene {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    chat.sendMessage(tef.getText());
+                    chat.sendMessage(tef.getText(), p);
                 } catch (IOException ex) {
                     Logger.getLogger(MainGameFXScene.class.getName()).log(Level.SEVERE, null, ex);
                 }
