@@ -1,14 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package nl.haunted;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,7 +18,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -42,8 +39,11 @@ public class MainGameFXScene {
     private double levelDrawWidth, levelDrawHeight;
     private double horScale, verScale;
 
-    private Stage chatstage;
+    private Chat chat;
+    private Player p;
     
+    private Stage chatstage;
+
     private Scene scene;
     private Group root;
 
@@ -83,8 +83,16 @@ public class MainGameFXScene {
 
     private gamefeed gf;
 
-    public Scene MainGameFX(gamefeed gf) {
+    /**
+     * Builds the scene for the main game fx
+     *
+     * @param gf
+     * @return the scene to view in the mainActivity stage
+     */
+    public Scene mainGameFX(gamefeed gf, Chat chat, Player p) {
         this.gf = gf;
+        this.chat = chat;
+        this.p = p;
         state = 0;
         this.bgImage = gf.gameInfo.getBackgroundImage();
         levelDrawWidth = bgImage.getWidth();
@@ -111,7 +119,7 @@ public class MainGameFXScene {
         ghostLayer = new Canvas(screenWidth, screenHeight);
         ghostGc = ghostLayer.getGraphicsContext2D();
         root.getChildren().add(ghostLayer);
-        
+
         textLayer = new Canvas(screenWidth, screenHeight);
         textGc = textLayer.getGraphicsContext2D();
         root.getChildren().add(textLayer);
@@ -123,6 +131,7 @@ public class MainGameFXScene {
         onKeyReleases(scene);
 
         new AnimationTimer() {
+            @Override
             public void handle(long currentNanoTime) {
                 List<Object> obj = new ArrayList();
                 root.getChildren().stream().filter((o) -> (o instanceof Polygon)).forEach((o) -> {
@@ -144,47 +153,56 @@ public class MainGameFXScene {
 
         return scene;
     }
-    
-    private void drawTexts(){
+
+    /**
+     * Draws the texts out of Game info
+     */
+    private void drawTexts() {
         textGc.setFont(new Font("Courier New", 14.0));
         textGc.setStroke(Color.BLACK);
-        textGc.strokeText("Ghost lives left: "+gf.gameInfo.getGhostLives(), 10, 14);
+        textGc.strokeText("Ghost lives left: " + gf.gameInfo.getGhostLives(), 10, 14);
         textGc.strokeText("Current floor: " + gf.gameInfo.getCurrentFloor(), 10, 30);
         textGc.strokeText("Current human: " + gf.gameInfo.getCurrentHuman(), 10, 46);
-        if(gf.gameInfo.getKey()){
+        if (gf.gameInfo.getKey()) {
             textGc.strokeText("Key has been picked up by human", 10, 62);
-        }
-        else{
+        } else {
             textGc.strokeText("Key hasn't been picked up by the human yet", 10, 62);
         }
     }
-    
-    private Scene getChatScene(){
+
+    /**
+     * builds the scene to make chats.
+     *
+     * @return the scene to view in the ChatStage.
+     */
+    private Scene getChatScene() {
         Group chatRoot = new Group();
         Scene chatScene = new Scene(chatRoot);
-        //TODO: add controls
+
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(25,25,25,25));
-        
+        grid.setPadding(new Insets(25, 25, 25, 25));
+
         TextFlow tf = new TextFlow();
-        //TODO: ADD PROPER GET CHAT MESSAGES BELOW
-        for(Entity chatString : gf.gameInfo.getEntities()){
-            Text txt = new Text(chatString.toString());
+        for (String chatString : chat.getMessages()) {
+            Text txt = new Text(chatString);
             tf.getChildren().add(txt);
         }
         grid.add(tf, 0, 0, 8, 8);
-        
+
         TextField tef = new TextField();
         grid.add(tef, 0, 9, 1, 7);
-        
+
         Button btCommit = new Button("Send");
-        btCommit.setOnAction(new EventHandler<ActionEvent>(){
+        btCommit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event){
-                //TODO: ADD PROPER SEND MESSAGE METHODE BELOW
-//                gf.sendMessage();
+            public void handle(ActionEvent event) {
+                try {
+                    chat.sendMessage(tef.getText(), p);
+                } catch (IOException ex) {
+                    Logger.getLogger(MainGameFXScene.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 chatstage.close();
             }
         });
@@ -201,14 +219,15 @@ public class MainGameFXScene {
     private void onKeyPresses(Scene scene) {
         scene.setOnKeyPressed(
                 new EventHandler<KeyEvent>() {
+                    @Override
                     public void handle(KeyEvent e) {
                         String code = e.getCode().toString();
 
-                        if (code == "ENTER") {
+                        if (code.equals("ENTER")) {
                             //TODO: call up chatbox popup
                             chatstage = new Stage();
                             chatstage.setTitle("Chat | Haunted");
-                            chatstage.setScene(scene);
+                            chatstage.setScene(getChatScene());
                             chatstage.show();
                         } else {
 
@@ -237,6 +256,9 @@ public class MainGameFXScene {
                                 case "RIGHT":
                                     HauntedClient.getController().getInputController().setDirection(DirectionType.RIGHT);
                                     break;
+                                default:
+                                    HauntedClient.getController().getInputController().setDirection(null);
+                                    break;
                             }
 
                         }
@@ -247,9 +269,15 @@ public class MainGameFXScene {
         );
     }
 
+    /**
+     * Handle the on key releases
+     *
+     * @param scene
+     */
     private void onKeyReleases(Scene scene) {
         scene.setOnKeyReleased(
                 new EventHandler<KeyEvent>() {
+                    @Override
                     public void handle(KeyEvent e) {
                         String code = e.getCode().toString();
 
@@ -284,6 +312,9 @@ public class MainGameFXScene {
         );
     }
 
+    /**
+     * Loads in the images to draw it.
+     */
     private void loadInImages() {
         keyImage = new Image("key.png");
         doorImage = new Image("door.png");
@@ -305,27 +336,28 @@ public class MainGameFXScene {
 
     }
 
+    /**
+     * Draws the images for all objects on the screen
+     */
     private void drawImages() {
         for (Entity e : gf.gameInfo.getEntities()) {
             switch (e.getType()) {
                 case Door:
-                    drawRotatedImage(keyDoorGc, doorImage, getAngle(e.getDirection()), e.getPosition().getX(), e.getPosition().getY(), horScale, verScale);
+                    drawRotatedImage(keyDoorGc, doorImage, getAngle(e.getDirection()), e.getPosition().getX() + 100, e.getPosition().getY(), horScale, verScale);
                     break;
                 case Key:
-                    keyDoorGc.drawImage(keyImage, e.getPosition().getX(), e.getPosition().getY(), keyImage.getWidth() * horScale, keyImage.getHeight() * verScale);
+                    keyDoorGc.drawImage(keyImage, e.getPosition().getX() + 100, e.getPosition().getY() + 100, keyImage.getWidth() * horScale, keyImage.getHeight() * verScale);
                     break;
                 case Human:
                     //todo : draw animated human images
-                    drawRotatedImage(humanGc, getAnimatedHumanImage(e), getAngle(e.getDirection()), e.getPosition().getX(), e.getPosition().getY(), horScale, verScale);
+                    drawRotatedImage(humanGc, getAnimatedHumanImage(e), getAngle(e.getDirection()), e.getPosition().getX() + 100, e.getPosition().getY() + 100, horScale, verScale);
                     break;
                 case Ghost:
                     //todo : draw animated ghost images
                     if (e.getWall()) {
-                        int xPos = (((int) e.getPosition().getX()) + 50) / 100 * 100;
-                        int yPos = (((int) e.getPosition().getY()) + 50) / 100 * 100;
-                        drawRotatedImage(ghostGc, wallImage, 0, xPos, yPos, horScale, verScale);
+                        drawRotatedImage(ghostGc, wallImage, 0, e.getPosition().getX() + 100, e.getPosition().getY() + 100, horScale, verScale);
                     } else {
-                        drawRotatedImage(ghostGc, getAnimatedGhostImage(e), getAngle(e.getDirection()), e.getPosition().getX(), e.getPosition().getY(), horScale, verScale);
+                        drawRotatedImage(ghostGc, getAnimatedGhostImage(e), getAngle(e.getDirection()), e.getPosition().getX() + 100, e.getPosition().getY() + 100, horScale, verScale);
                     }
                     break;
 
@@ -333,6 +365,12 @@ public class MainGameFXScene {
         }
     }
 
+    /**
+     * convert directionType into angle degrees (example: LEFT == 270°)
+     *
+     * @param direction
+     * @return degrees of the rotation
+     */
     private double getAngle(DirectionType direction) {
         switch (direction) {
             case UP:
@@ -348,11 +386,30 @@ public class MainGameFXScene {
         }
     }
 
+    /**
+     * Rotates the graphicscontext for a rotated image.
+     *
+     * @param gc
+     * @param angle
+     * @param px
+     * @param py
+     */
     private void rotate(GraphicsContext gc, double angle, double px, double py) {
         Rotate r = new Rotate(angle, px, py);
         gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
     }
 
+    /**
+     * Draws the rotated image on the right position with the right scalings.
+     *
+     * @param gc
+     * @param image
+     * @param angle
+     * @param tlpx
+     * @param tlpy
+     * @param scaleX
+     * @param scaleY
+     */
     private void drawRotatedImage(GraphicsContext gc, Image image, double angle, double tlpx, double tlpy, double scaleX, double scaleY) {
         gc.save(); // saves the current state on stack, including the current transform
         rotate(gc, angle, ((tlpx + image.getWidth()) * scaleX) / 2, ((tlpy + image.getHeight()) * scaleY) / 2);
@@ -360,6 +417,12 @@ public class MainGameFXScene {
         gc.restore(); // back to original state (before rotation)
     }
 
+    /**
+     * Returns the proper human image
+     *
+     * @param e
+     * @return image
+     */
     private Image getAnimatedHumanImage(Entity e) {
         Image returnImage = null;
 
@@ -503,8 +566,14 @@ public class MainGameFXScene {
         return returnImage;
     }
 
+    /**
+     * Returns the proper ghost image
+     *
+     * @param e
+     * @return image
+     */
     private Image getAnimatedGhostImage(Entity e) {
-         Image returnImage = null;
+        Image returnImage = null;
 
         Color c = e.getColor();
         if (c == Color.WHITE) {
@@ -645,6 +714,9 @@ public class MainGameFXScene {
         return returnImage;
     }
 
+    /**
+     * Calculates the screen sizes and the scalings
+     */
     private void determineScreenSizes() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         screenWidth = screenSize.getWidth();
