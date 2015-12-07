@@ -34,7 +34,8 @@ public class Game {
     private IPlayer currentHuman;
     private Socket srvSoc;
     private GameLobby gameLobby;
-
+    private List<Point2D> spawnPoints = new ArrayList<>();
+    
     public Level getLevel() {
         return level;
     }
@@ -287,8 +288,7 @@ public class Game {
      * @param startOfGame boolean if the spawnpoint is for the start of the game.
      * @return the ghost spawn point.
      */
-    public Point2D pickGhostSpawnPoint(boolean startOfGame){
-        List<Point2D> spawnPoints = new ArrayList<>();
+    public Point2D pickGhostSpawnPoint(boolean startOfGame){       
         spawnPoints.add(new Point2D.Double(0,0));
         spawnPoints.add(new Point2D.Double(0, 1000));
         spawnPoints.add(new Point2D.Double(1500, 1500));
@@ -300,8 +300,15 @@ public class Game {
         int randomInt = randomizer.nextInt(6);
         Point2D spawnPoint = spawnPoints.get(randomInt);
         
+        if(startOfGame){
+            for(Character character : this.characters){
+                if (character.getPosition() == spawnPoint){
+                    spawnPoint = pickGhostSpawnPoint(true);
+                }
+            }
+        }
         
-        return null;
+        return spawnPoint;
     }
 
     /**
