@@ -88,8 +88,8 @@ public class Game {
         this.gameLobby = gl;
 
         // Create the first level.
-        nextLevel();
-        
+        nextLevel();	
+		
         // Create the characters and bind them to the players.
         bindCharactersToPlayers();
     }
@@ -274,8 +274,8 @@ public class Game {
         return obj;
 
     }
-
-    /**
+	
+	/**
      * Create the ghosts and human and bind them random to the players.
      * @throws java.rmi.RemoteException
      */
