@@ -37,16 +37,16 @@ public class GameInfo {
         this.key = key;
         entities = new ArrayList();
     }
-    
-    public int getGhostLives(){
+
+    public int getGhostLives() {
         return this.ghostLives;
     }
 
     public void setGhostLives(int i) {
         this.ghostLives = i;
     }
-    
-    public int getCurrentFloor(){
+
+    public int getCurrentFloor() {
         return this.currentFloor;
     }
 
@@ -54,25 +54,33 @@ public class GameInfo {
         //this.setCurrentFloor(i);
         this.currentFloor = i;
     }
-    
-    public String getCurrentHuman(){
+
+    public String getCurrentHuman() {
         return this.currentHuman;
     }
 
     public void setCurrentHuman(String s) {
         this.currentHuman = s;
     }
-    
-    public boolean getKey(){
+
+    public boolean getKey() {
         return this.key;
     }
-    
-    public void setKey(boolean bool){
+
+    public void setKey(boolean bool) {
         this.key = bool;
     }
 
     public Image getBackgroundImage() {
         return this.backgroundImage;
+    }
+    
+    /**
+     * Background1.png example;
+     * @param i 
+     */
+    public void setBackgroundImage(int i) {
+        this.backgroundImage = new Image("Background" + i + ".png");
     }
 
     public boolean addEntity(Entity e) {

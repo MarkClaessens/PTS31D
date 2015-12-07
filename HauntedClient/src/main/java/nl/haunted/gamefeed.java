@@ -72,6 +72,7 @@ public class gamefeed {
         Object[][] o = soc.receiveObject();
         if ("Server".equals((String) o[0][0])) {
             //set gameinfo
+            gameInfo.setBackgroundImage((int) o[0][2]);
             gameInfo.setGhostLives((int) o[1][0]);
             gameInfo.setCurrentFloor((int) o[1][1]);
             gameInfo.setCurrentHuman((String) o[1][2]);
