@@ -16,6 +16,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Logger;
 
 /**
  *
@@ -34,7 +36,6 @@ public class Game {
     private IPlayer currentHuman;
     private Socket srvSoc;
     private GameLobby gameLobby;
-    private List<Point2D> spawnPoints = new ArrayList<>();
     
     public Level getLevel() {
         return level;
@@ -102,17 +103,44 @@ public class Game {
     }
 
     /**
-     *
+     *  starts the next round at the current floor.
      */
     public void startRound() {
+        human.setPosition(pickHumanSpawnpoint());
+        human.setHasKey(false);
+        human.setMoving(false);
+        
+        for (Ghost ghost : ghosts) {
+            ghost.reset();
+            ghost.setPosition(pickGhostSpawnPoint(true));
+        }
+        
+        this.running = true;
 
+        this.tickTimer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {           
+                try {
+                    tick();
+                } catch (IOException | ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                } 
+            }
+        };
+        
+        nextLevel();
+        this.tickTimer.scheduleAtFixedRate(task, 0, 16);
     }
 
     /**
-     *
+     * Ends the current round and opens the counting screen. 
      */
     public void endRound() {
-
+        this.tickTimer.cancel();
+        
+        // Open the counting screen.
+        // TODO for Marc. Open the counting screen. 
     }
 
     /**
@@ -295,7 +323,8 @@ public class Game {
      * @param startOfGame boolean if the spawnpoint is for the start of the game.
      * @return the ghost spawn point.
      */
-    public Point2D pickGhostSpawnPoint(boolean startOfGame){       
+    public Point2D pickGhostSpawnPoint(boolean startOfGame){  
+        List<Point2D> spawnPoints = new ArrayList<>();
         spawnPoints.add(new Point2D.Double(0,0));
         spawnPoints.add(new Point2D.Double(0, 1000));
         spawnPoints.add(new Point2D.Double(1500, 1500));

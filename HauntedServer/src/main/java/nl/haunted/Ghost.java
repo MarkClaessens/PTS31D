@@ -87,6 +87,15 @@ public class Ghost extends Character {
         this.timeOfDeath = null;
         this.bestuurder = bestuurder;
     }
+    
+    public void reset(){
+        this.dead = false;
+        this.vulnerable = true;
+        this.isGhost = true;
+        this.stationaryTime.clear();
+        this.timeOfDeath.clear();
+        this.moving = false;
+    }
 
     /**
      * This possesses a human, this ghost becomes the human, the previous human
