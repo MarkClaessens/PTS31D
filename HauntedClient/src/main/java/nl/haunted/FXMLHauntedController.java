@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -45,7 +47,7 @@ import nl.haunted.IPlayer;
  * Mike Evers
  *
  */
-public class FXMLHauntedController implements Initializable {
+public class FXMLHauntedController extends TimerTask implements Initializable {
 
     /**
      * the fxml location for FXMLHauntedController
@@ -105,6 +107,10 @@ public class FXMLHauntedController implements Initializable {
         } catch (RemoteException ex) {
             Logger.getLogger(FXMLHauntedController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        TimerTask timerTask = this;
+        //running timer task as daemon thread
+        Timer timer = new Timer(true);
+        timer.scheduleAtFixedRate(timerTask, 0, 2000);
         
     }
 
@@ -158,7 +164,7 @@ public class FXMLHauntedController implements Initializable {
         {            
             try 
             {
-                if (Integer.parseInt(TFplayers.getText()) > 1 && Integer.parseInt(TFplayers.getText()) < 7 && Integer.parseInt(TFfloors.getText()) < 11) 
+                if (Integer.parseInt(TFplayers.getText()) > 2 && Integer.parseInt(TFplayers.getText()) < 8 && Integer.parseInt(TFfloors.getText()) < 11) 
                 {
                     lobby.createGameLobby(TFroomname.getText(), TFpassword.getText(),tisplayer, Integer.parseInt(TFfloors.getText()), Integer.parseInt(TFplayers.getText()));                    
                 } 
@@ -211,14 +217,9 @@ public class FXMLHauntedController implements Initializable {
         List<String> namen = new ArrayList<>();
         for (IGameLobby GL : lobby.getGameLobbys()) 
         {
-          namen.add("naam: " + GL.getName() + " players: " + GL.getPlayers().size() + "/" +GL.getMaxFloors() + " maxplayers: " + GL.getMaxPlayer());
+          namen.add("naam: " + GL.getName() + " players: " + GL.getPlayers().size() + "/" +GL.getMaxPlayer() + " maxFloors: " + GL.getMaxFloors());
         }
         LVgamelobbys.setItems(FXCollections.observableList(namen));
-    }
-    
-    public void refresh() throws RemoteException
-    {
-        setgamelobbys();
     }
     
     public void addPlayerGL() throws RemoteException
@@ -236,6 +237,15 @@ public class FXMLHauntedController implements Initializable {
            
        }
        
+    }
+
+    @Override
+    public void run() {
+        try {
+            setgamelobbys();
+        } catch (RemoteException ex) {
+            Logger.getLogger(FXMLHauntedController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

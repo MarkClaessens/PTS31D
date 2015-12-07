@@ -266,7 +266,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         controller.setInGL(false);
        if(gamelobby.getPlayers().size() == 0)
        {
-           lobby.getGameLobbys().remove(gamelobby);
+           lobby.removeGL(gamelobby);
        }
        if(tisplayer.getReady())
        {

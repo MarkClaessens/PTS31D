@@ -54,4 +54,6 @@ public interface ILobby extends Remote, RemotePublisher {
     public IPlayer createPlayer(String name, String ipAddress) throws RemoteException;
     
     public void informlobbys();
+    
+    public void removeGL(IGameLobby GL) throws RemoteException;
 }
