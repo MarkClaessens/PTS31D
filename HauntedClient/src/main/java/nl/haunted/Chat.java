@@ -6,7 +6,10 @@
 package nl.haunted;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,7 +19,7 @@ import java.util.List;
  */
 public class Chat {
     private List<String> messages;
-    private InputController IC;
+    private final InputController IC;
     
     /**
      * Constructor for chat
@@ -34,8 +37,10 @@ public class Chat {
         this.messages.add(s);
     }
     
-    public void sendMessage(String s) throws IOException{
-        //TODO set Player tags
-        IC.sendMessage(s);
+    public void sendMessage(String s, Player p) throws IOException{
+        String sb = "";
+        DateFormat df = new SimpleDateFormat("HH:mm");
+        sb = "["+df.format(Calendar.getInstance())+"]["+p.getName()+"]"+": "+s;
+        IC.sendMessage(sb);
     }
 }
