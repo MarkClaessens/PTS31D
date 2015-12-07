@@ -70,117 +70,43 @@ public abstract class Character {
      * @param direction
      */
     public void move(DirectionType direction) {
+        this.direction = direction;
         Point2D proposedLocation = new Point2D.Double();
         Point2D oldPosition = position;
 
         switch (direction) {
             case UP:
-                // <editor-fold defaultstate="collapsed" desc="UP">
-                proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
-                if (detectCollision(proposedLocation)) {
-                    if (this.moving) {
-                        if (this instanceof Ghost) {
-                            Ghost g = (Ghost) this;
-                            g.setStationaryTime();
-                        }
-                    }
-                    this.moving = false;
-                    break;
-                } else {
-                    this.direction = direction;
-                    if (!this.moving) {
-                        if (this instanceof Ghost) {
-                            Ghost g = (Ghost) this;
-                            g.getStationaryTime().clear();
-                        }
-                    }
-                    this.moving = true;
-                    position.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
-                    //System.out.println("UP");
-                    break;
-
-                }
-            // </editor-fold>
+                proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);                
+                break;              
             case DOWN:
-                // <editor-fold defaultstate="collapsed" desc="DOWN">
                 proposedLocation.setLocation(oldPosition.getX(), (oldPosition.getY() + movementSpeed));
-                if (detectCollision(proposedLocation)) {
-                    if (this.moving) {
-                        if (this instanceof Ghost) {
-                            Ghost g = (Ghost) this;
-                            g.setStationaryTime();
-                        }
-                    }
-                    this.moving = false;
-                    break;
-                } else {
-                    this.direction = direction;
-                    if (!this.moving) {
-                        if (this instanceof Ghost) {
-                            Ghost g = (Ghost) this;
-                            g.getStationaryTime().clear();
-                        }
-                    }
-                    this.moving = true;
-                    position.setLocation(oldPosition.getX(), (oldPosition.getY() + movementSpeed));
-                    //System.out.println("DOWN");
-                    break;
-                }
-            // </editor-fold>
+                break;
             case RIGHT:
-                // <editor-fold defaultstate="collapsed" desc="RIGHT">
                 proposedLocation.setLocation(oldPosition.getX() + movementSpeed, oldPosition.getY());
-                if (detectCollision(proposedLocation)) {
-                    if (this.moving) {
-                        if (this instanceof Ghost) {
-                            Ghost g = (Ghost) this;
-                            g.setStationaryTime();
-                        }
-                    }
-                    this.moving = false;
-                    break;
-                } else {
-                    this.direction = direction;
-                    if (!this.moving) {
-                        if (this instanceof Ghost) {
-                            Ghost g = (Ghost) this;
-
-                            g.getStationaryTime().clear();
-                        }
-                    }
-                    this.moving = true;
-                    position.setLocation(oldPosition.getX() + movementSpeed, oldPosition.getY());
-                    //System.out.println("RIGHT");
-                    break;
-                }
-            // </editor-fold>
+                break;
             case LEFT:
-                //        // <editor-fold defaultstate="collapsed" desc="LEFT">
                 proposedLocation.setLocation((oldPosition.getX() - movementSpeed), oldPosition.getY());
-                if (detectCollision(proposedLocation)) {
-                    if (this.moving) {
-                        if (this instanceof Ghost) {
-                            Ghost g = (Ghost) this;
-                            g.setStationaryTime();
-                        }
-                    }
-                    this.moving = false;
-                    break;
-                } else {
-                    this.direction = direction;
-                    if (!this.moving) {
-                        if (this instanceof Ghost) {
-                            Ghost g = (Ghost) this;
-                            g.getStationaryTime().clear();
-                        }
-                    }
-                    this.moving = true;
-                    position.setLocation((oldPosition.getX() - movementSpeed), oldPosition.getY());
-                    //System.out.println("LEFT");
-                    break;
-                }
-            // </editor-fold>
+                break;
         }
+        
+        if (detectCollision(proposedLocation)) {
+                if (this.moving) {
+                    if (this instanceof Ghost) {
+                        Ghost g = (Ghost) this;
+                        g.setStationaryTime();
+                    }
+                }
+                this.moving = false;
+            } else {
+                if (!this.moving) {
+                    if (this instanceof Ghost) {
+                        Ghost g = (Ghost) this;
+                        g.getStationaryTime().clear();
+                    }
+                }
+                this.moving = true;
+                position.setLocation(proposedLocation);
+            }
     }
 
     /**
