@@ -57,7 +57,7 @@ public class GhostTest {
     @Test
     public void testMakeGhost() {
         Ghost ghost1 = new Ghost(spawnPosition, game, (Player) players.get(0));
-        assertEquals("spawnPosition wasn't set correctly at initializing", ghost1.getSpawnPosition(), spawnPosition);
+        assertEquals("spawnPosition wasn't set correctly at initializing", ghost1.getPosition(), spawnPosition);
         assertEquals("game wasn't set correctly at initializing", ghost1.getGame(), game);
     }
 

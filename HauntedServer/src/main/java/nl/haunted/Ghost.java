@@ -20,7 +20,6 @@ import java.util.logging.Logger;
 public class Ghost extends Character {
     private boolean vulnerable, isGhost, dead;
     private Calendar stationaryTime, timeOfDeath;
-    private Point2D spawnPosition;
     private Player bestuurder;
     private Game game;
     
@@ -47,15 +46,11 @@ public class Ghost extends Character {
     public void setTimeOfDeath(){
         this.timeOfDeath = Calendar.getInstance();
     }
-    
-    public Point2D getSpawnPosition(){
-        return spawnPosition;
-    }
-    
+        
     public Game getGame(){
         return game;
     }
-    
+       
     
     /**
      * Sets the stationary time to now when the Ghost started standing still.
@@ -84,7 +79,6 @@ public class Ghost extends Character {
      */
     public Ghost(Point2D position, Game game, Player bestuurder) {
         super(position, game);
-        this.spawnPosition = position;
         this.game = game;
         this.isGhost = true;
         this.vulnerable = true;

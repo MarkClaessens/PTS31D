@@ -257,7 +257,7 @@ public class Game {
     }
 
     /**
-     * Picks a human spawpoint.
+     * Picks a human spawnpoint.
      * The human spawns anywhere in the middle of the map.
      * @return the spawnpoint
      */
@@ -277,6 +277,27 @@ public class Game {
         }
         
         return humanSpawnpoint; 
+    }
+    
+    /**
+     * Picks a ghost spawnpoint.
+     * The Ghosts spawn in any corner.
+     * @return the ghost spawn point.
+     */
+    public Point2D pickGhostSpawnPoint(){
+        List<Point2D> spawnPoints = new ArrayList<>();
+        spawnPoints.add(new Point2D.Double(0,0));
+        spawnPoints.add(new Point2D.Double(0, 1000));
+        spawnPoints.add(new Point2D.Double(1500, 1500));
+        spawnPoints.add(new Point2D.Double(1500, 1000));
+        spawnPoints.add(new Point2D.Double(0, 500));
+        spawnPoints.add(new Point2D.Double(1500, 500));
+        
+        Random randomizer = new Random();
+        int randomInt = randomizer.nextInt(6);
+        Point2D spawnPoint = spawnPoints.get(randomInt);
+        
+        return null;
     }
 
     /**
