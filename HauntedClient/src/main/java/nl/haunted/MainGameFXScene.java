@@ -36,19 +36,19 @@ import javafx.stage.Stage;
  * @author jvdwi
  */
 public class MainGameFXScene {
-    
+
     private double screenWidth, screenHeight;
     private double levelDrawWidth, levelDrawHeight;
     private double horScale, verScale;
-    
+
     private Chat chat;
     private IPlayer p;
-    
+
     private Stage chatstage;
-    
+
     private Scene scene;
     private Group root;
-    
+
     private int state;
 
     //background
@@ -84,7 +84,7 @@ public class MainGameFXScene {
     private Image[] humanOrangeImages, ghostOrangeImages;
     //Purple player imgs
     private Image[] humanPurpleImages, ghostPurpleImages;
-    
+
     private gamefeed gf;
 
     /**
@@ -101,43 +101,43 @@ public class MainGameFXScene {
         this.bgImage = gf.gameInfo.getBackgroundImage();
         levelDrawWidth = bgImage.getWidth();
         levelDrawHeight = bgImage.getHeight();
-        
+
         root = new Group();
         scene = new Scene(root);
         determineScreenSizes();
-        
+
         loadInImages();
-        
+
         bgLayer = new Canvas(screenWidth, screenHeight);
         bgGc = bgLayer.getGraphicsContext2D();
         root.getChildren().add(bgLayer);
-        
+
         keyDoorLayer = new Canvas(screenWidth, screenHeight);
         keyDoorGc = keyDoorLayer.getGraphicsContext2D();
         root.getChildren().add(keyDoorLayer);
-        
+
         humanLayer = new Canvas(screenWidth, screenHeight);
         humanGc = humanLayer.getGraphicsContext2D();
         root.getChildren().add(humanLayer);
-        
+
         ghostLayer = new Canvas(screenWidth, screenHeight);
         ghostGc = ghostLayer.getGraphicsContext2D();
         root.getChildren().add(ghostLayer);
-        
+
         textLayer = new Canvas(screenWidth, screenHeight);
         textGc = textLayer.getGraphicsContext2D();
         root.getChildren().add(textLayer);
-        
+
         humanPersLayer = new Canvas(screenWidth, screenHeight);
         humanPersGc = humanPersLayer.getGraphicsContext2D();
         root.getChildren().add(humanPersLayer);
-        
+
         bgGc.drawImage(bgImage, 0, 0, levelDrawWidth * horScale, levelDrawHeight * verScale);
 
         //Handle key pressings
         onKeyPresses(scene);
         onKeyReleases(scene);
-        
+
         new AnimationTimer() {
             @Override
             public void handle(long currentNanoTime) {
@@ -170,11 +170,11 @@ public class MainGameFXScene {
         textGc.setStroke(Color.BLACK);
         textGc.strokeText("Ghost lives left: " + gf.gameInfo.getGhostLives(), 10, 14);
         textGc.strokeText("Current floor: " + gf.gameInfo.getCurrentFloor(), 10, 30);
-        textGc.strokeText("Current human: " + gf.gameInfo.getCurrentHuman(), 10, 46);
+        //       textGc.strokeText("Current human: " + gf.gameInfo.getCurrentHuman(), 10, 46);
         if (gf.gameInfo.getKey()) {
-            textGc.strokeText("Key has been picked up by human", 10, 62);
+            textGc.strokeText("Key has been picked up by human", 10, 46);
         } else {
-            textGc.strokeText("Key hasn't been picked up by the human yet", 10, 62);
+            textGc.strokeText("Key hasn't been picked up by the human yet", 10, 46);
         }
     }
 
@@ -186,26 +186,32 @@ public class MainGameFXScene {
     private Scene getChatScene() {
         Group chatRoot = new Group();
         Scene chatScene = new Scene(chatRoot);
-        
+
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
-        
+
         TextFlow tf = new TextFlow();
-        for (String chatString : chat.getMessages()) {
-            Text txt = new Text(chatString);
-            tf.getChildren().add(txt);
+        for (Message chatMessage : chat.getMessages()) {
+            if (gf.gameInfo.amIHuman() && chatMessage.isVisibleForEveryone()) {
+                Text txt = new Text(chatMessage.toString());
+                tf.getChildren().add(txt);
+            } else if (!gf.gameInfo.amIHuman()) {
+                Text txt = new Text(chatMessage.toString());
+                tf.getChildren().add(txt);
+            }
+
         }
         grid.add(tf, 0, 0, 8, 8);
-        
+
         TextField tef = new TextField();
         grid.add(tef, 0, 9, 1, 7);
-        
+
         CheckBox cbGhost = new CheckBox();
         cbGhost.setText("Visible for all players?");
         grid.add(cbGhost, 0, 9);
-        
+
         Button btCommit = new Button("Send");
         btCommit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -213,9 +219,9 @@ public class MainGameFXScene {
                 try {
                     if (tef.getText().trim().length() >= 0) {
                         if (cbGhost.isSelected()) {
-                            chat.sendMessage(tef.getText(), p);
+                            chat.sendMessage(new Message(tef.getText(), p, true));
                         } else {
-                            chat.sendMessage(tef.getText(), p);
+                            chat.sendMessage(new Message(tef.getText(), p, false));
                         }
                     }
                 } catch (IOException ex) {
@@ -225,7 +231,7 @@ public class MainGameFXScene {
             }
         });
         grid.add(btCommit, 8, 9);
-        
+
         chatRoot.getChildren().add(grid);
         return chatScene;
     }
@@ -241,7 +247,7 @@ public class MainGameFXScene {
                     @Override
                     public void handle(KeyEvent e) {
                         String code = e.getCode().toString();
-                        
+
                         if (code.equals("ENTER")) {
                             //TODO: call up chatbox popup
                             chatstage = new Stage();
@@ -249,7 +255,7 @@ public class MainGameFXScene {
                             chatstage.setScene(getChatScene());
                             chatstage.show();
                         } else {
-                            
+
                             switch (code) {
                                 case "W":
                                     HauntedClient.getController().getInputController().setDirection(DirectionType.UP);
@@ -279,7 +285,7 @@ public class MainGameFXScene {
                                     HauntedClient.getController().getInputController().setDirection(null);
                                     break;
                             }
-                            
+
                         }
 
                         // only add once... prevent duplicates
@@ -299,7 +305,7 @@ public class MainGameFXScene {
                     @Override
                     public void handle(KeyEvent e) {
                         String code = e.getCode().toString();
-                        
+
                         switch (code) {
                             case "W":
                                 HauntedClient.getController().getInputController().setDirection(null);
@@ -353,7 +359,7 @@ public class MainGameFXScene {
         ghostOrangeImages = new Image[]{new Image("ghostOrange1.png"), new Image("ghostOrange2.png"), new Image("ghostOrange3.png")};
         humanPurpleImages = new Image[]{new Image("humanPurple1.png"), new Image("humanPurple2.png"), new Image("humanPurple3.png")};
         ghostPurpleImages = new Image[]{new Image("ghostPurple1.png"), new Image("ghostPurple2.png"), new Image("ghostPurple3.png")};
-        
+
     }
 
     /**
@@ -369,9 +375,9 @@ public class MainGameFXScene {
                     keyDoorGc.drawImage(keyImage, e.getPosition().getX() + 100, e.getPosition().getY() + 100, keyImage.getWidth() * horScale, keyImage.getHeight() * verScale);
                     break;
                 case Human:
-                    if(gf.gameInfo.amIHuman()){
+                    if (gf.gameInfo.amIHuman()) {
                         //TODO: calculate proper x and y coordinates
-                        drawRotatedImage(humanPersGc, humanPerspectiveImage, getAngle(e.getDirection()), e.getPosition().getX() -1900, e.getPosition().getY()-1900, horScale, verScale);
+                        drawRotatedImage(humanPersGc, humanPerspectiveImage, getAngle(e.getDirection()), e.getPosition().getX() - 1900, e.getPosition().getY() - 1900, horScale, verScale);
                     }
                     drawRotatedImage(humanGc, getAnimatedHumanImage(e), getAngle(e.getDirection()), e.getPosition().getX() + 100, e.getPosition().getY() + 100, horScale, verScale);
                     break;
@@ -383,11 +389,10 @@ public class MainGameFXScene {
                         drawRotatedImage(ghostGc, getAnimatedGhostImage(e), getAngle(e.getDirection()), e.getPosition().getX() + 100, e.getPosition().getY() + 100, horScale, verScale);
                     }
                     break;
-                
+
             }
         }
     }
-   
 
     /**
      * convert directionType into angle degrees (example: LEFT == 270°)
@@ -449,7 +454,7 @@ public class MainGameFXScene {
      */
     private Image getAnimatedHumanImage(Entity e) {
         Image returnImage = null;
-        
+
         Color c = e.getColor();
         if (c == Color.WHITE) {
             if (e.getMoving()) {
@@ -491,7 +496,7 @@ public class MainGameFXScene {
             }
         } else if (c == Color.GREEN) {
             if (e.getMoving()) {
-                
+
                 switch (state) {
                     case 2:
                         returnImage = humanGreenImages[0];
@@ -586,7 +591,7 @@ public class MainGameFXScene {
         } else {
             returnImage = humanPurpleImages[0];
         }
-        
+
         return returnImage;
     }
 
@@ -598,7 +603,7 @@ public class MainGameFXScene {
      */
     private Image getAnimatedGhostImage(Entity e) {
         Image returnImage = null;
-        
+
         Color c = e.getColor();
         if (c == Color.WHITE) {
             if (e.getMoving()) {
@@ -640,7 +645,7 @@ public class MainGameFXScene {
             }
         } else if (c == Color.GREEN) {
             if (e.getMoving()) {
-                
+
                 switch (state) {
                     case 2:
                         returnImage = ghostGreenImages[0];
@@ -748,5 +753,5 @@ public class MainGameFXScene {
         horScale = screenWidth / levelDrawWidth;
         verScale = screenHeight / levelDrawHeight;
     }
-    
+
 }
