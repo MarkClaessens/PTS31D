@@ -20,8 +20,9 @@ public class InputController {
 //    Socket inputSocket;
 //    DirectionType direction;
 
-    public InputController() {
+    public InputController(String groupID) throws IOException {
         this.inputSocket = new Socket();
+        this.inputSocket.socketSetup(groupID, 9877);
     }
 
     public Socket getInputSocket() {

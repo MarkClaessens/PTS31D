@@ -23,10 +23,12 @@ public class Chat {
     
     /**
      * Constructor for chat
+     * @param groupID
+     * @throws java.io.IOException
      */
-    public Chat(){
+    public Chat(String groupID) throws IOException{
         this.messages = new ArrayList();
-        IC = new InputController();
+        IC = new InputController(groupID);
     }
     
     public List<String> getMessages(){

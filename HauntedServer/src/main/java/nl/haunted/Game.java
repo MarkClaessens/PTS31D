@@ -176,7 +176,7 @@ public class Game {
                     G.changeAppearance();
                     if (G.getTimeOfDeath() != null) {
                         if (System.currentTimeMillis() >= (G.getTimeOfDeath().getTimeInMillis() + 2000)) {
-                            G.setPosition(this.pickSpawnPoint());
+                            G.setPosition(this.pickGhostSpawnPoint());
 
                             G.setTimeOfDeath();
                         }
@@ -203,6 +203,7 @@ public class Game {
         obj = new Object[this.ghosts.size() + 6][7];
         obj[0][0] = "Server";
         obj[0][1] = InetAddress.getLocalHost();
+        obj[0][2] = this.level.getBackgroundInt();
         obj[1][0] = this.level.getGhostLifePool();
         obj[1][1] = this.level.getCurrentFoor();
         obj[1][2] = this.getCurrentHuman();

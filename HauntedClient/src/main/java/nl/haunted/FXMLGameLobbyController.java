@@ -63,6 +63,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     IPlayer tisplayer;    
     ClientController controller;
     Socket msgSoc;
+    private Chat chat;
     
     private List<IPlayer> players;
     private transient ObservableList<String> observablePersonen;
@@ -138,8 +139,9 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
      * sets the gamelobby
      *
      * @param Gamelobby
+     * @throws java.io.IOException
      */
-    public void setGameLobby(IGameLobby Gamelobby) {
+    public void setGameLobby(IGameLobby Gamelobby) throws IOException {
         this.gamelobby = Gamelobby;
         try {
             gamelobby.addListener(this, "players");
@@ -151,6 +153,8 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         try {
             playernames();
             gamesettings();
+            controller.setGroupID(gamelobby.getGroupID());
+            chat = new Chat(controller.getGroupID());
         } catch (RemoteException ex) {
             Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
         }
