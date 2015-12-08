@@ -5,22 +5,19 @@
  */
 package nl.haunted;
 
-import fontys.observer.RemotePropertyListener;
-import java.beans.PropertyChangeEvent;
+
 import java.io.IOException;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,11 +32,7 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
-import nl.haunted.ClientController;
-import nl.haunted.HauntedClient;
-import nl.haunted.IGameLobby;
-import nl.haunted.ILobby;
-import nl.haunted.IPlayer;
+
 
 /**
  *
@@ -96,11 +89,11 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
         } catch (RemoteException ex) {
             Logger.getLogger(FXMLHauntedController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        /* BackgroundImage myBI = new BackgroundImage(new Image("lobbypic.jpg", 1024, 576, false, true),
+         BackgroundImage myBI = new BackgroundImage(new Image("lobbypic.jpg", 1024, 576, false, true),
          BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
          BackgroundSize.DEFAULT);
          //then you set to your node
-         paneel.setBackground(new Background(myBI));*/
+         paneel.setBackground(new Background(myBI));
         try {
             setplayername();
         } catch (RemoteException ex) {
@@ -125,7 +118,6 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
      * *
      * sets the lobby. There will always be one and the same lobby
      *
-     * @param lobby
      */
     public void setLobby() {
         this.lobby = controller.getLobby();
@@ -142,6 +134,7 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
     /**
      * *
      * change the name of both players
+     * @throws java.rmi.RemoteException
      */
     public void changename() throws RemoteException {
 
@@ -192,6 +185,7 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
     public void exit() {
         try {
             lobby.exit(controller.getPlayer());
+            Platform.exit();
         } catch (RemoteException ex) {
             Logger.getLogger(FXMLHauntedController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -200,6 +194,7 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
     /**
      * *
      * before the gui will be shown
+     * @throws java.rmi.RemoteException
      */
     public void setgamelobbys() throws RemoteException {
         setLobby();
@@ -226,11 +221,19 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
 
     @Override
     public void run() {
-        try {
-            setgamelobbys();
-        } catch (RemoteException ex) {
-            Logger.getLogger(FXMLHauntedController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+            Platform.runLater(new Runnable() {
+
+                @Override
+                public void run() {
+                    try {
+                        setgamelobbys();
+                    } catch (RemoteException ex) {
+                        Logger.getLogger(FXMLHauntedController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });            
+       
     }
 
 }

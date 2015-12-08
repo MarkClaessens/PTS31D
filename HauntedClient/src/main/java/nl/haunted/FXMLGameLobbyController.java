@@ -15,8 +15,6 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -43,12 +41,7 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
-import nl.haunted.ClientController;
-import nl.haunted.HauntedClient;
-import nl.haunted.IFXMLGameLobbyController;
-import nl.haunted.IGameLobby;
-import nl.haunted.ILobby;
-import nl.haunted.IPlayer;
+
 
 /**
  * FXML Controller class
@@ -98,11 +91,11 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        /* BackgroundImage myBI = new BackgroundImage(new Image("gamelobby.jpg", 1024, 576, false, true),
+         BackgroundImage myBI = new BackgroundImage(new Image("gamelobby.jpg", 1024, 576, false, true),
          BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
          BackgroundSize.DEFAULT);
          //then you set to your node
-         paneel.setBackground(new Background(myBI));*/
+         paneel.setBackground(new Background(myBI));
 
         System.out.println("kaas");
         // Set the groupID in ClientController to the groupID of this gamelobby.
@@ -263,7 +256,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     private void leavegamelobby() throws RemoteException {
         gamelobby.removePlayer(tisplayer);
         controller.setInGL(false);
-        if (gamelobby.getPlayers().size() == 0) {
+        if (gamelobby.getPlayers().isEmpty()) {
             lobby.removeGL(gamelobby);
         }
         if (tisplayer.getReady()) {
