@@ -26,7 +26,7 @@ public class Game {
     private final int floorAmount; // starts at 1
     private int currentFloor = -1; // starts at 0 so the init has to be -1.
     private Timer tickTimer;
-    private boolean running, roundEnded, nextRound;
+    private boolean roundEnded, nextRound; 
     private Level level;
     private List<Ghost> ghosts;
     private Human human;
@@ -34,7 +34,6 @@ public class Game {
     private IPlayer currentHuman;
     private Socket srvSoc;
     private IGameLobby gameLobby;
-    private IPlayer winner = null;
     
     public Level getLevel() {
         return level;
@@ -50,10 +49,6 @@ public class Game {
      */
     public int getFloorAmount() {
         return floorAmount;
-    }
-
-    public void setRunning(boolean isRunning) {
-        this.running = isRunning;
     }
 
     /**
@@ -105,21 +100,20 @@ public class Game {
     /**
      *  starts the next round at the current floor.
      */
-    public void startRound() {       
-        this.running = true;
-
+    public void startRound() {    
+        this.roundEnded = false;
         this.tickTimer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
             public void run() {           
                 try {
                     tick();
+                    
                 } catch (IOException | ClassNotFoundException ex) {
                     ex.printStackTrace();
                 } 
             }
-        };
-        
+        };        
         this.tickTimer.scheduleAtFixedRate(task, 0, 16);
     }
 
@@ -127,7 +121,7 @@ public class Game {
      *  Ends the current round and opens the counting screen. 
      */
     public void endRound() {
-        this.tickTimer.cancel();
+        this.roundEnded = true;
         
         human.setPosition(pickHumanSpawnpoint());
         human.setHasKey(false);
@@ -147,13 +141,18 @@ public class Game {
      *
      * @param winner the player that wins the game by entering the last door.
      * @throws java.rmi.RemoteException
+     * @throws java.lang.InterruptedException
      */
-    public void endGame(IPlayer winner) throws RemoteException {
-        this.winner = winner;
+    public void endGame(IPlayer winner) throws RemoteException, InterruptedException {
         for(IPlayer player : this.players){
             player.reset();
         }
-        this.running = false;
+        this.roundEnded = true;
+        this.nextRound = false;
+        
+        // Wait 500 milliseconds (tick timer needs to go one some time) before cancelling ticking.
+        Thread.sleep(500);
+        this.tickTimer.cancel();
     }
 
     /**
@@ -180,7 +179,7 @@ public class Game {
      */
     public void tick() throws RemoteException, UnknownHostException, IOException, ClassNotFoundException {
         //check if the game is running and not in the pause screen (between rounds)
-        if (!this.running) {
+        if (this.roundEnded) {
         } else {
             //check if the list of ghosts is empty
             // <editor-fold defaultstate="collapsed" desc="if there are ghosts">
