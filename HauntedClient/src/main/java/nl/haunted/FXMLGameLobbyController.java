@@ -207,9 +207,9 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         }
         if (startable) {
                 gamelobby.startGame();
-               
-               MainGameFXScene MGS = new MainGameFXScene();
-               Scene scene = MGS.mainGameFX(null, chat, tisplayer);
+               msgSoc = new Socket();
+               MainGameFXScene MGS = new MainGameFXScene();               
+               Scene scene = MGS.mainGameFX(new gamefeed(msgSoc), chat, tisplayer);
                HauntedClient.getStage().setScene(scene);
         }
     }
