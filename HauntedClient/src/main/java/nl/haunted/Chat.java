@@ -31,9 +31,9 @@ public class Chat extends Observable {
      * @param groupID
      * @throws java.io.IOException
      */
-    public Chat(String groupID) throws IOException {
+    public Chat(InputController ic) throws IOException {
         this.messages = new ArrayList();
-        IC = new InputController(groupID);
+        IC = ic;
     }
 
     public List<Message> getMessages() {
@@ -54,7 +54,10 @@ public class Chat extends Observable {
             @Override
             public void run() {          
                 try {
-                    addMessage(IC.getMessage());
+                    Message m = IC.getMessage();
+                    if(m != null){
+                    addMessage(m);
+                    }
                 } catch (IOException | ClassNotFoundException ex) {
                     Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
                 }

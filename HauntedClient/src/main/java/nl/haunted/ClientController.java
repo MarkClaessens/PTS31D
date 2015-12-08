@@ -132,9 +132,10 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
 
     public void setGroupID(String groupID) throws IOException {
         this.groupID = groupID;
-        this.inputController = new InputController(groupID);
     }
-
+    public void setInputController(IGameLobby gamelobby) throws IOException{
+        this.inputController = new InputController(this.groupID, gamelobby);
+    }
     public String getGroupID() {
         return this.groupID;
     }

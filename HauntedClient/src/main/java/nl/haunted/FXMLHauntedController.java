@@ -162,7 +162,7 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
                        exist = true;
                    }
                 }
-                if (exist && Integer.parseInt(TFplayers.getText()) > 2 && Integer.parseInt(TFplayers.getText()) < 8 && Integer.parseInt(TFfloors.getText()) < 11) {
+                if (exist && Integer.parseInt(TFplayers.getText()) > 2 && Integer.parseInt(TFplayers.getText()) < 8 && Integer.parseInt(TFfloors.getText()) < 11 && Integer.parseInt(TFfloors.getText()) > 2) {
                     lobby.createGameLobby(TFroomname.getText(), TFpassword.getText(), tisplayer, Integer.parseInt(TFfloors.getText()), Integer.parseInt(TFplayers.getText()));
                 } else {
                     Alert alert = new Alert(AlertType.INFORMATION);

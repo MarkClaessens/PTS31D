@@ -71,7 +71,7 @@ public class Socket {
         }
     }
     
-    public void sendMessage(Message m) throws IOException {
+    public void sendMessage(String m) throws IOException {
         ByteArrayOutputStream byteStream = new ByteArrayOutputStream(5000);
         Object o = m;
         try (ObjectOutputStream os = new ObjectOutputStream(new BufferedOutputStream(byteStream))) {
@@ -108,7 +108,7 @@ public class Socket {
         return (Object[][])o;
     }
     
-    public Message receiveMessage() throws IOException, ClassNotFoundException {
+    public String receiveMessage() throws IOException, ClassNotFoundException {
         byte[] recvBuf = new byte[5000];
         DatagramPacket packet = new DatagramPacket(recvBuf,
                 recvBuf.length);
@@ -119,7 +119,7 @@ public class Socket {
         try (ObjectInputStream is = new ObjectInputStream(new BufferedInputStream(byteStream))) {
             o = is.readObject();
         }
-        return (Message)o;
+        return (String)o;
     }
 
     public String[] receiveInput() throws IOException, ClassNotFoundException {

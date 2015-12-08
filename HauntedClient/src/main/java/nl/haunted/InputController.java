@@ -33,6 +33,10 @@ public class InputController {
     public Socket getInputSocket() {
         return this.inputSocket;
     }
+    
+    public Socket getSrvSocket(){
+        return this.srvSocket;
+    }
 
     public void setDirection(DirectionType direction) {
         this.direction = direction;
