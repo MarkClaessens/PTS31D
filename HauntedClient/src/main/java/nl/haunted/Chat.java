@@ -31,9 +31,9 @@ public class Chat extends Observable {
      * @param groupID
      * @throws java.io.IOException
      */
-    public Chat(String groupID) throws IOException {
+    public Chat(InputController ic) throws IOException {
         this.messages = new ArrayList();
-        IC = new InputController(groupID);
+        IC = ic;
     }
 
     public List<Message> getMessages() {
