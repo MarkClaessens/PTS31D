@@ -54,7 +54,10 @@ public class Chat extends Observable {
             @Override
             public void run() {          
                 try {
-                    addMessage(IC.getMessage());
+                    Message m = IC.getMessage();
+                    if(m != null){
+                    addMessage(m);
+                    }
                 } catch (IOException | ClassNotFoundException ex) {
                     Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
                 }
