@@ -23,10 +23,9 @@ public class gamefeed {
 
     public gamefeed(Socket socket) throws IOException, ClassNotFoundException {
         this.soc = socket;
-        setupGameInfo();
     }
 
-    private void setupGameInfo() throws IOException, ClassNotFoundException {
+    public void setupGameInfo() throws IOException, ClassNotFoundException {
         boolean setup = false;
         while (!setup) {
             Object[][] o = soc.receiveObject();
@@ -73,6 +72,7 @@ public class gamefeed {
         Object[][] o = soc.receiveObject();
         if ("Server".equals((String) o[0][0])) {
             //set gameinfo
+
             gameInfo.setBackgroundImage((int) o[0][2]);
             gameInfo.setGhostLives((int) o[1][0]);
             gameInfo.setCurrentFloor((int) o[1][1]);
@@ -108,7 +108,9 @@ public class gamefeed {
                     }
                 }
             }
+            this.fillGameInfo(o);
         }
+
     }
 
     public void compressInput() {

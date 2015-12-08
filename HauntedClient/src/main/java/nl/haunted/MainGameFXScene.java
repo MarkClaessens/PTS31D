@@ -3,6 +3,8 @@ package nl.haunted;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.AnimationTimer;
@@ -32,6 +34,8 @@ import javafx.stage.Stage;
  * @author Joris
  */
 public class MainGameFXScene {
+    
+    private Timer timer;
 
     private double screenWidth, screenHeight;
     private double levelDrawWidth, levelDrawHeight;
@@ -89,11 +93,12 @@ public class MainGameFXScene {
      * @param gf
      * @return the scene to view in the mainActivity stage
      */
-    public Scene mainGameFX(gamefeed gf, Chat chat, IPlayer p) {
+    public Scene mainGameFX(gamefeed gf, Chat chat, IPlayer p) throws IOException, ClassNotFoundException {
         this.gf = gf;
         this.chat = chat;
         this.p = p;
         state = 0;
+        gf.setupGameInfo();
         this.bgImage = gf.gameInfo.getBackgroundImage();
         levelDrawWidth = bgImage.getWidth();
         levelDrawHeight = bgImage.getHeight();
@@ -133,11 +138,27 @@ public class MainGameFXScene {
         //Handle key pressings
         onKeyPresses(scene);
         onKeyReleases(scene);
+        
+        timer = new Timer();
+        TimerTask task = new TimerTask(){
+            @Override
+            public void run() {          
+                try {
+                    gf.decompressFeed();
+                } catch (IOException ex) {
+                    Logger.getLogger(MainGameFXScene.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MainGameFXScene.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        };
+        
+        timer.scheduleAtFixedRate(task, 0, 16);
 
         new AnimationTimer() {
             @Override
             public void handle(long currentNanoTime) {
-                if (if !gf.gameInfo.isGameEnd() && !gf.gameInfo.isRoundEnd()) { //TODO
+                if (!gf.gameInfo.isGameEnd() && !gf.gameInfo.isRoundEnd()) { //TODO
                     keyDoorGc.clearRect(0, 0, screenWidth, screenHeight);
                     humanGc.clearRect(0, 0, screenWidth, screenHeight);
                     ghostGc.clearRect(0, 0, screenWidth, screenHeight);
@@ -148,10 +169,12 @@ public class MainGameFXScene {
                 }
                 else if (gf.gameInfo.isGameEnd()){ //TODO
                     this.stop();
+                    timer.cancel();
                     //gf.gameInfo.endGame(); //TODO
                 }
                 else if(gf.gameInfo.isRoundEnd()){ //TODO
                     this.stop();
+                    timer.cancel();
                     //gf.gameInfo.endRound();//TODO
                 }
 
