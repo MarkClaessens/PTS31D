@@ -33,7 +33,7 @@ import javafx.stage.Stage;
 //important for full screen http://stackoverflow.com/questions/16713554/how-to-change-scene-when-in-fullscreen-in-javafx-and-avoid-press-esc-to-exit-fu
 /**
  *
- * @author jvdwi
+ * @author Joris
  */
 public class MainGameFXScene {
 
