@@ -31,9 +31,10 @@ public class Message {
         return player;
     }
     
-    public boolean isVisibleForEveryone(){
+    public boolean getIsVisibleForEveryone(){
         return visibleForEveryone;
     }
+    
 
     /**
      * Constructs the message object. This object represents a message inside

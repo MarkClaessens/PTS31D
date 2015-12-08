@@ -33,9 +33,9 @@ public class gamefeed {
             if (o[0][0] == "Server") {
                 int ghostLives = (int) o[1][0];
                 int currentFloor = (int) o[1][1];
-                String currentHuman = (String) o[1][2];
+                String amIHuman = (String) o[1][2];
                 boolean key = (boolean) o[1][3];
-                gameInfo = new GameInfo(ghostLives, currentFloor, InetAddress.getLocalHost().toString().equalsIgnoreCase(currentHuman), key);
+                gameInfo = new GameInfo(ghostLives, currentFloor, InetAddress.getLocalHost().toString().equalsIgnoreCase(amIHuman), key);
                 fillGameInfo(o);
                 setup = true;
             }
@@ -78,6 +78,8 @@ public class gamefeed {
             gameInfo.setCurrentFloor((int) o[1][1]);
             gameInfo.setamIHuman(InetAddress.getLocalHost().toString().equalsIgnoreCase((String) o[1][2]));
             gameInfo.setKey((boolean) o[1][3]);
+            gameInfo.setRoundEnd((boolean) o[1][4]);
+            gameInfo.setNextRound((boolean) o[1][5]);
             int i = 6;
             boolean foundHuman = false;
 

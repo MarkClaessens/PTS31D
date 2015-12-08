@@ -95,13 +95,23 @@ public class GameInfo {
         return this.entities;
     }
 
-    public void setVictory(boolean bool) {
-        this.gameEnd = bool;
+    public void setNextRound(boolean bool) {
+        this.gameEnd = !bool;
     }
 
     public void setRoundEnd(boolean bool) {
         this.roundEnd = bool;
     }
+    
+    public boolean isRoundEnd(){
+        return this.roundEnd;      
+    }
+    
+    public boolean isGameEnd(){
+        return this.gameEnd;
+    }
+    
+    
     
     public boolean isRunning(){
         return false;

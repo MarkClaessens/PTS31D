@@ -7,6 +7,7 @@ package nl.haunted;
 
 import fontys.observer.RemotePublisher;
 import java.awt.Color;
+import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -14,7 +15,7 @@ import java.rmi.RemoteException;
  *
  * @author jvdwi
  */
-public interface IPlayer extends Remote, RemotePublisher {
+public interface IPlayer extends Remote, RemotePublisher, Serializable {
 
     /**
      *
