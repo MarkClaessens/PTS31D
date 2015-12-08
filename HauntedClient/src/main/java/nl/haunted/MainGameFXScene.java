@@ -141,17 +141,23 @@ public class MainGameFXScene {
         new AnimationTimer() {
             @Override
             public void handle(long currentNanoTime) {
-                List<Object> obj = new ArrayList();
-                root.getChildren().stream().filter((o) -> (o instanceof Polygon)).forEach((o) -> {
-                    obj.add(o);
-                });
-                root.getChildren().removeAll(obj);
-                keyDoorGc.clearRect(0, 0, screenWidth, screenHeight);
-                humanGc.clearRect(0, 0, screenWidth, screenHeight);
-                ghostGc.clearRect(0, 0, screenWidth, screenHeight);
-                textGc.clearRect(0, 0, screenWidth, screenHeight);
-                drawImages();
-                drawTexts();
+                if (gf.gameInfo.isRunning() && !gf.gameInfo.isEnded()) { //TODO
+                    keyDoorGc.clearRect(0, 0, screenWidth, screenHeight);
+                    humanGc.clearRect(0, 0, screenWidth, screenHeight);
+                    ghostGc.clearRect(0, 0, screenWidth, screenHeight);
+                    textGc.clearRect(0, 0, screenWidth, screenHeight);
+                    drawImages();
+                    drawTexts();
+                }
+                else if (gf.gameInfo.isRunning() && gf.gameInfo.isEnded()){ //TODO
+                    this.stop();
+                    gf.gameInfo.endGame(); //TODO
+                }
+                else if(!gf.gameInfo.isRunning() && !gf.gameInfo.isEnded()){ //TODO
+                    this.stop();
+                    gf.gameInfo.endRound();//TODO
+                }
+
             }
         }.start();
 //        ImageView iv = new ImageView(image);
