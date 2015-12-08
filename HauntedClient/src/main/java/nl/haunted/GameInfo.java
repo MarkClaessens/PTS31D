@@ -102,4 +102,13 @@ public class GameInfo {
     public void setRoundEnd(boolean bool) {
         this.roundEnd = bool;
     }
+    
+    public boolean isRunning(){
+        return false;
+    }
+     public boolean isEnded(){
+         return true;
+     }
+     public void endGame(){}
+     public void endRound(){}
 }
