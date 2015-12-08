@@ -53,14 +53,16 @@ public class Level {
     }
 
     /**
-     *
+     * Constructs the level object
      * @param floorNr
+     * @param numberOfGhosts
      */
-    public Level(int floorNr) {
+    public Level(int floorNr, int numberOfGhosts) {
         this.floorNr = floorNr;
         pickCollisionMap();
         generateDoorLocation();
         generateKeyLocation();
+        ghostLifePool = numberOfGhosts * 2;
     }
 
     /**
