@@ -93,6 +93,11 @@ public class Player extends UnicastRemoteObject implements IPlayer {
         this.basicPublisher = new BasicPublisher(props);
     }
 
+    
+    public void reset(){
+        this.ready = false;
+        this.character = null;
+    }
     /**
      * verandert de ready status van de speler
      *

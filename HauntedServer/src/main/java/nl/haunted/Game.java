@@ -35,6 +35,7 @@ public class Game {
     private IPlayer currentHuman;
     private Socket srvSoc;
     private IGameLobby gameLobby;
+    private Player winner = null;
     
     public Level getLevel() {
         return level;
@@ -99,22 +100,13 @@ public class Game {
      */
     public void nextLevel() {
         this.currentFloor++;
-        this.level = new Level(currentFloor);
+        this.level = new Level(this.currentFloor, this.ghosts.size());
     }
 
     /**
      *  starts the next round at the current floor.
      */
-    public void startRound() {
-        human.setPosition(pickHumanSpawnpoint());
-        human.setHasKey(false);
-        human.setMoving(false);
-        
-        for (Ghost ghost : ghosts) {
-            ghost.reset();
-            ghost.setPosition(pickGhostSpawnPoint(true));
-        }
-        
+    public void startRound() {       
         this.running = true;
 
         this.tickTimer = new Timer();
@@ -129,7 +121,6 @@ public class Game {
             }
         };
         
-        nextLevel();
         this.tickTimer.scheduleAtFixedRate(task, 0, 16);
     }
 
@@ -139,21 +130,37 @@ public class Game {
     public void endRound() {
         this.tickTimer.cancel();
         
+        human.setPosition(pickHumanSpawnpoint());
+        human.setHasKey(false);
+        human.setMoving(false);
+        
+        for (Ghost ghost : ghosts) {
+            ghost.reset();
+            ghost.setPosition(pickGhostSpawnPoint(true));
+        }
+        
+        nextLevel();
     }
 
     /**
      * Will be called when the last level is played. After calling the victory
      * screen will be shown.
      *
-     * @param player the player that wins the game by entering the last door.
+     * @param winner the player that wins the game by entering the last door.
+     * @throws java.rmi.RemoteException
      */
-    public void endGame(Player player) {
+    public void endGame(Player winner) throws RemoteException {
+        this.winner = winner;
+        for(Player player : this.players){
+            player.reset();
+        }
         this.running = false;
     }
 
     /**
      * The player leaves the game (gamelobby).
      * @param player the player that wants to leave the game.
+     * @throws java.rmi.RemoteException
      */
     public synchronized void leaveGame(Player player) throws RemoteException {
         if(player.getCharacter() instanceof Human){
