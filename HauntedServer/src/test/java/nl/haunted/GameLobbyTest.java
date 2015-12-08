@@ -36,8 +36,9 @@ public class GameLobbyTest {
 
     @Before
     public void setUp() throws RemoteException, IOException {
+        Lobby lobby = new Lobby();
         host = new Player("host", "ipadres");
-        globby = new GameLobby("lobby1", "pass1", host, 4, 4);
+        globby = new GameLobby("lobby1", "pass1", host, 4, 4, lobby);
     }
 
     @After
