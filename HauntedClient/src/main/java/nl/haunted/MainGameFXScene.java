@@ -142,6 +142,7 @@ public class MainGameFXScene {
                     humanGc.clearRect(0, 0, screenWidth, screenHeight);
                     ghostGc.clearRect(0, 0, screenWidth, screenHeight);
                     textGc.clearRect(0, 0, screenWidth, screenHeight);
+                    humanPersGc.clearRect(0, 0, screenWidth, screenHeight);
                     drawImages();
                     drawTexts();
                 }
@@ -168,15 +169,15 @@ public class MainGameFXScene {
      * Draws the texts out of Game info
      */
     private void drawTexts() {
-        textGc.setFont(new Font("Courier New", 14.0));
-        textGc.setStroke(Color.BLACK);
-        textGc.strokeText("Ghost lives left: " + gf.gameInfo.getGhostLives(), 10, 14);
-        textGc.strokeText("Current floor: " + gf.gameInfo.getCurrentFloor(), 10, 30);
+        textGc.setFont(new Font("Times New Roman", 14.0));
+        textGc.setFill(Color.BLACK);
+        textGc.fillText(("Ghost lives left: " + gf.gameInfo.getGhostLives()).toUpperCase(), 10, 14);
+        textGc.fillText(("Current floor: " + gf.gameInfo.getCurrentFloor()).toUpperCase(), 10, 30);
         //       textGc.strokeText("Current human: " + gf.gameInfo.getCurrentHuman(), 10, 46);
         if (gf.gameInfo.getKey()) {
-            textGc.strokeText("Key has been picked up by human", 10, 46);
+            textGc.fillText(("Key has been picked up by human").toUpperCase(), 10, 46);
         } else {
-            textGc.strokeText("Key hasn't been picked up by the human yet", 10, 46);
+            textGc.fillText(("Key hasn't been picked up by the human yet").toUpperCase(), 10, 46);
         }
     }
 
