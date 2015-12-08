@@ -46,7 +46,7 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
     @Override
     public void createGameLobby(String name, String password, IPlayer host, int maxFloors, int maxPlayers) throws RemoteException {
         try {
-            GameLobby gamelobby = new GameLobby(name, password, host, maxFloors, maxPlayers);
+            GameLobby gamelobby = new GameLobby(name, password, host, maxFloors, maxPlayers, this);
             gameLobbys.add(gamelobby);
             basicPublisher.inform(this, "gamelobbys", null, gameLobbys);
         } catch (IOException ex) {
@@ -85,18 +85,31 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
         basicPublisher.removeListener(remotePropertyListener, string);
     }
 
+    @Override
     public void informlobbys() throws RemoteException {
         basicPublisher.inform(this, "gamelobbys", null, gameLobbys);
     }
 
+    @Override
     public void removeGL(IGameLobby GL) throws RemoteException {
         IGameLobby EXGL = null;
-        for (IGameLobby INGL : gameLobbys) {
+        for (IGameLobby INGL : this.gameLobbys) {
             if (INGL.getName().equals(GL.getName())) {
                 EXGL = INGL;
             }
         }
-        gameLobbys.remove(EXGL);
-        basicPublisher.inform(this, "gamelobbys", null, gameLobbys);
+        this.gameLobbys.remove(EXGL);
+        basicPublisher.inform(this, "gamelobbys", null, this.gameLobbys);
+    }
+    
+    public void removeGLAfterGame(GameLobby gl) throws RemoteException{
+        IGameLobby temp = null;
+        for(IGameLobby iGameLobby : this.gameLobbys){
+            if(iGameLobby.getName().equals(gl.getName())){ 
+                temp = iGameLobby;
+            }
+        }
+        this.gameLobbys.remove(temp);
+        basicPublisher.inform(this, "gamelobbys", null, this.gameLobbys);
     }
 }

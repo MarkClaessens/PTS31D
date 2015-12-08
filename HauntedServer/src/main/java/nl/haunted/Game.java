@@ -153,7 +153,8 @@ public class Game {
         // Wait 500 milliseconds (tick timer needs to go one some time) before cancelling ticking.
         Thread.sleep(500);
         this.tickTimer.cancel();
-        
+        GameLobby gameLobby = (GameLobby)this.gameLobby;
+        gameLobby.getLobby().removeGLAfterGame(gameLobby);
     }
 
     /**

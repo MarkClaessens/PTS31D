@@ -28,6 +28,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
     private BasicPublisher basicPublisher;
     private static int gameLobbyNum = 0;
     private String groupID;
+    private Lobby lobby;
 
     /**
      * maakt een nieuwe gamelobby aan
@@ -37,9 +38,11 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
      * @param host
      * @param maxFloors
      * @param maxPlayers
+     * @param lobby
      * @throws java.rmi.RemoteException
      */
-    public GameLobby(String name, String password, IPlayer host, int maxFloors, int maxPlayers) throws RemoteException, IOException {
+    public GameLobby(String name, String password, IPlayer host, int maxFloors, int maxPlayers, Lobby lobby) throws RemoteException, IOException {
+        this.lobby = lobby;
         this.name = name;
         this.password = password;
         this.host = host;        
@@ -188,5 +191,9 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
     @Override
     public String getGroupID() throws RemoteException {
         return this.groupID;
+    }
+    
+    public Lobby getLobby(){
+        return this.lobby;
     }
 }
