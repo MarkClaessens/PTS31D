@@ -153,9 +153,17 @@ public class Game {
 
     /**
      * The player leaves the game (gamelobby).
+     * @param player the player that wants to leave the game.
      */
-    public void leaveGame() {
-
+    public synchronized void leaveGame(Player player) throws RemoteException {
+        if(player.getCharacter() instanceof Human){
+           Random randomizer = new Random();
+           int randomInt = randomizer.nextInt(this.players.size() - 1);
+           this.players.get(randomInt).setCharacter(human);
+        }
+        
+        player.setCharacter(null);
+        this.players.remove(player);
     }
 
     /**
