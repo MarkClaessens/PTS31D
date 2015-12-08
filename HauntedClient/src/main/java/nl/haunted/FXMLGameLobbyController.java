@@ -213,7 +213,8 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
             }
         }
         if (startable) {
-               Game game = new Game(players, gamelobby.getMaxFloors(), gamelobby.getGroupID(), gamelobby);
+                gamelobby.startGame();
+               
                MainGameFXScene MGS = new MainGameFXScene();
                Scene scene = MGS.mainGameFX(null, chat, tisplayer);
                HauntedClient.getStage().setScene(scene);
