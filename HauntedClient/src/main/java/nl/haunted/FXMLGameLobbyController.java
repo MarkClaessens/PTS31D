@@ -207,7 +207,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
                 startable = false;
             }
         }
-        if (startable) {
+        if (startable && players.size() > 2) {
                 gamelobby.startGame();
                gamefeed gameFeed = new gamefeed(this.controller.getInputController().getSrvSocket());
                MainGameFXScene MGS = new MainGameFXScene();
