@@ -16,11 +16,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.Timer;
-import java.util.logging.Logger;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.stage.Stage;
 
 /**
  *
@@ -39,7 +34,6 @@ public class Game {
     private IPlayer currentHuman;
     private Socket srvSoc;
     private IGameLobby gameLobby;
-    private List<Point2D> spawnPoints = new ArrayList<>();    
     
     public Level getLevel() {
         return level;
@@ -129,11 +123,11 @@ public class Game {
      * @param player the player that wins the game by entering the last door.
      */
     public void endGame(Player player) {
-
+        this.running = false;
     }
 
     /**
-     *
+     * The player leaves the game (gamelobby).
      */
     public void leaveGame() {
 
@@ -288,7 +282,6 @@ public class Game {
         Point2D humanSpawnpoint = new Point2D.Double(x, y);
 
         // Check if the choosen spawnpoint doesn't collide with a wall.
-        BufferedImage collisionMap = this.level.getCollisionMap();
         if (human.detectCollision(humanSpawnpoint)) {
             humanSpawnpoint = pickHumanSpawnpoint();
         }
@@ -303,6 +296,7 @@ public class Game {
      * @return the ghost spawn point.
      */
     public Point2D pickGhostSpawnPoint(boolean startOfGame){       
+        List<Point2D> spawnPoints = new ArrayList<>();    
         spawnPoints.add(new Point2D.Double(0,0));
         spawnPoints.add(new Point2D.Double(0, 1000));
         spawnPoints.add(new Point2D.Double(1500, 1500));
