@@ -6,7 +6,6 @@
 package nl.haunted;
 
 import java.awt.geom.Point2D;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -86,13 +85,12 @@ public class Game {
         this.floorAmount = randomizer.nextInt(floors - 3 + 1) + 3;
         this.currentFloor = 0;
         this.gameLobby = gl;
+        		
+	// Create the characters and bind them to the players.
+        bindCharactersToPlayers();
         
-
         // Create the first level.
         nextLevel();	
-		
-		// Create the characters and bind them to the players.
-        bindCharactersToPlayers();
     }
 
     /**
@@ -180,7 +178,7 @@ public class Game {
      * @throws java.lang.ClassNotFoundException
      */
     public void tick() throws RemoteException, UnknownHostException, IOException, ClassNotFoundException {
-        //check if the server is running and is not paused
+        //check if the game is running and not in the pause screen (between rounds)
         if (!this.running) {
         } else {
             //check if the list of ghosts is empty
