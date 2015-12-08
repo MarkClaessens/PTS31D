@@ -21,7 +21,7 @@ public class Ghost extends Character {
 
     private boolean vulnerable, isGhost, dead;
     private Calendar stationaryTime, timeOfDeath;
-    private Player bestuurder;
+    private IPlayer bestuurder;
     private Game game;
 
     public boolean isVulnerable() {
@@ -77,7 +77,7 @@ public class Ghost extends Character {
      * @param game, the game in which the Ghost is active
      * @param bestuurder the player that owns this object
      */
-    public Ghost(Point2D position, Game game, Player bestuurder) {
+    public Ghost(Point2D position, Game game, IPlayer bestuurder) {
         super(position, game);
         this.game = game;
         this.isGhost = true;
@@ -102,11 +102,11 @@ public class Ghost extends Character {
      * becomes a ghost (with his own coloured sprites).
      */
     public void possess() {
-        List<Player> players = game.getPlayers();
+        List<IPlayer> players = game.getPlayers();
         boolean humanFound = false;
 
         while (!humanFound) {
-            for (Player player : players) {
+            for (IPlayer player : players) {
                 try {
                     if (player.getCharacter() instanceof Human) {
                         Character human = player.getCharacter();
@@ -138,6 +138,10 @@ public class Ghost extends Character {
             this.isGhost = true;
             this.stationaryTime.clear();
         }
+        
+        int x = (((int) this.getPosition().getX()) + 50) / 100 * 100;
+                        int yPos = (((int) this.getPosition().getY()) + 50) / 100 * 100;
+        
     }
 
     /**

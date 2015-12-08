@@ -161,7 +161,7 @@ public class Human extends Character {
             boolean humanFound = false;
 
             while (!humanFound) {
-                for (Player player : game.getPlayers()) {
+                for (IPlayer player : game.getPlayers()) {
                     try {
                         if (player.getCharacter() instanceof Human) {
                             game.endGame(player);

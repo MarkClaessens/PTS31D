@@ -30,17 +30,17 @@ public class Game {
     private Level level;
     private List<Ghost> ghosts;
     private Human human;
-    private List<Player> players;
+    private List<IPlayer> players;
     private IPlayer currentHuman;
     private Socket srvSoc;
     private IGameLobby gameLobby;
-    private Player winner = null;
+    private IPlayer winner = null;
     
     public Level getLevel() {
         return level;
     }
 
-    public List<Player> getPlayers() {
+    public List<IPlayer> getPlayers() {
         return players;
     }
 
@@ -77,6 +77,7 @@ public class Game {
      * @throws java.io.IOException
      */
     public Game(List<IPlayer> players, int floors, String groupID, IGameLobby gl) throws IOException {
+        this.players = players;
         //Setup the socket for this game;
         srvSoc = new Socket();
         srvSoc.socketSetup(groupID, 9876);
@@ -147,9 +148,9 @@ public class Game {
      * @param winner the player that wins the game by entering the last door.
      * @throws java.rmi.RemoteException
      */
-    public void endGame(Player winner) throws RemoteException {
+    public void endGame(IPlayer winner) throws RemoteException {
         this.winner = winner;
-        for(Player player : this.players){
+        for(IPlayer player : this.players){
             player.reset();
         }
         this.running = false;
@@ -363,7 +364,7 @@ public class Game {
         boolean filled = false;
         while (!filled) {
             String[] input = this.srvSoc.receiveInput();
-            for (Player p : this.players) {
+            for (IPlayer p : this.players) {
                 if (p.getIpAdress().equals((String) input[0])) {
                     int index = this.players.indexOf(p);
                     switch (input[1]) {

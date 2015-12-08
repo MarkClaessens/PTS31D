@@ -30,6 +30,8 @@ public interface IPlayer extends Remote, RemotePublisher {
      */
     public String getName() throws RemoteException;
 
+    public String getIpAdress() throws RemoteException;
+    
     public void setName(String naam) throws RemoteException;
 
     public void toggleReady() throws RemoteException;
@@ -58,4 +60,6 @@ public interface IPlayer extends Remote, RemotePublisher {
     public void setReady(boolean ready) throws RemoteException;
 
     public void setCharacter(Character character) throws RemoteException;
+    
+    public void reset() throws RemoteException;
 }
