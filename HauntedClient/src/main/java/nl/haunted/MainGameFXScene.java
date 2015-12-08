@@ -137,7 +137,7 @@ public class MainGameFXScene {
         new AnimationTimer() {
             @Override
             public void handle(long currentNanoTime) {
-                if (gf.gameInfo.isRunning() && !gf.gameInfo.isEnded()) { //TODO
+                if (if !gf.gameInfo.isGameEnd() && !gf.gameInfo.isRoundEnd()) { //TODO
                     keyDoorGc.clearRect(0, 0, screenWidth, screenHeight);
                     humanGc.clearRect(0, 0, screenWidth, screenHeight);
                     ghostGc.clearRect(0, 0, screenWidth, screenHeight);
@@ -145,13 +145,13 @@ public class MainGameFXScene {
                     drawImages();
                     drawTexts();
                 }
-                else if (gf.gameInfo.isRunning() && gf.gameInfo.isEnded()){ //TODO
+                else if (gf.gameInfo.isGameEnd()){ //TODO
                     this.stop();
-                    gf.gameInfo.endGame(); //TODO
+                    //gf.gameInfo.endGame(); //TODO
                 }
-                else if(!gf.gameInfo.isRunning() && !gf.gameInfo.isEnded()){ //TODO
+                else if(gf.gameInfo.isRoundEnd()){ //TODO
                     this.stop();
-                    gf.gameInfo.endRound();//TODO
+                    //gf.gameInfo.endRound();//TODO
                 }
 
             }
