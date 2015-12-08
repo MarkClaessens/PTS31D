@@ -139,9 +139,10 @@ public class Ghost extends Character {
             this.stationaryTime.clear();
         }
         
-        int x = (((int) this.getPosition().getX()) + 50) / 100 * 100;
-                        int yPos = (((int) this.getPosition().getY()) + 50) / 100 * 100;
-        
+        int x = (((int) this.getPosition().getX()) + 50) / 100 * 100;   
+        int y = (((int) this.getPosition().getY()) + 50) / 100 * 100;
+        Point2D fixedPosition = new Point2D.Double(x, y);
+        this.setPosition(fixedPosition);
     }
 
     /**
