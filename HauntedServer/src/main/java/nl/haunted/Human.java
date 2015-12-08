@@ -9,7 +9,6 @@ import java.awt.geom.Point2D;
 import static java.lang.Math.tan;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +25,10 @@ public class Human extends Character {
 
     private double flX3 = 0, flY3 = 0, flX2 = 0, flY2 = 0, flX1, flY1, flY23, flX32, flY31, flX13, flDet, flMinD, flMaxD;
 
+    public void setHasKey(boolean hasKey){
+        this.hasKey = hasKey;
+    }
+    
     /**
      * The Constructor for human. This initializes the flashlightRange,
      * flashlightAngle and the flashlightPoints by calling setFlashlight Also
@@ -38,7 +41,7 @@ public class Human extends Character {
         super(position, game);
         this.hasKey = false;
     }
-
+    
     /**
      *
      * @return true if human has picked up the key

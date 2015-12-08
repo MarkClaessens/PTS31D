@@ -12,7 +12,7 @@ public abstract class Character {
     private Point2D position;
     private double movementSpeed;
     private DirectionType direction;
-    private boolean moving;
+    protected boolean moving;
     protected Game game;
 
     public Point2D getPosition() {

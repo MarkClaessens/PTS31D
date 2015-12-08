@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -102,17 +103,41 @@ public class Game {
     }
 
     /**
-     *
+     *  starts the next round at the current floor.
      */
     public void startRound() {
+        human.setPosition(pickHumanSpawnpoint());
+        human.setHasKey(false);
+        human.setMoving(false);
+        
+        for (Ghost ghost : ghosts) {
+            ghost.reset();
+            ghost.setPosition(pickGhostSpawnPoint(true));
+        }
+        
+        this.running = true;
 
+        this.tickTimer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {           
+                try {
+                    tick();
+                } catch (IOException | ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                } 
+            }
+        };
+        
+        nextLevel();
+        this.tickTimer.scheduleAtFixedRate(task, 0, 16);
     }
 
     /**
-     *
+     *  Ends the current round and opens the counting screen. 
      */
     public void endRound() {
-
+        this.tickTimer.cancel();
         
     }
 
