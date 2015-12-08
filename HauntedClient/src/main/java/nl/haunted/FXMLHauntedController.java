@@ -21,6 +21,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -226,11 +227,19 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
 
     @Override
     public void run() {
-        try {
-            setgamelobbys();
-        } catch (RemoteException ex) {
-            Logger.getLogger(FXMLHauntedController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+            Platform.runLater(new Runnable() {
+
+                @Override
+                public void run() {
+                    try {
+                        setgamelobbys();
+                    } catch (RemoteException ex) {
+                        Logger.getLogger(FXMLHauntedController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });            
+       
     }
 
 }
