@@ -6,6 +6,7 @@
 package nl.haunted;
 
 import java.awt.geom.Point2D;
+import java.io.Serializable;
 import static java.lang.Math.tan;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author Mike Evers + Mal
  */
-public class Human extends Character {
+public class Human extends Character implements Serializable {
 
     private int flashlightRange, flashlightAngle;
     private boolean hasKey;
@@ -35,10 +36,10 @@ public class Human extends Character {
      * initialize the base class Character!
      *
      * @param position the spawn Point2D position of the Human on the map
-     * @param game
+     
      */
-    public Human(Point2D position, Game game) {
-        super(position, game);
+    public Human(Point2D position) {
+        super(position);
         this.hasKey = false;
     }
     
@@ -154,7 +155,7 @@ public class Human extends Character {
      * continue to the next round or go to the victory screen. Otherwise, this
      * method won't cause anything.
      */
-    public void enterDoor() throws InterruptedException {
+    public void enterDoor(Game game) throws InterruptedException {
         // First check if this entering was on the last floor (last level).
         if (game.getFloorAmount() - 1 == game.getCurrentFloor()) {
             boolean humanFound = false;
@@ -208,9 +209,9 @@ public class Human extends Character {
      *
      * @return the ghost where the human collides with
      */
-    public Ghost checkGhostCollision() {
+    public Ghost checkGhostCollision(Game game) {
         //ghost collision
-        for (Ghost ghost : this.game.getGhosts()) {
+        for (Ghost ghost : game.getGhosts()) {
             if (checkHitboxCollision(this.getPosition(), 90, 90, ghost.getPosition(), 90, 90)) {
                 return ghost;
             }
@@ -255,26 +256,26 @@ public class Human extends Character {
      * check if the human interacts with ghost, key, door or wall
      *
      */
-    public void checkInteract() throws InterruptedException {
-        Point2D door = new Point2D.Double(this.game.getLevel().getDoorLocation().getX() + 40, this.game.getLevel().getDoorLocation().getY());
-        Point2D key = this.game.getLevel().getKeyLocation();
+    public void checkInteract(Game game) throws InterruptedException {
+        Point2D door = new Point2D.Double(game.getLevel().getDoorLocation().getX() + 40, game.getLevel().getDoorLocation().getY());
+        Point2D key = game.getLevel().getKeyLocation();
 
         //door collision
         if ((checkHitboxCollision(new Point2D.Double(this.getPosition().getX() + 45, this.getPosition().getY() + 10), 10, 3, door, 20, 5) && this.hasKey)) //key collision   
         {
-            this.enterDoor();
+            this.enterDoor(game);
         }
         //key collision
         if (checkHitboxCollision(this.getPosition(), 80, 80, key, 80, 80)) {
             this.pickUpKey();
         }
         //flashlight and ghost collision
-        if (this.checkGhostCollision() != null) {
-            this.checkGhostCollision().possess();
+        if (this.checkGhostCollision(game) != null) {
+            this.checkGhostCollision(game).possess(game);
         }
         setFlashlight();
         List<Ghost> deadghosts = new ArrayList();
-        this.game.getGhosts().stream().forEach((g) -> {
+        game.getGhosts().stream().forEach((g) -> {
             if (g.isVulnerable()) {
                 boolean hit = false;
                 for (Point2D p : g.getHitboxPoints()) {
@@ -286,7 +287,7 @@ public class Human extends Character {
                 if (hit) {
                     deadghosts.add(g);
                     g.setTimeOfDeath();
-                    g.vanish();
+                    g.vanish(game);
                 }
             }
         });

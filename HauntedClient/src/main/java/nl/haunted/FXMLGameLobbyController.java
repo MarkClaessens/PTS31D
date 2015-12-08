@@ -163,7 +163,6 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         this.controller = HauntedClient.getController();
         try {
             controller.setGroupID(this.gamelobby.getGroupID());
-            controller.getInputController().getInputSocket().socketSetup(controller.getGroupID(), 8765);
         } catch (RemoteException ex) {
             Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

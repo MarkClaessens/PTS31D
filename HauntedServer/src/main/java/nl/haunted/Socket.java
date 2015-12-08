@@ -12,6 +12,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import static java.lang.System.out;
 import java.net.DatagramPacket;
 import java.net.Inet6Address;
@@ -29,7 +30,7 @@ import java.util.Scanner;
  *
  * @author Mal
  */
-public class Socket {
+public class Socket implements Serializable{
 
     MulticastSocket sock;
     InetAddress groupIp;

@@ -4,6 +4,7 @@ import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -13,7 +14,7 @@ import javax.imageio.ImageIO;
  *
  * @author Mike Evers
  */
-public class Level {
+public class Level implements Serializable {
 
     private int floorNr, ghostLifePool, backgroundInt;
     private Point2D keyLocation, doorLocation;

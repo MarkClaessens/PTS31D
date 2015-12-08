@@ -7,6 +7,7 @@ package nl.haunted;
 
 import java.awt.geom.Point2D;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.rmi.RemoteException;
@@ -21,7 +22,7 @@ import java.util.TimerTask;
  *
  * @author Mal + Mike
  */
-public class Game {
+public class Game implements Serializable {
 
     private final int floorAmount; // starts at 1
     private int currentFloor = -1; // starts at 0 so the init has to be -1.
@@ -81,6 +82,7 @@ public class Game {
         this.floorAmount = randomizer.nextInt(floors - 3 + 1) + 3;
         this.currentFloor = 0;
         this.gameLobby = gl;
+        this.ghosts = new ArrayList();
         		
 	// Create the characters and bind them to the players.
         bindCharactersToPlayers();
@@ -198,7 +200,7 @@ public class Game {
                     for (int i = 0; i < this.players.size(); i++) {
                         //check if the player pressed a button
                         if (keyboard[i] != null) {
-                            this.players.get(i).getCharacter().move((DirectionType) keyboard[i]);
+                            this.players.get(i).getCharacter().move(this,(DirectionType) keyboard[i]);
                         } else {
 
                             // <editor-fold defaultstate="collapsed" desc="set moving and check if a ghost needs to become a wall">
@@ -219,7 +221,7 @@ public class Game {
                     }
                 }
                 //</editor-fold>
-                this.human.checkInteract();
+                this.human.checkInteract(this);
                 // <editor-fold defaultstate="collapsed" desc="loop  to change ghosts to wall and respawn them">
                 this.ghosts.stream().forEach((G) -> {
                     G.changeAppearance();
@@ -300,12 +302,12 @@ public class Game {
         Collections.shuffle(this.players);
         
         for(int i = 0; i < this.players.size() - 1; i++){
-            Ghost ghost = new Ghost(pickGhostSpawnPoint(true), this, this.players.get(i));
+            Ghost ghost = new Ghost(pickGhostSpawnPoint(true), this.players.get(i));
             this.players.get(i).setCharacter(ghost);
             this.ghosts.add(ghost);
         }
         
-        Human newHuman = new Human(pickHumanSpawnpoint(), this);
+        Human newHuman = new Human(pickHumanSpawnpoint());
         this.players.get(this.players.size() - 1).setCharacter(newHuman);
         this.human = newHuman;
     }
@@ -326,7 +328,7 @@ public class Game {
         Point2D humanSpawnpoint = new Point2D.Double(x, y);
 
         // Check if the choosen spawnpoint doesn't collide with a wall.
-        if (human.detectCollision(humanSpawnpoint)) {
+        if (human.detectCollision(humanSpawnpoint, this)) {
             humanSpawnpoint = pickHumanSpawnpoint();
         }
 

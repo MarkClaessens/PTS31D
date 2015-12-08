@@ -6,6 +6,7 @@
 package nl.haunted;
 
 import java.awt.geom.Point2D;
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author Mike Evers
  */
-public class Ghost extends Character {
+public class Ghost extends Character implements Serializable {
 
     private boolean vulnerable, isGhost, dead;
     private Calendar stationaryTime, timeOfDeath;
@@ -74,12 +75,11 @@ public class Ghost extends Character {
      * super variables in Character
      *
      * @param position, the spawn Point2D position of the Ghost on the map
-     * @param game, the game in which the Ghost is active
+    '
      * @param bestuurder the player that owns this object
      */
-    public Ghost(Point2D position, Game game, IPlayer bestuurder) {
-        super(position, game);
-        this.game = game;
+    public Ghost(Point2D position, IPlayer bestuurder) {
+        super(position);
         this.isGhost = true;
         this.vulnerable = true;
         this.dead = false;
@@ -101,7 +101,7 @@ public class Ghost extends Character {
      * This possesses a human, this ghost becomes the human, the previous human
      * becomes a ghost (with his own coloured sprites).
      */
-    public void possess() {
+    public void possess(Game game) {
         List<IPlayer> players = game.getPlayers();
         boolean humanFound = false;
 
@@ -150,7 +150,7 @@ public class Ghost extends Character {
      * lifes for the ghost then the ghost dead attribute will be set to true.
      * The ghost whil respawn when the timeOfDeath is 3 seconds ago.
      */
-    public void vanish() {
+    public void vanish(Game game) {
         // Get the remaining lifes that the ghost has.
         int remainingGhostLifes = game.getLevel().getGhostLifePool();
 

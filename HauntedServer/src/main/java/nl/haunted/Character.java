@@ -2,18 +2,18 @@ package nl.haunted;
 
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 /**
  *
  * @author Mike Evers
  */
-public abstract class Character {
+public abstract class Character implements Serializable {
 
     private Point2D position;
     private double movementSpeed;
     private DirectionType direction;
     protected boolean moving;
-    protected Game game;
 
     public Point2D getPosition() {
         return this.position;
@@ -54,11 +54,9 @@ public abstract class Character {
      * Constructor for character Initialize position, movementSpeed, controller
      *
      * @param position
-     * @param game
      */
-    public Character(Point2D position, Game game) {
+    public Character(Point2D position) {
         this.direction = DirectionType.DOWN; // Set a default direction
-        this.game = game;
         this.moving = false;
     }
 
@@ -68,7 +66,7 @@ public abstract class Character {
      *
      * @param direction
      */
-    public void move(DirectionType direction) {
+    public void move(Game game, DirectionType direction) {
         this.direction = direction;
         Point2D proposedLocation = new Point2D.Double();
         Point2D oldPosition = position;
@@ -88,7 +86,7 @@ public abstract class Character {
                 break;
         }
         
-        if (detectCollision(proposedLocation)) {
+        if (detectCollision(proposedLocation, game)) {
                 if (this.moving) {
                     if (this instanceof Ghost) {
                         Ghost g = (Ghost) this;
@@ -127,7 +125,7 @@ public abstract class Character {
      * to.
      * @return true if there is an obstacle
      */
-    public boolean detectCollision(Point2D proposedLocation) {
+    public boolean detectCollision(Point2D proposedLocation, Game game) {
 
         // First initialize the hitboxpoints.
         int pXl = (int) proposedLocation.getX() + 15;
@@ -135,7 +133,7 @@ public abstract class Character {
         int pYt = (int) proposedLocation.getY() + 15;
         int pYb = pYt + 70;
 
-        BufferedImage colImg = this.game.getLevel().getCollisionMap();
+        BufferedImage colImg = game.getLevel().getCollisionMap();
         if (0 <= pXl && 1000 >= pYb && 1500
                 >= pXr && pYt >= 0) {
             if ((colImg.getRGB(pXl, pYt) + colImg.getRGB(pXr, pYt) + colImg.getRGB(pXr, pYb) + colImg.getRGB(pXl, pYb)) == -4) {
