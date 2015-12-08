@@ -9,17 +9,15 @@ import fontys.observer.BasicPublisher;
 import fontys.observer.RemotePropertyListener;
 import java.io.IOException;
 import java.rmi.RemoteException;
-import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  *
- * @author jvdwi
+ * @author Mike Evers
  */
 public class GameLobby extends UnicastRemoteObject implements IGameLobby {
 

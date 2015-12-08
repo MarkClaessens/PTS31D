@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author jvdwi
+ * @author Mike Evers
  */
 public class Ghost extends Character {
 

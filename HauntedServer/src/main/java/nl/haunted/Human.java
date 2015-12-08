@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author jvdwi
+ * @author Mike Evers + Mal
  */
 public class Human extends Character {
 
