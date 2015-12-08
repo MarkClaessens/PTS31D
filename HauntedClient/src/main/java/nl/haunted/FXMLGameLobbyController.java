@@ -34,6 +34,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -208,7 +209,8 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         if (startable) {
                 gamelobby.startGame();
                msgSoc = new Socket();
-               MainGameFXScene MGS = new MainGameFXScene();               
+               MainGameFXScene MGS = new MainGameFXScene();
+               HauntedClient.getStage().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
                Scene scene = MGS.mainGameFX(new gamefeed(msgSoc), chat, tisplayer);
                HauntedClient.getStage().setScene(scene);
         }
