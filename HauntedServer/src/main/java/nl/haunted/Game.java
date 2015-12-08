@@ -109,7 +109,7 @@ public class Game {
                 try {
                     tick();
                     
-                } catch (IOException | ClassNotFoundException ex) {
+                } catch (IOException | InterruptedException | ClassNotFoundException ex) {
                     ex.printStackTrace();
                 } 
             }
@@ -153,6 +153,7 @@ public class Game {
         // Wait 500 milliseconds (tick timer needs to go one some time) before cancelling ticking.
         Thread.sleep(500);
         this.tickTimer.cancel();
+        
     }
 
     /**
@@ -177,7 +178,7 @@ public class Game {
      * @throws java.net.UnknownHostException
      * @throws java.lang.ClassNotFoundException
      */
-    public void tick() throws RemoteException, UnknownHostException, IOException, ClassNotFoundException {
+    public void tick() throws RemoteException, UnknownHostException, IOException, ClassNotFoundException, InterruptedException {
         //check if the game is running and not in the pause screen (between rounds)
         if (this.roundEnded) {
         } else {

@@ -154,10 +154,9 @@ public class Human extends Character {
      * continue to the next round or go to the victory screen. Otherwise, this
      * method won't cause anything.
      */
-    public void enterDoor() {
+    public void enterDoor() throws InterruptedException {
         // First check if this entering was on the last floor (last level).
         if (game.getFloorAmount() - 1 == game.getCurrentFloor()) {
-            game.setRunning(false);
             boolean humanFound = false;
 
             while (!humanFound) {
@@ -173,7 +172,6 @@ public class Human extends Character {
                 }
             }
         } else {
-            game.setRunning(false);
             game.endRound();
         }
     }
@@ -257,7 +255,7 @@ public class Human extends Character {
      * check if the human interacts with ghost, key, door or wall
      *
      */
-    public void checkInteract() {
+    public void checkInteract() throws InterruptedException {
         Point2D door = new Point2D.Double(this.game.getLevel().getDoorLocation().getX() + 40, this.game.getLevel().getDoorLocation().getY());
         Point2D key = this.game.getLevel().getKeyLocation();
 
