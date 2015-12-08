@@ -161,8 +161,9 @@ public class Game {
      * The player leaves the game (gamelobby).
      * @param player the player that wants to leave the game.
      * @throws java.rmi.RemoteException
+     * @throws java.lang.InterruptedException
      */
-    public synchronized void leaveGame(Player player) throws RemoteException {
+    public synchronized void leaveGame(Player player) throws RemoteException, InterruptedException {
         if(player.getCharacter() instanceof Human){
            Random randomizer = new Random();
            int randomInt = randomizer.nextInt(this.players.size() - 1);
@@ -171,6 +172,9 @@ public class Game {
         
         player.setCharacter(null);
         this.players.remove(player);
+        if(this.players.size() == 1){
+            this.endGame(this.players.get(0));
+        }
     }
 
     /**
