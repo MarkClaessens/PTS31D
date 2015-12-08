@@ -22,6 +22,7 @@ public class InputController {
 
     public InputController(String groupID) throws IOException {
         this.inputSocket = new Socket();
+        this.srvSocket = new Socket();
         this.inputSocket.socketSetup(groupID, 9877);
         this.srvSocket.socketSetup(groupID, 9876);
     }
