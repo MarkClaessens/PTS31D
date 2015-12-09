@@ -7,7 +7,9 @@ package nl.haunted;
 
 import java.beans.PropertyChangeEvent;
 import java.io.IOException;
+import java.net.Inet4Address;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -57,7 +59,7 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
         //player = lobby.createPlayer("player", "get ip adress not implemented yeti");create return type for createplayer 
     }
 
-    public void startClient(String ip) throws RemoteException {
+    public void startClient(String ip) throws RemoteException, UnknownHostException {
         // Locate registry at ip address (server) with port 8761.
         try {
             registry = LocateRegistry.getRegistry(ip, 8761);
@@ -89,7 +91,7 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
                 System.out.println("Client: Controller couldn't subscribe himself to the lobby.");
             }
         }
-        tisplayer = lobby.createPlayer("player", "ipadres");
+        tisplayer = lobby.createPlayer("player", Inet4Address.getLocalHost().getHostAddress());
     }
 
     /**
