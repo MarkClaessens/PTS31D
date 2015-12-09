@@ -63,7 +63,7 @@
   </properties>
   <testcase classname="nl.haunted.PlayerTest" name="testGetName" time="0"/>
   <testcase classname="nl.haunted.PlayerTest" name="testSetReady" time="0"/>
-  <testcase classname="nl.haunted.PlayerTest" name="testgetCharacter" time="0"/>
   <testcase classname="nl.haunted.PlayerTest" name="testGetReady" time="0"/>
-  <testcase classname="nl.haunted.PlayerTest" name="testtoggleready" time="0"/>
+  <testcase classname="nl.haunted.PlayerTest" name="testgetCharacter" time="0"/>
+  <testcase classname="nl.haunted.PlayerTest" name="testtoggleready" time="0.001"/>
 </testsuite>

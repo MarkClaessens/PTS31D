@@ -8,6 +8,10 @@ package nl.haunted;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,6 +23,7 @@ public class InputController {
     private ArrayList<String> messages;
     private DirectionType direction;
     private IGameLobby gameLobby;
+    private Timer timer;
 //    Socket inputSocket;
 //    DirectionType direction;
 
@@ -28,6 +33,22 @@ public class InputController {
         this.inputSocket.socketSetup(groupID, 9877);
         this.srvSocket.socketSetup(groupID, 9876);
         this.gameLobby = GL;
+        timer = new Timer();
+        TimerTask task = new TimerTask(){
+            @Override
+            public void run() {          
+                try {
+                    srvSocket.receiveObject();
+                    inputSocket.receiveMessage();
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(InputController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(InputController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        };
+         timer.scheduleAtFixedRate(task, 0, 16);
+               
     }
 
     public Socket getInputSocket() {
@@ -63,8 +84,10 @@ public class InputController {
         this.inputSocket = s;
     }
 
-    public Message getMessage() throws IOException, ClassNotFoundException {
-        String input = this.inputSocket.receiveMessage();
+    public List<Message> getMessage() throws IOException, ClassNotFoundException {
+        List<String> inputlist = this.inputSocket.getMessages();
+        List<Message> messages = new ArrayList();
+        for(String input : inputlist)
         if (input != null) {
             boolean visible = true;
             if("0".equals(input.substring(1,2))){
@@ -79,11 +102,11 @@ public class InputController {
             }
             String text = input.substring(input.indexOf("]: ") + 3);
             if (player != null) {
-                return new Message(text, player, visible);
+                messages.add(new Message(text, player, visible));
             }
-            return null;
+           
         }
-        return null;
+        return messages;
     }
 
 }

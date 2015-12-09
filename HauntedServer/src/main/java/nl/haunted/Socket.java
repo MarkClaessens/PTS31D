@@ -23,8 +23,10 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.nio.channels.SocketChannel;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -36,7 +38,9 @@ public class Socket implements Serializable {
     MulticastSocket sock;
     InetAddress groupIp;
     NetworkInterface nic;
+    Object[][] object;
     int port;
+    List<String> messages = new ArrayList();
 
     public void socketSetup(String groupname, int port) throws IOException {
         sock = new MulticastSocket(port);
@@ -49,6 +53,7 @@ public class Socket implements Serializable {
             System.out.println("What Network interface do you want to connect with?");
             nic = NetworkInterface.getByName(input.nextLine());
         }
+        object = null;
 
         sock.joinGroup(new InetSocketAddress(groupIp, port), nic);
         this.port = port;
@@ -95,17 +100,24 @@ public class Socket implements Serializable {
                 buf, buf.length, groupIp, port);
         sock.send(packet);
     }
-
-    public Object[][] receiveObject() throws IOException, ClassNotFoundException {
+    
+    public Object[][] getObject(){
+        return this.object;
+    }
+    
+    public List<String> getMessages(){
+    List<String> tempMessages = this.messages;
+    this.messages.clear();
+    return tempMessages;
+    }
+    public void receiveObject() throws IOException, ClassNotFoundException {
         byte[] recvBuf = new byte[5000];
         DatagramPacket packet = new DatagramPacket(recvBuf,
                 recvBuf.length);
-        sock.setSoTimeout(16);
+        sock.setSoTimeout(5);
         try{
             sock.receive(packet);
         } catch(IOException ex){
-            System.out.println(ex.toString());
-            return null;
         }
         int byteCount = packet.getLength();
         ByteArrayInputStream byteStream = new ByteArrayInputStream(recvBuf);
@@ -113,19 +125,17 @@ public class Socket implements Serializable {
         try (ObjectInputStream is = new ObjectInputStream(new BufferedInputStream(byteStream))) {
             o = is.readObject();
         }
-        return (Object[][]) o;
+        this.object = (Object[][]) o;
     }
 
-    public String receiveMessage() throws IOException, ClassNotFoundException {
+    public void receiveMessage() throws IOException, ClassNotFoundException {
         byte[] recvBuf = new byte[5000];
         DatagramPacket packet = new DatagramPacket(recvBuf,
                 recvBuf.length);
-        sock.setSoTimeout(16);
+        sock.setSoTimeout(10);
         try{
             sock.receive(packet);
         } catch(IOException ex){
-            System.out.println(ex.toString());
-            return null;
         }
         int byteCount = packet.getLength();
         ByteArrayInputStream byteStream = new ByteArrayInputStream(recvBuf);
@@ -133,7 +143,7 @@ public class Socket implements Serializable {
         try (ObjectInputStream is = new ObjectInputStream(new BufferedInputStream(byteStream))) {
             o = is.readObject();
         }
-        return (String) o;
+        this.messages.add((String) o);
     }
 
     public String[] receiveInput() throws IOException, ClassNotFoundException {

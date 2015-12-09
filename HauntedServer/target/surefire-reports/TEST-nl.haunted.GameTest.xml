@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="nl.haunted.GameTest" time="1.1" errors="1" skipped="0">
+<testsuite tests="1" failures="0" name="nl.haunted.GameTest" time="1.098" errors="1" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_60\jre\bin"/>
@@ -61,7 +61,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="nl.haunted.GameTest" name="test" time="1.094">
+  <testcase classname="nl.haunted.GameTest" name="test" time="1.093">
     <error type="java.lang.NullPointerException">java.lang.NullPointerException
 	at nl.haunted.GameTest.test(GameTest.java:61)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -95,11 +95,11 @@
 </error>
     <system-out>10.1.3.100
 </system-out>
-    <system-err>Dec 09, 2015 3:05:09 PM nl.haunted.GameTest setUp
+    <system-err>Dec 09, 2015 3:56:59 PM nl.haunted.GameTest setUp
 SEVERE: null
 java.net.SocketException: Not a multicast address
 	at java.net.MulticastSocket.joinGroup(MulticastSocket.java:403)
-	at nl.haunted.Socket.socketSetup(Socket.java:53)
+	at nl.haunted.Socket.socketSetup(Socket.java:58)
 	at nl.haunted.Game.&lt;init&gt;(Game.java:83)
 	at nl.haunted.GameTest.setUp(GameTest.java:49)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)

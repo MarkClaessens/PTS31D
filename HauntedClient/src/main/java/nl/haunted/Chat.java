@@ -40,8 +40,8 @@ public class Chat extends Observable {
         return Collections.unmodifiableList(messages);
     }
 
-    public void addMessage(Message m) {
-        this.messages.add(m);
+    public void addMessage(List<Message> m) {
+        this.messages.addAll(m);
     }
 
     public void sendMessage(Message m) throws IOException {
@@ -54,7 +54,7 @@ public class Chat extends Observable {
             @Override
             public void run() {          
                 try {
-                    Message m = IC.getMessage();
+                    List<Message> m = IC.getMessage();
                     if(m != null){
                     addMessage(m);
                     }
