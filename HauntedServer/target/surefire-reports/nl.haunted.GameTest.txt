@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: nl.haunted.GameTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.084 sec <<< FAILURE!
-test(nl.haunted.GameTest)  Time elapsed: 1.083 sec  <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.124 sec <<< FAILURE!
+test(nl.haunted.GameTest)  Time elapsed: 1.124 sec  <<< ERROR!
 java.lang.NullPointerException
 	at nl.haunted.GameTest.test(GameTest.java:61)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)

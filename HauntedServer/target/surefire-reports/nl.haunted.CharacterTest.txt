@@ -1,11 +1,11 @@
 -------------------------------------------------------------------------------
 Test set: nl.haunted.CharacterTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.342 sec <<< FAILURE!
-moveTest(nl.haunted.CharacterTest)  Time elapsed: 0.165 sec  <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.374 sec <<< FAILURE!
+moveTest(nl.haunted.CharacterTest)  Time elapsed: 0.276 sec  <<< ERROR!
 java.lang.NullPointerException
-	at nl.haunted.Character.detectCollision(Character.java:136)
-	at nl.haunted.Character.move(Character.java:89)
+	at nl.haunted.Character.detectCollision(Character.java:137)
+	at nl.haunted.Character.move(Character.java:90)
 	at nl.haunted.CharacterTest.moveTest(CharacterTest.java:72)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)

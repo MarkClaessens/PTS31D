@@ -7,7 +7,7 @@ package nl.haunted;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
-import javafx.scene.paint.Color;
+import java.awt.Color;
 
 /**
  *

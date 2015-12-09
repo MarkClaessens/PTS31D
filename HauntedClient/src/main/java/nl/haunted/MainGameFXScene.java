@@ -481,8 +481,8 @@ public class MainGameFXScene {
     private Image getAnimatedHumanImage(Entity e) {
         Image returnImage = null;
 
-        Color c = e.getColor();
-        if (c == Color.WHITE) {
+        java.awt.Color c = e.getColor();
+        if (c == java.awt.Color.WHITE) {
             if (e.getMoving()) {
                 switch (state) {
                     case 2:
@@ -501,7 +501,7 @@ public class MainGameFXScene {
             } else {
                 returnImage = humanWhiteImages[0];
             }
-        } else if (c == Color.BLACK) {
+        } else if (c == java.awt.Color.BLACK) {
             if (e.getMoving()) {
                 switch (state) {
                     case 2:
@@ -520,7 +520,7 @@ public class MainGameFXScene {
             } else {
                 returnImage = humanBlackImages[0];
             }
-        } else if (c == Color.GREEN) {
+        } else if (c == java.awt.Color.GREEN) {
             if (e.getMoving()) {
 
                 switch (state) {
@@ -540,7 +540,7 @@ public class MainGameFXScene {
             } else {
                 returnImage = humanGreenImages[0];
             }
-        } else if (c == Color.RED) {
+        } else if (c == java.awt.Color.RED) {
             if (e.getMoving()) {
                 switch (state) {
                     case 2:
@@ -559,7 +559,7 @@ public class MainGameFXScene {
             } else {
                 returnImage = humanRedImages[0];
             }
-        } else if (c == Color.BLUE) {
+        } else if (c == java.awt.Color.BLUE) {
             if (e.getMoving()) {
                 switch (state) {
                     case 2:
@@ -578,7 +578,7 @@ public class MainGameFXScene {
             } else {
                 returnImage = humanBlueImages[0];
             }
-        } else if (c == Color.ORANGE) {
+        } else if (c == java.awt.Color.ORANGE) {
             if (e.getMoving()) {
                 switch (state) {
                     case 2:
@@ -597,7 +597,7 @@ public class MainGameFXScene {
             } else {
                 returnImage = humanOrangeImages[0];
             }
-        } else if (c == Color.PURPLE) {
+        } else if (c == java.awt.Color.MAGENTA) {
             if (e.getMoving()) {
                 switch (state) {
                     case 2:
@@ -630,8 +630,8 @@ public class MainGameFXScene {
     private Image getAnimatedGhostImage(Entity e) {
         Image returnImage = null;
 
-        Color c = e.getColor();
-        if (c == Color.WHITE) {
+        java.awt.Color c = e.getColor();
+        if (c == java.awt.Color.WHITE) {
             if (e.getMoving()) {
                 switch (state) {
                     case 2:
@@ -650,7 +650,7 @@ public class MainGameFXScene {
             } else {
                 returnImage = ghostWhiteImages[0];
             }
-        } else if (c == Color.BLACK) {
+        } else if (c == java.awt.Color.BLACK) {
             if (e.getMoving()) {
                 switch (state) {
                     case 2:
@@ -669,7 +669,7 @@ public class MainGameFXScene {
             } else {
                 returnImage = ghostBlackImages[0];
             }
-        } else if (c == Color.GREEN) {
+        } else if (c == java.awt.Color.GREEN) {
             if (e.getMoving()) {
 
                 switch (state) {
@@ -689,7 +689,7 @@ public class MainGameFXScene {
             } else {
                 returnImage = ghostGreenImages[0];
             }
-        } else if (c == Color.RED) {
+        } else if (c == java.awt.Color.RED) {
             if (e.getMoving()) {
                 switch (state) {
                     case 2:
@@ -708,7 +708,7 @@ public class MainGameFXScene {
             } else {
                 returnImage = ghostRedImages[0];
             }
-        } else if (c == Color.BLUE) {
+        } else if (c == java.awt.Color.BLUE) {
             if (e.getMoving()) {
                 switch (state) {
                     case 2:
@@ -727,7 +727,7 @@ public class MainGameFXScene {
             } else {
                 returnImage = ghostBlueImages[0];
             }
-        } else if (c == Color.ORANGE) {
+        } else if (c == java.awt.Color.ORANGE) {
             if (e.getMoving()) {
                 switch (state) {
                     case 2:
@@ -746,7 +746,7 @@ public class MainGameFXScene {
             } else {
                 returnImage = ghostOrangeImages[0];
             }
-        } else if (c == Color.PURPLE) {
+        } else if (c == java.awt.Color.MAGENTA) {
             if (e.getMoving()) {
                 switch (state) {
                     case 2:
