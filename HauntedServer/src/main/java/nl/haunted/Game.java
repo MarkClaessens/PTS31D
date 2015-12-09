@@ -287,7 +287,7 @@ public class Game implements Serializable {
         for (IPlayer p : players) {
             for (Ghost G : this.ghosts) {
                 if (p.getCharacter().equals(G)) {
-                    if (G.getDead()) {
+                    if (!G.getDead()) {
                         obj[i][0] = G.getPosition();
                         obj[i][1] = G.getDirection();
                         obj[i][2] = G.getMoving();

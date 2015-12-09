@@ -128,7 +128,9 @@ public class Socket implements Serializable {
         } catch (Exception ex) {
 
         }
-        this.object = (Object[][]) o;
+        if (o != null) {
+            this.object = (Object[][]) o;
+        }
 
     }
 
@@ -159,7 +161,6 @@ public class Socket implements Serializable {
         try {
             sock.receive(packet);
         } catch (SocketTimeoutException ex) {
-            System.out.println(ex.toString());
             return null;
         }
         String[] s = new String[2];
