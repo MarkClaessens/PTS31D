@@ -7,9 +7,9 @@ package nl.haunted;
 
 import fontys.observer.BasicPublisher;
 import fontys.observer.RemotePropertyListener;
-import java.awt.Color;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -110,6 +110,11 @@ public class Player extends UnicastRemoteObject implements IPlayer {
             this.ready = true;
         }
         basicPublisher.inform(this, "ready", null, this.ready);
+    }
+    
+    public void setColor(Color kleur)
+    {
+        this.color = kleur;
     }
 
     @Override
