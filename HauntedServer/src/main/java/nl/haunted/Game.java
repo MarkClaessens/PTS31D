@@ -215,6 +215,9 @@ public class Game implements Serializable {
                                         g.setStationaryTime();
                                     }
                                 }
+                                if(g.getStationaryTime() == null){
+                                g.setStationaryTime();
+                                }
                             }
                             this.players.get(i).getCharacter().setMoving(false);
                             //</editor-fold>
