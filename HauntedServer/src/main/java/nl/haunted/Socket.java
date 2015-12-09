@@ -122,14 +122,14 @@ public class Socket implements Serializable {
         }
         int byteCount = packet.getLength();
         ByteArrayInputStream byteStream = new ByteArrayInputStream(recvBuf);
+        Object o = null;
+        try (ObjectInputStream is = new ObjectInputStream(new BufferedInputStream(byteStream))) {
+            o = is.readObject();
+        } catch (Exception ex) {
 
-        Object o;
-        if (byteStream.available() > 2) {
-            try (ObjectInputStream is = new ObjectInputStream(new BufferedInputStream(byteStream))) {
-                o = is.readObject();
-            }
-            this.object = (Object[][]) o;
         }
+        this.object = (Object[][]) o;
+
     }
 
     public void receiveMessage() throws IOException, ClassNotFoundException {
@@ -143,11 +143,12 @@ public class Socket implements Serializable {
         }
         int byteCount = packet.getLength();
         ByteArrayInputStream byteStream = new ByteArrayInputStream(recvBuf);
-        Object o;
+        Object o = null;
         try (ObjectInputStream is = new ObjectInputStream(new BufferedInputStream(byteStream))) {
             o = is.readObject();
+        } catch (Exception ex) {
+            this.messages.add((String) o);
         }
-        this.messages.add((String) o);
     }
 
     public String[] receiveInput() throws IOException, ClassNotFoundException {
