@@ -40,6 +40,9 @@ public class Ghost extends Character implements Serializable {
     public boolean getDead() {
         return this.dead;
     }
+    public IPlayer getControllingPlayer(){
+        return this.controllingPlayer;
+    }
 
     public Calendar getTimeOfDeath() {
         return timeOfDeath;

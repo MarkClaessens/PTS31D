@@ -1,9 +1,9 @@
 -------------------------------------------------------------------------------
 Test set: nl.haunted.HumanTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 0 sec <<< FAILURE!
+Tests run: 4, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 0.001 sec <<< FAILURE!
 testGetFlashlightPolygon(nl.haunted.HumanTest)  Time elapsed: 0 sec  <<< FAILURE!
-java.lang.AssertionError: should return a polygon expected:<[I@16b4a017> but was:<[I@8807e25>
+java.lang.AssertionError: should return a polygon expected:<[I@2a3046da> but was:<[I@2a098129>
 	at org.junit.Assert.fail(Assert.java:74)
 	at org.junit.Assert.failNotEquals(Assert.java:448)
 	at org.junit.Assert.assertEquals(Assert.java:102)
