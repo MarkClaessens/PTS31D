@@ -49,7 +49,8 @@ public class CharacterTest {
         players.add(new Player("testPlayer1", "192.68.132.13"));
         players.add(new Player("testPlayer2", "192.69.133.14"));
         //game = new Game(players, 3, "234.56.78.90");
-        human = new Human(spawnPosition);
+        human = new Human();
+        human.setPosition(spawnPosition);
         ghost = new Ghost(spawnPosition, (Player) players.get(0));
 
     }
