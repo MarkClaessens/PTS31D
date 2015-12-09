@@ -6,7 +6,7 @@
 package nl.haunted;
 
 import fontys.observer.RemotePublisher;
-import javafx.scene.paint.Color;
+import java.awt.Color;
 import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;

@@ -7,7 +7,7 @@ package nl.haunted;
 
 import fontys.observer.BasicPublisher;
 import fontys.observer.RemotePropertyListener;
-import javafx.scene.paint.Color;
+import java.awt.Color;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -100,7 +100,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
                                 player.setColor(Color.ORANGE);
                            break;  
                            case(6):
-                                player.setColor(Color.PURPLE);
+                                player.setColor(Color.MAGENTA);
                            break;                            
                        }
                        i++;

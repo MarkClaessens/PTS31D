@@ -9,7 +9,7 @@ import fontys.observer.BasicPublisher;
 import fontys.observer.RemotePropertyListener;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import javafx.scene.paint.Color;
+import java.awt.Color;
 
 /**
  *
