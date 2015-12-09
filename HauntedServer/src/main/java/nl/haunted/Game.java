@@ -266,7 +266,7 @@ public class Game implements Serializable {
         obj[0][2] = this.level.getBackgroundInt();
         obj[1][0] = this.level.getGhostLifePool();
         obj[1][1] = this.level.getCurrentFoor();
-        obj[1][2] = this.human;
+        obj[1][2] = this.currentHuman;
         obj[1][3] = !this.human.hasKey();
         obj[1][4] = this.roundEnded;
         obj[1][5] = this.nextRound;

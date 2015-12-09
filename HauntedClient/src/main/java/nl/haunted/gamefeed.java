@@ -33,9 +33,9 @@ public class gamefeed {
                 if ("Server".equals((String) o[0][0])) {
                     int ghostLives = (int) o[1][0];
                     int currentFloor = (int) o[1][1];
-                    String amIHuman = (String) o[1][2];
+                    IPlayer human = (IPlayer) o[1][2];                    
                     boolean key = (boolean) o[1][3];
-                    gameInfo = new GameInfo(ghostLives, currentFloor, InetAddress.getLocalHost().toString().equalsIgnoreCase(amIHuman), key);
+                    gameInfo = new GameInfo(ghostLives, currentFloor, InetAddress.getLocalHost().toString().equalsIgnoreCase(human.getIpAdress()), key);
                     fillGameInfo(o);
                     setup = true;
                 }
