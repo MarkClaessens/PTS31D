@@ -84,4 +84,6 @@ public interface IGameLobby extends Remote, RemotePublisher {
      * @throws RemoteException
      */
     public boolean readycheck() throws RemoteException;
+    
+    public boolean getIngame() throws RemoteException;
 }

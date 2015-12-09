@@ -207,12 +207,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
             }
         }
         if (startable && players.size() > 2) {
-                gamelobby.startGame();
-               gamefeed gameFeed = new gamefeed(this.controller.getInputController().getSrvSocket());
-               MainGameFXScene MGS = new MainGameFXScene();
-               HauntedClient.getStage().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-               Scene scene = MGS.mainGameFX(gameFeed, chat, tisplayer);
-               HauntedClient.getStage().setScene(scene);
+               gamelobby.startGame();
         }
     }
 
@@ -277,6 +272,22 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     public void propertyChange(PropertyChangeEvent evt) throws RemoteException {
         String propertyName = evt.getPropertyName();
         if (propertyName.equals("players")) {
+            if(gamelobby.getIngame())
+            {
+               gamefeed gameFeed;
+                try {
+                    gameFeed = new gamefeed(this.controller.getInputController().getSrvSocket());
+                    MainGameFXScene MGS = new MainGameFXScene();
+                    HauntedClient.getStage().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+                    Scene scene = MGS.mainGameFX(gameFeed, chat, tisplayer);
+                    HauntedClient.getStage().setScene(scene); 
+                } catch (IOException ex) {
+                    Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+               
+            }
             List<IPlayer> INplayers = (List<IPlayer>) evt.getNewValue();
             if (INplayers.size() > players.size()) {
                 subscribeToAllPlayers();

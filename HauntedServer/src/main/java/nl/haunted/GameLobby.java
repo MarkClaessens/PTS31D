@@ -29,6 +29,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
     private static int gameLobbyNum = 0;
     private String groupID;
     private Lobby lobby;
+    private boolean ingame;
 
     /**
      * maakt een nieuwe gamelobby aan
@@ -53,6 +54,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         props[0] = "players";
         this.basicPublisher = new BasicPublisher(props);
         players.add(host);
+        ingame = false;
 
         //<socket>
         int groupIdNum = 234567890 + gameLobbyNum;
@@ -74,7 +76,9 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
                 Game game;
                 try {
                     game = new Game(players, maxFloors, groupID, this);
-                    game.startRound();
+                    ingame = true;
+                    this.basicPublisher.inform(this, "players", null, players);
+                    game.startRound();                    
                 } catch (IOException ex) {
                     Logger.getLogger(GameLobby.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -195,5 +199,10 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
     
     public Lobby getLobby(){
         return this.lobby;
+    }
+    
+    public boolean getIngame() throws RemoteException
+    {
+        return ingame;
     }
 }
