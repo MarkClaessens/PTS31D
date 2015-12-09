@@ -86,9 +86,9 @@ public class Game implements Serializable {
 
         // Create the first level.
         nextLevel();
-        
+
         // Create the characters and bind them to the players.
-        bindCharactersToPlayers();       
+        bindCharactersToPlayers();
     }
 
     /**
@@ -96,7 +96,7 @@ public class Game implements Serializable {
      */
     public void nextLevel() {
         this.currentFloor++;
-        this.level = new Level(this.currentFloor, this.players.size()-1);
+        this.level = new Level(this.currentFloor, this.players.size() - 1);
     }
 
     /**
@@ -308,7 +308,7 @@ public class Game implements Serializable {
             this.players.get(i).setCharacter(ghost);
             this.ghosts.add(ghost);
         }
-        
+
         this.human = new Human();
         this.human.setPosition(pickHumanSpawnpoint());
         this.players.get(this.players.size() - 1).setCharacter(this.human);
@@ -374,32 +374,38 @@ public class Game implements Serializable {
         DirectionType[] dir = new DirectionType[this.players.size()];
         boolean[] filledPlayer = new boolean[this.players.size()];
         boolean filled = false;
+        int i = 0;
         while (!filled) {
-            String[] input = this.srvSoc.receiveInput();
-            for (IPlayer p : this.players) {
-                if (p.getIpAdress().equals((String) input[0])) {
-                    int index = this.players.indexOf(p);
-                    switch (input[1]) {
-                        case "UP":
-                            dir[index] = DirectionType.UP;
-                        case "DOWN":
-                            dir[index] = DirectionType.DOWN;
-                        case "LEFT":
-                            dir[index] = DirectionType.LEFT;
-                        case "RIGHT":
-                            dir[index] = DirectionType.RIGHT;
-                        case "":
-                            dir[index] = null;
+            if (i < 10) {
+                String[] input = this.srvSoc.receiveInput();
+                if (input != null) {
+                    for (IPlayer p : this.players) {
+                        if (p.getIpAdress().equals((String) input[0])) {
+                            int index = this.players.indexOf(p);
+                            switch (input[1]) {
+                                case "UP":
+                                    dir[index] = DirectionType.UP;
+                                case "DOWN":
+                                    dir[index] = DirectionType.DOWN;
+                                case "LEFT":
+                                    dir[index] = DirectionType.LEFT;
+                                case "RIGHT":
+                                    dir[index] = DirectionType.RIGHT;
+                                case "":
+                                    dir[index] = null;
+                            }
+                            filledPlayer[index] = true;
+                        }
                     }
-                    filledPlayer[index] = true;
+                    filled = true;
+                    for (boolean b : filledPlayer) {
+                        if (!b) {
+                            filled = false;
+                        }
+                    }
                 }
-            }
-            filled = true;
-            for (boolean b : filledPlayer) {
-                if (!b) {
-                    filled = false;
-                }
-            }
+                i++;
+            } else { filled = true;}
         }
         return dir;
     }

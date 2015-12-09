@@ -21,6 +21,7 @@ import java.net.InetSocketAddress;
 import java.net.MulticastSocket;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.nio.channels.SocketChannel;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -99,6 +100,7 @@ public class Socket implements Serializable {
         byte[] recvBuf = new byte[5000];
         DatagramPacket packet = new DatagramPacket(recvBuf,
                 recvBuf.length);
+        sock.setSoTimeout(16);
         try{
             sock.receive(packet);
         } catch(IOException ex){
@@ -118,6 +120,7 @@ public class Socket implements Serializable {
         byte[] recvBuf = new byte[5000];
         DatagramPacket packet = new DatagramPacket(recvBuf,
                 recvBuf.length);
+        sock.setSoTimeout(16);
         try{
             sock.receive(packet);
         } catch(IOException ex){
@@ -137,9 +140,10 @@ public class Socket implements Serializable {
         byte[] recvBuf = new byte[1000];
         DatagramPacket packet = new DatagramPacket(recvBuf,
                 recvBuf.length);
+        sock.setSoTimeout(16);
         try{
             sock.receive(packet);
-        } catch(IOException ex){
+        } catch(SocketTimeoutException ex){
             System.out.println(ex.toString());
             return null;
         }
