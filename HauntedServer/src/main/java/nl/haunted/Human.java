@@ -212,6 +212,7 @@ public class Human extends Character implements Serializable {
     public Ghost checkGhostCollision(Game game) {
         //ghost collision
         for (Ghost ghost : game.getGhosts()) {
+            
             if (checkHitboxCollision(this.getPosition(), 90, 90, ghost.getPosition(), 90, 90)) {
                 return ghost;
             }
