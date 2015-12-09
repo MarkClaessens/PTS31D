@@ -29,7 +29,7 @@ public class gamefeed {
         boolean setup = false;
         while (!setup) {
             Object[][] o = soc.receiveObject();
-            if (o[0][0] == "Server") {
+            if ("Server".equals((String)o[0][0])) {
                 int ghostLives = (int) o[1][0];
                 int currentFloor = (int) o[1][1];
                 String amIHuman = (String) o[1][2];

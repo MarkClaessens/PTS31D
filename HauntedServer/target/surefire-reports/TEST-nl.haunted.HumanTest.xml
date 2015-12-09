@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="4" failures="1" name="nl.haunted.HumanTest" time="0.005" errors="1" skipped="0">
+<testsuite tests="4" failures="1" name="nl.haunted.HumanTest" time="0.006" errors="1" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_60\jre\bin"/>
@@ -62,7 +62,6 @@
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
   <testcase classname="nl.haunted.HumanTest" name="testAddHuman" time="0"/>
-  <testcase classname="nl.haunted.HumanTest" name="testPickupKey" time="0"/>
   <testcase classname="nl.haunted.HumanTest" name="enterDoor" time="0">
     <error type="java.lang.NullPointerException">java.lang.NullPointerException
 	at nl.haunted.Human.enterDoor(Human.java:160)
@@ -97,6 +96,7 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 </error>
   </testcase>
+  <testcase classname="nl.haunted.HumanTest" name="testPickupKey" time="0"/>
   <testcase classname="nl.haunted.HumanTest" name="testGetFlashlightPolygon" time="0">
     <failure message="should return a polygon expected:&lt;[I@7637f22&gt; but was:&lt;[I@4926097b&gt;" type="java.lang.AssertionError">java.lang.AssertionError: should return a polygon expected:&lt;[I@7637f22&gt; but was:&lt;[I@4926097b&gt;
 	at org.junit.Assert.fail(Assert.java:74)

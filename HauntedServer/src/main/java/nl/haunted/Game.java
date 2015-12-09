@@ -84,11 +84,11 @@ public class Game implements Serializable {
         this.gameLobby = gl;
         this.ghosts = new ArrayList();
 
-        // Create the characters and bind them to the players.
-        bindCharactersToPlayers();
-
         // Create the first level.
         nextLevel();
+        
+        // Create the characters and bind them to the players.
+        bindCharactersToPlayers();       
     }
 
     /**
@@ -96,7 +96,7 @@ public class Game implements Serializable {
      */
     public void nextLevel() {
         this.currentFloor++;
-        this.level = new Level(this.currentFloor, this.ghosts.size());
+        this.level = new Level(this.currentFloor, this.players.size()-1);
     }
 
     /**
