@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: nl.haunted.GhostTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 1, Errors: 3, Skipped: 0, Time elapsed: 0.001 sec <<< FAILURE!
+Tests run: 6, Failures: 1, Errors: 3, Skipped: 0, Time elapsed: 0.003 sec <<< FAILURE!
 testMakeGhost(nl.haunted.GhostTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: spawnPosition wasn't set correctly at initializing expected:<null> but was:<Point2D.Double[300.0, 500.0]>
 	at org.junit.Assert.fail(Assert.java:74)
@@ -36,7 +36,7 @@ java.lang.AssertionError: spawnPosition wasn't set correctly at initializing exp
 	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
-testPossess(nl.haunted.GhostTest)  Time elapsed: 0.001 sec  <<< ERROR!
+testPossess(nl.haunted.GhostTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NullPointerException
 	at nl.haunted.Ghost.possess(Ghost.java:105)
 	at nl.haunted.GhostTest.testPossess(GhostTest.java:91)
@@ -100,7 +100,7 @@ java.lang.NullPointerException
 	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
-testChangeAppearance(nl.haunted.GhostTest)  Time elapsed: 0 sec  <<< ERROR!
+testChangeAppearance(nl.haunted.GhostTest)  Time elapsed: 0.001 sec  <<< ERROR!
 java.lang.NullPointerException
 	at nl.haunted.Ghost.changeAppearance(Ghost.java:133)
 	at nl.haunted.GhostTest.testChangeAppearance(GhostTest.java:102)

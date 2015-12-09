@@ -56,6 +56,7 @@ public abstract class Character implements Serializable {
      * @param position
      */
     public Character(Point2D position) {
+        this.position = position;
         this.direction = DirectionType.DOWN; // Set a default direction
         this.moving = false;
     }
