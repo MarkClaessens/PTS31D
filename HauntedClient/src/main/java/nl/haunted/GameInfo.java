@@ -75,12 +75,12 @@ public class GameInfo {
     }
 
     /**
-     * Background1.png example;
+     * background1.png example;
      *
      * @param i
      */
     public void setBackgroundImage(int i) {
-        this.backgroundImage = new Image("Background" + i + ".png");
+        this.backgroundImage = new Image("background" + i + ".png");
     }
 
     public boolean addEntity(Entity e) {
