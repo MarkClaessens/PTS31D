@@ -100,42 +100,46 @@ public class Socket implements Serializable {
                 buf, buf.length, groupIp, port);
         sock.send(packet);
     }
-    
-    public Object[][] getObject(){
+
+    public Object[][] getObject() {
         return this.object;
     }
-    
-    public List<String> getMessages(){
-    List<String> tempMessages = this.messages;
-    this.messages.clear();
-    return tempMessages;
+
+    public List<String> getMessages() {
+        List<String> tempMessages = this.messages;
+        this.messages.clear();
+        return tempMessages;
     }
+
     public void receiveObject() throws IOException, ClassNotFoundException {
         byte[] recvBuf = new byte[5000];
         DatagramPacket packet = new DatagramPacket(recvBuf,
                 recvBuf.length);
-        sock.setSoTimeout(5);
-        try{
+        sock.setSoTimeout(15);
+        try {
             sock.receive(packet);
-        } catch(IOException ex){
+        } catch (IOException ex) {
         }
         int byteCount = packet.getLength();
         ByteArrayInputStream byteStream = new ByteArrayInputStream(recvBuf);
+
         Object o;
-        try (ObjectInputStream is = new ObjectInputStream(new BufferedInputStream(byteStream))) {
-            o = is.readObject();
+        if (byteStream.available() > 2) {
+            try (ObjectInputStream is = new ObjectInputStream(new BufferedInputStream(byteStream))) {
+                o = is.readObject();
+            }
+            this.object = (Object[][]) o;
         }
-        this.object = (Object[][]) o;
     }
 
     public void receiveMessage() throws IOException, ClassNotFoundException {
         byte[] recvBuf = new byte[5000];
         DatagramPacket packet = new DatagramPacket(recvBuf,
                 recvBuf.length);
-        sock.setSoTimeout(10);
-        try{
+        sock.setSoTimeout(15);
+        try {
             sock.receive(packet);
-        } catch(IOException ex){
+        } catch (IOException ex) {
         }
         int byteCount = packet.getLength();
         ByteArrayInputStream byteStream = new ByteArrayInputStream(recvBuf);
@@ -151,9 +155,9 @@ public class Socket implements Serializable {
         DatagramPacket packet = new DatagramPacket(recvBuf,
                 recvBuf.length);
         sock.setSoTimeout(16);
-        try{
+        try {
             sock.receive(packet);
-        } catch(SocketTimeoutException ex){
+        } catch (SocketTimeoutException ex) {
             System.out.println(ex.toString());
             return null;
         }
@@ -286,6 +290,5 @@ public class Socket implements Serializable {
         }
         return null;
     }
-    
-    
+
 }
