@@ -99,7 +99,12 @@ public class Socket implements Serializable {
         byte[] recvBuf = new byte[5000];
         DatagramPacket packet = new DatagramPacket(recvBuf,
                 recvBuf.length);
-        sock.receive(packet);
+        try{
+            sock.receive(packet);
+        } catch(IOException ex){
+            System.out.println(ex.toString());
+            return null;
+        }
         int byteCount = packet.getLength();
         ByteArrayInputStream byteStream = new ByteArrayInputStream(recvBuf);
         Object o;
@@ -113,7 +118,12 @@ public class Socket implements Serializable {
         byte[] recvBuf = new byte[5000];
         DatagramPacket packet = new DatagramPacket(recvBuf,
                 recvBuf.length);
-        sock.receive(packet);
+        try{
+            sock.receive(packet);
+        } catch(IOException ex){
+            System.out.println(ex.toString());
+            return null;
+        }
         int byteCount = packet.getLength();
         ByteArrayInputStream byteStream = new ByteArrayInputStream(recvBuf);
         Object o;
@@ -127,7 +137,12 @@ public class Socket implements Serializable {
         byte[] recvBuf = new byte[1000];
         DatagramPacket packet = new DatagramPacket(recvBuf,
                 recvBuf.length);
-        sock.receive(packet);
+        try{
+            sock.receive(packet);
+        } catch(IOException ex){
+            System.out.println(ex.toString());
+            return null;
+        }
         String[] s = new String[2];
         s[0] = packet.getAddress().toString();
         s[1] = new String(packet.getData(), 0, packet.getLength());
