@@ -38,8 +38,8 @@ public class Human extends Character implements Serializable {
      * @param position the spawn Point2D position of the Human on the map
      
      */
-    public Human(Point2D position) {
-        super(position);
+    public Human() {
+        super(null);
         this.hasKey = false;
     }
     

@@ -30,7 +30,7 @@ import java.util.Scanner;
  *
  * @author Mal
  */
-public class Socket implements Serializable{
+public class Socket implements Serializable {
 
     MulticastSocket sock;
     InetAddress groupIp;
@@ -42,7 +42,7 @@ public class Socket implements Serializable{
         sock.setLoopbackMode(false);
         groupIp = InetAddress.getByName(groupname);
         Scanner input = new Scanner(System.in);
-        nic = this.getLoopbackNick();//this.getCurrentNIC(); //commented for futuure over internet support
+        nic = this.getLocalNIC();//this.getInternetNIC(); //commented for futuure over internet support
         if (nic == null) {
             listNics();
             System.out.println("What Network interface do you want to connect with?");
@@ -71,7 +71,7 @@ public class Socket implements Serializable{
             sock.send(packet);
         }
     }
-    
+
     public void sendMessage(String m) throws IOException {
         ByteArrayOutputStream byteStream = new ByteArrayOutputStream(5000);
         Object o = m;
@@ -106,9 +106,9 @@ public class Socket implements Serializable{
         try (ObjectInputStream is = new ObjectInputStream(new BufferedInputStream(byteStream))) {
             o = is.readObject();
         }
-        return (Object[][])o;
+        return (Object[][]) o;
     }
-    
+
     public String receiveMessage() throws IOException, ClassNotFoundException {
         byte[] recvBuf = new byte[5000];
         DatagramPacket packet = new DatagramPacket(recvBuf,
@@ -120,7 +120,7 @@ public class Socket implements Serializable{
         try (ObjectInputStream is = new ObjectInputStream(new BufferedInputStream(byteStream))) {
             o = is.readObject();
         }
-        return (String)o;
+        return (String) o;
     }
 
     public String[] receiveInput() throws IOException, ClassNotFoundException {
@@ -169,7 +169,7 @@ public class Socket implements Serializable{
         return null;
     }
 
-    public NetworkInterface getCurrentNIC() throws SocketException, IOException {
+    public NetworkInterface getInternetNIC() throws SocketException, IOException {
         // iterate over the network interfaces known to java
         Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
         OUTER:
@@ -214,6 +214,45 @@ public class Socket implements Serializable{
                 }
 
                 return interface_;
+            }
+        }
+        return null;
+    }
+
+    public NetworkInterface getLocalNIC() throws IOException {
+        Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+        OUTER:
+        for (NetworkInterface interface_ : Collections.list(interfaces)) {
+            // we shouldn't care about loopback addresses
+            if (interface_.isLoopback()) {
+                continue;
+            }
+
+            // if you don't expect the interface to be up you can skip this
+            // though it would question the usability of the rest of the code
+            if (!interface_.isUp()) {
+                continue;
+            }
+
+            // iterate over the addresses associated with the interface
+            Enumeration<InetAddress> addresses = interface_.getInetAddresses();
+            for (InetAddress address : Collections.list(addresses)) {
+                // look only for ipv4 addresses
+                if (address instanceof Inet6Address) {
+                    continue;
+                }
+
+                // use a timeout big enough for your needs
+                if (!address.isReachable(3000)) {
+                    continue;
+                }
+
+                // java 7's try-with-resources statement, so that
+                // we close the socket immediately after use
+                if (address.toString().indexOf("10.1.3.") > 0) {
+                    System.out.println(address.getHostAddress());
+                    return interface_;
+                }
             }
         }
         return null;

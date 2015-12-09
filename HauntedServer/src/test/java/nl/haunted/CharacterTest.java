@@ -49,8 +49,8 @@ public class CharacterTest {
         players.add(new Player("testPlayer1", "192.68.132.13"));
         players.add(new Player("testPlayer2", "192.69.133.14"));
         //game = new Game(players, 3, "234.56.78.90");
-        human = new Human(spawnPosition, game);
-        ghost = new Ghost(spawnPosition, game, (Player) players.get(0));
+        human = new Human(spawnPosition);
+        ghost = new Ghost(spawnPosition, (Player) players.get(0));
 
     }
 
@@ -68,14 +68,14 @@ public class CharacterTest {
      */
     @Test
     public void moveTest() {
-        human.move(DirectionType.UP);
-        human.move(DirectionType.DOWN);
-        human.move(DirectionType.LEFT);
-        human.move(DirectionType.RIGHT);
-        ghost.move(DirectionType.UP);
-        ghost.move(DirectionType.DOWN);
-        ghost.move(DirectionType.LEFT);
-        ghost.move(DirectionType.RIGHT);
+        human.move(game, DirectionType.UP);
+        human.move(game, DirectionType.DOWN);
+        human.move(game, DirectionType.LEFT);
+        human.move(game, DirectionType.RIGHT);
+        ghost.move(game, DirectionType.UP);
+        ghost.move(game, DirectionType.DOWN);
+        ghost.move(game, DirectionType.LEFT);
+        ghost.move(game, DirectionType.RIGHT);
     }
 
     //Verder zou ik niet weten of je de rest ook fatsoenlijk kan testen...

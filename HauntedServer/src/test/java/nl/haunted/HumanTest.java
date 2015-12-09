@@ -46,7 +46,7 @@ public class HumanTest {
         players.add(new Player("testPlayer1", "192.68.132.13"));
         players.add(new Player("testPlayer2", "192.69.133.14"));
         //game = new Game(players, 3, "234.56.78.90");
-        human = new Human(spawnPosition, game);
+        human = new Human(spawnPosition);
     }
 
     @After
@@ -63,7 +63,7 @@ public class HumanTest {
      */
     @Test
     public void testAddHuman() {
-        Human h = new Human(spawnPosition, game);
+        Human h = new Human(spawnPosition);
     }
 
     /**
@@ -80,10 +80,10 @@ public class HumanTest {
      * test for entering the door
      */
     @Test
-    public void enterDoor() {
-        human.enterDoor();
+    public void enterDoor() throws InterruptedException {
+        human.enterDoor(game);
         human.pickUpKey();
-        human.enterDoor();
+        human.enterDoor(game);
     }
 
     /**

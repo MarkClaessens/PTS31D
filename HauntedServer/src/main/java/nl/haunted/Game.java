@@ -27,7 +27,7 @@ public class Game implements Serializable {
     private final int floorAmount; // starts at 1
     private int currentFloor = -1; // starts at 0 so the init has to be -1.
     private Timer tickTimer;
-    private boolean roundEnded, nextRound; 
+    private boolean roundEnded, nextRound;
     private Level level;
     private List<Ghost> ghosts;
     private Human human;
@@ -35,7 +35,7 @@ public class Game implements Serializable {
     private IPlayer currentHuman;
     private Socket srvSoc;
     private IGameLobby gameLobby;
-    
+
     public Level getLevel() {
         return level;
     }
@@ -83,12 +83,12 @@ public class Game implements Serializable {
         this.currentFloor = 0;
         this.gameLobby = gl;
         this.ghosts = new ArrayList();
-        		
-	// Create the characters and bind them to the players.
+
+        // Create the characters and bind them to the players.
         bindCharactersToPlayers();
-        
+
         // Create the first level.
-        nextLevel();	
+        nextLevel();
     }
 
     /**
@@ -100,40 +100,40 @@ public class Game implements Serializable {
     }
 
     /**
-     *  starts the next round at the current floor.
+     * starts the next round at the current floor.
      */
-    public void startRound() {    
+    public void startRound() {
         this.roundEnded = false;
         this.tickTimer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
-            public void run() {           
+            public void run() {
                 try {
                     tick();
-                    
+
                 } catch (IOException | InterruptedException | ClassNotFoundException ex) {
                     ex.printStackTrace();
-                } 
+                }
             }
-        };        
+        };
         this.tickTimer.scheduleAtFixedRate(task, 0, 16);
     }
 
     /**
-     *  Ends the current round and opens the counting screen. 
+     * Ends the current round and opens the counting screen.
      */
     public void endRound() {
         this.roundEnded = true;
-        
+
         human.setPosition(pickHumanSpawnpoint());
         human.setHasKey(false);
         human.setMoving(false);
-        
+
         for (Ghost ghost : ghosts) {
             ghost.reset();
             ghost.setPosition(pickGhostSpawnPoint(true));
         }
-        
+
         nextLevel();
     }
 
@@ -146,35 +146,36 @@ public class Game implements Serializable {
      * @throws java.lang.InterruptedException
      */
     public void endGame(IPlayer winner) throws RemoteException, InterruptedException {
-        for(IPlayer player : this.players){
+        for (IPlayer player : this.players) {
             player.reset();
         }
         this.roundEnded = true;
         this.nextRound = false;
-        
+
         // Wait 500 milliseconds (tick timer needs to go one some time) before cancelling ticking.
         Thread.sleep(500);
         this.tickTimer.cancel();
-        GameLobby gameLobby = (GameLobby)this.gameLobby;
+        GameLobby gameLobby = (GameLobby) this.gameLobby;
         gameLobby.getLobby().removeGLAfterGame(gameLobby);
     }
 
     /**
      * The player leaves the game (gamelobby).
+     *
      * @param player the player that wants to leave the game.
      * @throws java.rmi.RemoteException
      * @throws java.lang.InterruptedException
      */
     public synchronized void leaveGame(Player player) throws RemoteException, InterruptedException {
-        if(player.getCharacter() instanceof Human){
-           Random randomizer = new Random();
-           int randomInt = randomizer.nextInt(this.players.size() - 1);
-           this.players.get(randomInt).setCharacter(human);
+        if (player.getCharacter() instanceof Human) {
+            Random randomizer = new Random();
+            int randomInt = randomizer.nextInt(this.players.size() - 1);
+            this.players.get(randomInt).setCharacter(human);
         }
-        
+
         player.setCharacter(null);
         this.players.remove(player);
-        if(this.players.size() == 1){
+        if (this.players.size() == 1) {
             this.endGame(this.players.get(0));
         }
     }
@@ -200,7 +201,7 @@ public class Game implements Serializable {
                     for (int i = 0; i < this.players.size(); i++) {
                         //check if the player pressed a button
                         if (keyboard[i] != null) {
-                            this.players.get(i).getCharacter().move(this,(DirectionType) keyboard[i]);
+                            this.players.get(i).getCharacter().move(this, (DirectionType) keyboard[i]);
                         } else {
 
                             // <editor-fold defaultstate="collapsed" desc="set moving and check if a ghost needs to become a wall">
@@ -293,23 +294,24 @@ public class Game implements Serializable {
         return obj;
 
     }
-	
-	/**
+
+    /**
      * Create the ghosts and human and bind them random to the players.
+     *
      * @throws java.rmi.RemoteException
      */
     public void bindCharactersToPlayers() throws RemoteException {
         Collections.shuffle(this.players);
-        
-        for(int i = 0; i < this.players.size() - 1; i++){
+
+        for (int i = 0; i < this.players.size() - 1; i++) {
             Ghost ghost = new Ghost(pickGhostSpawnPoint(true), this.players.get(i));
             this.players.get(i).setCharacter(ghost);
             this.ghosts.add(ghost);
         }
         
-        Human newHuman = new Human(pickHumanSpawnpoint());
-        this.players.get(this.players.size() - 1).setCharacter(newHuman);
-        this.human = newHuman;
+        this.human = new Human();
+        this.human.setPosition(pickHumanSpawnpoint());
+        this.players.get(this.players.size() - 1).setCharacter(this.human);
     }
 
     /**
@@ -328,40 +330,43 @@ public class Game implements Serializable {
         Point2D humanSpawnpoint = new Point2D.Double(x, y);
 
         // Check if the choosen spawnpoint doesn't collide with a wall.
-        if (human.detectCollision(humanSpawnpoint, this)) {
-            humanSpawnpoint = pickHumanSpawnpoint();
+        if (human != null) {
+            if (human.detectCollision(humanSpawnpoint, this)) {
+                humanSpawnpoint = pickHumanSpawnpoint();
+            }
         }
 
         return humanSpawnpoint;
     }
 
     /**
-     * Picks a ghost spawnpoint.
-     * The Ghosts spawn in any corner.
-     * @param startOfGame boolean if the spawnpoint is for the start of the game.
+     * Picks a ghost spawnpoint. The Ghosts spawn in any corner.
+     *
+     * @param startOfGame boolean if the spawnpoint is for the start of the
+     * game.
      * @return the ghost spawn point.
      */
-    public Point2D pickGhostSpawnPoint(boolean startOfGame){       
-        List<Point2D> spawnPoints = new ArrayList<>();    
-        spawnPoints.add(new Point2D.Double(0,0));
+    public Point2D pickGhostSpawnPoint(boolean startOfGame) {
+        List<Point2D> spawnPoints = new ArrayList<>();
+        spawnPoints.add(new Point2D.Double(0, 0));
         spawnPoints.add(new Point2D.Double(0, 1000));
         spawnPoints.add(new Point2D.Double(1500, 1500));
         spawnPoints.add(new Point2D.Double(1500, 1000));
         spawnPoints.add(new Point2D.Double(0, 500));
         spawnPoints.add(new Point2D.Double(1500, 500));
-        
+
         Random randomizer = new Random();
         int randomInt = randomizer.nextInt(6);
         Point2D spawnPoint = spawnPoints.get(randomInt);
-        
-        if(startOfGame){
-            for(Ghost ghost : this.ghosts){
-                if (ghost.getPosition() == spawnPoint){
+
+        if (startOfGame) {
+            for (Ghost ghost : this.ghosts) {
+                if (ghost.getPosition() == spawnPoint) {
                     spawnPoint = pickGhostSpawnPoint(true);
                 }
             }
         }
-        
+
         return spawnPoint;
     }
 
