@@ -112,7 +112,8 @@ public class Player extends UnicastRemoteObject implements IPlayer {
         basicPublisher.inform(this, "ready", null, this.ready);
     }
     
-    public void setColor(Color kleur)
+    @Override
+    public void setColor(Color kleur) throws RemoteException
     {
         this.color = kleur;
     }

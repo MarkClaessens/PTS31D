@@ -64,5 +64,5 @@ public interface IPlayer extends Remote, RemotePublisher, Serializable {
     
     public void reset() throws RemoteException;
     
-    public void setColor(Color kleur);
+    public void setColor(Color kleur) throws RemoteException;
 }
