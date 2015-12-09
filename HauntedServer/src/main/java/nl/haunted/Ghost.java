@@ -22,7 +22,7 @@ public class Ghost extends Character implements Serializable {
 
     private boolean vulnerable, isGhost, dead;
     private Calendar stationaryTime, timeOfDeath;
-    private IPlayer bestuurder;
+    private IPlayer controllingPlayer;
     private Game game;
 
     public boolean isVulnerable() {
@@ -86,7 +86,7 @@ public class Ghost extends Character implements Serializable {
         this.stationaryTime = Calendar.getInstance();
         this.stationaryTime.clear();
         this.timeOfDeath = null;
-        this.bestuurder = bestuurder;
+        this.controllingPlayer = bestuurder;
     }
 
     public void reset(){
@@ -113,8 +113,10 @@ public class Ghost extends Character implements Serializable {
                         Character human = player.getCharacter();
 
                         player.setCharacter(this);
-                        this.bestuurder.setCharacter(human);
-
+                        this.controllingPlayer.setCharacter(human);
+                        game.setCurrentHuman(this.controllingPlayer);
+                        //set control of ghost to previous human
+                        this.controllingPlayer = player;
                         humanFound = true;
                     }
                 } catch (RemoteException ex) {

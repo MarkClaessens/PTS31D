@@ -59,6 +59,10 @@ public class Game implements Serializable {
     public int getCurrentFloor() {
         return currentFloor;
     }
+    
+    public void setCurrentHuman(IPlayer p){
+        this.currentHuman = p;
+    }
 
     public List<Ghost> getGhosts() {
         return this.ghosts;
@@ -171,6 +175,7 @@ public class Game implements Serializable {
             Random randomizer = new Random();
             int randomInt = randomizer.nextInt(this.players.size() - 1);
             this.players.get(randomInt).setCharacter(human);
+            this.currentHuman = this.players.get(randomInt);
         }
 
         player.setCharacter(null);
@@ -315,6 +320,8 @@ public class Game implements Serializable {
         this.human = new Human();
         this.human.setPosition(pickHumanSpawnpoint());
         this.players.get(this.players.size() - 1).setCharacter(this.human);
+        this.currentHuman = this.players.get(this.players.size() -1);
+                
     }
 
     /**
