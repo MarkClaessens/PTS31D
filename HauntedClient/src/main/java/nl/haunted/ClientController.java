@@ -48,7 +48,7 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
         return gamelobbys;
     }
 
-    public ClientController(HauntedClient client, String ip) throws RemoteException {
+    public ClientController(HauntedClient client, String ip) throws RemoteException, UnknownHostException {
         gamelobbys = new ArrayList();
         this.client = client;
         startClient(ip);
