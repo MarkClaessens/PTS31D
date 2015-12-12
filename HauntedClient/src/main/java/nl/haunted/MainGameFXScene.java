@@ -197,7 +197,7 @@ public class MainGameFXScene {
         textGc.fillText(("Ghost lives left: " + gf.gameInfo.getGhostLives()).toUpperCase(), 10, 14);
         textGc.fillText(("Current floor: " + gf.gameInfo.getCurrentFloor()).toUpperCase(), 10, 30);
         //       textGc.strokeText("Current human: " + gf.gameInfo.getCurrentHuman(), 10, 46);
-        if (gf.gameInfo.getKey()) {
+        if (!gf.gameInfo.getKey()) {
             textGc.fillText(("Key has been picked up by human").toUpperCase(), 10, 46);
         } else {
             textGc.fillText(("Key hasn't been picked up by the human yet").toUpperCase(), 10, 46);
