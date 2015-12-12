@@ -42,6 +42,7 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.stage.Stage;
 
 
 /**
@@ -278,9 +279,19 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
                 try {
                     gameFeed = new gamefeed(this.controller.getInputController().getSrvSocket());
                     MainGameFXScene MGS = new MainGameFXScene();
-                    HauntedClient.getStage().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+                    Stage stage = HauntedClient.getStage();
                     Scene scene = MGS.mainGameFX(gameFeed, chat, tisplayer);
-                    HauntedClient.getStage().setScene(scene); 
+                    Platform.runLater(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            HauntedClient.getStage().setScene(scene);
+                            HauntedClient.getStage().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+                            HauntedClient.getStage().setFullScreen(true);
+                            HauntedClient.getStage().show(); 
+                        }
+                    });
+                    
                 } catch (IOException ex) {
                     Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
