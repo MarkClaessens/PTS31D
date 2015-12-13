@@ -415,7 +415,9 @@ public class MainGameFXScene {
                         drawRotatedImage(ghostGc, getAnimatedGhostImage(e), getAngle(e.getDirection()), e.getPosition().getX() + 100, e.getPosition().getY() + 100, horScale, verScale);
                     }
                     break;
-
+                default:
+                break;
+                        
             }
         }
     }

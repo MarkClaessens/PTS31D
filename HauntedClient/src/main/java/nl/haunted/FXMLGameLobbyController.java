@@ -275,30 +275,33 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         if (propertyName.equals("players")) {
             if(gamelobby.getIngame())
             {
-               gamefeed gameFeed;
-                try {
-                    gameFeed = new gamefeed(this.controller.getInputController().getSrvSocket());
-                    MainGameFXScene MGS = new MainGameFXScene();
-                    Stage stage = HauntedClient.getStage();
-                    Scene scene = MGS.mainGameFX(gameFeed, chat, tisplayer);
-                    Platform.runLater(new Runnable() {
+                Platform.runLater(new Runnable() {
 
                         @Override
                         public void run() {
+               gamefeed gameFeed;
+                try {
+                    gameFeed = new gamefeed(controller.getInputController().getSrvSocket());
+                    MainGameFXScene MGS = new MainGameFXScene();
+                    Stage stage = HauntedClient.getStage();
+                    Scene scene = MGS.mainGameFX(gameFeed, chat, tisplayer);
+                    
                             HauntedClient.getStage().setScene(scene);
                             HauntedClient.getStage().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-                            HauntedClient.getStage().setFullScreen(true);
+                            //HauntedClient.getStage().setFullScreen(true);
                             HauntedClient.getStage().show(); 
                         }
-                    });
-                    
-                } catch (IOException ex) {
+                catch (IOException ex) {
                     Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-               
+                }   
+               }
+              });
             }
+                       
+            else
+            {
             List<IPlayer> INplayers = (List<IPlayer>) evt.getNewValue();
             if (INplayers.size() > players.size()) {
                 subscribeToAllPlayers();
@@ -319,6 +322,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
                     }
                 }
             }
+           }
 
         } else if (propertyName.equals("ready")) {
 

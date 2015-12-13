@@ -47,6 +47,7 @@ public class gamefeed {
     }
 
     public void fillGameInfo(Object[][] o) {
+        gameInfo.getEntities().clear();
         Entity key = new Entity((Point2D) o[3][0], EntityType.Key);
         Entity door = new Entity((Point2D) o[5][0], EntityType.Door);
         door.setDirection((DirectionType) o[5][1]);
@@ -81,7 +82,7 @@ public class gamefeed {
             gameInfo.setBackgroundImage((int) o[0][2]);
             gameInfo.setGhostLives((int) o[1][0]);
             gameInfo.setCurrentFloor((int) o[1][1]);
-            gameInfo.setamIHuman(InetAddress.getLocalHost().toString().equalsIgnoreCase((String) o[1][2]));
+            gameInfo.setamIHuman(InetAddress.getLocalHost().toString().equalsIgnoreCase(((IPlayer) o[1][2]).getIpAdress()));
             gameInfo.setKey((boolean) o[1][3]);
             gameInfo.setRoundEnd((boolean) o[1][4]);
             gameInfo.setNextRound((boolean) o[1][5]);
@@ -101,12 +102,13 @@ public class gamefeed {
                     }
                     //set ghosts
                     if (e.getType() == EntityType.Ghost) {
+
                         if (!(boolean) o[i][5]) {
                             e.setPosition((Point2D) o[i][0]);
-                            e.setDirection((DirectionType) o[5][1]);
-                            e.setMoving((boolean) o[5][2]);
-                            e.setColor((Color) o[5][3]);
-                            e.setWall((boolean) o[5][4]);
+                            e.setDirection((DirectionType) o[i][1]);
+                            e.setMoving((boolean) o[i][2]);
+                            e.setColor((Color) o[i][3]);
+                            e.setWall((boolean) o[i][4]);
                         }
                         e.setDead((boolean) o[i][5]);
                         i++;
