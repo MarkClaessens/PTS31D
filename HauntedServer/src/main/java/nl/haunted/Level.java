@@ -140,22 +140,22 @@ public class Level implements Serializable {
             case 1:
                 index = (int) (Math.random() * spawnPointsTop.size());
                 this.doorLocation = spawnPointsTop.get(index);
-                this.doorDirection = DirectionType.DOWN;
+                this.doorDirection = DirectionType.UP;
                 break;
             case 2:
                 index = (int) (Math.random() * spawnPointsBottom.size());
                 this.doorLocation = spawnPointsBottom.get(index);
-                this.doorDirection = DirectionType.UP;
+                this.doorDirection = DirectionType.DOWN;
                 break;
             case 3:
                 index = (int) (Math.random() * spawnPointsLeft.size());
                 this.doorLocation = spawnPointsLeft.get(index);
-                this.doorDirection = DirectionType.RIGHT;
+                this.doorDirection = DirectionType.LEFT;
                 break;
             default: //4
                 index = (int) (Math.random() * spawnPointsRight.size());
                 this.doorLocation = spawnPointsRight.get(index);
-                this.doorDirection = DirectionType.LEFT;
+                this.doorDirection = DirectionType.RIGHT;
                 break;
         }
     }
