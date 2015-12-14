@@ -249,4 +249,24 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
     {
         return password;
     }
+    
+    public void setHost(IPlayer player) throws RemoteException
+    {
+        this.host = player;
+    }
+    
+    public void setName(String naam) throws RemoteException
+    {
+        this.name = naam;
+    }
+    
+    public void setMaxFloors(int maxfloors) throws RemoteException
+    {
+        this.maxFloors = maxfloors;
+    }
+    
+    public void setMaxPlayers(int maxplayers) throws RemoteException
+    {
+        this.maxPlayers = maxplayers;
+    }
 }

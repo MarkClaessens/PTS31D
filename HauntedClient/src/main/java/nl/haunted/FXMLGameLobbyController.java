@@ -75,7 +75,21 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     @FXML
     private Button BTNsendMessage;
     @FXML
+    private Button BTNremoveplayer;
+    @FXML
+    private Button BTNsetname;
+    @FXML
+    private Button BTNsetfloors;
+    @FXML
+    private Button BTNsetplayers;
+    @FXML
     private TextField TFmessage;
+    @FXML
+    private TextField TFnewname;
+    @FXML
+    private TextField TFnewfloors;
+    @FXML
+    private TextField TFnewplayers;
     @FXML
     private TextArea TAchatBox;
     @FXML
@@ -286,6 +300,10 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     private void leavegamelobby() throws RemoteException {
         gamelobby.removePlayer(tisplayer);
         controller.setInGL(false);
+        if(gamelobby.getHost().equals(tisplayer) && !gamelobby.getPlayers().isEmpty())
+        {
+            gamelobby.setHost(players.get(0));
+        }
         if (gamelobby.getPlayers().isEmpty()) {
             lobby.removeGL(gamelobby);
         }
@@ -390,6 +408,78 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
 
     public Chat getchat() {
         return chat;
+    }
+    
+    @FXML
+    public void setnewname(MouseEvent event) throws RemoteException
+    {
+        if(!TFnewname.getText().trim().isEmpty())
+        {
+          gamelobby.setName(TFnewname.getText());
+          gamesettings();
+        }
+        else
+            {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setHeaderText("voer tekst in");
+                    alert.setContentText("voer een tekst in");
+                    alert.showAndWait();
+            }
+    }
+    
+    @FXML
+    public void setnewfloors(MouseEvent event) throws RemoteException
+    {
+        try
+        {
+            if(!TFnewname.getText().trim().isEmpty() && Integer.parseInt(TFnewfloors.getText()) > 2 && Integer.parseInt(TFnewfloors.getText()) < 11)
+            {
+                gamelobby.setMaxFloors(Integer.parseInt(TFnewfloors.getText()));
+                gamesettings();
+            }
+            else
+            {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setHeaderText("voer juiste getal in");
+                    alert.setContentText("Het maximum voor floors is 10 minimaal is 2");
+                    alert.showAndWait();
+            }
+        }
+        catch(NumberFormatException e)
+        {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setHeaderText("geen getal");
+                alert.setContentText("zorg ervoor dat bij maximum spelers en floor amount er een getal staat");
+                alert.showAndWait();   
+        }
+    }
+    
+    @FXML
+    public void setnewplayers(MouseEvent event) throws RemoteException
+    {
+        try
+        {
+          if(!TFnewname.getText().trim().isEmpty() && Integer.parseInt(TFnewplayers.getText()) > 2 && Integer.parseInt(TFnewplayers.getText()) < 8)
+            {
+                gamelobby.setMaxPlayers(Integer.parseInt(TFnewplayers.getText()));
+                gamesettings();
+            }  
+          else
+            {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setHeaderText("juist getal invoeren");
+                    alert.setContentText(" Het maximum voor spelers is 6 en minimum is 3");
+                    alert.showAndWait();
+            }
+        }
+        catch(NumberFormatException e)
+        {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setHeaderText("geen getal");
+                alert.setContentText("zorg ervoor dat bij maximum spelers en floor amount er een getal staat");
+                alert.showAndWait();   
+        }
+        
     }
 
     
