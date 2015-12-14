@@ -76,13 +76,10 @@ public class Ghost extends Character implements Serializable {
     /**
      * Constructor for Ghost sets vulnerable and isGhost to true and sets the
      * super variables in Character
-     *
-     * @param position, the spawn Point2D position of the Ghost on the map
-    '
      * @param bestuurder the player that owns this object
      */
-    public Ghost(Point2D position, IPlayer bestuurder) {
-        super(position);
+    public Ghost(IPlayer bestuurder) {
+        super(null);
         this.isGhost = true;
         this.vulnerable = true;
         this.dead = false;

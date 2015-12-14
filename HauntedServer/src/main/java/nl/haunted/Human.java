@@ -33,10 +33,7 @@ public class Human extends Character implements Serializable {
     /**
      * The Constructor for human. This initializes the flashlightRange,
      * flashlightAngle and the flashlightPoints by calling setFlashlight Also
-     * initialize the base class Character!
-     *
-     * @param position the spawn Point2D position of the Human on the map
-     
+     * initialize the base class Character!     
      */
     public Human() {
         super(null);
