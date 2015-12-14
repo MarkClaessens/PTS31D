@@ -399,24 +399,28 @@ public class MainGameFXScene {
         for (Entity e : gf.gameInfo.getEntities()) {
             switch (e.getType()) {
                 case Door:
-                    drawRotatedImage(keyDoorGc, doorImage, getAngle(e.getDirection()), (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY()) * verScale, horScale, verScale);
+                    if (gf.gameInfo.amIHuman()) {
+                        drawRotatedImage(keyDoorGc, doorImage, getAngle(e.getDirection()), (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY()) * verScale, horScale, verScale);
+                    }
                     break;
                 case Key:
-                    keyDoorGc.drawImage(keyImage, (e.getPosition().getX() + 100)*horScale, (e.getPosition().getY() + 100)*verScale, keyImage.getWidth() * horScale, keyImage.getHeight() * verScale);
+                    if (gf.gameInfo.amIHuman()) {
+                        keyDoorGc.drawImage(keyImage, (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, keyImage.getWidth() * horScale, keyImage.getHeight() * verScale);
+                    }
                     break;
                 case Human:
                     if (gf.gameInfo.amIHuman()) {
 
-                        drawRotatedImage(humanPersGc, humanPerspectiveImage, getAngle(e.getDirection()), (e.getPosition().getX() - 1900)*horScale, (e.getPosition().getY() - 1900)*verScale, horScale, verScale);
+                        drawRotatedImage(humanPersGc, humanPerspectiveImage, getAngle(e.getDirection()), (e.getPosition().getX() - 1900) * horScale, (e.getPosition().getY() - 1900) * verScale, horScale, verScale);
                     }
-                    drawRotatedImage(humanGc, getAnimatedHumanImage(e), getAngle(e.getDirection()), (e.getPosition().getX() + 100)*horScale, (e.getPosition().getY() + 100)*verScale, horScale, verScale);
+                    drawRotatedImage(humanGc, getAnimatedHumanImage(e), getAngle(e.getDirection()), (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, horScale, verScale);
                     break;
                 case Ghost:
 
                     if (e.getWall()) {
-                        drawRotatedImage(ghostGc, wallImage, 0, (e.getPosition().getX() + 100)*horScale, (e.getPosition().getY() + 100)*verScale, horScale, verScale);
+                        drawRotatedImage(ghostGc, wallImage, 0, (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, horScale, verScale);
                     } else {
-                        drawRotatedImage(ghostGc, getAnimatedGhostImage(e), getAngle(e.getDirection()), (e.getPosition().getX() + 100)*horScale, (e.getPosition().getY() + 100)*verScale, horScale, verScale);
+                        drawRotatedImage(ghostGc, getAnimatedGhostImage(e), getAngle(e.getDirection()), (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, horScale, verScale);
                     }
                     break;
                 default:
