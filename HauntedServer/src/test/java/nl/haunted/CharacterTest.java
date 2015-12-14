@@ -51,7 +51,8 @@ public class CharacterTest {
         //game = new Game(players, 3, "234.56.78.90");
         human = new Human();
         human.setPosition(spawnPosition);
-        ghost = new Ghost(spawnPosition, (Player) players.get(0));
+        ghost = new Ghost((Player) players.get(0));
+        ghost.setPosition(spawnPosition);
 
     }
 

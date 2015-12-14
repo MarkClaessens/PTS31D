@@ -56,7 +56,8 @@ public class GhostTest {
      */
     @Test
     public void testMakeGhost() {
-        Ghost ghost1 = new Ghost(spawnPosition, (Player) players.get(0));
+        Ghost ghost1 = new Ghost((Player) players.get(0));
+        ghost1.setPosition(spawnPosition);
         assertEquals("spawnPosition wasn't set correctly at initializing", ghost1.getPosition(), spawnPosition);
         assertEquals("game wasn't set correctly at initializing", ghost1.getGame(), game);
     }
@@ -66,7 +67,9 @@ public class GhostTest {
      */
     @Test
     public void testIsVulnerable() {
-        Ghost ghost = new Ghost(spawnPosition, (Player) players.get(0));
+        Ghost ghost = new Ghost((Player) players.get(0));
+        ghost.setPosition(spawnPosition);
+        
         assertTrue("Ghost is not vulnerable at initializing", ghost.isVulnerable());
     }
 
@@ -75,7 +78,8 @@ public class GhostTest {
      */
     @Test
     public void testSetVulnerable() {
-        Ghost ghost = new Ghost(spawnPosition, (Player) players.get(0));
+        Ghost ghost = new Ghost((Player) players.get(0));
+        ghost.setPosition(spawnPosition);
         ghost.setVulnerable(false);
         assertFalse("Ghost vulnerable was not correctly set to false", ghost.isVulnerable());
     }
@@ -85,7 +89,8 @@ public class GhostTest {
      */
     @Test
     public void testPossess() {
-        Ghost ghost = new Ghost(spawnPosition, (Player) players.get(0));
+        Ghost ghost = new Ghost((Player) players.get(0));
+        ghost.setPosition(spawnPosition);
         // after possing the ghost will respawn, so we can test if the timeOfDeath is set
         Calendar previousTimeOfDeath = ghost.getTimeOfDeath();
         ghost.possess(game);
@@ -98,7 +103,8 @@ public class GhostTest {
      */
     @Test
     public void testChangeAppearance() {
-        Ghost ghost = new Ghost(spawnPosition, (Player) players.get(0));
+        Ghost ghost = new Ghost((Player) players.get(0));
+        ghost.setPosition(spawnPosition);
         ghost.changeAppearance();
         assertFalse("ghost is still vulnerable when it becomes a wall", ghost.isVulnerable());
 
@@ -111,7 +117,8 @@ public class GhostTest {
      */
     @Test
     public void testVanish() {
-        Ghost ghost = new Ghost(spawnPosition, (Player) players.get(0));
+        Ghost ghost = new Ghost((Player) players.get(0));
+        ghost.setPosition(spawnPosition);
         ghost.vanish(game);
         Calendar previousTimeOfDeath = ghost.getTimeOfDeath();
         ghost.possess(game);
