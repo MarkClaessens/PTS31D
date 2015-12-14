@@ -117,7 +117,7 @@ public class Socket implements Serializable {
 
     public List<String> getMessages() {
         List<String> tempMessages = new ArrayList();
-        Collections.copy(tempMessages,this.messages);
+        tempMessages.addAll(this.messages);
         this.messages.clear();
         return tempMessages;
     }
