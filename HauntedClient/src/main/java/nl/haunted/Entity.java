@@ -20,6 +20,7 @@ public class Entity {
     private boolean moving, wall, Dead;
     private final EntityType type;
     private Color color;
+    private int id;
 
     /**
      *
@@ -81,5 +82,13 @@ public class Entity {
 
     public void setColor(Color col) {
         this.color = col;
+    }
+
+    int getID() {
+        return this.id;
+    }
+
+    public void setID(int i) {
+        this.id = i;
     }
 }

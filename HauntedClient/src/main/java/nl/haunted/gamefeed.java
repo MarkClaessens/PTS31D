@@ -34,7 +34,7 @@ public class gamefeed {
                     int bgimg = (int) o[0][2];
                     int ghostLives = (int) o[1][0];
                     int currentFloor = (int) o[1][1];
-                    IPlayer human = (IPlayer) o[1][2];                    
+                    IPlayer human = (IPlayer) o[1][2];
                     boolean key = (boolean) o[1][3];
                     gameInfo = new GameInfo(ghostLives, currentFloor, InetAddress.getLocalHost().toString().equalsIgnoreCase(human.getIpAdress()), key);
                     fillGameInfo(o);
@@ -63,6 +63,7 @@ public class gamefeed {
             e.setColor((Color) o[i + 6][3]);
             e.setWall((boolean) o[i + 6][4]);
             e.setDead((boolean) o[i + 6][5]);
+            e.setID((int) o[i + 6][6]);
             ghosts.add(e);
         }
         gameInfo.addEntity(key);
@@ -102,15 +103,18 @@ public class gamefeed {
                     }
                     //set ghosts
                     if (e.getType() == EntityType.Ghost) {
-
-                        if (!(boolean) o[i][5]) {
-                            e.setPosition((Point2D) o[i][0]);
-                            e.setDirection((DirectionType) o[i][1]);
-                            e.setMoving((boolean) o[i][2]);
-                            e.setColor((Color) o[i][3]);
-                            boolean wall = (boolean) o[i][4];
-                            if(!(e.getWall() == wall)){System.out.println("wallchange");}
-                            e.setWall((boolean) o[i][4]);
+                        if (e.getID() == (int) o[i][6]) {
+                            if (!(boolean) o[i][5]) {
+                                e.setPosition((Point2D) o[i][0]);
+                                e.setDirection((DirectionType) o[i][1]);
+                                e.setMoving((boolean) o[i][2]);
+                                e.setColor((Color) o[i][3]);
+                                boolean wall = (boolean) o[i][4];
+                                if (!(e.getWall() == wall)) {
+                                    System.out.println("wallchange");
+                                }
+                                e.setWall((boolean) o[i][4]);
+                            }
                         }
                         e.setDead((boolean) o[i][5]);
                         i++;

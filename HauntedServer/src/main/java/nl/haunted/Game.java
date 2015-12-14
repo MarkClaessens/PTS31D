@@ -293,6 +293,7 @@ public class Game implements Serializable {
                         obj[i][2] = G.getMoving();
                         obj[i][3] = p.getColor();
                         obj[i][4] = !G.isVulnerable();
+                        obj[i][6] = G.getID();
                     }
                     obj[i][5] = G.getDead();
                     i++;

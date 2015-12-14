@@ -24,9 +24,14 @@ public class Ghost extends Character implements Serializable {
     private Calendar stationaryTime, timeOfDeath;
     private IPlayer controllingPlayer;
     private Game game;
+    private static int id = 0;
 
     public boolean isVulnerable() {
         return vulnerable;
+    }
+    
+    public int getID(){
+        return this.id;
     }
 
     public void setVulnerable(boolean isVulnerable) {
@@ -87,6 +92,7 @@ public class Ghost extends Character implements Serializable {
         this.stationaryTime.clear();
         this.timeOfDeath = null;
         this.controllingPlayer = bestuurder;
+        Ghost.id +=1;
     }
 
     public void reset(){
