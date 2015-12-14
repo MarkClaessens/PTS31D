@@ -138,7 +138,7 @@ public class Socket implements Serializable {
     }
 
     public void receiveMessage() throws IOException, ClassNotFoundException {
-        byte[] recvBuf = new byte[1000];
+        byte[] recvBuf = new byte[100];
         DatagramPacket packet = new DatagramPacket(recvBuf,
                 recvBuf.length);
         sock.setSoTimeout(5);
@@ -147,7 +147,7 @@ public class Socket implements Serializable {
         } catch (SocketTimeoutException ex) {
         }
         String s = new String(packet.getData(), 0, packet.getLength());
-        if(!s.equalsIgnoreCase("")){
+        if(!s.substring(0,10).equalsIgnoreCase("          ")){
         this.messages.add(s);
         }
     }

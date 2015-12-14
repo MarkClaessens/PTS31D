@@ -281,7 +281,7 @@ public class Game implements Serializable {
         obj[4][2] = this.human.getMoving();
         obj[4][3] = this.currentHuman.getColor();
         obj[5][0] = this.level.getDoorLocation();
-        obj[5][1] = DirectionType.DOWN;
+        obj[5][1] = this.level.getDoorDirection();
 
         //ghostloop
         int i = 6;
