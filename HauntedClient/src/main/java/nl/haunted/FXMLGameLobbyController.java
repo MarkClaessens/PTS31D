@@ -162,8 +162,11 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
             controller.setInputController(gamelobby); 
             chat = new Chat(controller.getInputController());  
             om = new observermessages(this);
-            controller.setGroupID(gamelobby.getGroupID());
+            controller.setGroupID(gamelobby.getGroupID());            
+                
+                
             
+        
                                 
         } catch (RemoteException ex) {
             Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
@@ -172,6 +175,14 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
 
     public void settisPlayer(IPlayer player) {
         this.tisplayer = player;
+        try {
+            if(!gamelobby.getHost().equals(tisplayer))
+            {
+                IVstart.setVisible(false);
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void setController() {
