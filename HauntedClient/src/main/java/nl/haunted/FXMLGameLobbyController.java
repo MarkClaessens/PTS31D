@@ -294,9 +294,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
                             //HauntedClient.getStage().setFullScreen(true);
                             HauntedClient.getStage().show(); 
                         }
-                catch (IOException ex) {
-                    Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
+                catch (     IOException | ClassNotFoundException | InterruptedException ex) {
                     Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
                 }   
                }
