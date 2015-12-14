@@ -438,6 +438,7 @@ public class MainGameFXScene {
                     } else {
                         drawRotatedImage(ghostGcs[ghostChooser], getAnimatedGhostImage(e), getAngle(e.getDirection()), (e.getPosition().getX() + 100), (e.getPosition().getY() + 100), horScale, verScale);
                     }
+                    ghostChooser++;
                     break;
                 default:
                     break;
@@ -494,10 +495,10 @@ public class MainGameFXScene {
     private void drawRotatedImage(GraphicsContext gc, Image image, double angle, double tlpx, double tlpy, double scaleX, double scaleY) {
         gc.save(); // saves the current state on stack, including the current transform
         //rotate(gc, angle, ((tlpx + image.getWidth()) * scaleX) / 2, ((tlpy + image.getHeight()) * scaleY) / 2);
-        rotate(gc, angle, tlpx + (image.getWidth()/2), tlpy + (image.getHeight()/2));
+        rotate(gc, angle, tlpx + 50, tlpy + 50);
         //rotate(gc, angle, tlpx, (tlpy + image.getHeight()/2));
         if (angle == 90 || angle == 270) {
-            gc.drawImage(image, tlpx*scaleX, tlpy*scaleY, image.getWidth() * scaleY, image.getHeight() * scaleX);
+            gc.drawImage(image, tlpx*scaleX, tlpy*scaleY, image.getHeight() * scaleY, image.getWidth() * scaleX);
         } else {
             gc.drawImage(image, tlpx*scaleX, tlpy * scaleY, image.getWidth() * scaleX, image.getHeight() * scaleY);
         }
