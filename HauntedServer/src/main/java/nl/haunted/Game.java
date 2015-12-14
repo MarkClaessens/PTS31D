@@ -336,9 +336,8 @@ public class Game implements Serializable {
     public Point2D pickHumanSpawnpoint() {
         // Pick random x and y positions in the middle of the map.
         Random randomizer = new Random();
-        int x = (int) floor(randomizer.nextInt(800 - 600) + 600); // minimum is 600 and maximum is 800
-        int y = (int) floor(randomizer.nextInt(600 - 300) + 300); // minimum is 300 and maximum is 600
-
+        int x = ((randomizer.nextInt(800 - 600) + 600) + 50) / 100 * 100; // minimum is 600 and maximum is 800
+        int y = ((randomizer.nextInt(600 - 300) + 300) + 50) / 100 *100; // minimum is 300 and maximum is 600
         // Create a Point2D object with the random picked x and y values.
         Point2D humanSpawnpoint = new Point2D.Double(x, y);
 
