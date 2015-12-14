@@ -230,11 +230,17 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
         for (IGameLobby GL : lobby.getGameLobbys()) {
             System.out.println(GL.getName());
             if (GL.getName().equals(naam)) {
-                if(GL.getww().equals(TFwachtwoord.getText()))
+                if(GL.getww().isEmpty())
                 {
-                  GL.addPlayer(tisplayer);
+                GL.addPlayer(tisplayer);
                 lobby.informlobbys();
                 timer.cancel();  
+                }
+                else if(GL.getww().equals(TFwachtwoord.getText()))
+                {
+                GL.addPlayer(tisplayer);
+                lobby.informlobbys();
+                timer.cancel();   
                 }
                 else
                 {
