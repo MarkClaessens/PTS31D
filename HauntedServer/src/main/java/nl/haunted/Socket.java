@@ -41,6 +41,7 @@ public class Socket implements Serializable {
     Object[][] object;
     int port;
     List<String> messages = new ArrayList();
+    String IP = "";
 
     public void socketSetup(String groupname, int port) throws IOException {
         sock = new MulticastSocket(port);
@@ -53,6 +54,7 @@ public class Socket implements Serializable {
             System.out.println("What Network interface do you want to connect with?");
             nic = NetworkInterface.getByName(input.nextLine());
         }
+        IP = nic.getInetAddresses().nextElement().getHostAddress();
         object = null;
 
         sock.joinGroup(new InetSocketAddress(groupIp, port), nic);
@@ -61,6 +63,10 @@ public class Socket implements Serializable {
 
     public NetworkInterface getNIC() {
         return nic;
+    }
+    
+    public String getIPAddress(){
+        return this.IP;
     }
 
     public void sendObject(Object o) throws IOException {

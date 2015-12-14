@@ -90,8 +90,8 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
                 ex.printStackTrace();
                 System.out.println("Client: Controller couldn't subscribe himself to the lobby.");
             }
-        }
-        tisplayer = lobby.createPlayer("player", Inet4Address.getLocalHost().getHostAddress());
+        }      
+        tisplayer = lobby.createPlayer("player",this.inputController.getSrvSocket().getIPAddress());
     }
 
     /**
