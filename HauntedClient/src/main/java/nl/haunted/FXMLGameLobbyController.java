@@ -393,6 +393,8 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         return chat;
     }
 
+    
+
     public class observermessages implements Observer {
 
         FXMLGameLobbyController GLC;
