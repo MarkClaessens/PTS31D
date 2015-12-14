@@ -163,10 +163,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
             chat = new Chat(controller.getInputController());  
             om = new observermessages(this);
             controller.setGroupID(gamelobby.getGroupID());
-            if(!gamelobby.getHost().equals(tisplayer))
-            {
-                IVstart.setVisible(false);
-            }
+            
                                 
         } catch (RemoteException ex) {
             Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
