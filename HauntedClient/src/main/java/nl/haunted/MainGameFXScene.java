@@ -91,9 +91,14 @@ public class MainGameFXScene {
      * Builds the scene for the main game fx
      *
      * @param gf
+     * @param chat
+     * @param p
      * @return the scene to view in the mainActivity stage
+     * @throws java.io.IOException
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.lang.InterruptedException
      */
-    public Scene mainGameFX(gamefeed gf, Chat chat, IPlayer p) throws IOException, ClassNotFoundException {
+    public Scene mainGameFX(gamefeed gf, Chat chat, IPlayer p) throws IOException, ClassNotFoundException, InterruptedException {
         this.gf = gf;
         this.chat = chat;
         this.p = p;
