@@ -82,6 +82,8 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     AnchorPane paneel;
     @FXML
     ImageView IVexit;
+    @FXML
+    ImageView IVstart;
 
     public FXMLGameLobbyController() throws RemoteException {
     }
@@ -161,6 +163,10 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
             chat = new Chat(controller.getInputController());  
             om = new observermessages(this);
             controller.setGroupID(gamelobby.getGroupID());
+            if(!gamelobby.getHost().equals(tisplayer))
+            {
+                IVstart.setVisible(false);
+            }
                                 
         } catch (RemoteException ex) {
             Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
