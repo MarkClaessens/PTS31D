@@ -25,7 +25,7 @@ public class gamefeed {
         this.soc = socket;
     }
 
-    public void setupGameInfo() throws IOException, ClassNotFoundException {
+    public void setupGameInfo() throws IOException, ClassNotFoundException, InterruptedException {
         boolean setup = false;
         while (!setup) {
             Object[][] o = soc.getObject();
@@ -41,8 +41,8 @@ public class gamefeed {
                     gameInfo.setBackgroundImage(bgimg);
                     setup = true;
                 }
-
             }
+            Thread.sleep(50);
         }
     }
 
