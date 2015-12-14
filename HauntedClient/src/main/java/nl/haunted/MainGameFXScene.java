@@ -497,7 +497,7 @@ public class MainGameFXScene {
         rotate(gc, angle, tlpx + (image.getWidth()/2), tlpy + (image.getHeight()/2));
         //rotate(gc, angle, tlpx, (tlpy + image.getHeight()/2));
         if (angle == 90 || angle == 270) {
-            gc.drawImage(image, tlpx*scaleY, tlpy*scaleX, image.getWidth() * scaleY, image.getHeight() * scaleX);
+            gc.drawImage(image, tlpx*scaleX, tlpy*scaleY, image.getWidth() * scaleY, image.getHeight() * scaleX);
         } else {
             gc.drawImage(image, tlpx*scaleX, tlpy * scaleY, image.getWidth() * scaleX, image.getHeight() * scaleY);
         }
