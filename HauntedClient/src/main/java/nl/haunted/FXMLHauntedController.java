@@ -50,6 +50,7 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
     ClientController controller;
     IPlayer tisplayer;
     List<IGameLobby> gamelobbys;
+    Timer timer;
     @FXML
     TextField TFchangenameplayer1;
     @FXML
@@ -101,7 +102,7 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
         }
         TimerTask timerTask = this;
         //running timer task as daemon thread
-        Timer timer = new Timer(true);
+        timer = new Timer(true);
         timer.scheduleAtFixedRate(timerTask, 0, 2000);
 
     }
@@ -164,6 +165,7 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
                 }
                 if (!exist && Integer.parseInt(TFplayers.getText()) > 2 && Integer.parseInt(TFplayers.getText()) < 8 && Integer.parseInt(TFfloors.getText()) < 11 && Integer.parseInt(TFfloors.getText()) > 2) {
                     lobby.createGameLobby(TFroomname.getText(), TFpassword.getText(), tisplayer, Integer.parseInt(TFfloors.getText()), Integer.parseInt(TFplayers.getText()));
+                    timer.cancel();
                 } else {
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setHeaderText("maximum overschreden");
@@ -221,6 +223,7 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
             if (GL.getName().equals(naam)) {
                 GL.addPlayer(tisplayer);
                 lobby.informlobbys();
+                timer.cancel();
             }
 
         }
