@@ -102,7 +102,6 @@ public class InputController {
                     for (IPlayer p : gameLobby.getPlayers()) {
                         if (p.getName() == null ? strPlayer == null : p.getName().equals(strPlayer)) {
                             player = p;
-                            break;
                         }
                     }
                     String text = input.substring(input.indexOf("]: ") + 3);
