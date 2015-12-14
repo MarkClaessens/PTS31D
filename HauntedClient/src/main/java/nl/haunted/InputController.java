@@ -86,7 +86,10 @@ public class InputController {
 
     public List<Message> getMessage() throws IOException, ClassNotFoundException {
         List<String> inputlist = new ArrayList();
-        Collections.copy(inputlist, this.inputSocket.getMessages());
+        List<String> exinputlist = this.inputSocket.getMessages();
+        if(!exinputlist.isEmpty())
+        {
+           Collections.copy(inputlist, exinputlist);
         List<Message> messages = new ArrayList();
         for (String input : inputlist) {
             if (input != null) {
@@ -108,7 +111,9 @@ public class InputController {
 
             }
         }
-        return messages;
+        return messages; 
+        }
+        return null;
     }
 
 }
