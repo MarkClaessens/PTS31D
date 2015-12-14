@@ -34,7 +34,7 @@ import javafx.stage.Stage;
  * @author Joris
  */
 public class MainGameFXScene {
-    
+
     private Timer timer;
 
     private double screenWidth, screenHeight;
@@ -143,11 +143,11 @@ public class MainGameFXScene {
         //Handle key pressings
         onKeyPresses(scene);
         onKeyReleases(scene);
-        
+
         timer = new Timer();
-        TimerTask task = new TimerTask(){
+        TimerTask task = new TimerTask() {
             @Override
-            public void run() {          
+            public void run() {
                 try {
                     gf.decompressFeed();
                 } catch (IOException ex) {
@@ -157,7 +157,7 @@ public class MainGameFXScene {
                 }
             }
         };
-        
+
         timer.scheduleAtFixedRate(task, 0, 16);
 
         AnimationTimer at = new AnimationTimer() {
@@ -171,13 +171,11 @@ public class MainGameFXScene {
                     humanPersGc.clearRect(0, 0, screenWidth, screenHeight);
                     drawImages();
                     drawTexts();
-                }
-                else if (gf.gameInfo.isGameEnd()){ //TODO
+                } else if (gf.gameInfo.isGameEnd()) { //TODO
                     this.stop();
                     timer.cancel();
                     //gf.gameInfo.endGame(); //TODO
-                }
-                else if(gf.gameInfo.isRoundEnd()){ //TODO
+                } else if (gf.gameInfo.isRoundEnd()) { //TODO
                     this.stop();
                     timer.cancel();
                     //gf.gameInfo.endRound();//TODO
@@ -185,8 +183,8 @@ public class MainGameFXScene {
 
             }
         };
-                at.start();
-                //ImageView(image);
+        at.start();
+        //ImageView(image);
 //        
 //        Rotate rotation = new Rotate(90, image.getWidth()/2, image.getHeight()/2);
 //        iv.getTransforms().add(rotation);
@@ -401,29 +399,29 @@ public class MainGameFXScene {
         for (Entity e : gf.gameInfo.getEntities()) {
             switch (e.getType()) {
                 case Door:
-                    drawRotatedImage(keyDoorGc, doorImage, getAngle(e.getDirection()), e.getPosition().getX() + 100, e.getPosition().getY(), horScale, verScale);
+                    drawRotatedImage(keyDoorGc, doorImage, getAngle(e.getDirection()), (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY()) * verScale, horScale, verScale);
                     break;
                 case Key:
-                    keyDoorGc.drawImage(keyImage, e.getPosition().getX() + 100, e.getPosition().getY() + 100, keyImage.getWidth() * horScale, keyImage.getHeight() * verScale);
+                    keyDoorGc.drawImage(keyImage, (e.getPosition().getX() + 100)*horScale, (e.getPosition().getY() + 100)*verScale, keyImage.getWidth() * horScale, keyImage.getHeight() * verScale);
                     break;
                 case Human:
                     if (gf.gameInfo.amIHuman()) {
-                        //TODO: calculate proper x and y coordinates
-                        drawRotatedImage(humanPersGc, humanPerspectiveImage, getAngle(e.getDirection()), e.getPosition().getX() - 1900, e.getPosition().getY() - 1900, horScale, verScale);
+
+                        drawRotatedImage(humanPersGc, humanPerspectiveImage, getAngle(e.getDirection()), (e.getPosition().getX() - 1900)*horScale, (e.getPosition().getY() - 1900)*verScale, horScale, verScale);
                     }
-                    drawRotatedImage(humanGc, getAnimatedHumanImage(e), getAngle(e.getDirection()), e.getPosition().getX() + 100, e.getPosition().getY() + 100, horScale, verScale);
+                    drawRotatedImage(humanGc, getAnimatedHumanImage(e), getAngle(e.getDirection()), (e.getPosition().getX() + 100)*horScale, (e.getPosition().getY() + 100)*verScale, horScale, verScale);
                     break;
                 case Ghost:
-                    //todo : draw animated ghost images
+
                     if (e.getWall()) {
-                        drawRotatedImage(ghostGc, wallImage, 0, e.getPosition().getX() + 100, e.getPosition().getY() + 100, horScale, verScale);
+                        drawRotatedImage(ghostGc, wallImage, 0, (e.getPosition().getX() + 100)*horScale, (e.getPosition().getY() + 100)*verScale, horScale, verScale);
                     } else {
-                        drawRotatedImage(ghostGc, getAnimatedGhostImage(e), getAngle(e.getDirection()), e.getPosition().getX() + 100, e.getPosition().getY() + 100, horScale, verScale);
+                        drawRotatedImage(ghostGc, getAnimatedGhostImage(e), getAngle(e.getDirection()), (e.getPosition().getX() + 100)*horScale, (e.getPosition().getY() + 100)*verScale, horScale, verScale);
                     }
                     break;
                 default:
-                break;
-                        
+                    break;
+
             }
         }
     }

@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: nl.haunted.GhostTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 1, Errors: 2, Skipped: 0, Time elapsed: 0 sec <<< FAILURE!
+Tests run: 6, Failures: 1, Errors: 2, Skipped: 0, Time elapsed: 0.001 sec <<< FAILURE!
 testVanish(nl.haunted.GhostTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NullPointerException
 	at nl.haunted.Ghost.vanish(Ghost.java:158)
