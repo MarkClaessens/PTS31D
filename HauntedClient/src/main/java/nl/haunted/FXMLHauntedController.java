@@ -64,6 +64,8 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
     @FXML
     TextField TFfloors;
     @FXML
+    TextField TFwachtwoord;
+    @FXML
     AnchorPane paneel;
     @FXML
     ImageView IVexit;
