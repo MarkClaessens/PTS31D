@@ -385,7 +385,7 @@ public class MainGameFXScene {
      */
     private void loadInImages() {
         keyImage = new Image("key.png");
-        doorImage = new Image[]{new Image("doorUp.png"), new Image("doorDown.png"), new Image("doorLeft"), new Image("doorRight")};
+        doorImage = new Image[]{new Image("doorUp.png"), new Image("doorDown.png"), new Image("doorLeft.png"), new Image("doorRight.png")};
         wallImage = new Image("wall.png");
         humanPerspectiveImage = new Image[]{new Image("outOfFlashlightUp.png"), new Image("outOfFlashlightDown.png"), new Image("outOfFlashlightLeft.png"), new Image("outOfFlashlightRight.png")};
 
