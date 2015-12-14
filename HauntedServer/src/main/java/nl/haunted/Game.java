@@ -8,6 +8,7 @@ package nl.haunted;
 import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.io.Serializable;
+import static java.lang.Math.floor;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.rmi.RemoteException;
@@ -335,8 +336,8 @@ public class Game implements Serializable {
     public Point2D pickHumanSpawnpoint() {
         // Pick random x and y positions in the middle of the map.
         Random randomizer = new Random();
-        int x = randomizer.nextInt(800 - 600) + 600; // minimum is 600 and maximum is 800
-        int y = randomizer.nextInt(600 - 300) + 300; // minimum is 300 and maximum is 600
+        int x = (int) floor(randomizer.nextInt(800 - 600) + 600); // minimum is 600 and maximum is 800
+        int y = (int) floor(randomizer.nextInt(600 - 300) + 300); // minimum is 300 and maximum is 600
 
         // Create a Point2D object with the random picked x and y values.
         Point2D humanSpawnpoint = new Point2D.Double(x, y);
