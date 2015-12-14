@@ -168,8 +168,9 @@ public class MainGameFXScene {
                     keyDoorGc.clearRect(0, 0, screenWidth, screenHeight);
                     humanGc.clearRect(0, 0, screenWidth, screenHeight);
                     ghostGc.clearRect(0, 0, screenWidth, screenHeight);
-                    textGc.clearRect(0, 0, screenWidth, screenHeight);
+                    
                     humanPersGc.clearRect(0, 0, screenWidth, screenHeight);
+                    textGc.clearRect(0, 0, screenWidth, screenHeight);
                     drawImages();
                     drawTexts();
                 } else if (gf.gameInfo.isGameEnd()) { //TODO
@@ -412,17 +413,15 @@ public class MainGameFXScene {
                 case Human:
                     if (gf.gameInfo.amIHuman()) {
 
-                        drawRotatedImage(humanPersGc, humanPerspectiveImage, getAngle(e.getDirection()), (e.getPosition().getX() - 1900) * horScale, (e.getPosition().getY() - 1900) * verScale, 1, 1);
+                        //drawRotatedImage(humanPersGc, humanPerspectiveImage, getAngle(e.getDirection()), (e.getPosition().getX() - 1900) * horScale, (e.getPosition().getY() - 1900) * verScale, horScale, verScale);
                     }
                     drawRotatedImage(humanGc, getAnimatedHumanImage(e), getAngle(e.getDirection()), (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, horScale, verScale);
                     break;
                 case Ghost:
 
                     if (e.getWall()) {
-                        System.out.println("wall");
                         drawRotatedImage(ghostGc, wallImage, 0, (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, horScale, verScale);
                     } else {
-                        System.out.println("ghost");
                         drawRotatedImage(ghostGc, getAnimatedGhostImage(e), getAngle(e.getDirection()), (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, horScale, verScale);
                     }
                     break;
