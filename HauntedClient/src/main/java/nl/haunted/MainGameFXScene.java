@@ -494,8 +494,8 @@ public class MainGameFXScene {
     private void drawRotatedImage(GraphicsContext gc, Image image, double angle, double tlpx, double tlpy, double scaleX, double scaleY) {
         gc.save(); // saves the current state on stack, including the current transform
         //rotate(gc, angle, ((tlpx + image.getWidth()) * scaleX) / 2, ((tlpy + image.getHeight()) * scaleY) / 2);
-        //rotate(gc, angle, (tlpx + (image.getWidth()/2)), (tlpy + image.getHeight()/2));
-        rotate(gc, angle, tlpx, (tlpy + image.getHeight()/2));
+        rotate(gc, angle, (tlpx + image.getWidth()), tlpy + image.getHeight());
+        //rotate(gc, angle, tlpx, (tlpy + image.getHeight()/2));
         gc.drawImage(image, tlpx, tlpy, image.getWidth() * scaleX, image.getHeight() * scaleY);
         gc.restore(); // back to original state (before rotation)
     }
