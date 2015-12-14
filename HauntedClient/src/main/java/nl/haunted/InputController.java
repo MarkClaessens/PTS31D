@@ -85,33 +85,33 @@ public class InputController {
     }
 
     public List<Message> getMessage() throws IOException, ClassNotFoundException {
-        List<String> inputlist = new ArrayList();
-        List<String> exinputlist = this.inputSocket.getMessages();
-        if(!exinputlist.isEmpty())
-        {
-           Collections.copy(inputlist, exinputlist);
-        List<Message> messages = new ArrayList();
-        for (String input : inputlist) {
-            if (input != null) {
-                boolean visible = true;
-                if ("0".equals(input.substring(1, 2))) {
-                    visible = false;
-                }
-                String strPlayer = input.substring(4, input.substring(4).indexOf("]"));
-                IPlayer player = null;
-                for (IPlayer p : gameLobby.getPlayers()) {
-                    if (p.getName() == null ? strPlayer == null : p.getName().equals(strPlayer)) {
-                        player = p;
-                    }
-                }
-                String text = input.substring(input.indexOf("]: ") + 3);
-                if (player != null) {
-                    messages.add(new Message(text, player, visible));
-                }
 
+        List<String> exinputlist = this.inputSocket.getMessages();
+        List<String> inputlist = new ArrayList(this.inputSocket.getMessages().size());
+        if (!exinputlist.isEmpty()) {
+            inputlist.addAll(exinputlist);
+            List<Message> messages = new ArrayList();
+            for (String input : inputlist) {
+                if (input != null) {
+                    boolean visible = true;
+                    if ("0".equals(input.substring(1, 2))) {
+                        visible = false;
+                    }
+                    String strPlayer = input.substring(4, input.substring(4).indexOf("]"));
+                    IPlayer player = null;
+                    for (IPlayer p : gameLobby.getPlayers()) {
+                        if (p.getName() == null ? strPlayer == null : p.getName().equals(strPlayer)) {
+                            player = p;
+                        }
+                    }
+                    String text = input.substring(input.indexOf("]: ") + 3);
+                    if (player != null) {
+                        messages.add(new Message(text, player, visible));
+                    }
+
+                }
             }
-        }
-        return messages; 
+            return messages;
         }
         return null;
     }

@@ -48,6 +48,7 @@ public class Chat extends Observable {
 
     public void sendMessage(Message m) throws IOException {
         IC.sendMessage(m);
+        this.messages.add(m);
     }
     
     public void startMessageClient(){
