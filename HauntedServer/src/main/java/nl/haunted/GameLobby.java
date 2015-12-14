@@ -157,6 +157,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
             }
         }
         if (exist == false && this.players.size() + 1 <= this.maxPlayers) {
+            naamchecker(player);
             players.add((IPlayer) player);
             this.basicPublisher.inform(this, "players", null, players);
             System.out.println("player "+player.getName()+" was added to gamelobby "+this.name);
@@ -248,5 +249,17 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
     public String getww() throws RemoteException
     {
         return password;
+    }
+    
+    private void naamchecker(IPlayer player) throws RemoteException
+    {
+        for (IPlayer spelernaam : players)
+            {
+                if(player.getName().equals(spelernaam.getName()))
+                {
+                    player.setName(player.getName() + "(1)");
+                    naamchecker(player);
+                }
+            }
     }
 }
