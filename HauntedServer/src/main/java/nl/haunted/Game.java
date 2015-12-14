@@ -276,8 +276,10 @@ public class Game implements Serializable {
         obj[2][1] = new Point2D.Double(this.human.getFlashlightPolygon()[2], this.human.getFlashlightPolygon()[3]);
         obj[2][2] = new Point2D.Double(this.human.getFlashlightPolygon()[4], this.human.getFlashlightPolygon()[5]);
         obj[3][0] = this.level.getKeyLocation();
-        obj[4][0] = this.human.getPosition();
-        obj[4][1] = this.human.getDirection();
+        obj[4][0] = new Point2D.Double(100,100); // lelijke fixed position
+        obj[4][1] = DirectionType.RIGHT;
+        //obj[4][0] = this.human.getPosition();
+        //obj[4][1] = this.human.getDirection();
         obj[4][2] = this.human.getMoving();
         obj[4][3] = this.currentHuman.getColor();
         obj[5][0] = this.level.getDoorLocation();
