@@ -89,19 +89,11 @@ public class Socket implements Serializable {
     }
 
     public void sendMessage(String m) throws IOException {
-        ByteArrayOutputStream byteStream = new ByteArrayOutputStream(5000);
-        Object o = m;
-        try (ObjectOutputStream os = new ObjectOutputStream(new BufferedOutputStream(byteStream))) {
-            os.flush();
-            os.writeObject(o);
-            os.flush();
-            //retrieves byte array
-            byte[] buf = byteStream.toByteArray();
-            DatagramPacket packet = new DatagramPacket(
-                    buf, buf.length, groupIp, 9877);
-            int byteCount = packet.getLength();
-            sock.send(packet);
-        }
+       byte[] buf = m.getBytes();
+        DatagramPacket packet = new DatagramPacket(
+                buf, buf.length, groupIp, 9877);
+        sock.send(packet);
+        
     }
 
     public void sendInput(String s, int port) throws IOException {
@@ -146,24 +138,17 @@ public class Socket implements Serializable {
     }
 
     public void receiveMessage() throws IOException, ClassNotFoundException {
-        byte[] recvBuf = new byte[5000];
+        byte[] recvBuf = new byte[1000];
         DatagramPacket packet = new DatagramPacket(recvBuf,
                 recvBuf.length);
-        sock.setSoTimeout(15);
+        sock.setSoTimeout(5);
         try {
             sock.receive(packet);
-        } catch (IOException ex) {
+        } catch (SocketTimeoutException ex) {
         }
-        int byteCount = packet.getLength();
-        ByteArrayInputStream byteStream = new ByteArrayInputStream(recvBuf);
-        Object o = null;
-        try (ObjectInputStream is = new ObjectInputStream(new BufferedInputStream(byteStream))) {
-            o = is.readObject();
-        } catch (Exception ex) {
-            
-        }
-        if(o != null){
-            this.messages.add((String) o);
+        String s = new String(packet.getData(), 0, packet.getLength());
+        if(!s.equalsIgnoreCase("")){
+        this.messages.add(s);
         }
     }
 
