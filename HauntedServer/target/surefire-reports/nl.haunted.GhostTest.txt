@@ -1,11 +1,12 @@
 -------------------------------------------------------------------------------
 Test set: nl.haunted.GhostTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 1, Errors: 2, Skipped: 0, Time elapsed: 0 sec <<< FAILURE!
-testVanish(nl.haunted.GhostTest)  Time elapsed: 0 sec  <<< ERROR!
-java.lang.NullPointerException
-	at nl.haunted.Ghost.vanish(Ghost.java:158)
-	at nl.haunted.GhostTest.testVanish(GhostTest.java:122)
+Tests run: 6, Failures: 1, Errors: 2, Skipped: 0, Time elapsed: 0.001 sec <<< FAILURE!
+testChangeAppearance(nl.haunted.GhostTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: ghost is not vulnerable when it becomes back a ghost
+	at org.junit.Assert.fail(Assert.java:74)
+	at org.junit.Assert.assertTrue(Assert.java:37)
+	at nl.haunted.GhostTest.testChangeAppearance(GhostTest.java:112)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -66,11 +67,10 @@ java.lang.NullPointerException
 	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
-testChangeAppearance(nl.haunted.GhostTest)  Time elapsed: 0 sec  <<< FAILURE!
-java.lang.AssertionError: ghost is not vulnerable when it becomes back a ghost
-	at org.junit.Assert.fail(Assert.java:74)
-	at org.junit.Assert.assertTrue(Assert.java:37)
-	at nl.haunted.GhostTest.testChangeAppearance(GhostTest.java:112)
+testVanish(nl.haunted.GhostTest)  Time elapsed: 0.001 sec  <<< ERROR!
+java.lang.NullPointerException
+	at nl.haunted.Ghost.vanish(Ghost.java:158)
+	at nl.haunted.GhostTest.testVanish(GhostTest.java:122)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

@@ -136,16 +136,16 @@ public class Ghost extends Character implements Serializable {
         if (this.isGhost && System.currentTimeMillis() >= stationaryTime.getTimeInMillis() + 1500 && !getMoving()) {
             this.vulnerable = false;
             this.isGhost = false;
+            
+            int x = (((int) this.getPosition().getX()) + 50) / 100 * 100;   
+            int y = (((int) this.getPosition().getY()) + 50) / 100 * 100;
+            Point2D fixedPosition = new Point2D.Double(x, y);
+            this.setPosition(fixedPosition);
         } else if (this.isGhost == false && getMoving()) {
             this.vulnerable = true;
             this.isGhost = true;
             this.stationaryTime.clear();
         }
-        
-        int x = (((int) this.getPosition().getX()) + 50) / 100 * 100;   
-        int y = (((int) this.getPosition().getY()) + 50) / 100 * 100;
-        Point2D fixedPosition = new Point2D.Double(x, y);
-        this.setPosition(fixedPosition);
     }
 
     /**
