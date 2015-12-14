@@ -205,7 +205,7 @@ public class MainGameFXScene {
         if (!gf.gameInfo.getKey()) {
             textGc.fillText(("Key has been picked up by human").toUpperCase(), 10, 64);
         } else {
-            textGc.fillText(("Key hasn't been picked up by the human yet").toUpperCase(), 10, 84);
+            textGc.fillText(("Key hasn't been picked up by the human yet").toUpperCase(), 10, 64);
         }
     }
 
@@ -419,8 +419,10 @@ public class MainGameFXScene {
                 case Ghost:
 
                     if (e.getWall()) {
+                        System.out.println("wall");
                         drawRotatedImage(ghostGc, wallImage, 0, (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, horScale, verScale);
                     } else {
+                        System.out.println("ghost");
                         drawRotatedImage(ghostGc, getAnimatedGhostImage(e), getAngle(e.getDirection()), (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, horScale, verScale);
                     }
                     break;
