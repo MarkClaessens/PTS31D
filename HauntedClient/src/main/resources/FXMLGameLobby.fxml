@@ -24,7 +24,7 @@
                 <Image url="@btnReady.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="55.0" fitWidth="130.0" layoutX="829.0" layoutY="116.0" onMouseClicked="#startgame" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="IVstart" fitHeight="55.0" fitWidth="130.0" layoutX="829.0" layoutY="116.0" onMouseClicked="#startgame" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@btnStartGame.png" />
             </image>
