@@ -212,7 +212,14 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
         setLobby();
         List<String> namen = new ArrayList<>();
         for (IGameLobby GL : lobby.getGameLobbys()) {
-            namen.add("naam: " + GL.getName() + " players: " + GL.getPlayers().size() + "/" + GL.getMaxPlayer() + " maxFloors: " + GL.getMaxFloors());
+            if(GL.getww().isEmpty())
+            {
+              namen.add("naam: " + GL.getName() + " players: " + GL.getPlayers().size() + "/" + GL.getMaxPlayer() + " maxFloors: " + GL.getMaxFloors());
+            }
+            else
+            {
+               namen.add("naam: " + GL.getName() + " *p* players: " + GL.getPlayers().size() + "/" + GL.getMaxPlayer() + " maxFloors: " + GL.getMaxFloors());
+            }
         }
         LVgamelobbys.setItems(FXCollections.observableList(namen));
     }
@@ -223,9 +230,20 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
         for (IGameLobby GL : lobby.getGameLobbys()) {
             System.out.println(GL.getName());
             if (GL.getName().equals(naam)) {
-                GL.addPlayer(tisplayer);
+                if(GL.getww().equals(TFwachtwoord.getText()))
+                {
+                  GL.addPlayer(tisplayer);
                 lobby.informlobbys();
-                timer.cancel();
+                timer.cancel();  
+                }
+                else
+                {
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setHeaderText("FOUT WACHTWOORD");
+                    alert.setContentText("verkeerde wachwoord ingevuld!");
+                    alert.showAndWait();
+                }
+                
             }
 
         }

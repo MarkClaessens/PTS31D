@@ -36,7 +36,8 @@
                 <Image url="@btnCreateGameLobby.png" />
             </image>
         </ImageView>
-        <ListView fx:id="LVgamelobbys" layoutX="6.0" layoutY="275.0" prefHeight="287.0" prefWidth="282.0" />
-        <Button layoutX="356.0" layoutY="406.0" mnemonicParsing="false" onMouseClicked="#addPlayerGL" text="join game" />
+        <ListView fx:id="LVgamelobbys" layoutX="6.0" layoutY="275.0" prefHeight="287.0" prefWidth="361.0" />
+        <Button layoutX="400.0" layoutY="406.0" mnemonicParsing="false" onMouseClicked="#addPlayerGL" text="join game" />
+      <TextField fx:id="TFwachtwoord" layoutX="387.0" layoutY="368.0" promptText="password(optional)" />
     </children>
 </AnchorPane>

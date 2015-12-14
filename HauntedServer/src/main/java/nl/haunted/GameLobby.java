@@ -244,4 +244,9 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
     {
         return host;
     }
+    
+    public String getww() throws RemoteException
+    {
+        return password;
+    }
 }

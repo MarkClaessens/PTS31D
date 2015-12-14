@@ -88,4 +88,6 @@ public interface IGameLobby extends Remote, RemotePublisher {
     public boolean getIngame() throws RemoteException;
     
     public IPlayer getHost() throws RemoteException;
+    
+    public String getww() throws RemoteException;
 }
