@@ -116,7 +116,8 @@ public class Socket implements Serializable {
     }
 
     public List<String> getMessages() {
-        List<String> tempMessages = this.messages;
+        List<String> tempMessages = new ArrayList();
+        Collections.copy(tempMessages,this.messages);
         this.messages.clear();
         return tempMessages;
     }
@@ -159,6 +160,9 @@ public class Socket implements Serializable {
         try (ObjectInputStream is = new ObjectInputStream(new BufferedInputStream(byteStream))) {
             o = is.readObject();
         } catch (Exception ex) {
+            
+        }
+        if(o != null){
             this.messages.add((String) o);
         }
     }

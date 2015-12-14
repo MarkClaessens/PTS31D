@@ -62,6 +62,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         String stringConverter = "" + groupIdNum;
         groupID = stringConverter.substring(0, 3) + "." + stringConverter.substring(4, 5) + "." + stringConverter.substring(6, 7) + "." + stringConverter.substring(8, 9);
         gameLobbyNum++;
+        System.out.println("Created lobby name:"+this.name+" host: "+this.host.getName());
         //</socket>
 
     }
@@ -106,7 +107,8 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
                        i++;
                     }
                     game = new Game(players, maxFloors, groupID, this);
-                    ingame = true;                    
+                    ingame = true;
+                    System.out.println("game "+this.getName()+" has started");
                     game.startRound();
                     this.basicPublisher.inform(this, "players", null, players);
                 } catch (IOException ex) {
@@ -133,6 +135,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         if (exist) {
             players.remove(player);
             this.basicPublisher.inform(this, "players", null, players);
+            System.out.println("player "+player.getName()+" was kicked from gamelobby "+this.name);
             return true;
         } else {
             return false;
@@ -156,6 +159,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         if (exist == false && this.players.size() + 1 <= this.maxPlayers) {
             players.add((IPlayer) player);
             this.basicPublisher.inform(this, "players", null, players);
+            System.out.println("player "+player.getName()+" was added to gamelobby "+this.name);
             return true;
         } else {
             return false;
