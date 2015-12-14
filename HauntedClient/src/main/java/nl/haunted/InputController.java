@@ -7,6 +7,7 @@ package nl.haunted;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,7 +21,6 @@ import java.util.logging.Logger;
 public class InputController {
 
     private Socket inputSocket, srvSocket;
-    private ArrayList<String> messages;
     private DirectionType direction;
     private IGameLobby gameLobby;
     private Timer timer;
@@ -34,9 +34,9 @@ public class InputController {
         this.srvSocket.socketSetup(groupID, 9876);
         this.gameLobby = GL;
         timer = new Timer();
-        TimerTask task = new TimerTask(){
+        TimerTask task = new TimerTask() {
             @Override
-            public void run() {          
+            public void run() {
                 try {
                     srvSocket.receiveObject();
                     inputSocket.receiveMessage();
@@ -47,15 +47,15 @@ public class InputController {
                 }
             }
         };
-         timer.scheduleAtFixedRate(task, 0, 16);
-               
+        timer.scheduleAtFixedRate(task, 0, 16);
+
     }
 
     public Socket getInputSocket() {
         return this.inputSocket;
     }
-    
-    public Socket getSrvSocket(){
+
+    public Socket getSrvSocket() {
         return this.srvSocket;
     }
 
@@ -65,7 +65,7 @@ public class InputController {
 
     public void sendMessage(Message m) throws IOException {
         StringBuilder sb = new StringBuilder();
-        
+
         sb.append("[");
         if (m.getIsVisibleForEveryone()) {
             sb.append("1");
@@ -85,26 +85,28 @@ public class InputController {
     }
 
     public List<Message> getMessage() throws IOException, ClassNotFoundException {
-        List<String> inputlist = this.inputSocket.getMessages();
+        List<String> inputlist = new ArrayList();
+        Collections.copy(inputlist, this.inputSocket.getMessages());
         List<Message> messages = new ArrayList();
-        for(String input : inputlist)
-        if (input != null) {
-            boolean visible = true;
-            if("0".equals(input.substring(1,2))){
-                visible = false;
-            }
-            String strPlayer = input.substring(4, input.substring(4).indexOf("]"));
-            IPlayer player = null;
-            for (IPlayer p : gameLobby.getPlayers()) {
-                if (p.getName() == null ? strPlayer == null : p.getName().equals(strPlayer)) {
-                    player = p;
+        for (String input : inputlist) {
+            if (input != null) {
+                boolean visible = true;
+                if ("0".equals(input.substring(1, 2))) {
+                    visible = false;
                 }
+                String strPlayer = input.substring(4, input.substring(4).indexOf("]"));
+                IPlayer player = null;
+                for (IPlayer p : gameLobby.getPlayers()) {
+                    if (p.getName() == null ? strPlayer == null : p.getName().equals(strPlayer)) {
+                        player = p;
+                    }
+                }
+                String text = input.substring(input.indexOf("]: ") + 3);
+                if (player != null) {
+                    messages.add(new Message(text, player, visible));
+                }
+
             }
-            String text = input.substring(input.indexOf("]: ") + 3);
-            if (player != null) {
-                messages.add(new Message(text, player, visible));
-            }
-           
         }
         return messages;
     }
