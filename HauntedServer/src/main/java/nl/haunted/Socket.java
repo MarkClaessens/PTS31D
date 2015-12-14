@@ -147,7 +147,7 @@ public class Socket implements Serializable {
         } catch (SocketTimeoutException ex) {
         }
         String s = new String(packet.getData(), 0, packet.getLength());
-        if(!s.substring(0,10).equalsIgnoreCase("          ")){
+        if(!s.substring(0,10).equals("          ")){
         this.messages.add(s);
         }
     }
