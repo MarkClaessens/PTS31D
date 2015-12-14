@@ -57,8 +57,14 @@ public class MainGameFXScene {
     private GraphicsContext bgGc;
 
     //foreground
-    private Canvas keyDoorLayer, humanLayer, ghostLayer, textLayer, humanPersLayer;
-    private GraphicsContext keyDoorGc, humanGc, ghostGc, textGc, humanPersGc;
+    private Canvas keyDoorLayer, humanLayer, textLayer, humanPersLayer;
+    private GraphicsContext keyDoorGc, humanGc, textGc, humanPersGc;
+
+    //ghost gcs
+    private Canvas[] ghostLayers = new Canvas[6];
+    private GraphicsContext[] ghostGcs = new GraphicsContext[6];
+    
+    private int ghostChooser = 0;
 
     //Images:
     //Background map
@@ -127,9 +133,11 @@ public class MainGameFXScene {
         humanGc = humanLayer.getGraphicsContext2D();
         root.getChildren().add(humanLayer);
 
-        ghostLayer = new Canvas(screenWidth, screenHeight);
-        ghostGc = ghostLayer.getGraphicsContext2D();
-        root.getChildren().add(ghostLayer);
+        for (int i = 0; i < ghostLayers.length; i++) {
+            ghostLayers[i] = new Canvas(screenWidth, screenHeight);
+            ghostGcs[i] = ghostLayers[i].getGraphicsContext2D();
+            root.getChildren().add(ghostLayers[i]);
+        }
 
         textLayer = new Canvas(screenWidth, screenHeight);
         textGc = textLayer.getGraphicsContext2D();
@@ -167,8 +175,11 @@ public class MainGameFXScene {
                 if (!gf.gameInfo.isGameEnd() && !gf.gameInfo.isRoundEnd()) { //TODO
                     keyDoorGc.clearRect(0, 0, screenWidth, screenHeight);
                     humanGc.clearRect(0, 0, screenWidth, screenHeight);
-                    ghostGc.clearRect(0, 0, screenWidth, screenHeight);
                     
+                    for (int i = 0; i<ghostLayers.length;i++){
+                        ghostGcs[i].clearRect(0, 0, screenWidth, screenHeight);
+                    }
+
                     humanPersGc.clearRect(0, 0, screenWidth, screenHeight);
                     textGc.clearRect(0, 0, screenWidth, screenHeight);
                     drawImages();
@@ -198,7 +209,7 @@ public class MainGameFXScene {
      * Draws the texts out of Game info
      */
     private void drawTexts() {
-        textGc.setFont(Font.font("Times New Roman",FontWeight.BOLD , 20.0));
+        textGc.setFont(Font.font("Times New Roman", FontWeight.BOLD, 20.0));
         textGc.setFill(Color.BLUE);
         textGc.fillText(("Ghost lives left: " + gf.gameInfo.getGhostLives()).toUpperCase(), 10, 20);
         textGc.fillText(("Current floor: " + gf.gameInfo.getCurrentFloor()).toUpperCase(), 10, 42);
@@ -399,6 +410,9 @@ public class MainGameFXScene {
      */
     private void drawImages() {
         for (Entity e : gf.gameInfo.getEntities()) {
+            if(ghostChooser >= 6){
+                ghostChooser = 0;
+            }
             switch (e.getType()) {
                 case Door:
                     if (gf.gameInfo.amIHuman()) {
@@ -420,9 +434,9 @@ public class MainGameFXScene {
                 case Ghost:
 
                     if (e.getWall()) {
-                        drawRotatedImage(ghostGc, wallImage, 0, (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, horScale, verScale);
+                        drawRotatedImage(ghostGcs[ghostChooser], wallImage, 0, (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, horScale, verScale);
                     } else {
-                        drawRotatedImage(ghostGc, getAnimatedGhostImage(e), getAngle(e.getDirection()), (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, horScale, verScale);
+                        drawRotatedImage(ghostGcs[ghostChooser], getAnimatedGhostImage(e), getAngle(e.getDirection()), (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, horScale, verScale);
                     }
                     break;
                 default:
