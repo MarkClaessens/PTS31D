@@ -116,7 +116,6 @@ public class gamefeed {
                     }
                 }
             }
-            this.fillGameInfo(o);
         }
 
     }
