@@ -76,7 +76,6 @@ public class gamefeed {
 
     public void decompressFeed() throws IOException, ClassNotFoundException {
         Object[][] o = soc.getObject();
-        System.out.println("getobject");
         if ("Server".equals((String) o[0][0])) {
             //set gameinfo
 
