@@ -236,6 +236,13 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
                gamelobby.startGame();
                Thread.sleep(3000);
         }
+        else
+                {
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setHeaderText("NIET IEDEREEN READY");
+                    alert.setContentText("niet alle spelers hebben op ready gedrukt!");
+                    alert.showAndWait();
+                }
     }
 
     /**
