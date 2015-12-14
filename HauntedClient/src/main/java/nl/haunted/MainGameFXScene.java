@@ -155,7 +155,7 @@ public class MainGameFXScene {
         
         timer.scheduleAtFixedRate(task, 0, 16);
 
-        new AnimationTimer() {
+        AnimationTimer at = new AnimationTimer() {
             @Override
             public void handle(long currentNanoTime) {
                 if (!gf.gameInfo.isGameEnd() && !gf.gameInfo.isRoundEnd()) { //TODO
@@ -179,8 +179,9 @@ public class MainGameFXScene {
                 }
 
             }
-        }.start();
-//        ImageView iv = new ImageView(image);
+        };
+                at.start();
+                //ImageView(image);
 //        
 //        Rotate rotation = new Rotate(90, image.getWidth()/2, image.getHeight()/2);
 //        iv.getTransforms().add(rotation);
