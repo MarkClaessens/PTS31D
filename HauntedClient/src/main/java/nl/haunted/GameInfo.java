@@ -96,7 +96,11 @@ public class GameInfo {
     }
 
     public void setNextRound(boolean bool) {
-        this.gameEnd = !bool;
+        if(this.roundEnd == true && bool == false){
+            this.gameEnd = true;
+        } else {
+            this.gameEnd = false;
+        }
     }
 
     public void setRoundEnd(boolean bool) {
