@@ -270,8 +270,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
             chat.sendMessage(message);
             TFmessage.clear();
 
-        } else {
-            TAchatBox.setText(currentText);
+        } else {            
             TAchatBox.setScrollTop(Double.MAX_VALUE);
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setContentText("geen message ingevoerd");
