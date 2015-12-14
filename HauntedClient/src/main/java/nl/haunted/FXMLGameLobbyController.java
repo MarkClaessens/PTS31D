@@ -385,7 +385,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     }
 
     public void getmessages() {
-        TAchatBox.appendText(chat.getMessages().get(chat.getMessages().size()).toString());
+        TAchatBox.appendText(chat.getMessages().get(chat.getMessages().size() - 1).toString());
         TAchatBox.appendText("\n");
     }
 

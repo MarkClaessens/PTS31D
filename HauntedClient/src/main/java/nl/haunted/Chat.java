@@ -43,7 +43,7 @@ public class Chat extends Observable {
 
     public void addMessage(List<Message> m) {
             this.messages.addAll(m);
-            this.hasChanged();
+            this.setChanged();
         this.notifyObservers();
     }
 
