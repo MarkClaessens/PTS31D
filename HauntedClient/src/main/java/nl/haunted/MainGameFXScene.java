@@ -412,7 +412,7 @@ public class MainGameFXScene {
                 case Human:
                     if (gf.gameInfo.amIHuman()) {
 
-                        drawRotatedImage(humanPersGc, humanPerspectiveImage, getAngle(e.getDirection()), (e.getPosition().getX() - 1900) * horScale, (e.getPosition().getY() - 1900) * verScale, horScale, verScale);
+                        drawRotatedImage(humanPersGc, humanPerspectiveImage, getAngle(e.getDirection()), (e.getPosition().getX() - 1900) * horScale, (e.getPosition().getY() - 1900) * verScale, 1, 1);
                     }
                     drawRotatedImage(humanGc, getAnimatedHumanImage(e), getAngle(e.getDirection()), (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, horScale, verScale);
                     break;
