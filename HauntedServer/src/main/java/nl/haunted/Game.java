@@ -312,7 +312,8 @@ public class Game implements Serializable {
         Collections.shuffle(this.players);
 
         for (int i = 0; i < this.players.size() - 1; i++) {
-            Ghost ghost = new Ghost(pickGhostSpawnPoint(true), this.players.get(i));
+            Ghost ghost = new Ghost(this.players.get(i));
+            ghost.setPosition(this.pickGhostSpawnPoint(true));
             this.players.get(i).setCharacter(ghost);
             this.ghosts.add(ghost);
         }
