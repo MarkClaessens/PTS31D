@@ -64,7 +64,8 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     ClientController controller;
     Socket msgSoc;
     private Chat chat;
-
+    observermessages om;
+    
     private List<IPlayer> players;
     private transient ObservableList<String> observablePersonen;
     @FXML
@@ -148,6 +149,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
             playernames();
             gamesettings();
             setController();
+            om = new observermessages(this);
             controller.setGroupID(gamelobby.getGroupID());
             controller.setInputController(gamelobby);
             chat = new Chat(controller.getInputController());           
