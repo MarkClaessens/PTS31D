@@ -63,7 +63,7 @@ public class MainGameFXScene {
     //ghost gcs
     private Canvas[] ghostLayers = new Canvas[6];
     private GraphicsContext[] ghostGcs = new GraphicsContext[6];
-    
+
     private int ghostChooser = 0;
 
     //Images:
@@ -175,8 +175,8 @@ public class MainGameFXScene {
                 if (!gf.gameInfo.isGameEnd() && !gf.gameInfo.isRoundEnd()) { //TODO
                     keyDoorGc.clearRect(0, 0, screenWidth, screenHeight);
                     humanGc.clearRect(0, 0, screenWidth, screenHeight);
-                    
-                    for (int i = 0; i<ghostLayers.length;i++){
+
+                    for (int i = 0; i < ghostLayers.length; i++) {
                         ghostGcs[i].clearRect(0, 0, screenWidth, screenHeight);
                     }
 
@@ -410,7 +410,7 @@ public class MainGameFXScene {
      */
     private void drawImages() {
         for (Entity e : gf.gameInfo.getEntities()) {
-            if(ghostChooser >= 6){
+            if (ghostChooser >= 6) {
                 ghostChooser = 0;
             }
             switch (e.getType()) {
@@ -494,9 +494,13 @@ public class MainGameFXScene {
     private void drawRotatedImage(GraphicsContext gc, Image image, double angle, double tlpx, double tlpy, double scaleX, double scaleY) {
         gc.save(); // saves the current state on stack, including the current transform
         //rotate(gc, angle, ((tlpx + image.getWidth()) * scaleX) / 2, ((tlpy + image.getHeight()) * scaleY) / 2);
-        rotate(gc, angle, (tlpx + image.getWidth()), tlpy + image.getHeight());
+        rotate(gc, angle, tlpx + (image.getWidth()/2), tlpy + (image.getHeight()/2));
         //rotate(gc, angle, tlpx, (tlpy + image.getHeight()/2));
-        gc.drawImage(image, tlpx, tlpy, image.getWidth() * scaleX, image.getHeight() * scaleY);
+        if (angle == 90 || angle == 270) {
+            gc.drawImage(image, tlpx, tlpy, image.getWidth() * scaleY, image.getHeight() * scaleX);
+        } else {
+            gc.drawImage(image, tlpx, tlpy, image.getWidth() * scaleX, image.getHeight() * scaleY);
+        }
         gc.restore(); // back to original state (before rotation)
     }
 
