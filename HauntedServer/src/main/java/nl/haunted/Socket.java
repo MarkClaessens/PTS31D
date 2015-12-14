@@ -45,7 +45,11 @@ public class Socket implements Serializable {
 
     public void socketSetup(String groupname, int port) throws IOException {
         sock = new MulticastSocket(port);
-        sock.setLoopbackMode(false);
+        if (port == 9877) {
+            sock.setLoopbackMode(false);
+        } else {
+            sock.setLoopbackMode(true);
+        }
         groupIp = InetAddress.getByName(groupname);
         Scanner input = new Scanner(System.in);
         nic = this.getLocalNIC();//this.getInternetNIC(); //commented for futuure over internet support
@@ -64,8 +68,8 @@ public class Socket implements Serializable {
     public NetworkInterface getNIC() {
         return nic;
     }
-    
-    public String getIPAddress(){
+
+    public String getIPAddress() {
         return this.IP;
     }
 

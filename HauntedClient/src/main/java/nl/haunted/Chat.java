@@ -34,6 +34,7 @@ public class Chat extends Observable {
     public Chat(InputController ic) throws IOException {
         this.messages = new ArrayList();
         IC = ic;
+        this.startMessageClient();
     }
 
     public List<Message> getMessages() {
