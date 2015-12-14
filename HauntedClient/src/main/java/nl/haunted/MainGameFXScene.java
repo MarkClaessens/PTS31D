@@ -93,7 +93,7 @@ public class MainGameFXScene {
      * @param gf
      * @return the scene to view in the mainActivity stage
      */
-    public Scene mainGameFX(gamefeed gf, Chat chat, IPlayer p) throws IOException, ClassNotFoundException {
+    public Scene mainGameFX(gamefeed gf, Chat chat, IPlayer p) throws IOException, ClassNotFoundException, InterruptedException {
         this.gf = gf;
         this.chat = chat;
         this.p = p;
