@@ -235,4 +235,9 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
     {
         return ingame;
     }
+    
+    public IPlayer getHost() throws RemoteException
+    {
+        return host;
+    }
 }
