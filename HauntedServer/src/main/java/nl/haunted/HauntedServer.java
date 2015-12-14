@@ -53,13 +53,13 @@ public class HauntedServer {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        System.setProperty("java.rmi.server.hostname", "10.1.3.2");
         try {
             // Create server
             RMISocketFactory.setSocketFactory(new MyServerRMISocketFactory());
         } catch (IOException ex) {
-            ex.printStackTrace();
         }
-        System.setProperty("java.rmi.server.hostname", "10.1.3.2");
+        
         HauntedServer server = new HauntedServer();
     }
 }

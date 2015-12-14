@@ -109,6 +109,8 @@ public class gamefeed {
                             e.setDirection((DirectionType) o[i][1]);
                             e.setMoving((boolean) o[i][2]);
                             e.setColor((Color) o[i][3]);
+                            boolean wall = (boolean) o[i][4];
+                            if(!(e.getWall() == wall)){System.out.println("wallchange");}
                             e.setWall((boolean) o[i][4]);
                         }
                         e.setDead((boolean) o[i][5]);
