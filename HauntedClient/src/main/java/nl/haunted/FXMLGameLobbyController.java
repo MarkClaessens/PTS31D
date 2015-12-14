@@ -1,4 +1,4 @@
-/*
+;/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -286,7 +286,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
                     Stage stage = HauntedClient.getStage();
                     Scene scene = MGS.mainGameFX(gameFeed, chat, tisplayer);
                     
-                            HauntedClient.getStage().setScene(scene);
+                             HauntedClient.getStage().setScene(scene);
                             HauntedClient.getStage().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
                             //HauntedClient.getStage().setFullScreen(true);
                             HauntedClient.getStage().show(); 
