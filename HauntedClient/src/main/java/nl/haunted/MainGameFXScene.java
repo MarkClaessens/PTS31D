@@ -23,6 +23,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.scene.transform.Rotate;
@@ -196,13 +197,13 @@ public class MainGameFXScene {
      * Draws the texts out of Game info
      */
     private void drawTexts() {
-        textGc.setFont(new Font("Times New Roman", 20.0));
-        textGc.setFill(Color.MAGENTA);
+        textGc.setFont(Font.font("Times New Roman",FontWeight.BOLD , 20.0));
+        textGc.setFill(Color.BLUE);
         textGc.fillText(("Ghost lives left: " + gf.gameInfo.getGhostLives()).toUpperCase(), 10, 20);
         textGc.fillText(("Current floor: " + gf.gameInfo.getCurrentFloor()).toUpperCase(), 10, 42);
         //       textGc.strokeText("Current human: " + gf.gameInfo.getCurrentHuman(), 10, 46);
         if (!gf.gameInfo.getKey()) {
-            textGc.fillText(("Key has been picked up by human").toUpperCase(), 10, 84);
+            textGc.fillText(("Key has been picked up by human").toUpperCase(), 10, 64);
         } else {
             textGc.fillText(("Key hasn't been picked up by the human yet").toUpperCase(), 10, 84);
         }
