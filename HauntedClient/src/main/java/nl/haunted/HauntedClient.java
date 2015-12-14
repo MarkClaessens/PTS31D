@@ -8,7 +8,6 @@ package nl.haunted;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -16,7 +15,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -47,7 +45,7 @@ public class HauntedClient extends Application {
          * *********ABOVE THIS IS ENTERING SERVER IP + INIT THE
          * CONTROLLER****************
          */
-        this.primaryStage = primaryStage;
+        HauntedClient.primaryStage = primaryStage;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLHaunted.fxml"));
         Node root = fxmlLoader.load();
         Scene scene = new Scene((Parent) root);
