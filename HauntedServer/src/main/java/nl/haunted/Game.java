@@ -403,7 +403,7 @@ public class Game implements Serializable {
         boolean[] filledPlayer = new boolean[this.players.size()];
         boolean filled = false;
         List<String[]> input = this.srvSoc.getInputArray();
-        if (input != null) {
+        if (input.size() > 0) {
             for (IPlayer p : this.players) {
                 for (String[] s : input) {
                     if (p.getIpAdress().equals(s[0])) {
