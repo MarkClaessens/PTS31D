@@ -168,20 +168,22 @@ public class Socket implements Serializable {
         if (packet.getLength() < 1000) {
             String str = new String(packet.getData(), 0, packet.getLength());
             boolean found = false;
-            for (String[] s : inputArray) {
-                if (s[0].equalsIgnoreCase(str.substring(0, str.indexOf(":")))) {
-                    if (!s[1].equalsIgnoreCase(str.substring(str.indexOf(":") + 1))) {
-                        s[1] = str.substring(str.indexOf(":") + 1);
+            if (str.indexOf("  ") == -1) {
+                for (String[] s : inputArray) {
+                    if (s[0].equalsIgnoreCase(str.substring(0, str.indexOf(":")))) {
+                        if (!s[1].equalsIgnoreCase(str.substring(str.indexOf(":") + 1))) {
+                            s[1] = str.substring(str.indexOf(":") + 1);
 
+                        }
+                        found = true;
                     }
-                    found = true;
                 }
-            }
-            if (!found) {
-                String[] newstr = new String[2];
-                newstr[0] = str.substring(0, str.indexOf(":"));
-                newstr[1] = str.substring(str.indexOf(":") + 1);
-                this.inputArray.add(newstr);
+                if (!found) {
+                    String[] newstr = new String[2];
+                    newstr[0] = str.substring(0, str.indexOf(":"));
+                    newstr[1] = str.substring(str.indexOf(":") + 1);
+                    this.inputArray.add(newstr);
+                }
             }
         }
     }
