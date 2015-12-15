@@ -417,7 +417,7 @@ public class Game implements Serializable {
                                 dir[index] = DirectionType.LEFT;
                             case "RIGHT":
                                 dir[index] = DirectionType.RIGHT;
-                            case "":
+                            case "null":
                                 dir[index] = null;
                         }
                     }
