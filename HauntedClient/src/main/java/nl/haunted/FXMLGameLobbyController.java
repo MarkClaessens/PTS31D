@@ -195,6 +195,12 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
             if(!gamelobby.getHost().equals(tisplayer))
             {
                 IVstart.setVisible(false);
+                TFnewplayers.setVisible(false);
+                TFnewfloors.setVisible(false);
+                TFnewname.setVisible(false);
+                BTNsetname.setVisible(false);
+                BTNsetfloors.setVisible(false);
+                BTNsetplayers.setVisible(false); 
             }
         } catch (RemoteException ex) {
             Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
