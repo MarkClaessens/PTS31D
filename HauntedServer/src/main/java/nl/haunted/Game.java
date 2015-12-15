@@ -27,7 +27,7 @@ public class Game implements Serializable {
 
     private final int floorAmount; // starts at 1
     private int currentFloor = -1; // starts at 0 so the init has to be -1.
-    private Timer tickTimer;
+    private Timer tickTimer, inputTimer;
     private boolean roundEnded, nextRound;
     private Level level;
     private List<Ghost> ghosts;
@@ -60,8 +60,8 @@ public class Game implements Serializable {
     public int getCurrentFloor() {
         return currentFloor;
     }
-    
-    public void setCurrentHuman(IPlayer p){
+
+    public void setCurrentHuman(IPlayer p) {
         this.currentHuman = p;
     }
 
@@ -122,6 +122,20 @@ public class Game implements Serializable {
             }
         };
         this.tickTimer.scheduleAtFixedRate(task, 0, 16);
+
+        this.inputTimer = new Timer();
+        TimerTask task2 = new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    srvSoc.receiveInput();
+
+                } catch (IOException | ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+        this.inputTimer.scheduleAtFixedRate(task2, 0, 5);
     }
 
     /**
@@ -221,8 +235,8 @@ public class Game implements Serializable {
                                         g.setStationaryTime();
                                     }
                                 }
-                                if(g.getStationaryTime() == null){
-                                g.setStationaryTime();
+                                if (g.getStationaryTime() == null) {
+                                    g.setStationaryTime();
                                 }
                             }
                             this.players.get(i).getCharacter().setMoving(false);
@@ -276,10 +290,10 @@ public class Game implements Serializable {
         obj[2][1] = new Point2D.Double(this.human.getFlashlightPolygon()[2], this.human.getFlashlightPolygon()[3]);
         obj[2][2] = new Point2D.Double(this.human.getFlashlightPolygon()[4], this.human.getFlashlightPolygon()[5]);
         obj[3][0] = this.level.getKeyLocation();
-        obj[4][0] = new Point2D.Double(100,100); // lelijke fixed position
-        obj[4][1] = DirectionType.RIGHT;
-        //obj[4][0] = this.human.getPosition();
-        //obj[4][1] = this.human.getDirection();
+        //obj[4][0] = new Point2D.Double(100,100); // lelijke fixed position
+        //obj[4][1] = DirectionType.RIGHT;
+        obj[4][0] = this.human.getPosition();
+        obj[4][1] = this.human.getDirection();
         obj[4][2] = this.human.getMoving();
         obj[4][3] = this.currentHuman.getColor();
         obj[5][0] = this.level.getDoorLocation();
@@ -325,8 +339,8 @@ public class Game implements Serializable {
         this.human = new Human();
         this.human.setPosition(pickHumanSpawnpoint());
         this.players.get(this.players.size() - 1).setCharacter(this.human);
-        this.currentHuman = this.players.get(this.players.size() -1);
-                
+        this.currentHuman = this.players.get(this.players.size() - 1);
+
     }
 
     /**
@@ -339,7 +353,7 @@ public class Game implements Serializable {
         // Pick random x and y positions in the middle of the map.
         Random randomizer = new Random();
         int x = ((randomizer.nextInt(800 - 600) + 600) + 50) / 100 * 100; // minimum is 600 and maximum is 800
-        int y = ((randomizer.nextInt(600 - 300) + 300) + 50) / 100 *100; // minimum is 300 and maximum is 600
+        int y = ((randomizer.nextInt(600 - 300) + 300) + 50) / 100 * 100; // minimum is 300 and maximum is 600
         // Create a Point2D object with the random picked x and y values.
         Point2D humanSpawnpoint = new Point2D.Double(x, y);
 
@@ -363,11 +377,11 @@ public class Game implements Serializable {
     public Point2D pickGhostSpawnPoint(boolean startOfGame) {
         List<Point2D> spawnPoints = new ArrayList<>();
         spawnPoints.add(new Point2D.Double(0, 0));
-        spawnPoints.add(new Point2D.Double(0, 1000));
-        spawnPoints.add(new Point2D.Double(1500, 1500));
-        spawnPoints.add(new Point2D.Double(1500, 1000));
+        spawnPoints.add(new Point2D.Double(0, 900));
+        spawnPoints.add(new Point2D.Double(1400, 0));
+        spawnPoints.add(new Point2D.Double(1400, 900));
         spawnPoints.add(new Point2D.Double(0, 500));
-        spawnPoints.add(new Point2D.Double(1500, 500));
+        spawnPoints.add(new Point2D.Double(1400, 500));
 
         Random randomizer = new Random();
         int randomInt = randomizer.nextInt(6);
@@ -388,38 +402,27 @@ public class Game implements Serializable {
         DirectionType[] dir = new DirectionType[this.players.size()];
         boolean[] filledPlayer = new boolean[this.players.size()];
         boolean filled = false;
-        int i = 0;
-        while (!filled) {
-            if (i < 10) {
-                String[] input = this.srvSoc.receiveInput();
-                if (input != null) {
-                    for (IPlayer p : this.players) {
-                        if (p.getIpAdress().equals((String) input[0])) {
-                            int index = this.players.indexOf(p);
-                            switch (input[1]) {
-                                case "UP":
-                                    dir[index] = DirectionType.UP;
-                                case "DOWN":
-                                    dir[index] = DirectionType.DOWN;
-                                case "LEFT":
-                                    dir[index] = DirectionType.LEFT;
-                                case "RIGHT":
-                                    dir[index] = DirectionType.RIGHT;
-                                case "":
-                                    dir[index] = null;
-                            }
-                            filledPlayer[index] = true;
-                        }
-                    }
-                    filled = true;
-                    for (boolean b : filledPlayer) {
-                        if (!b) {
-                            filled = false;
+        List<String[]> input = this.srvSoc.getInputArray();
+        if (input != null) {
+            for (IPlayer p : this.players) {
+                for (String[] s : input) {
+                    if (p.getIpAdress().equals(s[0])) {
+                        int index = this.players.indexOf(p);
+                        switch (s[1]) {
+                            case "UP":
+                                dir[index] = DirectionType.UP;
+                            case "DOWN":
+                                dir[index] = DirectionType.DOWN;
+                            case "LEFT":
+                                dir[index] = DirectionType.LEFT;
+                            case "RIGHT":
+                                dir[index] = DirectionType.RIGHT;
+                            case "":
+                                dir[index] = null;
                         }
                     }
                 }
-                i++;
-            } else { filled = true;}
+            }
         }
         return dir;
     }

@@ -34,6 +34,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -337,8 +339,8 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
                     Scene scene = MGS.mainGameFX(gameFeed, chat, tisplayer);
                     
                              HauntedClient.getStage().setScene(scene);
-                            HauntedClient.getStage().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-                            //HauntedClient.getStage().setFullScreen(true);
+                            HauntedClient.getStage().setFullScreenExitKeyCombination(new KeyCodeCombination(KeyCode.ESCAPE, KeyCombination.ALT_DOWN));
+                            HauntedClient.getStage().setFullScreen(true);
                             HauntedClient.getStage().show(); 
                         }
                 catch (     IOException | ClassNotFoundException | InterruptedException ex) {
