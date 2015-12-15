@@ -37,7 +37,12 @@
             </image>
         </ImageView>
         <ListView fx:id="LVgamelobbys" layoutX="6.0" layoutY="275.0" prefHeight="287.0" prefWidth="361.0" />
-        <Button layoutX="400.0" layoutY="406.0" mnemonicParsing="false" onMouseClicked="#addPlayerGL" text="join game" />
-      <TextField fx:id="TFwachtwoord" layoutX="387.0" layoutY="368.0" promptText="password(optional)" />
+        <ImageView fx:id="IVJoingamelobby" fitHeight="56.0" fitWidth="134.0" layoutX="400.0" layoutY="406.0" onMouseClicked="#addPlayerGL" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@btnJoinGamelobby.png"/>
+            </image>
+        </ImageView>
+        <!--<Button layoutX="400.0" layoutY="406.0" mnemonicParsing="false" onMouseClicked="#addPlayerGL" text="join game" />-->
+        <TextField fx:id="TFwachtwoord" layoutX="387.0" layoutY="368.0" promptText="password(optional)" />
     </children>
 </AnchorPane>
