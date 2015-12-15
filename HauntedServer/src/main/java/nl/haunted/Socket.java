@@ -177,6 +177,7 @@ public class Socket implements Serializable {
                 String[] newstr = new String[2];
                 newstr[0] = str.substring(0 ,str.indexOf(":"));
                 newstr[0] = str.substring(str.indexOf(":")+1);
+                this.inputArray.add(newstr);
             }          
         }
     }
