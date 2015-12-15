@@ -186,6 +186,12 @@ public class MainGameFXScene {
                     textGc.clearRect(0, 0, screenWidth, screenHeight);
                     drawImages();
                     drawTexts();
+                    try {
+                        HauntedClient.getController().getInputController().sendInput();
+                    } catch (IOException ex) {
+                        Logger.getLogger(MainGameFXScene.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                
                 } else if (gf.gameInfo.isGameEnd()) { //TODO
                     this.stop();
                     timer.cancel();
