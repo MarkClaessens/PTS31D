@@ -80,7 +80,7 @@ public class gamefeed {
         if ("Server".equals((String) o[0][0])) {
             //set gameinfo
 
-            gameInfo.setBackgroundImage((int) o[0][2]);
+            //gameInfo.setBackgroundImage((int) o[0][2]);
             gameInfo.setGhostLives((int) o[1][0]);
             gameInfo.setCurrentFloor((int) o[1][1]);
             gameInfo.setamIHuman(this.soc.getIPAddress().equalsIgnoreCase(((IPlayer) o[1][2]).getIpAdress()));

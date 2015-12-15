@@ -100,7 +100,7 @@ public class Ghost extends Character implements Serializable {
         this.vulnerable = true;
         this.isGhost = true;
         this.stationaryTime.clear();
-        this.timeOfDeath.clear();
+        this.timeOfDeath = null;
         this.moving = false;
     }
     

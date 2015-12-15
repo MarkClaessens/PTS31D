@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class Human extends Character implements Serializable {
 
-    private int flashlightRange, flashlightAngle;
+    private int flashlightRange = 100, flashlightAngle = 15;
     private boolean hasKey;
     private double[][] flashlightPoints;
 

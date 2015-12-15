@@ -42,6 +42,7 @@ public class Socket implements Serializable {
     int port;
     List<String> messages = new ArrayList();
     String IP = "";
+   List<String[]> inputArray = new ArrayList();
 
     public void socketSetup(String groupname, int port) throws IOException {
         sock = new MulticastSocket(port);
@@ -97,7 +98,9 @@ public class Socket implements Serializable {
     }
 
     public void sendInput(String s, int port) throws IOException {
-        byte[] buf = s.getBytes();
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.IP).append(":").append(s);
+        byte[] buf = sb.toString().getBytes();
         DatagramPacket packet = new DatagramPacket(
                 buf, buf.length, groupIp, port);
         sock.send(packet);
@@ -152,7 +155,7 @@ public class Socket implements Serializable {
         }
     }
 
-    public String[] receiveInput() throws IOException, ClassNotFoundException {
+    public void receiveInput() throws IOException, ClassNotFoundException {
         byte[] recvBuf = new byte[1000];
         DatagramPacket packet = new DatagramPacket(recvBuf,
                 recvBuf.length);
@@ -160,14 +163,27 @@ public class Socket implements Serializable {
         try {
             sock.receive(packet);
         } catch (SocketTimeoutException ex) {
-            return null;
         }
-        String[] s = new String[2];
-        s[0] = packet.getAddress().toString();
-        s[1] = new String(packet.getData(), 0, packet.getLength());
-        return s;
+        if (packet.getLength() < 1000) {
+            String str = new String(packet.getData(), 0, packet.getLength());
+            boolean found = false;
+            for(String[] s : inputArray){
+                if(s[0].equalsIgnoreCase(str.substring(0,str.indexOf(":")))){
+                    s[1] = str.substring(str.indexOf(":"+1));
+                    found = true;
+                }
+            }
+            if (!found){
+                String[] newstr = new String[2];
+                newstr[0] = str.substring(0 ,str.indexOf(":"));
+                newstr[0] = str.substring(str.indexOf(":")+1);
+            }          
+        }
     }
 
+    public List<String[]> getInputArray(){
+        return this.inputArray;
+    }
     public void close() throws IOException {
         sock.leaveGroup(groupIp);
         sock.close();

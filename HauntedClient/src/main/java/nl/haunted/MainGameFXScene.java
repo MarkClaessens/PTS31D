@@ -61,7 +61,7 @@ public class MainGameFXScene {
     private GraphicsContext keyDoorGc, humanGc, textGc, humanPersGc;
 
     //ghost gcs
-    private Canvas[] ghostLayers = new Canvas[6];
+    private Canvas ghostlayer = new Canvas();
     private GraphicsContext[] ghostGcs = new GraphicsContext[6];
 
     private int ghostChooser = 0;
@@ -132,12 +132,13 @@ public class MainGameFXScene {
         humanLayer = new Canvas(screenWidth, screenHeight);
         humanGc = humanLayer.getGraphicsContext2D();
         root.getChildren().add(humanLayer);
-
-        for (int i = 0; i < ghostLayers.length; i++) {
-            ghostLayers[i] = new Canvas(screenWidth, screenHeight);
-            ghostGcs[i] = ghostLayers[i].getGraphicsContext2D();
-            root.getChildren().add(ghostLayers[i]);
+        
+        ghostlayer = new Canvas(screenWidth, screenHeight);
+        for (int i = 0; i < ghostGcs.length; i++) {           
+            ghostGcs[i] = ghostlayer.getGraphicsContext2D();
+            
         }
+        root.getChildren().add(ghostlayer);
 
         textLayer = new Canvas(screenWidth, screenHeight);
         textGc = textLayer.getGraphicsContext2D();
@@ -173,10 +174,11 @@ public class MainGameFXScene {
             @Override
             public void handle(long currentNanoTime) {
                 if (!gf.gameInfo.isGameEnd() && !gf.gameInfo.isRoundEnd()) { //TODO
+                    
                     keyDoorGc.clearRect(0, 0, screenWidth, screenHeight);
                     humanGc.clearRect(0, 0, screenWidth, screenHeight);
 
-                    for (int i = 0; i < ghostLayers.length; i++) {
+                    for (int i = 0; i < ghostGcs.length; i++) {
                         ghostGcs[i].clearRect(0, 0, screenWidth, screenHeight);
                     }
 
@@ -451,7 +453,7 @@ public class MainGameFXScene {
      */
     private void drawImages() {
         for (Entity e : gf.gameInfo.getEntities()) {
-            if (ghostChooser >= 6) {
+            if (ghostChooser >= gf.gameInfo.getEntities().size()-3) {
                 ghostChooser = 0;
             }
             switch (e.getType()) {
@@ -486,16 +488,16 @@ public class MainGameFXScene {
                         }
                         //drawRotatedImage(humanPersGc, humanPerspectiveImage, getAngle(e.getDirection()), (e.getPosition().getX() - 1900), (e.getPosition().getY() - 1900), horScale, verScale);
                     }
-                    humanGc.drawImage(getAnimatedHumanImage(e), (e.getPosition().getX() - 100) * horScale, (e.getPosition().getY() - 100) * verScale, getAnimatedHumanImage(e).getWidth() * horScale, getAnimatedHumanImage(e).getHeight() * verScale);
+                    humanGc.drawImage(getAnimatedHumanImage(e), (e.getPosition().getX()+100) * horScale, (e.getPosition().getY()+100) * verScale, getAnimatedHumanImage(e).getWidth() * horScale, getAnimatedHumanImage(e).getHeight() * verScale);
                     //drawRotatedImage(humanGc, getAnimatedHumanImage(e), getAngle(e.getDirection()), (e.getPosition().getX() + 100), (e.getPosition().getY() + 100), horScale, verScale);
                     break;
                 case Ghost:
 
                     if (e.getWall()) {
-                        ghostGcs[ghostChooser].drawImage(wallImage, (e.getPosition().getX() + 100), (e.getPosition().getY() + 100), wallImage.getWidth() * horScale, wallImage.getHeight() * verScale);
+                        ghostGcs[ghostChooser].drawImage(wallImage, (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, wallImage.getWidth() * horScale, wallImage.getHeight() * verScale);
                         //drawRotatedImage(ghostGcs[ghostChooser], wallImage, 0, (e.getPosition().getX() + 100), (e.getPosition().getY() + 100), horScale, verScale);
                     } else {
-                        ghostGcs[ghostChooser].drawImage(getAnimatedGhostImage(e), (e.getPosition().getX() - 100) * horScale, (e.getPosition().getY() - 100) * verScale, getAnimatedGhostImage(e).getWidth() * horScale, getAnimatedGhostImage(e).getHeight() * verScale);
+                        ghostGcs[ghostChooser].drawImage(getAnimatedGhostImage(e), (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, getAnimatedGhostImage(e).getWidth() * horScale, getAnimatedGhostImage(e).getHeight() * verScale);
                     }
                     ghostChooser++;
                     break;
