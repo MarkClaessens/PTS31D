@@ -77,7 +77,11 @@ public class InputController {
     }
 
     public void sendInput() throws IOException {
-        this.srvSocket.sendInput(this.direction.toString(), 9876);
+        if(this.direction != null){
+            this.srvSocket.sendInput(this.direction.toString(), 9876);
+        }else {
+            this.srvSocket.sendInput("null", 9876);
+        }    
     }
 
     public void setSrvSocket(Socket s) {
