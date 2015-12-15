@@ -400,9 +400,10 @@ public class Game implements Serializable {
 
     private DirectionType[] getPlayerInput() throws IOException, ClassNotFoundException {
         DirectionType[] dir = new DirectionType[this.players.size()];
-        boolean[] filledPlayer = new boolean[this.players.size()];
-        boolean filled = false;
-        List<String[]> input = this.srvSoc.getInputArray();
+        List<String[]> inputSrc = new ArrayList();
+        inputSrc = this.srvSoc.getInputArray();
+        List<String[]> input = new ArrayList(inputSrc.size());
+        input.addAll(inputSrc);
         if (input.size() > 0) {
             for (IPlayer p : this.players) {
                 for (String[] s : input) {

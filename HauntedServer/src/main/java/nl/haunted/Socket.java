@@ -42,7 +42,7 @@ public class Socket implements Serializable {
     int port;
     List<String> messages = new ArrayList();
     String IP = "";
-   List<String[]> inputArray = new ArrayList();
+    List<String[]> inputArray = new ArrayList();
 
     public void socketSetup(String groupname, int port) throws IOException {
         sock = new MulticastSocket(port);
@@ -54,6 +54,7 @@ public class Socket implements Serializable {
         groupIp = InetAddress.getByName(groupname);
         Scanner input = new Scanner(System.in);
         nic = this.getLocalNIC(); /* this.getLoopbackNick(); this.getInternetNIC(); //commented for futuure over internet support */
+
         if (nic == null) {
             listNics();
             System.out.println("What Network interface do you want to connect with?");
@@ -167,24 +168,28 @@ public class Socket implements Serializable {
         if (packet.getLength() < 1000) {
             String str = new String(packet.getData(), 0, packet.getLength());
             boolean found = false;
-            for(String[] s : inputArray){
-                if(s[0].equalsIgnoreCase(str.substring(0,str.indexOf(":")))){
-                    s[1] = str.substring(str.indexOf(":"+1));
+            for (String[] s : inputArray) {
+                if (s[0].equalsIgnoreCase(str.substring(0, str.indexOf(":")))) {
+                    if (!s[1].equalsIgnoreCase(str.substring(str.indexOf(":") + 1))) {
+                        s[1] = str.substring(str.indexOf(":") + 1);
+
+                    }
                     found = true;
                 }
             }
-            if (!found){
+            if (!found) {
                 String[] newstr = new String[2];
-                newstr[0] = str.substring(0 ,str.indexOf(":"));
-                newstr[0] = str.substring(str.indexOf(":")+1);
+                newstr[0] = str.substring(0, str.indexOf(":"));
+                newstr[1] = str.substring(str.indexOf(":") + 1);
                 this.inputArray.add(newstr);
-            }          
+            }
         }
     }
 
-    public List<String[]> getInputArray(){
-        return this.inputArray;
+    public List<String[]> getInputArray() {
+        return Collections.unmodifiableList(this.inputArray);
     }
+
     public void close() throws IOException {
         sock.leaveGroup(groupIp);
         sock.close();
