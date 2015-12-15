@@ -90,4 +90,12 @@ public interface IGameLobby extends Remote, RemotePublisher {
     public IPlayer getHost() throws RemoteException;
     
     public String getww() throws RemoteException;
+    
+    public void setHost(IPlayer player) throws RemoteException;
+    
+    public void setName(String naam) throws RemoteException;    
+    
+    public void setMaxFloors(int maxfloors) throws RemoteException;    
+    
+    public void setMaxPlayers(int maxplayers) throws RemoteException;
 }

@@ -48,11 +48,11 @@ public class Socket implements Serializable {
         if (port == 9877) {
             sock.setLoopbackMode(false);
         } else {
-            sock.setLoopbackMode(true);
+            sock.setLoopbackMode(false); // turn to true for dedicated server
         }
         groupIp = InetAddress.getByName(groupname);
         Scanner input = new Scanner(System.in);
-        nic = this.getLocalNIC();//this.getInternetNIC(); //commented for futuure over internet support
+        nic = this.getLoopbackNick(); //this.getLocalNIC();//this.getInternetNIC(); //commented for futuure over internet support
         if (nic == null) {
             listNics();
             System.out.println("What Network interface do you want to connect with?");
@@ -89,11 +89,11 @@ public class Socket implements Serializable {
     }
 
     public void sendMessage(String m) throws IOException {
-       byte[] buf = m.getBytes();
+        byte[] buf = m.getBytes();
         DatagramPacket packet = new DatagramPacket(
                 buf, buf.length, groupIp, 9877);
         sock.send(packet);
-        
+
     }
 
     public void sendInput(String s, int port) throws IOException {
@@ -138,7 +138,7 @@ public class Socket implements Serializable {
     }
 
     public void receiveMessage() throws IOException, ClassNotFoundException {
-        byte[] recvBuf = new byte[100];
+        byte[] recvBuf = new byte[300];
         DatagramPacket packet = new DatagramPacket(recvBuf,
                 recvBuf.length);
         sock.setSoTimeout(5);
@@ -146,9 +146,9 @@ public class Socket implements Serializable {
             sock.receive(packet);
         } catch (SocketTimeoutException ex) {
         }
-        String s = new String(packet.getData(), 0, packet.getLength());
-        if(!s.substring(0,10).equals("          ")){
-        this.messages.add(s);
+        if (packet.getLength() < 300) {
+            String s = new String(packet.getData(), 0, packet.getLength());
+            this.messages.add(s);
         }
     }
 

@@ -34,8 +34,8 @@ java.lang.NullPointerException
 	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
-testGetFlashlightPolygon(nl.haunted.HumanTest)  Time elapsed: 0 sec  <<< FAILURE!
-java.lang.AssertionError: should return a polygon expected:<[I@1996cd68> but was:<[I@3339ad8e>
+testGetFlashlightPolygon(nl.haunted.HumanTest)  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.AssertionError: should return a polygon expected:<[I@3339ad8e> but was:<[I@555590>
 	at org.junit.Assert.fail(Assert.java:74)
 	at org.junit.Assert.failNotEquals(Assert.java:448)
 	at org.junit.Assert.assertEquals(Assert.java:102)

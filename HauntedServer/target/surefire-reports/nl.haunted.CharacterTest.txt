@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: nl.haunted.CharacterTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.227 sec <<< FAILURE!
-moveTest(nl.haunted.CharacterTest)  Time elapsed: 0.205 sec  <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.155 sec <<< FAILURE!
+moveTest(nl.haunted.CharacterTest)  Time elapsed: 0.134 sec  <<< ERROR!
 java.lang.NullPointerException
 	at nl.haunted.Character.detectCollision(Character.java:137)
 	at nl.haunted.Character.move(Character.java:90)

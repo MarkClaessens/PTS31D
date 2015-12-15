@@ -232,15 +232,34 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
             if (GL.getName().equals(naam)) {
                 if(GL.getww().isEmpty())
                 {
-                GL.addPlayer(tisplayer);
-                lobby.informlobbys();
-                timer.cancel();  
+                    if(GL.addPlayer(tisplayer))
+                    {
+                  lobby.informlobbys();
+                  timer.cancel();    
+                    }
+                   else
+                   {
+                   Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setHeaderText("Room is vol");
+                    alert.setContentText("jammer joh vol!");
+                    alert.showAndWait();     
+                    }
+                
                 }
                 else if(GL.getww().equals(TFwachtwoord.getText()))
                 {
-                GL.addPlayer(tisplayer);
-                lobby.informlobbys();
-                timer.cancel();   
+                   if(GL.addPlayer(tisplayer))
+                    {
+                   lobby.informlobbys();
+                   timer.cancel();    
+                    }
+                   else
+                   {
+                   Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setHeaderText("Room is vol");
+                    alert.setContentText("jammer joh vol!");
+                    alert.showAndWait();     
+                    }
                 }
                 else
                 {

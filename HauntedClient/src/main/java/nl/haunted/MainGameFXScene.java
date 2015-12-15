@@ -70,27 +70,27 @@ public class MainGameFXScene {
     //Background map
     private Image bgImage;
     //Door imgs
-    private Image doorImage;
+    private Image[] doorImage;
     //Key imgs
     private Image keyImage;
     //Wall imgs
     private Image wallImage;
     //Human perspective
-    private Image humanPerspectiveImage;
+    private Image[] humanPerspectiveImage;
     //White player imgs
-    private Image[] humanWhiteImages, ghostWhiteImages;
+    private Image[][] humanWhiteImages, ghostWhiteImages;
     //Black player imgs
-    private Image[] humanBlackImages, ghostBlackImages;
+    private Image[][] humanBlackImages, ghostBlackImages;
     //Green player imgs
-    private Image[] humanGreenImages, ghostGreenImages;
+    private Image[][] humanGreenImages, ghostGreenImages;
     //Red player imgs
-    private Image[] humanRedImages, ghostRedImages;
+    private Image[][] humanRedImages, ghostRedImages;
     //Blue player imgs
-    private Image[] humanBlueImages, ghostBlueImages;
+    private Image[][] humanBlueImages, ghostBlueImages;
     //Orange player imgs
-    private Image[] humanOrangeImages, ghostOrangeImages;
+    private Image[][] humanOrangeImages, ghostOrangeImages;
     //Purple player imgs
-    private Image[] humanPurpleImages, ghostPurpleImages;
+    private Image[][] humanPurpleImages, ghostPurpleImages;
 
     private gamefeed gf;
 
@@ -381,28 +381,69 @@ public class MainGameFXScene {
     }
 
     /**
-     * Loads in the images to draw it.
+     * Loads in the images to draw it. --> UP DOWN LEFT RIGHT
      */
     private void loadInImages() {
         keyImage = new Image("key.png");
-        doorImage = new Image("door.png");
+        doorImage = new Image[]{new Image("doorUp.png"), new Image("doorDown.png"), new Image("doorLeft.png"), new Image("doorRight.png")};
         wallImage = new Image("wall.png");
-        humanPerspectiveImage = new Image("outOfFlashlight.png");
-        humanWhiteImages = new Image[]{new Image("humanWhite1.png"), new Image("humanWhite2.png"), new Image("humanWhite3.png")};
-        ghostWhiteImages = new Image[]{new Image("ghostWhite1.png"), new Image("ghostWhite2.png"), new Image("ghostWhite3.png")};
-        humanBlackImages = new Image[]{new Image("humanBlack1.png"), new Image("humanBlack2.png"), new Image("humanBlack3.png")};
-        ghostBlackImages = new Image[]{new Image("ghostBlack1.png"), new Image("ghostBlack2.png"), new Image("ghostBlack3.png")};
-        humanGreenImages = new Image[]{new Image("humanGreen1.png"), new Image("humanGreen2.png"), new Image("humanGreen3.png")};
-        ghostGreenImages = new Image[]{new Image("ghostGreen1.png"), new Image("ghostGreen2.png"), new Image("ghostGreen3.png")};
-        humanRedImages = new Image[]{new Image("humanRed1.png"), new Image("humanRed2.png"), new Image("humanRed3.png")};
-        ghostRedImages = new Image[]{new Image("ghostRed1.png"), new Image("ghostRed2.png"), new Image("ghostRed3.png")};
-        humanBlueImages = new Image[]{new Image("humanBlue1.png"), new Image("humanBlue2.png"), new Image("humanBlue3.png")};
-        ghostBlueImages = new Image[]{new Image("ghostBlue1.png"), new Image("ghostBlue2.png"), new Image("ghostBlue3.png")};
-        humanOrangeImages = new Image[]{new Image("humanOrange1.png"), new Image("humanOrange2.png"), new Image("humanOrange3.png")};
-        ghostOrangeImages = new Image[]{new Image("ghostOrange1.png"), new Image("ghostOrange2.png"), new Image("ghostOrange3.png")};
-        humanPurpleImages = new Image[]{new Image("humanPurple1.png"), new Image("humanPurple2.png"), new Image("humanPurple3.png")};
-        ghostPurpleImages = new Image[]{new Image("ghostPurple1.png"), new Image("ghostPurple2.png"), new Image("ghostPurple3.png")};
+        humanPerspectiveImage = new Image[]{new Image("outOfFlashlightUp.png"), new Image("outOfFlashlightDown.png"), new Image("outOfFlashlightLeft.png"), new Image("outOfFlashlightRight.png")};
 
+        humanWhiteImages = new Image[][]{{new Image("humanWhiteUp1.png"), new Image("humanWhiteUp2.png"), new Image("humanWhiteUp3.png")},
+        {new Image("humanWhiteDown1.png"), new Image("humanWhiteDown2.png"), new Image("humanWhiteDown3.png")}, {new Image("humanWhiteLeft1.png"), new Image("humanWhiteLeft2.png"), new Image("humanWhiteLeft3.png")},
+        {new Image("humanWhiteRight1.png"), new Image("humanWhiteRight2.png"), new Image("humanWhiteRight3.png")}};
+
+        ghostWhiteImages = new Image[][]{{new Image("ghostWhiteUp1.png"), new Image("ghostWhiteUp2.png"), new Image("ghostWhiteUp3.png")},
+        {new Image("ghostWhiteDown1.png"), new Image("ghostWhiteDown2.png"), new Image("ghostWhiteDown3.png")}, {new Image("ghostWhiteLeft1.png"), new Image("ghostWhiteLeft2.png"), new Image("ghostWhiteLeft3.png")},
+        {new Image("ghostWhiteRight1.png"), new Image("ghostWhiteRight2.png"), new Image("ghostWhiteRight3.png")}};
+
+        humanBlackImages = new Image[][]{{new Image("humanBlackUp1.png"), new Image("humanBlackUp2.png"), new Image("humanBlackUp3.png")},
+        {new Image("humanBlackDown1.png"), new Image("humanBlackDown2.png"), new Image("humanBlackDown3.png")}, {new Image("humanBlackLeft1.png"), new Image("humanBlackLeft2.png"), new Image("humanBlackLeft3.png")},
+        {new Image("humanBlackRight1.png"), new Image("humanBlackRight2.png"), new Image("humanBlackRight3.png")}};
+
+        ghostBlackImages = new Image[][]{{new Image("ghostBlackUp1.png"), new Image("ghostBlackUp2.png"), new Image("ghostBlackUp3.png")},
+        {new Image("ghostBlackDown1.png"), new Image("ghostBlackDown2.png"), new Image("ghostBlackDown3.png")}, {new Image("ghostBlackLeft1.png"), new Image("ghostBlackLeft2.png"), new Image("ghostBlackLeft3.png")},
+        {new Image("ghostBlackRight1.png"), new Image("ghostBlackRight2.png"), new Image("ghostBlackRight3.png")}};
+
+        humanGreenImages = new Image[][]{{new Image("humanGreenUp1.png"), new Image("humanGreenUp2.png"), new Image("humanGreenUp3.png")},
+        {new Image("humanGreenDown1.png"), new Image("humanGreenDown2.png"), new Image("humanGreenDown3.png")}, {new Image("humanGreenLeft1.png"), new Image("humanGreenLeft2.png"), new Image("humanGreenLeft3.png")},
+        {new Image("humanGreenRight1.png"), new Image("humanGreenRight2.png"), new Image("humanGreenRight3.png")}};
+
+        ghostGreenImages = new Image[][]{{new Image("ghostGreenUp1.png"), new Image("ghostGreenUp2.png"), new Image("ghostGreenUp3.png")},
+        {new Image("ghostGreenDown1.png"), new Image("ghostGreenDown2.png"), new Image("ghostGreenDown3.png")}, {new Image("ghostGreenLeft1.png"), new Image("ghostGreenLeft2.png"), new Image("ghostGreenLeft3.png")},
+        {new Image("ghostGreenRight1.png"), new Image("ghostGreenRight2.png"), new Image("ghostGreenRight3.png")}};
+
+        humanRedImages = new Image[][]{{new Image("humanRedUp1.png"), new Image("humanRedUp2.png"), new Image("humanRedUp3.png")},
+        {new Image("humanRedDown1.png"), new Image("humanRedDown2.png"), new Image("humanRedDown3.png")}, {new Image("humanRedLeft1.png"), new Image("humanRedLeft2.png"), new Image("humanRedLeft3.png")},
+        {new Image("humanRedRight1.png"), new Image("humanRedRight2.png"), new Image("humanRedRight3.png")}};
+
+        ghostRedImages = new Image[][]{{new Image("ghostRedUp1.png"), new Image("ghostRedUp2.png"), new Image("ghostRedUp3.png")},
+        {new Image("ghostRedDown1.png"), new Image("ghostRedDown2.png"), new Image("ghostRedDown3.png")}, {new Image("ghostRedLeft1.png"), new Image("ghostRedLeft2.png"), new Image("ghostRedLeft3.png")},
+        {new Image("ghostRedRight1.png"), new Image("ghostRedRight2.png"), new Image("ghostRedRight3.png")}};
+
+        humanBlueImages = new Image[][]{{new Image("humanBlueUp1.png"), new Image("humanBlueUp2.png"), new Image("humanBlueUp3.png")},
+        {new Image("humanBlueDown1.png"), new Image("humanBlueDown2.png"), new Image("humanBlueDown3.png")}, {new Image("humanBlueLeft1.png"), new Image("humanBlueLeft2.png"), new Image("humanBlueLeft3.png")},
+        {new Image("humanBlueRight1.png"), new Image("humanBlueRight2.png"), new Image("humanBlueRight3.png")}};
+
+        ghostBlueImages = new Image[][]{{new Image("ghostBlueUp1.png"), new Image("ghostBlueUp2.png"), new Image("ghostBlueUp3.png")},
+        {new Image("ghostBlueDown1.png"), new Image("ghostBlueDown2.png"), new Image("ghostBlueDown3.png")}, {new Image("ghostBlueLeft1.png"), new Image("ghostBlueLeft2.png"), new Image("ghostBlueLeft3.png")},
+        {new Image("ghostBlueRight1.png"), new Image("ghostBlueRight2.png"), new Image("ghostBlueRight3.png")}};
+
+        humanOrangeImages = new Image[][]{{new Image("humanOrangeUp1.png"), new Image("humanOrangeUp2.png"), new Image("humanOrangeUp3.png")},
+        {new Image("humanOrangeDown1.png"), new Image("humanOrangeDown2.png"), new Image("humanOrangeDown3.png")}, {new Image("humanOrangeLeft1.png"), new Image("humanOrangeLeft2.png"), new Image("humanOrangeLeft3.png")},
+        {new Image("humanOrangeRight1.png"), new Image("humanOrangeRight2.png"), new Image("humanOrangeRight3.png")}};
+
+        ghostOrangeImages = new Image[][]{{new Image("ghostOrangeUp1.png"), new Image("ghostOrangeUp2.png"), new Image("ghostOrangeUp3.png")},
+        {new Image("ghostOrangeDown1.png"), new Image("ghostOrangeDown2.png"), new Image("ghostOrangeDown3.png")}, {new Image("ghostOrangeLeft1.png"), new Image("ghostOrangeLeft2.png"), new Image("ghostOrangeLeft3.png")},
+        {new Image("ghostOrangeRight1.png"), new Image("ghostOrangeRight2.png"), new Image("ghostOrangeRight3.png")}};
+
+        humanPurpleImages = new Image[][]{{new Image("humanPurpleUp1.png"), new Image("humanPurpleUp2.png"), new Image("humanPurpleUp3.png")},
+        {new Image("humanPurpleDown1.png"), new Image("humanPurpleDown2.png"), new Image("humanPurpleDown3.png")}, {new Image("humanPurpleLeft1.png"), new Image("humanPurpleLeft2.png"), new Image("humanPurpleLeft3.png")},
+        {new Image("humanPurpleRight1.png"), new Image("humanPurpleRight2.png"), new Image("humanPurpleRight3.png")}};
+
+        ghostPurpleImages = new Image[][]{{new Image("ghostPurpleUp1.png"), new Image("ghostPurpleUp2.png"), new Image("ghostPurpleUp3.png")},
+        {new Image("ghostPurpleDown1.png"), new Image("ghostPurpleDown2.png"), new Image("ghostPurpleDown3.png")}, {new Image("ghostPurpleLeft1.png"), new Image("ghostPurpleLeft2.png"), new Image("ghostPurpleLeft3.png")},
+        {new Image("ghostPurpleRight1.png"), new Image("ghostPurpleRight2.png"), new Image("ghostPurpleRight3.png")}};
     }
 
     /**
@@ -416,7 +457,15 @@ public class MainGameFXScene {
             switch (e.getType()) {
                 case Door:
                     if (gf.gameInfo.amIHuman()) {
-                        drawRotatedImage(keyDoorGc, doorImage, getAngle(e.getDirection()), (e.getPosition().getX() + 100), (e.getPosition().getY()), horScale, verScale);
+                        if (e.getDirection() == DirectionType.UP) {
+                            keyDoorGc.drawImage(doorImage[0], (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY()) * verScale, doorImage[0].getWidth() * horScale, doorImage[0].getHeight() * verScale);
+                        } else if (e.getDirection() == DirectionType.DOWN) {
+                            keyDoorGc.drawImage(doorImage[1], (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 200) * verScale, doorImage[1].getWidth() * horScale, doorImage[1].getHeight() * verScale);
+                        } else if (e.getDirection() == DirectionType.LEFT) {
+                            keyDoorGc.drawImage(doorImage[2], (e.getPosition().getX()) * horScale, (e.getPosition().getY() + 100) * verScale, doorImage[2].getWidth() * horScale, doorImage[2].getHeight() * verScale);
+                        } else {
+                            keyDoorGc.drawImage(doorImage[3], (e.getPosition().getX() + 200) * horScale, (e.getPosition().getY() + 100) * verScale, doorImage[3].getWidth() * horScale, doorImage[3].getHeight() * verScale);
+                        }
                     }
                     break;
                 case Key:
@@ -426,17 +475,27 @@ public class MainGameFXScene {
                     break;
                 case Human:
                     if (gf.gameInfo.amIHuman()) {
-
+                        if (e.getDirection() == DirectionType.UP) {
+                            humanPersGc.drawImage(humanPerspectiveImage[0], (e.getPosition().getX() - 1800) * horScale, (e.getPosition().getY() - 1800) * verScale, humanPerspectiveImage[0].getWidth() * horScale, humanPerspectiveImage[0].getHeight() * verScale);
+                        } else if (e.getDirection() == DirectionType.DOWN) {
+                            humanPersGc.drawImage(humanPerspectiveImage[1], (e.getPosition().getX() - 1800) * horScale, (e.getPosition().getY() - 1800) * verScale, humanPerspectiveImage[1].getWidth() * horScale, humanPerspectiveImage[1].getHeight() * verScale);
+                        } else if (e.getDirection() == DirectionType.LEFT) {
+                            humanPersGc.drawImage(humanPerspectiveImage[2], (e.getPosition().getX() - 1800) * horScale, (e.getPosition().getY() - 1800) * verScale, humanPerspectiveImage[2].getWidth() * horScale, humanPerspectiveImage[2].getHeight() * verScale);
+                        } else {
+                            humanPersGc.drawImage(humanPerspectiveImage[3], (e.getPosition().getX() - 1800) * horScale, (e.getPosition().getY() - 1800) * verScale, humanPerspectiveImage[3].getWidth() * horScale, humanPerspectiveImage[3].getHeight() * verScale);
+                        }
                         //drawRotatedImage(humanPersGc, humanPerspectiveImage, getAngle(e.getDirection()), (e.getPosition().getX() - 1900), (e.getPosition().getY() - 1900), horScale, verScale);
                     }
-                    drawRotatedImage(humanGc, getAnimatedHumanImage(e), getAngle(e.getDirection()), (e.getPosition().getX() + 100), (e.getPosition().getY() + 100), horScale, verScale);
+                    humanGc.drawImage(getAnimatedHumanImage(e), (e.getPosition().getX() - 100) * horScale, (e.getPosition().getY() - 100) * verScale, getAnimatedHumanImage(e).getWidth() * horScale, getAnimatedHumanImage(e).getHeight() * verScale);
+                    //drawRotatedImage(humanGc, getAnimatedHumanImage(e), getAngle(e.getDirection()), (e.getPosition().getX() + 100), (e.getPosition().getY() + 100), horScale, verScale);
                     break;
                 case Ghost:
 
                     if (e.getWall()) {
-                        drawRotatedImage(ghostGcs[ghostChooser], wallImage, 0, (e.getPosition().getX() + 100), (e.getPosition().getY() + 100), horScale, verScale);
+                        ghostGcs[ghostChooser].drawImage(wallImage, (e.getPosition().getX() + 100), (e.getPosition().getY() + 100), wallImage.getWidth() * horScale, wallImage.getHeight() * verScale);
+                        //drawRotatedImage(ghostGcs[ghostChooser], wallImage, 0, (e.getPosition().getX() + 100), (e.getPosition().getY() + 100), horScale, verScale);
                     } else {
-                        drawRotatedImage(ghostGcs[ghostChooser], getAnimatedGhostImage(e), getAngle(e.getDirection()), (e.getPosition().getX() + 100), (e.getPosition().getY() + 100), horScale, verScale);
+                        ghostGcs[ghostChooser].drawImage(getAnimatedGhostImage(e), (e.getPosition().getX() - 100) * horScale, (e.getPosition().getY() - 100) * verScale, getAnimatedGhostImage(e).getWidth() * horScale, getAnimatedGhostImage(e).getHeight() * verScale);
                     }
                     ghostChooser++;
                     break;
@@ -498,11 +557,26 @@ public class MainGameFXScene {
         rotate(gc, angle, tlpx + 50, tlpy + 50);
         //rotate(gc, angle, tlpx, (tlpy + image.getHeight()/2));
         if (angle == 90 || angle == 270) {
-            gc.drawImage(image, tlpx*scaleX, tlpy*scaleY, image.getHeight() * scaleY, image.getWidth() * scaleX);
+            gc.drawImage(image, tlpx * scaleX, tlpy * scaleY, image.getWidth() * scaleX, image.getWidth() * scaleX);
         } else {
-            gc.drawImage(image, tlpx*scaleX, tlpy * scaleY, image.getWidth() * scaleX, image.getHeight() * scaleY);
+            gc.drawImage(image, tlpx * scaleX, tlpy * scaleY, image.getWidth() * scaleX, image.getHeight() * scaleY);
         }
         gc.restore(); // back to original state (before rotation)
+    }
+
+    private int getRotationIndex(DirectionType direction) {
+        switch (direction) {
+            case UP:
+                return 0;
+            case DOWN:
+                return 1;
+            case LEFT:
+                return 2;
+            case RIGHT:
+                return 3;
+            default:
+                return 0;
+        }
     }
 
     /**
@@ -513,142 +587,143 @@ public class MainGameFXScene {
      */
     private Image getAnimatedHumanImage(Entity e) {
         Image returnImage = null;
+        int rotIndex = getRotationIndex(e.getDirection());
 
         java.awt.Color c = e.getColor();
         if (c == java.awt.Color.WHITE) {
             if (e.getMoving()) {
                 switch (state) {
                     case 2:
-                        returnImage = humanWhiteImages[0];
+                        returnImage = humanWhiteImages[rotIndex][0];
                         state = 0;
                         break;
                     case 0:
-                        returnImage = humanWhiteImages[1];
+                        returnImage = humanWhiteImages[rotIndex][1];
                         state = 1;
                         break;
                     case 1:
-                        returnImage = humanWhiteImages[2];
+                        returnImage = humanWhiteImages[rotIndex][2];
                         state = 2;
                         break;
                 }
             } else {
-                returnImage = humanWhiteImages[0];
+                returnImage = humanWhiteImages[rotIndex][0];
             }
         } else if (c == java.awt.Color.BLACK) {
             if (e.getMoving()) {
                 switch (state) {
                     case 2:
-                        returnImage = humanBlackImages[0];
+                        returnImage = humanBlackImages[rotIndex][0];
                         state = 0;
                         break;
                     case 0:
-                        returnImage = humanBlackImages[1];
+                        returnImage = humanBlackImages[rotIndex][1];
                         state = 1;
                         break;
                     case 1:
-                        returnImage = humanBlackImages[2];
+                        returnImage = humanBlackImages[rotIndex][2];
                         state = 2;
                         break;
                 }
             } else {
-                returnImage = humanBlackImages[0];
+                returnImage = humanBlackImages[rotIndex][0];
             }
         } else if (c == java.awt.Color.GREEN) {
             if (e.getMoving()) {
 
                 switch (state) {
                     case 2:
-                        returnImage = humanGreenImages[0];
+                        returnImage = humanGreenImages[rotIndex][0];
                         state = 0;
                         break;
                     case 0:
-                        returnImage = humanGreenImages[1];
+                        returnImage = humanGreenImages[rotIndex][1];
                         state = 1;
                         break;
                     case 1:
-                        returnImage = humanGreenImages[2];
+                        returnImage = humanGreenImages[rotIndex][2];
                         state = 2;
                         break;
                 }
             } else {
-                returnImage = humanGreenImages[0];
+                returnImage = humanGreenImages[rotIndex][0];
             }
         } else if (c == java.awt.Color.RED) {
             if (e.getMoving()) {
                 switch (state) {
                     case 2:
-                        returnImage = humanRedImages[0];
+                        returnImage = humanRedImages[rotIndex][0];
                         state = 0;
                         break;
                     case 0:
-                        returnImage = humanRedImages[1];
+                        returnImage = humanRedImages[rotIndex][1];
                         state = 1;
                         break;
                     case 1:
-                        returnImage = humanRedImages[2];
+                        returnImage = humanRedImages[rotIndex][2];
                         state = 2;
                         break;
                 }
             } else {
-                returnImage = humanRedImages[0];
+                returnImage = humanRedImages[rotIndex][0];
             }
         } else if (c == java.awt.Color.BLUE) {
             if (e.getMoving()) {
                 switch (state) {
                     case 2:
-                        returnImage = humanBlueImages[0];
+                        returnImage = humanBlueImages[rotIndex][0];
                         state = 0;
                         break;
                     case 0:
-                        returnImage = humanBlueImages[1];
+                        returnImage = humanBlueImages[rotIndex][1];
                         state = 1;
                         break;
                     case 1:
-                        returnImage = humanBlueImages[2];
+                        returnImage = humanBlueImages[rotIndex][2];
                         state = 2;
                         break;
                 }
             } else {
-                returnImage = humanBlueImages[0];
+                returnImage = humanBlueImages[rotIndex][0];
             }
         } else if (c == java.awt.Color.ORANGE) {
             if (e.getMoving()) {
                 switch (state) {
                     case 2:
-                        returnImage = humanOrangeImages[0];
+                        returnImage = humanOrangeImages[rotIndex][0];
                         state = 0;
                         break;
                     case 0:
-                        returnImage = humanOrangeImages[1];
+                        returnImage = humanOrangeImages[rotIndex][1];
                         state = 1;
                         break;
                     case 1:
-                        returnImage = humanOrangeImages[2];
+                        returnImage = humanOrangeImages[rotIndex][2];
                         state = 2;
                         break;
                 }
             } else {
-                returnImage = humanOrangeImages[0];
+                returnImage = humanOrangeImages[rotIndex][0];
             }
         } else if (c == java.awt.Color.MAGENTA) {
             if (e.getMoving()) {
                 switch (state) {
                     case 2:
-                        returnImage = humanPurpleImages[0];
+                        returnImage = humanPurpleImages[rotIndex][0];
                         state = 0;
                         break;
                     case 0:
-                        returnImage = humanPurpleImages[1];
+                        returnImage = humanPurpleImages[rotIndex][1];
                         state = 1;
                         break;
                     case 1:
-                        returnImage = humanPurpleImages[2];
+                        returnImage = humanPurpleImages[rotIndex][2];
                         state = 2;
                         break;
                 }
             }
         } else {
-            returnImage = humanPurpleImages[0];
+            returnImage = humanPurpleImages[rotIndex][0];
         }
 
         return returnImage;
@@ -662,142 +737,143 @@ public class MainGameFXScene {
      */
     private Image getAnimatedGhostImage(Entity e) {
         Image returnImage = null;
+        int rotIndex = getRotationIndex(e.getDirection());
 
         java.awt.Color c = e.getColor();
         if (c == java.awt.Color.WHITE) {
             if (e.getMoving()) {
                 switch (state) {
                     case 2:
-                        returnImage = ghostWhiteImages[0];
+                        returnImage = ghostWhiteImages[rotIndex][0];
                         state = 0;
                         break;
                     case 0:
-                        returnImage = ghostWhiteImages[1];
+                        returnImage = ghostWhiteImages[rotIndex][1];
                         state = 1;
                         break;
                     case 1:
-                        returnImage = ghostWhiteImages[2];
+                        returnImage = ghostWhiteImages[rotIndex][2];
                         state = 2;
                         break;
                 }
             } else {
-                returnImage = ghostWhiteImages[0];
+                returnImage = ghostWhiteImages[rotIndex][0];
             }
         } else if (c == java.awt.Color.BLACK) {
             if (e.getMoving()) {
                 switch (state) {
                     case 2:
-                        returnImage = ghostBlackImages[0];
+                        returnImage = ghostBlackImages[rotIndex][0];
                         state = 0;
                         break;
                     case 0:
-                        returnImage = ghostBlackImages[1];
+                        returnImage = ghostBlackImages[rotIndex][1];
                         state = 1;
                         break;
                     case 1:
-                        returnImage = ghostBlackImages[2];
+                        returnImage = ghostBlackImages[rotIndex][2];
                         state = 2;
                         break;
                 }
             } else {
-                returnImage = ghostBlackImages[0];
+                returnImage = ghostBlackImages[rotIndex][0];
             }
         } else if (c == java.awt.Color.GREEN) {
             if (e.getMoving()) {
 
                 switch (state) {
                     case 2:
-                        returnImage = ghostGreenImages[0];
+                        returnImage = ghostGreenImages[rotIndex][0];
                         state = 0;
                         break;
                     case 0:
-                        returnImage = ghostGreenImages[1];
+                        returnImage = ghostGreenImages[rotIndex][1];
                         state = 1;
                         break;
                     case 1:
-                        returnImage = ghostGreenImages[2];
+                        returnImage = ghostGreenImages[rotIndex][2];
                         state = 2;
                         break;
                 }
             } else {
-                returnImage = ghostGreenImages[0];
+                returnImage = ghostGreenImages[rotIndex][0];
             }
         } else if (c == java.awt.Color.RED) {
             if (e.getMoving()) {
                 switch (state) {
                     case 2:
-                        returnImage = ghostRedImages[0];
+                        returnImage = ghostRedImages[rotIndex][0];
                         state = 0;
                         break;
                     case 0:
-                        returnImage = ghostRedImages[1];
+                        returnImage = ghostRedImages[rotIndex][1];
                         state = 1;
                         break;
                     case 1:
-                        returnImage = ghostRedImages[2];
+                        returnImage = ghostRedImages[rotIndex][2];
                         state = 2;
                         break;
                 }
             } else {
-                returnImage = ghostRedImages[0];
+                returnImage = ghostRedImages[rotIndex][0];
             }
         } else if (c == java.awt.Color.BLUE) {
             if (e.getMoving()) {
                 switch (state) {
                     case 2:
-                        returnImage = ghostBlueImages[0];
+                        returnImage = ghostBlueImages[rotIndex][0];
                         state = 0;
                         break;
                     case 0:
-                        returnImage = ghostBlueImages[1];
+                        returnImage = ghostBlueImages[rotIndex][1];
                         state = 1;
                         break;
                     case 1:
-                        returnImage = ghostBlueImages[2];
+                        returnImage = ghostBlueImages[rotIndex][2];
                         state = 2;
                         break;
                 }
             } else {
-                returnImage = ghostBlueImages[0];
+                returnImage = ghostBlueImages[rotIndex][0];
             }
         } else if (c == java.awt.Color.ORANGE) {
             if (e.getMoving()) {
                 switch (state) {
                     case 2:
-                        returnImage = ghostOrangeImages[0];
+                        returnImage = ghostOrangeImages[rotIndex][0];
                         state = 0;
                         break;
                     case 0:
-                        returnImage = ghostOrangeImages[1];
+                        returnImage = ghostOrangeImages[rotIndex][1];
                         state = 1;
                         break;
                     case 1:
-                        returnImage = ghostOrangeImages[2];
+                        returnImage = ghostOrangeImages[rotIndex][2];
                         state = 2;
                         break;
                 }
             } else {
-                returnImage = ghostOrangeImages[0];
+                returnImage = ghostOrangeImages[rotIndex][0];
             }
         } else if (c == java.awt.Color.MAGENTA) {
             if (e.getMoving()) {
                 switch (state) {
                     case 2:
-                        returnImage = ghostPurpleImages[0];
+                        returnImage = ghostPurpleImages[rotIndex][0];
                         state = 0;
                         break;
                     case 0:
-                        returnImage = ghostPurpleImages[1];
+                        returnImage = ghostPurpleImages[rotIndex][1];
                         state = 1;
                         break;
                     case 1:
-                        returnImage = ghostPurpleImages[2];
+                        returnImage = ghostPurpleImages[rotIndex][2];
                         state = 2;
                         break;
                 }
             }
         } else {
-            returnImage = ghostPurpleImages[0];
+            returnImage = ghostPurpleImages[rotIndex][0];
         }
         return returnImage;
     }
