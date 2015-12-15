@@ -424,6 +424,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         if(!TFnewname.getText().trim().isEmpty())
         {
           gamelobby.setName(TFnewname.getText());
+          TFnewname.clear();
           gamesettings();
         }
         else
@@ -443,6 +444,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
             if(!TFnewname.getText().trim().isEmpty() && Integer.parseInt(TFnewfloors.getText()) > 2 && Integer.parseInt(TFnewfloors.getText()) < 11)
             {
                 gamelobby.setMaxFloors(Integer.parseInt(TFnewfloors.getText()));
+                TFnewfloors.clear();
                 gamesettings();
             }
             else
@@ -470,6 +472,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
           if(!TFnewname.getText().trim().isEmpty() && Integer.parseInt(TFnewplayers.getText()) > 2 && Integer.parseInt(TFnewplayers.getText()) < 8)
             {
                 gamelobby.setMaxPlayers(Integer.parseInt(TFnewplayers.getText()));
+                TFnewname.clear();
                 gamesettings();
             }  
           else
