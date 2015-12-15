@@ -33,7 +33,7 @@ public class HauntedClient extends Application {
         //Scanner input = new Scanner(System.in);
         //System.out.print("Client: Enter IP address of server: ");
         //String ipAddress = input.nextLine();
-        String ipAddress = "127.0.0.1";
+        String ipAddress = "10.1.3.2";
         try {
             controller = new ClientController(this, ipAddress);
         } catch (RemoteException ex) {
