@@ -29,9 +29,9 @@
                 <Image url="@btnStartGame.png" />
             </image>
         </ImageView>
-      <Button fx:id="BTNsetname" layoutX="121.0" layoutY="224.0" mnemonicParsing="false" text="change name" />
-      <Button fx:id="BTNsetfloors" layoutX="121.0" layoutY="288.0" mnemonicParsing="false" text="change floors" />
-      <Button fx:id="BTNsetplayers" layoutX="121.0" layoutY="366.0" mnemonicParsing="false" text="change players" />
+      <Button fx:id="BTNsetname" layoutX="121.0" layoutY="232.0" mnemonicParsing="false" onMouseClicked="#setnewname" text="change name" />
+      <Button fx:id="BTNsetfloors" layoutX="121.0" layoutY="288.0" mnemonicParsing="false" onMouseClicked="#setnewfloors" text="change floors" />
+      <Button fx:id="BTNsetplayers" layoutX="121.0" layoutY="366.0" mnemonicParsing="false" onMouseClicked="#setnewplayers" text="change players" />
       <TextField fx:id="TFnewplayers" layoutX="121.0" layoutY="332.0" promptText="change max players" />
       <TextField fx:id="TFnewfloors" layoutX="121.0" layoutY="257.0" promptText="change max floors" />
       <TextField fx:id="TFnewname" layoutX="121.0" layoutY="192.0" promptText="change name" />
