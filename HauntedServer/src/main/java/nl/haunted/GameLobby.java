@@ -265,21 +265,21 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
 
     @Override
     public void setHost(IPlayer player) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        this.host = player;
+        }
 
     @Override
     public void setName(String naam) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        this.name = naam;
+        }
 
     @Override
     public void setMaxFloors(int maxfloors) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     this.maxFloors = maxfloors;   
     }
 
     @Override
     public void setMaxPlayers(int maxplayers) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.maxPlayers = maxplayers;
     }
 }

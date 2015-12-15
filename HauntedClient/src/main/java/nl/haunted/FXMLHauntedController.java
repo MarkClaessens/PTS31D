@@ -226,8 +226,18 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
 
     public void addPlayerGL() throws RemoteException {
         String totaaltekst = (String) LVgamelobbys.getSelectionModel().getSelectedItem();
-        String naam = totaaltekst.substring(6, totaaltekst.indexOf(" players:"));
+        String naam = "";
         for (IGameLobby GL : lobby.getGameLobbys()) {
+            if(GL.getww().isEmpty())
+            {
+              naam = totaaltekst.substring(6, totaaltekst.indexOf(" players:"));  
+            }
+            else
+            {
+               naam = totaaltekst.substring(6, totaaltekst.indexOf(" *p*")); 
+            }
+                    
+            
             System.out.println(GL.getName());
             if (GL.getName().equals(naam)) {
                 if(GL.getww().isEmpty())
