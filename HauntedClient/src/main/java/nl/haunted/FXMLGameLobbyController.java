@@ -345,8 +345,8 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
                     Scene scene = MGS.mainGameFX(gameFeed, chat, tisplayer);
                     
                              HauntedClient.getStage().setScene(scene);
-                            //HauntedClient.getStage().setFullScreenExitKeyCombination(new KeyCodeCombination(KeyCode.ESCAPE, KeyCombination.ALT_DOWN));
-                            //HauntedClient.getStage().setFullScreen(true);
+                            HauntedClient.getStage().setFullScreenExitKeyCombination(new KeyCodeCombination(KeyCode.ESCAPE, KeyCombination.ALT_DOWN));
+                            HauntedClient.getStage().setFullScreen(true);
                             HauntedClient.getStage().show(); 
                         }
                 catch (     IOException | ClassNotFoundException | InterruptedException ex) {
