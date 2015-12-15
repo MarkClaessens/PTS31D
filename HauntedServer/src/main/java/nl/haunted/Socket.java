@@ -49,11 +49,11 @@ public class Socket implements Serializable {
         if (port == 9877) {
             sock.setLoopbackMode(false);
         } else {
-            sock.setLoopbackMode(false); // turn to true for dedicated server
+            sock.setLoopbackMode(true); // turn to true for dedicated server
         }
         groupIp = InetAddress.getByName(groupname);
         Scanner input = new Scanner(System.in);
-        nic = this.getLoopbackNick(); //this.getLocalNIC();//this.getInternetNIC(); //commented for futuure over internet support
+        nic = this.getLocalNIC(); /* this.getLoopbackNick(); this.getInternetNIC(); //commented for futuure over internet support */
         if (nic == null) {
             listNics();
             System.out.println("What Network interface do you want to connect with?");
