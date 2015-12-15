@@ -11,10 +11,10 @@
 
 <AnchorPane id="AnchorPane" fx:id="paneel" prefHeight="576.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.haunted.FXMLHauntedController">
     <children>
-        <Label layoutX="401.0" layoutY="207.0" text="flooramount:" />
-        <Label layoutX="401.0" layoutY="167.0" text="max. players:" />
-        <Label layoutX="408.0" layoutY="126.0" text="password:" />
-        <Label layoutX="404.0" layoutY="85.0" text="roomname:" />
+        <Label layoutX="401.0" layoutY="207.0" text="flooramount:" textFill="WHITE" />
+        <Label layoutX="401.0" layoutY="167.0" text="max. players:" textFill="WHITE" />
+        <Label layoutX="408.0" layoutY="126.0" text="password:" textFill="WHITE" />
+        <Label layoutX="404.0" layoutY="85.0" text="roomname:" textFill="WHITE" />
         <Label layoutX="10.0" layoutY="167.0" text="naam speler1:" />
         <TextField fx:id="TFfloors" layoutX="490.0" layoutY="203.0" promptText="floor amount" />
         <TextField fx:id="TFplayers" layoutX="490.0" layoutY="163.0" promptText="maximum players" />
@@ -39,7 +39,7 @@
         <ListView fx:id="LVgamelobbys" layoutX="6.0" layoutY="275.0" prefHeight="287.0" prefWidth="361.0" />
         <ImageView fx:id="IVJoingamelobby" fitHeight="56.0" fitWidth="134.0" layoutX="400.0" layoutY="406.0" onMouseClicked="#addPlayerGL" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@btnJoinGamelobby.png"/>
+                <Image url="@btnJoinGamelobby.png" />
             </image>
         </ImageView>
         <!--<Button layoutX="400.0" layoutY="406.0" mnemonicParsing="false" onMouseClicked="#addPlayerGL" text="join game" />-->
