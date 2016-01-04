@@ -221,7 +221,16 @@ public class Game implements Serializable {
                     for (int i = 0; i < this.players.size(); i++) {
                         //check if the player pressed a button
                         if (keyboard[i] != null) {
-                            this.players.get(i).getCharacter().move(this, (DirectionType) keyboard[i]);
+                            if (this.players.get(i).getCharacter() instanceof Ghost) {
+                                for (Ghost g : ghosts){
+                                    if(g.getControllingPlayer().getIpAdress().equals(this.players.get(i).getIpAdress())){
+                                        g.move(this, (DirectionType) keyboard[i]);
+                                    }
+                                }
+                            }
+                            else if (this.players.get(i).getCharacter() instanceof Human){
+                                this.human.move(this, (DirectionType) keyboard[i]);
+                            }
                         } else {
 
                             // <editor-fold defaultstate="collapsed" desc="set moving and check if a ghost needs to become a wall">
@@ -238,8 +247,13 @@ public class Game implements Serializable {
                                 if (g.getStationaryTime() == null) {
                                     g.setStationaryTime();
                                 }
+                                g.setMoving(false);
                             }
-                            this.players.get(i).getCharacter().setMoving(false);
+                            else
+                            {
+                                this.human.setMoving(false);
+                            }
+//                            this.players.get(i).getCharacter().setMoving(false);
                             //</editor-fold>
                         }
                     }
