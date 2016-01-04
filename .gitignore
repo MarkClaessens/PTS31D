@@ -59,3 +59,6 @@ HauntedServer/nbproject/project.properties
 /rotationtest/build/
 /rotationtest/dist/
 HauntedClient/nbactions.xml
+/RotationTests/nbproject/private/
+/RotationTests/build/
+/RotationTests/dist/
