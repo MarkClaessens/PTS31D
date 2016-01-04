@@ -239,6 +239,7 @@ public class Game implements Serializable {
                             //set the characters moving on false
                             if (this.players.get(i).getCharacter() instanceof Ghost) {
                                 Ghost g = (Ghost) this.players.get(i).getCharacter();
+                                //TODO: bugfixing.
                                 if (g.getMoving()) {
                                     if (this.players.get(i).getCharacter() instanceof Ghost) {
                                         g.setStationaryTime();
