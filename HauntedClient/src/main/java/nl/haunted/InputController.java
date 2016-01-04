@@ -7,7 +7,6 @@ package nl.haunted;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -40,9 +39,7 @@ public class InputController {
                 try {
                     srvSocket.receiveObject();
                     inputSocket.receiveMessage();
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(InputController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IOException ex) {
+                } catch (ClassNotFoundException | IOException ex) {
                     Logger.getLogger(InputController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
