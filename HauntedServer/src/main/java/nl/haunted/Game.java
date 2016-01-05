@@ -240,7 +240,6 @@ public class Game implements Serializable {
                             if (this.players.get(i).getCharacter() instanceof Ghost) {
                                 for (Ghost g : ghosts){
                                     if(g.getControllingPlayer().getIpAdress().equals(this.players.get(i).getIpAdress())){
-                                        g.move(this, (DirectionType) keyboard[i]);
                                         if (g.getMoving()) {
                                             if (this.players.get(i).getCharacter() instanceof Ghost) {
                                                 g.setStationaryTime();
