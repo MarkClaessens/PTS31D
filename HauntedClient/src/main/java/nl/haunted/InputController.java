@@ -19,18 +19,18 @@ import java.util.logging.Logger;
  */
 public class InputController {
 
-    private Socket inputSocket, srvSocket;
+    private SocketMediator inputSocket, srvSocket;
     private DirectionType direction;
     private IGameLobby gameLobby;
     private Timer timer;
-//    Socket inputSocket;
+//    SocketMediator inputSocket;
 //    DirectionType direction;
 
     public InputController(String groupID, IGameLobby GL) throws IOException {
-        this.inputSocket = new Socket();
-        this.srvSocket = new Socket();
-        this.inputSocket.socketSetup(groupID, 9877);
-        this.srvSocket.socketSetup(groupID, 9876);
+        this.inputSocket = new SocketMediator();
+        this.srvSocket = new SocketMediator();
+        this.inputSocket.socketSetup(groupID, 9877, "TCPS");
+        this.srvSocket.socketSetup(groupID, 9876, "UDP");
         this.gameLobby = GL;
         timer = new Timer();
         TimerTask task = new TimerTask() {
@@ -48,11 +48,11 @@ public class InputController {
 
     }
 
-    public Socket getInputSocket() {
+    public SocketMediator getInputSocket() {
         return this.inputSocket;
     }
 
-    public Socket getSrvSocket() {
+    public SocketMediator getSrvSocket() {
         return this.srvSocket;
     }
 
@@ -81,7 +81,7 @@ public class InputController {
         }    
     }
 
-    public void setSrvSocket(Socket s) {
+    public void setSrvSocket(SocketMediator s) {
         this.inputSocket = s;
     }
 

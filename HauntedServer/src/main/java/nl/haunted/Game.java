@@ -8,7 +8,6 @@ package nl.haunted;
 import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.io.Serializable;
-import static java.lang.Math.floor;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.rmi.RemoteException;
@@ -34,8 +33,9 @@ public class Game implements Serializable {
     private Human human;
     private List<IPlayer> players;
     private IPlayer currentHuman;
-    private Socket srvSoc;
+    private SocketMediator srvSoc;
     private IGameLobby gameLobby;
+    private SocketMediator TCPCsoc;
 
     public Level getLevel() {
         return level;
@@ -80,8 +80,10 @@ public class Game implements Serializable {
     public Game(List<IPlayer> players, int floors, String groupID, IGameLobby gl) throws IOException {
         this.players = players;
         //Setup the socket for this game;
-        srvSoc = new Socket();
-        srvSoc.socketSetup(groupID, 9876);
+        srvSoc = new SocketMediator();
+        srvSoc.socketSetup(groupID, 9876, "UDP");
+        TCPCsoc = new SocketMediator();
+        TCPCsoc.socketSetup(groupID, 9877, "TCPC");
         Random randomizer = new Random();
         // the minimum floors is hardcoded to 3 right now.
         this.floorAmount = randomizer.nextInt(floors - 3 + 1) + 3;
@@ -128,10 +130,9 @@ public class Game implements Serializable {
             @Override
             public void run() {
                 try {
-                    srvSoc.receiveInput();
-
+                    TCPCsoc.socketSetup("", 9877, "TCPC");
+                    TCPCsoc.receiveInput();
                 } catch (IOException | ClassNotFoundException ex) {
-                    ex.printStackTrace();
                 }
             }
         };

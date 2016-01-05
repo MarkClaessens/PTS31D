@@ -18,10 +18,10 @@ import java.awt.Color;
  */
 public class gamefeed {
 
-    Socket soc;
+    SocketMediator soc;
     GameInfo gameInfo;
 
-    public gamefeed(Socket socket) throws IOException, ClassNotFoundException {
+    public gamefeed(SocketMediator socket) throws IOException, ClassNotFoundException {
         this.soc = socket;
     }
 
