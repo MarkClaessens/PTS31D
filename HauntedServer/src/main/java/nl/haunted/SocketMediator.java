@@ -116,14 +116,12 @@ public class SocketMediator implements Serializable {
 
     }
 
-    public void sendInput(String s) throws IOException {
+    public void sendInput(String s, int port) throws IOException {
         StringBuilder sb = new StringBuilder();
         sb.append(this.IP).append(":").append(s);
         try (PrintWriter out = new PrintWriter(TCPSocket.getOutputStream(), true)) {
             out.print(sb.toString());
         }
-        out.close();
-        TCPSocket.close();
     }
 
     public Object[][] getObject() {

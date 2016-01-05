@@ -19,18 +19,17 @@ import java.util.logging.Logger;
  */
 public class InputController {
 
-    private SocketMediator messageSocket, srvSocket, inputSocket;
-    private DirectionType direction, prevDirection;
+    private SocketMediator inputSocket, srvSocket;
+    private DirectionType direction;
     private IGameLobby gameLobby;
     private Timer timer;
-//    SocketMediator messageSocket;
+//    SocketMediator inputSocket;
 //    DirectionType direction;
 
     public InputController(String groupID, IGameLobby GL) throws IOException {
-        this.messageSocket = new SocketMediator();
-        this.srvSocket = new SocketMediator();
         this.inputSocket = new SocketMediator();
-        this.messageSocket.socketSetup(groupID, 9877, "UDP");
+        this.srvSocket = new SocketMediator();
+        this.inputSocket.socketSetup(groupID, 9877, "TCPS");
         this.srvSocket.socketSetup(groupID, 9876, "UDP");
         this.gameLobby = GL;
         timer = new Timer();
@@ -39,7 +38,7 @@ public class InputController {
             public void run() {
                 try {
                     srvSocket.receiveObject();
-                    messageSocket.receiveMessage();
+                    inputSocket.receiveMessage();
                 } catch (ClassNotFoundException | IOException ex) {
                     Logger.getLogger(InputController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -50,7 +49,7 @@ public class InputController {
     }
 
     public SocketMediator getInputSocket() {
-        return this.messageSocket;
+        return this.inputSocket;
     }
 
     public SocketMediator getSrvSocket() {
@@ -71,29 +70,25 @@ public class InputController {
             sb.append("0");
         }
         sb.append("]").append(m.toString().substring(m.toString().indexOf("]") + 1));
-        this.messageSocket.sendMessage(sb.toString());
+        this.inputSocket.sendMessage(sb.toString());
     }
 
     public void sendInput() throws IOException {
-        if (this.direction != this.prevDirection) {
-            this.inputSocket.socketSetup("",9878,"TCPS");
-            if (this.direction != null) {
-                this.inputSocket.sendInput(this.direction.toString());
-            } else {
-                this.inputSocket.sendInput("null");
-            }
-            this.prevDirection = this.direction;
-        }
+        if(this.direction != null){
+            this.srvSocket.sendInput(this.direction.toString(), 9876);
+        }else {
+            this.srvSocket.sendInput("null", 9876);
+        }    
     }
 
     public void setSrvSocket(SocketMediator s) {
-        this.messageSocket = s;
+        this.inputSocket = s;
     }
 
     public List<Message> getMessage() throws IOException, ClassNotFoundException {
 
-        List<String> exinputlist = this.messageSocket.getMessages();
-        List<String> inputlist = new ArrayList(this.messageSocket.getMessages().size());
+        List<String> exinputlist = this.inputSocket.getMessages();
+        List<String> inputlist = new ArrayList(this.inputSocket.getMessages().size());
         if (!exinputlist.isEmpty()) {
             inputlist.addAll(exinputlist);
             List<Message> messages = new ArrayList();
@@ -103,7 +98,7 @@ public class InputController {
                     if ("0".equals(input.substring(1, 2))) {
                         visible = false;
                     }
-                    String strPlayer = input.substring(4, 4 + input.substring(4).indexOf("]"));
+                    String strPlayer = input.substring(4, 4+input.substring(4).indexOf("]"));
                     IPlayer player = null;
                     for (IPlayer p : gameLobby.getPlayers()) {
                         if (p.getName() == null ? strPlayer == null : p.getName().equals(strPlayer)) {
