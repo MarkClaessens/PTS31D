@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class InputController {
 
     private Socket inputSocket, srvSocket;
-    private DirectionType direction;
+    private DirectionType direction, prevDirection = null;
     private IGameLobby gameLobby;
     private Timer timer;
 //    Socket inputSocket;
@@ -74,11 +74,14 @@ public class InputController {
     }
 
     public void sendInput() throws IOException {
-        if(this.direction != null){
-            this.srvSocket.sendInput(this.direction.toString(), 9876);
-        }else {
-            this.srvSocket.sendInput("null", 9876);
-        }    
+        if (this.direction != this.prevDirection) {
+            if (this.direction != null) {
+                this.srvSocket.sendInput(this.direction.toString(), 9876);
+            } else {
+                this.srvSocket.sendInput("null", 9876);
+            }
+            this.prevDirection = this.direction;
+        }
     }
 
     public void setSrvSocket(Socket s) {
@@ -98,7 +101,7 @@ public class InputController {
                     if ("0".equals(input.substring(1, 2))) {
                         visible = false;
                     }
-                    String strPlayer = input.substring(4, 4+input.substring(4).indexOf("]"));
+                    String strPlayer = input.substring(4, 4 + input.substring(4).indexOf("]"));
                     IPlayer player = null;
                     for (IPlayer p : gameLobby.getPlayers()) {
                         if (p.getName() == null ? strPlayer == null : p.getName().equals(strPlayer)) {
