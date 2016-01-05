@@ -10,8 +10,11 @@ import java.util.logging.Logger;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -196,9 +199,19 @@ public class MainGameFXScene {
                     this.stop();
                     timer.cancel();
                     //gf.gameInfo.endGame(); //TODO
-                } else if (gf.gameInfo.isRoundEnd()) { //TODO
-                    this.stop();
-                    timer.cancel();
+                } else if (gf.gameInfo.isRoundEnd()) { //TODO                    
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLtussenscherm.fxml"));
+                    Node root;
+                    try {
+                        root = fxmlLoader.load();
+                        Scene tussenscene = new Scene((Parent) root);                        
+                        HauntedClient.getStage().setScene(tussenscene);
+                        HauntedClient.getStage().show(); 
+                        this.stop();
+                        timer.cancel();
+                    } catch (IOException ex) {
+                        Logger.getLogger(MainGameFXScene.class.getName()).log(Level.SEVERE, null, ex);
+                    }                    
                     //gf.gameInfo.endRound();//TODO
                 }
 
