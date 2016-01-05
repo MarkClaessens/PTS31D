@@ -64,7 +64,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     ILobby lobby;
     IPlayer tisplayer;
     ClientController controller;
-    SocketMediator msgSoc;
+    Socket msgSoc;
     private Chat chat;
     observermessages om;
     

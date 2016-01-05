@@ -7,14 +7,11 @@ package nl.haunted;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.io.Serializable;
 import static java.lang.System.out;
 import java.net.DatagramPacket;
@@ -23,8 +20,6 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.MulticastSocket;
 import java.net.NetworkInterface;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.nio.channels.SocketChannel;
@@ -38,11 +33,9 @@ import java.util.Scanner;
  *
  * @author Mal
  */
-public class SocketMediator implements Serializable {
+public class Socket implements Serializable {
 
-    MulticastSocket UDPsocket;
-    ServerSocket TCPServerSocket;
-    Socket TCPSocket;
+    MulticastSocket sock;
     InetAddress groupIp;
     NetworkInterface nic;
     Object[][] object;
@@ -51,7 +44,13 @@ public class SocketMediator implements Serializable {
     String IP = "";
     List<String[]> inputArray = new ArrayList();
 
-    public void socketSetup(String groupname, int port, String type) throws IOException {
+    public void socketSetup(String groupname, int port) throws IOException {
+        sock = new MulticastSocket(port);
+        if (port == 9877) {
+            sock.setLoopbackMode(false);
+        } else {
+            sock.setLoopbackMode(true); // turn to true for dedicated server
+        }
         groupIp = InetAddress.getByName(groupname);
         Scanner input = new Scanner(System.in);
         nic = this.getLocalNIC(); /* this.getLoopbackNick(); this.getInternetNIC(); //commented for futuure over internet support */
@@ -63,26 +62,9 @@ public class SocketMediator implements Serializable {
         }
         IP = nic.getInetAddresses().nextElement().getHostAddress();
         object = null;
-        this.port = port;
-        switch (type) {
-            case "TCPC":
-                TCPSocket = new Socket("client", port);
-                break;
-            case "TCPS":
-                TCPServerSocket = new ServerSocket(port);
-                TCPSocket = TCPServerSocket.accept();
-                break;
-            case "UDP":
-                UDPsocket = new MulticastSocket(port);
-                if (port == 9877) {
-                    UDPsocket.setLoopbackMode(false);
-                } else {
-                    UDPsocket.setLoopbackMode(true); // turn to true for dedicated server
-                }
-                UDPsocket.joinGroup(new InetSocketAddress(groupIp, port), nic);
-                break;
-        }
 
+        sock.joinGroup(new InetSocketAddress(groupIp, port), nic);
+        this.port = port;
     }
 
     public NetworkInterface getNIC() {
@@ -104,7 +86,7 @@ public class SocketMediator implements Serializable {
             DatagramPacket packet = new DatagramPacket(
                     buf, buf.length, groupIp, 9876);
             int byteCount = packet.getLength();
-            UDPsocket.send(packet);
+            sock.send(packet);
         }
     }
 
@@ -112,16 +94,17 @@ public class SocketMediator implements Serializable {
         byte[] buf = m.getBytes();
         DatagramPacket packet = new DatagramPacket(
                 buf, buf.length, groupIp, 9877);
-        UDPsocket.send(packet);
+        sock.send(packet);
 
     }
 
     public void sendInput(String s, int port) throws IOException {
         StringBuilder sb = new StringBuilder();
         sb.append(this.IP).append(":").append(s);
-        try (PrintWriter out = new PrintWriter(TCPSocket.getOutputStream(), true)) {
-            out.print(sb.toString());
-        }
+        byte[] buf = sb.toString().getBytes();
+        DatagramPacket packet = new DatagramPacket(
+                buf, buf.length, groupIp, port);
+        sock.send(packet);
     }
 
     public Object[][] getObject() {
@@ -139,9 +122,9 @@ public class SocketMediator implements Serializable {
         byte[] recvBuf = new byte[5000];
         DatagramPacket packet = new DatagramPacket(recvBuf,
                 recvBuf.length);
-        UDPsocket.setSoTimeout(15);
+        sock.setSoTimeout(15);
         try {
-            UDPsocket.receive(packet);
+            sock.receive(packet);
         } catch (IOException ex) {
         }
         int byteCount = packet.getLength();
@@ -162,9 +145,9 @@ public class SocketMediator implements Serializable {
         byte[] recvBuf = new byte[300];
         DatagramPacket packet = new DatagramPacket(recvBuf,
                 recvBuf.length);
-        UDPsocket.setSoTimeout(5);
+        sock.setSoTimeout(5);
         try {
-            UDPsocket.receive(packet);
+            sock.receive(packet);
         } catch (SocketTimeoutException ex) {
         }
         if (packet.getLength() < 300) {
@@ -174,30 +157,35 @@ public class SocketMediator implements Serializable {
     }
 
     public void receiveInput() throws IOException, ClassNotFoundException {
-        try (BufferedReader in = new BufferedReader(new InputStreamReader(TCPSocket.getInputStream()))) {
-            while (in.ready()) {
-                String str = in.readLine();
-                boolean found = false;
-                if (!str.contains("  ")) {
-                    for (String[] s : inputArray) {
-                        if (s[0].equalsIgnoreCase(str.substring(0, str.indexOf(":")))) {
-                            if (!s[1].equalsIgnoreCase(str.substring(str.indexOf(":") + 1))) {
-                                s[1] = str.substring(str.indexOf(":") + 1);
-                                
-                            }
-                            found = true;
+        byte[] recvBuf = new byte[1000];
+        DatagramPacket packet = new DatagramPacket(recvBuf,
+                recvBuf.length);
+        sock.setSoTimeout(16);
+        try {
+            sock.receive(packet);
+        } catch (SocketTimeoutException ex) {
+        }
+        if (packet.getLength() < 1000) {
+            String str = new String(packet.getData(), 0, packet.getLength());
+            boolean found = false;
+            if (str.indexOf("  ") == -1) {
+                for (String[] s : inputArray) {
+                    if (s[0].equalsIgnoreCase(str.substring(0, str.indexOf(":")))) {
+                        if (!s[1].equalsIgnoreCase(str.substring(str.indexOf(":") + 1))) {
+                            s[1] = str.substring(str.indexOf(":") + 1);
+
                         }
+                        found = true;
                     }
-                    if (!found) {
-                        String[] newstr = new String[2];
-                        newstr[0] = str.substring(0, str.indexOf(":"));
-                        newstr[1] = str.substring(str.indexOf(":") + 1);
-                        this.inputArray.add(newstr);
-                    }
+                }
+                if (!found) {
+                    String[] newstr = new String[2];
+                    newstr[0] = str.substring(0, str.indexOf(":"));
+                    newstr[1] = str.substring(str.indexOf(":") + 1);
+                    this.inputArray.add(newstr);
                 }
             }
         }
-        TCPSocket.close();
     }
 
     public List<String[]> getInputArray() {
@@ -205,8 +193,8 @@ public class SocketMediator implements Serializable {
     }
 
     public void close() throws IOException {
-        UDPsocket.leaveGroup(groupIp);
-        UDPsocket.close();
+        sock.leaveGroup(groupIp);
+        sock.close();
     }
 
     public void listNics() throws SocketException {
