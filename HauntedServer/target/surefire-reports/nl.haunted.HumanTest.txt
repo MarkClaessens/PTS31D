@@ -1,7 +1,11 @@
 -------------------------------------------------------------------------------
 Test set: nl.haunted.HumanTest
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
 Tests run: 4, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 0.011 sec <<< FAILURE!
+=======
+Tests run: 4, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 0.002 sec <<< FAILURE!
+>>>>>>> parent of 0516f04... TCP added
 enterDoor(nl.haunted.HumanTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NullPointerException
 	at nl.haunted.Human.enterDoor(Human.java:157)
@@ -34,8 +38,13 @@ java.lang.NullPointerException
 	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+<<<<<<< HEAD
 testGetFlashlightPolygon(nl.haunted.HumanTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: should return a polygon expected:<[I@5cbc508c> but was:<[I@3419866c>
+=======
+testGetFlashlightPolygon(nl.haunted.HumanTest)  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.AssertionError: should return a polygon expected:<[I@3ada9e37> but was:<[I@5cbc508c>
+>>>>>>> parent of 0516f04... TCP added
 	at org.junit.Assert.fail(Assert.java:74)
 	at org.junit.Assert.failNotEquals(Assert.java:448)
 	at org.junit.Assert.assertEquals(Assert.java:102)

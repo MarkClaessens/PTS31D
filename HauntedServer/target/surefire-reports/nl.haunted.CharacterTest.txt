@@ -1,8 +1,13 @@
 -------------------------------------------------------------------------------
 Test set: nl.haunted.CharacterTest
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
 Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.467 sec <<< FAILURE!
 moveTest(nl.haunted.CharacterTest)  Time elapsed: 0.361 sec  <<< ERROR!
+=======
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.54 sec <<< FAILURE!
+moveTest(nl.haunted.CharacterTest)  Time elapsed: 0.437 sec  <<< ERROR!
+>>>>>>> parent of 0516f04... TCP added
 java.lang.NullPointerException
 	at nl.haunted.Character.detectCollision(Character.java:138)
 	at nl.haunted.Character.move(Character.java:91)
