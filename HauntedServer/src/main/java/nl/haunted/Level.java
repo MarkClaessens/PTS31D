@@ -75,19 +75,19 @@ public class Level implements Serializable {
         List<Point2D> spawnPoints = new ArrayList<>();
         int possiblePoints;
         switch (this.doorDirection) {
-            case DOWN: // door is top row.
+            case UP: // door is top row.
                 for (int i = 100; i < 1400; i += 100) {
                     spawnPoints.add(new Point2D.Double(i, 900));
                 }
                 possiblePoints = 13;
                 break;
-            case UP: // door is bottom row.
+            case DOWN: // door is bottom row.
                 for (int i = 100; i < 1400; i += 100) {
                     spawnPoints.add(new Point2D.Double(i, 0));
                 }
                 possiblePoints = 13;
                 break;
-            case LEFT: // door is right row.
+            case RIGHT: // door is right row.
                 for (int i = 100; i < 900; i += 100) {
                     spawnPoints.add(new Point2D.Double(0, i));
                 }
