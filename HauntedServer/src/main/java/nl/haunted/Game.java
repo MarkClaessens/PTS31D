@@ -239,17 +239,20 @@ public class Game implements Serializable {
                             //if it was moving set the stationary time
                             //set the characters moving on false
                             if (this.players.get(i).getCharacter() instanceof Ghost) {
-                                Ghost g = (Ghost) this.players.get(i).getCharacter();
-                                //TODO: bugfixing.
-                                if (g.getMoving()) {
-                                    if (this.players.get(i).getCharacter() instanceof Ghost) {
-                                        g.setStationaryTime();
+                                for (Ghost g : ghosts){
+                                    if(g.getControllingPlayer().getIpAdress().equals(this.players.get(i).getIpAdress())){
+                                        g.move(this, (DirectionType) keyboard[i]);
+                                        if (g.getMoving()) {
+                                            if (this.players.get(i).getCharacter() instanceof Ghost) {
+                                                g.setStationaryTime();
+                                            }
+                                        }
+                                        if (g.getStationaryTime() == null) {
+                                            g.setStationaryTime();
+                                        }
+                                        g.setMoving(false);
                                     }
                                 }
-                                if (g.getStationaryTime() == null) {
-                                    g.setStationaryTime();
-                                }
-                                g.setMoving(false);
                             }
                             else
                             {
