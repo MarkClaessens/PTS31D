@@ -52,6 +52,10 @@ public class Ghost extends Character implements Serializable {
     public Calendar getTimeOfDeath() {
         return timeOfDeath;
     }
+    
+    public void clearTimeOfDeath(){
+        this.timeOfDeath = null;
+    }
 
     public void setTimeOfDeath() {
         this.timeOfDeath = Calendar.getInstance();

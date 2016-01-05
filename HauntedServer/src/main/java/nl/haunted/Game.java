@@ -269,8 +269,6 @@ public class Game implements Serializable {
                     if (G.getTimeOfDeath() != null) {
                         if (System.currentTimeMillis() >= (G.getTimeOfDeath().getTimeInMillis() + 2000)) {
                             G.setPosition(this.pickGhostSpawnPoint(false));
-
-                            G.setTimeOfDeath();
                         }
                     }
                 });
@@ -409,7 +407,7 @@ public class Game implements Serializable {
                 }
             }
         }
-
+        
         return spawnPoint;
     }
 
