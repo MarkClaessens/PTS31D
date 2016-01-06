@@ -245,7 +245,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
                 startable = false;
             }
         }
-        if (startable && players.size() > 2) {
+        if (startable && players.size() > 1) {
             gamelobby.startGame();
             Thread.sleep(3000);
         } else {
