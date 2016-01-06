@@ -29,8 +29,8 @@ public class Ghost extends Character implements Serializable {
     public boolean isVulnerable() {
         return vulnerable;
     }
-    
-    public int getID(){
+
+    public int getID() {
         return this.id;
     }
 
@@ -45,15 +45,16 @@ public class Ghost extends Character implements Serializable {
     public boolean getDead() {
         return this.dead;
     }
-    public IPlayer getControllingPlayer(){
+
+    public IPlayer getControllingPlayer() {
         return this.controllingPlayer;
     }
 
     public Calendar getTimeOfDeath() {
         return timeOfDeath;
     }
-    
-    public void clearTimeOfDeath(){
+
+    public void clearTimeOfDeath() {
         this.timeOfDeath = null;
     }
 
@@ -85,6 +86,7 @@ public class Ghost extends Character implements Serializable {
     /**
      * Constructor for Ghost sets vulnerable and isGhost to true and sets the
      * super variables in Character
+     *
      * @param bestuurder the player that owns this object
      */
     public Ghost(IPlayer bestuurder) {
@@ -96,10 +98,10 @@ public class Ghost extends Character implements Serializable {
         this.stationaryTime.clear();
         this.timeOfDeath = null;
         this.controllingPlayer = bestuurder;
-        Ghost.id +=1;
+        Ghost.id += 1;
     }
 
-    public void reset(){
+    public void reset() {
         this.dead = false;
         this.vulnerable = true;
         this.isGhost = true;
@@ -107,7 +109,7 @@ public class Ghost extends Character implements Serializable {
         this.timeOfDeath = null;
         this.moving = false;
     }
-    
+
     /**
      * This possesses a human, this ghost becomes the human, the previous human
      * becomes a ghost (with his own coloured sprites).
@@ -146,8 +148,8 @@ public class Ghost extends Character implements Serializable {
         if (this.isGhost && System.currentTimeMillis() >= stationaryTime.getTimeInMillis() + 1500 && !getMoving()) {
             this.vulnerable = false;
             this.isGhost = false;
-            
-            int x = (((int) this.getPosition().getX()) + 50) / 100 * 100;   
+
+            int x = (((int) this.getPosition().getX()) + 50) / 100 * 100;
             int y = (((int) this.getPosition().getY()) + 50) / 100 * 100;
             Point2D fixedPosition = new Point2D.Double(x, y);
             this.setPosition(fixedPosition);

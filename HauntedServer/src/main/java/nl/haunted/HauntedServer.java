@@ -6,7 +6,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.RMISocketFactory;
 
-
 /**
  * This class starts the game server.
  *
@@ -58,7 +57,7 @@ public class HauntedServer {
             RMISocketFactory.setSocketFactory(new MyServerRMISocketFactory());
         } catch (IOException ex) {
         }
-        
+
         HauntedServer server = new HauntedServer();
     }
 }

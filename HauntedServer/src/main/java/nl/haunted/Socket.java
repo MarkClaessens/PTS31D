@@ -35,46 +35,69 @@ import java.util.Scanner;
  */
 public class Socket implements Serializable {
 
+    //variables for setup.
+    NetworkInterface nic;
     MulticastSocket sock;
     InetAddress groupIp;
-    NetworkInterface nic;
-    Object[][] object;
     int port;
-    List<String> messages = new ArrayList();
     String IP = "";
+
+    //temporary lists to read out.
+    Object[][] object;
+    List<String> messages = new ArrayList();
     List<String[]> inputArray = new ArrayList();
 
+    /**
+     * This function sets up the correct NIC, it requests a groupname and a port.
+     * @param groupname
+     * @param port
+     * @throws IOException
+     */
     public void socketSetup(String groupname, int port) throws IOException {
-        sock = new MulticastSocket(port);
+        this.sock = new MulticastSocket(port);
+        this.nic = this.getLocalNIC();  
+        if (nic == null) {
+            Scanner input = new Scanner(System.in);
+            listNics();
+            System.out.println("What Network interface do you want to connect with?");
+            nic = NetworkInterface.getByName(input.nextLine());
+        }
+        this.IP = nic.getInetAddresses().nextElement().getHostAddress();
+        this.port = port;
+        
         if (port == 9877) {
             sock.setLoopbackMode(false);
         } else {
             sock.setLoopbackMode(true); // turn to true for dedicated server
         }
         groupIp = InetAddress.getByName(groupname);
-        Scanner input = new Scanner(System.in);
-        nic = this.getLocalNIC(); /* this.getLoopbackNick(); this.getInternetNIC(); //commented for futuure over internet support */
-
-        if (nic == null) {
-            listNics();
-            System.out.println("What Network interface do you want to connect with?");
-            nic = NetworkInterface.getByName(input.nextLine());
-        }
-        IP = nic.getInetAddresses().nextElement().getHostAddress();
-        object = null;
-
+        
         sock.joinGroup(new InetSocketAddress(groupIp, port), nic);
-        this.port = port;
+        object = null;
     }
 
+    /**
+     *  this returns the current network interface
+     * @return
+     */
     public NetworkInterface getNIC() {
         return nic;
     }
 
+    /**
+     * This returns the current IPAddress.
+     * @return
+     */
     public String getIPAddress() {
         return this.IP;
     }
 
+    /**
+     * This function lets you send an Object to the other computers connected to the Multicastgroup.
+     * this function expects an two-dimensional ObjectArray Object[][].
+     * @param o
+     * @throws IOException
+     */
     public void sendObject(Object o) throws IOException {
         ByteArrayOutputStream byteStream = new ByteArrayOutputStream(5000);
         try (ObjectOutputStream os = new ObjectOutputStream(new BufferedOutputStream(byteStream))) {
@@ -90,6 +113,11 @@ public class Socket implements Serializable {
         }
     }
 
+    /**
+     * This function lets you send a Message to the other computers.
+     * @param m
+     * @throws IOException
+     */
     public void sendMessage(String m) throws IOException {
         byte[] buf = m.getBytes();
         DatagramPacket packet = new DatagramPacket(
@@ -98,6 +126,12 @@ public class Socket implements Serializable {
 
     }
 
+    /**
+     * This function lets you send input from the client to the server.
+     * @param s
+     * @param port
+     * @throws IOException
+     */
     public void sendInput(String s, int port) throws IOException {
         StringBuilder sb = new StringBuilder();
         sb.append(this.IP).append(":").append(s);
@@ -107,10 +141,18 @@ public class Socket implements Serializable {
         sock.send(packet);
     }
 
+    /**
+     * This function returns an ObjectArray
+     * @return
+     */
     public Object[][] getObject() {
         return this.object;
     }
 
+    /**
+     * This function returns all the messages stored.
+     * @return
+     */
     public List<String> getMessages() {
         List<String> tempMessages = new ArrayList();
         tempMessages.addAll(this.messages);
@@ -118,6 +160,11 @@ public class Socket implements Serializable {
         return tempMessages;
     }
 
+    /**
+     * This Function receives a two-dimensional ObjectArray and saves it in the variable this.object
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void receiveObject() throws IOException, ClassNotFoundException {
         byte[] recvBuf = new byte[5000];
         DatagramPacket packet = new DatagramPacket(recvBuf,
@@ -141,6 +188,11 @@ public class Socket implements Serializable {
 
     }
 
+    /**
+     * This function receives a message from the socket and puts it in the this.messages list.
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void receiveMessage() throws IOException, ClassNotFoundException {
         byte[] recvBuf = new byte[300];
         DatagramPacket packet = new DatagramPacket(recvBuf,
@@ -156,6 +208,11 @@ public class Socket implements Serializable {
         }
     }
 
+    /**
+     * This function receives input from the socket and puts it in this.inputArray variable.
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void receiveInput() throws IOException, ClassNotFoundException {
         byte[] recvBuf = new byte[1000];
         DatagramPacket packet = new DatagramPacket(recvBuf,
@@ -168,7 +225,7 @@ public class Socket implements Serializable {
         if (packet.getLength() < 1000) {
             String str = new String(packet.getData(), 0, packet.getLength());
             boolean found = false;
-            if (str.indexOf("  ") == -1) {
+            if (!str.contains("  ")) {
                 for (String[] s : inputArray) {
                     if (s[0].equalsIgnoreCase(str.substring(0, str.indexOf(":")))) {
                         if (!s[1].equalsIgnoreCase(str.substring(str.indexOf(":") + 1))) {
@@ -188,15 +245,27 @@ public class Socket implements Serializable {
         }
     }
 
+    /**
+     * This function returns the saved this.inputArray variable.
+     * @return
+     */
     public List<String[]> getInputArray() {
         return Collections.unmodifiableList(this.inputArray);
     }
 
+    /**
+     * This function closes the connections to the other computers.
+     * @throws IOException
+     */
     public void close() throws IOException {
         sock.leaveGroup(groupIp);
         sock.close();
     }
 
+    /**
+     * This function prints a list of NICs
+     * @throws SocketException
+     */
     public void listNics() throws SocketException {
         Enumeration<NetworkInterface> nets = NetworkInterface.getNetworkInterfaces();
         for (NetworkInterface netint : Collections.list(nets)) {
@@ -205,7 +274,12 @@ public class Socket implements Serializable {
             }
         }
     }
-
+    
+    /**
+     * This function Prints information from a NIC.
+     * @param netint
+     * @throws SocketException
+     */
     public void displayInterfaceInformation(NetworkInterface netint) throws SocketException {
         out.printf("Display name: %s\n", netint.getDisplayName());
         out.printf("Name: %s\n", netint.getName());
@@ -216,6 +290,11 @@ public class Socket implements Serializable {
         out.printf("\n");
     }
 
+    /**
+     * This function returns the loopback network interface.
+     * @return
+     * @throws SocketException
+     */
     public NetworkInterface getLoopbackNick() throws SocketException {
         Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
         OUTER:
@@ -227,6 +306,12 @@ public class Socket implements Serializable {
         return null;
     }
 
+    /**
+     * this function returns a network interface that has an Internet connection.
+     * @return
+     * @throws SocketException
+     * @throws IOException
+     */
     public NetworkInterface getInternetNIC() throws SocketException, IOException {
         // iterate over the network interfaces known to java
         Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
@@ -277,6 +362,11 @@ public class Socket implements Serializable {
         return null;
     }
 
+    /**
+     * this function returns a network interface that is connected to a local network.
+     * @return
+     * @throws IOException
+     */
     public NetworkInterface getLocalNIC() throws IOException {
         Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
         OUTER:

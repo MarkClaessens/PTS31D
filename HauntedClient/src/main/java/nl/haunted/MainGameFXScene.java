@@ -310,53 +310,53 @@ public class MainGameFXScene {
     private void onKeyPresses(Scene scene) {
         scene.setOnKeyPressed(
                 new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent e) {
-                String code = e.getCode().toString();
+                    @Override
+                    public void handle(KeyEvent e) {
+                        String code = e.getCode().toString();
 
-                if (code.equals("ENTER")) {
-                    //TODO: call up chatbox popup
-                    chatstage = new Stage();
-                    chatstage.setTitle("Chat | Haunted");
-                    chatstage.setScene(getChatScene());
-                    chatstage.show();
-                } else {
+                        if (code.equals("ENTER")) {
+                            //TODO: call up chatbox popup
+                            chatstage = new Stage();
+                            chatstage.setTitle("Chat | Haunted");
+                            chatstage.setScene(getChatScene());
+                            chatstage.show();
+                        } else {
 
-                    switch (code) {
-                        case "W":
-                            HauntedClient.getController().getInputController().setDirection(DirectionType.UP);
-                            break;
-                        case "A":
-                            HauntedClient.getController().getInputController().setDirection(DirectionType.LEFT);
-                            break;
-                        case "S":
-                            HauntedClient.getController().getInputController().setDirection(DirectionType.DOWN);
-                            break;
-                        case "D":
-                            HauntedClient.getController().getInputController().setDirection(DirectionType.RIGHT);
-                            break;
-                        case "UP":
-                            HauntedClient.getController().getInputController().setDirection(DirectionType.UP);
-                            break;
-                        case "LEFT":
-                            HauntedClient.getController().getInputController().setDirection(DirectionType.LEFT);
-                            break;
-                        case "DOWN":
-                            HauntedClient.getController().getInputController().setDirection(DirectionType.DOWN);
-                            break;
-                        case "RIGHT":
-                            HauntedClient.getController().getInputController().setDirection(DirectionType.RIGHT);
-                            break;
-                        default:
-                            HauntedClient.getController().getInputController().setDirection(null);
-                            break;
+                            switch (code) {
+                                case "W":
+                                    HauntedClient.getController().getInputController().setDirection(DirectionType.UP);
+                                    break;
+                                case "A":
+                                    HauntedClient.getController().getInputController().setDirection(DirectionType.LEFT);
+                                    break;
+                                case "S":
+                                    HauntedClient.getController().getInputController().setDirection(DirectionType.DOWN);
+                                    break;
+                                case "D":
+                                    HauntedClient.getController().getInputController().setDirection(DirectionType.RIGHT);
+                                    break;
+                                case "UP":
+                                    HauntedClient.getController().getInputController().setDirection(DirectionType.UP);
+                                    break;
+                                case "LEFT":
+                                    HauntedClient.getController().getInputController().setDirection(DirectionType.LEFT);
+                                    break;
+                                case "DOWN":
+                                    HauntedClient.getController().getInputController().setDirection(DirectionType.DOWN);
+                                    break;
+                                case "RIGHT":
+                                    HauntedClient.getController().getInputController().setDirection(DirectionType.RIGHT);
+                                    break;
+                                default:
+                                    HauntedClient.getController().getInputController().setDirection(null);
+                                    break;
+                            }
+
+                        }
+
+                        // only add once... prevent duplicates
                     }
-
                 }
-
-                // only add once... prevent duplicates
-            }
-        }
         );
     }
 
@@ -368,38 +368,38 @@ public class MainGameFXScene {
     private void onKeyReleases(Scene scene) {
         scene.setOnKeyReleased(
                 new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent e) {
-                String code = e.getCode().toString();
+                    @Override
+                    public void handle(KeyEvent e) {
+                        String code = e.getCode().toString();
 
-                switch (code) {
-                    case "W":
-                        HauntedClient.getController().getInputController().setDirection(null);
-                        break;
-                    case "A":
-                        HauntedClient.getController().getInputController().setDirection(null);
-                        break;
-                    case "S":
-                        HauntedClient.getController().getInputController().setDirection(null);
-                        break;
-                    case "D":
-                        HauntedClient.getController().getInputController().setDirection(null);
-                        break;
-                    case "UP":
-                        HauntedClient.getController().getInputController().setDirection(null);
-                        break;
-                    case "LEFT":
-                        HauntedClient.getController().getInputController().setDirection(null);
-                        break;
-                    case "DOWN":
-                        HauntedClient.getController().getInputController().setDirection(null);
-                        break;
-                    case "RIGHT":
-                        HauntedClient.getController().getInputController().setDirection(null);
-                        break;
+                        switch (code) {
+                            case "W":
+                                HauntedClient.getController().getInputController().setDirection(null);
+                                break;
+                            case "A":
+                                HauntedClient.getController().getInputController().setDirection(null);
+                                break;
+                            case "S":
+                                HauntedClient.getController().getInputController().setDirection(null);
+                                break;
+                            case "D":
+                                HauntedClient.getController().getInputController().setDirection(null);
+                                break;
+                            case "UP":
+                                HauntedClient.getController().getInputController().setDirection(null);
+                                break;
+                            case "LEFT":
+                                HauntedClient.getController().getInputController().setDirection(null);
+                                break;
+                            case "DOWN":
+                                HauntedClient.getController().getInputController().setDirection(null);
+                                break;
+                            case "RIGHT":
+                                HauntedClient.getController().getInputController().setDirection(null);
+                                break;
+                        }
+                    }
                 }
-            }
-        }
         );
     }
 
@@ -419,67 +419,67 @@ public class MainGameFXScene {
         {new Image("humanWhiteRight1.png"), new Image("humanWhiteRight2.png"), new Image("humanWhiteRight3.png")}};
 
         ghostWhiteImages = new Image[][]{{new Image("ghostWhiteUp1.png"), new Image("ghostWhiteUp2.png"), new Image("ghostWhiteUp3.png")},
-        {new Image("ghostWhiteDown1.png"), new Image("ghostWhiteDown2.png"), new Image("ghostWhiteDown3.png")}, 
+        {new Image("ghostWhiteDown1.png"), new Image("ghostWhiteDown2.png"), new Image("ghostWhiteDown3.png")},
         {new Image("ghostWhiteLeft1.png"), new Image("ghostWhiteLeft2.png"), new Image("ghostWhiteLeft3.png")},
         {new Image("ghostWhiteRight1.png"), new Image("ghostWhiteRight2.png"), new Image("ghostWhiteRight3.png")}};
 
         humanBlackImages = new Image[][]{{new Image("humanBlackUp1.png"), new Image("humanBlackUp2.png"), new Image("humanBlackUp3.png")},
-        {new Image("humanBlackDown1.png"), new Image("humanBlackDown2.png"), new Image("humanBlackDown3.png")}, 
+        {new Image("humanBlackDown1.png"), new Image("humanBlackDown2.png"), new Image("humanBlackDown3.png")},
         {new Image("humanBlackLeft1.png"), new Image("humanBlackLeft2.png"), new Image("humanBlackLeft3.png")},
         {new Image("humanBlackRight1.png"), new Image("humanBlackRight2.png"), new Image("humanBlackRight3.png")}};
 
         ghostBlackImages = new Image[][]{{new Image("ghostBlackUp1.png"), new Image("ghostBlackUp2.png"), new Image("ghostBlackUp3.png")},
-        {new Image("ghostBlackDown1.png"), new Image("ghostBlackDown2.png"), new Image("ghostBlackDown3.png")}, 
+        {new Image("ghostBlackDown1.png"), new Image("ghostBlackDown2.png"), new Image("ghostBlackDown3.png")},
         {new Image("ghostBlackLeft1.png"), new Image("ghostBlackLeft2.png"), new Image("ghostBlackLeft3.png")},
         {new Image("ghostBlackRight1.png"), new Image("ghostBlackRight2.png"), new Image("ghostBlackRight3.png")}};
 
         humanGreenImages = new Image[][]{{new Image("humanGreenUp1.png"), new Image("humanGreenUp2.png"), new Image("humanGreenUp3.png")},
-        {new Image("humanGreenDown1.png"), new Image("humanGreenDown2.png"), new Image("humanGreenDown3.png")}, 
+        {new Image("humanGreenDown1.png"), new Image("humanGreenDown2.png"), new Image("humanGreenDown3.png")},
         {new Image("humanGreenLeft1.png"), new Image("humanGreenLeft2.png"), new Image("humanGreenLeft3.png")},
         {new Image("humanGreenRight1.png"), new Image("humanGreenRight2.png"), new Image("humanGreenRight3.png")}};
 
         ghostGreenImages = new Image[][]{{new Image("ghostGreenUp1.png"), new Image("ghostGreenUp2.png"), new Image("ghostGreenUp3.png")},
-        {new Image("ghostGreenDown1.png"), new Image("ghostGreenDown2.png"), new Image("ghostGreenDown3.png")}, 
+        {new Image("ghostGreenDown1.png"), new Image("ghostGreenDown2.png"), new Image("ghostGreenDown3.png")},
         {new Image("ghostGreenLeft1.png"), new Image("ghostGreenLeft2.png"), new Image("ghostGreenLeft3.png")},
         {new Image("ghostGreenRight1.png"), new Image("ghostGreenRight2.png"), new Image("ghostGreenRight3.png")}};
 
         humanRedImages = new Image[][]{{new Image("humanRedUp1.png"), new Image("humanRedUp2.png"), new Image("humanRedUp3.png")},
-        {new Image("humanRedDown1.png"), new Image("humanRedDown2.png"), new Image("humanRedDown3.png")}, 
+        {new Image("humanRedDown1.png"), new Image("humanRedDown2.png"), new Image("humanRedDown3.png")},
         {new Image("humanRedLeft1.png"), new Image("humanRedLeft2.png"), new Image("humanRedLeft3.png")},
         {new Image("humanRedRight1.png"), new Image("humanRedRight2.png"), new Image("humanRedRight3.png")}};
 
         ghostRedImages = new Image[][]{{new Image("ghostRedUp1.png"), new Image("ghostRedUp2.png"), new Image("ghostRedUp3.png")},
-        {new Image("ghostRedDown1.png"), new Image("ghostRedDown2.png"), new Image("ghostRedDown3.png")}, 
+        {new Image("ghostRedDown1.png"), new Image("ghostRedDown2.png"), new Image("ghostRedDown3.png")},
         {new Image("ghostRedLeft1.png"), new Image("ghostRedLeft2.png"), new Image("ghostRedLeft3.png")},
         {new Image("ghostRedRight1.png"), new Image("ghostRedRight2.png"), new Image("ghostRedRight3.png")}};
 
         humanBlueImages = new Image[][]{{new Image("humanBlueUp1.png"), new Image("humanBlueUp2.png"), new Image("humanBlueUp3.png")},
-        {new Image("humanBlueDown1.png"), new Image("humanBlueDown2.png"), new Image("humanBlueDown3.png")}, 
+        {new Image("humanBlueDown1.png"), new Image("humanBlueDown2.png"), new Image("humanBlueDown3.png")},
         {new Image("humanBlueLeft1.png"), new Image("humanBlueLeft2.png"), new Image("humanBlueLeft3.png")},
         {new Image("humanBlueRight1.png"), new Image("humanBlueRight2.png"), new Image("humanBlueRight3.png")}};
 
         ghostBlueImages = new Image[][]{{new Image("ghostBlueUp1.png"), new Image("ghostBlueUp2.png"), new Image("ghostBlueUp3.png")},
-        {new Image("ghostBlueDown1.png"), new Image("ghostBlueDown2.png"), new Image("ghostBlueDown3.png")}, 
+        {new Image("ghostBlueDown1.png"), new Image("ghostBlueDown2.png"), new Image("ghostBlueDown3.png")},
         {new Image("ghostBlueLeft1.png"), new Image("ghostBlueLeft2.png"), new Image("ghostBlueLeft3.png")},
         {new Image("ghostBlueRight1.png"), new Image("ghostBlueRight2.png"), new Image("ghostBlueRight3.png")}};
 
         humanOrangeImages = new Image[][]{{new Image("humanOrangeUp1.png"), new Image("humanOrangeUp2.png"), new Image("humanOrangeUp3.png")},
-        {new Image("humanOrangeDown1.png"), new Image("humanOrangeDown2.png"), new Image("humanOrangeDown3.png")}, 
+        {new Image("humanOrangeDown1.png"), new Image("humanOrangeDown2.png"), new Image("humanOrangeDown3.png")},
         {new Image("humanOrangeLeft1.png"), new Image("humanOrangeLeft2.png"), new Image("humanOrangeLeft3.png")},
         {new Image("humanOrangeRight1.png"), new Image("humanOrangeRight2.png"), new Image("humanOrangeRight3.png")}};
 
         ghostOrangeImages = new Image[][]{{new Image("ghostOrangeUp1.png"), new Image("ghostOrangeUp2.png"), new Image("ghostOrangeUp3.png")},
-        {new Image("ghostOrangeDown1.png"), new Image("ghostOrangeDown2.png"), new Image("ghostOrangeDown3.png")}, 
+        {new Image("ghostOrangeDown1.png"), new Image("ghostOrangeDown2.png"), new Image("ghostOrangeDown3.png")},
         {new Image("ghostOrangeLeft1.png"), new Image("ghostOrangeLeft2.png"), new Image("ghostOrangeLeft3.png")},
         {new Image("ghostOrangeRight1.png"), new Image("ghostOrangeRight2.png"), new Image("ghostOrangeRight3.png")}};
 
         humanPurpleImages = new Image[][]{{new Image("humanPurpleUp1.png"), new Image("humanPurpleUp2.png"), new Image("humanPurpleUp3.png")},
-        {new Image("humanPurpleDown1.png"), new Image("humanPurpleDown2.png"), new Image("humanPurpleDown3.png")}, 
+        {new Image("humanPurpleDown1.png"), new Image("humanPurpleDown2.png"), new Image("humanPurpleDown3.png")},
         {new Image("humanPurpleLeft1.png"), new Image("humanPurpleLeft2.png"), new Image("humanPurpleLeft3.png")},
         {new Image("humanPurpleRight1.png"), new Image("humanPurpleRight2.png"), new Image("humanPurpleRight3.png")}};
 
         ghostPurpleImages = new Image[][]{{new Image("ghostPurpleUp1.png"), new Image("ghostPurpleUp2.png"), new Image("ghostPurpleUp3.png")},
-        {new Image("ghostPurpleDown1.png"), new Image("ghostPurpleDown2.png"), new Image("ghostPurpleDown3.png")}, 
+        {new Image("ghostPurpleDown1.png"), new Image("ghostPurpleDown2.png"), new Image("ghostPurpleDown3.png")},
         {new Image("ghostPurpleLeft1.png"), new Image("ghostPurpleLeft2.png"), new Image("ghostPurpleLeft3.png")},
         {new Image("ghostPurpleRight1.png"), new Image("ghostPurpleRight2.png"), new Image("ghostPurpleRight3.png")}};
     }
@@ -523,8 +523,7 @@ public class MainGameFXScene {
                             humanGhostPersGc.drawImage(humanPerspectiveImage[3], (e.getPosition().getX() - 1800) * horScale, (e.getPosition().getY() - 1800) * verScale, humanPerspectiveImage[3].getWidth() * horScale, humanPerspectiveImage[3].getHeight() * verScale);
                         }
                         //drawRotatedImage(humanPersGc, humanPerspectiveImage, getAngle(e.getDirection()), (e.getPosition().getX() - 1900), (e.getPosition().getY() - 1900), horScale, verScale);
-                    }
-                    else{
+                    } else {
                         if (e.getDirection() == DirectionType.UP) {
                             humanGhostPersGc.drawImage(ghostPerspectiveImage[0], (e.getPosition().getX() - 1800) * horScale, (e.getPosition().getY() - 1800) * verScale, ghostPerspectiveImage[0].getWidth() * horScale, ghostPerspectiveImage[0].getHeight() * verScale);
                         } else if (e.getDirection() == DirectionType.DOWN) {

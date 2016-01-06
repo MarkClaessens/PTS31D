@@ -55,6 +55,7 @@ public class Level implements Serializable {
 
     /**
      * Constructs the level object
+     *
      * @param floorNr
      * @param numberOfGhosts
      */

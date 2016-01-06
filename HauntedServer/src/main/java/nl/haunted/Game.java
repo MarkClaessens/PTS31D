@@ -222,13 +222,12 @@ public class Game implements Serializable {
                         //check if the player pressed a button
                         if (keyboard[i] != null) {
                             if (this.players.get(i).getCharacter() instanceof Ghost) {
-                                for (Ghost g : ghosts){
-                                    if(g.getControllingPlayer().getIpAdress().equals(this.players.get(i).getIpAdress())){
+                                for (Ghost g : ghosts) {
+                                    if (g.getControllingPlayer().getIpAdress().equals(this.players.get(i).getIpAdress())) {
                                         g.move(this, (DirectionType) keyboard[i]);
                                     }
                                 }
-                            }
-                            else if (this.players.get(i).getCharacter() instanceof Human){
+                            } else if (this.players.get(i).getCharacter() instanceof Human) {
                                 this.human.move(this, (DirectionType) keyboard[i]);
                             }
                         } else {
@@ -238,8 +237,8 @@ public class Game implements Serializable {
                             //if it was moving set the stationary time
                             //set the characters moving on false
                             if (this.players.get(i).getCharacter() instanceof Ghost) {
-                                for (Ghost g : ghosts){
-                                    if(g.getControllingPlayer().getIpAdress().equals(this.players.get(i).getIpAdress())){
+                                for (Ghost g : ghosts) {
+                                    if (g.getControllingPlayer().getIpAdress().equals(this.players.get(i).getIpAdress())) {
                                         if (g.getMoving()) {
                                             if (this.players.get(i).getCharacter() instanceof Ghost) {
                                                 g.setStationaryTime();
@@ -251,9 +250,7 @@ public class Game implements Serializable {
                                         g.setMoving(false);
                                     }
                                 }
-                            }
-                            else
-                            {
+                            } else {
                                 this.human.setMoving(false);
                             }
 //                            this.players.get(i).getCharacter().setMoving(false);
@@ -407,7 +404,7 @@ public class Game implements Serializable {
                 }
             }
         }
-        
+
         return spawnPoint;
     }
 

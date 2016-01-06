@@ -62,7 +62,7 @@ public abstract class Character implements Serializable {
         this.movementSpeed = 4.0;
     }
 
-        /**
+    /**
      * Moves the character into the given direction. But checks if there is no
      * collision.
      *
@@ -75,8 +75,8 @@ public abstract class Character implements Serializable {
 
         switch (direction) {
             case UP:
-                proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);                
-                break;              
+                proposedLocation.setLocation(oldPosition.getX(), oldPosition.getY() - movementSpeed);
+                break;
             case DOWN:
                 proposedLocation.setLocation(oldPosition.getX(), (oldPosition.getY() + movementSpeed));
                 break;
@@ -87,25 +87,25 @@ public abstract class Character implements Serializable {
                 proposedLocation.setLocation((oldPosition.getX() - movementSpeed), oldPosition.getY());
                 break;
         }
-        
+
         if (detectCollision(proposedLocation, game)) {
-                if (this.moving) {
-                    if (this instanceof Ghost) {
-                        Ghost g = (Ghost) this;
-                        g.setStationaryTime();
-                    }
+            if (this.moving) {
+                if (this instanceof Ghost) {
+                    Ghost g = (Ghost) this;
+                    g.setStationaryTime();
                 }
-                this.moving = false;
-            } else {
-                if (!this.moving) {
-                    if (this instanceof Ghost) {
-                        Ghost g = (Ghost) this;
-                        g.getStationaryTime().clear();
-                    }
-                }
-                this.moving = true;
-                position.setLocation(proposedLocation);
             }
+            this.moving = false;
+        } else {
+            if (!this.moving) {
+                if (this instanceof Ghost) {
+                    Ghost g = (Ghost) this;
+                    g.getStationaryTime().clear();
+                }
+            }
+            this.moving = true;
+            position.setLocation(proposedLocation);
+        }
     }
 
     /**

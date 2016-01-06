@@ -69,7 +69,7 @@ public class GhostTest {
     public void testIsVulnerable() {
         Ghost ghost = new Ghost((Player) players.get(0));
         ghost.setPosition(spawnPosition);
-        
+
         assertTrue("Ghost is not vulnerable at initializing", ghost.isVulnerable());
     }
 

@@ -30,11 +30,10 @@ public class Message {
     public IPlayer getPlayer() {
         return player;
     }
-    
-    public boolean getIsVisibleForEveryone(){
+
+    public boolean getIsVisibleForEveryone() {
         return visibleForEveryone;
     }
-    
 
     /**
      * Constructs the message object. This object represents a message inside
@@ -46,7 +45,7 @@ public class Message {
      * @exception IllegalArgumentException thrown when the text is null, empty
      * or only containing white spaces and when de player is null.
      */
-    public Message(String text, IPlayer player, boolean visibleForEveryone ) throws IllegalArgumentException, RemoteException {
+    public Message(String text, IPlayer player, boolean visibleForEveryone) throws IllegalArgumentException, RemoteException {
         if (text == null || player == null || text.isEmpty() || text.trim().length() == 0) {
             throw new IllegalArgumentException("The message was not created, "
                     + "check if the text and player are not null and if the text is not empty "
@@ -62,7 +61,7 @@ public class Message {
     }
 
     /**
-     * Creates a string of the message object. Example --> 
+     * Creates a string of the message object. Example -->
      * [15:34][Mike23HeroJeWeetZelf]: Hoi allemaal, veel succes!
      *
      * @return the string that represents a chat message.
@@ -72,7 +71,7 @@ public class Message {
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
         String timeToString = formatter.format(timestamp);
 
-        StringBuilder sb = new StringBuilder("["+timeToString);
+        StringBuilder sb = new StringBuilder("[" + timeToString);
         sb.append("][");
         try {
             sb.append(player.getName());

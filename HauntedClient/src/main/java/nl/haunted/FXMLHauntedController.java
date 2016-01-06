@@ -5,7 +5,6 @@
  */
 package nl.haunted;
 
-
 import java.io.IOException;
 import javafx.scene.control.TextField;
 import java.net.URL;
@@ -32,7 +31,6 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
-
 
 /**
  *
@@ -92,11 +90,11 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
         } catch (RemoteException ex) {
             Logger.getLogger(FXMLHauntedController.class.getName()).log(Level.SEVERE, null, ex);
         }
-         BackgroundImage myBI = new BackgroundImage(new Image("lobbypic.jpg", 1024, 576, false, true),
-         BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-         BackgroundSize.DEFAULT);
-         //then you set to your node
-         paneel.setBackground(new Background(myBI));
+        BackgroundImage myBI = new BackgroundImage(new Image("lobbypic.jpg", 1024, 576, false, true),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        //then you set to your node
+        paneel.setBackground(new Background(myBI));
         try {
             setplayername();
         } catch (RemoteException ex) {
@@ -137,6 +135,7 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
     /**
      * *
      * change the name of both players
+     *
      * @throws java.rmi.RemoteException
      */
     public void changename() throws RemoteException {
@@ -158,12 +157,10 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
         if ((!(TFroomname.getText().equals("")) && !(TFplayers.getText().equals("")) && !(TFfloors.getText().equals("")))) {
             try {
                 boolean exist = false;
-                for(IGameLobby GL :lobby.getGameLobbys())
-                {
-                   if(GL.getName().equals(TFroomname.getText()))
-                   {
-                       exist = true;
-                   }
+                for (IGameLobby GL : lobby.getGameLobbys()) {
+                    if (GL.getName().equals(TFroomname.getText())) {
+                        exist = true;
+                    }
                 }
                 if (!exist && Integer.parseInt(TFplayers.getText()) > 2 && Integer.parseInt(TFplayers.getText()) < 8 && Integer.parseInt(TFfloors.getText()) < 11 && Integer.parseInt(TFfloors.getText()) > 2) {
                     lobby.createGameLobby(TFroomname.getText(), TFpassword.getText(), tisplayer, Integer.parseInt(TFfloors.getText()), Integer.parseInt(TFplayers.getText()));
@@ -206,19 +203,17 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
     /**
      * *
      * before the gui will be shown
+     *
      * @throws java.rmi.RemoteException
      */
     public void setgamelobbys() throws RemoteException {
         setLobby();
         List<String> namen = new ArrayList<>();
         for (IGameLobby GL : lobby.getGameLobbys()) {
-            if(GL.getww().isEmpty())
-            {
-              namen.add("naam: " + GL.getName() + " players: " + GL.getPlayers().size() + "/" + GL.getMaxPlayer() + " maxFloors: " + GL.getMaxFloors());
-            }
-            else
-            {
-               namen.add("naam: " + GL.getName() + " *p* players: " + GL.getPlayers().size() + "/" + GL.getMaxPlayer() + " maxFloors: " + GL.getMaxFloors());
+            if (GL.getww().isEmpty()) {
+                namen.add("naam: " + GL.getName() + " players: " + GL.getPlayers().size() + "/" + GL.getMaxPlayer() + " maxFloors: " + GL.getMaxFloors());
+            } else {
+                namen.add("naam: " + GL.getName() + " *p* players: " + GL.getPlayers().size() + "/" + GL.getMaxPlayer() + " maxFloors: " + GL.getMaxFloors());
             }
         }
         LVgamelobbys.setItems(FXCollections.observableList(namen));
@@ -228,57 +223,42 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
         String totaaltekst = (String) LVgamelobbys.getSelectionModel().getSelectedItem();
         String naam = "";
         for (IGameLobby GL : lobby.getGameLobbys()) {
-            if(GL.getww().isEmpty())
-            {
-              naam = totaaltekst.substring(6, totaaltekst.indexOf(" players:"));  
+            if (GL.getww().isEmpty()) {
+                naam = totaaltekst.substring(6, totaaltekst.indexOf(" players:"));
+            } else {
+                naam = totaaltekst.substring(6, totaaltekst.indexOf(" *p*"));
             }
-            else
-            {
-               naam = totaaltekst.substring(6, totaaltekst.indexOf(" *p*")); 
-            }
-                    
-            
+
             System.out.println(GL.getName());
             if (GL.getName().equals(naam)) {
-                if(GL.getww().isEmpty())
-                {
-                    if(GL.addPlayer(tisplayer))
-                    {
-                  lobby.informlobbys();
-                  timer.cancel();    
+                if (GL.getww().isEmpty()) {
+                    if (GL.addPlayer(tisplayer)) {
+                        lobby.informlobbys();
+                        timer.cancel();
+                    } else {
+                        Alert alert = new Alert(AlertType.INFORMATION);
+                        alert.setHeaderText("Room is vol");
+                        alert.setContentText("jammer joh vol!");
+                        alert.showAndWait();
                     }
-                   else
-                   {
-                   Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setHeaderText("Room is vol");
-                    alert.setContentText("jammer joh vol!");
-                    alert.showAndWait();     
+
+                } else if (GL.getww().equals(TFwachtwoord.getText())) {
+                    if (GL.addPlayer(tisplayer)) {
+                        lobby.informlobbys();
+                        timer.cancel();
+                    } else {
+                        Alert alert = new Alert(AlertType.INFORMATION);
+                        alert.setHeaderText("Room is vol");
+                        alert.setContentText("jammer joh vol!");
+                        alert.showAndWait();
                     }
-                
-                }
-                else if(GL.getww().equals(TFwachtwoord.getText()))
-                {
-                   if(GL.addPlayer(tisplayer))
-                    {
-                   lobby.informlobbys();
-                   timer.cancel();    
-                    }
-                   else
-                   {
-                   Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setHeaderText("Room is vol");
-                    alert.setContentText("jammer joh vol!");
-                    alert.showAndWait();     
-                    }
-                }
-                else
-                {
+                } else {
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setHeaderText("FOUT WACHTWOORD");
                     alert.setContentText("verkeerde wachwoord ingevuld!");
                     alert.showAndWait();
                 }
-                
+
             }
 
         }
@@ -287,19 +267,19 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
 
     @Override
     public void run() {
-        
-            Platform.runLater(new Runnable() {
 
-                @Override
-                public void run() {
-                    try {
-                        setgamelobbys();
-                    } catch (RemoteException ex) {
-                        Logger.getLogger(FXMLHauntedController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+        Platform.runLater(new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    setgamelobbys();
+                } catch (RemoteException ex) {
+                    Logger.getLogger(FXMLHauntedController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            });            
-       
+            }
+        });
+
     }
 
 }

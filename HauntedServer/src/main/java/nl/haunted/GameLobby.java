@@ -24,7 +24,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
 
     private String name, password;
     private int maxPlayers, maxFloors;
-    private IPlayer host;    
+    private IPlayer host;
     private List<IPlayer> players;
     private BasicPublisher basicPublisher;
     private static int gameLobbyNum = 0;
@@ -47,7 +47,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         this.lobby = lobby;
         this.name = name;
         this.password = password;
-        this.host = host;        
+        this.host = host;
         this.maxPlayers = maxPlayers;
         this.maxFloors = maxFloors;
         this.players = new ArrayList();
@@ -62,7 +62,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         String stringConverter = "" + groupIdNum;
         groupID = stringConverter.substring(0, 3) + "." + stringConverter.substring(4, 5) + "." + stringConverter.substring(6, 7) + "." + stringConverter.substring(8, 9);
         gameLobbyNum++;
-        System.out.println("Created lobby name:"+this.name+" host: "+this.host.getName());
+        System.out.println("Created lobby name:" + this.name + " host: " + this.host.getName());
         //</socket>
 
     }
@@ -78,37 +78,35 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
                 Game game;
                 try {
                     int i = 0;
-                    for(IPlayer player : players)
-                    {
-                       switch(i)
-                       {
-                           case(0):
+                    for (IPlayer player : players) {
+                        switch (i) {
+                            case (0):
                                 player.setColor(Color.WHITE);
-                           break;
-                           case(1):
+                                break;
+                            case (1):
                                 player.setColor(Color.BLACK);
-                           break;
-                           case(2):
+                                break;
+                            case (2):
                                 player.setColor(Color.GREEN);
-                           break;
-                           case(3):
+                                break;
+                            case (3):
                                 player.setColor(Color.RED);
-                           break;      
-                           case(4):
+                                break;
+                            case (4):
                                 player.setColor(Color.BLUE);
-                           break;
-                           case(5):
+                                break;
+                            case (5):
                                 player.setColor(Color.ORANGE);
-                           break;  
-                           case(6):
+                                break;
+                            case (6):
                                 player.setColor(Color.MAGENTA);
-                           break;                            
-                       }
-                       i++;
+                                break;
+                        }
+                        i++;
                     }
                     game = new Game(players, maxFloors, groupID, this);
                     ingame = true;
-                    System.out.println("game "+this.getName()+" has started");
+                    System.out.println("game " + this.getName() + " has started");
                     game.startRound();
                     this.basicPublisher.inform(this, "players", null, players);
                 } catch (IOException ex) {
@@ -135,7 +133,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         if (exist) {
             players.remove(player);
             this.basicPublisher.inform(this, "players", null, players);
-            System.out.println("player "+player.getName()+" was kicked from gamelobby "+this.name);
+            System.out.println("player " + player.getName() + " was kicked from gamelobby " + this.name);
             return true;
         } else {
             return false;
@@ -160,7 +158,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
             naamchecker(player);
             players.add((IPlayer) player);
             this.basicPublisher.inform(this, "players", null, players);
-            System.out.println("player "+player.getName()+" was added to gamelobby "+this.name);
+            System.out.println("player " + player.getName() + " was added to gamelobby " + this.name);
             return true;
         } else {
             return false;
@@ -231,51 +229,45 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
     public String getGroupID() throws RemoteException {
         return this.groupID;
     }
-    
-    public Lobby getLobby(){
+
+    public Lobby getLobby() {
         return this.lobby;
     }
-    
-    public boolean getIngame() throws RemoteException
-    {
+
+    public boolean getIngame() throws RemoteException {
         return ingame;
     }
-    
-    public IPlayer getHost() throws RemoteException
-    {
+
+    public IPlayer getHost() throws RemoteException {
         return host;
     }
-    
-    public String getww() throws RemoteException
-    {
+
+    public String getww() throws RemoteException {
         return password;
     }
-    
-    private void naamchecker(IPlayer player) throws RemoteException
-    {
-        for (IPlayer spelernaam : players)
-            {
-                if(player.getName().equals(spelernaam.getName()))
-                {
-                    player.setName(player.getName() + "(1)");
-                    naamchecker(player);
-                }
+
+    private void naamchecker(IPlayer player) throws RemoteException {
+        for (IPlayer spelernaam : players) {
+            if (player.getName().equals(spelernaam.getName())) {
+                player.setName(player.getName() + "(1)");
+                naamchecker(player);
             }
+        }
     }
 
     @Override
     public void setHost(IPlayer player) throws RemoteException {
         this.host = player;
-        }
+    }
 
     @Override
     public void setName(String naam) throws RemoteException {
         this.name = naam;
-        }
+    }
 
     @Override
     public void setMaxFloors(int maxfloors) throws RemoteException {
-     this.maxFloors = maxfloors;   
+        this.maxFloors = maxfloors;
     }
 
     @Override

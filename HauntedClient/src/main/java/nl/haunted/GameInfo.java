@@ -55,7 +55,7 @@ public class GameInfo {
     }
 
     public Boolean amIHuman() {
-       return this.amIHuman;
+        return this.amIHuman;
     }
 
     public void setamIHuman(boolean b) {
@@ -96,7 +96,7 @@ public class GameInfo {
     }
 
     public void setNextRound(boolean bool) {
-        if(this.roundEnd == true && bool == false){
+        if (this.roundEnd == true && bool == false) {
             this.gameEnd = true;
         } else {
             this.gameEnd = false;
@@ -106,23 +106,26 @@ public class GameInfo {
     public void setRoundEnd(boolean bool) {
         this.roundEnd = bool;
     }
-    
-    public boolean isRoundEnd(){
-        return this.roundEnd;      
+
+    public boolean isRoundEnd() {
+        return this.roundEnd;
     }
-    
-    public boolean isGameEnd(){
+
+    public boolean isGameEnd() {
         return this.gameEnd;
     }
-    
-    
-    
-    public boolean isRunning(){
+
+    public boolean isRunning() {
         return false;
     }
-     public boolean isEnded(){
-         return true;
-     }
-     public void endGame(){}
-     public void endRound(){}
+
+    public boolean isEnded() {
+        return true;
+    }
+
+    public void endGame() {
+    }
+
+    public void endRound() {
+    }
 }

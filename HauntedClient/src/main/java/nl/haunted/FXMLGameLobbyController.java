@@ -46,7 +46,6 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.stage.Stage;
 
-
 /**
  * FXML Controller class
  *
@@ -67,7 +66,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     Socket msgSoc;
     private Chat chat;
     observermessages om;
-    
+
     private List<IPlayer> players;
     private transient ObservableList<String> observablePersonen;
     @FXML
@@ -112,11 +111,11 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         BackgroundImage myBI = new BackgroundImage(new Image("gamelobby.jpg", 1024, 576, false, true),
-         BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-         BackgroundSize.DEFAULT);
-         //then you set to your node
-         paneel.setBackground(new Background(myBI));
+        BackgroundImage myBI = new BackgroundImage(new Image("gamelobby.jpg", 1024, 576, false, true),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        //then you set to your node
+        paneel.setBackground(new Background(myBI));
 
         System.out.println("kaas");
         // Set the groupID in ClientController to the groupID of this gamelobby.
@@ -135,15 +134,12 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     private void playernames() throws RemoteException {
         List<String> namen = new ArrayList<>();
         for (IPlayer player : players) {
-            if(gamelobby.getHost().equals(player))
-            {
+            if (gamelobby.getHost().equals(player)) {
                 namen.add("(Host) " + player.getName() + " ready: " + player.getReady());
+            } else {
+                namen.add(player.getName() + " ready: " + player.getReady());
             }
-            else
-            {
-              namen.add(player.getName() + " ready: " + player.getReady());  
-            }
-            
+
         }
         Platform.runLater(new Runnable() {
 
@@ -175,15 +171,11 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
             playernames();
             gamesettings();
             setController();
-            controller.setInputController(gamelobby); 
-            chat = new Chat(controller.getInputController());  
+            controller.setInputController(gamelobby);
+            chat = new Chat(controller.getInputController());
             om = new observermessages(this);
-            controller.setGroupID(gamelobby.getGroupID());            
-                
-                
-            
-        
-                                
+            controller.setGroupID(gamelobby.getGroupID());
+
         } catch (RemoteException ex) {
             Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -192,15 +184,14 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     public void settisPlayer(IPlayer player) {
         this.tisplayer = player;
         try {
-            if(!gamelobby.getHost().equals(tisplayer))
-            {
+            if (!gamelobby.getHost().equals(tisplayer)) {
                 IVstart.setVisible(false);
                 TFnewplayers.setVisible(false);
                 TFnewfloors.setVisible(false);
                 TFnewname.setVisible(false);
                 BTNsetname.setVisible(false);
                 BTNsetfloors.setVisible(false);
-                BTNsetplayers.setVisible(false); 
+                BTNsetplayers.setVisible(false);
             }
         } catch (RemoteException ex) {
             Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
@@ -255,16 +246,14 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
             }
         }
         if (startable && players.size() > 2) {
-               gamelobby.startGame();
-               Thread.sleep(3000);
+            gamelobby.startGame();
+            Thread.sleep(3000);
+        } else {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setHeaderText("NIET IEDEREEN READY");
+            alert.setContentText("niet alle spelers hebben op ready gedrukt!");
+            alert.showAndWait();
         }
-        else
-                {
-                    Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setHeaderText("NIET IEDEREEN READY");
-                    alert.setContentText("niet alle spelers hebben op ready gedrukt!");
-                    alert.showAndWait();
-                }
     }
 
     /**
@@ -292,7 +281,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
             chat.sendMessage(message);
             TFmessage.clear();
 
-        } else {            
+        } else {
             TAchatBox.setScrollTop(Double.MAX_VALUE);
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setContentText("geen message ingevoerd");
@@ -308,8 +297,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     private void leavegamelobby() throws RemoteException {
         gamelobby.removePlayer(tisplayer);
         controller.setInGL(false);
-        if(gamelobby.getHost().equals(tisplayer) && !gamelobby.getPlayers().isEmpty())
-        {
+        if (gamelobby.getHost().equals(tisplayer) && !gamelobby.getPlayers().isEmpty()) {
             gamelobby.setHost(players.get(0));
         }
         if (gamelobby.getPlayers().isEmpty()) {
@@ -331,54 +319,49 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     public void propertyChange(PropertyChangeEvent evt) throws RemoteException {
         String propertyName = evt.getPropertyName();
         if (propertyName.equals("players")) {
-            if(gamelobby.getIngame())
-            {
+            if (gamelobby.getIngame()) {
                 Platform.runLater(new Runnable() {
 
-                        @Override
-                        public void run() {
-               gamefeed gameFeed;
-                try {
-                    gameFeed = new gamefeed(controller.getInputController().getSrvSocket());
-                    MainGameFXScene MGS = new MainGameFXScene();
-                    Stage stage = HauntedClient.getStage();
-                    Scene scene = MGS.mainGameFX(gameFeed, chat, tisplayer);
-                    
+                    @Override
+                    public void run() {
+                        gamefeed gameFeed;
+                        try {
+                            gameFeed = new gamefeed(controller.getInputController().getSrvSocket());
+                            MainGameFXScene MGS = new MainGameFXScene();
+                            Stage stage = HauntedClient.getStage();
+                            Scene scene = MGS.mainGameFX(gameFeed, chat, tisplayer);
+
                             HauntedClient.getStage().setScene(scene);
                             HauntedClient.getStage().setFullScreenExitKeyCombination(new KeyCodeCombination(KeyCode.ESCAPE, KeyCombination.ALT_DOWN));
                             HauntedClient.getStage().setFullScreen(true);
-                            HauntedClient.getStage().show(); 
-                        }
-                catch (     IOException | ClassNotFoundException | InterruptedException ex) {
-                    Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
-                }   
-               }
-              });
-            }
-                       
-            else
-            {
-            List<IPlayer> INplayers = (List<IPlayer>) evt.getNewValue();
-            if (INplayers.size() > players.size()) {
-                subscribeToAllPlayers();
-                setPlayers();
-                playernames();
-            } else {
-                for (IPlayer INplayer : INplayers) {
-                    boolean found = false;
-                    for (IPlayer EXplayer : players) {
-                        if (INplayer == EXplayer) {
-                            found = true;
+                            HauntedClient.getStage().show();
+                        } catch (IOException | ClassNotFoundException | InterruptedException ex) {
+                            Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
-                    if (!found) {
-                        INplayer.removeListener(this, propertyName);
-                        setPlayers();
-                        playernames();
+                });
+            } else {
+                List<IPlayer> INplayers = (List<IPlayer>) evt.getNewValue();
+                if (INplayers.size() > players.size()) {
+                    subscribeToAllPlayers();
+                    setPlayers();
+                    playernames();
+                } else {
+                    for (IPlayer INplayer : INplayers) {
+                        boolean found = false;
+                        for (IPlayer EXplayer : players) {
+                            if (INplayer == EXplayer) {
+                                found = true;
+                            }
+                        }
+                        if (!found) {
+                            INplayer.removeListener(this, propertyName);
+                            setPlayers();
+                            playernames();
+                        }
                     }
                 }
             }
-           }
 
         } else if (propertyName.equals("ready")) {
 
@@ -417,83 +400,63 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     public Chat getchat() {
         return chat;
     }
-    
+
     @FXML
-    public void setnewname(MouseEvent event) throws RemoteException
-    {
-        if(!TFnewname.getText().trim().isEmpty())
-        {
-          gamelobby.setName(TFnewname.getText());
-          TFnewname.clear();
-          gamesettings();
+    public void setnewname(MouseEvent event) throws RemoteException {
+        if (!TFnewname.getText().trim().isEmpty()) {
+            gamelobby.setName(TFnewname.getText());
+            TFnewname.clear();
+            gamesettings();
+        } else {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setHeaderText("voer tekst in");
+            alert.setContentText("voer een tekst in");
+            alert.showAndWait();
         }
-        else
-            {
-                Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setHeaderText("voer tekst in");
-                    alert.setContentText("voer een tekst in");
-                    alert.showAndWait();
-            }
     }
-    
+
     @FXML
-    public void setnewfloors(MouseEvent event) throws RemoteException
-    {
-        try
-        {
-            if(!TFnewname.getText().trim().isEmpty() && Integer.parseInt(TFnewfloors.getText()) > 2 && Integer.parseInt(TFnewfloors.getText()) < 11)
-            {
+    public void setnewfloors(MouseEvent event) throws RemoteException {
+        try {
+            if (!TFnewname.getText().trim().isEmpty() && Integer.parseInt(TFnewfloors.getText()) > 2 && Integer.parseInt(TFnewfloors.getText()) < 11) {
                 gamelobby.setMaxFloors(Integer.parseInt(TFnewfloors.getText()));
                 TFnewfloors.clear();
                 gamesettings();
-            }
-            else
-            {
+            } else {
                 Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setHeaderText("voer juiste getal in");
-                    alert.setContentText("Het maximum voor floors is 10 minimaal is 2");
-                    alert.showAndWait();
+                alert.setHeaderText("voer juiste getal in");
+                alert.setContentText("Het maximum voor floors is 10 minimaal is 2");
+                alert.showAndWait();
             }
-        }
-        catch(NumberFormatException e)
-        {
-                Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setHeaderText("geen getal");
-                alert.setContentText("zorg ervoor dat bij maximum spelers en floor amount er een getal staat");
-                alert.showAndWait();   
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setHeaderText("geen getal");
+            alert.setContentText("zorg ervoor dat bij maximum spelers en floor amount er een getal staat");
+            alert.showAndWait();
         }
     }
-    
+
     @FXML
-    public void setnewplayers(MouseEvent event) throws RemoteException
-    {
-        try
-        {
-          if(!TFnewname.getText().trim().isEmpty() && Integer.parseInt(TFnewplayers.getText()) > 2 && Integer.parseInt(TFnewplayers.getText()) < 8)
-            {
+    public void setnewplayers(MouseEvent event) throws RemoteException {
+        try {
+            if (!TFnewname.getText().trim().isEmpty() && Integer.parseInt(TFnewplayers.getText()) > 2 && Integer.parseInt(TFnewplayers.getText()) < 8) {
                 gamelobby.setMaxPlayers(Integer.parseInt(TFnewplayers.getText()));
                 TFnewname.clear();
                 gamesettings();
-            }  
-          else
-            {
+            } else {
                 Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setHeaderText("juist getal invoeren");
-                    alert.setContentText(" Het maximum voor spelers is 6 en minimum is 3");
-                    alert.showAndWait();
+                alert.setHeaderText("juist getal invoeren");
+                alert.setContentText(" Het maximum voor spelers is 6 en minimum is 3");
+                alert.showAndWait();
             }
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setHeaderText("geen getal");
+            alert.setContentText("zorg ervoor dat bij maximum spelers en floor amount er een getal staat");
+            alert.showAndWait();
         }
-        catch(NumberFormatException e)
-        {
-                Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setHeaderText("geen getal");
-                alert.setContentText("zorg ervoor dat bij maximum spelers en floor amount er een getal staat");
-                alert.showAndWait();   
-        }
-        
-    }
 
-    
+    }
 
     public class observermessages implements Observer {
 

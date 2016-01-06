@@ -5,7 +5,6 @@ package nl.haunted;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -27,16 +26,17 @@ public class FXMLtussenschermController implements Initializable {
 
     @FXML
     AnchorPane paneel;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         BackgroundImage myBI = new BackgroundImage(new Image("CreepyStairs.jpg", 1024, 576, false, true),
-         BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-         BackgroundSize.DEFAULT);
-         //then you set to your node
-         paneel.setBackground(new Background(myBI));
-    }    
-    
+        BackgroundImage myBI = new BackgroundImage(new Image("CreepyStairs.jpg", 1024, 576, false, true),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        //then you set to your node
+        paneel.setBackground(new Background(myBI));
+    }
+
 }

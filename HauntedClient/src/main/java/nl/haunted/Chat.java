@@ -42,24 +42,24 @@ public class Chat extends Observable {
     }
 
     public void addMessage(List<Message> m) {
-            this.messages.addAll(m);
-            this.setChanged();
+        this.messages.addAll(m);
+        this.setChanged();
         this.notifyObservers();
     }
 
     public void sendMessage(Message m) throws IOException {
         IC.sendMessage(m);
     }
-    
-    public void startMessageClient(){
+
+    public void startMessageClient() {
         timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
-            public void run() {          
+            public void run() {
                 try {
                     List<Message> m = IC.getMessage();
-                    if(m != null){
-                    addMessage(m);
+                    if (m != null) {
+                        addMessage(m);
                     }
                 } catch (IOException | ClassNotFoundException ex) {
                     Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
@@ -68,9 +68,9 @@ public class Chat extends Observable {
         };
         timer.scheduleAtFixedRate(task, 0, 16);
     }
-    
-    public void stopMessageClient(){
+
+    public void stopMessageClient() {
         timer.cancel();
     }
-    
+
 }

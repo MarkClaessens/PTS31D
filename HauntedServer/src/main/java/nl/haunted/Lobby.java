@@ -101,11 +101,11 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
         this.gameLobbys.remove(EXGL);
         basicPublisher.inform(this, "gamelobbys", null, this.gameLobbys);
     }
-    
-    public void removeGLAfterGame(GameLobby gl) throws RemoteException{
+
+    public void removeGLAfterGame(GameLobby gl) throws RemoteException {
         IGameLobby temp = null;
-        for(IGameLobby iGameLobby : this.gameLobbys){
-            if(iGameLobby.getName().equals(gl.getName())){ 
+        for (IGameLobby iGameLobby : this.gameLobbys) {
+            if (iGameLobby.getName().equals(gl.getName())) {
                 temp = iGameLobby;
             }
         }

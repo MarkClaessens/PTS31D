@@ -26,20 +26,20 @@ public class Human extends Character implements Serializable {
 
     private double flX3 = 0, flY3 = 0, flX2 = 0, flY2 = 0, flX1, flY1, flY23, flX32, flY31, flX13, flDet, flMinD, flMaxD;
 
-    public void setHasKey(boolean hasKey){
+    public void setHasKey(boolean hasKey) {
         this.hasKey = hasKey;
     }
-    
+
     /**
      * The Constructor for human. This initializes the flashlightRange,
      * flashlightAngle and the flashlightPoints by calling setFlashlight Also
-     * initialize the base class Character!     
+     * initialize the base class Character!
      */
     public Human() {
         super(null);
         this.hasKey = false;
     }
-    
+
     /**
      *
      * @return true if human has picked up the key
@@ -209,7 +209,7 @@ public class Human extends Character implements Serializable {
     public Ghost checkGhostCollision(Game game) {
         //ghost collision
         for (Ghost ghost : game.getGhosts()) {
-            
+
             if (checkHitboxCollision(this.getPosition(), 90, 90, ghost.getPosition(), 90, 90)) {
                 return ghost;
             }

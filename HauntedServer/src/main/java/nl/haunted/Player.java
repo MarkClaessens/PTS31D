@@ -93,11 +93,11 @@ public class Player extends UnicastRemoteObject implements IPlayer {
         this.basicPublisher = new BasicPublisher(props);
     }
 
-    
-    public void reset(){
+    public void reset() {
         this.ready = false;
         this.character = null;
     }
+
     /**
      * verandert de ready status van de speler
      *
@@ -111,10 +111,9 @@ public class Player extends UnicastRemoteObject implements IPlayer {
         }
         basicPublisher.inform(this, "ready", null, this.ready);
     }
-    
+
     @Override
-    public void setColor(Color kleur) throws RemoteException
-    {
+    public void setColor(Color kleur) throws RemoteException {
         this.color = kleur;
     }
 

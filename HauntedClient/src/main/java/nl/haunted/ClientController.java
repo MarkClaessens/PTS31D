@@ -94,13 +94,12 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
                 ex.printStackTrace();
                 System.out.println("Client: Controller couldn't subscribe himself to the lobby.");
             }
-        }           
-        tisplayer = lobby.createPlayer("player",this.getIPadress());
+        }
+        tisplayer = lobby.createPlayer("player", this.getIPadress());
     }
-    
-    
-   private String getIPadress() throws SocketException, IOException{
-       Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+
+    private String getIPadress() throws SocketException, IOException {
+        Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
         OUTER:
         for (NetworkInterface interface_ : Collections.list(interfaces)) {
             // we shouldn't care about loopback addresses
@@ -136,7 +135,7 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
             }
         }
         return "";
-   }
+    }
 
     /**
      * @param propertyChangeEvent
@@ -179,9 +178,11 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
     public void setGroupID(String groupID) throws IOException {
         this.groupID = groupID;
     }
-    public void setInputController(IGameLobby gamelobby) throws IOException{
+
+    public void setInputController(IGameLobby gamelobby) throws IOException {
         this.inputController = new InputController(this.groupID, gamelobby);
     }
+
     public String getGroupID() {
         return this.groupID;
     }
