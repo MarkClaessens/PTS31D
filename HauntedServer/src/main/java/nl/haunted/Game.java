@@ -25,50 +25,19 @@ import java.util.TimerTask;
  */
 public class Game implements Serializable {
 
-    private final int floorAmount; // starts at 1
-    private int currentFloor = -1; // starts at 0 so the init has to be -1.
-    private Timer tickTimer, inputTimer;
-    private boolean roundEnded, nextRound;
-    private Level level;
-    private List<Ghost> ghosts;
-    private Human human;
-    private List<IPlayer> players;
-    private IPlayer currentHuman;
     private Socket srvSoc;
     private IGameLobby gameLobby;
-
-    public Level getLevel() {
-        return level;
-    }
-
-    public List<IPlayer> getPlayers() {
-        return players;
-    }
-
-    /**
-     *
-     * @return the amount of floors in this game.
-     */
-    public int getFloorAmount() {
-        return floorAmount;
-    }
-
-    /**
-     *
-     * @return the current floor of the game, starts at 0.
-     */
-    public int getCurrentFloor() {
-        return currentFloor;
-    }
-
-    public void setCurrentHuman(IPlayer p) {
-        this.currentHuman = p;
-    }
-
-    public List<Ghost> getGhosts() {
-        return this.ghosts;
-    }
-
+    private Timer tickTimer, inputTimer;
+    
+    private final int floorAmount; // starts at 1
+    private int currentFloor = -1; // starts at 0 so the init has to be -1.
+    private boolean roundEnded, nextRound;
+    private Level level;
+    private List<IPlayer> players;
+    private List<Ghost> ghosts;
+    private IPlayer currentHuman;
+    private Human human;
+    
     /**
      *
      * @param players
@@ -94,6 +63,54 @@ public class Game implements Serializable {
 
         // Create the characters and bind them to the players.
         bindCharactersToPlayers();
+    }
+
+    /**
+     * This function returns the variable this.level
+     * @return
+     */
+    public Level getLevel() {
+        return this.level;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<IPlayer> getPlayers() {
+        return this.players;
+    }
+
+    /**
+     *
+     * @return the amount of floors in this game.
+     */
+    public int getFloorAmount() {
+        return this.floorAmount;
+    }
+
+    /**
+     *
+     * @return the current floor of the game, starts at 0.
+     */
+    public int getCurrentFloor() {
+        return this.currentFloor;
+    }
+
+    /**
+     *
+     * @param p
+     */
+    public void setCurrentHuman(IPlayer p) {
+        this.currentHuman = p;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<Ghost> getGhosts() {
+        return this.ghosts;
     }
 
     /**
@@ -205,6 +222,7 @@ public class Game implements Serializable {
      * @throws java.rmi.RemoteException
      * @throws java.net.UnknownHostException
      * @throws java.lang.ClassNotFoundException
+     * @throws java.lang.InterruptedException
      */
     public void tick() throws RemoteException, UnknownHostException, IOException, ClassNotFoundException, InterruptedException {
         //check if the game is running and not in the pause screen (between rounds)
@@ -215,7 +233,7 @@ public class Game implements Serializable {
             if (!this.ghosts.isEmpty()) {
                 DirectionType[] keyboard = this.getPlayerInput();
 
-                // <editor-fold defaultstate="collapsed" desc="if there is a pressed key TODO: get keypresses">
+                // <editor-fold defaultstate="collapsed" desc="if there is a pressed key">
                 if (keyboard != null) {
                     //go through every player
                     for (int i = 0; i < this.players.size(); i++) {
