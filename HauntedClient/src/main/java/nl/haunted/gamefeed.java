@@ -21,10 +21,24 @@ public class gamefeed {
     Socket soc;
     GameInfo gameInfo;
 
+    /**
+     *
+     * @param socket
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public gamefeed(Socket socket) throws IOException, ClassNotFoundException {
         this.soc = socket;
     }
 
+    /**
+     * This function looks for packets until it has enough information to show
+     * the first frame on the screen.
+     *
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws InterruptedException
+     */
     public void setupGameInfo() throws IOException, ClassNotFoundException, InterruptedException {
         boolean setup = false;
         while (!setup) {
@@ -46,6 +60,12 @@ public class gamefeed {
         }
     }
 
+    /**
+     * this function takes an object an creates the correct variables with the
+     * correct received variable.
+     *
+     * @param o
+     */
     public void fillGameInfo(Object[][] o) {
         gameInfo.getEntities().clear();
         Entity key = new Entity((Point2D) o[3][0], EntityType.Key);
@@ -75,6 +95,13 @@ public class gamefeed {
 
     }
 
+    /**
+     * this function gets an object from the socket and fills variables in
+     * gameFeed with the correct received variables.
+     *
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void decompressFeed() throws IOException, ClassNotFoundException {
         Object[][] o = soc.getObject();
         if ("Server".equals((String) o[0][0])) {
@@ -122,10 +149,5 @@ public class gamefeed {
                 }
             }
         }
-
-    }
-
-    public void compressInput() {
-
     }
 }

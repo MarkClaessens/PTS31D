@@ -26,6 +26,12 @@ public class InputController {
 //    Socket inputSocket;
 //    DirectionType direction;
 
+    /**
+     * 
+     * @param groupID
+     * @param GL
+     * @throws IOException
+     */
     public InputController(String groupID, IGameLobby GL) throws IOException {
         this.inputSocket = new Socket();
         this.srvSocket = new Socket();
@@ -48,18 +54,35 @@ public class InputController {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public Socket getInputSocket() {
         return this.inputSocket;
     }
 
+    /**
+     *
+     * @return
+     */
     public Socket getSrvSocket() {
         return this.srvSocket;
     }
 
+    /**
+     *
+     * @param direction
+     */
     public void setDirection(DirectionType direction) {
         this.direction = direction;
     }
 
+    /**
+     *
+     * @param m
+     * @throws IOException
+     */
     public void sendMessage(Message m) throws IOException {
         StringBuilder sb = new StringBuilder();
 
@@ -73,6 +96,10 @@ public class InputController {
         this.inputSocket.sendMessage(sb.toString());
     }
 
+    /**
+     *
+     * @throws IOException
+     */
     public void sendInput() throws IOException {
         if (this.direction != this.prevDirection) {
             if (this.direction != null) {
@@ -84,10 +111,20 @@ public class InputController {
         }
     }
 
+    /**
+     *
+     * @param s
+     */
     public void setSrvSocket(Socket s) {
         this.inputSocket = s;
     }
 
+    /**
+     *
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public List<Message> getMessage() throws IOException, ClassNotFoundException {
 
         List<String> exinputlist = this.inputSocket.getMessages();
