@@ -130,8 +130,9 @@ public class gamefeed {
                     }
                     //set ghosts
                     if (e.getType() == EntityType.Ghost) {
-                        if (e.getID() == (int) o[i][6]) {
-                            if (!(boolean) o[i][5]) {
+                        if (!(boolean) o[i][5]) {
+                            if (e.getID() == (int) o[i][6]) {
+
                                 e.setPosition((Point2D) o[i][0]);
                                 e.setDirection((DirectionType) o[i][1]);
                                 e.setMoving((boolean) o[i][2]);
@@ -141,6 +142,7 @@ public class gamefeed {
                                     System.out.println("wallchange");
                                 }
                                 e.setWall((boolean) o[i][4]);
+
                             }
                         }
                         e.setDead((boolean) o[i][5]);
