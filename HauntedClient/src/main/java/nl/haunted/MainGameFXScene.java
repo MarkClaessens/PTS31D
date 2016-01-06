@@ -232,7 +232,7 @@ public class MainGameFXScene {
      * Draws the texts out of Game info
      */
     private void drawTexts() {
-        textGc.setFont(Font.font("Times New Roman", FontWeight.BOLD, 20.0));
+        textGc.setFont(Font.font("Times New Roman", FontWeight.BOLD, 20.0 * verScale));
         textGc.setFill(Color.BLUE);
         textGc.fillText(("Ghost lives left: " + gf.gameInfo.getGhostLives()).toUpperCase(), 10, 20);
         textGc.fillText(("Current floor: " + gf.gameInfo.getCurrentFloor()).toUpperCase(), 10, 42);
