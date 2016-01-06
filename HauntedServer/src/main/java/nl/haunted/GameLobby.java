@@ -72,7 +72,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
      */
     @Override
     public void startGame() throws RemoteException {
-        if (players.size() > 2) {
+        if (players.size() > 1) {
             boolean ready = readycheck();
             if (ready) {
                 Game game;
