@@ -7,7 +7,6 @@ package nl.haunted;
 
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,18 +22,6 @@ public class Message {
     private boolean visibleForEveryone = true;
     private IPlayer player;
 
-    public String getText() {
-        return text;
-    }
-
-    public IPlayer getPlayer() {
-        return player;
-    }
-
-    public boolean isVisibleForEveryone() {
-        return visibleForEveryone;
-    }
-
     /**
      * Constructs the message object. This object represents a message inside
      * the chatbox.
@@ -42,8 +29,10 @@ public class Message {
      * @param text the text that represents the message. text is not null, empty
      * or only containing whitespaces.
      * @param player the player that sends the message. player is not null.
+     * @param visibleForEveryone
      * @exception IllegalArgumentException thrown when the text is null, empty
      * or only containing white spaces and when de player is null.
+     * @throws java.rmi.RemoteException
      */
     public Message(String text, IPlayer player, boolean visibleForEveryone) throws IllegalArgumentException, RemoteException {
         if (text == null || player == null || text.isEmpty() || text.trim().length() == 0) {
@@ -58,6 +47,30 @@ public class Message {
         this.visibleForEveryone = visibleForEveryone;
 
         // If the player's character is a ghost then the message is not visibible for the human
+    }
+    
+    /**
+     * this function returns the text of the message.
+     * @return
+     */
+    public String getText() {
+        return text;
+    }
+
+    /**
+     * this fumction returns the player that wrote the message.
+     * @return
+     */
+    public IPlayer getPlayer() {
+        return player;
+    }
+
+    /**
+     * this function returns a boolean that indicates of this message is visible for the human player.
+     * @return
+     */
+    public boolean isVisibleForEveryone() {
+        return visibleForEveryone;
     }
 
     /**

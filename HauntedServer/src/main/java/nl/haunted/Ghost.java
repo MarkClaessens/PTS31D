@@ -65,7 +65,12 @@ public class Ghost extends Character implements Serializable {
     public Game getGame() {
         return game;
     }
-
+    
+    @Override
+    public void setPosition(Point2D position) {
+        super.setPosition(position);
+        this.clearTimeOfDeath();
+    }
     /**
      * Sets the stationary time to now when the Ghost started standing still.
      * Started standing still means pressing no moving keys.

@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package nl.haunted;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
