@@ -190,7 +190,6 @@ public class MainGameFXScene {
                     humanGhostPersGc.clearRect(0, 0, screenWidth, screenHeight);
                     textGc.clearRect(0, 0, screenWidth, screenHeight);
                     drawImages();
-                    drawTexts();
                     try {
                         HauntedClient.getController().getInputController().sendInput();
                     } catch (IOException ex) {
@@ -216,6 +215,7 @@ public class MainGameFXScene {
                     }
                     //gf.gameInfo.endRound();//TODO
                 }
+                
 
             }
         };
@@ -310,53 +310,53 @@ public class MainGameFXScene {
     private void onKeyPresses(Scene scene) {
         scene.setOnKeyPressed(
                 new EventHandler<KeyEvent>() {
-                    @Override
-                    public void handle(KeyEvent e) {
-                        String code = e.getCode().toString();
+            @Override
+            public void handle(KeyEvent e) {
+                String code = e.getCode().toString();
 
-                        if (code.equals("ENTER")) {
-                            //TODO: call up chatbox popup
-                            chatstage = new Stage();
-                            chatstage.setTitle("Chat | Haunted");
-                            chatstage.setScene(getChatScene());
-                            chatstage.show();
-                        } else {
+                if (code.equals("ENTER")) {
+                    //TODO: call up chatbox popup
+                    chatstage = new Stage();
+                    chatstage.setTitle("Chat | Haunted");
+                    chatstage.setScene(getChatScene());
+                    chatstage.show();
+                } else {
 
-                            switch (code) {
-                                case "W":
-                                    HauntedClient.getController().getInputController().setDirection(DirectionType.UP);
-                                    break;
-                                case "A":
-                                    HauntedClient.getController().getInputController().setDirection(DirectionType.LEFT);
-                                    break;
-                                case "S":
-                                    HauntedClient.getController().getInputController().setDirection(DirectionType.DOWN);
-                                    break;
-                                case "D":
-                                    HauntedClient.getController().getInputController().setDirection(DirectionType.RIGHT);
-                                    break;
-                                case "UP":
-                                    HauntedClient.getController().getInputController().setDirection(DirectionType.UP);
-                                    break;
-                                case "LEFT":
-                                    HauntedClient.getController().getInputController().setDirection(DirectionType.LEFT);
-                                    break;
-                                case "DOWN":
-                                    HauntedClient.getController().getInputController().setDirection(DirectionType.DOWN);
-                                    break;
-                                case "RIGHT":
-                                    HauntedClient.getController().getInputController().setDirection(DirectionType.RIGHT);
-                                    break;
-                                default:
-                                    HauntedClient.getController().getInputController().setDirection(null);
-                                    break;
-                            }
-
-                        }
-
-                        // only add once... prevent duplicates
+                    switch (code) {
+                        case "W":
+                            HauntedClient.getController().getInputController().setDirection(DirectionType.UP);
+                            break;
+                        case "A":
+                            HauntedClient.getController().getInputController().setDirection(DirectionType.LEFT);
+                            break;
+                        case "S":
+                            HauntedClient.getController().getInputController().setDirection(DirectionType.DOWN);
+                            break;
+                        case "D":
+                            HauntedClient.getController().getInputController().setDirection(DirectionType.RIGHT);
+                            break;
+                        case "UP":
+                            HauntedClient.getController().getInputController().setDirection(DirectionType.UP);
+                            break;
+                        case "LEFT":
+                            HauntedClient.getController().getInputController().setDirection(DirectionType.LEFT);
+                            break;
+                        case "DOWN":
+                            HauntedClient.getController().getInputController().setDirection(DirectionType.DOWN);
+                            break;
+                        case "RIGHT":
+                            HauntedClient.getController().getInputController().setDirection(DirectionType.RIGHT);
+                            break;
+                        default:
+                            HauntedClient.getController().getInputController().setDirection(null);
+                            break;
                     }
+
                 }
+
+                // only add once... prevent duplicates
+            }
+        }
         );
     }
 
@@ -368,38 +368,38 @@ public class MainGameFXScene {
     private void onKeyReleases(Scene scene) {
         scene.setOnKeyReleased(
                 new EventHandler<KeyEvent>() {
-                    @Override
-                    public void handle(KeyEvent e) {
-                        String code = e.getCode().toString();
+            @Override
+            public void handle(KeyEvent e) {
+                String code = e.getCode().toString();
 
-                        switch (code) {
-                            case "W":
-                                HauntedClient.getController().getInputController().setDirection(null);
-                                break;
-                            case "A":
-                                HauntedClient.getController().getInputController().setDirection(null);
-                                break;
-                            case "S":
-                                HauntedClient.getController().getInputController().setDirection(null);
-                                break;
-                            case "D":
-                                HauntedClient.getController().getInputController().setDirection(null);
-                                break;
-                            case "UP":
-                                HauntedClient.getController().getInputController().setDirection(null);
-                                break;
-                            case "LEFT":
-                                HauntedClient.getController().getInputController().setDirection(null);
-                                break;
-                            case "DOWN":
-                                HauntedClient.getController().getInputController().setDirection(null);
-                                break;
-                            case "RIGHT":
-                                HauntedClient.getController().getInputController().setDirection(null);
-                                break;
-                        }
-                    }
+                switch (code) {
+                    case "W":
+                        HauntedClient.getController().getInputController().setDirection(null);
+                        break;
+                    case "A":
+                        HauntedClient.getController().getInputController().setDirection(null);
+                        break;
+                    case "S":
+                        HauntedClient.getController().getInputController().setDirection(null);
+                        break;
+                    case "D":
+                        HauntedClient.getController().getInputController().setDirection(null);
+                        break;
+                    case "UP":
+                        HauntedClient.getController().getInputController().setDirection(null);
+                        break;
+                    case "LEFT":
+                        HauntedClient.getController().getInputController().setDirection(null);
+                        break;
+                    case "DOWN":
+                        HauntedClient.getController().getInputController().setDirection(null);
+                        break;
+                    case "RIGHT":
+                        HauntedClient.getController().getInputController().setDirection(null);
+                        break;
                 }
+            }
+        }
         );
     }
 
@@ -523,16 +523,14 @@ public class MainGameFXScene {
                             humanGhostPersGc.drawImage(humanPerspectiveImage[3], (e.getPosition().getX() - 1800) * horScale, (e.getPosition().getY() - 1800) * verScale, humanPerspectiveImage[3].getWidth() * horScale, humanPerspectiveImage[3].getHeight() * verScale);
                         }
                         //drawRotatedImage(humanPersGc, humanPerspectiveImage, getAngle(e.getDirection()), (e.getPosition().getX() - 1900), (e.getPosition().getY() - 1900), horScale, verScale);
+                    } else if (e.getDirection() == DirectionType.UP) {
+                        humanGhostPersGc.drawImage(ghostPerspectiveImage[0], (e.getPosition().getX() - 1800) * horScale, (e.getPosition().getY() - 1800) * verScale, ghostPerspectiveImage[0].getWidth() * horScale, ghostPerspectiveImage[0].getHeight() * verScale);
+                    } else if (e.getDirection() == DirectionType.DOWN) {
+                        humanGhostPersGc.drawImage(ghostPerspectiveImage[1], (e.getPosition().getX() - 1800) * horScale, (e.getPosition().getY() - 1800) * verScale, ghostPerspectiveImage[1].getWidth() * horScale, ghostPerspectiveImage[1].getHeight() * verScale);
+                    } else if (e.getDirection() == DirectionType.LEFT) {
+                        humanGhostPersGc.drawImage(ghostPerspectiveImage[2], (e.getPosition().getX() - 1800) * horScale, (e.getPosition().getY() - 1800) * verScale, ghostPerspectiveImage[2].getWidth() * horScale, ghostPerspectiveImage[2].getHeight() * verScale);
                     } else {
-                        if (e.getDirection() == DirectionType.UP) {
-                            humanGhostPersGc.drawImage(ghostPerspectiveImage[0], (e.getPosition().getX() - 1800) * horScale, (e.getPosition().getY() - 1800) * verScale, ghostPerspectiveImage[0].getWidth() * horScale, ghostPerspectiveImage[0].getHeight() * verScale);
-                        } else if (e.getDirection() == DirectionType.DOWN) {
-                            humanGhostPersGc.drawImage(ghostPerspectiveImage[1], (e.getPosition().getX() - 1800) * horScale, (e.getPosition().getY() - 1800) * verScale, ghostPerspectiveImage[1].getWidth() * horScale, ghostPerspectiveImage[1].getHeight() * verScale);
-                        } else if (e.getDirection() == DirectionType.LEFT) {
-                            humanGhostPersGc.drawImage(ghostPerspectiveImage[2], (e.getPosition().getX() - 1800) * horScale, (e.getPosition().getY() - 1800) * verScale, ghostPerspectiveImage[2].getWidth() * horScale, ghostPerspectiveImage[2].getHeight() * verScale);
-                        } else {
-                            humanGhostPersGc.drawImage(ghostPerspectiveImage[3], (e.getPosition().getX() - 1800) * horScale, (e.getPosition().getY() - 1800) * verScale, ghostPerspectiveImage[3].getWidth() * horScale, ghostPerspectiveImage[3].getHeight() * verScale);
-                        }
+                        humanGhostPersGc.drawImage(ghostPerspectiveImage[3], (e.getPosition().getX() - 1800) * horScale, (e.getPosition().getY() - 1800) * verScale, ghostPerspectiveImage[3].getWidth() * horScale, ghostPerspectiveImage[3].getHeight() * verScale);
                     }
                     humanGc.drawImage(getAnimatedHumanImage(e), (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, getAnimatedHumanImage(e).getWidth() * horScale, getAnimatedHumanImage(e).getHeight() * verScale);
                     //drawRotatedImage(humanGc, getAnimatedHumanImage(e), getAngle(e.getDirection()), (e.getPosition().getX() + 100), (e.getPosition().getY() + 100), horScale, verScale);
@@ -552,6 +550,7 @@ public class MainGameFXScene {
 
             }
         }
+        drawTexts();
     }
 
     /**
