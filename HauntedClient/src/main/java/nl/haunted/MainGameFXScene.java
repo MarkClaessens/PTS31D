@@ -232,16 +232,16 @@ public class MainGameFXScene {
      */
     private void drawTexts() {
         textGc.setFill(Color.BLACK);
-        textGc.fillRect(0, 0, 400 * horScale, 100 * verScale);
-        textGc.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 20.0 * verScale));
+        textGc.fillRect(0, 0, screenWidth, 15 * verScale);
+        textGc.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 15.0 * verScale));
         textGc.setFill(Color.WHITE);
-        textGc.fillText(("Ghost lives left: " + gf.gameInfo.getGhostLives()).toUpperCase(), 10, 20);
-        textGc.fillText(("Current floor: " + gf.gameInfo.getCurrentFloor()).toUpperCase(), 10, 42);
-        //       textGc.strokeText("Current human: " + gf.gameInfo.getCurrentHuman(), 10, 46);
+        textGc.fillText(("Ghost lives left: " + gf.gameInfo.getGhostLives()).toUpperCase(), 10, 15);
+        textGc.fillText(("Current floor: " + gf.gameInfo.getCurrentFloor()).toUpperCase(), 250, 15);
+        //      textGc.strokeText("Current human: " + gf.gameInfo.getCurrentHuman(), 10, 46);
         if (!gf.gameInfo.getKey()) {
-            textGc.fillText(("Key has been picked up by human").toUpperCase(), 10, 64);
+            textGc.fillText(("Key has been picked up by human").toUpperCase(), 500, 15);
         } else {
-            textGc.fillText(("Key hasn't been picked up by the human yet").toUpperCase(), 10, 64);
+            textGc.fillText(("Key hasn't been picked up by the human yet").toUpperCase(), 500, 15);
         }
     }
 
