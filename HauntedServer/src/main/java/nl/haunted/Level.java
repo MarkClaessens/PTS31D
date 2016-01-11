@@ -125,7 +125,7 @@ public class Level implements Serializable {
         for (int i = 100; i < 900; i += 100) {
             spawnPointsRight.add(new Point2D.Double(1400, i));
         }
-        for (int i = 100; i < 1400; i += 100) {
+        for (int i = 400; i < 1400; i += 100) {
             spawnPointsTop.add(new Point2D.Double(i, 0));
         }
         for (int i = 100; i < 1400; i += 100) {
