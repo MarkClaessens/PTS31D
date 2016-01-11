@@ -151,6 +151,8 @@ public class Human extends Character implements Serializable {
      * if haskey == true, enterDoor will cause endround, so the game can
      * continue to the next round or go to the victory screen. Otherwise, this
      * method won't cause anything.
+     * @param game
+     * @throws java.lang.InterruptedException
      */
     public void enterDoor(Game game) throws InterruptedException {
         // First check if this entering was on the last floor (last level).
@@ -204,6 +206,7 @@ public class Human extends Character implements Serializable {
     /**
      * check if human collides with a ghost
      *
+     * @param game
      * @return the ghost where the human collides with
      */
     public Ghost checkGhostCollision(Game game) {
@@ -253,6 +256,8 @@ public class Human extends Character implements Serializable {
     /**
      * check if the human interacts with ghost, key, door or wall
      *
+     * @param game
+     * @throws java.lang.InterruptedException
      */
     public void checkInteract(Game game) throws InterruptedException {
         Point2D door = new Point2D.Double(game.getLevel().getDoorLocation().getX() + 40, game.getLevel().getDoorLocation().getY());
@@ -272,7 +277,6 @@ public class Human extends Character implements Serializable {
             this.checkGhostCollision(game).possess(game);
         }
         setFlashlight();
-        List<Ghost> deadghosts = new ArrayList();
         game.getGhosts().stream().forEach((g) -> {
             if (g.isVulnerable()) {
                 boolean hit = false;
@@ -283,7 +287,6 @@ public class Human extends Character implements Serializable {
                     }
                 }
                 if (hit) {
-                    deadghosts.add(g);
                     g.setTimeOfDeath();
                     g.vanish(game);
                 }
