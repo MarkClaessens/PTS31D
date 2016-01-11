@@ -138,7 +138,7 @@ public class InputController {
                     if ("0".equals(input.substring(1, 2))) {
                         visible = false;
                     }
-                    String strPlayer = input.substring(4, 4 + input.substring(4).indexOf("]"));
+                    String strPlayer = input.substring(4, 4 + input.substring(4).indexOf("]: "));
                     IPlayer player = null;
                     for (IPlayer p : gameLobby.getPlayers()) {
                         if (p.getName() == null ? strPlayer == null : p.getName().equals(strPlayer)) {
