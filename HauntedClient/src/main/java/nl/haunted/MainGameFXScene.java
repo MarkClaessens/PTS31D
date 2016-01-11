@@ -199,8 +199,21 @@ public class MainGameFXScene {
                 } else if (gf.gameInfo.isGameEnd()) { //TODO
                     this.stop();
                     timer.cancel();
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLvictory.fxml"));
+                    Node root;
+                    try {
+                        root = fxmlLoader.load();
+                        Scene tussenscene = new Scene((Parent) root);
+                        HauntedClient.getStage().setScene(tussenscene);
+                        HauntedClient.getStage().show();
+                    }
+                    catch (IOException ex) {
+                        Logger.getLogger(MainGameFXScene.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     //gf.gameInfo.endGame(); //TODO
-                } else if (gf.gameInfo.isRoundEnd()) { //TODO                    
+                } else if (gf.gameInfo.isRoundEnd()) { //TODO
+                    this.stop();
+                    timer.cancel();
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLtussenscherm.fxml"));
                     Node root;
                     try {
@@ -208,8 +221,7 @@ public class MainGameFXScene {
                         Scene tussenscene = new Scene((Parent) root);
                         HauntedClient.getStage().setScene(tussenscene);
                         HauntedClient.getStage().show();
-                        this.stop();
-                        timer.cancel();
+                        
                     } catch (IOException ex) {
                         Logger.getLogger(MainGameFXScene.class.getName()).log(Level.SEVERE, null, ex);
                     }
