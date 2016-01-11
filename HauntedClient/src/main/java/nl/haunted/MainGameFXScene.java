@@ -507,7 +507,7 @@ public class MainGameFXScene {
                     }
                     break;
                 case Key:
-                    if (gf.gameInfo.amIHuman() || !gf.gameInfo.getKey()) {
+                    if (gf.gameInfo.amIHuman() || gf.gameInfo.getKey()) {
                         keyDoorGc.drawImage(keyImage, (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, keyImage.getWidth() * horScale, keyImage.getHeight() * verScale);
                     }
                     break;
