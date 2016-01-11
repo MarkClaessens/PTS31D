@@ -178,7 +178,7 @@ public class MainGameFXScene {
         AnimationTimer at = new AnimationTimer() {
             @Override
             public void handle(long currentNanoTime) {
-                if (!gf.gameInfo.isGameEnd() || !gf.gameInfo.isRoundEnd()) { //TODO
+                if (!gf.gameInfo.isGameEnd() || !gf.gameInfo.isRoundEnd()) {
 
                     keyDoorGc.clearRect(0, 0, screenWidth, screenHeight);
                     humanGc.clearRect(0, 0, screenWidth, screenHeight);
