@@ -145,13 +145,13 @@ public class MainGameFXScene {
         }
         root.getChildren().add(ghostlayer);
 
-        textLayer = new Canvas(screenWidth, screenHeight);
-        textGc = textLayer.getGraphicsContext2D();
-        root.getChildren().add(textLayer);
-
         humanGhostPersLayer = new Canvas(screenWidth, screenHeight);
         humanGhostPersGc = humanGhostPersLayer.getGraphicsContext2D();
         root.getChildren().add(humanGhostPersLayer);
+
+        textLayer = new Canvas(screenWidth, screenHeight);
+        textGc = textLayer.getGraphicsContext2D();
+        root.getChildren().add(textLayer);
 
         bgGc.drawImage(bgImage, 0, 0, levelDrawWidth * horScale, levelDrawHeight * verScale);
 
@@ -215,7 +215,6 @@ public class MainGameFXScene {
                     }
                     //gf.gameInfo.endRound();//TODO
                 }
-                
 
             }
         };
