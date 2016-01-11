@@ -13,8 +13,8 @@ import java.util.List;
  */
 public class Human extends Character {
 
-    private int flashlightRange = 100; // Mike: setted default range to 100
-    private int flashlightAngle = 15; // Mike: setted default angle to 45
+    private int flashlightRange = 200; // Mike: setted default range to 100
+    private double flashlightAngle = Math.toRadians(30); // Mike: setted default angle to 45
     private boolean hasKey;
 
     private double flX3 = 0, flY3 = 0, flX2 = 0, flY2 = 0, flX1, flY1;
@@ -42,7 +42,7 @@ public class Human extends Character {
      *
      * @return the flashlight angle
      */
-    public int getFlashlightAngle() {
+    public double getFlashlightAngle() {
         return this.flashlightAngle;
     }
 

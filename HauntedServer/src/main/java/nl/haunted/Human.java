@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class Human extends Character implements Serializable {
 
-    private int flashlightRange = 200, flashlightAngle = 30;
+    private double flashlightRange = 200, flashlightAngle = Math.toRadians(30);
     private boolean hasKey;
     private double[][] flashlightPoints;
 
@@ -51,7 +51,7 @@ public class Human extends Character implements Serializable {
      *
      * @return the flashlight range
      */
-    public int getFlashlightRange() {
+    public double getFlashlightRange() {
         return this.flashlightRange;
     }
 
@@ -68,7 +68,7 @@ public class Human extends Character implements Serializable {
      *
      * @return the flashlight angle
      */
-    public int getFlashlightAngle() {
+    public double getFlashlightAngle() {
         return this.flashlightAngle;
     }
 
