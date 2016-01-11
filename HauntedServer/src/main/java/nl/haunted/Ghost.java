@@ -69,7 +69,7 @@ public class Ghost extends Character implements Serializable {
     @Override
     public void setPosition(Point2D position) {
         super.setPosition(position);
-        this.clearTimeOfDeath();
+        
     }
     /**
      * Sets the stationary time to now when the Ghost started standing still.
