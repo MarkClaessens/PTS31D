@@ -118,6 +118,7 @@ public class Ghost extends Character implements Serializable {
     /**
      * This possesses a human, this ghost becomes the human, the previous human
      * becomes a ghost (with his own coloured sprites).
+     * @param game
      */
     public void possess(Game game) {
         List<IPlayer> players = game.getPlayers();
@@ -169,6 +170,7 @@ public class Ghost extends Character implements Serializable {
      * Respawns the ghost when hit by the flashlight. If there aren't remaining
      * lifes for the ghost then the ghost dead attribute will be set to true.
      * The ghost whil respawn when the timeOfDeath is 3 seconds ago.
+     * @param game
      */
     public void vanish(Game game) {
         // Get the remaining lifes that the ghost has.
