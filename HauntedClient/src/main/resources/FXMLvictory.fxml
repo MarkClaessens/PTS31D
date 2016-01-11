@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.haunted.FXMLvictoryController">
-    
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="nl.haunted.FXMLvictoryController">
+   <children>
+      <Button fx:id="btncontinue" layoutX="269.0" layoutY="290.0" mnemonicParsing="false" text="continue" />
+      <Label layoutX="139.0" layoutY="52.0" text="DE WINAAR IS:" textFill="RED">
+         <font>
+            <Font size="49.0" />
+         </font>
+      </Label>
+      <Label fx:id="winaarslabel" layoutX="212.0" layoutY="144.0" textFill="RED">
+         <font>
+            <Font size="49.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>

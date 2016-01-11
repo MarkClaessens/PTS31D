@@ -178,7 +178,7 @@ public class MainGameFXScene {
         AnimationTimer at = new AnimationTimer() {
             @Override
             public void handle(long currentNanoTime) {
-                if (!gf.gameInfo.isGameEnd() || !gf.gameInfo.isRoundEnd()) { //TODO
+                if (!gf.gameInfo.isGameEnd() || !gf.gameInfo.isRoundEnd()) {
 
                     keyDoorGc.clearRect(0, 0, screenWidth, screenHeight);
                     humanGc.clearRect(0, 0, screenWidth, screenHeight);
@@ -232,7 +232,7 @@ public class MainGameFXScene {
      */
     private void drawTexts() {
         textGc.setFill(Color.BLACK);
-        textGc.fillRect(0, 0, screenWidth, 15 * verScale);
+        textGc.fillRect(0, 0, screenWidth, 18 * verScale);
         textGc.setFont(Font.font("Times New Roman", FontWeight.EXTRA_BOLD, 15.0 * verScale));
         textGc.setFill(Color.WHITE);
         textGc.fillText(("Ghost lives left: " + gf.gameInfo.getGhostLives()).toUpperCase(), 10, 15 * verScale);
