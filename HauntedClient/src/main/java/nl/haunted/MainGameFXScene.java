@@ -53,7 +53,9 @@ public class MainGameFXScene {
     private Scene scene;
     private Group root;
 
-    private int state;
+    private int humanState;
+
+    private int[] ghostStates;
 
     //background
     private Canvas bgLayer;
@@ -114,7 +116,8 @@ public class MainGameFXScene {
         this.gf = gf;
         this.chat = chat;
         this.p = p;
-        state = 0;
+        ghostStates = new int[6];
+        humanState = 0;
         gf.setupGameInfo();
         this.bgImage = gf.gameInfo.getBackgroundImage();
         levelDrawWidth = bgImage.getWidth();
@@ -206,8 +209,7 @@ public class MainGameFXScene {
                         Scene tussenscene = new Scene((Parent) root);
                         HauntedClient.getStage().setScene(tussenscene);
                         HauntedClient.getStage().show();
-                    }
-                    catch (IOException ex) {
+                    } catch (IOException ex) {
                         Logger.getLogger(MainGameFXScene.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     //gf.gameInfo.endGame(); //TODO
@@ -221,7 +223,7 @@ public class MainGameFXScene {
                         Scene tussenscene = new Scene((Parent) root);
                         HauntedClient.getStage().setScene(tussenscene);
                         HauntedClient.getStage().show();
-                        
+
                     } catch (IOException ex) {
                         Logger.getLogger(MainGameFXScene.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -545,7 +547,8 @@ public class MainGameFXScene {
                     } else {
                         humanGhostPersGc.drawImage(ghostPerspectiveImage[3], (e.getPosition().getX() - 1800) * horScale, (e.getPosition().getY() - 1800) * verScale, ghostPerspectiveImage[3].getWidth() * horScale, ghostPerspectiveImage[3].getHeight() * verScale);
                     }
-                    humanGc.drawImage(getAnimatedHumanImage(e), (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, getAnimatedHumanImage(e).getWidth() * horScale, getAnimatedHumanImage(e).getHeight() * verScale);
+                    Image humanImgToDraw = getAnimatedHumanImage(e);
+                    humanGc.drawImage(humanImgToDraw, (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, humanImgToDraw.getWidth() * horScale, humanImgToDraw.getHeight() * verScale);
                     //drawRotatedImage(humanGc, getAnimatedHumanImage(e), getAngle(e.getDirection()), (e.getPosition().getX() + 100), (e.getPosition().getY() + 100), horScale, verScale);
                     break;
                 case Ghost:
@@ -554,7 +557,8 @@ public class MainGameFXScene {
                         ghostGcs[ghostChooser].drawImage(wallImage, (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, wallImage.getWidth() * horScale, wallImage.getHeight() * verScale);
                         //drawRotatedImage(ghostGcs[ghostChooser], wallImage, 0, (e.getPosition().getX() + 100), (e.getPosition().getY() + 100), horScale, verScale);
                     } else {
-                        ghostGcs[ghostChooser].drawImage(getAnimatedGhostImage(e), (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, getAnimatedGhostImage(e).getWidth() * horScale, getAnimatedGhostImage(e).getHeight() * verScale);
+                        Image ghostImgToDraw = getAnimatedGhostImage(e, ghostChooser);
+                        ghostGcs[ghostChooser].drawImage(ghostImgToDraw, (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, ghostImgToDraw.getWidth() * horScale, ghostImgToDraw.getHeight() * verScale);
                     }
                     ghostChooser++;
                     break;
@@ -567,7 +571,7 @@ public class MainGameFXScene {
     }
 
     /**
-     * convert directionType into angle degrees (example: LEFT == 270°)
+     * convert directionType into angle degrees (example: LEFT == 270)
      *
      * @param direction
      * @return degrees of the rotation
@@ -652,18 +656,18 @@ public class MainGameFXScene {
         java.awt.Color c = e.getColor();
         if (c == java.awt.Color.WHITE) {
             if (e.getMoving()) {
-                switch (state) {
+                switch (humanState) {
                     case 2:
                         returnImage = humanWhiteImages[rotIndex][0];
-                        state = 0;
+                        humanState = 0;
                         break;
                     case 0:
                         returnImage = humanWhiteImages[rotIndex][1];
-                        state = 1;
+                        humanState = 1;
                         break;
                     case 1:
                         returnImage = humanWhiteImages[rotIndex][2];
-                        state = 2;
+                        humanState = 2;
                         break;
                 }
             } else {
@@ -671,18 +675,18 @@ public class MainGameFXScene {
             }
         } else if (c == java.awt.Color.BLACK) {
             if (e.getMoving()) {
-                switch (state) {
+                switch (humanState) {
                     case 2:
                         returnImage = humanBlackImages[rotIndex][0];
-                        state = 0;
+                        humanState = 0;
                         break;
                     case 0:
                         returnImage = humanBlackImages[rotIndex][1];
-                        state = 1;
+                        humanState = 1;
                         break;
                     case 1:
                         returnImage = humanBlackImages[rotIndex][2];
-                        state = 2;
+                        humanState = 2;
                         break;
                 }
             } else {
@@ -691,18 +695,18 @@ public class MainGameFXScene {
         } else if (c == java.awt.Color.GREEN) {
             if (e.getMoving()) {
 
-                switch (state) {
+                switch (humanState) {
                     case 2:
                         returnImage = humanGreenImages[rotIndex][0];
-                        state = 0;
+                        humanState = 0;
                         break;
                     case 0:
                         returnImage = humanGreenImages[rotIndex][1];
-                        state = 1;
+                        humanState = 1;
                         break;
                     case 1:
                         returnImage = humanGreenImages[rotIndex][2];
-                        state = 2;
+                        humanState = 2;
                         break;
                 }
             } else {
@@ -710,18 +714,18 @@ public class MainGameFXScene {
             }
         } else if (c == java.awt.Color.RED) {
             if (e.getMoving()) {
-                switch (state) {
+                switch (humanState) {
                     case 2:
                         returnImage = humanRedImages[rotIndex][0];
-                        state = 0;
+                        humanState = 0;
                         break;
                     case 0:
                         returnImage = humanRedImages[rotIndex][1];
-                        state = 1;
+                        humanState = 1;
                         break;
                     case 1:
                         returnImage = humanRedImages[rotIndex][2];
-                        state = 2;
+                        humanState = 2;
                         break;
                 }
             } else {
@@ -729,18 +733,18 @@ public class MainGameFXScene {
             }
         } else if (c == java.awt.Color.BLUE) {
             if (e.getMoving()) {
-                switch (state) {
+                switch (humanState) {
                     case 2:
                         returnImage = humanBlueImages[rotIndex][0];
-                        state = 0;
+                        humanState = 0;
                         break;
                     case 0:
                         returnImage = humanBlueImages[rotIndex][1];
-                        state = 1;
+                        humanState = 1;
                         break;
                     case 1:
                         returnImage = humanBlueImages[rotIndex][2];
-                        state = 2;
+                        humanState = 2;
                         break;
                 }
             } else {
@@ -748,18 +752,18 @@ public class MainGameFXScene {
             }
         } else if (c == java.awt.Color.ORANGE) {
             if (e.getMoving()) {
-                switch (state) {
+                switch (humanState) {
                     case 2:
                         returnImage = humanOrangeImages[rotIndex][0];
-                        state = 0;
+                        humanState = 0;
                         break;
                     case 0:
                         returnImage = humanOrangeImages[rotIndex][1];
-                        state = 1;
+                        humanState = 1;
                         break;
                     case 1:
                         returnImage = humanOrangeImages[rotIndex][2];
-                        state = 2;
+                        humanState = 2;
                         break;
                 }
             } else {
@@ -767,18 +771,18 @@ public class MainGameFXScene {
             }
         } else if (c == java.awt.Color.MAGENTA) {
             if (e.getMoving()) {
-                switch (state) {
+                switch (humanState) {
                     case 2:
                         returnImage = humanPurpleImages[rotIndex][0];
-                        state = 0;
+                        humanState = 0;
                         break;
                     case 0:
                         returnImage = humanPurpleImages[rotIndex][1];
-                        state = 1;
+                        humanState = 1;
                         break;
                     case 1:
                         returnImage = humanPurpleImages[rotIndex][2];
-                        state = 2;
+                        humanState = 2;
                         break;
                 }
             }
@@ -793,27 +797,28 @@ public class MainGameFXScene {
      * Returns the proper ghost image
      *
      * @param e
+     * @param ghostChooser
      * @return image
      */
-    private Image getAnimatedGhostImage(Entity e) {
+    private Image getAnimatedGhostImage(Entity e, int ghostChooser) {
         Image returnImage = null;
         int rotIndex = getRotationIndex(e.getDirection());
 
         java.awt.Color c = e.getColor();
         if (c == java.awt.Color.WHITE) {
             if (e.getMoving()) {
-                switch (state) {
+                switch (ghostStates[ghostChooser]) {
                     case 2:
                         returnImage = ghostWhiteImages[rotIndex][0];
-                        state = 0;
+                        ghostStates[ghostChooser] = 0;
                         break;
                     case 0:
                         returnImage = ghostWhiteImages[rotIndex][1];
-                        state = 1;
+                        ghostStates[ghostChooser] = 1;
                         break;
                     case 1:
                         returnImage = ghostWhiteImages[rotIndex][2];
-                        state = 2;
+                        ghostStates[ghostChooser] = 2;
                         break;
                 }
             } else {
@@ -821,18 +826,18 @@ public class MainGameFXScene {
             }
         } else if (c == java.awt.Color.BLACK) {
             if (e.getMoving()) {
-                switch (state) {
+                switch (ghostStates[ghostChooser]) {
                     case 2:
                         returnImage = ghostBlackImages[rotIndex][0];
-                        state = 0;
+                        ghostStates[ghostChooser] = 0;
                         break;
                     case 0:
                         returnImage = ghostBlackImages[rotIndex][1];
-                        state = 1;
+                        ghostStates[ghostChooser] = 1;
                         break;
                     case 1:
                         returnImage = ghostBlackImages[rotIndex][2];
-                        state = 2;
+                        ghostStates[ghostChooser] = 2;
                         break;
                 }
             } else {
@@ -841,18 +846,18 @@ public class MainGameFXScene {
         } else if (c == java.awt.Color.GREEN) {
             if (e.getMoving()) {
 
-                switch (state) {
+                switch (ghostStates[ghostChooser]) {
                     case 2:
                         returnImage = ghostGreenImages[rotIndex][0];
-                        state = 0;
+                        ghostStates[ghostChooser] = 0;
                         break;
                     case 0:
                         returnImage = ghostGreenImages[rotIndex][1];
-                        state = 1;
+                        ghostStates[ghostChooser] = 1;
                         break;
                     case 1:
                         returnImage = ghostGreenImages[rotIndex][2];
-                        state = 2;
+                        ghostStates[ghostChooser] = 2;
                         break;
                 }
             } else {
@@ -860,18 +865,18 @@ public class MainGameFXScene {
             }
         } else if (c == java.awt.Color.RED) {
             if (e.getMoving()) {
-                switch (state) {
+                switch (ghostStates[ghostChooser]) {
                     case 2:
                         returnImage = ghostRedImages[rotIndex][0];
-                        state = 0;
+                        ghostStates[ghostChooser] = 0;
                         break;
                     case 0:
                         returnImage = ghostRedImages[rotIndex][1];
-                        state = 1;
+                        ghostStates[ghostChooser] = 1;
                         break;
                     case 1:
                         returnImage = ghostRedImages[rotIndex][2];
-                        state = 2;
+                        ghostStates[ghostChooser] = 2;
                         break;
                 }
             } else {
@@ -879,18 +884,18 @@ public class MainGameFXScene {
             }
         } else if (c == java.awt.Color.BLUE) {
             if (e.getMoving()) {
-                switch (state) {
+                switch (ghostStates[ghostChooser]) {
                     case 2:
                         returnImage = ghostBlueImages[rotIndex][0];
-                        state = 0;
+                        ghostStates[ghostChooser] = 0;
                         break;
                     case 0:
                         returnImage = ghostBlueImages[rotIndex][1];
-                        state = 1;
+                        ghostStates[ghostChooser] = 1;
                         break;
                     case 1:
                         returnImage = ghostBlueImages[rotIndex][2];
-                        state = 2;
+                        ghostStates[ghostChooser] = 2;
                         break;
                 }
             } else {
@@ -898,18 +903,18 @@ public class MainGameFXScene {
             }
         } else if (c == java.awt.Color.ORANGE) {
             if (e.getMoving()) {
-                switch (state) {
+                switch (ghostStates[ghostChooser]) {
                     case 2:
                         returnImage = ghostOrangeImages[rotIndex][0];
-                        state = 0;
+                        ghostStates[ghostChooser] = 0;
                         break;
                     case 0:
                         returnImage = ghostOrangeImages[rotIndex][1];
-                        state = 1;
+                        ghostStates[ghostChooser] = 1;
                         break;
                     case 1:
                         returnImage = ghostOrangeImages[rotIndex][2];
-                        state = 2;
+                        ghostStates[ghostChooser] = 2;
                         break;
                 }
             } else {
@@ -917,18 +922,18 @@ public class MainGameFXScene {
             }
         } else if (c == java.awt.Color.MAGENTA) {
             if (e.getMoving()) {
-                switch (state) {
+                switch (ghostStates[ghostChooser]) {
                     case 2:
                         returnImage = ghostPurpleImages[rotIndex][0];
-                        state = 0;
+                        ghostStates[ghostChooser] = 0;
                         break;
                     case 0:
                         returnImage = ghostPurpleImages[rotIndex][1];
-                        state = 1;
+                        ghostStates[ghostChooser] = 1;
                         break;
                     case 1:
                         returnImage = ghostPurpleImages[rotIndex][2];
-                        state = 2;
+                        ghostStates[ghostChooser] = 2;
                         break;
                 }
             }
