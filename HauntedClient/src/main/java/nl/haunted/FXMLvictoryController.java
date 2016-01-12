@@ -62,7 +62,7 @@ public class FXMLvictoryController implements Initializable {
     public void continuetolobby()
     {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLGameLobby.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLHaunted.fxml"));
             Node root = fxmlLoader.load();            
             HauntedClient.getStage().getScene().setRoot((Parent) root);
             HauntedClient.getStage().show();
