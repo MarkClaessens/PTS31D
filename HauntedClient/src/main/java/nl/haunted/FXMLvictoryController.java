@@ -65,6 +65,7 @@ public class FXMLvictoryController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLHaunted.fxml"));
             Node root = fxmlLoader.load();            
             HauntedClient.getStage().getScene().setRoot((Parent) root);
+            HauntedClient.getStage().setFullScreen(false);
             HauntedClient.getStage().show();
         } catch (IOException ex) {
             Logger.getLogger(FXMLvictoryController.class.getName()).log(Level.SEVERE, null, ex);
