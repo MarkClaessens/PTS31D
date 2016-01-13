@@ -57,6 +57,7 @@ public class Game implements Serializable {
         this.currentFloor = 0;
         this.gameLobby = gl;
         this.ghosts = new ArrayList();
+        
 
         // Create the first level.
         nextLevel();
@@ -126,6 +127,7 @@ public class Game implements Serializable {
      */
     public void startRound() {
         this.roundEnded = false;
+        this.nextRound = true;
         this.tickTimer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
