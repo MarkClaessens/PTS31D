@@ -205,6 +205,8 @@ public class Game implements Serializable {
         // Wait 500 milliseconds (tick timer needs to go one some time) before cancelling ticking.
         Thread.sleep(500);
         this.tickTimer.cancel();
+        this.inputTimer.cancel();
+        this.srvSoc.close();
         GameLobby gl = (GameLobby) this.gameLobby;
         gl.getLobby().removeGLAfterGame(gl);
     }
