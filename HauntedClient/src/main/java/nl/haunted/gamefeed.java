@@ -111,6 +111,7 @@ public class gamefeed {
             gameInfo.setGhostLives((int) o[1][0]);
             gameInfo.setCurrentFloor((int) o[1][1]);
             gameInfo.setamIHuman(this.soc.getIPAddress().equalsIgnoreCase(((IPlayer) o[1][2]).getIpAdress()));
+            gameInfo.setCurrentHuman(((IPlayer) o[1][2]).getName());
             gameInfo.setKey((boolean) o[1][3]);
             gameInfo.setRoundEnd((boolean) o[1][4]);
             gameInfo.setNextRound((boolean) o[1][5]);

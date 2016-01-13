@@ -1,10 +1,10 @@
 -------------------------------------------------------------------------------
 Test set: nl.haunted.HumanTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 0 sec <<< FAILURE!
+Tests run: 4, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 0.001 sec <<< FAILURE!
 enterDoor(nl.haunted.HumanTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NullPointerException
-	at nl.haunted.Human.enterDoor(Human.java:157)
+	at nl.haunted.Human.enterDoor(Human.java:158)
 	at nl.haunted.HumanTest.enterDoor(HumanTest.java:86)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
