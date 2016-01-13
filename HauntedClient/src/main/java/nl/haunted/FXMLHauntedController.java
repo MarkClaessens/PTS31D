@@ -140,10 +140,18 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
      */
     public void changename() throws RemoteException {
 
-        if (!TFchangenameplayer1.getText().isEmpty()) {
+        if (!TFchangenameplayer1.getText().isEmpty() && TFchangenameplayer1.getText().length() < 20) {
+            
             tisplayer.setName(TFchangenameplayer1.getText());
             setplayername();
             TFroomname.setText(tisplayer.getName());
+        }
+        else
+        {
+          Alert alert = new Alert(AlertType.INFORMATION);
+          alert.setHeaderText("maximum overschreden");
+          alert.setContentText("ha fuck off");
+          alert.showAndWait();  
         }
     }
 
