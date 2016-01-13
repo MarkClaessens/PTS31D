@@ -230,9 +230,11 @@ public class Game implements Serializable {
         //check if the game is running and not in the pause screen (between rounds)
         if (this.roundEnded) {
         } else {
-            //check if the list of ghosts is empty
+            //check if the ghosts are dead
+             List<Ghost> deadghosts = new ArrayList();
+                this.ghosts.stream().forEach((G) -> {if (G.getDead()){deadghosts.add(G);}});
             // <editor-fold defaultstate="collapsed" desc="if there are ghosts">
-            if (!this.ghosts.isEmpty()) {
+            if (!this.ghosts.isEmpty() && this.ghosts.size()!=deadghosts.size()) {
                 DirectionType[] keyboard = this.getPlayerInput();
 
                 // <editor-fold defaultstate="collapsed" desc="if there is a pressed key">
@@ -280,12 +282,7 @@ public class Game implements Serializable {
                 }
                 //</editor-fold>
                 this.human.checkInteract(this);
-                
-                //remove deadghosts from the list
-                List<Ghost> deadghosts = new ArrayList();
-                this.ghosts.stream().forEach((G) -> {if (G.getDead()){deadghosts.add(G);}});
-                this.ghosts.removeAll(deadghosts);
-                
+                     
                 // <editor-fold defaultstate="collapsed" desc="loop  to change ghosts to wall and respawn them">
                 this.ghosts.stream().forEach((G) -> {
                     G.changeAppearance();
