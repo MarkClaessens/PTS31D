@@ -280,6 +280,12 @@ public class Game implements Serializable {
                 }
                 //</editor-fold>
                 this.human.checkInteract(this);
+                
+                //remove deadghosts from the list
+                List<Ghost> deadghosts = new ArrayList();
+                this.ghosts.stream().forEach((G) -> {if (G.getDead()){deadghosts.add(G);}});
+                this.ghosts.removeAll(deadghosts);
+                
                 // <editor-fold defaultstate="collapsed" desc="loop  to change ghosts to wall and respawn them">
                 this.ghosts.stream().forEach((G) -> {
                     G.changeAppearance();
