@@ -219,9 +219,9 @@ public class MainGameFXScene {
                     timer.cancel();
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLtussenscherm.fxml"));
                     Node root;
-                    try {
-                        FXMLtussenschermController TSC = fxmlLoader.getController();                        
+                    try {                                                
                         root = fxmlLoader.load();
+                        FXMLtussenschermController TSC = fxmlLoader.getController();
                         Scene tussenscene = new Scene((Parent) root);
                         HauntedClient.getStage().setScene(tussenscene);
                         HauntedClient.getStage().show();
