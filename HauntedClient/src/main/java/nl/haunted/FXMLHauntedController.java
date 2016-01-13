@@ -150,7 +150,7 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
         {
           Alert alert = new Alert(AlertType.INFORMATION);
           alert.setHeaderText("maximum overschreden");
-          alert.setContentText("ha fuck off");
+          alert.setContentText("U naam is te lang");
           alert.showAndWait();  
         }
     }
