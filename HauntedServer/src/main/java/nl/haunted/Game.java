@@ -37,7 +37,11 @@ public class Game implements Serializable {
     private List<Ghost> ghosts;
     private IPlayer currentHuman;
     private Human human;
+
     private int maxfloors;
+
+    private int delay = 0;
+
     
     /**
      *
@@ -238,9 +242,14 @@ public class Game implements Serializable {
      */
     public void tick() throws RemoteException, UnknownHostException, IOException, ClassNotFoundException, InterruptedException {
         //check if the game is running and not in the pause screen (between rounds)
-        if (this.roundEnded) {
+        if (this.roundEnded) {        
             this.endRound();
+            if (this.delay >= 60){
             this.roundEnded = false;
+            this.delay = 0;
+            } else {
+                this.delay++;
+            }
         } else {
             //check if the ghosts are dead
              List<Ghost> deadghosts = new ArrayList();
