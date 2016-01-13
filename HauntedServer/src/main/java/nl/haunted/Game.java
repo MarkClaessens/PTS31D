@@ -195,7 +195,7 @@ public class Game implements Serializable {
      * @throws java.rmi.RemoteException
      * @throws java.lang.InterruptedException
      */
-    public void endGame(IPlayer winner) throws RemoteException, InterruptedException {
+    public void endGame(IPlayer winner) throws RemoteException, InterruptedException, IOException {
         for (IPlayer player : this.players) {
             player.reset();
         }
@@ -218,7 +218,7 @@ public class Game implements Serializable {
      * @throws java.rmi.RemoteException
      * @throws java.lang.InterruptedException
      */
-    public synchronized void leaveGame(Player player) throws RemoteException, InterruptedException {
+    public synchronized void leaveGame(Player player) throws RemoteException, InterruptedException, IOException {
         if (player.getCharacter() instanceof Human) {
             Random randomizer = new Random();
             int randomInt = randomizer.nextInt(this.players.size() - 1);
