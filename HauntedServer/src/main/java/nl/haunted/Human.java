@@ -6,6 +6,7 @@
 package nl.haunted;
 
 import java.awt.geom.Point2D;
+import java.io.IOException;
 import java.io.Serializable;
 import static java.lang.Math.tan;
 import java.rmi.RemoteException;
@@ -152,7 +153,7 @@ public class Human extends Character implements Serializable {
      * @param game
      * @throws java.lang.InterruptedException
      */
-    public void enterDoor(Game game) throws InterruptedException {
+    public void enterDoor(Game game) throws InterruptedException, IOException {
         // First check if this entering was on the last floor (last level).
         if (game.getFloorAmount() - 1 == game.getCurrentFloor()) {
             boolean humanFound = false;
@@ -257,7 +258,7 @@ public class Human extends Character implements Serializable {
      * @param game
      * @throws java.lang.InterruptedException
      */
-    public void checkInteract(Game game) throws InterruptedException {
+    public void checkInteract(Game game) throws InterruptedException, IOException {
         Point2D door = new Point2D.Double(game.getLevel().getDoorLocation().getX() + 40, game.getLevel().getDoorLocation().getY());
         Point2D key = game.getLevel().getKeyLocation();
 
