@@ -222,6 +222,9 @@ public class MainGameFXScene {
                     try {                                                
                         root = fxmlLoader.load();
                         FXMLtussenschermController TSC = fxmlLoader.getController();
+                        TSC.setchat(chat);
+                        TSC.setgf(gf);
+                        TSC.setplayer(p);
                         Scene tussenscene = new Scene((Parent) root);
                         HauntedClient.getStage().setScene(tussenscene);
                         HauntedClient.getStage().show();
