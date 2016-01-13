@@ -727,11 +727,10 @@ public class MainGameFXScene {
                         humanState = 2;
                         break;
                 }
+            } else {
+                returnImage = humanPurpleImages[rotIndex][0];
             }
-        } else {
-            returnImage = humanPurpleImages[rotIndex][0];
         }
-
         return returnImage;
     }
 
@@ -878,9 +877,9 @@ public class MainGameFXScene {
                         ghostStates[ghostChooser] = 2;
                         break;
                 }
+            } else {
+                returnImage = ghostPurpleImages[rotIndex][0];
             }
-        } else {
-            returnImage = ghostPurpleImages[rotIndex][0];
         }
         return returnImage;
     }
