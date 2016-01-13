@@ -29,7 +29,7 @@ public class Game implements Serializable {
     private IGameLobby gameLobby;
     private Timer tickTimer, inputTimer;
     
-    private final int floorAmount; // starts at 1
+    private int floorAmount; // starts at 1
     private int currentFloor = -1; // starts at 0 so the init has to be -1.
     private boolean roundEnded, nextRound;
     private Level level;
@@ -37,6 +37,7 @@ public class Game implements Serializable {
     private List<Ghost> ghosts;
     private IPlayer currentHuman;
     private Human human;
+    private int maxfloors;
     
     /**
      *
@@ -53,7 +54,9 @@ public class Game implements Serializable {
         srvSoc.socketSetup(groupID, 9876);
         Random randomizer = new Random();
         // the minimum floors is hardcoded to 3 right now.
-        this.floorAmount = randomizer.nextInt(floors - 3 + 1) + 3;
+        this.maxfloors = floors;
+        this.floorAmount = randomizer.nextInt(floors);
+        setFloorAmount();
         this.currentFloor = 0;
         this.gameLobby = gl;
         this.ghosts = new ArrayList();
@@ -88,6 +91,14 @@ public class Game implements Serializable {
      */
     public int getFloorAmount() {
         return this.floorAmount;
+    }
+    
+    public void setFloorAmount() {
+        Random randomizer = new Random();
+         while(this.floorAmount < 2)
+         {
+             this.floorAmount = randomizer.nextInt(maxfloors);
+         }
     }
 
     /**
