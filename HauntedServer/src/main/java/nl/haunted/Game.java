@@ -161,7 +161,6 @@ public class Game implements Serializable {
      * Ends the current round and opens the counting screen.
      */
     public void endRound() {
-        this.roundEnded = true;
 
         human.setPosition(pickHumanSpawnpoint());
         human.setHasKey(false);
@@ -229,6 +228,8 @@ public class Game implements Serializable {
     public void tick() throws RemoteException, UnknownHostException, IOException, ClassNotFoundException, InterruptedException {
         //check if the game is running and not in the pause screen (between rounds)
         if (this.roundEnded) {
+            this.endRound();
+            this.roundEnded = false;
         } else {
             //check if the ghosts are dead
              List<Ghost> deadghosts = new ArrayList();
@@ -297,7 +298,7 @@ public class Game implements Serializable {
 
             } // if there are ghosts </editor-fold> 
             else { // if there are no ghosts.
-                this.endRound();
+                this.roundEnded = true;
             }
             srvSoc.sendObject(this.compressGameInfo());
         } // server runnin
