@@ -28,7 +28,7 @@ public class Game implements Serializable {
     private Socket srvSoc;
     private IGameLobby gameLobby;
     private Timer tickTimer, inputTimer;
-    
+
     private int floorAmount; // starts at 1
     private int currentFloor = -1; // starts at 0 so the init has to be -1.
     private boolean roundEnded, nextRound;
@@ -42,7 +42,6 @@ public class Game implements Serializable {
 
     private int delay = 0;
 
-    
     /**
      *
      * @param players
@@ -64,7 +63,6 @@ public class Game implements Serializable {
         this.currentFloor = 0;
         this.gameLobby = gl;
         this.ghosts = new ArrayList();
-        
 
         // Create the first level.
         nextLevel();
@@ -75,6 +73,7 @@ public class Game implements Serializable {
 
     /**
      * This function returns the variable this.level
+     *
      * @return
      */
     public Level getLevel() {
@@ -96,13 +95,12 @@ public class Game implements Serializable {
     public int getFloorAmount() {
         return this.floorAmount;
     }
-    
+
     public void setFloorAmount() {
         Random randomizer = new Random();
-         while(this.floorAmount < 2)
-         {
-             this.floorAmount = randomizer.nextInt(maxfloors);
-         }
+        while (this.floorAmount < 2) {
+            this.floorAmount = randomizer.nextInt(maxfloors);
+        }
     }
 
     /**
@@ -242,20 +240,26 @@ public class Game implements Serializable {
      */
     public void tick() throws RemoteException, UnknownHostException, IOException, ClassNotFoundException, InterruptedException {
         //check if the game is running and not in the pause screen (between rounds)
-        if (this.roundEnded) {        
-            this.endRound();
-            if (this.delay >= 60){
-            this.roundEnded = false;
-            this.delay = 0;
+        if (this.roundEnded) {
+            if (this.delay == 0) {
+                this.endRound();
+                this.delay++;
+            } else if (this.delay >= 60) {
+                this.roundEnded = false;
+                this.delay = 0;
             } else {
                 this.delay++;
             }
         } else {
             //check if the ghosts are dead
-             List<Ghost> deadghosts = new ArrayList();
-                this.ghosts.stream().forEach((G) -> {if (G.getDead()){deadghosts.add(G);}});
+            List<Ghost> deadghosts = new ArrayList();
+            this.ghosts.stream().forEach((G) -> {
+                if (G.getDead()) {
+                    deadghosts.add(G);
+                }
+            });
             // <editor-fold defaultstate="collapsed" desc="if there are ghosts">
-            if (!this.ghosts.isEmpty() && this.ghosts.size()!=deadghosts.size()) {
+            if (!this.ghosts.isEmpty() && this.ghosts.size() != deadghosts.size()) {
                 DirectionType[] keyboard = this.getPlayerInput();
 
                 // <editor-fold defaultstate="collapsed" desc="if there is a pressed key">
@@ -303,7 +307,7 @@ public class Game implements Serializable {
                 }
                 //</editor-fold>
                 this.human.checkInteract(this);
-                     
+
                 // <editor-fold defaultstate="collapsed" desc="loop  to change ghosts to wall and respawn them">
                 this.ghosts.stream().forEach((G) -> {
                     G.changeAppearance();
