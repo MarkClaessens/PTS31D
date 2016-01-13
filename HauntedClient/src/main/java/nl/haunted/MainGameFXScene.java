@@ -556,7 +556,7 @@ public class MainGameFXScene {
                     if (e.getWall()) {
                         ghostGcs[ghostChooser].drawImage(wallImage, (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, wallImage.getWidth() * horScale, wallImage.getHeight() * verScale);
                         //drawRotatedImage(ghostGcs[ghostChooser], wallImage, 0, (e.getPosition().getX() + 100), (e.getPosition().getY() + 100), horScale, verScale);
-                    } else {
+                    } else if (!e.getDead()) {
                         Image ghostImgToDraw = getAnimatedGhostImage(e, ghostChooser);
                         ghostGcs[ghostChooser].drawImage(ghostImgToDraw, (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, ghostImgToDraw.getWidth() * horScale, ghostImgToDraw.getHeight() * verScale);
                     }
@@ -568,64 +568,6 @@ public class MainGameFXScene {
             }
         }
         drawTexts();
-    }
-
-    /**
-     * convert directionType into angle degrees (example: LEFT == 270)
-     *
-     * @param direction
-     * @return degrees of the rotation
-     */
-    private double getAngle(DirectionType direction) {
-        switch (direction) {
-            case UP:
-                return 0;
-            case RIGHT:
-                return 90;
-            case DOWN:
-                return 180;
-            case LEFT:
-                return 270;
-            default:
-                return 0;
-        }
-    }
-
-    /**
-     * Rotates the graphicscontext for a rotated image.
-     *
-     * @param gc
-     * @param angle
-     * @param px
-     * @param py
-     */
-    private void rotate(GraphicsContext gc, double angle, double px, double py) {
-        Rotate r = new Rotate(angle, px, py);
-        gc.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
-    }
-
-    /**
-     * Draws the rotated image on the right position with the right scalings.
-     *
-     * @param gc
-     * @param image
-     * @param angle
-     * @param tlpx
-     * @param tlpy
-     * @param scaleX
-     * @param scaleY
-     */
-    private void drawRotatedImage(GraphicsContext gc, Image image, double angle, double tlpx, double tlpy, double scaleX, double scaleY) {
-        gc.save(); // saves the current state on stack, including the current transform
-        //rotate(gc, angle, ((tlpx + image.getWidth()) * scaleX) / 2, ((tlpy + image.getHeight()) * scaleY) / 2);
-        rotate(gc, angle, tlpx + 50, tlpy + 50);
-        //rotate(gc, angle, tlpx, (tlpy + image.getHeight()/2));
-        if (angle == 90 || angle == 270) {
-            gc.drawImage(image, tlpx * scaleX, tlpy * scaleY, image.getWidth() * scaleX, image.getWidth() * scaleX);
-        } else {
-            gc.drawImage(image, tlpx * scaleX, tlpy * scaleY, image.getWidth() * scaleX, image.getHeight() * scaleY);
-        }
-        gc.restore(); // back to original state (before rotation)
     }
 
     private int getRotationIndex(DirectionType direction) {
