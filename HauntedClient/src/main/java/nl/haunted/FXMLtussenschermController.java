@@ -60,17 +60,6 @@ public class FXMLtussenschermController implements Initializable {
                 BackgroundSize.DEFAULT);
         //then you set to your node
         paneel.setBackground(new Background(myBI));
-
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                tellabel.setText(String.valueOf(10 - run));
-                run++;
-            }
-
-        };
-        timer.scheduleAtFixedRate(task, 0, 1000);
     }
 
     public void setgf(gamefeed gf) {

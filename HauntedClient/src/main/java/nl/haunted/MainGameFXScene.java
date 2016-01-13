@@ -205,6 +205,7 @@ public class MainGameFXScene {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLvictory.fxml"));
                     Node root;
                     try {
+                        FXMLvictoryController VC = fxmlLoader.getController();                        
                         root = fxmlLoader.load();
                         Scene tussenscene = new Scene((Parent) root);
                         HauntedClient.getStage().setScene(tussenscene);
@@ -219,10 +220,12 @@ public class MainGameFXScene {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLtussenscherm.fxml"));
                     Node root;
                     try {
+                        FXMLtussenschermController TSC = fxmlLoader.getController();                        
                         root = fxmlLoader.load();
                         Scene tussenscene = new Scene((Parent) root);
                         HauntedClient.getStage().setScene(tussenscene);
                         HauntedClient.getStage().show();
+                        TSC.startTimer();
 
                     } catch (IOException ex) {
                         Logger.getLogger(MainGameFXScene.class.getName()).log(Level.SEVERE, null, ex);
