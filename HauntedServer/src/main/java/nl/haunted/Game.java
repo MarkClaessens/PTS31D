@@ -79,6 +79,10 @@ public class Game implements Serializable {
     public Level getLevel() {
         return this.level;
     }
+    
+    public void setRoundEnded(boolean bool){
+        this.roundEnded = bool;
+    }
 
     /**
      *
