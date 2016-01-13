@@ -596,7 +596,7 @@ public class MainGameFXScene {
         int rotIndex = getRotationIndex(e.getDirection());
 
         java.awt.Color c = e.getColor();
-        if (c == java.awt.Color.WHITE) {
+        if (c.equals(java.awt.Color.WHITE)) {
             if (e.getMoving()) {
                 switch (humanState) {
                     case 2:
@@ -615,7 +615,7 @@ public class MainGameFXScene {
             } else {
                 returnImage = humanWhiteImages[rotIndex][0];
             }
-        } else if (c == java.awt.Color.BLACK) {
+        } else if (c.equals(java.awt.Color.BLACK)) {
             if (e.getMoving()) {
                 switch (humanState) {
                     case 2:
@@ -634,7 +634,7 @@ public class MainGameFXScene {
             } else {
                 returnImage = humanBlackImages[rotIndex][0];
             }
-        } else if (c == java.awt.Color.GREEN) {
+        } else if (c.equals(java.awt.Color.GREEN)) {
             if (e.getMoving()) {
 
                 switch (humanState) {
@@ -654,7 +654,7 @@ public class MainGameFXScene {
             } else {
                 returnImage = humanGreenImages[rotIndex][0];
             }
-        } else if (c == java.awt.Color.RED) {
+        } else if (c.equals(java.awt.Color.RED)) {
             if (e.getMoving()) {
                 switch (humanState) {
                     case 2:
@@ -673,7 +673,7 @@ public class MainGameFXScene {
             } else {
                 returnImage = humanRedImages[rotIndex][0];
             }
-        } else if (c == java.awt.Color.BLUE) {
+        } else if (c.equals(java.awt.Color.BLUE)) {
             if (e.getMoving()) {
                 switch (humanState) {
                     case 2:
@@ -692,7 +692,7 @@ public class MainGameFXScene {
             } else {
                 returnImage = humanBlueImages[rotIndex][0];
             }
-        } else if (c == java.awt.Color.ORANGE) {
+        } else if (c.equals(java.awt.Color.ORANGE)) {
             if (e.getMoving()) {
                 switch (humanState) {
                     case 2:
@@ -711,7 +711,7 @@ public class MainGameFXScene {
             } else {
                 returnImage = humanOrangeImages[rotIndex][0];
             }
-        } else if (c == java.awt.Color.MAGENTA) {
+        } else if (c.equals(java.awt.Color.MAGENTA)) {
             if (e.getMoving()) {
                 switch (humanState) {
                     case 2:
@@ -746,7 +746,7 @@ public class MainGameFXScene {
         int rotIndex = getRotationIndex(e.getDirection());
 
         java.awt.Color c = e.getColor();
-        if (c == java.awt.Color.WHITE) {
+        if (c.equals(java.awt.Color.WHITE)) {
             if (e.getMoving()) {
                 switch (ghostStates[ghostChooser]) {
                     case 2:
@@ -765,7 +765,7 @@ public class MainGameFXScene {
             } else {
                 returnImage = ghostWhiteImages[rotIndex][0];
             }
-        } else if (c == java.awt.Color.BLACK) {
+        } else if (c.equals(java.awt.Color.BLACK)) {
             if (e.getMoving()) {
                 switch (ghostStates[ghostChooser]) {
                     case 2:
@@ -784,7 +784,7 @@ public class MainGameFXScene {
             } else {
                 returnImage = ghostBlackImages[rotIndex][0];
             }
-        } else if (c == java.awt.Color.GREEN) {
+        } else if (c.equals(java.awt.Color.GREEN)) {
             if (e.getMoving()) {
 
                 switch (ghostStates[ghostChooser]) {
@@ -804,7 +804,7 @@ public class MainGameFXScene {
             } else {
                 returnImage = ghostGreenImages[rotIndex][0];
             }
-        } else if (c == java.awt.Color.RED) {
+        } else if (c.equals(java.awt.Color.RED)) {
             if (e.getMoving()) {
                 switch (ghostStates[ghostChooser]) {
                     case 2:
@@ -823,7 +823,7 @@ public class MainGameFXScene {
             } else {
                 returnImage = ghostRedImages[rotIndex][0];
             }
-        } else if (c == java.awt.Color.BLUE) {
+        } else if (c.equals(java.awt.Color.BLUE)) {
             if (e.getMoving()) {
                 switch (ghostStates[ghostChooser]) {
                     case 2:
@@ -842,7 +842,7 @@ public class MainGameFXScene {
             } else {
                 returnImage = ghostBlueImages[rotIndex][0];
             }
-        } else if (c == java.awt.Color.ORANGE) {
+        } else if (c.equals(java.awt.Color.ORANGE)) {
             if (e.getMoving()) {
                 switch (ghostStates[ghostChooser]) {
                     case 2:
@@ -861,7 +861,7 @@ public class MainGameFXScene {
             } else {
                 returnImage = ghostOrangeImages[rotIndex][0];
             }
-        } else if (c == java.awt.Color.MAGENTA) {
+        } else if (c.equals(java.awt.Color.MAGENTA)) {
             if (e.getMoving()) {
                 switch (ghostStates[ghostChooser]) {
                     case 2:
