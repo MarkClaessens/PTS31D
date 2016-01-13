@@ -82,7 +82,7 @@ public class HumanTest {
      * test for entering the door
      */
     @Test
-    public void enterDoor() throws InterruptedException {
+    public void enterDoor() throws InterruptedException, IOException {
         human.enterDoor(game);
         human.pickUpKey();
         human.enterDoor(game);
