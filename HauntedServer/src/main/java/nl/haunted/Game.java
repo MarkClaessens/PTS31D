@@ -173,7 +173,7 @@ public class Game implements Serializable {
                 }
             }
         };
-        this.inputTimer.scheduleAtFixedRate(task2, 0, 2);
+        this.inputTimer.scheduleAtFixedRate(task2, 0, 4);
     }
 
     /**
