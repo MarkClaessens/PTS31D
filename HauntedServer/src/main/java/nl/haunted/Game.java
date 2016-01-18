@@ -273,13 +273,7 @@ public class Game implements Serializable {
         } else {
             //check if the ghosts are dead
             List<Ghost> deadghosts = new ArrayList();
-           ghosts.clear();
-            for(IPlayer p : this.players){
-                if (p.getCharacter() instanceof Ghost){
-                    Ghost g = (Ghost) p.getCharacter();
-                    ghosts.add(g);
-                }
-            }
+           
             this.ghosts.stream().forEach((G) -> {
                 if (G.getDead()) {
                     deadghosts.add(G);

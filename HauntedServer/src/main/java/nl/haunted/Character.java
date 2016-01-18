@@ -59,7 +59,7 @@ public abstract class Character implements Serializable {
         this.position = position;
         this.direction = DirectionType.DOWN; // Set a default direction
         this.moving = false;
-        this.movementSpeed = 4.0;
+        this.movementSpeed = 6.0;
     }
 
     /**
