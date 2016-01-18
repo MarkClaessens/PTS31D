@@ -26,7 +26,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
     private int maxPlayers, maxFloors;
     private IPlayer host;
     private List<IPlayer> players;
-    private BasicPublisher basicPublisher;
+    private BasicPublisher basicPublisher;    
     private static int gameLobbyNum = 0;
     private String groupID;
     private Lobby lobby;
@@ -51,9 +51,10 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         this.maxPlayers = maxPlayers;
         this.maxFloors = maxFloors;
         this.players = new ArrayList();
-        String[] props = new String[1];
+        String[] props = new String[2];
         props[0] = "players";
-        this.basicPublisher = new BasicPublisher(props);
+        props[1] = "stats";
+        this.basicPublisher = new BasicPublisher(props);        
         players.add(host);
         ingame = false;
 
