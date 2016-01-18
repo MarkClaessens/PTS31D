@@ -50,7 +50,7 @@ public class InputController {
                 }
             }
         };
-        timer.scheduleAtFixedRate(task, 0, 32);
+        timer.scheduleAtFixedRate(task, 0, 16);
 
     }
 
