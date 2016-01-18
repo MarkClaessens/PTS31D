@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -37,6 +38,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -116,7 +118,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
                 BackgroundSize.DEFAULT);
         //then you set to your node
         paneel.setBackground(new Background(myBI));
-
+        onKeyReleases(HauntedClient.getStage().getScene());
         System.out.println("kaas");
         // Set the groupID in ClientController to the groupID of this gamelobby.
 
@@ -183,7 +185,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
 
     public void settisPlayer(IPlayer player) {
         this.tisplayer = player;
-        
+
         try {
             gamelobby.addListener(this, "stats");
             if (!gamelobby.getHost().equals(tisplayer)) {
@@ -368,9 +370,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         } else if (propertyName.equals("ready")) {
 
             playernames();
-        }
-        else if (propertyName.equals("stats")) 
-        {
+        } else if (propertyName.equals("stats")) {
             gamesettings();
         }
     }
@@ -480,4 +480,37 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
 
     }
 
+    private void onKeyReleases(Scene scene) {
+        scene.setOnKeyPressed(
+                new EventHandler<KeyEvent>() {
+                    @Override
+                    public void handle(KeyEvent e) {
+                        String code = e.getCode().toString();
+
+                        if (code.equals("ENTER")) {
+                            if (!TFmessage.getText().isEmpty()) {
+                                try {
+                                    Message message = new Message(TFmessage.getText(), tisplayer, true);
+                                    chat.sendMessage(message);
+                                    TFmessage.clear();
+                                } catch (IllegalArgumentException ex) {
+                                    Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
+                                } catch (RemoteException ex) {
+                                    Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
+                                } catch (IOException ex) {
+                                    Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+
+                            } else {
+                                TAchatBox.setScrollTop(Double.MAX_VALUE);
+                                Alert alert = new Alert(AlertType.INFORMATION);
+                                alert.setContentText("geen message ingevoerd");
+                                alert.showAndWait();
+                            }
+
+                        }
+                    }
+                }
+        );
+    }
 }
