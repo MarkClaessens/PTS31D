@@ -362,7 +362,7 @@ public class Game implements Serializable {
      */
     public Object[][] compressGameInfo() throws UnknownHostException, RemoteException {
         Object[][] obj;
-        obj = new Object[this.ghosts.size() + 6][7];
+        obj = new Object[this.ghosts.size() + 6][8];
         obj[0][0] = "Server";
         obj[0][1] = InetAddress.getLocalHost();
         obj[0][2] = this.level.getBackgroundInt();

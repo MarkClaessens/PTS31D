@@ -4,7 +4,7 @@ Test set: nl.haunted.GhostTest
 Tests run: 6, Failures: 1, Errors: 2, Skipped: 0, Time elapsed: 0.001 sec <<< FAILURE!
 testVanish(nl.haunted.GhostTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NullPointerException
-	at nl.haunted.Ghost.vanish(Ghost.java:197)
+	at nl.haunted.Ghost.vanish(Ghost.java:200)
 	at nl.haunted.GhostTest.testVanish(GhostTest.java:122)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -36,7 +36,7 @@ java.lang.NullPointerException
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 testPossess(nl.haunted.GhostTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NullPointerException
-	at nl.haunted.Ghost.possess(Ghost.java:125)
+	at nl.haunted.Ghost.possess(Ghost.java:134)
 	at nl.haunted.GhostTest.testPossess(GhostTest.java:96)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
