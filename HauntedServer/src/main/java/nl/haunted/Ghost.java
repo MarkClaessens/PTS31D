@@ -124,9 +124,9 @@ public class Ghost extends Character implements Serializable {
         List<IPlayer> players = game.getPlayers();
         boolean humanFound = false;
 
-        System.out.println("game gethuman() "+this.game.getHuman().toString());
-        System.out.println("players "+this.game.getPlayers().toString());
-        System.out.println("ghosts "+this.game.getGhosts().toString());
+        System.out.println("game gethuman() "+game.getHuman().toString());
+        System.out.println("players "+game.getPlayers().toString());
+        System.out.println("ghosts "+game.getGhosts().toString());
         while (!humanFound) {
             for (IPlayer player : players) {
                 try {
@@ -156,9 +156,9 @@ public class Ghost extends Character implements Serializable {
             this.setPosition(game.pickGhostSpawnPoint(false));
         }
         System.out.println("after");
-        System.out.println("game gethuman() "+this.game.getHuman().toString());
-        System.out.println("players "+this.game.getPlayers().toString());
-        System.out.println("ghosts "+this.game.getGhosts().toString());
+        System.out.println("game gethuman() "+game.getHuman().toString());
+        System.out.println("players "+game.getPlayers().toString());
+        System.out.println("ghosts "+game.getGhosts().toString());
                 
     }
 

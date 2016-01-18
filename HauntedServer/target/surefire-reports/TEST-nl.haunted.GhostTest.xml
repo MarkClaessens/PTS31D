@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="6" failures="1" name="nl.haunted.GhostTest" time="0.011" errors="2" skipped="0">
+<testsuite tests="6" failures="1" name="nl.haunted.GhostTest" time="0.007" errors="2" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_60\jre\bin"/>
@@ -97,9 +97,11 @@
 </failure>
   </testcase>
   <testcase classname="nl.haunted.GhostTest" name="testSetVulnerable" time="0"/>
+  <testcase classname="nl.haunted.GhostTest" name="testMakeGhost" time="0"/>
+  <testcase classname="nl.haunted.GhostTest" name="testIsVulnerable" time="0"/>
   <testcase classname="nl.haunted.GhostTest" name="testVanish" time="0">
     <error type="java.lang.NullPointerException">java.lang.NullPointerException
-	at nl.haunted.Ghost.vanish(Ghost.java:187)
+	at nl.haunted.Ghost.vanish(Ghost.java:196)
 	at nl.haunted.GhostTest.testVanish(GhostTest.java:122)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -131,7 +133,6 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 </error>
   </testcase>
-  <testcase classname="nl.haunted.GhostTest" name="testIsVulnerable" time="0"/>
   <testcase classname="nl.haunted.GhostTest" name="testPossess" time="0">
     <error type="java.lang.NullPointerException">java.lang.NullPointerException
 	at nl.haunted.Ghost.possess(Ghost.java:124)
@@ -166,5 +167,4 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 </error>
   </testcase>
-  <testcase classname="nl.haunted.GhostTest" name="testMakeGhost" time="0"/>
 </testsuite>

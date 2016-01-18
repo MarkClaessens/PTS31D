@@ -37,7 +37,7 @@ java.lang.AssertionError: ghost is not vulnerable when it becomes back a ghost
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 testVanish(nl.haunted.GhostTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NullPointerException
-	at nl.haunted.Ghost.vanish(Ghost.java:187)
+	at nl.haunted.Ghost.vanish(Ghost.java:196)
 	at nl.haunted.GhostTest.testVanish(GhostTest.java:122)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
