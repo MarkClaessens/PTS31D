@@ -263,15 +263,18 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
     @Override
     public void setName(String naam) throws RemoteException {
         this.name = naam;
+        this.basicPublisher.inform(this, "stats", null, name);
     }
 
     @Override
     public void setMaxFloors(int maxfloors) throws RemoteException {
         this.maxFloors = maxfloors;
+        this.basicPublisher.inform(this, "stats", null, maxFloors);
     }
 
     @Override
     public void setMaxPlayers(int maxplayers) throws RemoteException {
         this.maxPlayers = maxplayers;
+        this.basicPublisher.inform(this, "stats", null, maxPlayers);
     }
 }

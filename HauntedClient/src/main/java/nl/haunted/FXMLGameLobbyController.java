@@ -183,7 +183,9 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
 
     public void settisPlayer(IPlayer player) {
         this.tisplayer = player;
+        
         try {
+            gamelobby.addListener(this, "stats");
             if (!gamelobby.getHost().equals(tisplayer)) {
                 IVstart.setVisible(false);
                 TFnewplayers.setVisible(false);
@@ -366,6 +368,10 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         } else if (propertyName.equals("ready")) {
 
             playernames();
+        }
+        else if (propertyName.equals("stats")) 
+        {
+            gamesettings();
         }
     }
 
