@@ -567,7 +567,7 @@ public class MainGameFXScene {
                     } else if (!e.getDead()) {
                         Image ghostImgToDraw = getAnimatedGhostImage(e, ghostChooser);
                         ghostGcs[ghostChooser].drawImage(ghostImgToDraw, (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, ghostImgToDraw.getWidth() * horScale, ghostImgToDraw.getHeight() * verScale);
-                    } else if (e.getRespawn()) {
+                    } else if (e.getRip()) {
                         ghostGcs[ghostChooser].drawImage(deadImage, (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, wallImage.getWidth() * horScale, wallImage.getHeight() * verScale);
                     }
                     ghostChooser++;
