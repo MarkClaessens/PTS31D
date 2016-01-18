@@ -8,7 +8,6 @@ package nl.haunted;
 import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.io.Serializable;
-import static java.lang.Math.floor;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.rmi.RemoteException;
@@ -84,6 +83,9 @@ public class Game implements Serializable {
         this.roundEnded = bool;
     }
 
+    public Human getHuman(){
+        return this.human;
+    }
     /**
      *
      * @return

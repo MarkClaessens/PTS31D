@@ -128,7 +128,7 @@ public class Ghost extends Character implements Serializable {
             for (IPlayer player : players) {
                 try {
                     if (player.getCharacter() instanceof Human) {
-                        Character human = player.getCharacter();
+                        Character human = game.getHuman();
                         System.out.println("this is the human"+player.getName());
                         System.out.println("this is the ghost"+this.controllingPlayer.getName());
                         System.out.println("before setcharacter ghost "+player.getCharacter().toString());
