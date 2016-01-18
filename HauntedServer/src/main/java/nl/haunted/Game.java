@@ -157,7 +157,7 @@ public class Game implements Serializable {
                 }
             }
         };
-        this.tickTimer.scheduleAtFixedRate(task, 0, 16);
+        this.tickTimer.scheduleAtFixedRate(task, 0, 32);
 
         this.inputTimer = new Timer();
         TimerTask task2 = new TimerTask() {
@@ -183,15 +183,17 @@ public class Game implements Serializable {
         human.setHasKey(false);
         human.setMoving(false);
 
-        for (Ghost ghost : ghosts) {
+        ghosts.stream().map((ghost) -> {
             ghost.reset();
+            return ghost;
+        }).forEach((ghost) -> {
             ghost.setPosition(pickGhostSpawnPoint(true));
-        }
+        });
         
-        if (this.floorAmount != this.currentFloor){
-            this.endGame(currentHuman);
+        if (this.floorAmount != this.currentFloor){ 
+            this.nextLevel();
         } else {
-        this.nextLevel();
+            this.endGame(currentHuman);
         }
     }
 
