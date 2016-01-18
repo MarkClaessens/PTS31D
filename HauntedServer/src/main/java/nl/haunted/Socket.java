@@ -216,7 +216,7 @@ public class Socket implements Serializable {
         byte[] recvBuf = new byte[1000];
         DatagramPacket packet = new DatagramPacket(recvBuf,
                 recvBuf.length);
-        sock.setSoTimeout(16);
+        sock.setSoTimeout(5);
         try {
             sock.receive(packet);
         } catch (SocketTimeoutException ex) {
