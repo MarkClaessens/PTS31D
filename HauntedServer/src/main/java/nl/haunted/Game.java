@@ -177,7 +177,7 @@ public class Game implements Serializable {
     /**
      * Ends the current round and opens the counting screen.
      */
-    public void endRound() {
+    public void endRound() throws IOException, RemoteException, InterruptedException {
 
         human.setPosition(pickHumanSpawnpoint());
         human.setHasKey(false);
@@ -187,8 +187,12 @@ public class Game implements Serializable {
             ghost.reset();
             ghost.setPosition(pickGhostSpawnPoint(true));
         }
-
-        nextLevel();
+        
+        if (this.floorAmount != this.currentFloor){
+            this.endGame(currentHuman);
+        } else {
+        this.nextLevel();
+        }
     }
 
     /**
