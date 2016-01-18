@@ -214,9 +214,14 @@ public class Game implements Serializable {
         Thread.sleep(500);
         this.tickTimer.cancel();
         this.inputTimer.cancel();
-        this.srvSoc.close();
+       
         GameLobby gl = (GameLobby) this.gameLobby;
         gl.getLobby().removeGLAfterGame(gl);
+        for(int i=0;i < 60;i++){           
+        this.srvSoc.sendObject(this.compressGameInfo());
+        Thread.sleep(16);
+        }
+        this.srvSoc.close();
     }
 
     /**
