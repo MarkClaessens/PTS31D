@@ -151,7 +151,7 @@ public class Ghost extends Character implements Serializable {
      * immediately.
      */
     public void changeAppearance() {
-        if (this.isGhost && System.currentTimeMillis() >= stationaryTime.getTimeInMillis() + 1500 && !getMoving()) {
+        if (this.isGhost && System.currentTimeMillis() >= stationaryTime.getTimeInMillis() + 700 && !getMoving()) {
             this.vulnerable = false;
             this.isGhost = false;
 
