@@ -140,12 +140,13 @@ public class Ghost extends Character implements Serializable {
                       //  System.out.println("before setcharacter human "+this.controllingPlayer.getCharacter().toString());
                         this.controllingPlayer.setCharacter(human);
                         //System.out.println("after setcharacter human "+this.controllingPlayer.getCharacter().toString());
-                        game.setCurrentHuman(this.controllingPlayer);                        
+                        game.setCurrentHuman(this.controllingPlayer);
                         //set control of ghost to previous human
                        // System.out.println("thisconntrolling player before "+this.controllingPlayer.getName());
                         this.controllingPlayer = player;
                       //  System.out.println("thisconntrolling player after "+this.controllingPlayer.getName());
                         humanFound = true;
+                        break;
                     }
                 } catch (RemoteException ex) {
                     Logger.getLogger(Ghost.class.getName()).log(Level.SEVERE, null, ex);
