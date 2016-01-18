@@ -124,24 +124,27 @@ public class Ghost extends Character implements Serializable {
         List<IPlayer> players = game.getPlayers();
         boolean humanFound = false;
 
+        System.out.println("game gethuman() "+this.game.getHuman().toString());
+        System.out.println("players "+this.game.getPlayers().toString());
+        System.out.println("ghosts "+this.game.getGhosts().toString());
         while (!humanFound) {
             for (IPlayer player : players) {
                 try {
                     if (player.getCharacter() instanceof Human) {
                         Character human = game.getHuman();
-                        System.out.println("this is the human"+player.getName());
-                        System.out.println("this is the ghost"+this.controllingPlayer.getName());
-                        System.out.println("before setcharacter ghost "+player.getCharacter().toString());
+                       // System.out.println("this is the human"+player.getName());
+                        //System.out.println("this is the ghost"+this.controllingPlayer.getName());
+                        //System.out.println("before setcharacter ghost "+player.getCharacter().toString());
                         player.setCharacter(this);
-                        System.out.println("after setcharacter ghost "+player.getCharacter().toString());
-                        System.out.println("before setcharacter human "+this.controllingPlayer.getCharacter().toString());
+                        //System.out.println("after setcharacter ghost "+player.getCharacter().toString());
+                      //  System.out.println("before setcharacter human "+this.controllingPlayer.getCharacter().toString());
                         this.controllingPlayer.setCharacter(human);
-                        System.out.println("after setcharacter human "+this.controllingPlayer.getCharacter().toString());
+                        //System.out.println("after setcharacter human "+this.controllingPlayer.getCharacter().toString());
                         game.setCurrentHuman(this.controllingPlayer);                        
                         //set control of ghost to previous human
-                        System.out.println("thisconntrolling player before "+this.controllingPlayer.getName());
+                       // System.out.println("thisconntrolling player before "+this.controllingPlayer.getName());
                         this.controllingPlayer = player;
-                        System.out.println("thisconntrolling player after "+this.controllingPlayer.getName());
+                      //  System.out.println("thisconntrolling player after "+this.controllingPlayer.getName());
                         humanFound = true;
                     }
                 } catch (RemoteException ex) {
@@ -152,6 +155,11 @@ public class Ghost extends Character implements Serializable {
             this.reset();
             this.setPosition(game.pickGhostSpawnPoint(false));
         }
+        System.out.println("after");
+        System.out.println("game gethuman() "+this.game.getHuman().toString());
+        System.out.println("players "+this.game.getPlayers().toString());
+        System.out.println("ghosts "+this.game.getGhosts().toString());
+                
     }
 
     /**
