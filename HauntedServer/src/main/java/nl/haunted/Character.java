@@ -11,7 +11,7 @@ import java.io.Serializable;
 public abstract class Character implements Serializable {
 
     private Point2D position;
-    private double movementSpeed;
+    protected double movementSpeed;
     private DirectionType direction;
     protected boolean moving;
 

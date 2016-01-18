@@ -103,6 +103,7 @@ public class Ghost extends Character implements Serializable {
         this.stationaryTime.clear();
         this.timeOfDeath = null;
         this.controllingPlayer = bestuurder;
+        this.movementSpeed = 8;
         Ghost.id += 1;
     }
 
