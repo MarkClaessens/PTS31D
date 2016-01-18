@@ -157,7 +157,7 @@ public class Game implements Serializable {
                 }
             }
         };
-        this.tickTimer.scheduleAtFixedRate(task, 0, 32);
+        this.tickTimer.scheduleAtFixedRate(task, 0, 16);
 
         this.inputTimer = new Timer();
         TimerTask task2 = new TimerTask() {
@@ -171,7 +171,7 @@ public class Game implements Serializable {
                 }
             }
         };
-        this.inputTimer.scheduleAtFixedRate(task2, 0, 5);
+        this.inputTimer.scheduleAtFixedRate(task2, 0, 2);
     }
 
     /**
