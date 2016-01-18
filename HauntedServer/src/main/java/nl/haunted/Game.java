@@ -39,7 +39,7 @@ public class Game implements Serializable {
 
     private int maxfloors;
 
-    private int delay = 0;
+    private int delay = 0, tock = 0;
 
     /**
      *
@@ -344,7 +344,12 @@ public class Game implements Serializable {
             else { // if there are no ghosts.
                 this.roundEnded = true;
             }
+            if(tock==0){
             srvSoc.sendObject(this.compressGameInfo());
+            tock = 1;
+            } else {
+                tock = 0;
+            }
         } // server runnin
         // server runnin 
     }
