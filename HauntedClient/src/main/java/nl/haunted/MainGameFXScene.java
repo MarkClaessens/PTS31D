@@ -176,7 +176,7 @@ public class MainGameFXScene {
             }
         };
 
-        timer.scheduleAtFixedRate(task, 0, 16);
+        timer.scheduleAtFixedRate(task, 0, 8);
 
         AnimationTimer at = new AnimationTimer() {
             @Override
