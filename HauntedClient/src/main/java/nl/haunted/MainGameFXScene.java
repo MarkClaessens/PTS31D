@@ -204,10 +204,10 @@ public class MainGameFXScene {
                     timer.cancel();
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLvictory.fxml"));
                     Node root;
-                    try {
-                        FXMLvictoryController VC = fxmlLoader.getController();
-                        VC.setwinnaar(gf.gameInfo.getCurrentHuman());
+                    try {                        
                         root = fxmlLoader.load();
+                        FXMLvictoryController VC = fxmlLoader.getController();
+                        VC.setwinnaar(gf.gameInfo.getCurrentHuman());                        
                         Scene tussenscene = new Scene((Parent) root);
                         HauntedClient.getStage().setScene(tussenscene);
                         HauntedClient.getStage().show();
