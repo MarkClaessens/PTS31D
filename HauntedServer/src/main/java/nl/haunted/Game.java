@@ -179,6 +179,11 @@ public class Game implements Serializable {
      */
     public void endRound() throws IOException, RemoteException, InterruptedException {
 
+        if (this.floorAmount != this.currentFloor){ 
+            this.nextLevel();
+        } else {
+            this.endGame(currentHuman);
+        }
         human.setPosition(pickHumanSpawnpoint());
         human.setHasKey(false);
         human.setMoving(false);
@@ -190,11 +195,7 @@ public class Game implements Serializable {
             ghost.setPosition(pickGhostSpawnPoint(true));
         });
         
-        if (this.floorAmount != this.currentFloor){ 
-            this.nextLevel();
-        } else {
-            this.endGame(currentHuman);
-        }
+        
     }
 
     /**
