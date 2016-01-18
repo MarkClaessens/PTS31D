@@ -162,7 +162,7 @@ public class Human extends Character implements Serializable {
                 for (IPlayer player : game.getPlayers()) {
                     try {
                         if (player.getCharacter() instanceof Human) {
-                            game.endGame(player);
+                            game.setRoundEnded(true);
                             humanFound = true;
                         }
                     } catch (RemoteException ex) {
