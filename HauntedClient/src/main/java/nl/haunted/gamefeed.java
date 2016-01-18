@@ -141,7 +141,7 @@ public class gamefeed {
                                 e.setColor((Color) o[i][3]);
                                 boolean wall = (boolean) o[i][4];
                                 e.setWall((boolean) o[i][4]);
-                                e.setRip((boolean) o[i+6][7]);
+                                e.setRip((boolean) o[i][7]);
 
                             }
                         }
