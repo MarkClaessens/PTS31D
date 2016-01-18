@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class Ghost extends Character implements Serializable {
 
-    private boolean vulnerable, isGhost, dead;
+    private boolean vulnerable, isGhost, dead, rip = false;
     private Calendar stationaryTime, timeOfDeath;
     private IPlayer controllingPlayer;
     private Game game;
@@ -45,6 +45,13 @@ public class Ghost extends Character implements Serializable {
     public boolean getDead() {
         return this.dead;
     }
+    
+    public boolean getRip(){
+        return this.rip;
+    }
+    public void setRip(boolean bool){
+        this.rip = bool;
+    }
 
     public IPlayer getControllingPlayer() {
         return this.controllingPlayer;
@@ -65,12 +72,13 @@ public class Ghost extends Character implements Serializable {
     public Game getGame() {
         return game;
     }
-    
+
     @Override
     public void setPosition(Point2D position) {
         super.setPosition(position);
-        
+
     }
+
     /**
      * Sets the stationary time to now when the Ghost started standing still.
      * Started standing still means pressing no moving keys.
@@ -119,33 +127,26 @@ public class Ghost extends Character implements Serializable {
     /**
      * This possesses a human, this ghost becomes the human, the previous human
      * becomes a ghost (with his own coloured sprites).
+     *
      * @param game
      */
     public void possess(Game game) {
         List<IPlayer> players = game.getPlayers();
         boolean humanFound = false;
 
-        System.out.println("game gethuman() "+game.getHuman().toString());
-        System.out.println("players "+game.getPlayers().toString());
-        System.out.println("ghosts "+game.getGhosts().toString());
+        System.out.println("game gethuman() " + game.getHuman().toString());
+        System.out.println("players " + game.getPlayers().toString());
+        System.out.println("ghosts " + game.getGhosts().toString());
         while (!humanFound) {
             for (IPlayer player : players) {
                 try {
                     if (player.getCharacter() instanceof Human) {
                         Character human = game.getHuman();
-                       // System.out.println("this is the human"+player.getName());
-                        //System.out.println("this is the ghost"+this.controllingPlayer.getName());
-                        //System.out.println("before setcharacter ghost "+player.getCharacter().toString());
                         player.setCharacter(this);
-                        //System.out.println("after setcharacter ghost "+player.getCharacter().toString());
-                      //  System.out.println("before setcharacter human "+this.controllingPlayer.getCharacter().toString());
                         this.controllingPlayer.setCharacter(human);
-                        //System.out.println("after setcharacter human "+this.controllingPlayer.getCharacter().toString());
                         game.setCurrentHuman(this.controllingPlayer);
                         //set control of ghost to previous human
-                       // System.out.println("thisconntrolling player before "+this.controllingPlayer.getName());
                         this.controllingPlayer = player;
-                      //  System.out.println("thisconntrolling player after "+this.controllingPlayer.getName());
                         humanFound = true;
                         break;
                     }
@@ -153,15 +154,16 @@ public class Ghost extends Character implements Serializable {
                     Logger.getLogger(Ghost.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        } if (humanFound){
+        }
+        if (humanFound) {
             this.reset();
             this.setPosition(game.pickGhostSpawnPoint(false));
         }
         System.out.println("after");
-        System.out.println("game gethuman() "+game.getHuman().toString());
-        System.out.println("players "+game.getPlayers().toString());
-        System.out.println("ghosts "+game.getGhosts().toString());
-                
+        System.out.println("game gethuman() " + game.getHuman().toString());
+        System.out.println("players " + game.getPlayers().toString());
+        System.out.println("ghosts " + game.getGhosts().toString());
+
     }
 
     /**
@@ -190,6 +192,7 @@ public class Ghost extends Character implements Serializable {
      * Respawns the ghost when hit by the flashlight. If there aren't remaining
      * lifes for the ghost then the ghost dead attribute will be set to true.
      * The ghost whil respawn when the timeOfDeath is 3 seconds ago.
+     *
      * @param game
      */
     public void vanish(Game game) {
@@ -199,7 +202,7 @@ public class Ghost extends Character implements Serializable {
         // If there are remaining lifes then respawn the ghost on the map.
         if (remainingGhostLifes > 0) {
             // Vanish the Ghost by setting in off the screen
-            super.setPosition(new Point2D.Double(-800, -800));
+            this.rip = true;
             game.getLevel().setGhostLifePool(remainingGhostLifes - 1);
         } else {
             this.dead = true;

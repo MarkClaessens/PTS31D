@@ -78,14 +78,15 @@ public class Game implements Serializable {
     public Level getLevel() {
         return this.level;
     }
-    
-    public void setRoundEnded(boolean bool){
+
+    public void setRoundEnded(boolean bool) {
         this.roundEnded = bool;
     }
 
-    public Human getHuman(){
+    public Human getHuman() {
         return this.human;
     }
+
     /**
      *
      * @return
@@ -181,7 +182,7 @@ public class Game implements Serializable {
      */
     public void endRound() throws IOException, RemoteException, InterruptedException {
 
-        if (this.floorAmount != this.currentFloor){ 
+        if (this.floorAmount != this.currentFloor) {
             this.nextLevel();
         } else {
             this.endGame(currentHuman);
@@ -196,8 +197,7 @@ public class Game implements Serializable {
         }).forEach((ghost) -> {
             ghost.setPosition(pickGhostSpawnPoint(true));
         });
-        
-        
+
     }
 
     /**
@@ -219,12 +219,12 @@ public class Game implements Serializable {
         Thread.sleep(500);
         this.tickTimer.cancel();
         this.inputTimer.cancel();
-       
+
         GameLobby gl = (GameLobby) this.gameLobby;
         gl.getLobby().removeGLAfterGame(gl);
-        for(int i=0;i < 60;i++){           
-        this.srvSoc.sendObject(this.compressGameInfo());
-        Thread.sleep(16);
+        for (int i = 0; i < 30; i++) {
+            this.srvSoc.sendObject(this.compressGameInfo());
+            Thread.sleep(16);
         }
         this.srvSoc.close();
     }
@@ -273,7 +273,7 @@ public class Game implements Serializable {
         } else {
             //check if the ghosts are dead
             List<Ghost> deadghosts = new ArrayList();
-           
+
             this.ghosts.stream().forEach((G) -> {
                 if (G.getDead()) {
                     deadghosts.add(G);
@@ -334,6 +334,7 @@ public class Game implements Serializable {
                     G.changeAppearance();
                     if (G.getTimeOfDeath() != null) {
                         if (System.currentTimeMillis() >= (G.getTimeOfDeath().getTimeInMillis() + 2000)) {
+                            G.setRip(false);
                             G.setPosition(this.pickGhostSpawnPoint(false));
                             G.clearTimeOfDeath();
                         }
@@ -342,7 +343,10 @@ public class Game implements Serializable {
                 //</editor-fold>
 
             } // if there are ghosts </editor-fold> 
-            else { // if there are no ghosts.
+            else { // if there are no ghosts
+                if (this.currentFloor == this.floorAmount){
+                   this.endGame(currentHuman);
+                }
                 this.roundEnded = true;
             }
             srvSoc.sendObject(this.compressGameInfo());
@@ -392,6 +396,7 @@ public class Game implements Serializable {
                         obj[i][3] = p.getColor();
                         obj[i][4] = !G.isVulnerable();
                         obj[i][6] = G.getID();
+                        obj[i][7] = G.getRip();
                     }
                     obj[i][5] = G.getDead();
                     i++;

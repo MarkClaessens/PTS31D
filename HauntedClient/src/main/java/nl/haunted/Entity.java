@@ -17,7 +17,7 @@ public class Entity {
 
     private Point2D position;
     private DirectionType direction;
-    private boolean moving, wall, Dead;
+    private boolean moving, wall, Dead, rip;
     private final EntityType type;
     private Color color;
     private int id;
@@ -42,6 +42,13 @@ public class Entity {
 
     public boolean getDead() {
         return this.Dead;
+    }
+    
+    public boolean getRip(){
+        return this.rip;
+    }
+    public void setRip(Boolean bool){
+        this.rip = bool;
     }
 
     public void setDead(boolean bool) {

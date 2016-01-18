@@ -150,6 +150,7 @@ public class Human extends Character implements Serializable {
      * if haskey == true, enterDoor will cause endround, so the game can
      * continue to the next round or go to the victory screen. Otherwise, this
      * method won't cause anything.
+     *
      * @param game
      * @throws java.lang.InterruptedException
      */
@@ -211,9 +212,10 @@ public class Human extends Character implements Serializable {
     public Ghost checkGhostCollision(Game game) {
         //ghost collision
         for (Ghost ghost : game.getGhosts()) {
-
-            if (checkHitboxCollision(this.getPosition(), 90, 90, ghost.getPosition(), 90, 90)) {
-                return ghost;
+            if (!ghost.getRip()) {
+                if (checkHitboxCollision(this.getPosition(), 90, 90, ghost.getPosition(), 90, 90)) {
+                    return ghost;
+                }
             }
         }
         return null;
@@ -277,7 +279,7 @@ public class Human extends Character implements Serializable {
         }
         setFlashlight();
         game.getGhosts().stream().forEach((g) -> {
-            if (g.isVulnerable()) {
+            if (g.isVulnerable() && !g.getRip()) {
                 boolean hit = false;
                 for (Point2D p : g.getHitboxPoints()) {
                     if (flashlightCollision(p)) {
