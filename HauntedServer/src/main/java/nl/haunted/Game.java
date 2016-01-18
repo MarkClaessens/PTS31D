@@ -159,7 +159,7 @@ public class Game implements Serializable {
                 }
             }
         };
-        this.tickTimer.scheduleAtFixedRate(task, 0, 16);
+        this.tickTimer.scheduleAtFixedRate(task, 0, 32);
 
         this.inputTimer = new Timer();
         TimerTask task2 = new TimerTask() {
@@ -344,12 +344,8 @@ public class Game implements Serializable {
             else { // if there are no ghosts.
                 this.roundEnded = true;
             }
-            if(tock==0){
             srvSoc.sendObject(this.compressGameInfo());
-            tock = 1;
-            } else {
-                tock = 0;
-            }
+
         } // server runnin
         // server runnin 
     }
