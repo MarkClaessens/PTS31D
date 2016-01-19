@@ -141,17 +141,15 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
     public void changename() throws RemoteException {
 
         if (!TFchangenameplayer1.getText().isEmpty() && TFchangenameplayer1.getText().length() < 20) {
-            
+
             tisplayer.setName(TFchangenameplayer1.getText());
             setplayername();
             TFroomname.setText(tisplayer.getName());
-        }
-        else
-        {
-          Alert alert = new Alert(AlertType.INFORMATION);
-          alert.setHeaderText("maximum overschreden");
-          alert.setContentText("U naam is te lang");
-          alert.showAndWait();  
+        } else {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setHeaderText("maximum overschreden");
+            alert.setContentText("U naam is te lang");
+            alert.showAndWait();
         }
     }
 
@@ -218,10 +216,12 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
         setLobby();
         List<String> namen = new ArrayList<>();
         for (IGameLobby GL : lobby.getGameLobbys()) {
-            if (GL.getww().isEmpty()) {
-                namen.add("naam: " + GL.getName() + " players: " + GL.getPlayers().size() + "/" + GL.getMaxPlayer() + " maxFloors: " + GL.getMaxFloors());
-            } else {
-                namen.add("naam: " + GL.getName() + " *p* players: " + GL.getPlayers().size() + "/" + GL.getMaxPlayer() + " maxFloors: " + GL.getMaxFloors());
+            if (!GL.getIngame()) {
+                if (GL.getww().isEmpty()) {
+                    namen.add("naam: " + GL.getName() + " players: " + GL.getPlayers().size() + "/" + GL.getMaxPlayer() + " maxFloors: " + GL.getMaxFloors());
+                } else {
+                    namen.add("naam: " + GL.getName() + " *p* players: " + GL.getPlayers().size() + "/" + GL.getMaxPlayer() + " maxFloors: " + GL.getMaxFloors());
+                }
             }
         }
         LVgamelobbys.setItems(FXCollections.observableList(namen));
