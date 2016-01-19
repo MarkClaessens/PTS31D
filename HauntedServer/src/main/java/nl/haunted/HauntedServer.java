@@ -41,7 +41,7 @@ public class HauntedServer {
 
         // Bind lobby using registry
         try {
-            System.setProperty("hauntedServer", "10.1.3.2");
+            System.setProperty("java.rmi.server.hostname", "10.1.3.2");
             registry.rebind(bindingNameLobby, lobby);
         } catch (RemoteException ex) {
             System.out.println("Server: RemoteException: " + ex.getMessage());
