@@ -208,8 +208,7 @@ public class MainGameFXScene {
                         FXMLvictoryController VC = fxmlLoader.getController();
                         VC.setwinnaar(gf.gameInfo.getCurrentHuman());
                         Scene tussenscene = new Scene((Parent) root);
-                        HauntedClient.getStage().setScene(tussenscene);
-                        HauntedClient.getStage().setFullScreen(false);
+                        HauntedClient.getStage().setScene(tussenscene);                        
                         HauntedClient.getStage().show();
                     } catch (IOException ex) {
                         Logger.getLogger(MainGameFXScene.class.getName()).log(Level.SEVERE, null, ex);
