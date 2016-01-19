@@ -31,7 +31,7 @@ public class HauntedServer {
 
         // Create registry at port number
         try {
-            System.setProperty("hauntedServer", "10.1.3.2");
+            
             registry = LocateRegistry.createRegistry(portNumber);
         } catch (RemoteException ex) {
             System.out.println("Server: RemoteException: " + ex.getMessage());
@@ -41,6 +41,7 @@ public class HauntedServer {
 
         // Bind lobby using registry
         try {
+            System.setProperty("hauntedServer", "10.1.3.2");
             registry.rebind(bindingNameLobby, lobby);
         } catch (RemoteException ex) {
             System.out.println("Server: RemoteException: " + ex.getMessage());
