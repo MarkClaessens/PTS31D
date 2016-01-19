@@ -292,7 +292,7 @@ public class Game implements Serializable {
                             if (this.players.get(i).getCharacter() instanceof Ghost) {
                                 for (Ghost g : ghosts) {
                                     if (g.getControllingPlayer().getIpAdress().equals(this.players.get(i).getIpAdress())
-                                            && g.getRip() != false) {
+                                            && g.getRip() == false) {
                                         g.move(this, (DirectionType) keyboard[i]);
                                     }
                                 }

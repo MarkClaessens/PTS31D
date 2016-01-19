@@ -66,6 +66,7 @@ public abstract class Character implements Serializable {
      * Moves the character into the given direction. But checks if there is no
      * collision.
      *
+     * @param game
      * @param direction
      */
     public void move(Game game, DirectionType direction) {
