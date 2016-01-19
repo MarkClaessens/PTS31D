@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: nl.haunted.HumanTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 0.016 sec <<< FAILURE!
+Tests run: 4, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 0 sec <<< FAILURE!
 testGetFlashlightPolygon(nl.haunted.HumanTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: should return a polygon expected:<[I@3c679bde> but was:<[I@16b4a017>
 	at org.junit.Assert.fail(Assert.java:74)
@@ -36,7 +36,7 @@ java.lang.AssertionError: should return a polygon expected:<[I@3c679bde> but was
 	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
-enterDoor(nl.haunted.HumanTest)  Time elapsed: 0.016 sec  <<< ERROR!
+enterDoor(nl.haunted.HumanTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NullPointerException
 	at nl.haunted.Human.enterDoor(Human.java:159)
 	at nl.haunted.HumanTest.enterDoor(HumanTest.java:86)
