@@ -48,6 +48,8 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
         try {
             GameLobby gamelobby = new GameLobby(name, password, host, maxFloors, maxPlayers, this);
             gameLobbys.add(gamelobby);
+            System.setProperty("java.rmi.server.hostname", "10.1.3.2");
+
             basicPublisher.inform(this, "gamelobbys", null, gameLobbys);
         } catch (IOException ex) {
             Logger.getLogger(Lobby.class.getName()).log(Level.SEVERE, null, ex);

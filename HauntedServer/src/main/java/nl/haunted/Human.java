@@ -280,7 +280,7 @@ public class Human extends Character implements Serializable {
         Point2D key = game.getLevel().getKeyLocation();
 
         //door collision
-        if ((checkHitboxCollision(new Point2D.Double(this.getPosition().getX() + 10, this.getPosition().getY() + 10), 80, 80, door, 105, 105) && this.hasKey)) //key collision   
+        if ((checkHitboxCollision(new Point2D.Double(this.getPosition().getX() + 10, this.getPosition().getY() + 10), 80, 80, new Point2D.Double(door.getX()-5, door.getY()-5), 110, 110) && this.hasKey)) //key collision   
         {
             this.enterDoor(game);
         }
