@@ -172,7 +172,7 @@ public class Human extends Character implements Serializable {
                 }
             }
         } else {
-            game.setRoundEnded(true);
+            game.endGame();
         }
     }
 

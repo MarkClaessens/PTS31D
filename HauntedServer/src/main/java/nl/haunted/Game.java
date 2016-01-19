@@ -185,7 +185,7 @@ public class Game implements Serializable {
         if (this.floorAmount != this.currentFloor) {
             this.nextLevel();
         } else {
-            this.endGame(currentHuman);
+            this.endGame();
         }
         human.setPosition(pickHumanSpawnpoint());
         human.setHasKey(false);
@@ -208,7 +208,7 @@ public class Game implements Serializable {
      * @throws java.rmi.RemoteException
      * @throws java.lang.InterruptedException
      */
-    public void endGame(IPlayer winner) throws RemoteException, InterruptedException, IOException {
+    public void endGame() throws RemoteException, InterruptedException, IOException {
         for (IPlayer player : this.players) {
             player.reset();
         }
@@ -247,7 +247,7 @@ public class Game implements Serializable {
         player.setCharacter(null);
         this.players.remove(player);
         if (this.players.size() == 1) {
-            this.endGame(this.players.get(0));
+            this.endGame();
         }
     }
 
@@ -346,7 +346,7 @@ public class Game implements Serializable {
             } // if there are ghosts </editor-fold> 
             else { // if there are no ghosts
                 if (this.currentFloor == this.floorAmount){
-                   this.endGame(currentHuman);
+                   this.endGame();
                 }
                 this.roundEnded = true;
             }
