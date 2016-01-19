@@ -135,6 +135,15 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
 
     private void playernames() throws RemoteException {
         List<String> namen = new ArrayList<>();
+        if (!gamelobby.getHost().equals(tisplayer)) {
+                IVstart.setVisible(false);
+                TFnewplayers.setVisible(false);
+                TFnewfloors.setVisible(false);
+                TFnewname.setVisible(false);
+                BTNsetname.setVisible(false);
+                BTNsetfloors.setVisible(false);
+                BTNsetplayers.setVisible(false);
+            }
         for (IPlayer player : players) {
             if (gamelobby.getHost().equals(player)) {
                 namen.add("(Host) " + player.getName() + " ready: " + player.getReady());
