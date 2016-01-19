@@ -208,7 +208,7 @@ public class MainGameFXScene {
                         FXMLvictoryController VC = fxmlLoader.getController();
                         VC.setwinnaar(gf.gameInfo.getCurrentHuman());
                         Scene tussenscene = new Scene((Parent) root);
-                        HauntedClient.getStage().setScene(tussenscene);                        
+                        HauntedClient.getStage().setScene(tussenscene);
                         HauntedClient.getStage().show();
                     } catch (IOException ex) {
                         Logger.getLogger(MainGameFXScene.class.getName()).log(Level.SEVERE, null, ex);
@@ -563,11 +563,11 @@ public class MainGameFXScene {
                     if (e.getWall()) {
                         ghostGcs[ghostChooser].drawImage(wallImage, (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, wallImage.getWidth() * horScale, wallImage.getHeight() * verScale);
                         //drawRotatedImage(ghostGcs[ghostChooser], wallImage, 0, (e.getPosition().getX() + 100), (e.getPosition().getY() + 100), horScale, verScale);
+                    } else if (e.getRip()) {
+                        ghostGcs[ghostChooser].drawImage(deadImage, (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, deadImage.getWidth() * horScale, deadImage.getHeight() * verScale);
                     } else if (!e.getDead()) {
                         Image ghostImgToDraw = getAnimatedGhostImage(e, ghostChooser);
                         ghostGcs[ghostChooser].drawImage(ghostImgToDraw, (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, ghostImgToDraw.getWidth() * horScale, ghostImgToDraw.getHeight() * verScale);
-                    } else if (e.getRip()) {
-                        ghostGcs[ghostChooser].drawImage(deadImage, (e.getPosition().getX() + 100) * horScale, (e.getPosition().getY() + 100) * verScale, deadImage.getWidth() * horScale, deadImage.getHeight() * verScale);
                     }
                     ghostChooser++;
                     break;
