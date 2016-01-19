@@ -156,14 +156,14 @@ public class Human extends Character implements Serializable {
      */
     public void enterDoor(Game game) throws InterruptedException, IOException {
         // First check if this entering was on the last floor (last level).
-        if (game.getFloorAmount() - 1 == game.getCurrentFloor()) {
+        if (game.getFloorAmount() == game.getCurrentFloor()) {
             boolean humanFound = false;
 
             while (!humanFound) {
                 for (IPlayer player : game.getPlayers()) {
                     try {
                         if (player.getCharacter() instanceof Human) {
-                            game.setRoundEnded(true);
+                            game.endGame();
                             humanFound = true;
                         }
                     } catch (RemoteException ex) {
@@ -172,7 +172,7 @@ public class Human extends Character implements Serializable {
                 }
             }
         } else {
-            game.endGame();
+            game.setRoundEnded(true);
         }
     }
 
