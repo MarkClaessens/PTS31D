@@ -10,7 +10,7 @@
             <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
         </goals>
         <properties>
-            <exec.args>-Xms2000M -Xmx4000M -classpath %classpath ${packageClassName}</exec.args>
+            <exec.args>-Xms2000M -Xmx4000M -classpath %classpath nl.haunted.HauntedClient</exec.args>
             <exec.executable>java</exec.executable>
         </properties>
     </action>
