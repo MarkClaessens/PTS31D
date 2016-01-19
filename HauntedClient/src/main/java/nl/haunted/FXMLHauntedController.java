@@ -130,6 +130,8 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
 
     public void setController() {
         this.controller = HauntedClient.getController();
+        controller.setInGL(false);
+        controller.setyourGL();
     }
 
     /**

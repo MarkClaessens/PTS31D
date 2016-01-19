@@ -198,5 +198,9 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
     public void setInGL(boolean status) {
         INGameLobby = status;
     }
+    
+    public void setyourGL() {
+        YourGL = null;
+    }
 
 }
