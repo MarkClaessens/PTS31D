@@ -15,10 +15,9 @@
         <Label layoutX="401.0" layoutY="167.0" text="max. players:" textFill="WHITE" />
         <Label layoutX="408.0" layoutY="126.0" text="password:" textFill="WHITE" />
         <Label layoutX="404.0" layoutY="85.0" text="roomname:" textFill="WHITE" />
-        <Label layoutX="10.0" layoutY="167.0" text="naam speler1:" />
         <TextField fx:id="TFfloors" layoutX="490.0" layoutY="203.0" promptText="floor amount" />
         <TextField fx:id="TFplayers" layoutX="490.0" layoutY="163.0" promptText="maximum players" />
-        <TextField fx:id="TFchangenameplayer1" layoutX="91.0" layoutY="163.0" promptText="insert name here" />
+        <TextField fx:id="TFchangenameplayer1" layoutX="24.0" layoutY="163.0" promptText="insert name here" />
         <TextField fx:id="TFroomname" layoutX="490.0" layoutY="81.0" promptText="roomname" />
         <TextField fx:id="TFpassword" layoutX="490.0" layoutY="122.0" promptText="password(optional)" />
         <ImageView fx:id="IVexit" fitHeight="56.0" fitWidth="134.0" layoutX="91.0" layoutY="38.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true">
@@ -37,12 +36,12 @@
             </image>
         </ImageView>
         <ListView fx:id="LVgamelobbys" layoutX="6.0" layoutY="275.0" prefHeight="287.0" prefWidth="361.0" />
-        <ImageView fx:id="IVJoingamelobby" fitHeight="56.0" fitWidth="134.0" layoutX="400.0" layoutY="406.0" onMouseClicked="#addPlayerGL" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="IVJoingamelobby" fitHeight="56.0" fitWidth="134.0" layoutX="490.0" layoutY="480.0" onMouseClicked="#addPlayerGL" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@btnJoinGamelobby.png" />
             </image>
         </ImageView>
         <!--<Button layoutX="400.0" layoutY="406.0" mnemonicParsing="false" onMouseClicked="#addPlayerGL" text="join game" />-->
-        <TextField fx:id="TFwachtwoord" layoutX="387.0" layoutY="368.0" promptText="password(optional)" />
+        <TextField fx:id="TFwachtwoord" layoutX="490.0" layoutY="446.0" promptText="password(optional)" />
     </children>
 </AnchorPane>
