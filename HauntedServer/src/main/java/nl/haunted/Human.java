@@ -261,11 +261,26 @@ public class Human extends Character implements Serializable {
      * @throws java.lang.InterruptedException
      */
     public void checkInteract(Game game) throws InterruptedException, IOException {
-        Point2D door = new Point2D.Double(game.getLevel().getDoorLocation().getX() + 40, game.getLevel().getDoorLocation().getY());
+        DirectionType doorDisplacement = game.getLevel().getDoorDirection();
+        Point2D door = new Point2D.Double(game.getLevel().getDoorLocation().getX(), game.getLevel().getDoorLocation().getY());
+        switch (doorDisplacement) {
+            case UP:
+                door.setLocation(door.getX(), door.getY() - 100);
+                break;
+            case RIGHT:
+                door.setLocation(door.getX() + 100, door.getY());
+                break;
+            case LEFT:
+                door.setLocation(door.getX() - 100, door.getY());
+                break;
+            case DOWN:
+                door.setLocation(door.getX(), door.getY() + 100);
+                break;
+        }
         Point2D key = game.getLevel().getKeyLocation();
 
         //door collision
-        if ((checkHitboxCollision(new Point2D.Double(this.getPosition().getX() + 45, this.getPosition().getY() + 10), 10, 3, door, 20, 5) && this.hasKey)) //key collision   
+        if ((checkHitboxCollision(new Point2D.Double(this.getPosition().getX() + 10, this.getPosition().getY() + 10), 80, 80, door, 105, 105) && this.hasKey)) //key collision   
         {
             this.enterDoor(game);
         }
