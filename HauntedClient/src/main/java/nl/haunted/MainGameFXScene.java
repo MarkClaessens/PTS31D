@@ -262,7 +262,7 @@ public class MainGameFXScene {
         } else {
             textGc.fillText(("Key has not been picked up by the human yet").toUpperCase(), 500, 15 * verScale);
         }
-        textGc.fillText("Current human: " + gf.gameInfo.getCurrentHuman(), 700, 15 * verScale);
+        textGc.fillText("Current human: " + gf.gameInfo.getCurrentHuman(), 900, 15 * verScale);
     }
 
     /**
