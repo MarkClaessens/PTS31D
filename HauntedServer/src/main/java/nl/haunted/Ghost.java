@@ -122,6 +122,7 @@ public class Ghost extends Character implements Serializable {
         this.stationaryTime.clear();
         this.timeOfDeath = null;
         this.moving = false;
+        this.rip = false;
     }
 
     /**
