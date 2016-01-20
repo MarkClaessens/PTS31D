@@ -39,6 +39,7 @@
                                 <addClasspath>true</addClasspath>
                                 <classpathPrefix>lib/</classpathPrefix>
                                 <mainClass>nl.haunted.HauntedServer</mainClass>
+                                <version>2.4</version>
                             </manifest>
                         </archive>
                     </configuration>
