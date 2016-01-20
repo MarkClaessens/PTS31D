@@ -130,7 +130,7 @@ public class ClientController extends UnicastRemoteObject implements IClientCont
                 // we close the socket immediately after use
                 if (address.toString().indexOf("10.1.3.") > 0) {
                     System.out.println(address.getHostAddress());
-                    return interface_.getInetAddresses().nextElement().getHostAddress();
+                    return address.toString().substring(1);
                 }
             }
         }
