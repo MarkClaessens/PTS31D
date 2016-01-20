@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package nl.haunted;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
@@ -47,36 +48,60 @@ public class Socket implements Serializable {
     List<String[]> inputArray = new ArrayList();
 
     /**
-     * This function sets up the correct NIC, it requests a groupname and a port.
+     * This function sets up the correct NIC, it requests a groupname and a
+     * port.
+     *
      * @param groupname
      * @param port
      * @throws IOException
      */
     public void socketSetup(String groupname, int port) throws IOException {
         this.sock = new MulticastSocket(port);
-        this.nic = this.getLocalNIC();  
+        this.nic = this.getLocalNIC();
         if (nic == null) {
             Scanner input = new Scanner(System.in);
             listNics();
             System.out.println("What Network interface do you want to connect with?");
             nic = NetworkInterface.getByName(input.nextLine());
         }
-        this.IP = nic.getInetAddresses().nextElement().getHostAddress();
+
+        //set IP
+        Enumeration<InetAddress> addresses = nic.getInetAddresses();
+        for (InetAddress address : Collections.list(addresses)) {
+            // look only for ipv4 addresses
+            if (address instanceof Inet6Address) {
+                continue;
+            }
+
+            // use a timeout big enough for your needs
+            if (!address.isReachable(3000)) {
+                continue;
+            }
+
+            // java 7's try-with-resources statement, so that
+            // we close the socket immediately after use
+            if (address.toString().indexOf("10.1.3.") > 0) {
+                System.out.println(address.getHostAddress());
+                this.IP = address.toString();
+            }
+        }
+
         this.port = port;
-        
+
         if (port == 9877) {
             sock.setLoopbackMode(false);
         } else {
             sock.setLoopbackMode(true); // turn to true for dedicated server
         }
         groupIp = InetAddress.getByName(groupname);
-        
+
         sock.joinGroup(new InetSocketAddress(groupIp, port), nic);
         object = null;
     }
 
     /**
-     *  this returns the current network interface
+     * this returns the current network interface
+     *
      * @return
      */
     public NetworkInterface getNIC() {
@@ -85,6 +110,7 @@ public class Socket implements Serializable {
 
     /**
      * This returns the current IPAddress.
+     *
      * @return
      */
     public String getIPAddress() {
@@ -92,8 +118,10 @@ public class Socket implements Serializable {
     }
 
     /**
-     * This function lets you send an Object to the other computers connected to the Multicastgroup.
-     * this function expects an two-dimensional ObjectArray Object[][].
+     * This function lets you send an Object to the other computers connected to
+     * the Multicastgroup. this function expects an two-dimensional ObjectArray
+     * Object[][].
+     *
      * @param o
      * @throws IOException
      */
@@ -114,6 +142,7 @@ public class Socket implements Serializable {
 
     /**
      * This function lets you send a Message to the other computers.
+     *
      * @param m
      * @throws IOException
      */
@@ -127,6 +156,7 @@ public class Socket implements Serializable {
 
     /**
      * This function lets you send input from the client to the server.
+     *
      * @param s
      * @param port
      * @throws IOException
@@ -142,6 +172,7 @@ public class Socket implements Serializable {
 
     /**
      * This function returns an ObjectArray
+     *
      * @return
      */
     public Object[][] getObject() {
@@ -150,6 +181,7 @@ public class Socket implements Serializable {
 
     /**
      * This function returns all the messages stored.
+     *
      * @return
      */
     public List<String> getMessages() {
@@ -160,7 +192,9 @@ public class Socket implements Serializable {
     }
 
     /**
-     * This Function receives a two-dimensional ObjectArray and saves it in the variable this.object
+     * This Function receives a two-dimensional ObjectArray and saves it in the
+     * variable this.object
+     *
      * @throws IOException
      * @throws ClassNotFoundException
      */
@@ -188,7 +222,9 @@ public class Socket implements Serializable {
     }
 
     /**
-     * This function receives a message from the socket and puts it in the this.messages list.
+     * This function receives a message from the socket and puts it in the
+     * this.messages list.
+     *
      * @throws IOException
      * @throws ClassNotFoundException
      */
@@ -208,7 +244,9 @@ public class Socket implements Serializable {
     }
 
     /**
-     * This function receives input from the socket and puts it in this.inputArray variable.
+     * This function receives input from the socket and puts it in
+     * this.inputArray variable.
+     *
      * @throws IOException
      * @throws ClassNotFoundException
      */
@@ -246,6 +284,7 @@ public class Socket implements Serializable {
 
     /**
      * This function returns the saved this.inputArray variable.
+     *
      * @return
      */
     public List<String[]> getInputArray() {
@@ -254,6 +293,7 @@ public class Socket implements Serializable {
 
     /**
      * This function closes the connections to the other computers.
+     *
      * @throws IOException
      */
     public void close() throws IOException {
@@ -263,6 +303,7 @@ public class Socket implements Serializable {
 
     /**
      * This function prints a list of NICs
+     *
      * @throws SocketException
      */
     public void listNics() throws SocketException {
@@ -273,9 +314,10 @@ public class Socket implements Serializable {
             }
         }
     }
-    
+
     /**
      * This function Prints information from a NIC.
+     *
      * @param netint
      * @throws SocketException
      */
@@ -291,6 +333,7 @@ public class Socket implements Serializable {
 
     /**
      * This function returns the loopback network interface.
+     *
      * @return
      * @throws SocketException
      */
@@ -306,7 +349,9 @@ public class Socket implements Serializable {
     }
 
     /**
-     * this function returns a network interface that has an Internet connection.
+     * this function returns a network interface that has an Internet
+     * connection.
+     *
      * @return
      * @throws SocketException
      * @throws IOException
@@ -362,7 +407,9 @@ public class Socket implements Serializable {
     }
 
     /**
-     * this function returns a network interface that is connected to a local network.
+     * this function returns a network interface that is connected to a local
+     * network.
+     *
      * @return
      * @throws IOException
      */
