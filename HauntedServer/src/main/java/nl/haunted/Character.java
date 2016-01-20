@@ -131,10 +131,10 @@ public abstract class Character implements Serializable {
     public boolean detectCollision(Point2D proposedLocation, Game game) {
 
         // First initialize the hitboxpoints.
-        int pXl = (int) proposedLocation.getX() + 15;
-        int pXr = pXl + 70;
-        int pYt = (int) proposedLocation.getY() + 15;
-        int pYb = pYt + 70;
+        int pXl = (int) proposedLocation.getX() + 25;
+        int pXr = pXl + 50;
+        int pYt = (int) proposedLocation.getY() + 25;
+        int pYb = pYt + 50;
 
         BufferedImage colImg = game.getLevel().getCollisionMap();
         if (0 <= pXl && 1000 >= pYb && 1500
