@@ -82,7 +82,7 @@ public class Socket implements Serializable {
             // we close the socket immediately after use
             if (address.toString().indexOf("10.1.3.") > 0) {
                 System.out.println(address.getHostAddress());
-                this.IP = address.toString();
+                this.IP = address.toString().substring(1);
             }
         }
 
