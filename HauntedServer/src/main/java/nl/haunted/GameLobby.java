@@ -22,14 +22,15 @@ import java.util.logging.Logger;
  */
 public class GameLobby extends UnicastRemoteObject implements IGameLobby {
 
-    private String name, password;
+    private String name;
+    private final String password;
     private int maxPlayers, maxFloors;
     private IPlayer host;
-    private List<IPlayer> players;
-    private BasicPublisher basicPublisher;
+    private final List<IPlayer> players;
+    private final BasicPublisher basicPublisher;
     private static int gameLobbyNum = 0;
-    private String groupID;
-    private Lobby lobby;
+    private final String groupID;
+    private final Lobby lobby;
     private boolean ingame;
 
     /**
@@ -226,6 +227,11 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         basicPublisher.removeListener(remotePropertyListener, string);
     }
 
+    /**
+     *
+     * @return
+     * @throws RemoteException
+     */
     @Override
     public String getGroupID() throws RemoteException {
         return this.groupID;
@@ -235,14 +241,27 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         return this.lobby;
     }
 
+    @Override
     public boolean getIngame() throws RemoteException {
         return ingame;
     }
 
+    /**
+     *
+     * @return
+     * @throws RemoteException
+     */
+    @Override
     public IPlayer getHost() throws RemoteException {
         return host;
     }
 
+    /**
+     *
+     * @return
+     * @throws RemoteException
+     */
+    @Override
     public String getww() throws RemoteException {
         return password;
     }
