@@ -87,11 +87,20 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
         basicPublisher.removeListener(remotePropertyListener, string);
     }
 
+    /**
+     *
+     * @throws RemoteException
+     */
     @Override
     public void informlobbys() throws RemoteException {
         basicPublisher.inform(this, "gamelobbys", null, gameLobbys);
     }
 
+    /**
+     *
+     * @param GL
+     * @throws RemoteException
+     */
     @Override
     public void removeGL(IGameLobby GL) throws RemoteException {
         IGameLobby EXGL = null;
@@ -104,6 +113,11 @@ public class Lobby extends UnicastRemoteObject implements ILobby {
         basicPublisher.inform(this, "gamelobbys", null, this.gameLobbys);
     }
 
+    /**
+     *
+     * @param gl
+     * @throws RemoteException
+     */
     public void removeGLAfterGame(GameLobby gl) throws RemoteException {
         IGameLobby temp = null;
         for (IGameLobby iGameLobby : this.gameLobbys) {

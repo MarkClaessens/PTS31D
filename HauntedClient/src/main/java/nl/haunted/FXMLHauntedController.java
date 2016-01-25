@@ -219,7 +219,7 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
         List<String> namen = new ArrayList<>();
         for (IGameLobby GL : lobby.getGameLobbys()) {
             if (!GL.getIngame()) {
-                if (GL.getww().isEmpty()) {
+                if (GL.getPassword().isEmpty()) {
                     namen.add("naam: " + GL.getName() + " players: " + GL.getPlayers().size() + "/" + GL.getMaxPlayer() + " maxFloors: " + GL.getMaxFloors());
                 } else {
                     namen.add("naam: " + GL.getName() + " *p* players: " + GL.getPlayers().size() + "/" + GL.getMaxPlayer() + " maxFloors: " + GL.getMaxFloors());
@@ -233,7 +233,7 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
         String totaaltekst = (String) LVgamelobbys.getSelectionModel().getSelectedItem();
         String naam = "";
         for (IGameLobby GL : lobby.getGameLobbys()) {
-            if (GL.getww().isEmpty()) {
+            if (GL.getPassword().isEmpty()) {
                 naam = totaaltekst.substring(6, totaaltekst.indexOf(" players:"));
             } else {
                 naam = totaaltekst.substring(6, totaaltekst.indexOf(" *p*"));
@@ -241,7 +241,7 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
 
             System.out.println(GL.getName());
             if (GL.getName().equals(naam)) {
-                if (GL.getww().isEmpty()) {
+                if (GL.getPassword().isEmpty()) {
                     if (GL.addPlayer(tisplayer)) {
                         lobby.informlobbys();
                         timer.cancel();
@@ -252,7 +252,7 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
                         alert.showAndWait();
                     }
 
-                } else if (GL.getww().equals(TFwachtwoord.getText())) {
+                } else if (GL.getPassword().equals(TFwachtwoord.getText())) {
                     if (GL.addPlayer(tisplayer)) {
                         lobby.informlobbys();
                         timer.cancel();

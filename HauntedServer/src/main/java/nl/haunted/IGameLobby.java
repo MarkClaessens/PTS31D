@@ -75,6 +75,11 @@ public interface IGameLobby extends Remote, RemotePublisher {
      */
     public List<IPlayer> getPlayers() throws RemoteException;
 
+    /**
+     * this function returns the variable groupId
+     * @return the id of the group to be connecting to.
+     * @throws RemoteException
+     */
     public String getGroupID() throws RemoteException;
 
     /**
@@ -85,17 +90,52 @@ public interface IGameLobby extends Remote, RemotePublisher {
      */
     public boolean readycheck() throws RemoteException;
 
+    /**
+     * this function returns the variable ingame.
+     * @return true if the game has started.
+     * @throws RemoteException
+     */
     public boolean getIngame() throws RemoteException;
 
+    /**
+     * this function returns the variable host
+     * @return the IPlayer that is the host.
+     * @throws RemoteException
+     */
     public IPlayer getHost() throws RemoteException;
 
-    public String getww() throws RemoteException;
+    /**
+     * this function returns the variable password
+     * @return password of the lobby
+     * @throws RemoteException
+     */
+    public String getPassword() throws RemoteException;
 
+    /**
+     * Set the player that will be the host
+     * @param player the IPlayer that will be the host
+     * @throws RemoteException
+     */
     public void setHost(IPlayer player) throws RemoteException;
 
-    public void setName(String naam) throws RemoteException;
+    /**
+     * This function sets the name of the gamelobby.
+     * @param name the name of the gamelobby
+     * @throws RemoteException
+     */
+    public void setName(String name) throws RemoteException;
 
+    /**
+     * This function sets the maximum floors
+     * @param maxfloors the maximum amount of floors.
+     * @throws RemoteException
+     */
     public void setMaxFloors(int maxfloors) throws RemoteException;
 
+    /**
+     * this function sets the max players in the gamelobby
+     * @param maxplayers max amount of players.
+     * @throws RemoteException
+     */
     public void setMaxPlayers(int maxplayers) throws RemoteException;
 }

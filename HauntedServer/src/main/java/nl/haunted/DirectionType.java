@@ -11,8 +11,23 @@ package nl.haunted;
  */
 public enum DirectionType {
 
+    /**
+     * If the object is facing upwards
+     */
     UP,
+
+    /**
+     * If the object is facing downwards
+     */
     DOWN,
+
+    /**
+     * If the object is facing the left
+     */
     LEFT,
+
+    /**
+     * If the object is facing the right
+     */
     RIGHT
 }

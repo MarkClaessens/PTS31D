@@ -26,58 +26,98 @@ public class Ghost extends Character implements Serializable {
     private Game game;
     private static int id = 0;
 
+    /**
+     * this function returns the variable vurnerable 
+     * @return true if the ghost is vulnerable to the flashlight.
+     */
     public boolean isVulnerable() {
         return vulnerable;
     }
 
+    /**
+     * this fu nction returns the id of the ghost
+     * @return ghost id
+     */
     public int getID() {
         return this.id;
     }
 
+    /**
+     * this function sets the variable vulnerable
+     * @param isVulnerable true if the ghost is vulnerable.
+     */
     public void setVulnerable(boolean isVulnerable) {
         this.vulnerable = isVulnerable;
     }
 
+    /**
+     *
+     * @param isDead
+     */
     public void setDead(boolean isDead) {
         this.dead = isDead;
     }
 
+    /**
+     * this function returns the variable dead.
+     * @return true if the ghost is permanently dead for this round.
+     */
     public boolean getDead() {
         return this.dead;
     }
 
+    /**
+     * this function returns the variable rip
+     * @return true if the ghost should be a cross.
+     */
     public boolean getRip() {
         return this.rip;
     }
 
+    /**
+     * this function set the variable rip
+     * @param bool true if the ghost should be a cross.
+     */
     public void setRip(boolean bool) {
         this.rip = bool;
     }
 
+    /**
+     * this function returns the variable controllingPlayer
+     * @return the player that controls this ghost.
+     */
     public IPlayer getControllingPlayer() {
         return this.controllingPlayer;
     }
 
+    /**
+     * this function returns the variable timeOfDeath
+     * @return a time that the ghost died, null if the ghost has not died or has respawned.
+     */
     public Calendar getTimeOfDeath() {
         return timeOfDeath;
     }
 
+    /**
+     * this function clears the time of death variable
+     */
     public void clearTimeOfDeath() {
         this.timeOfDeath = null;
     }
 
+    /**
+     * this function sets the variable timeOfDeath to the current time.
+     */
     public void setTimeOfDeath() {
         this.timeOfDeath = Calendar.getInstance();
     }
 
+    /**
+     *
+     * @return
+     */
     public Game getGame() {
         return game;
-    }
-
-    @Override
-    public void setPosition(Point2D position) {
-        super.setPosition(position);
-
     }
 
     /**
@@ -116,6 +156,9 @@ public class Ghost extends Character implements Serializable {
         Ghost.id += 1;
     }
 
+    /**
+     * This function resets the ghost when a round is about to start.
+     */
     public void reset() {
         this.dead = false;
         this.vulnerable = true;
@@ -211,6 +254,10 @@ public class Ghost extends Character implements Serializable {
         }
     }
 
+    /**
+     * This function returns the hitbox points of the ghost.
+     * @return a list of Point2D's
+     */
     public List<Point2D> getHitboxPoints() {
         // a  ab  b
         // ac    bd

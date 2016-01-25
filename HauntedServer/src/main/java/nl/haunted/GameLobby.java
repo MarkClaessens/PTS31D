@@ -120,7 +120,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
     }
 
     /**
-     * verwijdert een speler uit de gamelobby
+     * removes a player from the gamelobby
      *
      * @param player
      * @return
@@ -144,7 +144,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
     }
 
     /**
-     * voegt een speler toe aan de gamelobby
+     * adds a player to the gamelobby
      *
      * @param player
      * @return
@@ -169,7 +169,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
     }
 
     /**
-     * vraagt de naam op van de gamelobby
+     * requests the name of this gamelobby
      *
      * @return
      */
@@ -238,10 +238,19 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         return this.groupID;
     }
 
+    /**
+     * This function returns the lobby
+     * @return the lobby
+     */
     public Lobby getLobby() {
         return this.lobby;
     }
 
+    /**
+     * this function returns the variable ingame
+     * @return true if this gamelobby has a started game
+     * @throws RemoteException
+     */
     @Override
     public boolean getIngame() throws RemoteException {
         return ingame;
@@ -263,7 +272,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
      * @throws RemoteException
      */
     @Override
-    public String getww() throws RemoteException {
+    public String getPassword() throws RemoteException {
         return password;
     }
 
@@ -276,23 +285,43 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         }
     }
 
+    /**
+     * this function sets the variable host
+     * @param player the player to be set to host.
+     * @throws RemoteException
+     */
     @Override
     public void setHost(IPlayer player) throws RemoteException {
         this.host = player;
     }
 
+    /**
+     * this function sets the variable name for the gamelobby
+     * @param name the new name for the gamelobby.
+     * @throws RemoteException
+     */
     @Override
-    public void setName(String naam) throws RemoteException {
-        this.name = naam;
+    public void setName(String name) throws RemoteException {
+        this.name = name;
         this.basicPublisher.inform(this, "stats", null, name);
     }
 
+    /**
+     * this function sets the variable maxfloors
+     * @param maxfloors the maximum amount of floors.
+     * @throws RemoteException
+     */
     @Override
     public void setMaxFloors(int maxfloors) throws RemoteException {
         this.maxFloors = maxfloors;
         this.basicPublisher.inform(this, "stats", null, maxFloors);
     }
 
+    /**
+     * this function sets the variable maxplayers
+     * @param maxplayers the maximum amount of players that can be in the gamelobby.
+     * @throws RemoteException
+     */
     @Override
     public void setMaxPlayers(int maxplayers) throws RemoteException {
         this.maxPlayers = maxplayers;

@@ -40,6 +40,7 @@ public interface ILobby extends Remote, RemotePublisher {
      * This method will delete the player from the lobby. So the player can
      * leave the gamelobby.
      *
+     * @param player
      * @throws java.rmi.RemoteException
      */
     public void exit(IPlayer player) throws RemoteException;
@@ -54,7 +55,16 @@ public interface ILobby extends Remote, RemotePublisher {
      */
     public IPlayer createPlayer(String name, String ipAddress) throws RemoteException;
 
+    /**
+     *
+     * @throws RemoteException
+     */
     public void informlobbys() throws RemoteException;
 
+    /**
+     *
+     * @param GL
+     * @throws RemoteException
+     */
     public void removeGL(IGameLobby GL) throws RemoteException;
 }

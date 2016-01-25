@@ -21,34 +21,66 @@ public class Level implements Serializable {
     private DirectionType doorDirection;
     private BufferedImage collisionMap;
 
+    /**
+     *
+     * @return
+     */
     public int getBackgroundInt() {
         return backgroundInt;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCurrentFoor() {
         return this.floorNr;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getGhostLifePool() {
         return this.ghostLifePool;
     }
 
+    /**
+     *
+     * @param ghostLifePool
+     */
     public void setGhostLifePool(int ghostLifePool) {
         this.ghostLifePool = ghostLifePool;
     }
 
+    /**
+     *
+     * @return
+     */
     public Point2D getKeyLocation() {
         return this.keyLocation;
     }
 
+    /**
+     *
+     * @return
+     */
     public Point2D getDoorLocation() {
         return this.doorLocation;
     }
 
+    /**
+     *
+     * @return
+     */
     public DirectionType getDoorDirection() {
         return doorDirection;
     }
 
+    /**
+     *
+     * @return
+     */
     public BufferedImage getCollisionMap() {
         return collisionMap;
     }

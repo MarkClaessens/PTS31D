@@ -19,7 +19,11 @@ public class HauntedServer {
     private Lobby lobby = null;
 
     // Constructor
-    public HauntedServer() {
+
+    /**
+     *
+     */
+        public HauntedServer() {
         try {
             // Create the lobby
             lobby = new Lobby();

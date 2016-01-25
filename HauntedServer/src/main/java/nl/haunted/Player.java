@@ -29,6 +29,11 @@ public class Player extends UnicastRemoteObject implements IPlayer {
         return character;
     }
 
+    /**
+     *
+     * @param character
+     * @throws RemoteException
+     */
     @Override
     public void setCharacter(Character character) throws RemoteException {
         this.character = character;
@@ -49,6 +54,11 @@ public class Player extends UnicastRemoteObject implements IPlayer {
         return name;
     }
 
+    /**
+     *
+     * @param naam
+     * @throws RemoteException
+     */
     @Override
     public void setName(String naam) throws RemoteException {
         this.name = naam;
@@ -74,6 +84,10 @@ public class Player extends UnicastRemoteObject implements IPlayer {
         this.ready = ready;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getIpAdress() {
         return this.ipAddress;
     }
@@ -93,6 +107,9 @@ public class Player extends UnicastRemoteObject implements IPlayer {
         this.basicPublisher = new BasicPublisher(props);
     }
 
+    /**
+     *
+     */
     public void reset() {
         this.ready = false;
         this.character = null;
@@ -112,6 +129,11 @@ public class Player extends UnicastRemoteObject implements IPlayer {
         basicPublisher.inform(this, "ready", null, this.ready);
     }
 
+    /**
+     *
+     * @param kleur
+     * @throws RemoteException
+     */
     @Override
     public void setColor(Color kleur) throws RemoteException {
         this.color = kleur;

@@ -25,6 +25,10 @@ public class Human extends Character implements Serializable {
 
     private double flX3 = 0, flY3 = 0, flX2 = 0, flY2 = 0, flX1, flY1, flY23, flX32, flY31, flX13, flDet, flMinD, flMaxD;
 
+    /**
+     * this function sets the variable hasKey
+     * @param hasKey true if the human has the key.
+     */
     public void setHasKey(boolean hasKey) {
         this.hasKey = hasKey;
     }
@@ -153,6 +157,7 @@ public class Human extends Character implements Serializable {
      *
      * @param game
      * @throws java.lang.InterruptedException
+     * @throws java.io.IOException
      */
     public void enterDoor(Game game) throws InterruptedException, IOException {
         // First check if this entering was on the last floor (last level).
@@ -259,6 +264,7 @@ public class Human extends Character implements Serializable {
      *
      * @param game
      * @throws java.lang.InterruptedException
+     * @throws java.io.IOException
      */
     public void checkInteract(Game game) throws InterruptedException, IOException {
         DirectionType doorDisplacement = game.getLevel().getDoorDirection();

@@ -79,10 +79,18 @@ public class Game implements Serializable {
         return this.level;
     }
 
+    /**
+     * This function sets the variable that lets the game ticktimer know if the round has ended.
+     * @param bool variable that shows if the round has ended or not.
+     */
     public void setRoundEnded(boolean bool) {
         this.roundEnded = bool;
     }
 
+    /**
+     * This function returns the human object
+     * @return the human
+     */
     public Human getHuman() {
         return this.human;
     }

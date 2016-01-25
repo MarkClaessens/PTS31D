@@ -9,22 +9,33 @@ import java.io.Serializable;
  * @author Mike Evers
  */
 public abstract class Character implements Serializable {
-
     private Point2D position;
     protected double movementSpeed;
     private DirectionType direction;
+
+    /**
+     * this boolean shows if the character is moving.
+     */
     protected boolean moving;
 
+    /**
+     * this function returns the position of the character
+     * @return a Point2D with the current position of the character.
+     */
     public Point2D getPosition() {
         return this.position;
     }
 
+    /**
+     * This function sets the position to the provided variable
+     * @param position this is the provided position.
+     */
     public void setPosition(Point2D position) {
         this.position = position;
     }
 
     /**
-     *
+     * this function returns the characters movement speed.
      * @return the character's movement speed
      */
     public Double getMovementSpeed() {
@@ -46,6 +57,10 @@ public abstract class Character implements Serializable {
         return this.moving;
     }
 
+    /**
+     * This function sets the moving variable of the character to the provided variable.
+     * @param bool the new movement variable.
+     */
     public void setMoving(boolean bool) {
         this.moving = bool;
     }
