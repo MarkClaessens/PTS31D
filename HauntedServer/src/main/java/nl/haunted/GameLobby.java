@@ -55,6 +55,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         String[] props = new String[2];
         props[0] = "players";
         props[1] = "stats";
+        props[2] = "kick";
         this.basicPublisher = new BasicPublisher(props);
         players.add(host);
         ingame = false;
@@ -134,7 +135,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         }
         if (exist) {
             players.remove(player);
-            this.basicPublisher.inform(this, "players", null, players);
+            this.basicPublisher.inform(this, "kick", null, player);
             System.out.println("player " + player.getName() + " was kicked from gamelobby " + this.name);
             return true;
         } else {
