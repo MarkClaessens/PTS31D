@@ -35,5 +35,6 @@
         <TextField fx:id="TFnewplayers" layoutX="121.0" layoutY="332.0" promptText="change max players" />
         <TextField fx:id="TFnewfloors" layoutX="121.0" layoutY="257.0" promptText="change max floors" />
         <TextField fx:id="TFnewname" layoutX="121.0" layoutY="192.0" promptText="change name" />
+      <Button fx:id="BTNkick" layoutX="121.0" layoutY="131.0" mnemonicParsing="false" onMouseClicked="#kicken" text="kick" />
     </children>
 </AnchorPane>
