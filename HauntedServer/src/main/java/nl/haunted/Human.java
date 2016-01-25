@@ -212,7 +212,7 @@ public class Human extends Character implements Serializable {
     public Ghost checkGhostCollision(Game game) {
         //ghost collision
         for (Ghost ghost : game.getGhosts()) {
-            if (!ghost.getRip()) {
+            if (!ghost.getRip() && !ghost.getDead()) {
                 if (checkHitboxCollision(this.getPosition(), 90, 90, ghost.getPosition(), 90, 90)) {
                     return ghost;
                 }
@@ -294,7 +294,7 @@ public class Human extends Character implements Serializable {
         }
         setFlashlight();
         game.getGhosts().stream().forEach((g) -> {
-            if (g.isVulnerable() && !g.getRip()) {
+            if (g.isVulnerable() && !g.getRip() && !g.getDead()) {
                 boolean hit = false;
                 for (Point2D p : g.getHitboxPoints()) {
                     if (flashlightCollision(p)) {

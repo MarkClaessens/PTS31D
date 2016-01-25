@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -9,7 +11,12 @@
 
 <AnchorPane id="AnchorPane" fx:id="paneel" prefHeight="576.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.haunted.FXMLvictoryController">
    <children>
-      <Button fx:id="btncontinue" layoutX="269.0" layoutY="290.0" mnemonicParsing="false" onMouseClicked="#continuetolobby" text="continue" />
+
+	  <ImageView fx:id="ivcontinue" fitHeight="56.0" fitWidth="134.0" layoutX="269.0" layoutY="290.0" onMouseClicked="#continuetolobby" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@btnContinue.png" />
+            </image>
+        </ImageView>
       <Label layoutX="139.0" layoutY="52.0" text="DE WINAAR IS:" textFill="RED">
          <font>
             <Font size="49.0" />
