@@ -30,7 +30,7 @@ public class BasicPublisher {
      * de listeners die onder de null-String staan geregistreerd zijn listeners
      * die op alle properties zijn geabonneerd
      */
-    private HashMap<String, Set<RemotePropertyListener>> listenersTable;
+    private final HashMap<String, Set<RemotePropertyListener>> listenersTable;
     /**
      * als een listener zich bij een onbekende property registreert wordt de
      * lijst met bekende properties in een RuntimeException meegegeven (zie
@@ -47,10 +47,12 @@ public class BasicPublisher {
      * @param properties
      */
     public BasicPublisher(String[] properties) {
-        listenersTable = new HashMap<String, Set<RemotePropertyListener>>();
-        listenersTable.put(null, new HashSet<RemotePropertyListener>());
+        listenersTable = new HashMap<>();
+        Set<RemotePropertyListener> put;
+        put = listenersTable.put(null, new HashSet<>());
         for (String s : properties) {
-            listenersTable.put(s, new HashSet<RemotePropertyListener>());
+            Set<RemotePropertyListener> put1;
+            put1 = listenersTable.put(s, new HashSet<>());
         }
         setPropertiesString();
     }
@@ -87,9 +89,9 @@ public class BasicPublisher {
             }
         } else { //property == null, dus alle abonnementen van listener verwijderen
             Set<String> keyset = listenersTable.keySet();
-            for (String key : keyset) {
+            keyset.stream().forEach((key) -> {
                 listenersTable.get(key).remove(listener);
-            }
+            });
         }
     }
 
@@ -114,13 +116,12 @@ public class BasicPublisher {
             alertable.addAll(listenersTable.get(null));
         } else {
             Set<String> keyset = listenersTable.keySet();
-            for (String key : keyset) {
+            keyset.stream().forEach((key) -> {
                 alertable.addAll(listenersTable.get(key));
-            }
+            });
         }
 
-        for (RemotePropertyListener listener : alertable) {
-
+        alertable.stream().forEach((listener) -> {
             PropertyChangeEvent evt = new PropertyChangeEvent(
                     source, property, oldValue, newValue);
             try {
@@ -129,8 +130,7 @@ public class BasicPublisher {
                 removeListener(listener, null);
                 Logger.getLogger(BasicPublisher.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        }
+        });
     }
 
     /**
@@ -149,7 +149,8 @@ public class BasicPublisher {
             return;
         }
 
-        listenersTable.put(property, new HashSet<RemotePropertyListener>());
+        Set<RemotePropertyListener> put;
+        put = listenersTable.put(property, new HashSet<>());
         setPropertiesString();
     }
 
@@ -168,11 +169,9 @@ public class BasicPublisher {
             listenersTable.remove(property);
         } else {
             Set<String> keyset = listenersTable.keySet();
-            for (String key : keyset) {
-                if (key != null) {
-                    listenersTable.remove(key);
-                }
-            }
+            keyset.stream().filter((key) -> (key != null)).forEach((key) -> {
+                listenersTable.remove(key);
+            });
         }
         setPropertiesString();
     }
