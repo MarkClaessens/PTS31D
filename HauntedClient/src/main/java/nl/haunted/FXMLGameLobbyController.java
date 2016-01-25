@@ -449,7 +449,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     @FXML
     public void setnewfloors(MouseEvent event) throws RemoteException {
         try {
-            if (!TFnewname.getText().trim().isEmpty() && Integer.parseInt(TFnewfloors.getText()) > 2 && Integer.parseInt(TFnewfloors.getText()) < 11) {
+            if (!TFnewfloors.getText().trim().isEmpty() && Integer.parseInt(TFnewfloors.getText()) > 2 && Integer.parseInt(TFnewfloors.getText()) < 11) {
                 gamelobby.setMaxFloors(Integer.parseInt(TFnewfloors.getText()));
                 TFnewfloors.clear();
                 gamesettings();
@@ -470,7 +470,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     @FXML
     public void setnewplayers(MouseEvent event) throws RemoteException {
         try {
-            if (!TFnewname.getText().trim().isEmpty() && Integer.parseInt(TFnewplayers.getText()) > 1 && Integer.parseInt(TFnewplayers.getText()) < 8) {
+            if (!TFnewplayers.getText().trim().isEmpty() && Integer.parseInt(TFnewplayers.getText()) > 1 && Integer.parseInt(TFnewplayers.getText()) < 8) {
                 gamelobby.setMaxPlayers(Integer.parseInt(TFnewplayers.getText()));
                 TFnewname.clear();
                 gamesettings();
