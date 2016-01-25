@@ -78,6 +78,8 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     @FXML
     private Button BTNsendMessage;
     @FXML
+    private Button BTNkick;
+    @FXML
     private Button BTNremoveplayer;
     @FXML
     private Button BTNsetname;
@@ -495,8 +497,12 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         if (!status.isEmpty()) {
             String naam = status.substring(0, status.indexOf(" "));
             if (!naam.equals("(Host)")) {
-                for (IPlayer p : players) {
-
+                for (IPlayer p : players) 
+                {
+                    if(p.getName().equals(naam))
+                    {
+                        gamelobby.removePlayer(p);
+                    }
                 }
             }
         }
