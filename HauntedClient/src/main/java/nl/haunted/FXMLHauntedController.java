@@ -247,8 +247,8 @@ public class FXMLHauntedController extends TimerTask implements Initializable {
                         timer.cancel();
                     } else {
                         Alert alert = new Alert(AlertType.INFORMATION);
-                        alert.setHeaderText("Room is vol");
-                        alert.setContentText("jammer joh vol!");
+                        alert.setHeaderText("Room full");
+                        alert.setContentText("Sorry there are no spots left in this room");
                         alert.showAndWait();
                     }
 
