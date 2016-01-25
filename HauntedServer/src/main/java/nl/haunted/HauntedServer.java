@@ -31,7 +31,7 @@ public class HauntedServer {
 
         // Create registry at port number
         try {
-            
+
             registry = LocateRegistry.createRegistry(portNumber);
         } catch (RemoteException ex) {
             System.out.println("Server: RemoteException: " + ex.getMessage());

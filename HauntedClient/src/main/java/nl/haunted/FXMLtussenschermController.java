@@ -44,7 +44,7 @@ public class FXMLtussenschermController implements Initializable {
     private IPlayer player;
     private Chat chat;
     private Scene scene;
-    
+
     @FXML
     AnchorPane paneel;
 
@@ -76,7 +76,7 @@ public class FXMLtussenschermController implements Initializable {
     }
 
     public void startTimer() {
-        Timer timer = new Timer();    
+        Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -110,10 +110,9 @@ public class FXMLtussenschermController implements Initializable {
             }
 
         };
-        
-        
+
         timer.scheduleAtFixedRate(task, 0, 1000);
-        
+
     }
 
 }

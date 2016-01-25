@@ -82,8 +82,8 @@ public class GameInfo {
     public void setBackgroundImage(int i) {
         this.backgroundImage = new Image("background" + i + ".png");
     }
-    
-    public void setCurrentHuman(String name){
+
+    public void setCurrentHuman(String name) {
         this.currentHuman = name;
     }
 
@@ -132,7 +132,8 @@ public class GameInfo {
 
     public void endRound() {
     }
-    public String getCurrentHuman(){
+
+    public String getCurrentHuman() {
         return this.currentHuman;
     }
 }

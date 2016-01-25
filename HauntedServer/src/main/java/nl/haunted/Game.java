@@ -345,8 +345,8 @@ public class Game implements Serializable {
 
             } // if there are ghosts </editor-fold> 
             else { // if there are no ghosts
-                if (this.currentFloor == this.floorAmount){
-                   this.endGame();
+                if (this.currentFloor == this.floorAmount) {
+                    this.endGame();
                 }
                 this.roundEnded = true;
             }

@@ -27,7 +27,7 @@ public class InputController {
 //    DirectionType direction;
 
     /**
-     * 
+     *
      * @param groupID
      * @param GL
      * @throws IOException
@@ -121,8 +121,7 @@ public class InputController {
 
     /**
      *
-     * @return
-     * @throws IOException
+     * @return @throws IOException
      * @throws ClassNotFoundException
      */
     public List<Message> getMessage() throws IOException, ClassNotFoundException {

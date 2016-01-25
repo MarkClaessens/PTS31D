@@ -385,7 +385,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
         } else if (propertyName.equals("kick")) {
             IPlayer gekicked = (IPlayer) evt.getNewValue();
             if (gekicked.equals(tisplayer)) {
-                controller.setInGL(false);  
+                controller.setInGL(false);
                 if (tisplayer.getReady()) {
                     tisplayer.toggleReady();
                 }
@@ -490,21 +490,18 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     }
 
     @FXML
-    public void kicken(MouseEvent event) throws RemoteException 
-    {
+    public void kicken(MouseEvent event) throws RemoteException {
         String status = (String) LVplayers.getSelectionModel().getSelectedItem();
-        if(!status.isEmpty())
-        {
+        if (!status.isEmpty()) {
             String naam = status.substring(0, status.indexOf(" "));
-            if(!naam.equals("(Host)"))
-            {
-                for(IPlayer p : players)
-                {
-                    
+            if (!naam.equals("(Host)")) {
+                for (IPlayer p : players) {
+
                 }
             }
         }
     }
+
     public class observermessages implements Observer {
 
         FXMLGameLobbyController GLC;

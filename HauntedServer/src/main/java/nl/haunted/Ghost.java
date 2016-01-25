@@ -45,11 +45,12 @@ public class Ghost extends Character implements Serializable {
     public boolean getDead() {
         return this.dead;
     }
-    
-    public boolean getRip(){
+
+    public boolean getRip() {
         return this.rip;
     }
-    public void setRip(boolean bool){
+
+    public void setRip(boolean bool) {
         this.rip = bool;
     }
 
@@ -216,7 +217,7 @@ public class Ghost extends Character implements Serializable {
         // c  cd  d
 
         List<Point2D> hitboxes = new ArrayList();
-        hitboxes.add(new Point2D.Double(this.getPosition().getX() + 20,this.getPosition().getY() + 20));                                                               //a
+        hitboxes.add(new Point2D.Double(this.getPosition().getX() + 20, this.getPosition().getY() + 20));                                                               //a
         hitboxes.add(new Point2D.Double(this.getPosition().getX() + 50, this.getPosition().getY() + 20));       //ab
         hitboxes.add(new Point2D.Double(this.getPosition().getX() + 80, this.getPosition().getY() + 20));      //b
         hitboxes.add(new Point2D.Double(this.getPosition().getX() + 80, this.getPosition().getY() + 50));   //bd

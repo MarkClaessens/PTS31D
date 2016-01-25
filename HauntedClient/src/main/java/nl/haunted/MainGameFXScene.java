@@ -331,53 +331,53 @@ public class MainGameFXScene {
     private void onKeyPresses(Scene scene) {
         scene.setOnKeyPressed(
                 new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent e) {
-                String code = e.getCode().toString();
+                    @Override
+                    public void handle(KeyEvent e) {
+                        String code = e.getCode().toString();
 
-                if (code.equals("ENTER")) {
-                    //TODO: call up chatbox popup
-                    chatstage = new Stage();
-                    chatstage.setTitle("Chat | Haunted");
-                    chatstage.setScene(getChatScene());
-                    chatstage.show();
-                } else {
+                        if (code.equals("ENTER")) {
+                            //TODO: call up chatbox popup
+                            chatstage = new Stage();
+                            chatstage.setTitle("Chat | Haunted");
+                            chatstage.setScene(getChatScene());
+                            chatstage.show();
+                        } else {
 
-                    switch (code) {
-                        case "W":
-                            HauntedClient.getController().getInputController().setDirection(DirectionType.UP);
-                            break;
-                        case "A":
-                            HauntedClient.getController().getInputController().setDirection(DirectionType.LEFT);
-                            break;
-                        case "S":
-                            HauntedClient.getController().getInputController().setDirection(DirectionType.DOWN);
-                            break;
-                        case "D":
-                            HauntedClient.getController().getInputController().setDirection(DirectionType.RIGHT);
-                            break;
-                        case "UP":
-                            HauntedClient.getController().getInputController().setDirection(DirectionType.UP);
-                            break;
-                        case "LEFT":
-                            HauntedClient.getController().getInputController().setDirection(DirectionType.LEFT);
-                            break;
-                        case "DOWN":
-                            HauntedClient.getController().getInputController().setDirection(DirectionType.DOWN);
-                            break;
-                        case "RIGHT":
-                            HauntedClient.getController().getInputController().setDirection(DirectionType.RIGHT);
-                            break;
-                        default:
-                            HauntedClient.getController().getInputController().setDirection(null);
-                            break;
+                            switch (code) {
+                                case "W":
+                                    HauntedClient.getController().getInputController().setDirection(DirectionType.UP);
+                                    break;
+                                case "A":
+                                    HauntedClient.getController().getInputController().setDirection(DirectionType.LEFT);
+                                    break;
+                                case "S":
+                                    HauntedClient.getController().getInputController().setDirection(DirectionType.DOWN);
+                                    break;
+                                case "D":
+                                    HauntedClient.getController().getInputController().setDirection(DirectionType.RIGHT);
+                                    break;
+                                case "UP":
+                                    HauntedClient.getController().getInputController().setDirection(DirectionType.UP);
+                                    break;
+                                case "LEFT":
+                                    HauntedClient.getController().getInputController().setDirection(DirectionType.LEFT);
+                                    break;
+                                case "DOWN":
+                                    HauntedClient.getController().getInputController().setDirection(DirectionType.DOWN);
+                                    break;
+                                case "RIGHT":
+                                    HauntedClient.getController().getInputController().setDirection(DirectionType.RIGHT);
+                                    break;
+                                default:
+                                    HauntedClient.getController().getInputController().setDirection(null);
+                                    break;
+                            }
+
+                        }
+
+                        // only add once... prevent duplicates
                     }
-
                 }
-
-                // only add once... prevent duplicates
-            }
-        }
         );
     }
 
@@ -389,38 +389,38 @@ public class MainGameFXScene {
     private void onKeyReleases(Scene scene) {
         scene.setOnKeyReleased(
                 new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent e) {
-                String code = e.getCode().toString();
+                    @Override
+                    public void handle(KeyEvent e) {
+                        String code = e.getCode().toString();
 
-                switch (code) {
-                    case "W":
-                        HauntedClient.getController().getInputController().setDirection(null);
-                        break;
-                    case "A":
-                        HauntedClient.getController().getInputController().setDirection(null);
-                        break;
-                    case "S":
-                        HauntedClient.getController().getInputController().setDirection(null);
-                        break;
-                    case "D":
-                        HauntedClient.getController().getInputController().setDirection(null);
-                        break;
-                    case "UP":
-                        HauntedClient.getController().getInputController().setDirection(null);
-                        break;
-                    case "LEFT":
-                        HauntedClient.getController().getInputController().setDirection(null);
-                        break;
-                    case "DOWN":
-                        HauntedClient.getController().getInputController().setDirection(null);
-                        break;
-                    case "RIGHT":
-                        HauntedClient.getController().getInputController().setDirection(null);
-                        break;
+                        switch (code) {
+                            case "W":
+                                HauntedClient.getController().getInputController().setDirection(null);
+                                break;
+                            case "A":
+                                HauntedClient.getController().getInputController().setDirection(null);
+                                break;
+                            case "S":
+                                HauntedClient.getController().getInputController().setDirection(null);
+                                break;
+                            case "D":
+                                HauntedClient.getController().getInputController().setDirection(null);
+                                break;
+                            case "UP":
+                                HauntedClient.getController().getInputController().setDirection(null);
+                                break;
+                            case "LEFT":
+                                HauntedClient.getController().getInputController().setDirection(null);
+                                break;
+                            case "DOWN":
+                                HauntedClient.getController().getInputController().setDirection(null);
+                                break;
+                            case "RIGHT":
+                                HauntedClient.getController().getInputController().setDirection(null);
+                                break;
+                        }
+                    }
                 }
-            }
-        }
         );
     }
 

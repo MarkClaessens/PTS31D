@@ -84,7 +84,7 @@ public class gamefeed {
             e.setWall((boolean) o[i + 6][4]);
             e.setDead((boolean) o[i + 6][5]);
             e.setID((int) o[i + 6][6]);
-            e.setRip((boolean) o[i+6][7]);
+            e.setRip((boolean) o[i + 6][7]);
             ghosts.add(e);
         }
         gameInfo.addEntity(key);

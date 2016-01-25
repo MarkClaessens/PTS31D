@@ -43,11 +43,12 @@ public class Entity {
     public boolean getDead() {
         return this.Dead;
     }
-    
-    public boolean getRip(){
+
+    public boolean getRip() {
         return this.rip;
     }
-    public void setRip(Boolean bool){
+
+    public void setRip(Boolean bool) {
         this.rip = bool;
     }
 

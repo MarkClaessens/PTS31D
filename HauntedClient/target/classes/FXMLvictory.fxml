@@ -10,22 +10,22 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane id="AnchorPane" fx:id="paneel" prefHeight="576.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.haunted.FXMLvictoryController">
-   <children>
+    <children>
 
-	  <ImageView fx:id="ivcontinue" fitHeight="56.0" fitWidth="134.0" layoutX="269.0" layoutY="290.0" onMouseClicked="#continuetolobby" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="ivcontinue" fitHeight="56.0" fitWidth="134.0" layoutX="269.0" layoutY="290.0" onMouseClicked="#continuetolobby" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@btnContinue.png" />
             </image>
         </ImageView>
-      <Label layoutX="139.0" layoutY="52.0" text="DE WINAAR IS:" textFill="RED">
-         <font>
-            <Font size="49.0" />
-         </font>
-      </Label>
-      <Label fx:id="winaarslabel" layoutX="212.0" layoutY="144.0" textFill="RED">
-         <font>
-            <Font size="49.0" />
-         </font>
-      </Label>
-   </children>
+        <Label layoutX="139.0" layoutY="52.0" text="DE WINAAR IS:" textFill="RED">
+            <font>
+                <Font size="49.0" />
+            </font>
+        </Label>
+        <Label fx:id="winaarslabel" layoutX="212.0" layoutY="144.0" textFill="RED">
+            <font>
+                <Font size="49.0" />
+            </font>
+        </Label>
+    </children>
 </AnchorPane>

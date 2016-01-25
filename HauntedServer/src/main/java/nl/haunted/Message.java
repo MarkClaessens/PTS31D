@@ -48,9 +48,10 @@ public class Message {
 
         // If the player's character is a ghost then the message is not visibible for the human
     }
-    
+
     /**
      * this function returns the text of the message.
+     *
      * @return
      */
     public String getText() {
@@ -59,6 +60,7 @@ public class Message {
 
     /**
      * this fumction returns the player that wrote the message.
+     *
      * @return
      */
     public IPlayer getPlayer() {
@@ -66,7 +68,9 @@ public class Message {
     }
 
     /**
-     * this function returns a boolean that indicates of this message is visible for the human player.
+     * this function returns a boolean that indicates of this message is visible
+     * for the human player.
+     *
      * @return
      */
     public boolean isVisibleForEveryone() {

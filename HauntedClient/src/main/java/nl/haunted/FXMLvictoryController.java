@@ -38,9 +38,10 @@ public class FXMLvictoryController implements Initializable {
 
     @FXML
     Label winaarslabel;
-    
+
     @FXML
     Button btncontinue;
+
     /**
      * Initializes the controller class.
      */
@@ -52,19 +53,17 @@ public class FXMLvictoryController implements Initializable {
         //then you set to your node
         paneel.setBackground(new Background(myBI));
     }
-    
-    public void setwinnaar(String naam)
-    {
-       winaarslabel.setText(naam);
+
+    public void setwinnaar(String naam) {
+        winaarslabel.setText(naam);
     }
-    
+
     @FXML
-    public void continuetolobby()
-    {
+    public void continuetolobby() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLHaunted.fxml"));
-            Node root = fxmlLoader.load();            
-            HauntedClient.getStage().getScene().setRoot((Parent) root);            
+            Node root = fxmlLoader.load();
+            HauntedClient.getStage().getScene().setRoot((Parent) root);
             HauntedClient.getStage().show();
         } catch (IOException ex) {
             Logger.getLogger(FXMLvictoryController.class.getName()).log(Level.SEVERE, null, ex);
