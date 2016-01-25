@@ -52,7 +52,7 @@ public class GameLobby extends UnicastRemoteObject implements IGameLobby {
         this.maxPlayers = maxPlayers;
         this.maxFloors = maxFloors;
         this.players = new ArrayList();
-        String[] props = new String[2];
+        String[] props = new String[3];
         props[0] = "players";
         props[1] = "stats";
         props[2] = "kick";
