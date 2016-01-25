@@ -282,7 +282,7 @@ public class MainGameFXScene {
         TextFlow tf = new TextFlow();
         for (Message chatMessage : chat.getMessages()) {
             if (gf.gameInfo.amIHuman() && chatMessage.getIsVisibleForEveryone()) {
-                Text txt = new Text(chatMessage.toString());
+                Text txt = new Text(chatMessage.toString() + "\n");
                 tf.getChildren().add(txt);
             } else if (!gf.gameInfo.amIHuman()) {
                 Text txt = new Text(chatMessage.toString());
