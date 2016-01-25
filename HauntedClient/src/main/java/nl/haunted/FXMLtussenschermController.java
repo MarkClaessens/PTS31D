@@ -122,8 +122,15 @@ public class FXMLtussenschermController implements Initializable {
 
         };
         
-        timer.scheduleAtFixedRate(task, 0, 1000);
-        timer2.scheduleAtFixedRate(task2, 0, 10);
+        
+        try {
+            timer.scheduleAtFixedRate(task, 0, 1000);
+            Thread.sleep(2000);
+            timer2.scheduleAtFixedRate(task2, 0, 1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(FXMLtussenschermController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
 }
