@@ -126,6 +126,7 @@ public abstract class Character implements Serializable {
      *
      * @param proposedLocation the location where the Character wants to move
      * to.
+     * @param game
      * @return true if there is an obstacle
      */
     public boolean detectCollision(Point2D proposedLocation, Game game) {

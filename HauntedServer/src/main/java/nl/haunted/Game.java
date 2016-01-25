@@ -24,20 +24,20 @@ import java.util.TimerTask;
  */
 public class Game implements Serializable {
 
-    private Socket srvSoc;
-    private IGameLobby gameLobby;
+    private final Socket srvSoc;
+    private final IGameLobby gameLobby;
     private Timer tickTimer, inputTimer;
 
     private int floorAmount; // starts at 1
     private int currentFloor = -1; // starts at 0 so the init has to be -1.
     private boolean roundEnded, nextRound;
     private Level level;
-    private List<IPlayer> players;
-    private List<Ghost> ghosts;
+    private final List<IPlayer> players;
+    private final List<Ghost> ghosts;
     private IPlayer currentHuman;
     private Human human;
 
-    private int maxfloors;
+    private final int maxfloors;
 
     private int delay = 0, tock = 0;
 
@@ -103,7 +103,7 @@ public class Game implements Serializable {
         return this.floorAmount;
     }
 
-    public void setFloorAmount() {
+    private void setFloorAmount() {
         Random randomizer = new Random();
         while (this.floorAmount < 2) {
             this.floorAmount = randomizer.nextInt(maxfloors);
@@ -137,7 +137,7 @@ public class Game implements Serializable {
     /**
      * Creates the new level object when a level has finished.
      */
-    public void nextLevel() {
+    private void nextLevel() {
         this.currentFloor++;
         this.level = new Level(this.currentFloor, this.players.size() - 1);
     }
@@ -156,7 +156,6 @@ public class Game implements Serializable {
                     tick();
 
                 } catch (IOException | InterruptedException | ClassNotFoundException ex) {
-                    ex.printStackTrace();
                 }
             }
         };
@@ -170,7 +169,6 @@ public class Game implements Serializable {
                     srvSoc.receiveInput();
 
                 } catch (IOException | ClassNotFoundException ex) {
-                    ex.printStackTrace();
                 }
             }
         };
@@ -179,6 +177,9 @@ public class Game implements Serializable {
 
     /**
      * Ends the current round and opens the counting screen.
+     * @throws java.io.IOException
+     * @throws java.rmi.RemoteException
+     * @throws java.lang.InterruptedException
      */
     public void endRound() throws IOException, RemoteException, InterruptedException {
 
@@ -204,7 +205,6 @@ public class Game implements Serializable {
      * Will be called when the last level is played. After calling the victory
      * screen will be shown.
      *
-     * @param winner the player that wins the game by entering the last door.
      * @throws java.rmi.RemoteException
      * @throws java.lang.InterruptedException
      */
@@ -413,7 +413,7 @@ public class Game implements Serializable {
      *
      * @throws java.rmi.RemoteException
      */
-    public void bindCharactersToPlayers() throws RemoteException {
+    private void bindCharactersToPlayers() throws RemoteException {
         Collections.shuffle(this.players);
 
         for (int i = 0; i < this.players.size() - 1; i++) {
