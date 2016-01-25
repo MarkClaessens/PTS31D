@@ -43,7 +43,8 @@ public class FXMLtussenschermController implements Initializable {
     private gamefeed gf;
     private IPlayer player;
     private Chat chat;
-
+    private Scene scene;
+    
     @FXML
     AnchorPane paneel;
 
@@ -76,6 +77,26 @@ public class FXMLtussenschermController implements Initializable {
 
     public void startTimer() {
         Timer timer = new Timer();
+        Timer timer2 = new Timer();
+        TimerTask task2 = new TimerTask() {
+
+            @Override
+            public void run() 
+            {                
+                try {
+                    MainGameFXScene fx = new MainGameFXScene();
+                    scene = fx.mainGameFX(gf, chat, player);
+                    timer2.cancel();
+                } catch (IOException ex) {
+                    Logger.getLogger(FXMLtussenschermController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(FXMLtussenschermController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(FXMLtussenschermController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        };  
+        
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -86,23 +107,13 @@ public class FXMLtussenschermController implements Initializable {
                         tellabel.setText(String.valueOf(10 - run));
                         if (run > 9) {
                             timer.cancel();
-                            MainGameFXScene fx = new MainGameFXScene();
-                            try {
-
-                                Stage stage = HauntedClient.getStage();
-                                Scene scene = fx.mainGameFX(gf, chat, player);
-                                HauntedClient.getStage().setScene(scene);
-                                HauntedClient.getStage().setFullScreenExitKeyCombination(new KeyCodeCombination(KeyCode.ESCAPE, KeyCombination.ALT_DOWN));
-                                HauntedClient.getStage().setFullScreen(true);
-                                HauntedClient.getStage().show();
-                                timer.cancel();
-                            } catch (IOException ex) {
-                                Logger.getLogger(FXMLtussenschermController.class.getName()).log(Level.SEVERE, null, ex);
-                            } catch (ClassNotFoundException ex) {
-                                Logger.getLogger(FXMLtussenschermController.class.getName()).log(Level.SEVERE, null, ex);
-                            } catch (InterruptedException ex) {
-                                Logger.getLogger(FXMLtussenschermController.class.getName()).log(Level.SEVERE, null, ex);
-                            }
+                           
+                            Stage stage = HauntedClient.getStage();
+                            HauntedClient.getStage().setScene(scene);
+                            HauntedClient.getStage().setFullScreenExitKeyCombination(new KeyCodeCombination(KeyCode.ESCAPE, KeyCombination.ALT_DOWN));
+                            HauntedClient.getStage().setFullScreen(true);
+                            HauntedClient.getStage().show();
+                            timer.cancel();
                         }
                     }
                 });
@@ -110,7 +121,9 @@ public class FXMLtussenschermController implements Initializable {
             }
 
         };
+        
         timer.scheduleAtFixedRate(task, 0, 1000);
+        timer2.scheduleAtFixedRate(task2, 0, 10);
     }
 
 }
