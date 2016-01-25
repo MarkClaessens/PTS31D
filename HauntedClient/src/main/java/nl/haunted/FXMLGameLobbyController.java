@@ -174,8 +174,7 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
     public void setGameLobby(IGameLobby Gamelobby) throws IOException {
         this.gamelobby = Gamelobby;
         try {
-            gamelobby.addListener(this, "players");
-            gamelobby.addListener(this, "kick");
+            gamelobby.addListener(this, "players");            
         } catch (RemoteException ex) {
             Logger.getLogger(FXMLGameLobbyController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -384,22 +383,8 @@ public class FXMLGameLobbyController extends UnicastRemoteObject implements Init
             playernames();
         } else if (propertyName.equals("stats")) {
             gamesettings();
-        } else if (propertyName.equals("kick")) {
-            IPlayer gekicked = (IPlayer) evt.getNewValue();
-            if (gekicked.equals(tisplayer)) {
-                controller.setInGL(false);
-                if (tisplayer.getReady()) {
-                    tisplayer.toggleReady();
-                }
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXMLHaunted.fxml"));
-                try {
-                    Node root = fxmlLoader.load();
-                    HauntedClient.getStage().getScene().setRoot((Parent) root);
-                } catch (IOException ex) {
-                    Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
+        } 
+        
     }
 
     /**
