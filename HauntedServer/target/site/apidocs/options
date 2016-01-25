@@ -1,0 +1,24 @@
+-classpath
+'C:/Users/Mal/.m2/repository/junit/junit/4.4/junit-4.4.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'E:/Git/PTS31D/HauntedServer/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2016. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'E:/Git/PTS31D/HauntedServer/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'HauntedServer 1.0-SNAPSHOT API'
+-linkoffline
+'http://docs.oracle.com/javase/8/docs/api' 'E:/Git/PTS31D/HauntedServer/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'HauntedServer 1.0-SNAPSHOT API'
