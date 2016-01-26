@@ -45,7 +45,7 @@ public class HauntedServer {
 
         // Bind lobby using registry
         try {
-            System.setProperty("java.rmi.server.hostname", "10.1.3.2");
+            System.setProperty("java.rmi.server.hostname", "10.1.3.5");
             registry.rebind(bindingNameLobby, lobby);
         } catch (RemoteException ex) {
             System.out.println("Server: RemoteException: " + ex.getMessage());
@@ -57,7 +57,7 @@ public class HauntedServer {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.setProperty("java.rmi.server.hostname", "10.1.3.2");
+        System.setProperty("java.rmi.server.hostname", "10.1.3.5");
         try {
             // Create server
             RMISocketFactory.setSocketFactory(new MyServerRMISocketFactory());
