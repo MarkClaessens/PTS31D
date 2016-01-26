@@ -93,6 +93,6 @@ public class HumanTest {
      */
     @Test
     public void testGetFlashlightPolygon() {
-        assertEquals("should return a polygon", new int[]{2, 2}, human.getFlashlightPolygon());
+        assertEquals("should return a polygon", 6, human.getFlashlightPolygon().length);
     }
 }
