@@ -61,7 +61,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="nl.haunted.CharacterTest" name="moveTest" time="0.234">
+  <testcase classname="nl.haunted.CharacterTest" name="moveTest" time="0.219">
     <error type="java.lang.NullPointerException">java.lang.NullPointerException
 	at nl.haunted.Character.detectCollision(Character.java:155)
 	at nl.haunted.Character.move(Character.java:107)
